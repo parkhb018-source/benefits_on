@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>최저임금 월급 계산기 2026 — 시급 10,320원 월급 환산 — 혜택on</title>
+  <meta name="description" content="2026년 최저시급 10,320원 기준. 주휴수당 포함 월급, 209시간 환산액을 바로 계산하세요.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .calc-page-wrap { max-width: 680px; margin: 0 auto; padding: 48px 16px 80px; }
+    .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .calc-page-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 32px; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .calc-section-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+    .calc-field { margin-bottom: 20px; }
+    .calc-field label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .calc-field input, .calc-field select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; color: var(--text-dark);
+      background: var(--bg-soft); transition: border-color .2s; box-sizing: border-box;
+    }
+    .calc-field input:focus, .calc-field select:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
+    .calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-result { display: none; margin-top: 24px; background: var(--bg-soft); border-radius: 12px; padding: 20px 24px; border-left: 4px solid var(--primary); }
+    .calc-result.show { display: block; animation: fadeInUp .3s ease; }
+    .result-highlight { font-size: 1.6rem; font-weight: 800; color: var(--primary-dark); margin: 4px 0 16px; }
+    .result-rows { display: flex; flex-direction: column; gap: 8px; }
+    .result-row { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .result-row:last-child { border-bottom: none; }
+    .result-row .r-label { color: var(--text-muted); }
+    .result-row .r-val { font-weight: 600; color: var(--text-dark); }
+    .result-note-small { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.5; }
+    .wage-update-notice { background: #FFF8E6; border: 1px solid #FFD966; border-radius: 8px; padding: 10px 14px; font-size: 0.82rem; color: #7A5700; margin-bottom: 24px; }
+    .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+  </style>
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/pages/calc-minimum-wage.html">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/pages/calc-minimum-wage.html">
+  <meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="최저임금 월급 계산기 2026 — 시급 10,320원 월급 환산 — 혜택on">
+  <meta name="twitter:description" content="2026년 최저시급 10,320원 기준. 주휴수당 포함 월급, 209시간 환산액을 바로 계산하세요.">
+  <meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <!-- ★ Google AdSense 설정
+       1. AdSense 승인 후 아래 주석을 제거하세요
+       2. ca-pub-XXXXXXXXXXXXXXXX → 실제 발행인 ID로 교체
+       신청: https://www.google.com/adsense/ -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="#">청년정책</a></li>
+          <li><a href="#">중장년·노년</a></li>
+          <li><a href="#">1인가구</a></li>
+          <li><a href="#">근로/소득</a></li>
+          <li><a href="#">세금/환급</a></li>
+          <li><a href="../index.html#calculators">계산기</a></li>
+          <li><a href="../index.html#diagnosis">자가진단</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="#"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="#"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="#"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="#"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="#"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="../index.html#calculators"><span class="m-icon">🧮</span>계산기</a>
+    <a href="../index.html#diagnosis"><span class="m-icon">🔍</span>자가진단</a>
+  </nav>
+
+  <main>
+    <div class="calc-page-wrap">
+      <p class="breadcrumb"><a href="../index.html">홈</a> &rsaquo; <a href="../index.html#calculators">계산기</a> &rsaquo; 최저임금 계산기</p>
+      <h1 class="calc-page-title">⚖️ 최저임금 월급 계산기</h1>
+      <p class="calc-page-sub">근무시간을 입력하면 주휴수당을 포함한 월 최저임금을 바로 계산해드려요.</p>
+
+      <div class="policy-data-badge">✅ <strong data-policy-date>2026-06-18</strong> 기준 최신 데이터</div>
+      <div class="wage-update-notice">
+        📌 2026년 최저시급: <strong><span data-policy="minimumWage.hourlyRate" data-policy-format="currency">10,320원</span></strong> (2025년 대비 <span data-policy="minimumWage.increaseRate">2.9%</span> 인상, 고용노동부 확정). 월 환산: <strong><span data-policy="minimumWage.monthlyStandard209" data-policy-format="currency">2,156,880원</span></strong>
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-section-label">근무 조건 입력</div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="daily-hours">1일 근무시간</label>
+            <select id="daily-hours">
+              <option value="4">4시간</option>
+              <option value="5">5시간</option>
+              <option value="6">6시간</option>
+              <option value="7">7시간</option>
+              <option value="8" selected>8시간 (기본)</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label for="work-days">주 근무일수</label>
+            <select id="work-days">
+              <option value="1">1일</option>
+              <option value="2">2일</option>
+              <option value="3">3일</option>
+              <option value="4">4일</option>
+              <option value="5" selected>5일 (기본)</option>
+              <option value="6">6일</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label for="hourly-wage">시급 (원)</label>
+          <input type="number" id="hourly-wage" value="10320" min="10320" step="10"
+                 data-policy-default="minimumWage.hourlyRate"
+                 data-policy-min="minimumWage.hourlyRate">
+          <p class="field-hint">2026년 최저시급(<span data-policy="minimumWage.hourlyRate" data-policy-format="currency">10,320원</span>) 이상으로 입력하세요.</p>
+        </div>
+        <button class="calc-btn" id="calcBtn">월급 계산하기</button>
+
+        <div class="calc-result" id="calcResult">
+          <div class="calc-section-label">계산 결과</div>
+          <div class="result-highlight" id="monthlyTotal">—</div>
+          <div class="result-rows" id="resultRows"></div>
+          <p class="result-note-small" id="resultNote"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+  <!-- ─── 결과 하단 광고 ─── -->
+  <div class="container" style="margin:24px auto;text-align:center;">
+    <!-- AdSense 인라인 광고 (반응형)
+         ★ AdSense 승인 후 아래 주석 제거 & ID 교체 -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+     data-ad-slot="XXXXXXXXXX_INLINE"
+     data-ad-format="fluid"
+     data-ad-layout="in-article"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+-->
+  </div>
+<footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about.html">사이트 소개</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="contact.html">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../data/policy-loader.js"></script>
+  <script src="../main.js"></script>
+  <script>
+  (function () {
+    const calcBtn = document.getElementById('calcBtn');
+    const calcResult = document.getElementById('calcResult');
+    const monthlyTotalEl = document.getElementById('monthlyTotal');
+    const resultRowsEl = document.getElementById('resultRows');
+    const resultNoteEl = document.getElementById('resultNote');
+
+    calcBtn.addEventListener('click', function () {
+      const dailyHours = parseInt(document.getElementById('daily-hours').value);
+      const workDays   = parseInt(document.getElementById('work-days').value);
+      const minWage    = (window.POLICY_DATA && window.POLICY_DATA.minimumWage.hourlyRate) || 10320;
+      const hourlyWage = parseInt(document.getElementById('hourly-wage').value) || minWage;
+
+      const weeklyHours = dailyHours * workDays;
+
+      // 주휴수당: 주 15시간 이상 근무 시 발생
+      const hasJuHyu = weeklyHours >= 15;
+      // 주휴시간 = (주당 소정근로시간 / 40) * 8, 최대 8시간
+      const juHyuHours = hasJuHyu ? Math.min((weeklyHours / 40) * 8, 8) : 0;
+      const totalWeeklyHours = weeklyHours + juHyuHours;
+
+      // 월 환산: 4.345주
+      const monthlyHours = Math.round(totalWeeklyHours * 4.345);
+      const monthlyPay   = Math.round(monthlyHours * hourlyWage);
+      const weeklyPay    = Math.round(totalWeeklyHours * hourlyWage);
+      const annualPay    = monthlyPay * 12;
+      const juHyuPay     = Math.round(juHyuHours * 4.345 * hourlyWage);
+
+      monthlyTotalEl.textContent = '월 ' + monthlyPay.toLocaleString() + '원';
+
+      const rows = [
+        ['주당 소정근로시간', weeklyHours + '시간'],
+        ['주휴수당 적용', hasJuHyu ? '적용 (주 ' + juHyuHours.toFixed(1) + '시간)' : '미적용 (주 15시간 미만)'],
+        ['월 환산 총 근무시간', monthlyHours + '시간'],
+        ['주휴수당 포함 월급', monthlyPay.toLocaleString() + '원'],
+        ['주급 (참고)', weeklyPay.toLocaleString() + '원'],
+        ['연간 총 급여 (참고)', annualPay.toLocaleString() + '원'],
+      ];
+      resultRowsEl.innerHTML = rows.map(([l, v]) =>
+        `<div class="result-row"><span class="r-label">${l}</span><span class="r-val">${v}</span></div>`
+      ).join('');
+
+      resultNoteEl.textContent =
+        '※ 위 금액은 세금·4대보험 공제 전 금액입니다. 실수령액은 실수령액 계산기를 이용해주세요. 주휴수당은 1주 소정근로시간이 15시간 이상인 경우 발생합니다.';
+
+      calcResult.classList.add('show');
+      calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }());
+  </script>
+</body>
+</html>

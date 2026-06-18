@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실업급여 계산기 2026 — 수급액·수급기간 계산 — 혜택on</title>
+  <meta name="description" content="2026년 기준 퇴직 전 평균임금과 고용보험 가입기간을 입력하면 실업급여 수급액과 기간을 바로 계산해드려요.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .calc-page-wrap { max-width: 700px; margin: 0 auto; padding: 48px 16px 80px; }
+    .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .calc-page-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 32px; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 20px; }
+    .calc-section-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+    .calc-field { margin-bottom: 20px; }
+    .calc-field label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .calc-field input, .calc-field select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; color: var(--text-dark);
+      background: var(--bg-soft); transition: border-color .2s; box-sizing: border-box;
+    }
+    .calc-field input:focus, .calc-field select:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
+    .calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-result { display: none; margin-top: 24px; }
+    .calc-result.show { display: block; animation: fadeInUp .3s ease; }
+    .result-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .result-box { background: var(--bg-soft); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid var(--border); }
+    .result-box-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 6px; }
+    .result-box-value { font-size: 1.2rem; font-weight: 800; color: var(--primary-dark); }
+    .result-box-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+    .result-box.highlight { background: var(--primary-dark); border-color: var(--primary-dark); }
+    .result-box.highlight .result-box-label { color: rgba(255,255,255,.8); }
+    .result-box.highlight .result-box-value { color: #fff; font-size: 1.4rem; }
+    .result-box.highlight .result-box-sub { color: rgba(255,255,255,.7); }
+    .detail-rows { display: flex; flex-direction: column; gap: 0; }
+    .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row .d-label { color: var(--text-muted); }
+    .detail-row .d-val { font-weight: 600; color: var(--text-dark); }
+    .eligibility-box { border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: 0.88rem; line-height: 1.6; }
+    .eligibility-box.ok  { background: #EAFAF1; border-left: 3px solid #27ae60; color: #1a5c34; }
+    .eligibility-box.warn { background: #FEF9E7; border-left: 3px solid #f1c40f; color: #7B6500; }
+    .info-box { background: #EBF5FB; border-left: 3px solid var(--primary); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 0.82rem; color: var(--primary-dark); margin-bottom: 20px; line-height: 1.6; }
+    .result-note-small { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
+    .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    @media (max-width: 480px) { .result-3col { grid-template-columns: 1fr; } }
+  </style>
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/pages/calc-unemployment.html">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/pages/calc-unemployment.html">
+  <meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="실업급여 계산기 2026 — 수급액·수급기간 계산 — 혜택on">
+  <meta name="twitter:description" content="2026년 기준 퇴직 전 평균임금과 고용보험 가입기간을 입력하면 실업급여 수급액과 기간을 바로 계산해드려요.">
+  <meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <!-- ★ Google AdSense 설정
+       1. AdSense 승인 후 아래 주석을 제거하세요
+       2. ca-pub-XXXXXXXXXXXXXXXX → 실제 발행인 ID로 교체
+       신청: https://www.google.com/adsense/ -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="#">청년정책</a></li>
+          <li><a href="#">중장년·노년</a></li>
+          <li><a href="#">1인가구</a></li>
+          <li><a href="#">근로/소득</a></li>
+          <li><a href="#">세금/환급</a></li>
+          <li><a href="../index.html#calculators">계산기</a></li>
+          <li><a href="../index.html#diagnosis">자가진단</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="#"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="#"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="#"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="#"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="#"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="../index.html#calculators"><span class="m-icon">🧮</span>계산기</a>
+    <a href="../index.html#diagnosis"><span class="m-icon">🔍</span>자가진단</a>
+  </nav>
+
+  <main>
+    <div class="calc-page-wrap">
+      <p class="breadcrumb"><a href="../index.html">홈</a> &rsaquo; <a href="../index.html#calculators">계산기</a> &rsaquo; 실업급여 계산기</p>
+      <div class="policy-data-badge">✅ <strong data-policy-date>2026-06-18</strong> 기준 최신 데이터</div>
+      <h1 class="calc-page-title">📋 실업급여 계산기</h1>
+      <p class="calc-page-sub">퇴직 전 평균임금과 고용보험 가입기간을 입력하면 실업급여 수급액과 수급기간을 계산해드려요.</p>
+
+      <div class="info-box">
+        💡 <strong>실업급여 수급 조건</strong>: ① 비자발적 퇴직 (권고사직·계약만료 포함) ② 퇴직 전 18개월 중 고용보험 피보험기간 180일 이상 ③ 적극적인 재취업 활동<br>
+        📌 <strong>2026년 변경</strong>: 일 상한액 <strong>68,100원</strong>, 하한액 <strong>66,048원</strong> (최저임금 10,320원 × 80% × 8시간)
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-section-label">정보 입력</div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="avg-salary">퇴직 전 3개월 평균 월급 (만원)</label>
+            <input type="number" id="avg-salary" value="300" min="0" step="10">
+            <p class="field-hint">세전 급여 기준</p>
+          </div>
+          <div class="calc-field">
+            <label for="insure-months">고용보험 가입기간 (개월)</label>
+            <input type="number" id="insure-months" value="24" min="0" step="1">
+            <p class="field-hint">현 직장 + 이전 직장 합산 가능</p>
+          </div>
+        </div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="worker-age">퇴직 당시 나이</label>
+            <select id="worker-age">
+              <option value="29">29세 이하</option>
+              <option value="49" selected>30~49세</option>
+              <option value="59">50~59세</option>
+              <option value="60">60세 이상·장애인</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label for="quit-reason">퇴직 사유</label>
+            <select id="quit-reason">
+              <option value="involuntary" selected>비자발적 퇴직 (권고사직·계약만료)</option>
+              <option value="voluntary">자발적 퇴직 (개인 사정)</option>
+            </select>
+          </div>
+        </div>
+        <button class="calc-btn" id="calcBtn">실업급여 계산하기</button>
+
+        <div class="calc-result" id="calcResult">
+          <div class="eligibility-box" id="eligBox"></div>
+          <div class="result-3col" id="result3col"></div>
+          <div class="detail-rows" id="detailRows"></div>
+          <p class="result-note-small">
+            ※ 2026년 기준: 일 상한액 68,100원, 하한액 최저임금(10,320원)×80%×8시간 = 66,048원<br>
+            ※ 실제 수급액은 근로복지공단 또는 고용보험 홈페이지에서 정확히 확인하세요.<br>
+            ※ 자발적 퇴직의 경우 수급이 제한될 수 있습니다 (정당한 사유 예외 있음).
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+  <!-- ─── 결과 하단 광고 ─── -->
+  <div class="container" style="margin:24px auto;text-align:center;">
+    <!-- AdSense 인라인 광고 (반응형)
+         ★ AdSense 승인 후 아래 주석 제거 & ID 교체 -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+     data-ad-slot="XXXXXXXXXX_INLINE"
+     data-ad-format="fluid"
+     data-ad-layout="in-article"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+-->
+  </div>
+<footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about.html">사이트 소개</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="contact.html">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../data/policy-loader.js"></script>
+  <script src="../main.js"></script>
+  <script>
+  (function () {
+    document.getElementById('calcBtn').addEventListener('click', function () {
+      const avgMonthly   = (parseFloat(document.getElementById('avg-salary').value) || 0) * 10000;
+      const insureMonths = parseInt(document.getElementById('insure-months').value)  || 0;
+      const ageGroup     = parseInt(document.getElementById('worker-age').value);
+      const quitReason   = document.getElementById('quit-reason').value;
+
+      const eligBox     = document.getElementById('eligBox');
+      const result3col  = document.getElementById('result3col');
+      const detailRows  = document.getElementById('detailRows');
+      const calcResult  = document.getElementById('calcResult');
+
+      // 수급 자격 판단
+      const eligible = quitReason === 'involuntary' && insureMonths >= 6;
+
+      if (!eligible) {
+        eligBox.className = 'eligibility-box warn';
+        eligBox.innerHTML = quitReason === 'voluntary'
+          ? '⚠️ <strong>자발적 퇴직</strong>의 경우 원칙적으로 실업급여 수급이 제한됩니다. 질병, 임금 체불, 회사 이전 등 정당한 사유가 있는 경우 예외 적용이 가능하므로 고용센터에 문의하세요.'
+          : '⚠️ 고용보험 가입기간이 <strong>6개월(180일) 미만</strong>이면 수급 자격이 발생하지 않습니다.';
+        result3col.innerHTML = '';
+        detailRows.innerHTML = '';
+        calcResult.classList.add('show');
+        return;
+      }
+
+      eligBox.className = 'eligibility-box ok';
+      eligBox.innerHTML = '✅ <strong>수급 자격 요건을 충족</strong>합니다. 퇴직 후 12개월 이내에 거주지 관할 고용센터에 방문하여 신청하세요.';
+
+      // 일 평균임금
+      const dailyAvg = avgMonthly / 30;
+      // 일 실업급여 = 일 평균임금 × 60%
+      let dailyBenefit = Math.round(dailyAvg * 0.6);
+      // 상한·하한 적용 (policy-data.json에서 자동 갱신)
+      const _upd         = window.POLICY_DATA && window.POLICY_DATA.unemployment;
+      const dailyCeiling = _upd ? _upd.dailyCeiling : 68100;
+      const dailyFloor   = _upd ? _upd.dailyFloor   : Math.round(10320 * 0.8 * 8);
+      dailyBenefit = Math.min(dailyCeiling, Math.max(dailyFloor, dailyBenefit));
+
+      // 수급 기간 (가입기간 × 나이 기준)
+      function getBenefitDays(months, age) {
+        const yr = Math.floor(months / 12);
+        // 2019년 법 개정 기준표
+        if (age <= 29) {
+          if (yr < 1) return 120;
+          if (yr < 3) return 150;
+          if (yr < 5) return 180;
+          if (yr < 10) return 210;
+          return 240;
+        } else if (age <= 49) {
+          if (yr < 1) return 120;
+          if (yr < 3) return 150;
+          if (yr < 5) return 180;
+          if (yr < 10) return 210;
+          return 240;
+        } else { // 50세 이상 또는 장애인
+          if (yr < 1) return 120;
+          if (yr < 3) return 180;
+          if (yr < 5) return 210;
+          if (yr < 10) return 240;
+          return 270;
+        }
+      }
+      const benefitDays  = getBenefitDays(insureMonths, ageGroup);
+      const totalBenefit = dailyBenefit * benefitDays;
+      const monthlyEst   = Math.round(dailyBenefit * 30);
+
+      result3col.innerHTML = `
+        <div class="result-box highlight">
+          <div class="result-box-label">예상 총 수령액</div>
+          <div class="result-box-value">${totalBenefit.toLocaleString()}원</div>
+          <div class="result-box-sub">최대 ${benefitDays}일 수급</div>
+        </div>
+        <div class="result-box">
+          <div class="result-box-label">일 실업급여</div>
+          <div class="result-box-value">${dailyBenefit.toLocaleString()}원</div>
+          <div class="result-box-sub">일 기준</div>
+        </div>
+        <div class="result-box">
+          <div class="result-box-label">월 예상 수령</div>
+          <div class="result-box-value">${monthlyEst.toLocaleString()}원</div>
+          <div class="result-box-sub">30일 기준</div>
+        </div>
+      `;
+
+      const rows = [
+        ['퇴직 전 3개월 평균 월급', avgMonthly.toLocaleString() + '원'],
+        ['일 평균임금', Math.round(dailyAvg).toLocaleString() + '원'],
+        ['일 실업급여 (평균임금×60%)', dailyBenefit.toLocaleString() + '원'],
+        ['일 상한액 (2026)', dailyCeiling.toLocaleString() + '원'],
+        ['일 하한액 (최저임금×80%×8h)', dailyFloor.toLocaleString() + '원'],
+        ['고용보험 가입기간', insureMonths + '개월 (' + Math.floor(insureMonths / 12) + '년 ' + (insureMonths % 12) + '개월)'],
+        ['수급 기간', benefitDays + '일'],
+        ['예상 총 수령액', totalBenefit.toLocaleString() + '원'],
+      ];
+      detailRows.innerHTML = rows.map(([l, v]) =>
+        `<div class="detail-row"><span class="d-label">${l}</span><span class="d-val">${v}</span></div>`
+      ).join('');
+
+      calcResult.classList.add('show');
+      calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }());
+  </script>
+</body>
+</html>

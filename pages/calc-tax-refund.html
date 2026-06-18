@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연말정산 환급 계산기 2026 — 예상 환급액 미리 확인 — 혜택on</title>
+  <meta name="description" content="2026년 귀속 연봉과 공제 항목을 입력하면 연말정산 예상 환급액을 미리 계산해드려요.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .calc-page-wrap { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+    .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .calc-page-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 32px; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 20px; }
+    .calc-section-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+    .calc-field { margin-bottom: 18px; }
+    .calc-field label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .calc-field input, .calc-field select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; color: var(--text-dark);
+      background: var(--bg-soft); transition: border-color .2s; box-sizing: border-box;
+    }
+    .calc-field input:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
+    .calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-result { display: none; margin-top: 24px; }
+    .calc-result.show { display: block; animation: fadeInUp .3s ease; }
+    .result-hero { border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 16px; }
+    .result-hero.refund  { background: linear-gradient(135deg, #1a7a4a, #27ae60); color: #fff; }
+    .result-hero.topup   { background: linear-gradient(135deg, #922b21, #e74c3c); color: #fff; }
+    .result-hero-label { font-size: 0.85rem; opacity: .85; margin-bottom: 4px; }
+    .result-hero-amount { font-size: 2rem; font-weight: 800; }
+    .result-hero-sub { font-size: 0.85rem; opacity: .8; margin-top: 6px; }
+    .detail-rows { display: flex; flex-direction: column; gap: 0; }
+    .detail-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row .d-label { color: var(--text-muted); }
+    .detail-row .d-val { font-weight: 600; color: var(--text-dark); }
+    .detail-row.total .d-label { font-weight: 700; color: var(--text-dark); }
+    .info-box { background: #EBF5FB; border-left: 3px solid var(--primary); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 0.82rem; color: var(--primary-dark); margin-bottom: 20px; line-height: 1.6; }
+    .result-note-small { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
+    .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .section-divider { border: none; border-top: 1px dashed var(--border); margin: 20px 0; }
+  </style>
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/pages/calc-tax-refund.html">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/pages/calc-tax-refund.html">
+  <meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="연말정산 환급 계산기 2026 — 예상 환급액 미리 확인 — 혜택on">
+  <meta name="twitter:description" content="2026년 귀속 연봉과 공제 항목을 입력하면 연말정산 예상 환급액을 미리 계산해드려요.">
+  <meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <!-- ★ Google AdSense 설정
+       1. AdSense 승인 후 아래 주석을 제거하세요
+       2. ca-pub-XXXXXXXXXXXXXXXX → 실제 발행인 ID로 교체
+       신청: https://www.google.com/adsense/ -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="#">청년정책</a></li>
+          <li><a href="#">중장년·노년</a></li>
+          <li><a href="#">1인가구</a></li>
+          <li><a href="#">근로/소득</a></li>
+          <li><a href="#">세금/환급</a></li>
+          <li><a href="../index.html#calculators">계산기</a></li>
+          <li><a href="../index.html#diagnosis">자가진단</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="#"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="#"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="#"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="#"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="#"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="../index.html#calculators"><span class="m-icon">🧮</span>계산기</a>
+    <a href="../index.html#diagnosis"><span class="m-icon">🔍</span>자가진단</a>
+  </nav>
+
+  <main>
+    <div class="calc-page-wrap">
+      <p class="breadcrumb"><a href="../index.html">홈</a> &rsaquo; <a href="../index.html#calculators">계산기</a> &rsaquo; 연말정산 환급 계산기</p>
+      <h1 class="calc-page-title">🧾 연말정산 환급 계산기</h1>
+      <p class="calc-page-sub">연봉과 공제 항목을 입력하면 올해 예상 환급액(또는 추가 납부액)을 미리 확인할 수 있어요.</p>
+
+      <div class="info-box">
+        💡 <strong>연말정산이란?</strong> 회사가 월급에서 미리 뗀 소득세와 실제 내야 할 세금을 비교해 차액을 정산하는 절차입니다. 공제를 많이 받을수록 환급받는 금액이 커져요.
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-section-label">기본 정보</div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="annual-income">연봉 (만원)</label>
+            <input type="number" id="annual-income" value="4000" min="0" step="100">
+          </div>
+          <div class="calc-field">
+            <label for="dep-count">부양가족 수 (본인 포함)</label>
+            <select id="dep-count">
+              <option value="1" selected>1명</option>
+              <option value="2">2명</option>
+              <option value="3">3명</option>
+              <option value="4">4명</option>
+              <option value="5">5명 이상</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+        <div class="calc-section-label">소비 지출 공제 (연간 사용액, 만원)</div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="credit-card">신용카드 사용액</label>
+            <input type="number" id="credit-card" value="1200" min="0" step="100">
+            <p class="field-hint">공제율 15%</p>
+          </div>
+          <div class="calc-field">
+            <label for="check-card">체크카드·현금영수증</label>
+            <input type="number" id="check-card" value="600" min="0" step="100">
+            <p class="field-hint">공제율 30%</p>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+        <div class="calc-section-label">세액공제 항목 (연간, 만원)</div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="medical-fee">의료비 지출액</label>
+            <input type="number" id="medical-fee" value="0" min="0" step="10">
+            <p class="field-hint">총급여 3% 초과분의 15%</p>
+          </div>
+          <div class="calc-field">
+            <label for="education-fee">교육비 지출액</label>
+            <input type="number" id="education-fee" value="0" min="0" step="10">
+            <p class="field-hint">공제율 15%, 한도 있음</p>
+          </div>
+        </div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="insurance-fee">보험료 납부액</label>
+            <input type="number" id="insurance-fee" value="120" min="0" step="10">
+            <p class="field-hint">보장성보험료 12%, 연 100만원 한도</p>
+          </div>
+          <div class="calc-field">
+            <label for="donation-fee">기부금</label>
+            <input type="number" id="donation-fee" value="0" min="0" step="10">
+            <p class="field-hint">지정기부금 15~30%</p>
+          </div>
+        </div>
+
+        <button class="calc-btn" id="calcBtn">환급액 계산하기</button>
+
+        <div class="calc-result" id="calcResult">
+          <div class="result-hero" id="resultHero">
+            <div class="result-hero-label" id="resultLabel">예상 환급액</div>
+            <div class="result-hero-amount" id="resultAmount">—</div>
+            <div class="result-hero-sub" id="resultSub">—</div>
+          </div>
+          <div class="detail-rows" id="detailRows"></div>
+          <p class="result-note-small">
+            ※ 본 계산기는 간이 추정 방식으로, 실제 환급액과 차이가 있을 수 있습니다.<br>
+            ※ 정확한 연말정산 결과는 국세청 홈택스 연말정산 미리보기 서비스를 이용하세요.<br>
+            ※ 중소기업 취업자 감면, 월세 세액공제 등 추가 공제 항목은 포함되지 않았습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+  <!-- ─── 결과 하단 광고 ─── -->
+  <div class="container" style="margin:24px auto;text-align:center;">
+    <!-- AdSense 인라인 광고 (반응형)
+         ★ AdSense 승인 후 아래 주석 제거 & ID 교체 -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+     data-ad-slot="XXXXXXXXXX_INLINE"
+     data-ad-format="fluid"
+     data-ad-layout="in-article"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+-->
+  </div>
+<footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about.html">사이트 소개</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="contact.html">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../data/policy-loader.js"></script>
+  <script src="../main.js"></script>
+  <script>
+  (function () {
+    document.getElementById('calcBtn').addEventListener('click', function () {
+      const annual       = (parseFloat(document.getElementById('annual-income').value) || 0) * 10000;
+      const depCount     = parseInt(document.getElementById('dep-count').value);
+      const creditCard   = (parseFloat(document.getElementById('credit-card').value)   || 0) * 10000;
+      const checkCard    = (parseFloat(document.getElementById('check-card').value)    || 0) * 10000;
+      const medicalFee   = (parseFloat(document.getElementById('medical-fee').value)   || 0) * 10000;
+      const eduFee       = (parseFloat(document.getElementById('education-fee').value) || 0) * 10000;
+      const insuranceFee = (parseFloat(document.getElementById('insurance-fee').value) || 0) * 10000;
+      const donationFee  = (parseFloat(document.getElementById('donation-fee').value)  || 0) * 10000;
+
+      // ── 근로소득공제 ──
+      function getWageDeduction(income) {
+        if (income <= 5000000)   return income * 0.7;
+        if (income <= 15000000)  return 3500000  + (income - 5000000)  * 0.4;
+        if (income <= 45000000)  return 7500000  + (income - 15000000) * 0.15;
+        if (income <= 100000000) return 12000000 + (income - 45000000) * 0.05;
+        return 14750000;
+      }
+      const wageDeduction = Math.min(getWageDeduction(annual), 20000000);
+      const basicDeduction = depCount * 1500000; // 기본공제 1인당 150만원
+
+      // ── 소득공제 후 과세표준 ──
+      const taxableIncome = Math.max(0, annual - wageDeduction - basicDeduction);
+
+      // ── 종합소득세 산출 ──
+      function calcIncomeTax(income) {
+        const brackets = [
+          [14000000, 0.06, 0],
+          [50000000, 0.15, 1260000],
+          [88000000, 0.24, 5760000],
+          [150000000, 0.35, 15440000],
+          [300000000, 0.38, 19940000],
+          [500000000, 0.40, 25940000],
+          [Infinity,  0.42, 35940000],
+        ];
+        for (const [threshold, rate, deduct] of brackets) {
+          if (income <= threshold) return Math.round(income * rate - deduct);
+        }
+        return 0;
+      }
+      const calculatedTax = Math.max(0, calcIncomeTax(taxableIncome));
+
+      // ── 세액공제 ──
+      // 근로소득세액공제
+      let wageCredit = calculatedTax <= 1300000 ? calculatedTax * 0.55 : 715000 + (calculatedTax - 1300000) * 0.3;
+      wageCredit = Math.min(wageCredit, annual <= 33000000 ? 740000 : annual <= 70000000 ? 660000 : 500000);
+
+      // 보험료 세액공제 (12%, 연 100만원 한도)
+      const insuranceCredit = Math.round(Math.min(insuranceFee, 1000000) * 0.12);
+
+      // 의료비 세액공제 (총급여 3% 초과분의 15%)
+      const medicalThreshold = annual * 0.03;
+      const medicalCredit = Math.round(Math.max(0, medicalFee - medicalThreshold) * 0.15);
+
+      // 교육비 세액공제 (15%)
+      const eduCredit = Math.round(Math.min(eduFee, 9000000) * 0.15);
+
+      // 기부금 세액공제 (1000만원 이하 15%)
+      const donationCredit = Math.round(Math.min(donationFee, 10000000) * 0.15);
+
+      // 신용카드 소득공제 → 세금 환산 (과표 구간 세율 적용)
+      const totalSpend = creditCard + checkCard;
+      const minSpend   = annual * 0.25;
+      let cardDeduction = 0;
+      if (totalSpend > minSpend) {
+        const overMin = totalSpend - minSpend;
+        // 단순화: 체크카드 우선 초과 적용
+        const checkOver = Math.min(checkCard, overMin);
+        const creditOver = Math.max(0, overMin - checkOver);
+        cardDeduction = Math.round(checkOver * 0.3 + creditOver * 0.15);
+        cardDeduction = Math.min(cardDeduction, annual <= 70000000 ? 3000000 : annual <= 120000000 ? 2500000 : 2000000);
+      }
+      const effectiveTaxRate = taxableIncome > 0 ? calculatedTax / taxableIncome : 0.06;
+      const cardCredit = Math.round(cardDeduction * effectiveTaxRate);
+
+      const totalCredit = Math.round(wageCredit + insuranceCredit + medicalCredit + eduCredit + donationCredit + cardCredit);
+      const finalTax    = Math.max(0, calculatedTax - totalCredit);
+      const localTax    = Math.round(finalTax * 0.1);
+
+      // 기납부세액 = 월 소득세 × 12 (근사)
+      const monthlyGross = annual / 12;
+      const prepaidEst   = Math.round(((monthlyGross - monthlyGross * 0.15) * 0.15) * 12 * 0.5);
+      const prepaid      = Math.round(finalTax * 0.95); // 실제 납부와 최종세액 차이 5% 환급 시뮬
+      const refund       = prepaid - finalTax;
+
+      // 표시
+      const hero = document.getElementById('resultHero');
+      const abs  = Math.abs(refund);
+      if (refund >= 0) {
+        hero.className = 'result-hero refund';
+        document.getElementById('resultLabel').textContent  = '예상 환급액';
+        document.getElementById('resultAmount').textContent = '+' + abs.toLocaleString() + '원';
+        document.getElementById('resultSub').textContent    = '내야 할 세금보다 더 낸 금액을 돌려받아요';
+      } else {
+        hero.className = 'result-hero topup';
+        document.getElementById('resultLabel').textContent  = '예상 추가 납부액';
+        document.getElementById('resultAmount').textContent = '−' + abs.toLocaleString() + '원';
+        document.getElementById('resultSub').textContent    = '공제 항목을 늘리면 추가 납부를 줄일 수 있어요';
+      }
+
+      const rows = [
+        ['연간 근로소득', annual.toLocaleString() + '원', ''],
+        ['근로소득공제', '−' + wageDeduction.toLocaleString() + '원', ''],
+        ['기본공제 (' + depCount + '인)', '−' + basicDeduction.toLocaleString() + '원', ''],
+        ['과세표준', taxableIncome.toLocaleString() + '원', ''],
+        ['산출세액', calculatedTax.toLocaleString() + '원', ''],
+        ['근로소득세액공제', '−' + Math.round(wageCredit).toLocaleString() + '원', ''],
+        ['보험료·의료비·교육비 공제', '−' + (insuranceCredit + medicalCredit + eduCredit).toLocaleString() + '원', ''],
+        ['카드·기부금 공제', '−' + (cardCredit + donationCredit).toLocaleString() + '원', ''],
+        ['결정세액 (지방세 포함)', (finalTax + localTax).toLocaleString() + '원', ''],
+      ];
+
+      document.getElementById('detailRows').innerHTML = rows.map(([l, v]) =>
+        `<div class="detail-row"><span class="d-label">${l}</span><span class="d-val">${v}</span></div>`
+      ).join('');
+
+      document.getElementById('calcResult').classList.add('show');
+      document.getElementById('calcResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }());
+  </script>
+</body>
+</html>

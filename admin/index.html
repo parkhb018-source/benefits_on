@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>혜택on 관리자</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F4F8; color: #1A2332; font-size: 14px; }
+
+    /* ── Header ── */
+    .hd { background: #1F4E79; color: #fff; padding: 0 20px; height: 52px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+    .hd-logo { font-size: 1rem; font-weight: 700; }
+    .hd-logo span { color: #90CAF9; }
+    .hd-pills { display: flex; align-items: center; gap: 10px; }
+    .pill { background: rgba(255,255,255,.15); border-radius: 14px; padding: 3px 10px; font-size: 0.75rem; }
+    .hd a { color: #90CAF9; text-decoration: none; font-size: 0.8rem; }
+    .hd a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .layout { display: grid; grid-template-columns: 188px 1fr; min-height: calc(100vh - 52px); }
+
+    /* ── Sidebar ── */
+    .sidebar { background: #fff; border-right: 1px solid #E2E8F0; padding: 16px 0; position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto; }
+    .sb-label { font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: .08em; padding: 0 16px; margin: 12px 0 4px; }
+    .nb { display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 14px; background: none; border: none; cursor: pointer; border-radius: 7px; font-size: 0.85rem; color: #4A5568; text-align: left; transition: all .12s; }
+    .nb:hover { background: #F0F4F8; color: #1F4E79; }
+    .nb.on { background: #EBF5FB; color: #1F4E79; font-weight: 600; }
+    .nb .badge { margin-left: auto; background: #E53E3E; color: #fff; border-radius: 10px; padding: 1px 6px; font-size: 0.68rem; font-weight: 700; display: none; }
+    .nb .badge.show { display: inline-block; }
+
+    /* ── Main ── */
+    .main { padding: 20px 24px 80px; }
+    .tab { display: none; }
+    .tab.on { display: block; }
+
+    /* ── Cards ── */
+    .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+    .card-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #F0F4F8; }
+    .card-title { font-size: 0.95rem; font-weight: 700; }
+    .sched-tag { font-size: 0.72rem; color: #718096; background: #F7FAFC; border: 1px solid #E2E8F0; border-radius: 5px; padding: 2px 8px; }
+    .sched-tag.soon { background: #FFFBEB; border-color: #F6E05E; color: #744210; }
+    .sched-tag.due  { background: #FFF5F5; border-color: #FEB2B2; color: #C53030; }
+
+    /* ── Form ── */
+    .fg { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 11px; }
+    .fv { display: flex; flex-direction: column; gap: 3px; }
+    .fl { font-size: 0.75rem; font-weight: 600; color: #4A5568; }
+    .fl .req { color: #E53E3E; }
+    .fi { padding: 7px 10px; border: 1.5px solid #E2E8F0; border-radius: 6px; font-size: 0.85rem; color: #1A2332; background: #F7FAFC; transition: border-color .15s; width: 100%; }
+    .fi:focus { border-color: #2E75B6; outline: none; background: #fff; }
+    .fi.auto { background: #EDF2F7; color: #718096; }
+    .fh { font-size: 0.7rem; color: #94A3B8; }
+    select.fi { cursor: pointer; }
+
+    /* ── Buttons ── */
+    .btn { padding: 7px 16px; border: none; border-radius: 7px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all .12s; }
+    .btn-p { background: #2E75B6; color: #fff; }
+    .btn-p:hover { background: #1F4E79; }
+    .btn-s { background: #F0F4F8; color: #4A5568; border: 1px solid #E2E8F0; }
+    .btn-s:hover { background: #E2E8F0; }
+    .btn-d { background: #FFF5F5; color: #C53030; border: 1px solid #FEB2B2; }
+    .btn-d:hover { background: #FED7D7; }
+    .btn-sm { padding: 4px 10px; font-size: 0.75rem; }
+
+    /* ── Save bar ── */
+    .save-bar { position: sticky; bottom: 0; background: #fff; border-top: 1px solid #E2E8F0; padding: 10px 20px; display: flex; align-items: center; gap: 10px; margin: 0 -24px -80px; }
+    .save-ok { font-size: 0.8rem; color: #38A169; font-weight: 600; opacity: 0; transition: opacity .3s; }
+    .save-ok.show { opacity: 1; }
+
+    /* ── Dashboard ── */
+    .dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .dc { background: #fff; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 16px; }
+    .dc.ok    { border-left: 4px solid #38A169; }
+    .dc.warn  { border-left: 4px solid #D69E2E; }
+    .dc.error { border-left: 4px solid #E53E3E; }
+    .dc-label { font-size: 0.72rem; font-weight: 700; color: #718096; text-transform: uppercase; letter-spacing: .06em; }
+    .dc-val { font-size: 1.5rem; font-weight: 800; color: #1A2332; margin: 2px 0; }
+    .dc-sub { font-size: 0.72rem; color: #94A3B8; }
+
+    /* ── Policy table ── */
+    .pt { width: 100%; border-collapse: collapse; }
+    .pt th { background: #F7FAFC; padding: 8px 10px; text-align: left; font-size: 0.75rem; font-weight: 700; color: #4A5568; border-bottom: 1px solid #E2E8F0; white-space: nowrap; }
+    .pt td { padding: 8px 10px; border-bottom: 1px solid #F0F4F8; font-size: 0.8rem; vertical-align: middle; }
+    .pt tr:last-child td { border-bottom: none; }
+    .pt tr.exp td { background: #FFF5F5; }
+    .pt tr.expiring td { background: #FFFBEB; }
+    .sbadge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: 0.7rem; font-weight: 700; }
+    .sbadge.active  { background: #C6F6D5; color: #276749; }
+    .sbadge.expired { background: #FED7D7; color: #9B2C2C; }
+    .sbadge.draft   { background: #EDF2F7; color: #4A5568; }
+    .dago { font-size: 0.7rem; color: #94A3B8; }
+    .dago.stale  { color: #D69E2E; font-weight: 600; }
+    .dago.vstale { color: #E53E3E; font-weight: 600; }
+
+    /* ── Validation ── */
+    .vi { display: flex; align-items: flex-start; gap: 8px; padding: 9px 12px; border-radius: 7px; margin-bottom: 7px; font-size: 0.85rem; }
+    .vi.ok    { background: #F0FFF4; color: #276749; }
+    .vi.warn  { background: #FFFBEB; color: #744210; }
+    .vi.error { background: #FFF5F5; color: #9B2C2C; }
+
+    /* ── Rules editor ── */
+    .rules-editor { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.78rem; width: 100%; min-height: 300px; padding: 12px; border: 1.5px solid #E2E8F0; border-radius: 7px; resize: vertical; line-height: 1.5; }
+    .rules-editor:focus { border-color: #2E75B6; outline: none; }
+
+    /* ── Page heading ── */
+    .ph { font-size: 1.2rem; font-weight: 800; color: #1A2332; margin-bottom: 3px; }
+    .ps { font-size: 0.82rem; color: #718096; margin-bottom: 16px; }
+
+    /* ── Cal row ── */
+    .cal-row { display: flex; align-items: center; gap: 12px; padding: 7px 0; border-bottom: 1px solid #F0F4F8; }
+    .cal-row:last-child { border-bottom: none; }
+    .cal-icon { font-size: 1.1rem; }
+    .cal-name { font-weight: 600; flex: 1; font-size: 0.85rem; }
+    .cal-when { color: #718096; font-size: 0.78rem; }
+    .cal-d { font-size: 0.78rem; font-weight: 700; }
+    .cal-d.ok { color: #38A169; }
+    .cal-d.soon { color: #D69E2E; }
+    .cal-d.due { color: #E53E3E; }
+
+    @media (max-width: 700px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="hd-logo">혜택<span>on</span> 관리자</div>
+  <div class="hd-pills">
+    <span class="pill" id="hLastSaved">마지막 저장: -</span>
+    <span class="pill" id="hSource">파일에서 로드</span>
+    <a href="../index.html" target="_blank">🔗 사이트 보기</a>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sb-label">대시보드</div>
+    <button class="nb on" data-tab="dashboard">📊 현황</button>
+
+    <div class="sb-label">데이터</div>
+    <button class="nb" data-tab="constants">⚙️ 기준값</button>
+    <button class="nb" data-tab="policies">📰 정책 목록 <span class="badge" id="bPolicies"></span></button>
+    <button class="nb" data-tab="rules">🧭 자가진단 규칙</button>
+
+    <div class="sb-label">도구</div>
+    <button class="nb" data-tab="validate">✅ 검증 <span class="badge" id="bValidate"></span></button>
+    <button class="nb" data-tab="export">💾 내보내기</button>
+  </nav>
+
+  <main class="main">
+
+    <!-- ════ 대시보드 ════ -->
+    <div id="tab-dashboard" class="tab on">
+      <div class="ph">현황 요약</div>
+      <p class="ps">오늘: <strong id="todayStr">-</strong> · 데이터 소스: <strong id="srcStr">-</strong></p>
+
+      <div class="dash-grid" id="dashCards"></div>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">📅 연간 업데이트 캘린더</span></div>
+        <div id="calRows"></div>
+      </div>
+    </div>
+
+    <!-- ════ 기준값 ════ -->
+    <div id="tab-constants" class="tab">
+      <div class="ph">기준값 편집</div>
+      <p class="ps">수치 수정 후 <strong>저장</strong>을 누르면 사이트에 즉시 반영됩니다 (새로고침 불필요).</p>
+
+      <!-- 최저임금 -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">⚖️ 최저임금</span><span class="sched-tag" id="st-mw">매년 8월 5일경</span></div>
+        <div class="fg">
+          <div class="fv"><label class="fl">최저시급 <span class="req">*</span></label><input class="fi" type="number" id="f-mw-rate" step="10"><span class="fh">원</span></div>
+          <div class="fv"><label class="fl">월 환산 (209h)</label><input class="fi auto" type="text" id="f-mw-monthly" readonly tabindex="-1"><span class="fh">자동 계산</span></div>
+          <div class="fv"><label class="fl">전년도 최저시급</label><input class="fi" type="number" id="f-mw-prev" step="10"><span class="fh">원</span></div>
+          <div class="fv"><label class="fl">인상률</label><input class="fi auto" type="text" id="f-mw-rate-pct" readonly tabindex="-1"><span class="fh">자동 계산</span></div>
+        </div>
+      </div>
+
+      <!-- 기초연금 -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">👴 기초연금</span><span class="sched-tag" id="st-bp">매년 1월</span></div>
+        <div class="fg">
+          <div class="fv"><label class="fl">단독 최대 지급액 <span class="req">*</span></label><input class="fi" type="number" id="f-bp-max" step="100"><span class="fh">원/월</span></div>
+          <div class="fv"><label class="fl">부부 각 지급액</label><input class="fi" type="number" id="f-bp-couple" step="100"><span class="fh">원/월 (단독×80%)</span></div>
+          <div class="fv"><label class="fl">단독 선정기준액 <span class="req">*</span></label><input class="fi" type="number" id="f-bp-scrit" step="10000"><span class="fh">원/월 소득인정액</span></div>
+          <div class="fv"><label class="fl">부부 선정기준액 <span class="req">*</span></label><input class="fi" type="number" id="f-bp-ccrit" step="10000"><span class="fh">원/월 소득인정액</span></div>
+          <div class="fv"><label class="fl">인상률</label><input class="fi" type="text" id="f-bp-pct"><span class="fh">예: 2.1%</span></div>
+        </div>
+      </div>
+
+      <!-- 근로장려금 -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">💵 근로장려금</span><span class="sched-tag" id="st-eitc">매년 4~5월 (신청 전)</span></div>
+        <table style="width:100%;border-collapse:collapse;">
+          <thead><tr>
+            <th style="text-align:left;padding:7px;font-size:0.73rem;color:#718096;border-bottom:1px solid #E2E8F0;">가구유형</th>
+            <th style="padding:7px;font-size:0.73rem;color:#718096;border-bottom:1px solid #E2E8F0;">소득 상한 (원)</th>
+            <th style="padding:7px;font-size:0.73rem;color:#718096;border-bottom:1px solid #E2E8F0;">최대 지급액 (원)</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="padding:7px;font-weight:600;font-size:0.83rem;">단독가구</td><td style="padding:7px;"><input class="fi" type="number" id="f-eitc-sl" step="100000" style="width:100%;"></td><td style="padding:7px;"><input class="fi" type="number" id="f-eitc-sm" step="10000" style="width:100%;"></td></tr>
+            <tr><td style="padding:7px;font-weight:600;font-size:0.83rem;">홑벌이가구</td><td style="padding:7px;"><input class="fi" type="number" id="f-eitc-sel" step="100000" style="width:100%;"></td><td style="padding:7px;"><input class="fi" type="number" id="f-eitc-sem" step="10000" style="width:100%;"></td></tr>
+            <tr><td style="padding:7px;font-weight:600;font-size:0.83rem;">맞벌이가구</td><td style="padding:7px;"><input class="fi" type="number" id="f-eitc-del" step="100000" style="width:100%;"></td><td style="padding:7px;"><input class="fi" type="number" id="f-eitc-dem" step="10000" style="width:100%;"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 실업급여 -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">📋 실업급여</span><span class="sched-tag" id="st-ue">최저임금 연동 (매년 8월 이후)</span></div>
+        <div class="fg">
+          <div class="fv"><label class="fl">일 상한액 <span class="req">*</span></label><input class="fi" type="number" id="f-ue-ceil" step="100"><span class="fh">원/일 (고용노동부 고시)</span></div>
+          <div class="fv"><label class="fl">일 하한액</label><input class="fi auto" type="text" id="f-ue-floor" readonly tabindex="-1"><span class="fh">자동 계산 (최저시급 × 80% × 8h)</span></div>
+        </div>
+        <p style="font-size:0.75rem;color:#94A3B8;margin-top:10px;">💡 최저시급 변경 시 하한액이 자동으로 재계산됩니다.</p>
+      </div>
+
+      <!-- 에너지바우처 -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">⚡ 에너지바우처</span><span class="sched-tag" id="st-ev">매년 6~7월</span></div>
+        <div class="fg">
+          <div class="fv"><label class="fl">1인 가구</label><input class="fi" type="number" id="f-ev-1" step="100"></div>
+          <div class="fv"><label class="fl">2인 가구</label><input class="fi" type="number" id="f-ev-2" step="100"></div>
+          <div class="fv"><label class="fl">3인 가구</label><input class="fi" type="number" id="f-ev-3" step="100"></div>
+          <div class="fv"><label class="fl">4인 이상 가구</label><input class="fi" type="number" id="f-ev-4" step="1000"></div>
+          <div class="fv"><label class="fl">사용 시작일</label><input class="fi" type="date" id="f-ev-start"></div>
+          <div class="fv"><label class="fl">사용 종료일</label><input class="fi" type="date" id="f-ev-end"></div>
+        </div>
+      </div>
+
+      <!-- 청년월세 -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">🏠 청년월세 특별지원</span><span class="sched-tag" id="st-yr">신규 공모 시 확인</span></div>
+        <div class="fg">
+          <div class="fv"><label class="fl">월 최대 지원금 <span class="req">*</span></label><input class="fi" type="number" id="f-yr-max" step="10000"><span class="fh">원</span></div>
+          <div class="fv"><label class="fl">최장 지원기간</label><input class="fi" type="number" id="f-yr-months" step="1"><span class="fh">개월</span></div>
+          <div class="fv"><label class="fl">보증금 한도</label><input class="fi" type="number" id="f-yr-dep" step="1000000"><span class="fh">원</span></div>
+          <div class="fv"><label class="fl">월세 한도</label><input class="fi" type="number" id="f-yr-rent" step="10000"><span class="fh">원</span></div>
+        </div>
+      </div>
+
+      <!-- 기준중위소득 -->
+      <div class="card">
+        <div class="card-hd"><span class="card-title">📊 기준중위소득</span><span class="sched-tag" id="st-mi">매년 8월</span></div>
+        <div class="fg">
+          <div class="fv"><label class="fl">1인 가구</label><input class="fi" type="number" id="f-mi-1" step="1000"><span class="fh">원/월</span></div>
+          <div class="fv"><label class="fl">2인 가구</label><input class="fi" type="number" id="f-mi-2" step="1000"></div>
+          <div class="fv"><label class="fl">3인 가구</label><input class="fi" type="number" id="f-mi-3" step="1000"></div>
+          <div class="fv"><label class="fl">4인 가구</label><input class="fi" type="number" id="f-mi-4" step="1000"></div>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn btn-p" id="btnSaveC">💾 저장 (즉시 반영)</button>
+        <button class="btn btn-s" id="btnResetC">초기화</button>
+        <span class="save-ok" id="saveOkC">✓ 저장 완료</span>
+        <span style="margin-left:auto;font-size:0.72rem;color:#94A3B8;">사이트 새로고침 없이 바로 반영됩니다</span>
+      </div>
+    </div>
+
+    <!-- ════ 정책 목록 ════ -->
+    <div id="tab-policies" class="tab">
+      <div class="ph">정책 목록</div>
+      <p class="ps">마감일이 지나면 빨간색 표시. <strong>편집</strong> 버튼으로 상태·출처를 수정하세요.</p>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table class="pt" id="polTable">
+          <thead><tr>
+            <th>제목</th><th>카테고리</th><th>상태</th><th>마감일</th><th>업데이트</th><th>출처</th><th></th>
+          </tr></thead>
+          <tbody id="polBody"></tbody>
+        </table>
+      </div>
+
+      <div id="polEditPanel" style="display:none;">
+        <div class="card" style="border-color:#2E75B6;">
+          <div class="card-hd">
+            <span class="card-title">정책 편집</span>
+            <button class="btn btn-s btn-sm" id="btnCancelPol">✕ 닫기</button>
+          </div>
+          <div class="fg">
+            <div class="fv" style="grid-column:1/-1"><label class="fl">제목 <span class="req">*</span></label><input class="fi" type="text" id="pe-title"></div>
+            <div class="fv"><label class="fl">카테고리</label>
+              <select class="fi" id="pe-cat"><option>청년정책</option><option>중장년·노년</option><option>1인가구</option><option>근로/소득</option><option>세금/환급</option></select>
+            </div>
+            <div class="fv"><label class="fl">상태</label>
+              <select class="fi" id="pe-status"><option value="active">active (운영중)</option><option value="expired">expired (마감)</option><option value="draft">draft (준비중)</option></select>
+            </div>
+            <div class="fv"><label class="fl">마감일</label><input class="fi" type="date" id="pe-deadline"></div>
+            <div class="fv"><label class="fl">마지막 업데이트</label><input class="fi" type="date" id="pe-updated"></div>
+            <div class="fv" style="grid-column:1/-1"><label class="fl">출처 URL</label><input class="fi" type="url" id="pe-url"></div>
+            <div class="fv" style="grid-column:1/-1"><label class="fl">요약</label><input class="fi" type="text" id="pe-summary"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;">
+            <button class="btn btn-p" id="btnSavePol">저장</button>
+            <button class="btn btn-d" id="btnExpirePol">만료 처리</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn btn-p" id="btnSavePs">💾 정책 저장</button>
+        <span class="save-ok" id="saveOkP">✓ 저장 완료</span>
+      </div>
+    </div>
+
+    <!-- ════ 자가진단 규칙 ════ -->
+    <div id="tab-rules" class="tab">
+      <div class="ph">자가진단 매칭 규칙</div>
+      <p class="ps"><code>matching-rules.json</code> 내용을 직접 편집합니다. 저장하면 자가진단 결과에 즉시 반영됩니다.</p>
+
+      <div class="card">
+        <div class="card-hd">
+          <span class="card-title">benefitsMap (연령·가구·고용상태 → 추천 혜택)</span>
+          <span style="font-size:0.75rem;color:#94A3B8;">JSON 형식으로 편집</span>
+        </div>
+        <textarea class="rules-editor" id="rulesEditor" spellcheck="false"></textarea>
+        <p style="font-size:0.72rem;color:#94A3B8;margin-top:8px;" id="rulesStatus"></p>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn btn-p" id="btnSaveRules">💾 규칙 저장</button>
+        <button class="btn btn-s" id="btnValidateRules">문법 검사</button>
+        <span class="save-ok" id="saveOkR">✓ 저장 완료</span>
+      </div>
+    </div>
+
+    <!-- ════ 검증 ════ -->
+    <div id="tab-validate" class="tab">
+      <div class="ph">데이터 검증</div>
+      <p class="ps">오류, 만료 정책, 오래된 데이터를 자동으로 점검합니다.</p>
+
+      <div class="card">
+        <div class="card-hd">
+          <span class="card-title">검증 결과</span>
+          <button class="btn btn-s btn-sm" id="btnReval">🔄 다시 검증</button>
+        </div>
+        <div id="valResults"></div>
+      </div>
+    </div>
+
+    <!-- ════ 내보내기 ════ -->
+    <div id="tab-export" class="tab">
+      <div class="ph">내보내기 / 가져오기</div>
+      <p class="ps">관리자에서 편집한 내용을 파일로 내보내 <code>data/</code> 폴더에 덮어쓰면 Git에도 반영됩니다.</p>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">💾 JSON 파일 내보내기</span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-p" id="btnDlC">⬇ constants.json</button>
+          <button class="btn btn-p" id="btnDlP">⬇ policies.json</button>
+          <button class="btn btn-p" id="btnDlR">⬇ matching-rules.json</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">📂 파일에서 가져오기</span></div>
+        <p style="font-size:0.82rem;color:#718096;margin-bottom:12px;">기존 JSON 파일을 업로드하면 localStorage를 교체합니다.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <label class="btn btn-s" style="cursor:pointer;">📂 constants.json<input type="file" id="impC" accept=".json" style="display:none;"></label>
+          <label class="btn btn-s" style="cursor:pointer;">📂 policies.json<input type="file" id="impP" accept=".json" style="display:none;"></label>
+          <label class="btn btn-s" style="cursor:pointer;">📂 matching-rules.json<input type="file" id="impR" accept=".json" style="display:none;"></label>
+        </div>
+        <p style="font-size:0.75rem;color:#94A3B8;margin-top:10px;" id="impMsg"></p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">🗑️ localStorage 초기화</span></div>
+        <p style="font-size:0.82rem;color:#718096;margin-bottom:12px;">초기화하면 다음 로드 시 원본 JSON 파일에서 다시 불러옵니다.</p>
+        <button class="btn btn-d" id="btnClearLS">⚠️ 전체 초기화</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ─── 상수 ───────────────────────────────────────────────────
+const LS = { C: 'htkon_constants', P: 'htkon_policies', R: 'htkon_rules', SAVED: 'htkon_lastSaved' };
+const TODAY = new Date().toISOString().split('T')[0];
+const CAL = [
+  { key: 'minimumWage',   icon: '⚖️', name: '최저임금',       when: '매년 8월 5일',  month: 8 },
+  { key: 'basicPension',  icon: '👴', name: '기초연금',        when: '매년 1월',      month: 1 },
+  { key: 'medianIncome',  icon: '📊', name: '기준중위소득',    when: '매년 8월',      month: 8 },
+  { key: 'eitc',          icon: '💵', name: '근로장려금',      when: '매년 4~5월',    month: 4 },
+  { key: 'energyVoucher', icon: '⚡', name: '에너지바우처',    when: '매년 6~7월',    month: 6 },
+  { key: 'unemployment',  icon: '📋', name: '실업급여 상한액', when: '최저임금 연동', month: 8 },
+];
+
+// ─── 상태 ───────────────────────────────────────────────────
+let S = { C: null, P: null, R: null, editId: null };
+
+document.getElementById('todayStr').textContent = TODAY;
+
+// ─── 초기화 ─────────────────────────────────────────────────
+(async function init() {
+  S.C = tryLS(LS.C) || await fetchJSON('../data/constants.json');
+  S.P = tryLS(LS.P) || await fetchJSON('../data/policies.json');
+  S.R = tryLS(LS.R) || await fetchJSON('../data/matching-rules.json');
+
+  const src = localStorage.getItem(LS.C) ? 'localStorage' : '파일';
+  document.getElementById('hSource').textContent = src + '에서 로드';
+  document.getElementById('srcStr').textContent = src;
+  updateSaveTime();
+  renderAll();
+  setupEvents();
+})();
+
+// ─── 렌더 ───────────────────────────────────────────────────
+function renderAll() {
+  renderDashboard();
+  renderConstantsForm();
+  renderPoliciesTable();
+  renderRulesEditor();
+  runValidation();
+}
+
+function renderDashboard() {
+  const issues = getIssues();
+  const errors = issues.filter(i => i.t === 'error').length;
+  const warns  = issues.filter(i => i.t === 'warn').length;
+  const ps     = (S.P && S.P.policies) || [];
+  const active = ps.filter(p => p.status === 'active').length;
+  const expBad = ps.filter(p => p.deadline && p.deadline < TODAY && p.status === 'active').length;
+
+  document.getElementById('dashCards').innerHTML = [
+    { l: '오류',       v: errors,              s: '즉시 수정 필요', c: errors  > 0 ? 'error' : 'ok' },
+    { l: '경고',       v: warns,               s: '점검 권장',       c: warns   > 0 ? 'warn'  : 'ok' },
+    { l: '운영중 정책', v: active + '/' + ps.length, s: '전체',      c: 'ok' },
+    { l: '마감 미처리', v: expBad,              s: 'active인데 마감', c: expBad > 0 ? 'error' : 'ok' },
+  ].map(d => `<div class="dc ${d.c}"><div class="dc-label">${d.l}</div><div class="dc-val">${d.v}</div><div class="dc-sub">${d.s}</div></div>`).join('');
+
+  document.getElementById('calRows').innerHTML = CAL.map(c => {
+    const now = new Date();
+    const t   = new Date(now.getFullYear(), c.month - 1, 1);
+    if (t < now) t.setFullYear(now.getFullYear() + 1);
+    const d   = Math.ceil((t - now) / 864e5);
+    const cls = d < 30 ? 'due' : d < 90 ? 'soon' : 'ok';
+    return `<div class="cal-row"><span class="cal-icon">${c.icon}</span><span class="cal-name">${c.name}</span><span class="cal-when">${c.when}</span><span class="cal-d ${cls}">D-${d}일</span></div>`;
+  }).join('');
+}
+
+function renderConstantsForm() {
+  const c = S.C;
+  if (!c) return;
+  set('f-mw-rate',  c.minimumWage?.hourlyRate);
+  set('f-mw-prev',  c.minimumWage?.prevHourlyRate);
+  set('f-bp-max',   c.basicPension?.maxAmountSingle);
+  set('f-bp-couple',c.basicPension?.coupleEachAmount);
+  set('f-bp-scrit', c.basicPension?.singleSelectionCriteria);
+  set('f-bp-ccrit', c.basicPension?.coupleSelectionCriteria);
+  set('f-bp-pct',   c.basicPension?.increaseRate);
+  set('f-eitc-sl',  c.eitc?.single?.incomeLimit);
+  set('f-eitc-sm',  c.eitc?.single?.maxAmount);
+  set('f-eitc-sel', c.eitc?.singleEarner?.incomeLimit);
+  set('f-eitc-sem', c.eitc?.singleEarner?.maxAmount);
+  set('f-eitc-del', c.eitc?.dualEarner?.incomeLimit);
+  set('f-eitc-dem', c.eitc?.dualEarner?.maxAmount);
+  set('f-ue-ceil',  c.unemployment?.dailyCeiling);
+  set('f-ev-1',     c.energyVoucher?.byHousehold?.['1']);
+  set('f-ev-2',     c.energyVoucher?.byHousehold?.['2']);
+  set('f-ev-3',     c.energyVoucher?.byHousehold?.['3']);
+  set('f-ev-4',     c.energyVoucher?.byHousehold?.['4plus']);
+  set('f-ev-start', c.energyVoucher?.usageStart);
+  set('f-ev-end',   c.energyVoucher?.usageEnd);
+  set('f-yr-max',   c.youthMonthlyRent?.maxMonthly);
+  set('f-yr-months',c.youthMonthlyRent?.maxMonths);
+  set('f-yr-dep',   c.youthMonthlyRent?.depositLimit);
+  set('f-yr-rent',  c.youthMonthlyRent?.rentLimit);
+  set('f-mi-1',     c.medianIncome2026?.person1);
+  set('f-mi-2',     c.medianIncome2026?.person2);
+  set('f-mi-3',     c.medianIncome2026?.person3);
+  set('f-mi-4',     c.medianIncome2026?.person4);
+  updateCalcs();
+}
+
+function updateCalcs() {
+  const rate = n('f-mw-rate'), prev = n('f-mw-prev');
+  v('f-mw-monthly',  rate ? (rate * 209).toLocaleString('ko-KR') + '원' : '-');
+  v('f-mw-rate-pct', (rate && prev) ? ((rate-prev)/prev*100).toFixed(1) + '%' : '-');
+  const floor = rate ? Math.round(rate * 0.8 * 8) : 0;
+  v('f-ue-floor', floor ? floor.toLocaleString('ko-KR') + '원' : '-');
+}
+
+function collectConstants() {
+  const c = S.C;
+  const rate = n('f-mw-rate'), prev = n('f-mw-prev');
+  c.minimumWage    = { ...c.minimumWage, hourlyRate: rate, prevHourlyRate: prev, monthlyStandard209: Math.round(rate*209), increaseRate: (prev ? ((rate-prev)/prev*100).toFixed(1)+'%' : c.minimumWage?.increaseRate) };
+  c.basicPension   = { ...c.basicPension, maxAmountSingle: n('f-bp-max'), coupleEachAmount: n('f-bp-couple'), coupleTotalMax: n('f-bp-couple')*2, singleSelectionCriteria: n('f-bp-scrit'), coupleSelectionCriteria: n('f-bp-ccrit'), increaseRate: g('f-bp-pct') };
+  c.eitc           = { ...c.eitc, single: { incomeLimit: n('f-eitc-sl'), maxAmount: n('f-eitc-sm') }, singleEarner: { incomeLimit: n('f-eitc-sel'), maxAmount: n('f-eitc-sem') }, dualEarner: { ...c.eitc?.dualEarner, incomeLimit: n('f-eitc-del'), maxAmount: n('f-eitc-dem') } };
+  c.unemployment   = { ...c.unemployment, dailyCeiling: n('f-ue-ceil'), dailyFloor: Math.round(rate*0.8*8), minWageBase: rate };
+  c.energyVoucher  = { ...c.energyVoucher, usageStart: g('f-ev-start'), usageEnd: g('f-ev-end'), byHousehold: { '1': n('f-ev-1'), '2': n('f-ev-2'), '3': n('f-ev-3'), '4plus': n('f-ev-4') } };
+  c.youthMonthlyRent = { ...c.youthMonthlyRent, maxMonthly: n('f-yr-max'), maxMonths: n('f-yr-months'), depositLimit: n('f-yr-dep'), rentLimit: n('f-yr-rent') };
+  c.medianIncome2026 = { ...c.medianIncome2026, person1: n('f-mi-1'), person2: n('f-mi-2'), person3: n('f-mi-3'), person4: n('f-mi-4') };
+  c.meta.lastUpdated = TODAY;
+}
+
+function renderPoliciesTable() {
+  const ps = (S.P && S.P.policies) || [];
+  let expCnt = 0;
+  document.getElementById('polBody').innerHTML = ps.map(p => {
+    const isExp = p.deadline && p.deadline < TODAY && p.status === 'active';
+    const isSoon = p.deadline && !isExp && daysBetween(TODAY, p.deadline) < 14;
+    if (isExp) expCnt++;
+    const days = Math.floor((new Date() - new Date(p.lastUpdated)) / 864e5);
+    const dClass = days > 180 ? 'vstale' : days > 90 ? 'stale' : '';
+    const rClass = isExp ? 'exp' : isSoon ? 'expiring' : '';
+    const dStr = p.deadline ? (isExp ? `⚠️ ${p.deadline} 마감` : `D-${daysBetween(TODAY, p.deadline)}일`) : '상시';
+    return `<tr class="${rClass}"><td><strong>${p.title}</strong></td><td>${p.category}</td><td><span class="sbadge ${p.status}">${p.status}</span></td><td style="${isExp?'color:#E53E3E;font-weight:600':''}">${dStr}</td><td>${p.lastUpdated} <span class="dago ${dClass}">(${days}일 전)</span></td><td>${p.sourceUrl?`<a href="${p.sourceUrl}" target="_blank" style="color:#2E75B6;font-size:0.73rem">출처↗</a>`:'-'}</td><td><button class="btn btn-s btn-sm" onclick="editPol('${p.id}')">편집</button></td></tr>`;
+  }).join('');
+
+  const b = document.getElementById('bPolicies');
+  b.textContent = expCnt || ''; b.className = 'badge' + (expCnt ? ' show' : '');
+}
+
+function editPol(id) {
+  const p = (S.P.policies || []).find(x => x.id === id);
+  if (!p) return;
+  S.editId = id;
+  set('pe-title',    p.title);   g2('pe-cat', p.category); g2('pe-status', p.status);
+  set('pe-deadline', p.deadline || ''); set('pe-updated', p.lastUpdated); set('pe-url', p.sourceUrl || ''); set('pe-summary', p.summary || '');
+  document.getElementById('polEditPanel').style.display = 'block';
+  document.getElementById('polEditPanel').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderRulesEditor() {
+  if (!S.R) return;
+  document.getElementById('rulesEditor').value = JSON.stringify(S.R, null, 2);
+}
+
+// ─── 검증 ───────────────────────────────────────────────────
+function getIssues() {
+  const issues = [];
+  if (!S.C) { issues.push({ t: 'error', m: '기준값(constants.json)을 불러오지 못했습니다.' }); return issues; }
+
+  const c = S.C, ps = (S.P && S.P.policies) || [];
+  if (!c.minimumWage?.hourlyRate) issues.push({ t: 'error', m: '최저시급이 설정되지 않았습니다.' });
+
+  const mw = c.minimumWage?.hourlyRate || 0;
+  const floor = Math.round(mw * 0.8 * 8);
+  const ceil  = c.unemployment?.dailyCeiling || 0;
+  if (ceil && floor > ceil) issues.push({ t: 'error', m: `실업급여 하한액(${floor.toLocaleString()}원)이 상한액(${ceil.toLocaleString()}원)을 초과합니다.` });
+  if (ceil && floor && ceil - floor < 5000) issues.push({ t: 'warn', m: `실업급여 상·하한 격차가 ${(ceil-floor).toLocaleString()}원으로 매우 좁습니다 (주의 필요).` });
+
+  ps.forEach(p => {
+    if (p.deadline && p.deadline < TODAY && p.status === 'active') issues.push({ t: 'error', m: `"${p.title}" — 마감일(${p.deadline}) 지났지만 active 상태입니다.` });
+    const d = Math.floor((new Date() - new Date(p.lastUpdated)) / 864e5);
+    if (d > 180 && p.status === 'active') issues.push({ t: 'warn', m: `"${p.title}" — ${d}일째 미업데이트입니다 (점검 권장).` });
+  });
+
+  const cDays = c.meta?.lastUpdated ? Math.floor((new Date() - new Date(c.meta.lastUpdated)) / 864e5) : 0;
+  if (cDays > 365) issues.push({ t: 'warn', m: `기준값이 ${cDays}일째 업데이트되지 않았습니다.` });
+
+  return issues;
+}
+
+function runValidation() {
+  const issues = getIssues();
+  const el = document.getElementById('valResults');
+  if (el) {
+    el.innerHTML = issues.length
+      ? issues.map(i => `<div class="vi ${i.t}"><span>${i.t==='error'?'❌':'⚠️'}</span><span>${i.m}</span></div>`).join('')
+      : '<div class="vi ok"><span>✅</span><span>모든 항목이 정상입니다.</span></div>';
+  }
+  const b = document.getElementById('bValidate');
+  const ec = issues.filter(i => i.t === 'error').length;
+  b.textContent = ec || ''; b.className = 'badge' + (ec ? ' show' : '');
+}
+
+// ─── 이벤트 ─────────────────────────────────────────────────
+function setupEvents() {
+  // 탭 전환
+  document.querySelectorAll('.nb[data-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+      btn.classList.add('on');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('on');
+      if (btn.dataset.tab === 'validate') runValidation();
+      if (btn.dataset.tab === 'dashboard') renderDashboard();
+    });
+  });
+
+  // 자동 계산
+  el('f-mw-rate').addEventListener('input', updateCalcs);
+  el('f-mw-prev').addEventListener('input', updateCalcs);
+
+  // 기준값 저장
+  el('btnSaveC').addEventListener('click', () => {
+    collectConstants();
+    localStorage.setItem(LS.C, JSON.stringify(S.C));
+    flashOk('saveOkC');
+    renderDashboard(); runValidation();
+    if (window.htkonApplyConstants) window.htkonApplyConstants(S.C);
+  });
+
+  el('btnResetC').addEventListener('click', () => {
+    if (confirm('localStorage 기준값을 초기화하고 파일에서 다시 불러올까요?')) {
+      localStorage.removeItem(LS.C); location.reload();
+    }
+  });
+
+  // 정책 편집
+  el('btnCancelPol').addEventListener('click', () => { document.getElementById('polEditPanel').style.display = 'none'; S.editId = null; });
+  el('btnSavePol').addEventListener('click', () => {
+    const idx = S.P.policies.findIndex(p => p.id === S.editId);
+    if (idx < 0) return;
+    const p = S.P.policies[idx];
+    p.title = g('pe-title'); p.category = g('pe-cat'); p.status = g('pe-status');
+    p.deadline = g('pe-deadline') || null; p.lastUpdated = g('pe-updated');
+    p.sourceUrl = g('pe-url'); p.summary = g('pe-summary');
+    document.getElementById('polEditPanel').style.display = 'none'; S.editId = null;
+    renderPoliciesTable();
+  });
+  el('btnExpirePol').addEventListener('click', () => {
+    const p = S.P.policies.find(x => x.id === S.editId);
+    if (p && confirm(`"${p.title}"을 만료 처리할까요?`)) {
+      p.status = 'expired';
+      document.getElementById('polEditPanel').style.display = 'none'; S.editId = null;
+      renderPoliciesTable();
+    }
+  });
+  el('btnSavePs').addEventListener('click', () => {
+    S.P.meta.lastUpdated = TODAY;
+    localStorage.setItem(LS.P, JSON.stringify(S.P));
+    flashOk('saveOkP'); renderDashboard(); runValidation();
+  });
+
+  // 자가진단 규칙 저장
+  el('btnSaveRules').addEventListener('click', () => {
+    try {
+      S.R = JSON.parse(el('rulesEditor').value);
+      localStorage.setItem(LS.R, JSON.stringify(S.R));
+      flashOk('saveOkR');
+      document.getElementById('rulesStatus').textContent = '✓ JSON 유효 — 저장 완료';
+    } catch(e) {
+      document.getElementById('rulesStatus').textContent = '❌ JSON 오류: ' + e.message;
+    }
+  });
+  el('btnValidateRules').addEventListener('click', () => {
+    try { JSON.parse(el('rulesEditor').value); document.getElementById('rulesStatus').textContent = '✓ JSON 형식이 올바릅니다.'; }
+    catch(e) { document.getElementById('rulesStatus').textContent = '❌ JSON 오류: ' + e.message; }
+  });
+
+  // 검증
+  el('btnReval').addEventListener('click', runValidation);
+
+  // 내보내기
+  el('btnDlC').addEventListener('click', () => { collectConstants(); dl(S.C, 'constants.json'); });
+  el('btnDlP').addEventListener('click', () => dl(S.P, 'policies.json'));
+  el('btnDlR').addEventListener('click', () => { try { S.R = JSON.parse(el('rulesEditor').value); } catch(e) {} dl(S.R, 'matching-rules.json'); });
+
+  // 가져오기
+  el('impC').addEventListener('change', e => imp(e, data => { S.C = data; localStorage.setItem(LS.C, JSON.stringify(data)); renderConstantsForm(); msg('impMsg', 'constants.json 가져오기 완료'); }));
+  el('impP').addEventListener('change', e => imp(e, data => { S.P = data; localStorage.setItem(LS.P, JSON.stringify(data)); renderPoliciesTable(); msg('impMsg', 'policies.json 가져오기 완료'); }));
+  el('impR').addEventListener('change', e => imp(e, data => { S.R = data; localStorage.setItem(LS.R, JSON.stringify(data)); renderRulesEditor(); msg('impMsg', 'matching-rules.json 가져오기 완료'); }));
+
+  // localStorage 초기화
+  el('btnClearLS').addEventListener('click', () => {
+    if (confirm('모든 localStorage 데이터를 초기화할까요? 원본 파일에서 다시 불러옵니다.')) {
+      [LS.C, LS.P, LS.R, LS.SAVED].forEach(k => localStorage.removeItem(k));
+      location.reload();
+    }
+  });
+}
+
+// ─── 유틸 ───────────────────────────────────────────────────
+function el(id) { return document.getElementById(id); }
+function g(id)  { return el(id).value; }
+function g2(id, val) { el(id).value = val || ''; }
+function n(id)  { return parseFloat(el(id).value) || 0; }
+function v(id, val) { const e = el(id); if (e) e.value = val; }
+function set(id, val) { const e = el(id); if (e && val !== undefined && val !== null) e.value = val; }
+
+function tryLS(key) {
+  const raw = localStorage.getItem(key);
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch(e) { localStorage.removeItem(key); return null; }
+}
+
+async function fetchJSON(url) {
+  try { const r = await fetch(url); if (!r.ok) return null; return await r.json(); }
+  catch(e) { console.warn('fetch 실패:', url, e); return null; }
+}
+
+function daysBetween(from, to) { return Math.ceil((new Date(to) - new Date(from)) / 864e5); }
+
+function flashOk(id) {
+  const e = el(id); e.classList.add('show');
+  const ts = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+  localStorage.setItem(LS.SAVED, ts); updateSaveTime();
+  setTimeout(() => e.classList.remove('show'), 3000);
+}
+
+function updateSaveTime() {
+  const t = localStorage.getItem(LS.SAVED);
+  el('hLastSaved').textContent = t ? '마지막 저장: ' + t : '아직 저장 안 함';
+}
+
+function dl(data, name) {
+  const b = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const u = URL.createObjectURL(b), a = document.createElement('a');
+  a.href = u; a.download = name; a.click(); URL.revokeObjectURL(u);
+}
+
+function imp(e, cb) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => { try { cb(JSON.parse(ev.target.result)); } catch(err) { alert('JSON 파싱 오류: ' + err.message); } };
+  r.readAsText(f);
+}
+
+function msg(id, text) {
+  const e = el(id); e.textContent = '✓ ' + text;
+  setTimeout(() => e.textContent = '', 4000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# 혜택on robots.txt
+# ★ 도메인을 실제 URL로 교체하세요
+
+User-agent: *
+Allow: /
+
+# 관리자 페이지 크롤링 차단
+Disallow: /admin/
+
+# 데이터 파일 크롤링 불필요
+Disallow: /data/
+
+Sitemap: https://YOUR-DOMAIN.com/sitemap.xml

@@ -1,14 +1,348 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>혜택on — 내가 받을 수 있는 혜택, 30초면 확인</title>
+  <meta name="description" content="나이, 소득, 가구 형태만 입력하면 받을 수 있는 정부지원금을 바로 알려드려요.">
+  <meta name="keywords" content="정부지원금, 복지혜택, 실수령액계산기, 실업급여계산기, 근로장려금, 연말정산, 청년혜택">
+  <meta property="og:title" content="혜택on — 내가 받을 수 있는 혜택, 30초면 확인">
+  <meta property="og:description" content="자가진단으로 내가 받을 수 있는 혜택을 30초 만에 확인하세요.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css">
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/">
+  <meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="혜택on — 내가 받을 수 있는 혜택, 30초면 확인">
+  <meta name="twitter:description" content="나이, 소득, 가구 형태만 입력하면 받을 수 있는 정부지원금을 바로 알려드려요.">
+  <meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <!-- ★ Google AdSense 설정
+       1. AdSense 승인 후 아래 주석을 제거하세요
+       2. ca-pub-XXXXXXXXXXXXXXXX → 실제 발행인 ID로 교체
+       신청: https://www.google.com/adsense/ -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "혜택on",
+      "url": "https://YOUR-DOMAIN.com",
+      "description": "나이, 소득, 가구 형태만 입력하면 받을 수 있는 정부지원금을 바로 알려드려요.",
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://YOUR-DOMAIN.com/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "name": "혜택on",
+      "url": "https://YOUR-DOMAIN.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://YOUR-DOMAIN.com/og-image.png"
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+  <!-- ======================== HEADER ======================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="pages/youth.html">청년정책</a></li>
+          <li><a href="pages/senior.html">중장년·노년</a></li>
+          <li><a href="pages/single.html">1인가구</a></li>
+          <li><a href="pages/income.html">근로/소득</a></li>
+          <li><a href="pages/tax.html">세금/환급</a></li>
+          <li><a href="#calculators">계산기</a></li>
+          <li><a href="#diagnosis">자가진단</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="pages/youth.html"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="pages/senior.html"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="pages/single.html"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="pages/income.html"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="pages/tax.html"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="#calculators"><span class="m-icon">🧮</span>계산기</a>
+    <a href="#diagnosis"><span class="m-icon">🔍</span>자가진단</a>
+    <a href="pages/about.html"><span class="m-icon">ℹ️</span>사이트 소개</a>
+    <a href="pages/contact.html"><span class="m-icon">📧</span>광고문의</a>
+  </nav>
+
+  <!-- ======================== HERO (LIGHT, CENTERED) ======================== -->
+  <section class="hero-light" id="diagnosis">
+    <div class="container">
+      <div class="hero-center">
+        <div class="hero-badge-green">● 2026년 최신 정책 반영</div>
+        <h1 class="hero-title">내가 받을 수 있는 혜택, <span class="highlight">30초면 확인</span></h1>
+        <p class="hero-sub">나이, 소득, 가구 형태만 입력하면 받을 수 있는 정부지원금을 바로 알려드려요</p>
+
+        <!-- Self-Diagnosis Card (centered, wide) -->
+        <div class="diag-card-wide">
+          <div class="diag-card-header">
+            <h3 class="diag-title">내 혜택 자가진단</h3>
+            <div class="diag-header-right">
+              <span class="diag-counter" id="diagCounter">0/3 선택</span>
+              <button class="diag-reset" id="diagReset" aria-label="초기화">↺ 초기화</button>
+            </div>
+          </div>
+          <div class="diag-selects-row">
+            <div class="select-wrap">
+              <select id="sel-age" aria-label="연령대 선택">
+                <option value="">연령대 선택</option>
+                <option value="10대">10대</option>
+                <option value="20대">20대</option>
+                <option value="30대">30대</option>
+                <option value="40대">40대</option>
+                <option value="50대">50대</option>
+                <option value="60대 이상">60대 이상</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <select id="sel-household" aria-label="가구 형태 선택">
+                <option value="">가구 형태 선택</option>
+                <option value="1인가구">1인가구</option>
+                <option value="부모님과 동거">부모님과 동거</option>
+                <option value="배우자와 동거">배우자와 동거</option>
+                <option value="자녀 있는 가구">자녀 있는 가구</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <select id="sel-employ" aria-label="고용 상태 선택">
+                <option value="">고용 상태 선택</option>
+                <option value="직장인">직장인 (재직중)</option>
+                <option value="취업준비중">취업준비중</option>
+                <option value="자영업자">자영업자·프리랜서</option>
+                <option value="무직·기타">무직·기타</option>
+              </select>
+            </div>
+          </div>
+          <button class="diag-btn-wide diag-btn" id="diagBtn" disabled>
+            연령대·가구형태·고용상태를 선택해주세요
+          </button>
+          <div class="diagnosis-result" id="diagResult" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== SEASONAL BANNER (DARK) ======================== -->
+  <section class="seasonal-section">
+    <div class="container">
+      <div class="seasonal-dark">
+        <div class="seasonal-content">
+          <span class="seasonal-tag">6월의 추천 정보</span>
+          <h3 class="seasonal-title">여름철 에너지바우처, 신청 안 하면 못 받아요</h3>
+          <p class="seasonal-desc">무더위 시작 전 미리 신청하면 냉방비 부담을 줄일 수 있어요. 대상 여부부터 확인해보세요.</p>
+        </div>
+        <a href="#" class="seasonal-cta">에너지바우처 확인하기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== AD PLACEHOLDER ======================== -->
+  <div class="container ad-wrap">
+    <div class="ad-placeholder" aria-label="광고"><!-- AdSense 배너 광고 (728×90 / 반응형)
+       ★ AdSense 승인 후 아래 주석 제거 & ID 교체 -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+     data-ad-slot="XXXXXXXXXX_BANNER"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+--></div>
+  </div>
+
+  <!-- ======================== CALCULATORS ======================== -->
+  <section class="page-section" id="calculators">
+    <div class="container">
+      <div class="section-header-row">
+        <h2 class="section-title">지금 가장 많이 찾는 계산기</h2>
+        <a href="#" class="view-all-link">전체 보기 →</a>
+      </div>
+      <div class="calc-grid-new">
+        <!-- Left: large main card -->
+        <div class="calc-main-card">
+          <div class="calc-icon-wrap orange">
+            <span>₩</span>
+          </div>
+          <h3 class="calc-main-title">최저임금 월급 계산기</h3>
+          <p class="calc-main-desc">2026년 시급 기준, 209시간 월급으로 환산해서 바로 확인하세요. 가장 많이 찾는 계산기에요.</p>
+          <a href="pages/calc-minimum-wage.html" class="calc-main-link">바로 계산하기 →</a>
+        </div>
+        <!-- Right: 2x2 sub grid -->
+        <div class="calc-sub-grid">
+          <a href="pages/calc-net-salary.html" class="calc-sub-card">
+            <div class="calc-sub-icon orange-light">🔥</div>
+            <div>
+              <div class="calc-sub-title">실수령액 계산기</div>
+              <div class="calc-sub-desc">연봉 입력하면 4대보험·세금 빼고 실제 받는 돈</div>
+            </div>
+          </a>
+          <a href="pages/calc-tax-refund.html" class="calc-sub-card">
+            <div class="calc-sub-icon gray-light">📑</div>
+            <div>
+              <div class="calc-sub-title">연말정산 환급 계산기</div>
+              <div class="calc-sub-desc">올해 환급받을 금액 미리 확인하기</div>
+            </div>
+          </a>
+          <a href="pages/calc-unemployment.html" class="calc-sub-card">
+            <div class="calc-sub-icon blue-light">📋</div>
+            <div>
+              <div class="calc-sub-title">실업급여 계산기</div>
+              <div class="calc-sub-desc">고용보험 가입기간 입력하고 수급액 확인</div>
+            </div>
+          </a>
+          <a href="pages/calc-eitc.html" class="calc-sub-card">
+            <div class="calc-sub-icon green-light">🏠</div>
+            <div>
+              <div class="calc-sub-title">근로장려금 계산기</div>
+              <div class="calc-sub-desc">소득·재산 기준으로 지급액 자동 산출</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== 청년 정책 ======================== -->
+  <section class="page-section articles-section">
+    <div class="container">
+      <div class="section-header-row">
+        <h2 class="section-title">청년 정책</h2>
+        <a href="pages/youth.html" class="view-all-link">더보기 →</a>
+      </div>
+      <div class="articles-grid">
+        <a href="pages/article-youth-rent.html" class="article-card">
+          <span class="art-tag tag-urgent">신청마감 D-7</span>
+          <h3 class="art-title">2026 청년월세 특별지원, 신청 자격부터 서류까지</h3>
+          <p class="art-date">2026.06.10 업데이트</p>
+        </a>
+        <a href="pages/youth.html" class="article-card">
+          <span class="art-tag tag-compare">비교</span>
+          <h3 class="art-title">청년미래적금 VS 청년도약계좌, 나에게 맞는 건?</h3>
+          <p class="art-date">2026.06.08 업데이트</p>
+        </a>
+        <a href="pages/youth.html" class="article-card">
+          <span class="art-tag tag-new">신규</span>
+          <h3 class="art-title">국가장학금 2학기 신청기간 및 소득분위 확인 방법</h3>
+          <p class="art-date">2026.06.05 업데이트</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== 1인가구·주거 ======================== -->
+  <section class="page-section articles-section">
+    <div class="container">
+      <div class="section-header-row">
+        <h2 class="section-title">1인가구·주거</h2>
+        <a href="pages/single.html" class="view-all-link">더보기 →</a>
+      </div>
+      <div class="articles-grid">
+        <a href="pages/single.html" class="article-card">
+          <span class="art-tag tag-guide">총정리</span>
+          <h3 class="art-title">2026 1인가구 정부지원금 한눈에 보기</h3>
+          <p class="art-date">2026.06.12 업데이트</p>
+        </a>
+        <a href="pages/article-energy-voucher.html" class="article-card">
+          <span class="art-tag tag-urgent">신청마감 D-14</span>
+          <h3 class="art-title">에너지바우처 신청방법과 사용처 총정리</h3>
+          <p class="art-date">2026.06.09 업데이트</p>
+        </a>
+        <a href="pages/single.html" class="article-card">
+          <span class="art-tag tag-guide">가이드</span>
+          <h3 class="art-title">전입신고 인터넷으로 5분 만에 끝내는 방법</h3>
+          <p class="art-date">2026.06.07 업데이트</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== 중장년·노년 ======================== -->
+  <section class="page-section articles-section">
+    <div class="container">
+      <div class="section-header-row">
+        <h2 class="section-title">중장년·노년</h2>
+        <a href="pages/senior.html" class="view-all-link">더보기 →</a>
+      </div>
+      <div class="articles-grid">
+        <a href="pages/senior.html" class="article-card">
+          <span class="art-tag tag-new">신규</span>
+          <h3 class="art-title">2026 노인일자리 신청방법 (월 최대 76만원·전국 115만개)</h3>
+          <p class="art-date">2026.06.13 업데이트</p>
+        </a>
+        <a href="pages/article-basic-pension.html" class="article-card">
+          <span class="art-tag tag-guide">총정리</span>
+          <h3 class="art-title">2026 기초연금 신청자격, 선정기준액 완벽 정리</h3>
+          <p class="art-date">2026.06.11 업데이트</p>
+        </a>
+        <a href="pages/senior.html" class="article-card">
+          <span class="art-tag tag-guide">가이드</span>
+          <h3 class="art-title">노인장기요양보험 등급 기준과 신청 절차 한눈에</h3>
+          <p class="art-date">2026.06.06 업데이트</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== AD PLACEHOLDER ======================== -->
+  <div class="container ad-wrap">
+    <div class="ad-placeholder" aria-label="광고"><!-- AdSense 배너 광고 (728×90 / 반응형)
+       ★ AdSense 승인 후 아래 주석 제거 & ID 교체 -->
+<!--
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+     data-ad-slot="XXXXXXXXXX_BANNER"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+--></div>
+  </div>
+
+  <!-- ======================== FOOTER (SIMPLE) ======================== -->
+  <footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="pages/about.html">사이트 소개</a>
+        <a href="pages/privacy.html">개인정보처리방침</a>
+        <a href="pages/contact.html">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/policy-loader.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>

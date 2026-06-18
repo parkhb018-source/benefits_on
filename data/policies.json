@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "lastUpdated": "2026-06-18",
+    "note": "각 정책의 상태·마감일·출처 URL을 관리합니다."
+  },
+  "policies": [
+    {
+      "id": "youth-rent",
+      "title": "2026 청년월세 특별지원",
+      "category": "청년정책",
+      "tags": ["청년", "1인가구", "월세지원"],
+      "articleUrl": "pages/article-youth-rent.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-06-18",
+      "sourceUrl": "https://www.mlit.go.kr",
+      "summary": "월 최대 20만원, 최장 24개월 (생애 1회)"
+    },
+    {
+      "id": "basic-pension",
+      "title": "2026 기초연금 신청 자격과 금액",
+      "category": "중장년·노년",
+      "tags": ["노인", "연금", "소득하위70%"],
+      "articleUrl": "pages/article-basic-pension.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-06-18",
+      "sourceUrl": "https://www.bokjiro.go.kr",
+      "summary": "65세 이상 소득 하위 70%, 월 최대 349,700원"
+    },
+    {
+      "id": "energy-voucher",
+      "title": "에너지바우처 신청 방법 2026",
+      "category": "1인가구",
+      "tags": ["취약계층", "에너지", "바우처"],
+      "articleUrl": "pages/article-energy-voucher.html",
+      "deadline": "2026-08-31",
+      "status": "active",
+      "lastUpdated": "2026-06-18",
+      "sourceUrl": "https://www.energyvoucher.or.kr",
+      "summary": "4인 이상 최대 70만원, 2026.7~2027.5 사용"
+    },
+    {
+      "id": "eitc",
+      "title": "2026 근로장려금 신청 방법",
+      "category": "근로/소득",
+      "tags": ["근로자", "사업자", "저소득"],
+      "articleUrl": "pages/article-eitc.html",
+      "deadline": "2026-05-31",
+      "status": "expired",
+      "lastUpdated": "2026-06-18",
+      "sourceUrl": "https://www.hometax.go.kr",
+      "summary": "맞벌이 기준 연 최대 330만원 — 정기신청 5월 마감"
+    },
+    {
+      "id": "unemployment-guide",
+      "title": "실업급여 신청 절차 완벽 가이드 2026",
+      "category": "근로/소득",
+      "tags": ["퇴직", "실업급여", "고용보험"],
+      "articleUrl": "pages/article-unemployment-guide.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-06-18",
+      "sourceUrl": "https://www.ei.go.kr",
+      "summary": "일 상한 68,100원, 최대 270일 수급"
+    }
+  ]
+}
