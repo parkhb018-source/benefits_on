@@ -42,6 +42,8 @@
     .tab-row { display: flex; gap: 4px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 9px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--bg-soft); font-size: 0.88rem; font-weight: 600; cursor: pointer; color: var(--text-muted); transition: all .2s; }
     .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .calc-btn-reset { width: 100%; padding: 12px; background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all .2s; }
+    .calc-btn-reset:hover { background: var(--bg-soft); color: var(--text-dark); border-color: var(--text-muted); }
   </style>
   <link rel="canonical" href="https://YOUR-DOMAIN.com/pages/calc-net-salary.html">
   <meta property="og:url" content="https://YOUR-DOMAIN.com/pages/calc-net-salary.html">
@@ -105,13 +107,14 @@
         </div>
         <div class="calc-field">
           <label for="salary-input" id="salary-label">연봉 (만원)</label>
-          <input type="number" id="salary-input" value="3600" min="0" step="100">
+          <input type="number" id="salary-input" value="" min="0" step="100" placeholder="예) 3600">
           <p class="field-hint" id="salary-hint">예) 3600 입력 → 연봉 3,600만원</p>
         </div>
         <div class="calc-field">
           <label for="dependent-count">부양가족 수 (본인 포함)</label>
           <select id="dependent-count">
-            <option value="1" selected>1명 (본인만)</option>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="1">1명 (본인만)</option>
             <option value="2">2명</option>
             <option value="3">3명</option>
             <option value="4">4명</option>
@@ -120,6 +123,7 @@
           <p class="field-hint">부양가족 수에 따라 소득세 간이세액이 달라집니다.</p>
         </div>
         <button class="calc-btn" id="calcBtn">실수령액 계산하기</button>
+        <button class="calc-btn-reset" id="resetBtn">초기화</button>
 
         <div class="calc-result" id="calcResult">
           <div class="result-hero">
@@ -194,14 +198,16 @@
       tabAnnual.classList.add('active'); tabMonthly.classList.remove('active');
       salaryLabel.textContent = '연봉 (만원)';
       salaryHint.textContent  = '예) 3600 입력 → 연봉 3,600만원';
-      salaryInput.value = '3600';
+      salaryInput.value = '';
+      salaryInput.placeholder = '예) 3600';
     });
     tabMonthly.addEventListener('click', function () {
       isAnnualMode = false;
       tabMonthly.classList.add('active'); tabAnnual.classList.remove('active');
       salaryLabel.textContent = '월급 (만원)';
       salaryHint.textContent  = '예) 300 입력 → 월급 300만원';
-      salaryInput.value = '300';
+      salaryInput.value = '';
+      salaryInput.placeholder = '예) 300';
     });
 
     document.getElementById('calcBtn').addEventListener('click', function () {
@@ -264,6 +270,17 @@
 
       document.getElementById('calcResult').classList.add('show');
       document.getElementById('calcResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      isAnnualMode = true;
+      tabAnnual.classList.add('active'); tabMonthly.classList.remove('active');
+      salaryLabel.textContent = '연봉 (만원)';
+      salaryHint.textContent  = '예) 3600 입력 → 연봉 3,600만원';
+      salaryInput.value = '';
+      salaryInput.placeholder = '예) 3600';
+      document.getElementById('dependent-count').value = '';
+      document.getElementById('calcResult').classList.remove('show');
     });
   }());
   </script>

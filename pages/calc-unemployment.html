@@ -48,6 +48,8 @@
     .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
     .breadcrumb a { color: var(--primary); text-decoration: none; }
     @media (max-width: 480px) { .result-3col { grid-template-columns: 1fr; } }
+    .calc-btn-reset { width: 100%; padding: 12px; background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all .2s; }
+    .calc-btn-reset:hover { background: var(--bg-soft); color: var(--text-dark); border-color: var(--text-muted); }
   </style>
   <link rel="canonical" href="https://YOUR-DOMAIN.com/pages/calc-unemployment.html">
   <meta property="og:url" content="https://YOUR-DOMAIN.com/pages/calc-unemployment.html">
@@ -114,12 +116,12 @@
         <div class="calc-row2">
           <div class="calc-field">
             <label for="avg-salary">퇴직 전 3개월 평균 월급 (만원)</label>
-            <input type="number" id="avg-salary" value="300" min="0" step="10">
+            <input type="number" id="avg-salary" value="" min="0" step="10" placeholder="예) 300">
             <p class="field-hint">세전 급여 기준</p>
           </div>
           <div class="calc-field">
             <label for="insure-months">고용보험 가입기간 (개월)</label>
-            <input type="number" id="insure-months" value="24" min="0" step="1">
+            <input type="number" id="insure-months" value="" min="0" step="1" placeholder="예) 24">
             <p class="field-hint">현 직장 + 이전 직장 합산 가능</p>
           </div>
         </div>
@@ -127,8 +129,9 @@
           <div class="calc-field">
             <label for="worker-age">퇴직 당시 나이</label>
             <select id="worker-age">
+              <option value="" disabled selected>선택하세요</option>
               <option value="29">29세 이하</option>
-              <option value="49" selected>30~49세</option>
+              <option value="49">30~49세</option>
               <option value="59">50~59세</option>
               <option value="60">60세 이상·장애인</option>
             </select>
@@ -136,12 +139,14 @@
           <div class="calc-field">
             <label for="quit-reason">퇴직 사유</label>
             <select id="quit-reason">
-              <option value="involuntary" selected>비자발적 퇴직 (권고사직·계약만료)</option>
+              <option value="" disabled selected>선택하세요</option>
+              <option value="involuntary">비자발적 퇴직 (권고사직·계약만료)</option>
               <option value="voluntary">자발적 퇴직 (개인 사정)</option>
             </select>
           </div>
         </div>
         <button class="calc-btn" id="calcBtn">실업급여 계산하기</button>
+        <button class="calc-btn-reset" id="resetBtn">초기화</button>
 
         <div class="calc-result" id="calcResult">
           <div class="eligibility-box" id="eligBox"></div>
@@ -288,6 +293,14 @@
 
       calcResult.classList.add('show');
       calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      document.getElementById('avg-salary').value = '';
+      document.getElementById('insure-months').value = '';
+      document.getElementById('worker-age').value = '';
+      document.getElementById('quit-reason').value = '';
+      calcResult.classList.remove('show');
     });
   }());
   </script>
