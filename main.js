@@ -65,25 +65,25 @@ if (bannerClose && banner) {
   };
 
   const defaultBenefitDetails = {
-    '청년월세 특별지원':    { icon: '🏠', desc: '월 최대 20만원, 최장 24개월 지원 (생애 1회)' },
-    '청년미래적금':         { icon: '💰', desc: '월 50만원 납입 시 정부 매칭 최대 36만원' },
-    '청년도약계좌':         { icon: '📈', desc: '월 40~70만원 납입, 5년 후 최대 5,000만원' },
-    '청년취업지원금':       { icon: '🎯', desc: '취업 준비 청년 월 50만원, 최대 6개월' },
-    '청년구직활동지원금':   { icon: '🔍', desc: '구직활동 지원금 월 50만원, 최대 6개월' },
-    '청년 소득공제':        { icon: '💳', desc: '중소기업 취업 청년 소득세 90% 감면' },
-    '국민내일배움카드':     { icon: '🎓', desc: '직업훈련 비용 최대 500만원 지원' },
-    '근로장려금':           { icon: '💵', desc: '맞벌이 기준 연간 최대 330만원' },
-    '주거급여':             { icon: '🏘️', desc: '임차료 또는 자가수선 비용 지원' },
-    '실업급여':             { icon: '📋', desc: '퇴직 전 평균임금의 60%, 최대 270일' },
-    '연말정산 환급':        { icon: '🧾', desc: '공제 항목별 환급액 미리 계산해보세요' },
-    '자녀 교육비 공제':     { icon: '📚', desc: '1인당 연 300만원 한도 교육비 세액공제' },
-    '국민연금 수령 조회':   { icon: '📊', desc: '예상 수령액을 미리 확인하세요' },
-    '퇴직금 계산기':        { icon: '💼', desc: '근속연수·평균임금으로 퇴직금 계산' },
-    '기초연금':             { icon: '👴', desc: '소득 하위 70% 어르신, 월 최대 349,700원 (2026년)' },
-    '노인일자리사업':       { icon: '🌟', desc: '월 최대 76만원, 다양한 사회활동 참여' },
-    '에너지바우처':         { icon: '⚡', desc: '취약계층 에너지 비용, 4인 이상 최대 70만원' },
-    '청소년 교육지원금':    { icon: '🎒', desc: '교육활동비 지원, 학교별 상이' },
-    '방과후 지원 프로그램': { icon: '🏫', desc: '방과후 학교 자유수강권 지원' }
+    '청년월세 특별지원':    { icon: '🏠', desc: '월 최대 20만원, 최장 24개월 지원 (생애 1회)',        url: 'pages/article-youth-rent.html' },
+    '청년미래적금':         { icon: '💰', desc: '월 50만원 납입 시 정부 매칭 최대 36만원',            url: 'pages/article-youth-savings.html' },
+    '청년도약계좌':         { icon: '📈', desc: '월 40~70만원 납입, 5년 후 최대 5,000만원',           url: 'pages/article-youth-dream-account.html' },
+    '청년취업지원금':       { icon: '🎯', desc: '취업 준비 청년 월 50만원, 최대 6개월',               url: 'pages/article-youth-job-support.html' },
+    '청년구직활동지원금':   { icon: '🔍', desc: '구직활동 지원금 월 50만원, 최대 6개월',              url: 'pages/article-youth-job-support.html' },
+    '청년 소득공제':        { icon: '💳', desc: '중소기업 취업 청년 소득세 90% 감면',                 url: 'pages/article-youth-sme-tax.html' },
+    '국민내일배움카드':     { icon: '🎓', desc: '직업훈련 비용 최대 500만원 지원',                    url: 'pages/article-tomorrow-learning.html' },
+    '근로장려금':           { icon: '💵', desc: '맞벌이 기준 연간 최대 330만원',                      url: 'pages/article-eitc.html' },
+    '주거급여':             { icon: '🏘️', desc: '임차료 또는 자가수선 비용 지원',                    url: 'pages/article-housing-benefit.html' },
+    '실업급여':             { icon: '📋', desc: '퇴직 전 평균임금의 60%, 최대 270일',                 url: 'pages/article-unemployment-guide.html' },
+    '연말정산 환급':        { icon: '🧾', desc: '공제 항목별 환급액 미리 계산해보세요',               url: 'pages/calc-tax-refund.html' },
+    '자녀 교육비 공제':     { icon: '📚', desc: '1인당 연 300만원 한도 교육비 세액공제',              url: 'pages/article-child-edu.html' },
+    '국민연금 수령 조회':   { icon: '📊', desc: '예상 수령액을 미리 확인하세요',                      url: 'pages/article-national-pension.html' },
+    '퇴직금 계산기':        { icon: '💼', desc: '근속연수·평균임금으로 퇴직금 계산',                  url: 'pages/article-severance.html' },
+    '기초연금':             { icon: '👴', desc: '소득 하위 70% 어르신, 월 최대 349,700원 (2026년)',   url: 'pages/article-basic-pension.html' },
+    '노인일자리사업':       { icon: '🌟', desc: '월 최대 76만원, 다양한 사회활동 참여',               url: 'pages/article-senior-jobs.html' },
+    '에너지바우처':         { icon: '⚡', desc: '취약계층 에너지 비용, 4인 이상 최대 70만원',         url: 'pages/article-energy-voucher.html' },
+    '청소년 교육지원금':    { icon: '🎒', desc: '교육활동비 지원, 학교별 상이',                       url: 'pages/article-teen-edu.html' },
+    '방과후 지원 프로그램': { icon: '🏫', desc: '방과후 학교 자유수강권 지원',                        url: 'pages/article-after-school.html' }
   };
 
   function getBenefits(age, household, employ) {
@@ -113,13 +113,13 @@ if (bannerClose && banner) {
     diagResult.innerHTML =
       '<div class="diag-result-inner">' +
       benefits.map(name => {
-        const d = details[name] || { icon: '✨', desc: '혜택 상세 내용을 확인하세요' };
+        const d = details[name] || { icon: '✨', desc: '혜택 상세 내용을 확인하세요', url: '#' };
         return `<div class="result-item">
           <div class="result-icon">${d.icon}</div>
           <div class="result-content">
             <div class="result-title">${name}</div>
             <div class="result-desc">${d.desc}</div>
-            <a href="#" class="result-link">자세히 보기 →</a>
+            <a href="${d.url || '#'}" class="result-link">자세히 보기 →</a>
           </div>
         </div>`;
       }).join('') +
