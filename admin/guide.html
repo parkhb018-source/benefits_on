@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>혜택on 관리자 사용 설명서</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F0F4F8; color: #1A2332; font-size: 14px; line-height: 1.7; }
+
+    .hd { background: #1F4E79; color: #fff; padding: 0 20px; height: 52px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+    .hd-logo { font-size: 1rem; font-weight: 700; }
+    .hd-logo span { color: #90CAF9; }
+    .hd a { color: #90CAF9; text-decoration: none; font-size: 0.8rem; }
+    .hd a:hover { text-decoration: underline; }
+
+    .layout { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 52px); }
+
+    /* 사이드바 */
+    .sidebar { background: #fff; border-right: 1px solid #E2E8F0; padding: 20px 0; position: sticky; top: 52px; height: calc(100vh - 52px); overflow-y: auto; }
+    .sb-section { padding: 0 16px; margin-bottom: 20px; }
+    .sb-label { font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+    .sb-link { display: block; padding: 6px 10px; color: #4A5568; text-decoration: none; border-radius: 6px; font-size: 0.83rem; transition: all .12s; }
+    .sb-link:hover { background: #F0F4F8; color: #1F4E79; }
+    .sb-link.active { background: #EBF5FB; color: #1F4E79; font-weight: 600; }
+
+    /* 본문 */
+    .main { padding: 32px 40px 80px; max-width: 860px; }
+
+    h1.page-title { font-size: 1.6rem; font-weight: 800; color: #1A2332; margin-bottom: 6px; }
+    .page-sub { font-size: 0.88rem; color: #718096; margin-bottom: 32px; }
+
+    .section { margin-bottom: 40px; }
+    h2.sec-title { font-size: 1.15rem; font-weight: 800; color: #1F4E79; padding-bottom: 8px; border-bottom: 2px solid #BEE3F8; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    h3.sub-title { font-size: 0.95rem; font-weight: 700; color: #2D3748; margin: 20px 0 8px; }
+
+    p { font-size: 0.88rem; color: #4A5568; margin-bottom: 10px; }
+
+    /* 카드 */
+    .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+    .card-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; color: #1A2332; }
+
+    /* 스텝 */
+    .steps { display: flex; flex-direction: column; gap: 12px; }
+    .step { display: flex; gap: 14px; align-items: flex-start; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: #2E75B6; color: #fff; border-radius: 50%; font-size: 0.78rem; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .step-body { flex: 1; }
+    .step-title { font-weight: 700; font-size: 0.88rem; color: #1A2332; margin-bottom: 3px; }
+    .step-desc { font-size: 0.82rem; color: #718096; }
+    .step-desc code { background: #EDF2F7; padding: 1px 5px; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
+
+    /* 테이블 */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+    th { background: #F7FAFC; padding: 8px 12px; text-align: left; font-size: 0.78rem; font-weight: 700; color: #4A5568; border-bottom: 1px solid #E2E8F0; }
+    td { padding: 9px 12px; border-bottom: 1px solid #F0F4F8; font-size: 0.82rem; color: #4A5568; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td strong { color: #1A2332; }
+
+    /* 강조 박스 */
+    .info-box { background: #EBF8FF; border-left: 4px solid #2E75B6; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 0.85rem; color: #2C5282; }
+    .warn-box  { background: #FFFBEB; border-left: 4px solid #D69E2E; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 0.85rem; color: #744210; }
+    .tip-box   { background: #F0FFF4; border-left: 4px solid #38A169; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 14px 0; font-size: 0.85rem; color: #276749; }
+
+    /* 배지 */
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 9px; font-size: 0.72rem; font-weight: 700; }
+    .badge-blue   { background: #BEE3F8; color: #2C5282; }
+    .badge-green  { background: #C6F6D5; color: #276749; }
+    .badge-yellow { background: #FEFCBF; color: #744210; }
+    .badge-red    { background: #FED7D7; color: #9B2C2C; }
+    .badge-gray   { background: #EDF2F7; color: #4A5568; }
+
+    /* 버튼 미리보기 */
+    .btn-preview { display: inline-block; padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; }
+    .btn-blue  { background: #2E75B6; color: #fff; }
+    .btn-gray  { background: #F0F4F8; color: #4A5568; border: 1px solid #E2E8F0; }
+    .btn-red   { background: #FFF5F5; color: #C53030; border: 1px solid #FEB2B2; }
+
+    /* TOC 구분선 */
+    hr { border: none; border-top: 1px solid #E2E8F0; margin: 32px 0; }
+
+    code { background: #EDF2F7; padding: 1px 6px; border-radius: 4px; font-size: 0.8rem; font-family: monospace; }
+
+    ul { padding-left: 18px; margin-bottom: 10px; }
+    ul li { font-size: 0.85rem; color: #4A5568; margin-bottom: 4px; }
+
+    @media (max-width: 700px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .main { padding: 20px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="hd-logo">혜택<span>on</span> 관리자 사용 설명서</div>
+  <div style="display:flex;gap:16px;align-items:center;">
+    <a href="index.html">← 관리자로 돌아가기</a>
+    <a href="../index.html" target="_blank">🔗 사이트 보기</a>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sb-section">
+      <div class="sb-label">목차</div>
+      <a href="#overview"   class="sb-link">1. 개요</a>
+      <a href="#structure"  class="sb-link">2. 파일 구조</a>
+      <a href="#dashboard"  class="sb-link">3. 대시보드</a>
+      <a href="#constants"  class="sb-link">4. 기준값 편집</a>
+      <a href="#policies"   class="sb-link">5. 정책 목록 관리</a>
+      <a href="#add-policy" class="sb-link">6. 새 정책 추가 ★</a>
+      <a href="#rules"      class="sb-link">7. 자가진단 규칙</a>
+      <a href="#validate"   class="sb-link">8. 검증</a>
+      <a href="#export"     class="sb-link">9. 내보내기/가져오기</a>
+      <a href="#deploy"     class="sb-link">10. 배포 방법</a>
+      <a href="#faq"        class="sb-link">11. 자주 묻는 질문</a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <h1 class="page-title">혜택on 관리자 사용 설명서</h1>
+    <p class="page-sub">최종 업데이트: 2026.06.20 &nbsp;·&nbsp; 대상: 사이트 운영자</p>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="overview">
+      <h2 class="sec-title">1. 개요</h2>
+      <p>혜택on 관리자 페이지(<code>admin/index.html</code>)는 사이트의 정책 데이터·기준값·자가진단 규칙을 코드 수정 없이 관리할 수 있는 도구입니다.</p>
+
+      <div class="card">
+        <div class="card-title">관리자 페이지에서 할 수 있는 것</div>
+        <table>
+          <thead><tr><th>기능</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td><strong>기준값 편집</strong></td><td>최저임금·기초연금·에너지바우처 등 매년 바뀌는 수치를 업데이트</td></tr>
+            <tr><td><strong>정책 목록 관리</strong></td><td>정책 상태(운영중·만료·준비중)·마감일·출처 URL 수정</td></tr>
+            <tr><td><strong>새 정책 추가</strong></td><td>새 정책의 HTML 파일·카드 코드를 자동으로 생성</td></tr>
+            <tr><td><strong>자가진단 규칙</strong></td><td>연령·가구형태·고용상태에 따른 혜택 추천 로직 수정</td></tr>
+            <tr><td><strong>데이터 검증</strong></td><td>오류·만료 정책·미업데이트 항목 자동 점검</td></tr>
+            <tr><td><strong>내보내기/가져오기</strong></td><td>JSON 파일 다운로드 후 Git 반영</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box">
+        💡 <strong>저장 방식:</strong> 관리자에서 저장하면 브라우저의 <strong>localStorage</strong>에 먼저 저장됩니다. 사이트는 localStorage → JSON 파일 순서로 데이터를 읽기 때문에, 저장 즉시 사이트에 반영됩니다. Git에 영구 반영하려면 <strong>내보내기 → 파일 덮어쓰기 → push</strong>가 필요합니다.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="structure">
+      <h2 class="sec-title">2. 파일 구조</h2>
+      <p>사이트의 주요 파일 구조입니다. 관리자는 아래 파일들을 직접 또는 관리자 페이지를 통해 관리합니다.</p>
+
+      <div class="card">
+        <pre style="font-size:0.8rem;line-height:1.8;color:#2D3748;">benefitson/
+├── index.html                ← 메인 홈페이지
+├── style.css                 ← 전체 스타일
+├── main.js                   ← 메인 스크립트 (자가진단 등)
+│
+├── pages/                    ← 카테고리·아티클 페이지
+│   ├── youth.html            ← 청년정책 카테고리
+│   ├── newlywed.html         ← 신혼·육아 카테고리
+│   ├── senior.html           ← 중장년·노년 카테고리
+│   ├── article-XXX.html      ← 각 정책 아티클
+│   └── calc-XXX.html         ← 계산기 페이지
+│
+├── data/                     ← 데이터 파일 (★ 관리자에서 편집)
+│   ├── constants.json        ← 기준값 (최저임금·기초연금 등)
+│   ├── policies.json         ← 정책 목록 (상태·마감일·출처)
+│   ├── matching-rules.json   ← 자가진단 매칭 규칙
+│   └── policy-loader.js      ← 데이터 로더 (수정 불필요)
+│
+└── admin/                    ← 관리자 페이지
+    ├── index.html            ← 관리자 메인
+    └── guide.html            ← 이 문서</pre>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="dashboard">
+      <h2 class="sec-title">3. 대시보드</h2>
+      <p>관리자 페이지를 열면 첫 화면으로 표시됩니다. 사이트 데이터의 전반적인 상태를 한눈에 확인합니다.</p>
+
+      <table>
+        <thead><tr><th>카드</th><th>의미</th><th>조치</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-red">오류</span></td><td>즉시 수정이 필요한 문제 (마감 지난 active 정책 등)</td><td>검증 탭에서 상세 내용 확인 후 수정</td></tr>
+          <tr><td><span class="badge badge-yellow">경고</span></td><td>90일 이상 미업데이트 정책 등 점검 권장 항목</td><td>해당 정책 아티클 내용 검토 후 날짜 갱신</td></tr>
+          <tr><td><span class="badge badge-green">운영중 정책</span></td><td>active 상태인 정책 수 / 전체 정책 수</td><td>-</td></tr>
+          <tr><td><span class="badge badge-red">마감 미처리</span></td><td>마감일이 지났지만 상태가 active인 정책 수</td><td>정책 목록 탭에서 해당 정책을 expired로 변경</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-title">연간 업데이트 캘린더</h3>
+      <p>정책별로 연간 업데이트 시점이 정해져 있습니다. D-일 표시가 빨간색이면 업데이트 시기가 임박한 것입니다.</p>
+      <table>
+        <thead><tr><th>정책</th><th>업데이트 시점</th><th>업데이트 내용</th></tr></thead>
+        <tbody>
+          <tr><td>⚖️ 최저임금</td><td>매년 8월 5일경</td><td>다음 연도 시급 고시 → 기준값 탭에서 수정</td></tr>
+          <tr><td>👴 기초연금</td><td>매년 1월</td><td>인상률 적용 후 최대 지급액·선정기준액 변경</td></tr>
+          <tr><td>📊 기준중위소득</td><td>매년 8월</td><td>다음 연도 기준 고시</td></tr>
+          <tr><td>💵 근로장려금</td><td>매년 4~5월</td><td>신청 기간 시작 전 금액·소득 기준 확인</td></tr>
+          <tr><td>⚡ 에너지바우처</td><td>매년 6~7월</td><td>지원 금액·신청 기간 확인</td></tr>
+          <tr><td>📋 실업급여 상한액</td><td>최저임금 연동</td><td>최저임금 변경 시 자동 재계산됨</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="constants">
+      <h2 class="sec-title">4. 기준값 편집</h2>
+      <p>사이트 전체에서 사용하는 숫자 데이터를 관리합니다. 저장 즉시 사이트 새로고침 없이 반영됩니다.</p>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <div class="step-title">기준값 탭 클릭</div>
+            <div class="step-desc">사이드바에서 <strong>⚙️ 기준값</strong>을 클릭합니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <div class="step-title">수치 수정</div>
+            <div class="step-desc">변경된 수치를 입력합니다. <strong>월 환산액·인상률·실업급여 하한액</strong>은 입력값을 바탕으로 자동 계산됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <div class="step-title"><span class="btn-preview btn-blue">💾 저장 (즉시 반영)</span> 클릭</div>
+            <div class="step-desc">localStorage에 저장되며 사이트에 바로 반영됩니다. 새로고침 불필요.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <div class="step-title">Git에 영구 반영</div>
+            <div class="step-desc"><strong>내보내기</strong> 탭에서 <code>constants.json</code>을 다운로드 → <code>data/</code> 폴더에 덮어쓰기 → Git push</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="warn-box">
+        ⚠️ <strong>주의:</strong> 최저시급은 실업급여 하한액과 연동됩니다. 최저시급 변경 후 실업급여 상한액이 하한액보다 낮아지면 오류가 발생하므로, 함께 확인해주세요.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="policies">
+      <h2 class="sec-title">5. 정책 목록 관리</h2>
+      <p>등록된 모든 정책의 상태·마감일·출처를 관리합니다. 마감일이 지난 정책은 빨간색으로 표시됩니다.</p>
+
+      <h3 class="sub-title">정책 상태 종류</h3>
+      <table>
+        <thead><tr><th>상태</th><th>의미</th><th>언제 사용</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-green">active</span></td><td>현재 신청 가능하거나 상시 운영 중</td><td>정책이 유효한 동안</td></tr>
+          <tr><td><span class="badge badge-red">expired</span></td><td>마감 또는 폐지된 정책</td><td>신청 기간 종료 후</td></tr>
+          <tr><td><span class="badge badge-gray">draft</span></td><td>준비 중, 사이트에 아직 미노출</td><td>아티클 작성 전 임시 등록 시</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-title">정책 편집 방법</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <div class="step-title">정책 목록 탭 → 해당 정책 행의 <span class="btn-preview btn-gray">편집</span> 클릭</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <div class="step-title">내용 수정 후 <span class="btn-preview btn-blue">저장</span> 클릭</div>
+            <div class="step-desc">마감일·상태·출처 URL·요약 등을 수정합니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <div class="step-title">하단 <span class="btn-preview btn-blue">💾 정책 저장</span> 클릭</div>
+            <div class="step-desc">편집 내용이 localStorage에 최종 저장됩니다. 이 버튼을 누르지 않으면 페이지를 닫을 때 변경 사항이 사라집니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        ✅ <strong>빠른 만료 처리:</strong> 편집 패널의 <span class="btn-preview btn-red">만료 처리</span> 버튼을 클릭하면 상태가 즉시 expired로 변경됩니다.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="add-policy">
+      <h2 class="sec-title">6. 새 정책 추가 ★</h2>
+      <p>새로운 국가정책을 사이트에 추가하는 전체 흐름입니다. 관리자 페이지가 3가지를 자동으로 생성해줍니다.</p>
+
+      <div class="info-box">
+        💡 <strong>새 정책 하나를 추가할 때 필요한 작업:</strong><br>
+        ① policies.json에 항목 등록 &nbsp;→&nbsp; ② 아티클 HTML 파일 작성 &nbsp;→&nbsp; ③ 카테고리 페이지에 카드 추가 &nbsp;→&nbsp; ④ Git push
+      </div>
+
+      <h3 class="sub-title">Step 1 — 기본 정보 입력</h3>
+      <p>사이드바 <strong>➕ 새 정책 추가</strong>를 클릭하고 아래 항목을 입력합니다.</p>
+      <table>
+        <thead><tr><th>항목</th><th>입력 예시</th><th>설명</th></tr></thead>
+        <tbody>
+          <tr><td><strong>정책 제목</strong> <span class="badge badge-red">필수</span></td><td>2026 청년도약계좌 가입 조건</td><td>아티클 페이지의 H1 제목이 됩니다</td></tr>
+          <tr><td><strong>파일명</strong> <span class="badge badge-red">필수</span></td><td>article-youth-account</td><td>카테고리 변경 시 자동 제안됨. <code>pages/</code> 폴더에 저장될 이름 (.html 제외)</td></tr>
+          <tr><td><strong>카테고리</strong> <span class="badge badge-red">필수</span></td><td>청년정책</td><td>청년정책·신혼·육아·중장년·노년·1인가구·근로/소득·세금/환급 중 선택</td></tr>
+          <tr><td><strong>상태</strong></td><td>active</td><td>active(운영중) 또는 draft(준비중)</td></tr>
+          <tr><td><strong>마감일</strong></td><td>2026-08-31</td><td>상시 운영이면 비워두기</td></tr>
+          <tr><td><strong>출처 URL</strong></td><td>https://www.bokjiro.go.kr</td><td>정부 공식 신청 사이트 주소</td></tr>
+          <tr><td><strong>한줄 요약</strong> <span class="badge badge-red">필수</span></td><td>연 최대 5,000만원, 정부기여금 144만원</td><td>아티클 상단 요약 박스에 표시됩니다</td></tr>
+          <tr><td><strong>태그</strong></td><td>청년, 적금, 자산형성</td><td>쉼표로 구분. 검색·필터에 활용</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-title">Step 2 — ① policies.json에 등록</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <div class="step-title"><span class="btn-preview btn-blue">목록에 추가</span> 버튼 클릭</div>
+            <div class="step-desc">정책 목록 탭의 테이블에 새 항목이 추가됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <div class="step-title">정책 목록 탭 → <span class="btn-preview btn-blue">💾 정책 저장</span> 클릭</div>
+            <div class="step-desc">localStorage에 최종 저장됩니다. 이 버튼을 눌러야 데이터가 유지됩니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Step 3 — ② 아티클 HTML 파일 다운로드</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <div class="step-title"><span class="btn-preview btn-blue">HTML 다운로드</span> 버튼 클릭</div>
+            <div class="step-desc">입력한 제목·요약·카테고리가 채워진 HTML 파일이 자동 생성되어 다운로드됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <div class="step-title">다운로드 파일을 <code>pages/</code> 폴더에 저장</div>
+            <div class="step-desc">예: <code>pages/article-youth-account.html</code></div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <div class="step-title">파일을 열어 내용 채우기</div>
+            <div class="step-desc">
+              <code>&lt;!-- 신청 자격 및 대상 조건을 작성하세요 --&gt;</code> 형태의 주석을 찾아 실제 내용으로 교체합니다.<br>
+              주요 작성 구간: <strong>지원 대상 / 지원 내용 / 신청 방법 / 자주 묻는 질문</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Step 4 — ③ 카테고리 카드 코드 추가</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <div class="step-title"><span class="btn-preview btn-gray">코드 보기</span> 버튼 클릭 → <span class="btn-preview btn-gray">📋 복사</span></div>
+            <div class="step-desc">카테고리 페이지용 카드 코드와 index.html용 카드 코드 두 가지가 생성됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <div class="step-title">카테고리 페이지에 붙여넣기</div>
+            <div class="step-desc">
+              예: 청년정책이면 <code>pages/youth.html</code>을 열고 <code>.articles-main-grid</code> 태그 안에 복사한 코드를 붙여넣습니다.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <div class="step-title">index.html 메인 섹션에도 추가 (선택)</div>
+            <div class="step-desc">주목도 높은 정책은 <code>index.html</code>의 해당 카테고리 섹션 <code>.articles-grid</code> 안에도 카드 코드를 추가합니다.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-title">Step 5 — Git push로 배포</h3>
+      <p>아래 <a href="#deploy">10. 배포 방법</a> 섹션을 참고해 변경 파일을 push합니다.</p>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="rules">
+      <h2 class="sec-title">7. 자가진단 규칙</h2>
+      <p>메인 홈페이지의 자가진단 기능에서 연령·가구형태·고용상태 조합에 따라 어떤 혜택을 추천할지 정의합니다.</p>
+
+      <div class="card">
+        <div class="card-title">규칙 JSON 구조</div>
+        <pre style="font-size:0.78rem;background:#1A2332;color:#90CAF9;padding:14px;border-radius:7px;overflow-x:auto;">{
+  "benefitsMap": {
+    "20대_1인가구_직장인": [
+      { "title": "청년월세 특별지원",  "url": "pages/article-youth-rent.html" },
+      { "title": "실수령액 계산기",     "url": "pages/calc-net-salary.html" }
+    ],
+    "30대_자녀 있는 가구_직장인": [
+      { "title": "육아휴직 급여",       "url": "pages/article-parental-leave.html" },
+      { "title": "아이돌봄 바우처",     "url": "pages/article-childcare.html" }
+    ]
+  }
+}</pre>
+      </div>
+
+      <h3 class="sub-title">키(Key) 형식</h3>
+      <p>키는 <code>연령대_가구형태_고용상태</code> 형식으로 언더스코어(_)로 연결합니다.</p>
+      <table>
+        <thead><tr><th>항목</th><th>가능한 값</th></tr></thead>
+        <tbody>
+          <tr><td>연령대</td><td>10대, 20대, 30대, 40대, 50대, 60대 이상</td></tr>
+          <tr><td>가구형태</td><td>1인가구, 부모님과 동거, 배우자와 동거, 자녀 있는 가구</td></tr>
+          <tr><td>고용상태</td><td>직장인, 취업준비중, 자영업자, 무직·기타</td></tr>
+        </tbody>
+      </table>
+
+      <div class="warn-box">
+        ⚠️ JSON 문법 오류(쉼표 누락, 따옴표 불일치 등)가 있으면 저장이 되지 않습니다. <strong>문법 검사</strong> 버튼으로 미리 확인하세요.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="validate">
+      <h2 class="sec-title">8. 검증</h2>
+      <p>사이드바 <strong>✅ 검증</strong> 탭에서 자동으로 아래 항목들을 점검합니다.</p>
+
+      <table>
+        <thead><tr><th>점검 항목</th><th>오류 조건</th><th>해결 방법</th></tr></thead>
+        <tbody>
+          <tr><td>최저시급 설정</td><td>값이 0 또는 비어있음</td><td>기준값 탭에서 최저시급 입력</td></tr>
+          <tr><td>실업급여 상·하한 역전</td><td>하한액 &gt; 상한액</td><td>상한액을 높이거나 최저시급 재확인</td></tr>
+          <tr><td>마감 미처리 정책</td><td>마감일 경과 &amp; status = active</td><td>해당 정책을 expired로 변경</td></tr>
+          <tr><td>장기 미업데이트</td><td>lastUpdated 90일 초과</td><td>정책 내용 검토 후 날짜 갱신</td></tr>
+          <tr><td>기준값 미업데이트</td><td>constants.json 1년 이상 변경 없음</td><td>정부 고시 확인 후 기준값 편집</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="export">
+      <h2 class="sec-title">9. 내보내기 / 가져오기</h2>
+      <p>관리자에서 편집한 데이터를 <code>data/</code> 폴더의 JSON 파일로 영구 반영하는 방법입니다.</p>
+
+      <h3 class="sub-title">내보내기 (localStorage → 파일)</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <div class="step-title">내보내기 탭에서 원하는 파일 다운로드</div>
+            <div class="step-desc"><span class="btn-preview btn-blue">⬇ constants.json</span> <span class="btn-preview btn-blue">⬇ policies.json</span> <span class="btn-preview btn-blue">⬇ matching-rules.json</span></div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <div class="step-title">다운로드 파일을 프로젝트 <code>data/</code> 폴더에 덮어쓰기</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <div class="step-title">Git push</div>
+            <div class="step-desc">아래 배포 방법 섹션 참고</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-title">가져오기 (파일 → localStorage)</h3>
+      <p>다른 기기에서 편집한 JSON 파일을 업로드하거나, 백업 파일을 복원할 때 사용합니다. <span class="btn-preview btn-gray">📂 파일 선택</span> 후 JSON 파일을 선택하면 localStorage가 해당 내용으로 교체됩니다.</p>
+
+      <div class="warn-box">
+        ⚠️ <strong>localStorage 초기화:</strong> 초기화하면 파일에서 데이터를 다시 불러옵니다. 저장하지 않은 편집 내용이 모두 사라집니다.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="deploy">
+      <h2 class="sec-title">10. 배포 방법</h2>
+      <p>새 정책 추가·아티클 수정·JSON 파일 업데이트 후 사이트에 반영하는 방법입니다.</p>
+
+      <h3 class="sub-title">변경 파일 유형별 처리</h3>
+      <table>
+        <thead><tr><th>변경 내용</th><th>필요 작업</th></tr></thead>
+        <tbody>
+          <tr><td>기준값(최저임금 등) 수정</td><td>관리자 저장(즉시 반영) + constants.json 내보내기 후 Git push</td></tr>
+          <tr><td>정책 상태·마감일 수정</td><td>관리자 저장(즉시 반영) + policies.json 내보내기 후 Git push</td></tr>
+          <tr><td>새 아티클 HTML 추가</td><td>파일을 <code>pages/</code>에 저장 + 카테고리 페이지 카드 추가 + Git push</td></tr>
+          <tr><td>아티클 내용 수정</td><td>해당 HTML 파일 직접 수정 + Git push</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-title">Git push 방법 (Claude Code 터미널)</h3>
+      <div class="card">
+        <pre style="font-size:0.8rem;line-height:1.8;color:#2D3748;"># 1. 변경된 파일 확인
+git status
+
+# 2. 변경 파일 스테이징 (예시)
+git add data/policies.json pages/article-XXX.html pages/youth.html
+
+# 3. 커밋
+git commit -m "feat: XXX 정책 추가"
+
+# 4. push (GitHub Pages 자동 배포)
+git push origin main</pre>
+      </div>
+
+      <div class="tip-box">
+        ✅ push 후 약 1~2분 내에 GitHub Pages에 자동 배포됩니다. GitHub 저장소의 <strong>Actions</strong> 탭에서 배포 진행 상태를 확인할 수 있습니다.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="faq">
+      <h2 class="sec-title">11. 자주 묻는 질문</h2>
+
+      <h3 class="sub-title">Q. 관리자에서 저장했는데 사이트에 반영이 안 됩니다.</h3>
+      <p>같은 브라우저에서 사이트를 열었는지 확인하세요. localStorage는 브라우저·도메인 단위로 저장되므로, 다른 브라우저나 다른 컴퓨터에서는 변경사항이 보이지 않습니다. 다른 기기에 반영하려면 내보내기 → Git push가 필요합니다.</p>
+
+      <h3 class="sub-title">Q. 새 카테고리(네비게이션 메뉴)를 추가하려면?</h3>
+      <p>현재 네비게이션 추가는 HTML 파일을 직접 수정해야 합니다. 모든 HTML 파일의 <code>&lt;nav class="nav-main"&gt;</code>과 <code>&lt;nav class="mobile-menu"&gt;</code>에 항목을 추가하고, 해당 카테고리 페이지(예: <code>pages/newcategory.html</code>)를 생성해야 합니다. Claude Code에 요청하면 일괄 처리해 드립니다.</p>
+
+      <h3 class="sub-title">Q. 아티클 HTML 파일의 내용은 어떻게 작성하나요?</h3>
+      <p>다운로드된 HTML 파일을 텍스트 편집기(VS Code 등)로 열면 <code>&lt;!-- 신청 자격 및 대상 조건을 작성하세요 --&gt;</code>와 같은 주석이 있습니다. 이 주석을 실제 내용으로 교체합니다. 기존 아티클(예: <code>article-parental-leave.html</code>)을 참고하면 구조를 파악하기 쉽습니다.</p>
+
+      <h3 class="sub-title">Q. policies.json의 "id"는 무엇인가요?</h3>
+      <p>정책을 고유하게 식별하는 영문 식별자입니다. 파일명에서 <code>article-</code>를 뺀 값을 사용합니다. 예: 파일명이 <code>article-youth-rent.html</code>이면 id는 <code>youth-rent</code>.</p>
+
+      <h3 class="sub-title">Q. localStorage 데이터가 사라졌습니다.</h3>
+      <p>브라우저 캐시 삭제, 시크릿 모드 사용, localStorage 용량 초과 등의 이유로 데이터가 사라질 수 있습니다. 이것이 이유로 정기적으로 <strong>내보내기 → Git push</strong>로 JSON 파일에 영구 반영해두는 것을 권장합니다.</p>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// 현재 스크롤 위치에 따라 사이드바 링크 활성화
+const links = document.querySelectorAll('.sb-link');
+const sections = document.querySelectorAll('.section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  links.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
