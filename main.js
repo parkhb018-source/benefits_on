@@ -109,23 +109,23 @@ if (bannerClose && banner) {
 
   function showResult() {
     const benefits = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
-    // JSON의 icon/desc를 우선 사용하되, url은 없으면 defaultBenefitDetails로 fallback
+    // url은 항상 defaultBenefitDetails에서 가져옴 (JSON/localStorage 무관하게 안정적)
+    // icon·desc만 MATCHING_RULES로 오버라이드 허용
     const jsonDetails = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || {};
-    const details = {};
-    Object.entries(defaultBenefitDetails).forEach(([name, def]) => {
-      const fromJson = jsonDetails[name] || {};
-      details[name] = { ...def, ...fromJson, url: fromJson.url || def.url };
-    });
     diagResult.innerHTML =
       '<div class="diag-result-inner">' +
       benefits.map(name => {
-        const d = details[name] || { icon: '✨', desc: '혜택 상세 내용을 확인하세요', url: '#' };
+        const def  = defaultBenefitDetails[name] || { icon: '✨', desc: '혜택 상세 내용을 확인하세요', url: '#' };
+        const json = jsonDetails[name] || {};
+        const icon = json.icon || def.icon;
+        const desc = json.desc || def.desc;
+        const url  = def.url;   // 항상 defaultBenefitDetails 경로 사용
         return `<div class="result-item">
-          <div class="result-icon">${d.icon}</div>
+          <div class="result-icon">${icon}</div>
           <div class="result-content">
             <div class="result-title">${name}</div>
-            <div class="result-desc">${d.desc}</div>
-            <a href="${d.url || '#'}" class="result-link">자세히 보기 →</a>
+            <div class="result-desc">${desc}</div>
+            <a href="${url}" class="result-link">자세히 보기 →</a>
           </div>
         </div>`;
       }).join('') +
