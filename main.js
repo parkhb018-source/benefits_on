@@ -109,7 +109,13 @@ if (bannerClose && banner) {
 
   function showResult() {
     const benefits = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
-    const details = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || defaultBenefitDetails;
+    // JSON의 icon/desc를 우선 사용하되, url은 없으면 defaultBenefitDetails로 fallback
+    const jsonDetails = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || {};
+    const details = {};
+    Object.entries(defaultBenefitDetails).forEach(([name, def]) => {
+      const fromJson = jsonDetails[name] || {};
+      details[name] = { ...def, ...fromJson, url: fromJson.url || def.url };
+    });
     diagResult.innerHTML =
       '<div class="diag-result-inner">' +
       benefits.map(name => {
