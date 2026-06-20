@@ -118,6 +118,15 @@
     .cal-d.soon { color: #D69E2E; }
     .cal-d.due { color: #E53E3E; }
 
+    /* ── 새 정책 추가 ── */
+    .add-step { border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px 16px; }
+    .add-step-hd { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+    .add-step-title { font-weight: 700; font-size: 0.88rem; flex: 1; }
+    .add-step-desc { font-size: 0.78rem; color: #718096; }
+    .add-step-desc code { background: #EDF2F7; padding: 1px 5px; border-radius: 4px; font-size: 0.75rem; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: #2E75B6; color: #fff; border-radius: 50%; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+    .code-box { font-family: 'Consolas','Monaco',monospace; font-size: 0.73rem; background: #1A2332; color: #90CAF9; padding: 12px; border-radius: 7px; white-space: pre-wrap; word-break: break-all; margin-top: 8px; max-height: 220px; overflow-y: auto; display: none; }
+
     @media (max-width: 700px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { display: none; }
@@ -143,6 +152,7 @@
     <div class="sb-label">데이터</div>
     <button class="nb" data-tab="constants">⚙️ 기준값</button>
     <button class="nb" data-tab="policies">📰 정책 목록 <span class="badge" id="bPolicies"></span></button>
+    <button class="nb" data-tab="add">➕ 새 정책 추가</button>
     <button class="nb" data-tab="rules">🧭 자가진단 규칙</button>
 
     <div class="sb-label">도구</div>
@@ -286,7 +296,7 @@
           <div class="fg">
             <div class="fv" style="grid-column:1/-1"><label class="fl">제목 <span class="req">*</span></label><input class="fi" type="text" id="pe-title"></div>
             <div class="fv"><label class="fl">카테고리</label>
-              <select class="fi" id="pe-cat"><option>청년정책</option><option>중장년·노년</option><option>1인가구</option><option>근로/소득</option><option>세금/환급</option></select>
+              <select class="fi" id="pe-cat"><option>청년정책</option><option>신혼·육아</option><option>중장년·노년</option><option>1인가구</option><option>근로/소득</option><option>세금/환급</option></select>
             </div>
             <div class="fv"><label class="fl">상태</label>
               <select class="fi" id="pe-status"><option value="active">active (운영중)</option><option value="expired">expired (마감)</option><option value="draft">draft (준비중)</option></select>
@@ -306,6 +316,98 @@
       <div class="save-bar">
         <button class="btn btn-p" id="btnSavePs">💾 정책 저장</button>
         <span class="save-ok" id="saveOkP">✓ 저장 완료</span>
+      </div>
+    </div>
+
+    <!-- ════ 새 정책 추가 ════ -->
+    <div id="tab-add" class="tab">
+      <div class="ph">새 정책 추가</div>
+      <p class="ps">정보를 입력하면 <strong>① policies.json 등록</strong> · <strong>② 아티클 HTML 파일 생성</strong> · <strong>③ 카드 코드 복사</strong>를 자동으로 처리합니다.</p>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">📋 정책 기본 정보</span></div>
+        <div class="fg">
+          <div class="fv" style="grid-column:1/-1">
+            <label class="fl">정책 제목 <span class="req">*</span></label>
+            <input class="fi" type="text" id="na-title" placeholder="예: 2026 청년도약계좌 가입 조건과 방법">
+          </div>
+          <div class="fv">
+            <label class="fl">파일명 <span class="req">*</span></label>
+            <input class="fi" type="text" id="na-filename" placeholder="article-youth-account">
+            <span class="fh">pages/ 폴더 저장명 (.html 제외)</span>
+          </div>
+          <div class="fv">
+            <label class="fl">카테고리 <span class="req">*</span></label>
+            <select class="fi" id="na-cat">
+              <option value="청년정책">청년정책</option>
+              <option value="신혼·육아">신혼·육아</option>
+              <option value="중장년·노년">중장년·노년</option>
+              <option value="1인가구">1인가구</option>
+              <option value="근로/소득">근로/소득</option>
+              <option value="세금/환급">세금/환급</option>
+            </select>
+          </div>
+          <div class="fv">
+            <label class="fl">상태</label>
+            <select class="fi" id="na-status">
+              <option value="active">active (운영중)</option>
+              <option value="draft">draft (준비중)</option>
+            </select>
+          </div>
+          <div class="fv">
+            <label class="fl">마감일 (없으면 비워두기)</label>
+            <input class="fi" type="date" id="na-deadline">
+          </div>
+          <div class="fv">
+            <label class="fl">출처 URL</label>
+            <input class="fi" type="url" id="na-sourceUrl" placeholder="https://www.bokjiro.go.kr">
+          </div>
+          <div class="fv" style="grid-column:1/-1">
+            <label class="fl">한줄 요약 <span class="req">*</span></label>
+            <input class="fi" type="text" id="na-summary" placeholder="예: 연 최대 5,000만원 납입, 정부기여금 최대 144만원 지원">
+          </div>
+          <div class="fv" style="grid-column:1/-1">
+            <label class="fl">태그 (쉼표로 구분)</label>
+            <input class="fi" type="text" id="na-tags" placeholder="예: 청년, 적금, 자산형성">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">⚡ 자동 생성</span></div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+
+          <div class="add-step">
+            <div class="add-step-hd">
+              <span class="step-num">1</span>
+              <span class="add-step-title">policies.json에 등록</span>
+              <button class="btn btn-p btn-sm" id="btnAddPol">목록에 추가</button>
+              <span class="save-ok" id="addPolOk">✓ 추가됨 — 정책 목록 탭에서 💾 저장도 눌러주세요</span>
+            </div>
+            <p class="add-step-desc">추가 후 <strong>정책 목록</strong> 탭 → <strong>💾 정책 저장</strong> 버튼을 눌러야 localStorage에 최종 저장됩니다.</p>
+          </div>
+
+          <div class="add-step">
+            <div class="add-step-hd">
+              <span class="step-num">2</span>
+              <span class="add-step-title">아티클 HTML 파일 다운로드</span>
+              <button class="btn btn-p btn-sm" id="btnDlArt">HTML 다운로드</button>
+            </div>
+            <p class="add-step-desc">다운로드된 파일을 <code>pages/</code> 폴더에 넣고 내용(지원대상·지원내용·신청방법)을 채운 뒤 Git에 push하세요.</p>
+          </div>
+
+          <div class="add-step">
+            <div class="add-step-hd">
+              <span class="step-num">3</span>
+              <span class="add-step-title">카테고리 카드 코드 복사</span>
+              <button class="btn btn-s btn-sm" id="btnShowCard">코드 보기</button>
+              <button class="btn btn-s btn-sm" id="btnCopyCard" style="display:none;">📋 복사</button>
+            </div>
+            <p class="add-step-desc">카테고리 페이지(예: <code>newlywed.html</code>)의 <code>.articles-main-grid</code> 안에 붙여넣으세요.</p>
+            <pre class="code-box" id="cardCodeBox"></pre>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -667,6 +769,8 @@ function setupEvents() {
       location.reload();
     }
   });
+
+  setupAddEvents();
 }
 
 // ─── 유틸 ───────────────────────────────────────────────────
@@ -718,6 +822,254 @@ function imp(e, cb) {
 function msg(id, text) {
   const e = el(id); e.textContent = '✓ ' + text;
   setTimeout(() => e.textContent = '', 4000);
+}
+
+// ─── 새 정책 추가 ────────────────────────────────────────────
+const CAT_PAGE = {
+  '청년정책':'youth','신혼·육아':'newlywed','중장년·노년':'senior',
+  '1인가구':'single','근로/소득':'income','세금/환급':'tax'
+};
+
+function getAddData() {
+  return {
+    title:    g('na-title').trim(),
+    filename: g('na-filename').trim().replace(/\.html$/,''),
+    cat:      g('na-cat'),
+    status:   g('na-status'),
+    deadline: g('na-deadline') || null,
+    sourceUrl:g('na-sourceUrl').trim(),
+    summary:  g('na-summary').trim(),
+    tags:     g('na-tags').split(',').map(t=>t.trim()).filter(Boolean),
+    date:     TODAY,
+  };
+}
+
+function validateAdd(d) {
+  if (!d.title)    { alert('제목을 입력해주세요.'); el('na-title').focus(); return false; }
+  if (!d.filename) { alert('파일명을 입력해주세요.'); el('na-filename').focus(); return false; }
+  if (!d.summary)  { alert('한줄 요약을 입력해주세요.'); el('na-summary').focus(); return false; }
+  return true;
+}
+
+function buildArticleHtml(d) {
+  const page = CAT_PAGE[d.cat] || 'newlywed';
+  const nav = (href, label) => `<li><a href="${href}"${d.cat===label?' class="active"':''}>${label}</a></li>`;
+  return `<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${d.title} — 혜택on</title>
+  <meta name="description" content="${d.summary}">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="pages.css">
+  <link rel="canonical" href="https://YOUR-DOMAIN.com/pages/${d.filename}.html">
+  <meta property="og:url" content="https://YOUR-DOMAIN.com/pages/${d.filename}.html">
+  <meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png">
+  <meta property="og:site_name" content="혜택on">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="index, follow">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          ${nav('youth.html','청년정책')}
+          ${nav('newlywed.html','신혼·육아')}
+          ${nav('senior.html','중장년·노년')}
+          ${nav('single.html','1인가구')}
+          ${nav('income.html','근로/소득')}
+          ${nav('tax.html','세금/환급')}
+          <li><a href="../index.html#calculators">계산기</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="youth.html"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="newlywed.html"><span class="m-icon">👶</span>신혼·육아</a>
+    <a href="senior.html"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="single.html"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="income.html"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="tax.html"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="../index.html#calculators"><span class="m-icon">🧮</span>계산기</a>
+  </nav>
+
+  <div style="background: var(--bg-soft); border-bottom: 1px solid var(--border);">
+    <div class="inner-wrap breadcrumb-bar">
+      <a href="../index.html">홈</a><span class="sep">›</span>
+      <a href="${page}.html">${d.cat}</a><span class="sep">›</span>
+      ${d.title}
+    </div>
+  </div>
+
+  <main style="padding-bottom: 0;">
+    <div class="inner-wrap">
+      <div class="article-layout">
+        <article class="article-main">
+          <header class="article-header">
+            <div class="art-tags">
+              <span class="art-card-tag guide">가이드</span>
+              <span class="art-card-tag guide">${d.cat}</span>
+            </div>
+            <h1 class="article-h1">${d.title}</h1>
+            <div class="article-meta-row">
+              <span>작성일 <strong>${d.date}</strong></span>
+              <span>업데이트 <strong>${d.date}</strong></span>
+            </div>
+          </header>
+
+          <div class="policy-data-badge">✅ <strong>${d.date}</strong> 기준 최신 데이터</div>
+          <div class="article-summary">
+            <strong>핵심 요약:</strong> ${d.summary}
+          </div>
+
+          <div class="article-body">
+            <h2>지원 대상</h2>
+            <p><!-- 신청 자격 및 대상 조건을 작성하세요 --></p>
+
+            <h2>지원 내용</h2>
+            <p><!-- 지원 금액, 기간, 혜택 내용을 작성하세요 --></p>
+            <div class="highlight-box">
+              💡 <strong>핵심 정보</strong><br>
+              • <!-- 주요 내용 1 --><br>
+              • <!-- 주요 내용 2 --><br>
+              • <!-- 주요 내용 3 -->
+            </div>
+
+            <h2>신청 방법</h2>
+            <p><!-- 신청 절차를 작성하세요 --></p>
+            <ul>
+              <li><!-- 필요 서류 1 --></li>
+              <li><!-- 필요 서류 2 --></li>
+            </ul>
+
+            <a href="${d.sourceUrl||'#'}" class="cta-link" target="_blank" rel="noopener">공식 사이트에서 신청하기 →</a>
+            <a href="${page}.html" class="cta-link secondary">${d.cat} 정책 더 보기 →</a>
+
+            <h2>자주 묻는 질문</h2>
+            <h3>Q. <!-- 질문 1 --></h3>
+            <p><!-- 답변 1 --></p>
+            <h3>Q. <!-- 질문 2 --></h3>
+            <p><!-- 답변 2 --></p>
+          </div>
+
+          <div class="in-page-ad" style="margin: 28px 0;">광고 영역 — Google AdSense</div>
+
+          <nav class="article-nav">
+            <a href="${page}.html" class="article-nav-item">
+              <div class="article-nav-dir">← 목록으로</div>
+              <div class="article-nav-title">${d.cat} 정책 목록</div>
+            </a>
+          </nav>
+        </article>
+
+        <aside class="article-sidebar">
+          <div class="sidebar-card">
+            <div class="sidebar-title">관련 정책</div>
+            <div class="sidebar-related">
+              <a href="${page}.html">${d.cat} 정책 전체 보기</a>
+            </div>
+          </div>
+          <div class="sidebar-ad" aria-label="광고"><!-- AdSense 사이드바 광고 (300×250) --></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about.html">사이트 소개</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="contact.html">광고문의</a>
+      </div>
+    </div>
+  </footer>
+  <script src="../data/policy-loader.js"><\/script>
+  <script src="../main.js"><\/script>
+</body>
+</html>`;
+}
+
+function buildCardSnippet(d) {
+  const page = CAT_PAGE[d.cat] || 'newlywed';
+  return `<!-- ① ${d.cat} 페이지 (${page}.html) → .articles-main-grid 안에 추가 -->
+<a href="${d.filename}.html" class="art-card-lg">
+  <div class="art-card-thumb" style="background:#FDF2F8;">📋</div>
+  <div class="art-card-body">
+    <span class="art-card-tag new">신규</span>
+    <h2 class="art-card-title">${d.title}</h2>
+    <div class="art-card-meta"><span>${d.date}</span></div>
+  </div>
+</a>
+
+<!-- ② index.html → 해당 카테고리 섹션 .articles-grid 안에 추가 -->
+<a href="pages/${d.filename}.html" class="article-card">
+  <span class="art-tag tag-new">신규</span>
+  <h3 class="art-title">${d.title}</h3>
+  <p class="art-date">${d.date} 업데이트</p>
+</a>`;
+}
+
+function setupAddEvents() {
+  // 카테고리 변경 시 파일명 자동 제안
+  const fnInput = el('na-filename');
+  el('na-cat').addEventListener('change', () => {
+    if (fnInput.dataset.auto !== '0') {
+      fnInput.value = 'article-' + (CAT_PAGE[g('na-cat')] || 'policy') + '-' + TODAY.replace(/-/g,'').slice(2);
+    }
+  });
+  fnInput.addEventListener('input', () => { fnInput.dataset.auto = '0'; });
+  fnInput.value = 'article-newlywed-' + TODAY.replace(/-/g,'').slice(2);
+
+  // ① policies.json 추가
+  el('btnAddPol').addEventListener('click', () => {
+    const d = getAddData();
+    if (!validateAdd(d)) return;
+    if (!S.P) S.P = { meta:{ lastUpdated: TODAY }, policies:[] };
+    const id = d.filename.replace(/^article-/,'');
+    if (S.P.policies.find(p => p.id === id)) {
+      if (!confirm(`ID "${id}"가 이미 존재합니다. 덮어쓸까요?`)) return;
+      S.P.policies = S.P.policies.filter(p => p.id !== id);
+    }
+    S.P.policies.push({ id, title:d.title, category:d.cat, tags:d.tags,
+      articleUrl:'pages/'+d.filename+'.html', deadline:d.deadline,
+      status:d.status, lastUpdated:d.date, sourceUrl:d.sourceUrl, summary:d.summary });
+    renderPoliciesTable();
+    const ok = el('addPolOk'); ok.classList.add('show');
+    setTimeout(() => ok.classList.remove('show'), 5000);
+  });
+
+  // ② HTML 다운로드
+  el('btnDlArt').addEventListener('click', () => {
+    const d = getAddData();
+    if (!validateAdd(d)) return;
+    const b = new Blob([buildArticleHtml(d)], { type:'text/html;charset=utf-8' });
+    const u = URL.createObjectURL(b), a = document.createElement('a');
+    a.href = u; a.download = d.filename+'.html'; a.click(); URL.revokeObjectURL(u);
+  });
+
+  // ③ 카드 코드 보기/복사
+  el('btnShowCard').addEventListener('click', () => {
+    const d = getAddData();
+    if (!validateAdd(d)) return;
+    const box = el('cardCodeBox');
+    box.textContent = buildCardSnippet(d);
+    box.style.display = 'block';
+    el('btnCopyCard').style.display = 'inline-flex';
+  });
+
+  el('btnCopyCard').addEventListener('click', () => {
+    navigator.clipboard.writeText(el('cardCodeBox').textContent).then(() => {
+      el('btnCopyCard').textContent = '✓ 복사됨';
+      setTimeout(() => { el('btnCopyCard').textContent = '📋 복사'; }, 2000);
+    });
+  });
 }
 </script>
 </body>
