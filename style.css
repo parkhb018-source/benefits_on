@@ -1,7 +1,9 @@
 /* ===========================
-   혜택on Design System v1.0
-   Trust Blue + Soft Layer
+   혜택on Design System v2.0
+   Trust Blue + Serif Headline
    =========================== */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
 
 :root {
   --primary-dark: #1F4E79;
@@ -22,6 +24,14 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --t: 0.2s ease;
+
+  /* v2.1 — Pretendard 전면 적용 (토큰명 유지, 값만 Pretendard로) */
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', system-ui, sans-serif;
+  --font-serif: var(--font-sans);
+  --font-serif-latin: var(--font-sans);
+  --hero-from: #0F3A66;
+  --hero-to: #2456A4;
+  --hero-accent: #FFD27D;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +39,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-sans);
   background: var(--bg-soft);
   color: var(--text-primary);
   line-height: 1.6;
@@ -45,6 +55,31 @@ body {
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { display: block; max-width: 100%; }
+
+/* v2.1 — 헤딩 (Pretendard, --font-serif 토큰이 Pretendard로 정의됨) */
+h1, h2, h3,
+.hero-title, .section-title, .article-h1,
+.cat-hero-text h1, .calc-main-title {
+  font-family: var(--font-serif);
+  letter-spacing: -0.2px;
+}
+
+/* v2.0 — 키보드 포커스 링 (마우스 클릭에는 안 보임) */
+:focus-visible {
+  outline: 3px solid rgba(46,117,182,0.55);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* v2.0 — 모션 민감 사용자 배려 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* ===========================
    HEADER
@@ -119,10 +154,10 @@ img { display: block; max-width: 100%; }
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
   margin-left: auto;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
 }
 
 .hamburger span {
@@ -963,9 +998,35 @@ img { display: block; max-width: 100%; }
    =========================== */
 
 .hero-light {
-  background: var(--bg-soft);
-  padding: 60px 0 56px;
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  padding: 76px 0 68px;
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+}
+/* 배경 영상 (main.mp4) */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+/* 영상 위 블루 오버레이 — 텍스트 가독성 확보 */
+.hero-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(135deg, rgba(15,58,102,0.86) 0%, rgba(36,86,164,0.80) 100%),
+    radial-gradient(ellipse at 82% 18%, rgba(255,255,255,0.08) 0%, transparent 52%);
+  pointer-events: none;
+}
+/* 모션 최소화 사용자에겐 영상 대신 그라데이션 배경 유지 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
 }
 
 .hero-center {
@@ -973,13 +1034,15 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-badge-green {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--accent);
+  background: rgba(46,139,87,0.9);
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
@@ -989,19 +1052,23 @@ img { display: block; max-width: 100%; }
 }
 
 .hero-title {
-  font-size: clamp(26px, 4vw, 44px);
-  font-weight: 900;
-  color: var(--primary-dark);
-  letter-spacing: -1px;
-  line-height: 1.2;
-  margin-bottom: 12px;
+  font-size: clamp(28px, 4.4vw, 46px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+  margin-bottom: 14px;
 }
 
-.hero-title .highlight { color: var(--primary); }
+.hero-title .highlight {
+  font-style: normal;
+  font-weight: 800;
+  color: var(--hero-accent);
+}
 
 .hero-sub {
   font-size: 16px;
-  color: var(--text-secondary);
+  color: rgba(255,255,255,0.85);
   margin-bottom: 32px;
   line-height: 1.6;
 }
@@ -1104,6 +1171,17 @@ img { display: block; max-width: 100%; }
 
 .diag-selects-row select:focus {
   outline: none;
+  border-color: var(--primary);
+}
+
+/* v2.0 — 폼 컨트롤 키보드 포커스 링 복원 (위 outline:none 들을 소스 순서로 상쇄) */
+.diagnosis-selects select:focus-visible,
+.diag-selects-row select:focus-visible,
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 3px solid rgba(46,117,182,0.55);
+  outline-offset: 2px;
   border-color: var(--primary);
 }
 

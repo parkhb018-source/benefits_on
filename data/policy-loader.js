@@ -9,7 +9,7 @@
  */
 
 (function () {
-  const loaderSrc = document.currentScript ? document.currentScript.src : '';
+  const loaderSrc = document.currentScript ? document.currentScript.src.split('?')[0] : '';
   const base      = loaderSrc ? loaderSrc.replace('policy-loader.js', '') : 'data/';
 
   window.POLICY_DATA    = null;
