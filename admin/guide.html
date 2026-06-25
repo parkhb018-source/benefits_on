@@ -120,7 +120,7 @@
 
   <main class="main">
     <h1 class="page-title">혜택on 관리자 사용 설명서</h1>
-    <p class="page-sub">최종 업데이트: 2026.06.20 &nbsp;·&nbsp; 대상: 사이트 운영자</p>
+    <p class="page-sub">최종 업데이트: 2026.06.25 &nbsp;·&nbsp; 대상: 사이트 운영자</p>
 
     <!-- ══════════════════════════════════════════ -->
     <div class="section" id="overview">
@@ -134,7 +134,7 @@
           <tbody>
             <tr><td><strong>기준값 편집</strong></td><td>최저임금·기초연금·에너지바우처 등 매년 바뀌는 수치를 업데이트</td></tr>
             <tr><td><strong>정책 목록 관리</strong></td><td>정책 상태(운영중·만료·준비중)·마감일·출처 URL 수정</td></tr>
-            <tr><td><strong>새 정책 추가</strong></td><td>새 정책의 HTML 파일·카드 코드를 자동으로 생성</td></tr>
+            <tr><td><strong>새 정책 추가</strong></td><td>새 정책의 HTML 파일·카드 코드를 자동 생성 + 자가진단 결과에 자동 연결</td></tr>
             <tr><td><strong>자가진단 규칙</strong></td><td>연령·가구형태·고용상태에 따른 혜택 추천 로직 수정</td></tr>
             <tr><td><strong>데이터 검증</strong></td><td>오류·만료 정책·미업데이트 항목 자동 점검</td></tr>
             <tr><td><strong>내보내기/가져오기</strong></td><td>JSON 파일 다운로드 후 Git 반영</td></tr>
@@ -309,7 +309,8 @@
 
       <div class="info-box">
         💡 <strong>새 정책 하나를 추가할 때 필요한 작업:</strong><br>
-        ① policies.json에 항목 등록 &nbsp;→&nbsp; ② 아티클 HTML 파일 작성 &nbsp;→&nbsp; ③ 카테고리 페이지에 카드 추가 &nbsp;→&nbsp; ④ Git push
+        ① policies.json에 항목 등록 &nbsp;→&nbsp; ② 아티클 HTML 파일 작성 &nbsp;→&nbsp; ③ 카테고리 페이지에 카드 추가 &nbsp;→&nbsp; ④ Git push<br>
+        <span style="display:inline-block;margin-top:6px;">＋ (선택) <strong>자가진단 연결</strong>을 입력하면 메인 자가진단 결과에도 자동으로 노출·링크됩니다.</span>
       </div>
 
       <h3 class="sub-title">Step 1 — 기본 정보 입력</h3>
@@ -327,6 +328,25 @@
           <tr><td><strong>태그</strong></td><td>청년, 적금, 자산형성</td><td>쉼표로 구분. 검색·필터에 활용</td></tr>
         </tbody>
       </table>
+
+      <h3 class="sub-title">Step 1.5 — 자가진단 연결 입력 (선택)</h3>
+      <p>기본 정보 아래 <strong>🧭 자가진단 연결</strong> 카드에서 값을 입력하면, <span class="btn-preview btn-blue">목록에 추가</span>를 누를 때 <code>matching-rules.json</code>에도 함께 등록되어 메인 홈페이지 자가진단 결과에 노출됩니다.</p>
+      <table>
+        <thead><tr><th>항목</th><th>입력 예시</th><th>설명</th></tr></thead>
+        <tbody>
+          <tr><td><strong>자가진단 표시명</strong></td><td>청년도약계좌</td><td>자가진단 결과 카드에 표시될 짧은 혜택명. <strong>비워두면 자가진단 등록을 건너뜁니다.</strong></td></tr>
+          <tr><td><strong>아이콘</strong></td><td>📈</td><td>결과 카드의 이모지 (1자). 비우면 ✨ 사용</td></tr>
+          <tr><td><strong>노출 연령대</strong></td><td>☑ 20대 ☑ 30대</td><td>체크한 연령대의 자가진단 결과에 추가됩니다 (복수 선택 가능)</td></tr>
+          <tr><td><strong>가구형태 타겟</strong></td><td>전체 / 1인가구 …</td><td>특정 가구형태에만 우선 노출. <strong>전체</strong>면 연령대 공통으로 노출</td></tr>
+          <tr><td><strong>고용상태 타겟</strong></td><td>전체 / 직장인 …</td><td>특정 고용상태에만 우선 노출. <strong>가구형태를 선택해야 적용</strong>됩니다</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">
+        💡 설명(desc)은 위 <strong>한줄 요약</strong>을, 링크(url)는 <code>pages/{파일명}.html</code>을 자동으로 사용합니다. 따라서 표시명·연령대만 넣어도 "자세히 보기"가 새 아티클로 바로 연결됩니다.
+      </div>
+      <div class="tip-box">
+        ✅ 가구형태·고용상태로 좁혀도 해당 연령대의 <strong>기존 추천은 그대로 보존</strong>됩니다(새 항목이 맨 앞에 추가). 자가진단은 상위 3개만 노출하므로, 맨 앞 삽입으로 노출이 보장됩니다.
+      </div>
 
       <h3 class="sub-title">Step 2 — ① policies.json에 등록</h3>
       <div class="steps">
@@ -412,26 +432,41 @@
       <h2 class="sec-title">7. 자가진단 규칙</h2>
       <p>메인 홈페이지의 자가진단 기능에서 연령·가구형태·고용상태 조합에 따라 어떤 혜택을 추천할지 정의합니다.</p>
 
+      <p>규칙은 <strong>benefitsMap</strong>(누구에게 어떤 혜택을 추천할지)과 <strong>benefitDetails</strong>(각 혜택의 아이콘·설명·링크) 두 부분으로 나뉩니다.</p>
+
       <div class="card">
-        <div class="card-title">규칙 JSON 구조</div>
+        <div class="card-title">규칙 JSON 구조 (실제 형식)</div>
         <pre style="font-size:0.78rem;background:#1A2332;color:#90CAF9;padding:14px;border-radius:7px;overflow-x:auto;">{
   "benefitsMap": {
-    "20대_1인가구_직장인": [
-      { "title": "청년월세 특별지원",  "url": "pages/article-youth-rent.html" },
-      { "title": "실수령액 계산기",     "url": "pages/calc-net-salary.html" }
-    ],
-    "30대_자녀 있는 가구_직장인": [
-      { "title": "육아휴직 급여",       "url": "pages/article-parental-leave.html" },
-      { "title": "아이돌봄 바우처",     "url": "pages/article-childcare.html" }
-    ]
+    "10대": { "default": ["국민내일배움카드"] },
+    "20대": {
+      "1인가구": {
+        "직장인":  ["청년도약계좌", "청년 소득공제", "근로장려금"],
+        "default": ["청년월세 특별지원", "청년미래적금", "청년도약계좌"]
+      },
+      "default": ["청년월세 특별지원", "청년도약계좌", "근로장려금"]
+    },
+    "30대": { "default": ["근로장려금", "주거급여", "실업급여"] }
+  },
+  "benefitDetails": {
+    "청년도약계좌": {
+      "icon": "📈",
+      "desc": "월 40~70만원 납입, 5년 후 최대 5,000만원",
+      "url":  "pages/article-youth-dream-account.html"
+    }
   }
 }</pre>
       </div>
 
-      <h3 class="sub-title">키(Key) 형식</h3>
-      <p>키는 <code>연령대_가구형태_고용상태</code> 형식으로 언더스코어(_)로 연결합니다.</p>
+      <h3 class="sub-title">benefitsMap — 추천 대상 매칭</h3>
+      <p><code>연령대 → 가구형태 → 고용상태</code> 순으로 <strong>중첩된 객체</strong>이며, 값은 <strong>혜택명 문자열 배열</strong>입니다. 매칭 우선순위는 다음과 같습니다.</p>
+      <ul>
+        <li>해당 <strong>가구형태</strong> 항목이 없으면 그 연령대의 <code>default</code> 배열을 사용합니다.</li>
+        <li>가구형태 항목 안에 해당 <strong>고용상태</strong>가 없으면 그 가구형태의 <code>default</code>를 사용합니다.</li>
+        <li>결과는 <strong>상위 3개</strong>만 노출됩니다.</li>
+      </ul>
       <table>
-        <thead><tr><th>항목</th><th>가능한 값</th></tr></thead>
+        <thead><tr><th>항목</th><th>가능한 값 (정확히 일치해야 함)</th></tr></thead>
         <tbody>
           <tr><td>연령대</td><td>10대, 20대, 30대, 40대, 50대, 60대 이상</td></tr>
           <tr><td>가구형태</td><td>1인가구, 부모님과 동거, 배우자와 동거, 자녀 있는 가구</td></tr>
@@ -439,8 +474,15 @@
         </tbody>
       </table>
 
+      <h3 class="sub-title">benefitDetails — 혜택 상세</h3>
+      <p>benefitsMap에 쓴 <strong>혜택명</strong>을 key로 하고, 값은 <code>icon</code>·<code>desc</code>·<code>url</code>을 가집니다. 결과 카드의 "자세히 보기" 링크는 <code>url</code>로 연결되므로, <strong>url이 없으면 링크가 동작하지 않습니다.</strong></p>
+
+      <div class="tip-box">
+        ✅ <strong>새 정책 추가</strong>의 자가진단 연결을 사용하면 위 benefitsMap·benefitDetails 두 곳이 <strong>자동으로 채워집니다.</strong> 직접 JSON을 편집하는 것은 세부 노출 위치를 미세 조정하거나 기존 항목을 수정할 때만 필요합니다.
+      </div>
+
       <div class="warn-box">
-        ⚠️ JSON 문법 오류(쉼표 누락, 따옴표 불일치 등)가 있으면 저장이 되지 않습니다. <strong>문법 검사</strong> 버튼으로 미리 확인하세요.
+        ⚠️ JSON 문법 오류(쉼표 누락, 따옴표 불일치 등)가 있으면 저장이 되지 않습니다. <strong>문법 검사</strong> 버튼으로 미리 확인하세요. 또한 benefitsMap의 혜택명과 benefitDetails의 key는 <strong>철자가 정확히 같아야</strong> 아이콘·설명·링크가 표시됩니다.
       </div>
     </div>
 
@@ -516,6 +558,7 @@
           <tr><td>기준값(최저임금 등) 수정</td><td>관리자 저장(즉시 반영) + constants.json 내보내기 후 Git push</td></tr>
           <tr><td>정책 상태·마감일 수정</td><td>관리자 저장(즉시 반영) + policies.json 내보내기 후 Git push</td></tr>
           <tr><td>새 아티클 HTML 추가</td><td>파일을 <code>pages/</code>에 저장 + 카테고리 페이지 카드 추가 + Git push</td></tr>
+          <tr><td>자가진단 규칙 변경(또는 자가진단 연결로 추가)</td><td>관리자 저장(즉시 반영) + matching-rules.json 내보내기 후 Git push</td></tr>
           <tr><td>아티클 내용 수정</td><td>해당 HTML 파일 직접 수정 + Git push</td></tr>
         </tbody>
       </table>

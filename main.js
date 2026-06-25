@@ -144,4 +144,7 @@ if (bannerClose && banner) {
   allSelects.forEach(s => s.addEventListener('change', updateUI));
   diagBtn.addEventListener('click', showResult);
   if (diagReset) diagReset.addEventListener('click', resetDiag);
+
+  // 페이지 로드·뒤로가기(bfcache) 복원 시 셀렉트 값과 버튼 상태 동기화
+  window.addEventListener('pageshow', updateUI);
 }());

@@ -310,6 +310,7 @@
           <div style="display:flex;gap:8px;margin-top:14px;">
             <button class="btn btn-p" id="btnSavePol">저장</button>
             <button class="btn btn-d" id="btnExpirePol">만료 처리</button>
+            <button class="btn btn-d" id="btnDeletePol" style="margin-left:auto;">🗑️ 삭제</button>
           </div>
         </div>
       </div>
@@ -372,6 +373,58 @@
             <input class="fi" type="text" id="na-tags" placeholder="예: 청년, 적금, 자산형성">
           </div>
         </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">🧭 자가진단 연결 <span style="font-size:0.72rem;color:#94A3B8;font-weight:400;">(선택 — 표시명을 비우면 건너뜀)</span></span></div>
+        <div class="fg">
+          <div class="fv">
+            <label class="fl">자가진단 표시명</label>
+            <input class="fi" type="text" id="na-benefit" placeholder="예: 청년도약계좌">
+            <span class="fh">자가진단 결과에 표시될 짧은 혜택명</span>
+          </div>
+          <div class="fv">
+            <label class="fl">아이콘</label>
+            <input class="fi" type="text" id="na-benefit-icon" placeholder="📈" maxlength="2">
+            <span class="fh">이모지 1자</span>
+          </div>
+        </div>
+        <div class="fv" style="margin-top:11px;">
+          <label class="fl">노출 연령대 <span class="fh" style="font-weight:400;">(선택한 연령대 자가진단 결과에 추가)</span></label>
+          <div id="na-benefit-ages" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:5px;">
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="10대">10대</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="20대">20대</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="30대">30대</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="40대">40대</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="50대">50대</label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="60대 이상">60대 이상</label>
+          </div>
+        </div>
+        <div class="fg" style="margin-top:11px;">
+          <div class="fv">
+            <label class="fl">가구형태 타겟</label>
+            <select class="fi" id="na-benefit-hh">
+              <option value="">전체 (연령대 공통)</option>
+              <option value="1인가구">1인가구</option>
+              <option value="부모님과 동거">부모님과 동거</option>
+              <option value="배우자와 동거">배우자와 동거</option>
+              <option value="자녀 있는 가구">자녀 있는 가구</option>
+            </select>
+            <span class="fh">선택 시 해당 가구형태에만 우선 노출</span>
+          </div>
+          <div class="fv">
+            <label class="fl">고용상태 타겟</label>
+            <select class="fi" id="na-benefit-emp">
+              <option value="">전체</option>
+              <option value="직장인">직장인 (재직중)</option>
+              <option value="취업준비중">취업준비중</option>
+              <option value="자영업자">자영업자·프리랜서</option>
+              <option value="무직·기타">무직·기타</option>
+            </select>
+            <span class="fh">가구형태를 선택해야 적용됩니다</span>
+          </div>
+        </div>
+        <p class="add-step-desc" style="margin-top:10px;">설명은 위 <strong>한줄 요약</strong>을, 링크는 <code>pages/{파일명}.html</code>을 자동으로 사용합니다. 가구형태·고용상태로 좁히지 않으면 선택한 연령대 전체에 노출됩니다. <strong>아래 ① 목록에 추가</strong>를 누르면 자가진단 규칙에도 함께 등록됩니다.</p>
       </div>
 
       <div class="card">
@@ -728,6 +781,18 @@ function setupEvents() {
       renderPoliciesTable();
     }
   });
+  el('btnDeletePol').addEventListener('click', () => {
+    const idx = S.P.policies.findIndex(x => x.id === S.editId);
+    if (idx < 0) return;
+    const p = S.P.policies[idx];
+    if (!confirm(`"${p.title}" 정책을 목록에서 완전히 삭제할까요?\n\n※ 아티클 HTML 파일(${p.articleUrl || '-'})과 카테고리 카드는 삭제되지 않습니다. 필요하면 별도로 제거하세요.`)) return;
+    S.P.policies.splice(idx, 1);
+    S.P.meta.lastUpdated = TODAY;
+    localStorage.setItem(LS.P, JSON.stringify(S.P));
+    document.getElementById('polEditPanel').style.display = 'none'; S.editId = null;
+    renderPoliciesTable(); renderDashboard(); runValidation();
+    flashOk('saveOkP');
+  });
   el('btnSavePs').addEventListener('click', () => {
     S.P.meta.lastUpdated = TODAY;
     localStorage.setItem(LS.P, JSON.stringify(S.P));
@@ -842,7 +907,45 @@ function getAddData() {
     summary:  g('na-summary').trim(),
     tags:     g('na-tags').split(',').map(t=>t.trim()).filter(Boolean),
     date:     TODAY,
+    benefit:     g('na-benefit').trim(),
+    benefitIcon: g('na-benefit-icon').trim() || '✨',
+    benefitAges: [...document.querySelectorAll('#na-benefit-ages input:checked')].map(c => c.value),
+    benefitHh:   g('na-benefit-hh'),
+    benefitEmp:  g('na-benefit-emp'),
   };
+}
+
+// 자가진단 benefitsMap에 (연령·가구·고용) 경로로 혜택 삽입.
+// 새 노드는 현재 추천 결과로 시드해 기존 추천이 사라지지 않게 한다.
+function diagUnshift(arr, name) {
+  const a = Array.isArray(arr) ? arr : [];
+  const i = a.indexOf(name);
+  if (i >= 0) a.splice(i, 1);
+  a.unshift(name);
+  return a;
+}
+function diagInsert(R, age, household, employ, benefit) {
+  const map = R.benefitsMap || (R.benefitsMap = {});
+  let ageNode = map[age];
+  if (Array.isArray(ageNode)) ageNode = map[age] = { default: ageNode };
+  else if (!ageNode || typeof ageNode !== 'object') ageNode = map[age] = { default: [] };
+  if (!Array.isArray(ageNode.default)) ageNode.default = [];
+
+  if (!household) { ageNode.default = diagUnshift(ageNode.default, benefit); return; }
+
+  let hh = ageNode[household];
+  if (hh === undefined) hh = ageNode[household] = employ ? { default: ageNode.default.slice() } : ageNode.default.slice();
+
+  if (!employ) {
+    if (Array.isArray(hh)) ageNode[household] = diagUnshift(hh, benefit);
+    else hh.default = diagUnshift(hh.default, benefit);
+    return;
+  }
+
+  if (Array.isArray(hh)) hh = ageNode[household] = { default: hh.slice() };
+  if (!Array.isArray(hh.default)) hh.default = [];
+  if (hh[employ] === undefined) hh[employ] = hh.default.slice();
+  hh[employ] = diagUnshift(hh[employ], benefit);
 }
 
 function validateAdd(d) {
@@ -1042,7 +1145,28 @@ function setupAddEvents() {
       articleUrl:'pages/'+d.filename+'.html', deadline:d.deadline,
       status:d.status, lastUpdated:d.date, sourceUrl:d.sourceUrl, summary:d.summary });
     renderPoliciesTable();
-    const ok = el('addPolOk'); ok.classList.add('show');
+
+    // 자가진단 규칙에도 함께 등록 (표시명이 입력된 경우)
+    let diagMsg = '';
+    if (d.benefit) {
+      if (!S.R) S.R = { meta:{ lastUpdated: TODAY }, benefitsMap:{}, benefitDetails:{} };
+      if (!S.R.benefitDetails) S.R.benefitDetails = {};
+      if (!S.R.benefitsMap) S.R.benefitsMap = {};
+      S.R.benefitDetails[d.benefit] = { icon: d.benefitIcon, desc: d.summary, url: 'pages/'+d.filename+'.html' };
+      d.benefitAges.forEach(age => diagInsert(S.R, age, d.benefitHh, d.benefitEmp, d.benefit));
+      localStorage.setItem(LS.R, JSON.stringify(S.R));
+      renderRulesEditor();
+      if (d.benefitAges.length) {
+        const scope = [d.benefitHh, d.benefitHh && d.benefitEmp].filter(Boolean).join('·');
+        diagMsg = ` · 자가진단 등록(${d.benefitAges.join(', ')}${scope ? ' / ' + scope : ''})`;
+      } else {
+        diagMsg = ' · 자가진단 상세 등록(연령대 미선택 — 규칙 탭에서 노출 위치 지정)';
+      }
+    }
+
+    const ok = el('addPolOk');
+    ok.textContent = '✓ 추가됨 — 정책 목록 탭에서 💾 저장도 눌러주세요' + diagMsg;
+    ok.classList.add('show');
     setTimeout(() => ok.classList.remove('show'), 5000);
   });
 
