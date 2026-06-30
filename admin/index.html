@@ -156,6 +156,7 @@
     <button class="nb" data-tab="policies">📰 정책 목록 <span class="badge" id="bPolicies"></span></button>
     <button class="nb" data-tab="add">➕ 새 정책 추가</button>
     <button class="nb" data-tab="rules">🧭 자가진단 규칙</button>
+    <button class="nb" data-tab="resources">📂 자료실</button>
 
     <div class="sb-label">도구</div>
     <button class="nb" data-tab="validate">✅ 검증 <span class="badge" id="bValidate"></span></button>
@@ -487,6 +488,55 @@
       </div>
     </div>
 
+    <!-- ════ 자료실 ════ -->
+    <div id="tab-resources" class="tab">
+      <div class="ph">자료실 관리</div>
+      <p class="ps">소상공인용 무료 앱·자료를 등록합니다. 저장 후 <code>data/resources.json</code>을 내보내 Git에 push하면 모든 방문자에게 반영됩니다.</p>
+      <p class="ps" style="color:#C53030;">⚠️ 실제 파일은 저장소의 <code>downloads/</code> 폴더에 직접 커밋해야 다운로드 링크가 동작합니다. <code>파일 경로</code>는 <code>../downloads/파일명</code> 형태로 입력하세요.</p>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table class="pt" id="resTable">
+          <thead><tr>
+            <th>제목</th><th>카테고리</th><th>버전</th><th>파일</th><th>업데이트</th><th></th>
+          </tr></thead>
+          <tbody id="resBody"></tbody>
+        </table>
+      </div>
+
+      <div style="margin:12px 0;">
+        <button class="btn btn-s" id="btnAddRes">➕ 새 자료 추가</button>
+      </div>
+
+      <div id="resEditPanel" style="display:none;">
+        <div class="card" style="border-color:#2E75B6;">
+          <div class="card-hd">
+            <span class="card-title" id="resEditTitle">자료 편집</span>
+            <button class="btn btn-s btn-sm" id="btnCancelRes">✕ 닫기</button>
+          </div>
+          <div class="fg">
+            <div class="fv"><label class="fl">ID <span class="req">*</span></label><input class="fi" type="text" id="re-id" placeholder="예: sales-tracker"><span class="fh">영문·숫자·하이픈</span></div>
+            <div class="fv"><label class="fl">아이콘(이모지)</label><input class="fi" type="text" id="re-icon" placeholder="📦"></div>
+            <div class="fv" style="grid-column:1/-1"><label class="fl">제목 <span class="req">*</span></label><input class="fi" type="text" id="re-title"></div>
+            <div class="fv" style="grid-column:1/-1"><label class="fl">설명</label><input class="fi" type="text" id="re-desc"></div>
+            <div class="fv"><label class="fl">카테고리</label><input class="fi" type="text" id="re-cat" placeholder="도구"></div>
+            <div class="fv"><label class="fl">버전</label><input class="fi" type="text" id="re-version" placeholder="1.0.0"></div>
+            <div class="fv"><label class="fl">파일 크기</label><input class="fi" type="text" id="re-size" placeholder="2.3MB"></div>
+            <div class="fv"><label class="fl">업데이트 날짜</label><input class="fi" type="date" id="re-updated"></div>
+            <div class="fv" style="grid-column:1/-1"><label class="fl">파일 경로</label><input class="fi" type="text" id="re-url" placeholder="../downloads/파일명.zip"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;">
+            <button class="btn btn-p" id="btnApplyRes">적용</button>
+            <button class="btn btn-d" id="btnDeleteRes" style="margin-left:auto;display:none;">🗑️ 삭제</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn btn-p" id="btnSaveRes">💾 자료실 저장 (즉시 반영)</button>
+        <span class="save-ok" id="saveOkRes">✓ 저장 완료</span>
+      </div>
+    </div>
+
     <!-- ════ 검증 ════ -->
     <div id="tab-validate" class="tab">
       <div class="ph">데이터 검증</div>
@@ -512,6 +562,7 @@
           <button class="btn btn-p" id="btnDlC">⬇ constants.json</button>
           <button class="btn btn-p" id="btnDlP">⬇ policies.json</button>
           <button class="btn btn-p" id="btnDlR">⬇ matching-rules.json</button>
+          <button class="btn btn-p" id="btnDlRes">⬇ resources.json</button>
         </div>
       </div>
 
@@ -522,6 +573,7 @@
           <label class="btn btn-s" style="cursor:pointer;">📂 constants.json<input type="file" id="impC" accept=".json" style="display:none;"></label>
           <label class="btn btn-s" style="cursor:pointer;">📂 policies.json<input type="file" id="impP" accept=".json" style="display:none;"></label>
           <label class="btn btn-s" style="cursor:pointer;">📂 matching-rules.json<input type="file" id="impR" accept=".json" style="display:none;"></label>
+          <label class="btn btn-s" style="cursor:pointer;">📂 resources.json<input type="file" id="impRes" accept=".json" style="display:none;"></label>
         </div>
         <p style="font-size:0.75rem;color:#94A3B8;margin-top:10px;" id="impMsg"></p>
       </div>
@@ -538,7 +590,7 @@
 
 <script>
 // ─── 상수 ───────────────────────────────────────────────────
-const LS = { C: 'htkon_constants', P: 'htkon_policies', R: 'htkon_rules', SAVED: 'htkon_lastSaved' };
+const LS = { C: 'htkon_constants', P: 'htkon_policies', R: 'htkon_rules', RES: 'htkon_resources', SAVED: 'htkon_lastSaved' };
 const TODAY = new Date().toISOString().split('T')[0];
 const CAL = [
   { key: 'minimumWage',   icon: '⚖️', name: '최저임금',       when: '매년 8월 5일',  month: 8 },
@@ -550,7 +602,7 @@ const CAL = [
 ];
 
 // ─── 상태 ───────────────────────────────────────────────────
-let S = { C: null, P: null, R: null, editId: null };
+let S = { C: null, P: null, R: null, RES: null, editId: null, resEditId: null };
 
 document.getElementById('todayStr').textContent = TODAY;
 
@@ -559,6 +611,7 @@ document.getElementById('todayStr').textContent = TODAY;
   S.C = tryLS(LS.C) || await fetchJSON('../data/constants.json');
   S.P = tryLS(LS.P) || await fetchJSON('../data/policies.json');
   S.R = tryLS(LS.R) || await fetchJSON('../data/matching-rules.json');
+  S.RES = tryLS(LS.RES) || await fetchJSON('../data/resources.json') || { meta: { lastUpdated: TODAY }, resources: [] };
 
   const src = localStorage.getItem(LS.C) ? 'localStorage' : '파일';
   document.getElementById('hSource').textContent = src + '에서 로드';
@@ -574,6 +627,7 @@ function renderAll() {
   renderConstantsForm();
   renderPoliciesTable();
   renderRulesEditor();
+  renderResourcesTable();
   runValidation();
 }
 
@@ -688,6 +742,37 @@ function editPol(id) {
 function renderRulesEditor() {
   if (!S.R) return;
   document.getElementById('rulesEditor').value = JSON.stringify(S.R, null, 2);
+}
+
+// ─── 자료실 ─────────────────────────────────────────────────
+function renderResourcesTable() {
+  var list = (S.RES && S.RES.resources) || [];
+  document.getElementById('resBody').innerHTML = list.length
+    ? list.map(function (r) {
+        var file = r.fileUrl ? (r.fileUrl.split('/').pop()) : '<span style="color:#E53E3E">없음</span>';
+        return '<tr><td><strong>' + esc(r.title) + '</strong></td><td>' + esc(r.category || '-') +
+          '</td><td>' + esc(r.version || '-') + '</td><td style="font-size:0.73rem;color:#718096">' + file +
+          '</td><td>' + esc(r.updatedAt || '-') + '</td>' +
+          '<td><button class="btn btn-s btn-sm" onclick="editRes(\'' + r.id + '\')">편집</button></td></tr>';
+      }).join('')
+    : '<tr><td colspan="6" style="padding:20px;text-align:center;color:#94A3B8;">등록된 자료가 없습니다. ➕ 새 자료 추가를 눌러주세요.</td></tr>';
+}
+
+function openResPanel(r) {
+  S.resEditId = r ? r.id : null;
+  set('re-id', r ? r.id : ''); set('re-icon', r ? r.icon : ''); set('re-title', r ? r.title : '');
+  set('re-desc', r ? r.description : ''); set('re-cat', r ? r.category : ''); set('re-version', r ? r.version : '');
+  set('re-size', r ? r.fileSize : ''); set('re-updated', r ? r.updatedAt : TODAY); set('re-url', r ? r.fileUrl : '');
+  el('re-id').readOnly = !!r;
+  el('resEditTitle').textContent = r ? '자료 편집' : '새 자료 추가';
+  el('btnDeleteRes').style.display = r ? 'inline-block' : 'none';
+  el('resEditPanel').style.display = 'block';
+  el('resEditPanel').scrollIntoView({ behavior: 'smooth' });
+}
+
+function editRes(id) {
+  var r = ((S.RES && S.RES.resources) || []).find(function (x) { return x.id === id; });
+  if (r) openResPanel(r);
 }
 
 // ─── 검증 ───────────────────────────────────────────────────
@@ -823,18 +908,57 @@ function setupEvents() {
   el('btnDlC').addEventListener('click', () => { collectConstants(); dl(S.C, 'constants.json'); });
   el('btnDlP').addEventListener('click', () => dl(S.P, 'policies.json'));
   el('btnDlR').addEventListener('click', () => { try { S.R = JSON.parse(el('rulesEditor').value); } catch(e) {} dl(S.R, 'matching-rules.json'); });
+  el('btnDlRes').addEventListener('click', () => dl(S.RES, 'resources.json'));
 
   // 가져오기
   el('impC').addEventListener('change', e => imp(e, data => { S.C = data; localStorage.setItem(LS.C, JSON.stringify(data)); renderConstantsForm(); msg('impMsg', 'constants.json 가져오기 완료'); }));
   el('impP').addEventListener('change', e => imp(e, data => { S.P = data; localStorage.setItem(LS.P, JSON.stringify(data)); renderPoliciesTable(); msg('impMsg', 'policies.json 가져오기 완료'); }));
   el('impR').addEventListener('change', e => imp(e, data => { S.R = data; localStorage.setItem(LS.R, JSON.stringify(data)); renderRulesEditor(); msg('impMsg', 'matching-rules.json 가져오기 완료'); }));
+  el('impRes').addEventListener('change', e => imp(e, data => { S.RES = data; localStorage.setItem(LS.RES, JSON.stringify(data)); renderResourcesTable(); msg('impMsg', 'resources.json 가져오기 완료'); }));
 
   // localStorage 초기화
   el('btnClearLS').addEventListener('click', () => {
     if (confirm('모든 localStorage 데이터를 초기화할까요? 원본 파일에서 다시 불러옵니다.')) {
-      [LS.C, LS.P, LS.R, LS.SAVED].forEach(k => localStorage.removeItem(k));
+      [LS.C, LS.P, LS.R, LS.RES, LS.SAVED].forEach(k => localStorage.removeItem(k));
       location.reload();
     }
+  });
+
+  // 자료실
+  el('btnAddRes').addEventListener('click', () => openResPanel(null));
+  el('btnCancelRes').addEventListener('click', () => { el('resEditPanel').style.display = 'none'; S.resEditId = null; });
+  el('btnApplyRes').addEventListener('click', () => {
+    const id = g('re-id').trim(), title = g('re-title').trim();
+    if (!id || !title) { alert('ID와 제목은 필수입니다.'); return; }
+    if (!S.RES) S.RES = { meta: { lastUpdated: TODAY }, resources: [] };
+    const item = {
+      id: id, title: title, description: g('re-desc'), version: g('re-version'),
+      icon: g('re-icon') || '📦', category: g('re-cat'),
+      fileUrl: g('re-url'), fileSize: g('re-size') || '—', updatedAt: g('re-updated') || TODAY
+    };
+    const idx = S.RES.resources.findIndex(x => x.id === S.resEditId);
+    if (idx >= 0) {
+      S.RES.resources[idx] = item;
+    } else {
+      if (S.RES.resources.some(x => x.id === id)) { alert('이미 같은 ID의 자료가 있습니다.'); return; }
+      S.RES.resources.push(item);
+    }
+    el('resEditPanel').style.display = 'none'; S.resEditId = null;
+    renderResourcesTable();
+  });
+  el('btnDeleteRes').addEventListener('click', () => {
+    const idx = S.RES.resources.findIndex(x => x.id === S.resEditId);
+    if (idx < 0) return;
+    if (!confirm(`"${S.RES.resources[idx].title}" 자료를 삭제할까요?\n\n※ downloads/ 폴더의 실제 파일은 삭제되지 않습니다.`)) return;
+    S.RES.resources.splice(idx, 1);
+    el('resEditPanel').style.display = 'none'; S.resEditId = null;
+    renderResourcesTable();
+  });
+  el('btnSaveRes').addEventListener('click', () => {
+    if (!S.RES) S.RES = { meta: { lastUpdated: TODAY }, resources: [] };
+    S.RES.meta.lastUpdated = TODAY;
+    localStorage.setItem(LS.RES, JSON.stringify(S.RES));
+    flashOk('saveOkRes');
   });
 
   setupAddEvents();
@@ -847,6 +971,7 @@ function g2(id, val) { el(id).value = val || ''; }
 function n(id)  { return parseFloat(el(id).value) || 0; }
 function v(id, val) { const e = el(id); if (e) e.value = val; }
 function set(id, val) { const e = el(id); if (e && val !== undefined && val !== null) e.value = val; }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
 
 function tryLS(key) {
   const raw = localStorage.getItem(key);

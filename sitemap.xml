@@ -45,6 +45,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- 자료실 -->
+  <url>
+    <loc>https://YOUR-DOMAIN.com/pages/resources.html</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- 아티클 상세 페이지 (SEO 핵심) -->
   <url>
     <loc>https://YOUR-DOMAIN.com/pages/article-youth-rent.html</loc>

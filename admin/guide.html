@@ -112,10 +112,11 @@
       <a href="#policies"   class="sb-link">5. 정책 목록 관리</a>
       <a href="#add-policy" class="sb-link">6. 새 정책 추가 ★</a>
       <a href="#rules"      class="sb-link">7. 자가진단 규칙</a>
-      <a href="#validate"   class="sb-link">8. 검증</a>
-      <a href="#export"     class="sb-link">9. 내보내기/가져오기</a>
-      <a href="#deploy"     class="sb-link">10. 배포 방법</a>
-      <a href="#faq"        class="sb-link">11. 자주 묻는 질문</a>
+      <a href="#resources"  class="sb-link">8. 자료실 관리</a>
+      <a href="#validate"   class="sb-link">9. 검증</a>
+      <a href="#export"     class="sb-link">10. 내보내기/가져오기</a>
+      <a href="#deploy"     class="sb-link">11. 배포 방법</a>
+      <a href="#faq"        class="sb-link">12. 자주 묻는 질문</a>
     </div>
   </nav>
 
@@ -423,7 +424,7 @@
       </div>
 
       <h3 class="sub-title">Step 5 — Git push로 배포</h3>
-      <p>아래 <a href="#deploy">10. 배포 방법</a> 섹션을 참고해 변경 파일을 push합니다.</p>
+      <p>아래 <a href="#deploy">11. 배포 방법</a> 섹션을 참고해 변경 파일을 push합니다.</p>
     </div>
 
     <hr>
@@ -490,8 +491,64 @@
     <hr>
 
     <!-- ══════════════════════════════════════════ -->
+    <div class="section" id="resources">
+      <h2 class="sec-title">8. 자료실 관리</h2>
+      <p>소상공인을 위해 무료로 공유하는 앱·자료를 자료실 페이지(<code>pages/resources.html</code>)에 등록합니다. 방문자는 자료를 내려받고 댓글로 피드백을 남길 수 있습니다.</p>
+
+      <div class="warn-box">
+        ⚠️ <strong>실제 파일은 직접 커밋해야 합니다.</strong> 관리자에서 등록하는 것은 <strong>자료의 정보(제목·설명·다운로드 경로)</strong>뿐입니다. 내려받게 할 실제 파일(zip·exe·apk 등)은 저장소의 <code>downloads/</code> 폴더에 넣고 Git push 해야 다운로드가 동작합니다.
+      </div>
+
+      <h3 class="sub-title">자료 등록 방법</h3>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <div class="step-title">실제 파일을 <code>downloads/</code> 폴더에 추가</div>
+            <div class="step-desc">예: <code>downloads/sales-tracker-v1.0.0.zip</code> 를 저장하고 Git에 커밋합니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <div class="step-title">사이드바 <strong>📂 자료실</strong> → <span class="btn-preview btn-gray">➕ 새 자료 추가</span></div>
+            <div class="step-desc">제목·설명·버전·아이콘을 입력하고, <strong>파일 경로</strong>에 <code>../downloads/파일명</code>을 넣습니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <div class="step-title"><span class="btn-preview btn-blue">적용</span> → <span class="btn-preview btn-blue">💾 자료실 저장</span></div>
+            <div class="step-desc">localStorage에 저장되어 자료실 페이지에 즉시 반영됩니다.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <div class="step-title">Git에 영구 반영</div>
+            <div class="step-desc"><strong>내보내기</strong> 탭에서 <code>resources.json</code>을 다운로드 → <code>data/</code> 폴더에 덮어쓰기 → <code>downloads/</code> 파일과 함께 Git push</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub-title">댓글(Disqus) 설정 — 최초 1회</h3>
+      <p>댓글 기능은 <strong>Disqus</strong> 위젯을 사용합니다. 방문자가 <strong>GitHub 없이</strong> 구글·페이스북·이메일 또는 게스트로 댓글을 남길 수 있어, 소상공인 일반 사용자에게 적합합니다. 아래 설정은 1회만 하면 됩니다.</p>
+      <ul>
+        <li><a href="https://disqus.com" target="_blank">disqus.com</a>에 가입하고 사이트를 등록합니다. (현재 shortname <code>benefitson-pages-dev</code>가 이미 발급되어 <code>pages/resources.html</code>에 적용되어 있습니다.)</li>
+        <li>배포 후 disqus.com 대시보드 <code>Settings → Advanced</code>에서 <strong>Trusted Domains</strong>에 실제 도메인(및 테스트 시 <code>localhost</code>)을 등록합니다.</li>
+        <li>배포 시 <code>pages/resources.html</code>의 <code>this.page.url</code> 값을 실제 도메인으로 교체합니다. <code>this.page.identifier</code>(<code>'resources'</code>)는 스레드 식별자이므로 <strong>변경하지 마세요.</strong></li>
+        <li>댓글 관리(스팸 차단·삭제·승인)는 disqus.com 대시보드에서 합니다.</li>
+      </ul>
+      <div class="info-box">
+        💡 댓글 데이터는 <strong>Disqus 서버에 저장</strong>됩니다(외부 서비스 의존성 1개 추가). 무료 티어에는 댓글 영역에 광고가 노출될 수 있으며, 광고 제거는 Disqus 유료 플랜이 필요합니다.
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ══════════════════════════════════════════ -->
     <div class="section" id="validate">
-      <h2 class="sec-title">8. 검증</h2>
+      <h2 class="sec-title">9. 검증</h2>
       <p>사이드바 <strong>✅ 검증</strong> 탭에서 자동으로 아래 항목들을 점검합니다.</p>
 
       <table>
@@ -510,7 +567,7 @@
 
     <!-- ══════════════════════════════════════════ -->
     <div class="section" id="export">
-      <h2 class="sec-title">9. 내보내기 / 가져오기</h2>
+      <h2 class="sec-title">10. 내보내기 / 가져오기</h2>
       <p>관리자에서 편집한 데이터를 <code>data/</code> 폴더의 JSON 파일로 영구 반영하는 방법입니다.</p>
 
       <h3 class="sub-title">내보내기 (localStorage → 파일)</h3>
@@ -519,7 +576,7 @@
           <span class="step-num">1</span>
           <div class="step-body">
             <div class="step-title">내보내기 탭에서 원하는 파일 다운로드</div>
-            <div class="step-desc"><span class="btn-preview btn-blue">⬇ constants.json</span> <span class="btn-preview btn-blue">⬇ policies.json</span> <span class="btn-preview btn-blue">⬇ matching-rules.json</span></div>
+            <div class="step-desc"><span class="btn-preview btn-blue">⬇ constants.json</span> <span class="btn-preview btn-blue">⬇ policies.json</span> <span class="btn-preview btn-blue">⬇ matching-rules.json</span> <span class="btn-preview btn-blue">⬇ resources.json</span></div>
           </div>
         </div>
         <div class="step">
@@ -549,7 +606,7 @@
 
     <!-- ══════════════════════════════════════════ -->
     <div class="section" id="deploy">
-      <h2 class="sec-title">10. 배포 방법</h2>
+      <h2 class="sec-title">11. 배포 방법</h2>
       <p>새 정책 추가·아티클 수정·JSON 파일 업데이트 후 사이트에 반영하는 방법입니다.</p>
 
       <h3 class="sub-title">변경 파일 유형별 처리</h3>
@@ -561,6 +618,7 @@
           <tr><td>새 아티클 HTML 추가</td><td>파일을 <code>pages/</code>에 저장 + 카테고리 페이지 카드 추가 + Git push</td></tr>
           <tr><td>자가진단 규칙 변경(또는 자가진단 연결로 추가)</td><td>관리자 저장(즉시 반영) + matching-rules.json 내보내기 후 Git push</td></tr>
           <tr><td>아티클 내용 수정</td><td>해당 HTML 파일 직접 수정 + Git push</td></tr>
+          <tr><td>자료실 자료 추가</td><td>실제 파일을 <code>downloads/</code>에 추가 + 관리자 저장(즉시 반영) + resources.json 내보내기 후 Git push</td></tr>
         </tbody>
       </table>
 
@@ -588,7 +646,7 @@ git push origin main</pre>
 
     <!-- ══════════════════════════════════════════ -->
     <div class="section" id="faq">
-      <h2 class="sec-title">11. 자주 묻는 질문</h2>
+      <h2 class="sec-title">12. 자주 묻는 질문</h2>
 
       <h3 class="sub-title">Q. 관리자에서 저장했는데 사이트에 반영이 안 됩니다.</h3>
       <p>같은 브라우저에서 사이트를 열었는지 확인하세요. localStorage는 브라우저·도메인 단위로 저장되므로, 다른 브라우저나 다른 컴퓨터에서는 변경사항이 보이지 않습니다. 다른 기기에 반영하려면 내보내기 → Git push가 필요합니다.</p>
