@@ -1,19 +1,19 @@
 {
   "meta": {
-    "lastUpdated": "2026-06-30",
+    "lastUpdated": "2026-07-01",
     "note": "자료실에 공유하는 무료 앱·자료 목록을 관리합니다. fileUrl은 저장소의 downloads/ 폴더 경로를 가리킵니다."
   },
   "resources": [
     {
-      "id": "sample-app",
-      "title": "샘플 앱 (예시)",
-      "description": "소상공인을 위한 무료 도구 예시입니다. 실제 자료로 교체하거나 관리자 페이지에서 삭제하세요.",
+      "id": "store-stamp",
+      "title": "우리가게 스탬프",
+      "description": "단골손님 관리를 위한 무료 스탬프 적립 앱입니다.",
       "version": "1.0.0",
       "icon": "📦",
       "category": "도구",
-      "fileUrl": "../downloads/sample-app-v1.0.0.zip",
-      "fileSize": "—",
-      "updatedAt": "2026-06-30"
+      "fileUrl": "../downloads/triip20-stamp-app-v1.0.zip",
+      "fileSize": "33KB",
+      "updatedAt": "2026-07-01"
     }
   ]
 }
