@@ -53,6 +53,7 @@
     .fi.auto { background: #EDF2F7; color: #718096; }
     .fh { font-size: 0.7rem; color: #94A3B8; }
     select.fi { cursor: pointer; }
+    .fi.unclassified { color: #E53E3E; font-weight: 600; }
 
     /* ── Buttons ── */
     .btn { padding: 7px 16px; border: none; border-radius: 7px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all .12s; }
@@ -156,7 +157,9 @@
     <button class="nb" data-tab="policies">📰 정책 목록 <span class="badge" id="bPolicies"></span></button>
     <button class="nb" data-tab="add">➕ 새 정책 추가</button>
     <button class="nb" data-tab="rules">🧭 자가진단 규칙</button>
+    <button class="nb" data-tab="home">🏠 홈 카드</button>
     <button class="nb" data-tab="resources">📂 자료실</button>
+    <button class="nb" data-tab="bulk">📥 일괄 가져오기</button>
 
     <div class="sb-label">도구</div>
     <button class="nb" data-tab="validate">✅ 검증 <span class="badge" id="bValidate"></span></button>
@@ -279,11 +282,18 @@
     <!-- ════ 정책 목록 ════ -->
     <div id="tab-policies" class="tab">
       <div class="ph">정책 목록</div>
-      <p class="ps">마감일이 지나면 빨간색 표시. <strong>편집</strong> 버튼으로 상태·출처를 수정하세요.</p>
+      <p class="ps">마감일이 지나면 빨간색 표시. <strong>편집</strong> 버튼으로 상태·출처를 수정하세요. 체크박스로 여러 건을 선택해 삭제할 수 있습니다.</p>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+        <button class="btn btn-d btn-sm" id="btnDelSelected">🗑️ 선택 삭제</button>
+        <button class="btn btn-d btn-sm" id="btnDelAll">🗑️ 전체 삭제</button>
+        <span id="polSelCount" style="font-size:0.78rem;color:#94A3B8;">선택 0건</span>
+      </div>
 
       <div class="card" style="padding:0;overflow:hidden;">
         <table class="pt" id="polTable">
           <thead><tr>
+            <th style="width:34px;text-align:center;"><input type="checkbox" id="polCheckAll" title="전체 선택"></th>
             <th>제목</th><th>카테고리</th><th>상태</th><th>마감일</th><th>업데이트</th><th>출처</th><th></th>
           </tr></thead>
           <tbody id="polBody"></tbody>
@@ -309,6 +319,56 @@
             <div class="fv" style="grid-column:1/-1"><label class="fl">출처 URL</label><input class="fi" type="url" id="pe-url"></div>
             <div class="fv" style="grid-column:1/-1"><label class="fl">요약</label><input class="fi" type="text" id="pe-summary"></div>
           </div>
+
+          <div class="card-hd" style="margin-top:16px;"><span class="card-title">🧭 자가진단 연결 <span style="font-size:0.72rem;color:#94A3B8;font-weight:400;">(선택 — 표시명을 비우면 건너뜀)</span></span></div>
+          <div class="fg">
+            <div class="fv">
+              <label class="fl">자가진단 표시명</label>
+              <input class="fi" type="text" id="pe-benefit" placeholder="예: 청년도약계좌">
+              <span class="fh">자가진단 결과에 표시될 짧은 혜택명</span>
+            </div>
+            <div class="fv">
+              <label class="fl">아이콘</label>
+              <input class="fi" type="text" id="pe-benefit-icon" placeholder="📈" maxlength="2">
+              <span class="fh">이모지 1자</span>
+            </div>
+          </div>
+          <div class="fv" style="margin-top:11px;">
+            <label class="fl">노출 연령대 <span class="fh" style="font-weight:400;">(선택한 연령대 자가진단 결과에 추가)</span></label>
+            <div id="pe-benefit-ages" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:5px;">
+              <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="10대">10대</label>
+              <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="20대">20대</label>
+              <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="30대">30대</label>
+              <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="40대">40대</label>
+              <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="50대">50대</label>
+              <label style="display:flex;align-items:center;gap:5px;font-size:0.83rem;cursor:pointer;"><input type="checkbox" value="60대 이상">60대 이상</label>
+            </div>
+          </div>
+          <div class="fg" style="margin-top:11px;">
+            <div class="fv">
+              <label class="fl">가구형태 타겟</label>
+              <select class="fi" id="pe-benefit-hh">
+                <option value="">전체 (연령대 공통)</option>
+                <option value="1인가구">1인가구</option>
+                <option value="부모님과 동거">부모님과 동거</option>
+                <option value="배우자와 동거">배우자와 동거</option>
+                <option value="자녀 있는 가구">자녀 있는 가구</option>
+              </select>
+              <span class="fh">선택 시 해당 가구형태에만 우선 노출</span>
+            </div>
+            <div class="fv">
+              <label class="fl">고용상태 타겟</label>
+              <select class="fi" id="pe-benefit-emp">
+                <option value="">전체</option>
+                <option value="직장인">직장인 (재직중)</option>
+                <option value="취업준비중">취업준비중</option>
+                <option value="자영업자">자영업자·프리랜서</option>
+                <option value="무직·기타">무직·기타</option>
+              </select>
+              <span class="fh">가구형태를 선택해야 적용됩니다</span>
+            </div>
+          </div>
+
           <div style="display:flex;gap:8px;margin-top:14px;">
             <button class="btn btn-p" id="btnSavePol">저장</button>
             <button class="btn btn-d" id="btnExpirePol">만료 처리</button>
@@ -488,6 +548,54 @@
       </div>
     </div>
 
+    <!-- ════ 홈 카드 ════ -->
+    <div id="tab-home" class="tab">
+      <div class="ph">홈 카드 관리</div>
+      <p class="ps">홈페이지의 카테고리 섹션과 카드를 편집합니다. 링크는 드롭다운에서 골라 <strong>끊긴 링크를 방지</strong>합니다. 저장 후 <strong>내보내기 → <code>home-cards.json</code></strong>을 <code>data/</code> 폴더에 덮어쓰고 git push하면 모든 방문자에게 반영됩니다.</p>
+
+      <div id="homeSections"></div>
+
+      <div style="margin:12px 0;">
+        <button class="btn btn-s" id="btnAddSection">➕ 새 섹션 추가</button>
+      </div>
+
+      <!-- 카드 편집 패널 -->
+      <div id="homeCardPanel" style="display:none;">
+        <div class="card" style="border-color:#2E75B6;">
+          <div class="card-hd">
+            <span class="card-title" id="homeCardTitle">카드 편집</span>
+            <button class="btn btn-s btn-sm" id="btnCancelHomeCard">✕ 닫기</button>
+          </div>
+          <div class="fg">
+            <div class="fv" style="grid-column:1/-1"><label class="fl">제목 <span class="req">*</span></label><input class="fi" type="text" id="hc-title"></div>
+            <div class="fv"><label class="fl">태그 텍스트</label><input class="fi" type="text" id="hc-tag" placeholder="예: 신규 / 비교 / 신청마감 D-7"></div>
+            <div class="fv"><label class="fl">태그 스타일</label>
+              <select class="fi" id="hc-tagStyle">
+                <option value="new">신규 (초록)</option>
+                <option value="compare">비교 (파랑)</option>
+                <option value="urgent">마감임박 (빨강)</option>
+                <option value="guide">가이드 (회색)</option>
+              </select>
+            </div>
+            <div class="fv"><label class="fl">날짜</label><input class="fi" type="text" id="hc-date" placeholder="2026.06.10"></div>
+            <div class="fv" style="grid-column:1/-1"><label class="fl">링크 <span class="req">*</span></label>
+              <select class="fi" id="hc-linkSelect"></select>
+              <input class="fi" type="text" id="hc-link" placeholder="pages/article-....html" style="margin-top:6px;">
+              <span class="fh">드롭다운에서 고르면 자동 입력됩니다. 목록에 없으면 아래 칸에 직접 입력하세요.</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;">
+            <button class="btn btn-p" id="btnApplyHomeCard">적용</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <button class="btn btn-p" id="btnSaveHome">💾 홈 카드 저장 (즉시 반영)</button>
+        <span class="save-ok" id="saveOkHome">✓ 저장 완료</span>
+      </div>
+    </div>
+
     <!-- ════ 자료실 ════ -->
     <div id="tab-resources" class="tab">
       <div class="ph">자료실 관리</div>
@@ -544,6 +652,43 @@
       </div>
     </div>
 
+    <!-- ════ 일괄 가져오기 ════ -->
+    <div id="tab-bulk" class="tab">
+      <div class="ph">정책 일괄 가져오기</div>
+      <p class="ps">정부정책 탐색기 앱이 만든 <code>import-policies.json</code>을 업로드하면, 기존 정책과 비교해 <strong>신규/업데이트</strong>를 한 번에 등록합니다. (한 건씩 입력하지 않아도 됩니다.)</p>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">1) 파일 선택</span></div>
+        <label class="btn btn-s" style="cursor:pointer;">📂 import-policies.json 선택<input type="file" id="bulk-file" accept=".json" style="display:none;"></label>
+        <span id="bulk-fileMsg" style="margin-left:10px;font-size:0.8rem;color:#94A3B8;"></span>
+      </div>
+
+      <div id="bulk-previewWrap" style="display:none;">
+        <p class="ps">2) 미리보기에서 가져올 항목을 확인하세요. <strong>미분류</strong>(빨간색)는 카테고리를 지정해야 적용됩니다.</p>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <table class="pt">
+            <thead><tr>
+              <th style="width:34px;"><input type="checkbox" id="bulk-all" checked></th>
+              <th>제목</th><th>카테고리</th><th>상태</th><th>요약</th>
+            </tr></thead>
+            <tbody id="bulk-body"></tbody>
+          </table>
+        </div>
+        <p class="ps" id="bulk-summary"></p>
+
+        <div class="save-bar">
+          <button class="btn btn-p" id="bulk-apply">✅ 선택 항목 적용</button>
+          <span class="save-ok" id="bulk-ok">✓ 적용 완료</span>
+        </div>
+
+        <div class="card" id="bulk-exportNote" style="display:none;border-color:#D69E2E;background:#FFFBEB;color:#744210;">
+          <strong>마지막 단계 (영구 반영):</strong> 내보내기 탭에서 <code>policies.json</code>
+          (자가진단 포함 시 <code>matching-rules.json</code>도)을 다운로드해 <code>data/</code> 폴더에
+          덮어쓰고 git push 하세요. 안 하면 이 브라우저에만 저장됩니다.
+        </div>
+      </div>
+    </div>
+
     <!-- ════ 검증 ════ -->
     <div id="tab-validate" class="tab">
       <div class="ph">데이터 검증</div>
@@ -570,6 +715,7 @@
           <button class="btn btn-p" id="btnDlP">⬇ policies.json</button>
           <button class="btn btn-p" id="btnDlR">⬇ matching-rules.json</button>
           <button class="btn btn-p" id="btnDlRes">⬇ resources.json</button>
+          <button class="btn btn-p" id="btnDlHome">⬇ home-cards.json</button>
         </div>
       </div>
 
@@ -581,6 +727,7 @@
           <label class="btn btn-s" style="cursor:pointer;">📂 policies.json<input type="file" id="impP" accept=".json" style="display:none;"></label>
           <label class="btn btn-s" style="cursor:pointer;">📂 matching-rules.json<input type="file" id="impR" accept=".json" style="display:none;"></label>
           <label class="btn btn-s" style="cursor:pointer;">📂 resources.json<input type="file" id="impRes" accept=".json" style="display:none;"></label>
+          <label class="btn btn-s" style="cursor:pointer;">📂 home-cards.json<input type="file" id="impHome" accept=".json" style="display:none;"></label>
         </div>
         <p style="font-size:0.75rem;color:#94A3B8;margin-top:10px;" id="impMsg"></p>
       </div>
@@ -597,7 +744,16 @@
 
 <script>
 // ─── 상수 ───────────────────────────────────────────────────
-const LS = { C: 'htkon_constants', P: 'htkon_policies', R: 'htkon_rules', RES: 'htkon_resources', SAVED: 'htkon_lastSaved' };
+const LS = { C: 'htkon_constants', P: 'htkon_policies', R: 'htkon_rules', RES: 'htkon_resources', HOME: 'htkon_home', SAVED: 'htkon_lastSaved' };
+// 홈 카드 링크 드롭다운 — 카테고리 목록 페이지 (항상 존재)
+const CAT_PAGES = [
+  ['pages/youth.html',    '청년정책 목록'],
+  ['pages/newlywed.html', '신혼·육아 목록'],
+  ['pages/senior.html',   '중장년·노년 목록'],
+  ['pages/single.html',   '1인가구 목록'],
+  ['pages/income.html',   '근로/소득 목록'],
+  ['pages/tax.html',      '세금/환급 목록'],
+];
 const TODAY = new Date().toISOString().split('T')[0];
 const CAL = [
   { key: 'minimumWage',   icon: '⚖️', name: '최저임금',       when: '매년 8월 5일',  month: 8 },
@@ -609,7 +765,7 @@ const CAL = [
 ];
 
 // ─── 상태 ───────────────────────────────────────────────────
-let S = { C: null, P: null, R: null, RES: null, editId: null, resEditId: null };
+let S = { C: null, P: null, R: null, RES: null, HOME: null, PAGES: null, homeEdit: null, editId: null, resEditId: null, IMP: [] };
 
 document.getElementById('todayStr').textContent = TODAY;
 
@@ -619,6 +775,8 @@ document.getElementById('todayStr').textContent = TODAY;
   S.P = tryLS(LS.P) || await fetchJSON('../data/policies.json');
   S.R = tryLS(LS.R) || await fetchJSON('../data/matching-rules.json');
   S.RES = tryLS(LS.RES) || await fetchJSON('../data/resources.json') || { meta: { lastUpdated: TODAY }, resources: [] };
+  S.HOME = tryLS(LS.HOME) || await fetchJSON('../data/home-cards.json') || { meta: { lastUpdated: TODAY }, sections: [] };
+  // S.PAGES(sitemap 링크 목록)는 홈 카드 편집 패널을 처음 열 때 지연 로드 → openHomeCardPanel
 
   const src = localStorage.getItem(LS.C) ? 'localStorage' : '파일';
   document.getElementById('hSource').textContent = src + '에서 로드';
@@ -635,6 +793,7 @@ function renderAll() {
   renderPoliciesTable();
   renderRulesEditor();
   renderResourcesTable();
+  renderHomeEditor();
   runValidation();
 }
 
@@ -729,11 +888,25 @@ function renderPoliciesTable() {
     const dClass = days > 180 ? 'vstale' : days > 90 ? 'stale' : '';
     const rClass = isExp ? 'exp' : isSoon ? 'expiring' : '';
     const dStr = p.deadline ? (isExp ? `⚠️ ${p.deadline} 마감` : `D-${daysBetween(TODAY, p.deadline)}일`) : '상시';
-    return `<tr class="${rClass}"><td><strong>${p.title}</strong></td><td>${p.category}</td><td><span class="sbadge ${p.status}">${p.status}</span></td><td style="${isExp?'color:#E53E3E;font-weight:600':''}">${dStr}</td><td>${p.lastUpdated} <span class="dago ${dClass}">(${days}일 전)</span></td><td>${p.sourceUrl?`<a href="${p.sourceUrl}" target="_blank" style="color:#2E75B6;font-size:0.73rem">출처↗</a>`:'-'}</td><td><button class="btn btn-s btn-sm" onclick="editPol('${p.id}')">편집</button></td></tr>`;
+    return `<tr class="${rClass}"><td style="text-align:center;"><input type="checkbox" class="pol-check" value="${p.id}"></td><td><strong>${p.title}</strong></td><td>${p.category}</td><td><span class="sbadge ${p.status}">${p.status}</span></td><td style="${isExp?'color:#E53E3E;font-weight:600':''}">${dStr}</td><td>${p.lastUpdated} <span class="dago ${dClass}">(${days}일 전)</span></td><td>${p.sourceUrl?`<a href="${p.sourceUrl}" target="_blank" style="color:#2E75B6;font-size:0.73rem">출처↗</a>`:'-'}</td><td><button class="btn btn-s btn-sm" onclick="editPol('${p.id}')">편집</button></td></tr>`;
   }).join('');
 
   const b = document.getElementById('bPolicies');
   b.textContent = expCnt || ''; b.className = 'badge' + (expCnt ? ' show' : '');
+
+  const chkAll = document.getElementById('polCheckAll');
+  if (chkAll) chkAll.checked = false;
+  updatePolSelCount();
+}
+
+// 정책 목록 선택 개수 표시 + 전체선택 체크박스 동기화
+function updatePolSelCount() {
+  const boxes = [...document.querySelectorAll('.pol-check')];
+  const checked = boxes.filter(c => c.checked).length;
+  const label = document.getElementById('polSelCount');
+  if (label) label.textContent = '선택 ' + checked + '건';
+  const chkAll = document.getElementById('polCheckAll');
+  if (chkAll) chkAll.checked = boxes.length > 0 && checked === boxes.length;
 }
 
 function editPol(id) {
@@ -742,6 +915,12 @@ function editPol(id) {
   S.editId = id;
   set('pe-title',    p.title);   g2('pe-cat', p.category); g2('pe-status', p.status);
   set('pe-deadline', p.deadline || ''); set('pe-updated', p.lastUpdated); set('pe-url', p.sourceUrl || ''); set('pe-summary', p.summary || '');
+  // 자가진단 연결 프리필 (재편집 시 표시명·아이콘 복원, 연령·가구·고용은 초기화)
+  set('pe-benefit', p.benefit || '');
+  var bd = (S.R && S.R.benefitDetails && p.benefit) ? S.R.benefitDetails[p.benefit] : null;
+  set('pe-benefit-icon', (bd && bd.icon) || '');
+  document.querySelectorAll('#pe-benefit-ages input').forEach(function (c) { c.checked = false; });
+  g2('pe-benefit-hh', ''); g2('pe-benefit-emp', '');
   document.getElementById('polEditPanel').style.display = 'block';
   document.getElementById('polEditPanel').scrollIntoView({ behavior: 'smooth' });
 }
@@ -780,6 +959,269 @@ function openResPanel(r) {
 function editRes(id) {
   var r = ((S.RES && S.RES.resources) || []).find(function (x) { return x.id === id; });
   if (r) openResPanel(r);
+}
+
+// ─── 홈 카드 ─────────────────────────────────────────────────
+// sitemap.xml에서 실제 존재하는 pages/*.html 목록을 읽어 링크 드롭다운 소스로 사용
+async function loadSitemapPages() {
+  try {
+    const r = await fetch('../sitemap.xml');
+    if (!r.ok) return [];
+    const txt = await r.text();
+    const out = [];
+    (txt.match(/<loc>[^<]*<\/loc>/g) || []).forEach(function (m) {
+      const loc = m.replace(/<\/?loc>/g, '');
+      const i = loc.indexOf('pages/');
+      if (i >= 0) out.push(loc.slice(i));   // 예: pages/article-youth-rent.html
+    });
+    return out;
+  } catch (e) { return []; }
+}
+
+function renderHomeEditor() {
+  const box = el('homeSections');
+  if (!box) return;
+  const sections = (S.HOME && S.HOME.sections) || [];
+  if (!sections.length) {
+    box.innerHTML = '<div class="card" style="text-align:center;color:#94A3B8;padding:24px;">섹션이 없습니다. ➕ 새 섹션 추가를 눌러주세요.</div>';
+    return;
+  }
+  box.innerHTML = sections.map(function (s, si) {
+    const rows = (s.cards || []).map(function (c, ci) {
+      return '<tr>' +
+        '<td style="font-size:0.73rem;color:#718096;white-space:nowrap;">' + esc(c.tag || '-') + '</td>' +
+        '<td><strong>' + esc(c.title) + '</strong></td>' +
+        '<td style="font-size:0.72rem;color:#718096;">' + esc(c.link || '') + '</td>' +
+        '<td style="white-space:nowrap;text-align:right;">' +
+          '<button class="btn btn-s btn-sm" onclick="editHomeCard(' + si + ',' + ci + ')">편집</button> ' +
+          '<button class="btn btn-s btn-sm" onclick="moveHomeCard(' + si + ',' + ci + ',-1)">↑</button> ' +
+          '<button class="btn btn-s btn-sm" onclick="moveHomeCard(' + si + ',' + ci + ',1)">↓</button> ' +
+          '<button class="btn btn-d btn-sm" onclick="delHomeCard(' + si + ',' + ci + ')">🗑️</button>' +
+        '</td></tr>';
+    }).join('');
+    return '<div class="card">' +
+      '<div class="card-hd" style="gap:8px;flex-wrap:wrap;align-items:center;">' +
+        '<input class="fi" style="max-width:190px;" value="' + esc(s.title || '') + '" placeholder="섹션 제목" onchange="setSectionField(' + si + ',\'title\',this.value)">' +
+        '<input class="fi" style="max-width:210px;" value="' + esc(s.moreLink || '') + '" placeholder="더보기 링크(pages/…)" onchange="setSectionField(' + si + ',\'moreLink\',this.value)">' +
+        '<label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;cursor:pointer;"><input type="checkbox" ' + (s.visible !== false ? 'checked' : '') + ' onchange="setSectionField(' + si + ',\'visible\',this.checked)">표시</label>' +
+        '<span style="margin-left:auto;"></span>' +
+        '<button class="btn btn-s btn-sm" onclick="moveSection(' + si + ',-1)">↑</button> ' +
+        '<button class="btn btn-s btn-sm" onclick="moveSection(' + si + ',1)">↓</button> ' +
+        '<button class="btn btn-d btn-sm" onclick="delSection(' + si + ')">🗑️ 섹션</button>' +
+      '</div>' +
+      '<table class="pt"><thead><tr><th style="width:90px;">태그</th><th>제목</th><th>링크</th><th></th></tr></thead>' +
+        '<tbody>' + (rows || '<tr><td colspan="4" style="padding:14px;text-align:center;color:#94A3B8;">카드가 없습니다.</td></tr>') + '</tbody></table>' +
+      '<div style="margin-top:10px;"><button class="btn btn-s btn-sm" onclick="addHomeCard(' + si + ')">➕ 카드 추가</button></div>' +
+    '</div>';
+  }).join('');
+}
+
+function setSectionField(si, field, val) {
+  const s = S.HOME.sections[si]; if (!s) return;
+  s[field] = val;
+}
+
+function swapItems(arr, i, dir) {
+  const j = i + dir;
+  if (j < 0 || j >= arr.length) return false;
+  const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  return true;
+}
+
+function moveSection(si, dir) {
+  if (swapItems(S.HOME.sections, si, dir)) renderHomeEditor();
+}
+
+function delSection(si) {
+  const s = S.HOME.sections[si]; if (!s) return;
+  if (!confirm('"' + (s.title || '섹션') + '" 섹션을 삭제할까요? (카드 ' + ((s.cards || []).length) + '개 포함)')) return;
+  S.HOME.sections.splice(si, 1);
+  renderHomeEditor();
+}
+
+function moveHomeCard(si, ci, dir) {
+  const arr = S.HOME.sections[si] && S.HOME.sections[si].cards; if (!arr) return;
+  if (swapItems(arr, ci, dir)) renderHomeEditor();
+}
+
+function delHomeCard(si, ci) {
+  const arr = S.HOME.sections[si] && S.HOME.sections[si].cards; if (!arr) return;
+  if (!confirm('이 카드를 삭제할까요?\n\n' + (arr[ci].title || ''))) return;
+  arr.splice(ci, 1);
+  renderHomeEditor();
+}
+
+function addHomeCard(si) {
+  openHomeCardPanel(si, null, { tag: '신규', tagStyle: 'new', title: '', date: TODAY.replace(/-/g, '.'), link: '' });
+}
+
+function editHomeCard(si, ci) {
+  const c = S.HOME.sections[si] && S.HOME.sections[si].cards[ci];
+  if (c) openHomeCardPanel(si, ci, c);
+}
+
+async function openHomeCardPanel(si, ci, c) {
+  S.homeEdit = { si: si, ci: ci };
+  set('hc-title', c.title || '');
+  set('hc-tag', c.tag || '');
+  set('hc-tagStyle', c.tagStyle || 'new');
+  set('hc-date', c.date || '');
+  if (S.PAGES === null) S.PAGES = await loadSitemapPages();   // 지연 로드(최초 1회)
+  buildLinkOptions(c.link || '');
+  set('hc-link', c.link || '');
+  el('homeCardTitle').textContent = (ci === null ? '새 카드 추가' : '카드 편집');
+  el('homeCardPanel').style.display = 'block';
+  el('homeCardPanel').scrollIntoView({ behavior: 'smooth' });
+}
+
+function buildLinkOptions(current) {
+  const seen = {};
+  let html = '<option value="">— 직접 입력 —</option>';
+  CAT_PAGES.forEach(function (p) {
+    seen[p[0]] = 1;
+    html += '<option value="' + esc(p[0]) + '">[목록] ' + esc(p[1]) + ' (' + esc(p[0]) + ')</option>';
+  });
+  // sitemap의 실제 페이지 + 현재 홈 카드에서 이미 쓰이는 링크(=존재가 검증된 대상)를 병합
+  var pages = (S.PAGES || []).slice();
+  ((S.HOME && S.HOME.sections) || []).forEach(function (s) {
+    (s.cards || []).forEach(function (c) { if (c.link) pages.push(c.link); });
+  });
+  pages.sort().forEach(function (path) {
+    if (seen[path]) return; seen[path] = 1;
+    html += '<option value="' + esc(path) + '">' + esc(path) + '</option>';
+  });
+  // 현재 링크가 목록에 없으면 보존용 옵션 추가
+  if (current && !seen[current]) {
+    html += '<option value="' + esc(current) + '">' + esc(current) + ' (현재)</option>';
+  }
+  const sel = el('hc-linkSelect');
+  sel.innerHTML = html;
+  sel.value = current || '';
+}
+
+// ─── 일괄 가져오기 ───────────────────────────────────────────
+const BULK_CATS = ['청년정책', '신혼·육아', '중장년·노년', '1인가구', '근로/소득', '세금/환급'];
+const UNCLASSIFIED = '미분류';
+const BULK_RENDER_CAP = 500; // 대량 업로드 시 DOM 폭주 방지 (S.IMP 데이터는 전량 유지·적용)
+
+// 제목 정규화(중복 판정 키). ⚠️ policy-explorer/src/index.js 의 norm() 과 동일하게 유지할 것
+// — 탐색기의 기존-정책 제외와 관리자의 신규/중복 판정이 같은 규칙을 써야 한다.
+const bulkNorm = (s) => String(s || '').replace(/\s+/g, '').toLowerCase();
+function bulkSlug(t) {
+  return String(t).trim().toLowerCase().replace(/[^\w가-힣]+/g, '-').replace(/^-+|-+$/g, '') || 'policy';
+}
+
+// import 항목 1건 정규화 (탐색기 출력 스키마 → 내부 형태)
+function bulkNormalizeItem(x) {
+  return {
+    title: (x.title || '').trim(),
+    category: BULK_CATS.includes(x.category) ? x.category : UNCLASSIFIED,
+    summary: (x.summary || '').trim(),
+    sourceUrl: (x.sourceUrl || '').trim(),
+    deadline: x.deadline || null,
+    tags: Array.isArray(x.tags) ? x.tags : [],
+    diagnosis: x.diagnosis || null,
+  };
+}
+
+// 기존 정책과 제목으로 대조해 신규/업데이트/중복 분류
+function bulkBuildPreview(items) {
+  const existing = (S.P && S.P.policies) || [];
+  const byTitle = new Map(existing.map((p) => [bulkNorm(p.title), p]));
+  return items
+    .filter((it) => it.title)
+    .map((it) => {
+      const m = byTitle.get(bulkNorm(it.title));
+      let status = 'new';
+      if (m) {
+        const same = m.category === it.category && (m.summary || '') === it.summary &&
+          (m.deadline || null) === it.deadline && (m.sourceUrl || '') === it.sourceUrl;
+        status = same ? 'dup' : 'update';
+      }
+      return { item: it, status, targetId: m ? m.id : null, category: it.category, include: status !== 'dup' };
+    });
+}
+
+function renderBulkPreview() {
+  const L = S.IMP || [];
+  const badge = { new: '<span class="sbadge active">신규</span>',
+                  update: '<span class="sbadge draft">업데이트</span>',
+                  dup: '<span class="sbadge expired">중복</span>' };
+  const opts = (cat) => [...BULK_CATS, UNCLASSIFIED].map((c) =>
+    `<option value="${c}"${c === cat ? ' selected' : ''}>${c}</option>`).join('');
+  el('bulk-body').innerHTML = L.slice(0, BULK_RENDER_CAP).map((r, i) => {
+    const uncl = r.category === UNCLASSIFIED ? ' unclassified' : '';
+    return `<tr>
+      <td><input type="checkbox" ${r.include ? 'checked' : ''} onchange="bulkToggle(${i})"></td>
+      <td><strong>${esc(r.item.title)}</strong></td>
+      <td><select class="fi${uncl}" onchange="bulkSetCat(${i}, this)">${opts(r.category)}</select></td>
+      <td>${badge[r.status] || r.status}</td>
+      <td style="font-size:0.78rem;color:#718096">${esc(r.item.summary)}</td>
+    </tr>`;
+  }).join('');
+  let neu = 0, up = 0, du = 0;
+  for (const r of L) { if (r.status === 'new') neu++; else if (r.status === 'update') up++; else du++; }
+  const cap = L.length > BULK_RENDER_CAP ? ` · 상위 ${BULK_RENDER_CAP}건만 표시(전체 적용됨)` : '';
+  el('bulk-summary').textContent = `총 ${L.length}건 — 신규 ${neu} / 업데이트 ${up} / 중복 ${du}${cap}`;
+}
+
+function bulkToggle(i) { if (S.IMP[i]) S.IMP[i].include = !S.IMP[i].include; }
+// 한 행의 카테고리만 갱신 — 전체 재렌더 없이 해당 select 색상만 즉시 반영
+function bulkSetCat(i, sel) {
+  if (!S.IMP[i]) return;
+  S.IMP[i].category = sel.value;
+  sel.classList.toggle('unclassified', sel.value === UNCLASSIFIED);
+}
+
+function applyBulkImport() {
+  const chosen = (S.IMP || []).filter((r) => r.include);
+  if (!chosen.length) { alert('선택된 항목이 없습니다.'); return; }
+  const uncl = chosen.filter((r) => r.category === UNCLASSIFIED).length;
+  if (uncl) { alert(`미분류 ${uncl}건의 카테고리를 먼저 지정하세요.`); return; }
+
+  if (!S.P) S.P = { meta: { lastUpdated: TODAY }, policies: [] };
+  const ids = new Set(S.P.policies.map((p) => p.id)); // 루프 밖에서 1회만 구성
+  const byId = new Map(S.P.policies.map((p) => [p.id, p])); // 업데이트 대상 O(1) 조회
+  let added = 0, updated = 0, diag = 0;
+
+  chosen.forEach((r) => {
+    const it = r.item;
+    if (r.status === 'update' && r.targetId) {
+      const p = byId.get(r.targetId);
+      if (p) {
+        p.category = r.category; p.summary = it.summary; p.deadline = it.deadline || null;
+        p.sourceUrl = it.sourceUrl; if (it.tags.length) p.tags = it.tags; p.lastUpdated = TODAY;
+        updated++;
+      }
+    } else {
+      let id = bulkSlug(it.title);
+      if (ids.has(id)) { let n = 2; while (ids.has(id + '-' + n)) n++; id = id + '-' + n; }
+      ids.add(id);
+      S.P.policies.push({ id, title: it.title, category: r.category, tags: it.tags,
+        articleUrl: 'pages/' + id + '.html', deadline: it.deadline || null, status: 'active',
+        lastUpdated: TODAY, sourceUrl: it.sourceUrl, summary: it.summary });
+      added++;
+    }
+    // 자가진단 자동 등록
+    const dg = it.diagnosis;
+    if (dg && dg.benefit && Array.isArray(dg.ages) && dg.ages.length) {
+      if (!S.R) S.R = { meta: { lastUpdated: TODAY }, benefitsMap: {}, benefitDetails: {} };
+      if (!S.R.benefitDetails) S.R.benefitDetails = {};
+      S.R.benefitDetails[dg.benefit] = { icon: dg.icon || '✨', desc: it.summary, url: it.sourceUrl };
+      dg.ages.forEach((age) => diagInsert(S.R, age, dg.household || '', dg.employ || '', dg.benefit));
+      diag++;
+    }
+  });
+
+  S.P.meta.lastUpdated = TODAY;
+  localStorage.setItem(LS.P, JSON.stringify(S.P));
+  if (S.R) { S.R.meta = S.R.meta || {}; S.R.meta.lastUpdated = TODAY; localStorage.setItem(LS.R, JSON.stringify(S.R)); renderRulesEditor(); }
+  renderPoliciesTable(); renderDashboard(); runValidation();
+  flashOk('bulk-ok');
+  el('bulk-exportNote').style.display = 'block';
+  el('bulk-summary').textContent = `✓ 적용 완료 — 신규 ${added} / 업데이트 ${updated}${diag ? ` / 자가진단 ${diag}` : ''}`;
+  S.IMP = (S.IMP || []).filter((r) => !r.include); // 적용된 항목 제거
+  renderBulkPreview();
 }
 
 // ─── 검증 ───────────────────────────────────────────────────
@@ -863,6 +1305,23 @@ function setupEvents() {
     p.title = g('pe-title'); p.category = g('pe-cat'); p.status = g('pe-status');
     p.deadline = g('pe-deadline') || null; p.lastUpdated = g('pe-updated');
     p.sourceUrl = g('pe-url'); p.summary = g('pe-summary');
+
+    // 자가진단 연결 등록/갱신 (표시명이 입력된 경우)
+    const benefit = g('pe-benefit').trim();
+    if (benefit) {
+      const icon = g('pe-benefit-icon').trim() || '✨';
+      const ages = [...document.querySelectorAll('#pe-benefit-ages input:checked')].map(c => c.value);
+      const hh = g('pe-benefit-hh'), emp = g('pe-benefit-emp');
+      if (!S.R) S.R = { meta: { lastUpdated: TODAY }, benefitsMap: {}, benefitDetails: {} };
+      if (!S.R.benefitDetails) S.R.benefitDetails = {};
+      if (!S.R.benefitsMap) S.R.benefitsMap = {};
+      S.R.benefitDetails[benefit] = { icon, desc: p.summary, url: p.sourceUrl || p.articleUrl || '#' };
+      ages.forEach(age => diagInsert(S.R, age, hh, emp, benefit));
+      p.benefit = benefit;
+      localStorage.setItem(LS.R, JSON.stringify(S.R));
+      renderRulesEditor();
+    }
+
     document.getElementById('polEditPanel').style.display = 'none'; S.editId = null;
     renderPoliciesTable();
   });
@@ -886,6 +1345,42 @@ function setupEvents() {
     renderPoliciesTable(); renderDashboard(); runValidation();
     flashOk('saveOkP');
   });
+
+  // 전체 선택 체크박스
+  el('polCheckAll').addEventListener('change', (e) => {
+    document.querySelectorAll('.pol-check').forEach(c => { c.checked = e.target.checked; });
+    updatePolSelCount();
+  });
+  // 행 체크박스 변경 (이벤트 위임)
+  el('polBody').addEventListener('change', (e) => {
+    if (e.target.classList.contains('pol-check')) updatePolSelCount();
+  });
+  // 선택 삭제
+  el('btnDelSelected').addEventListener('click', () => {
+    const ids = [...document.querySelectorAll('.pol-check:checked')].map(c => c.value);
+    if (!ids.length) { alert('삭제할 정책을 먼저 선택해주세요.'); return; }
+    if (!confirm(`선택한 ${ids.length}건의 정책을 목록에서 삭제할까요?\n\n※ 아티클 HTML 파일·카테고리 카드·자가진단 연결은 삭제되지 않습니다.`)) return;
+    const idSet = new Set(ids);
+    S.P.policies = S.P.policies.filter(p => !idSet.has(p.id));
+    S.P.meta.lastUpdated = TODAY;
+    localStorage.setItem(LS.P, JSON.stringify(S.P));
+    if (S.editId && idSet.has(S.editId)) { document.getElementById('polEditPanel').style.display = 'none'; S.editId = null; }
+    renderPoliciesTable(); renderDashboard(); runValidation();
+    flashOk('saveOkP');
+  });
+  // 전체 삭제
+  el('btnDelAll').addEventListener('click', () => {
+    const n = (S.P && S.P.policies) ? S.P.policies.length : 0;
+    if (!n) { alert('삭제할 정책이 없습니다.'); return; }
+    if (!confirm(`정책 목록 전체(${n}건)를 삭제할까요?\n\n※ 되돌릴 수 없습니다. 아티클 HTML 파일·자가진단 연결은 삭제되지 않습니다.`)) return;
+    S.P.policies = [];
+    S.P.meta.lastUpdated = TODAY;
+    localStorage.setItem(LS.P, JSON.stringify(S.P));
+    document.getElementById('polEditPanel').style.display = 'none'; S.editId = null;
+    renderPoliciesTable(); renderDashboard(); runValidation();
+    flashOk('saveOkP');
+  });
+
   el('btnSavePs').addEventListener('click', () => {
     S.P.meta.lastUpdated = TODAY;
     localStorage.setItem(LS.P, JSON.stringify(S.P));
@@ -916,17 +1411,19 @@ function setupEvents() {
   el('btnDlP').addEventListener('click', () => dl(S.P, 'policies.json'));
   el('btnDlR').addEventListener('click', () => { try { S.R = JSON.parse(el('rulesEditor').value); } catch(e) {} dl(S.R, 'matching-rules.json'); });
   el('btnDlRes').addEventListener('click', () => dl(S.RES, 'resources.json'));
+  el('btnDlHome').addEventListener('click', () => dl(S.HOME, 'home-cards.json'));
 
   // 가져오기
   el('impC').addEventListener('change', e => imp(e, data => { S.C = data; localStorage.setItem(LS.C, JSON.stringify(data)); renderConstantsForm(); msg('impMsg', 'constants.json 가져오기 완료'); }));
   el('impP').addEventListener('change', e => imp(e, data => { S.P = data; localStorage.setItem(LS.P, JSON.stringify(data)); renderPoliciesTable(); msg('impMsg', 'policies.json 가져오기 완료'); }));
   el('impR').addEventListener('change', e => imp(e, data => { S.R = data; localStorage.setItem(LS.R, JSON.stringify(data)); renderRulesEditor(); msg('impMsg', 'matching-rules.json 가져오기 완료'); }));
   el('impRes').addEventListener('change', e => imp(e, data => { S.RES = data; localStorage.setItem(LS.RES, JSON.stringify(data)); renderResourcesTable(); msg('impMsg', 'resources.json 가져오기 완료'); }));
+  el('impHome').addEventListener('change', e => imp(e, data => { S.HOME = data; localStorage.setItem(LS.HOME, JSON.stringify(data)); renderHomeEditor(); msg('impMsg', 'home-cards.json 가져오기 완료'); }));
 
   // localStorage 초기화
   el('btnClearLS').addEventListener('click', () => {
     if (confirm('모든 localStorage 데이터를 초기화할까요? 원본 파일에서 다시 불러옵니다.')) {
-      [LS.C, LS.P, LS.R, LS.RES, LS.SAVED].forEach(k => localStorage.removeItem(k));
+      [LS.C, LS.P, LS.R, LS.RES, LS.HOME, LS.SAVED].forEach(k => localStorage.removeItem(k));
       location.reload();
     }
   });
@@ -977,6 +1474,52 @@ function setupEvents() {
     localStorage.setItem(LS.RES, JSON.stringify(S.RES));
     flashOk('saveOkRes');
   });
+
+  // 홈 카드
+  el('btnAddSection').addEventListener('click', () => {
+    if (!S.HOME) S.HOME = { meta: { lastUpdated: TODAY }, sections: [] };
+    S.HOME.sections.push({ id: 'section-' + Date.now(), title: '새 섹션', moreLink: '', visible: true, cards: [] });
+    renderHomeEditor();
+  });
+  el('btnCancelHomeCard').addEventListener('click', () => { el('homeCardPanel').style.display = 'none'; S.homeEdit = null; });
+  // 링크 드롭다운 선택 → 직접 입력 칸에 반영 ('직접 입력'이면 비우지 않고 유지)
+  el('hc-linkSelect').addEventListener('change', (e) => { if (e.target.value) el('hc-link').value = e.target.value; });
+  el('btnApplyHomeCard').addEventListener('click', () => {
+    if (!S.homeEdit) return;
+    const title = g('hc-title').trim();
+    const link = g('hc-link').trim();
+    if (!title) { alert('제목은 필수입니다.'); return; }
+    if (!link) { alert('링크는 필수입니다. 드롭다운에서 고르거나 직접 입력하세요.'); return; }
+    const card = { tag: g('hc-tag').trim(), tagStyle: g('hc-tagStyle'), title: title, date: g('hc-date').trim(), link: link };
+    const sec = S.HOME.sections[S.homeEdit.si]; if (!sec) return;
+    if (!sec.cards) sec.cards = [];
+    if (S.homeEdit.ci === null) sec.cards.push(card);
+    else sec.cards[S.homeEdit.ci] = card;
+    el('homeCardPanel').style.display = 'none'; S.homeEdit = null;
+    renderHomeEditor();
+  });
+  el('btnSaveHome').addEventListener('click', () => {
+    if (!S.HOME) S.HOME = { meta: { lastUpdated: TODAY }, sections: [] };
+    S.HOME.meta = S.HOME.meta || {};
+    S.HOME.meta.lastUpdated = TODAY;
+    localStorage.setItem(LS.HOME, JSON.stringify(S.HOME));
+    flashOk('saveOkHome');
+  });
+
+  // 일괄 가져오기
+  el('bulk-file').addEventListener('change', (e) => imp(e, (data) => {
+    if (!Array.isArray(data)) { alert('import 파일은 JSON 배열이어야 합니다. (탐색기 출력 형식)'); return; }
+    S.IMP = bulkBuildPreview(data.map(bulkNormalizeItem));
+    el('bulk-fileMsg').textContent = `${data.length}건 로드됨`;
+    el('bulk-previewWrap').style.display = 'block';
+    el('bulk-exportNote').style.display = 'none';
+    renderBulkPreview();
+  }));
+  el('bulk-all').addEventListener('change', (e) => {
+    S.IMP.forEach((r) => { r.include = e.target.checked; });
+    renderBulkPreview();
+  });
+  el('bulk-apply').addEventListener('click', applyBulkImport);
 
   setupAddEvents();
 }

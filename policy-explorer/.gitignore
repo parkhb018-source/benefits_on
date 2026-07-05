@@ -1,0 +1,9 @@
+# 실제 인증키 — 절대 커밋 금지
+.env
+config.json
+
+# 수집 결과물
+output/*.json
+
+# Node
+node_modules/

@@ -691,7 +691,7 @@ if (bannerClose && banner) {
         const json = jsonDetails[name] || {};
         const icon = json.icon || def.icon;
         const desc = json.desc || def.desc;
-        const url  = def.url;   // 항상 defaultBenefitDetails 경로 사용
+        const url  = json.url || def.url;   // 관리자 등록 혜택은 benefitDetails.url 사용, 없으면 기본 경로
         return `<div class="result-item">
           <div class="result-icon">${icon}</div>
           <div class="result-content">
