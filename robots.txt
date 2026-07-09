@@ -1,5 +1,4 @@
 # 혜택on robots.txt
-# ★ 도메인을 실제 URL로 교체하세요
 
 User-agent: *
 Allow: /
@@ -10,4 +9,4 @@ Disallow: /admin/
 # 데이터 파일 크롤링 불필요
 Disallow: /data/
 
-Sitemap: https://YOUR-DOMAIN.com/sitemap.xml
+Sitemap: https://benefitson.pages.dev/sitemap.xml

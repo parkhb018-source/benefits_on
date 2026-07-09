@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ★ 도메인을 실제 URL로 교체하세요: https://YOUR-DOMAIN.com
   Google Search Console에 제출: https://search.google.com/search-console
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- 메인 페이지 -->
   <url>
-    <loc>https://YOUR-DOMAIN.com/</loc>
+    <loc>https://benefitson.pages.dev/</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -15,37 +14,37 @@
 
   <!-- 카테고리 페이지 -->
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/youth.html</loc>
+    <loc>https://benefitson.pages.dev/pages/youth.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/newlywed.html</loc>
+    <loc>https://benefitson.pages.dev/pages/newlywed.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/senior.html</loc>
+    <loc>https://benefitson.pages.dev/pages/senior.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/single.html</loc>
+    <loc>https://benefitson.pages.dev/pages/single.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/income.html</loc>
+    <loc>https://benefitson.pages.dev/pages/income.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/tax.html</loc>
+    <loc>https://benefitson.pages.dev/pages/tax.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -53,7 +52,7 @@
 
   <!-- 자료실 -->
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/resources.html</loc>
+    <loc>https://benefitson.pages.dev/pages/resources.html</loc>
     <lastmod>2026-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -61,127 +60,127 @@
 
   <!-- 아티클 상세 페이지 (SEO 핵심) -->
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-youth-rent.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-youth-rent.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-basic-pension.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-basic-pension.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-energy-voucher.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-energy-voucher.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-eitc.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-eitc.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-unemployment-guide.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-unemployment-guide.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-youth-account.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-youth-account.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-youth-dream-account.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-youth-dream-account.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-youth-savings.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-youth-savings.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-youth-job-support.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-youth-job-support.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-youth-sme-tax.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-youth-sme-tax.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-newlywed-support.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-newlywed-support.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-parental-leave.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-parental-leave.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-childcare.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-childcare.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-child-edu.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-child-edu.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-teen-edu.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-teen-edu.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-after-school.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-after-school.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-tomorrow-learning.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-tomorrow-learning.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-senior-jobs.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-senior-jobs.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-national-pension.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-national-pension.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-housing-benefit.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-housing-benefit.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/article-severance.html</loc>
+    <loc>https://benefitson.pages.dev/pages/article-severance.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -189,31 +188,31 @@
 
   <!-- 계산기 페이지 (검색 유입 핵심) -->
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/calc-minimum-wage.html</loc>
+    <loc>https://benefitson.pages.dev/pages/calc-minimum-wage.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/calc-net-salary.html</loc>
+    <loc>https://benefitson.pages.dev/pages/calc-net-salary.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/calc-tax-refund.html</loc>
+    <loc>https://benefitson.pages.dev/pages/calc-tax-refund.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/calc-unemployment.html</loc>
+    <loc>https://benefitson.pages.dev/pages/calc-unemployment.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/calc-eitc.html</loc>
+    <loc>https://benefitson.pages.dev/pages/calc-eitc.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
@@ -221,19 +220,19 @@
 
   <!-- 정보 페이지 -->
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/about.html</loc>
+    <loc>https://benefitson.pages.dev/pages/about.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/contact.html</loc>
+    <loc>https://benefitson.pages.dev/pages/contact.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://YOUR-DOMAIN.com/pages/privacy.html</loc>
+    <loc>https://benefitson.pages.dev/pages/privacy.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
