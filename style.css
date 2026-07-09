@@ -1318,20 +1318,6 @@ h1, h2, h3,
 
 .ad-wrap { padding: 12px 24px; }
 
-.ad-placeholder {
-  background: var(--bg-soft);
-  border: 1px dashed #CBD5E0;
-  border-radius: var(--radius-sm);
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  color: var(--text-muted);
-  max-width: 728px;
-  margin: 0 auto;
-}
-
 /* ===========================
    PAGE SECTION
    =========================== */
