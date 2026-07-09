@@ -1,19 +1,18 @@
 {
   "meta": {
-    "lastUpdated": "2026-07-01",
-    "note": "자료실에 공유하는 무료 앱·자료 목록을 관리합니다. fileUrl은 저장소의 downloads/ 폴더 경로를 가리킵니다."
+    "lastUpdated": "2026-06-30"
   },
   "resources": [
     {
-      "id": "store-stamp",
+      "id": "Store stamp",
       "title": "우리가게 스탬프",
-      "description": "단골손님 관리를 위한 무료 스탬프 적립 앱입니다.",
-      "version": "1.0.0",
+      "description": "단골손님 스탬프 앱",
+      "version": "",
       "icon": "📦",
-      "category": "도구",
-      "fileUrl": "../downloads/triip20-stamp-app-v1.0.zip",
-      "fileSize": "33KB",
-      "updatedAt": "2026-07-01"
+      "category": "",
+      "fileUrl": "E:\\사업\\Pixel Vibe\\benefits_on-main\\benefits_on-main\\downloads",
+      "fileSize": "—",
+      "updatedAt": "2026-06-30"
     }
   ]
 }

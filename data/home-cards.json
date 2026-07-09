@@ -1,121 +1,50 @@
 {
-  "meta": { "lastUpdated": "2026-07-03" },
+  "meta": {
+    "lastUpdated": "2026-07-09"
+  },
   "sections": [
     {
-      "id": "youth",
-      "title": "청년 정책",
+      "id": "section-1783012116280",
+      "title": "청년정책",
       "moreLink": "pages/youth.html",
       "visible": true,
       "cards": [
         {
-          "tag": "신청마감 D-7",
-          "tagStyle": "urgent",
-          "title": "2026 청년월세 특별지원, 신청 자격부터 서류까지",
-          "date": "2026.06.10",
-          "link": "pages/article-youth-rent.html"
-        },
-        {
-          "tag": "비교",
-          "tagStyle": "compare",
-          "title": "청년미래적금 VS 청년도약계좌, 나에게 맞는 건?",
-          "date": "2026.06.08",
-          "link": "pages/article-youth-account.html"
+          "tag": "장애인복지",
+          "tagStyle": "new",
+          "title": "청소년 발달장애인 방과후활동서비스",
+          "date": "2026.07.02",
+          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000132"
         },
         {
           "tag": "신규",
           "tagStyle": "new",
-          "title": "국가장학금 2학기 신청기간 및 소득분위 확인 방법",
-          "date": "2026.06.05",
-          "link": "pages/youth.html"
+          "title": "주택금융공사 월세자금보증",
+          "date": "2026.07.02",
+          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/116010000001"
+        },
+        {
+          "tag": "신규",
+          "tagStyle": "new",
+          "title": "청년어촌정착지원",
+          "date": "2026.07.02",
+          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000174"
         }
       ]
     },
     {
-      "id": "single",
-      "title": "1인가구·주거",
-      "moreLink": "pages/single.html",
-      "visible": true,
-      "cards": [
-        {
-          "tag": "총정리",
-          "tagStyle": "guide",
-          "title": "2026 1인가구 정부지원금 한눈에 보기",
-          "date": "2026.06.12",
-          "link": "pages/single.html"
-        },
-        {
-          "tag": "신청마감 D-14",
-          "tagStyle": "urgent",
-          "title": "에너지바우처 신청방법과 사용처 총정리",
-          "date": "2026.06.09",
-          "link": "pages/article-energy-voucher.html"
-        },
-        {
-          "tag": "가이드",
-          "tagStyle": "guide",
-          "title": "전입신고 인터넷으로 5분 만에 끝내는 방법",
-          "date": "2026.06.07",
-          "link": "pages/single.html"
-        }
-      ]
-    },
-    {
-      "id": "newlywed",
+      "id": "section-1783587697463",
       "title": "신혼·육아",
-      "moreLink": "pages/newlywed.html",
+      "moreLink": "",
       "visible": true,
-      "cards": [
-        {
-          "tag": "총정리",
-          "tagStyle": "guide",
-          "title": "2026 신혼부부 지원금 총정리 — 결혼세액공제·전세대출·취득세 감면",
-          "date": "2026.06.15",
-          "link": "pages/article-newlywed-support.html"
-        },
-        {
-          "tag": "인기",
-          "tagStyle": "new",
-          "title": "2026 육아휴직 급여 계산법 — 통상임금 80%, 최대 월 250만원",
-          "date": "2026.06.12",
-          "link": "pages/article-parental-leave.html"
-        },
-        {
-          "tag": "가이드",
-          "tagStyle": "guide",
-          "title": "아이돌봄 바우처·보육료 지원 신청 방법 완벽 정리",
-          "date": "2026.06.10",
-          "link": "pages/article-childcare.html"
-        }
-      ]
+      "cards": []
     },
     {
-      "id": "senior",
+      "id": "section-1783587869965",
       "title": "중장년·노년",
-      "moreLink": "pages/senior.html",
+      "moreLink": "",
       "visible": true,
-      "cards": [
-        {
-          "tag": "신규",
-          "tagStyle": "new",
-          "title": "2026 노인일자리 신청방법 (월 최대 76만원·전국 115만개)",
-          "date": "2026.06.13",
-          "link": "pages/article-senior-jobs.html"
-        },
-        {
-          "tag": "총정리",
-          "tagStyle": "guide",
-          "title": "2026 기초연금 신청자격, 선정기준액 완벽 정리",
-          "date": "2026.06.11",
-          "link": "pages/article-basic-pension.html"
-        },
-        {
-          "tag": "가이드",
-          "tagStyle": "guide",
-          "title": "노인장기요양보험 등급 기준과 신청 절차 한눈에",
-          "date": "2026.06.06",
-          "link": "pages/senior.html"
-        }
-      ]
+      "cards": []
     }
   ]
 }

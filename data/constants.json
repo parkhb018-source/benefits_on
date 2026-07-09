@@ -1,19 +1,41 @@
 {
   "meta": {
-    "lastUpdated": "2026-06-18",
+    "lastUpdated": "2026-07-09",
     "version": "2026.1",
     "note": "이 파일만 수정하면 전체 계산기·아티클에 즉시 반영됩니다."
   },
-
   "checkSchedule": {
-    "minimumWage":   { "when": "매년 8월 5일경", "by": "고용노동부",     "note": "최저임금위원회 의결 후 고시" },
-    "basicPension":  { "when": "매년 1월",        "by": "보건복지부",     "note": "물가상승률 반영 고시" },
-    "eitc":          { "when": "매년 4~5월",       "by": "국세청",         "note": "정기신청 시작 전 반드시 확인" },
-    "unemployment":  { "when": "최저임금 연동",    "by": "고용노동부",     "note": "최저임금 확정 후 자동 계산" },
-    "energyVoucher": { "when": "매년 6~7월",       "by": "산업통상자원부", "note": "여름 지급 시작 전 확인" },
-    "medianIncome":  { "when": "매년 8월",         "by": "보건복지부",     "note": "다음 연도 기준 고시" }
+    "minimumWage": {
+      "when": "매년 8월 5일경",
+      "by": "고용노동부",
+      "note": "최저임금위원회 의결 후 고시"
+    },
+    "basicPension": {
+      "when": "매년 1월",
+      "by": "보건복지부",
+      "note": "물가상승률 반영 고시"
+    },
+    "eitc": {
+      "when": "매년 4~5월",
+      "by": "국세청",
+      "note": "정기신청 시작 전 반드시 확인"
+    },
+    "unemployment": {
+      "when": "최저임금 연동",
+      "by": "고용노동부",
+      "note": "최저임금 확정 후 자동 계산"
+    },
+    "energyVoucher": {
+      "when": "매년 6~7월",
+      "by": "산업통상자원부",
+      "note": "여름 지급 시작 전 확인"
+    },
+    "medianIncome": {
+      "when": "매년 8월",
+      "by": "보건복지부",
+      "note": "다음 연도 기준 고시"
+    }
   },
-
   "minimumWage": {
     "year": 2026,
     "hourlyRate": 10320,
@@ -22,7 +44,6 @@
     "increaseRate": "2.9%",
     "source": "고용노동부 2025.08.05 고시"
   },
-
   "basicPension": {
     "year": 2026,
     "maxAmountSingle": 349700,
@@ -33,17 +54,25 @@
     "increaseRate": "2.1%",
     "source": "보건복지부 2026년 고시"
   },
-
   "eitc": {
     "year": 2026,
-    "single":       { "incomeLimit": 22000000, "maxAmount": 1650000 },
-    "singleEarner": { "incomeLimit": 32000000, "maxAmount": 2850000 },
-    "dualEarner":   { "incomeLimit": 44000000, "maxAmount": 3300000, "prevIncomeLimit": 38000000 },
+    "single": {
+      "incomeLimit": 22000000,
+      "maxAmount": 1650000
+    },
+    "singleEarner": {
+      "incomeLimit": 32000000,
+      "maxAmount": 2850000
+    },
+    "dualEarner": {
+      "incomeLimit": 44000000,
+      "maxAmount": 3300000,
+      "prevIncomeLimit": 38000000
+    },
     "assetLimit": 240000000,
     "assetReductionThreshold": 140000000,
     "source": "국세청 2026년 기준"
   },
-
   "unemployment": {
     "year": 2026,
     "dailyCeiling": 68100,
@@ -53,7 +82,6 @@
     "prevDailyCeiling": 66000,
     "source": "고용노동부 2026년 기준"
   },
-
   "youthMonthlyRent": {
     "year": 2026,
     "maxMonthly": 200000,
@@ -62,7 +90,6 @@
     "rentLimit": 600000,
     "source": "국토교통부 2026년 기준"
   },
-
   "energyVoucher": {
     "year": 2026,
     "unified": true,
@@ -76,7 +103,6 @@
     },
     "source": "산업통상자원부 에너지바우처 공식 사이트"
   },
-
   "medianIncome2026": {
     "person1": 2318000,
     "person2": 3834000,

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-07-02"
+    "lastUpdated": "2026-07-09"
   },
   "policies": [
     {
@@ -13,11 +13,12 @@
         "교육"
       ],
       "articleUrl": "pages/유아학비-누리과정-지원.html",
-      "deadline": null,
+      "deadline": "2027-02-28",
       "status": "active",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/000000465790",
-      "summary": "유치원에 다니는 3~5세 아동에게 유아학비, 방과후과정비 등 지원"
+      "summary": "유치원에 다니는 3~5세 아동에게 유아학비, 방과후과정비 등 지원, 사립유치원을 다니는 법정저소득층 유아에게 저소득층 유아학비를 추가 지급",
+      "benefit": "유아학비 (누리과정) 지원"
     },
     {
       "id": "근로-자녀장려금",
@@ -33,12 +34,13 @@
       "status": "active",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/105100000001",
-      "summary": "소득과 재산이 적은 근로소득자에게 근로장려금을, 자녀가 있을 경우 자녀장려금 지급"
+      "summary": "소득과 재산이 적은 근로소득자에게 근로장려금을, 자녀가 있을 경우 자녀장려금 지급",
+      "benefit": "근로·자녀장려금"
     },
     {
       "id": "주택금융공사-월세자금보증",
       "title": "주택금융공사 월세자금보증",
-      "category": "세금/환급",
+      "category": "청년정책",
       "tags": [
         "한국주택금융공사",
         "주거",
@@ -49,12 +51,13 @@
       "status": "active",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/116010000001",
-      "summary": "일정요건의 월세대출 대상자에게 월세자금보증을 지원"
+      "summary": "일정요건의 월세대출 대상자에게 월세자금보증을 지원",
+      "benefit": "주택금융공사 월세자금보증"
     },
     {
       "id": "친환경-에너지절감장비-보급",
       "title": "친환경 에너지절감장비 보급",
-      "category": "1인가구",
+      "category": "중장년·노년",
       "tags": [
         "해양수산부",
         "농림축산어업"
@@ -62,9 +65,10 @@
       "articleUrl": "pages/친환경-에너지절감장비-보급.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-29",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000001",
-      "summary": "연근해 어업인을 대상으로 노후기관, 장비, 설비를 대체 보급"
+      "summary": "연근해 어업인을 대상으로 노후기관, 장비, 설비를 대체 보급",
+      "benefit": "친환경 에너지절감장비 보급"
     },
     {
       "id": "귀어-창업-및-주택구입-지원-융자",
@@ -79,12 +83,13 @@
       "status": "active",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000012",
-      "summary": "귀어업 지원자에 창업 및 주택구입 자금 지원 (융자 후 이자 차이를 지원)"
+      "summary": "귀어업 지원자에 창업 및 주택구입 자금 지원 (융자 후 이자 차이를 지원)",
+      "benefit": "귀어 창업 및 주택구입 지원(융자)"
     },
     {
       "id": "창업어가멘토링지원",
       "title": "창업어가멘토링지원",
-      "category": "근로/소득",
+      "category": "청년정책",
       "tags": [
         "해양수산부",
         "농림축산어업"
@@ -92,9 +97,10 @@
       "articleUrl": "pages/창업어가멘토링지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-24",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000070",
-      "summary": "어업후계자 및 창업어가에게 1인당 월 60만원 한도로 기술, 경영 교육지도 제공"
+      "summary": "어업후계자 및 창업어가에게 1인당 월 60만원 한도로 기술, 경영 교육지도 제공",
+      "benefit": "창업어가멘토링지원"
     },
     {
       "id": "천일염-장기저장시설-설치지원",
@@ -107,9 +113,10 @@
       "articleUrl": "pages/천일염-장기저장시설-설치지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000074",
-      "summary": "천일염 생산자 등을 대상으로 천일염장기저장시설 설치 지원"
+      "summary": "천일염 생산자 등을 대상으로 천일염장기저장시설 설치 지원",
+      "benefit": "천일염 장기저장시설 설치지원"
     },
     {
       "id": "천일염포장재지원",
@@ -122,9 +129,10 @@
       "articleUrl": "pages/천일염포장재지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000077",
-      "summary": "천일염 생산자, 협동조합 등을 대상으로 천일염포장재를 지원"
+      "summary": "천일염 생산자, 협동조합 등을 대상으로 천일염포장재를 지원",
+      "benefit": "천일염포장재지원"
     },
     {
       "id": "염전-바닥재-개선-지원",
@@ -137,14 +145,15 @@
       "articleUrl": "pages/염전-바닥재-개선-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000078",
-      "summary": "천일염 관련 종사자 및 단체 등에게 염전바닥재 개선을 위한 비용 지원"
+      "summary": "천일염 관련 종사자 및 단체 등에게 염전바닥재 개선을 위한 비용 지원",
+      "benefit": "염전 바닥재 개선 지원"
     },
     {
       "id": "양식장-친환경에너지-보급",
       "title": "양식장 친환경에너지 보급",
-      "category": "1인가구",
+      "category": "근로/소득",
       "tags": [
         "해양수산부",
         "농림축산어업"
@@ -152,14 +161,15 @@
       "articleUrl": "pages/양식장-친환경에너지-보급.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000126",
-      "summary": "어업인 및 수산관련 생산자단체에 에너지절감시설(히트펌프)을 지원"
+      "summary": "어업인 및 수산관련 생산자단체에 에너지절감시설(히트펌프)을 지원",
+      "benefit": "양식장 친환경에너지 보급"
     },
     {
       "id": "수산장비-임대",
       "title": "수산장비 임대",
-      "category": "1인가구",
+      "category": "근로/소득",
       "tags": [
         "해양수산부",
         "농림축산어업"
@@ -167,9 +177,10 @@
       "articleUrl": "pages/수산장비-임대.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-24",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000157",
-      "summary": "사용횟수가 적은 고가의 수산장비를 국가가 구입하여 어업인에게 임대"
+      "summary": "사용횟수가 적은 고가의 수산장비를 국가가 구입하여 어업인에게 임대",
+      "benefit": "수산장비 임대"
     },
     {
       "id": "선원복지고용센터-운영",
@@ -183,9 +194,10 @@
       "articleUrl": "pages/선원복지고용센터-운영.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-22",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000162",
-      "summary": "선원 및 직계가족을 위한 휴양콘도 운영, 장학사업 등 복지서비스 제공"
+      "summary": "선원 및 직계가족을 위한 휴양콘도 운영, 장학사업 등 복지서비스 제공",
+      "benefit": "선원복지고용센터 운영"
     },
     {
       "id": "청년어촌정착지원",
@@ -198,7 +210,7 @@
       "articleUrl": "pages/청년어촌정착지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-29",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000174",
       "summary": "만 40세 미만 어업경영 3년 이하의 수산업 경영인(예정자 포함)에게 어촌정착자금 지원"
     },
@@ -214,14 +226,15 @@
       "articleUrl": "pages/해양문화행사-및-해양영토-대장정.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-21",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000176",
-      "summary": "초등학생부터 일반인에 이르기까지 해양사진대전, 해양캠프 등의 문화행사 참여 지원"
+      "summary": "초등학생부터 일반인에 이르기까지 해양사진대전, 해양캠프 등의 문화행사 참여 지원",
+      "benefit": "해양문화행사 및 해양영토 대장정"
     },
     {
       "id": "원산지검증-대응-지원",
       "title": "원산지검증 대응 지원",
-      "category": "신혼·육아",
+      "category": "근로/소득",
       "tags": [
         "관세청",
         "보육",
@@ -230,9 +243,10 @@
       "articleUrl": "pages/원산지검증-대응-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-13",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/122000000003",
-      "summary": "일정조건의 수출 및 내수기업을 대상으로 FTA에 대응하는 맞춤형 컨설팅 제공"
+      "summary": "일정조건의 수출 및 내수기업을 대상으로 FTA에 대응하는 맞춤형 컨설팅 제공",
+      "benefit": "원산지검증 대응 지원"
     },
     {
       "id": "북한이탈주민-자산형성-지원-미래행복통장",
@@ -246,14 +260,15 @@
       "articleUrl": "pages/북한이탈주민-자산형성-지원-미래행복통장.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-23",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/125000000004",
-      "summary": "북한이탈주민 대상으로 매월 10~50만 원 저축 시, 적립금과 동일한 금액 지원"
+      "summary": "북한이탈주민 대상으로 매월 10~50만 원 저축 시, 적립금과 동일한 금액 지원",
+      "benefit": "북한이탈주민 자산형성 지원 (미래행복통장)"
     },
     {
       "id": "북한이탈주민-정착금-지원-기본금",
       "title": "북한이탈주민 정착금 지원(기본금)",
-      "category": "1인가구",
+      "category": "근로/소득",
       "tags": [
         "통일부",
         "주거",
@@ -262,14 +277,15 @@
       "articleUrl": "pages/북한이탈주민-정착금-지원-기본금.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-01-29",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/125000000014",
-      "summary": "북한이탈주민에게 정착금 지원(세대별 차등지급)"
+      "summary": "북한이탈주민에게 정착금 지원(세대별 차등지급)",
+      "benefit": "북한이탈주민 정착금 지원"
     },
     {
       "id": "북한이탈주민-정착금-지원-가산금",
       "title": "북한이탈주민 정착금 지원(가산금)",
-      "category": "1인가구",
+      "category": "근로/소득",
       "tags": [
         "통일부",
         "주거",
@@ -280,12 +296,13 @@
       "status": "active",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/125000000015",
-      "summary": "일정조건에 해당하는 북한이탈주민에게 가산금 지원"
+      "summary": "취약상황에 놓인 북한이탈주민 보호",
+      "benefit": "북한이탈주민 정착금 지원(가산금)"
     },
     {
       "id": "특별공로자-및-우수인재-특별귀화-허가-신청-수수료-면제-안내",
       "title": "특별공로자 및 우수인재 특별귀화 허가 신청 수수료 면제 안내",
-      "category": "1인가구",
+      "category": "세금/환급",
       "tags": [
         "법무부",
         "생활안정"
@@ -293,14 +310,15 @@
       "articleUrl": "pages/특별공로자-및-우수인재-특별귀화-허가-신청-수수료-면제-안내.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/127000000022",
-      "summary": "특별공로자 및 우수인재의 특별귀화 허가 신청 수수료 면제"
+      "summary": "특별공로자 및 우수인재의 특별귀화 허가 신청 수수료 면제",
+      "benefit": "특별공로자 및 우수인재 특별귀화 허가 신청 수수료 면제 안내"
     },
     {
       "id": "귀화허가-국적회복허가-신청-및-국적업무-증명서-발급-수수료-면제-안내",
       "title": "귀화허가, 국적회복허가 신청 및 국적업무 증명서 발급 수수료 면제 안내",
-      "category": "1인가구",
+      "category": "세금/환급",
       "tags": [
         "법무부",
         "생활안정"
@@ -308,14 +326,15 @@
       "articleUrl": "pages/귀화허가-국적회복허가-신청-및-국적업무-증명서-발급-수수료-면제-안내.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/127000000023",
-      "summary": "귀화허가, 국적회복 허가 및 국적업무 증명서 발급 신청 수수료 면제"
+      "summary": "귀화허가, 국적회복 허가 및 국적업무 증명서 발급 신청 수수료 면제",
+      "benefit": "귀화허가, 국적회복허가 신청 및 국적업무 증명서 발급 수수료 면제"
     },
     {
       "id": "성폭력-아동학대-인신매매등범죄의-피해-아동과-범죄-피해자인-장애인을-위한-진술조력인-지원",
       "title": "성폭력, 아동학대, 인신매매등범죄의 피해 아동과 범죄 피해자인 장애인을 위한 진술조력인 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "법무부",
         "행정",
@@ -324,14 +343,15 @@
       "articleUrl": "pages/성폭력-아동학대-인신매매등범죄의-피해-아동과-범죄-피해자인-장애인을-위한-진술조력인-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-04",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/127000000025",
-      "summary": "만 19세 미만 아동, 의사소통이 어려운 장애인 범죄 피해자의 수사·재판상 소통 중개"
+      "summary": "만 19세 미만 아동, 의사소통이 어려운 장애인 범죄 피해자의 수사·재판상 소통 중개",
+      "benefit": "성폭력, 아동학대, 인신매매등범죄의 피해 아동과 범죄 피해자인 장애인을 위한 진술조력인 지원"
     },
     {
       "id": "성폭력-아동학대-장애인학대-인신매매-및-스토킹범죄-피해자-국선변호사-지원",
       "title": "성폭력, 아동학대, 장애인학대,인신매매 및 스토킹범죄 피해자 국선변호사 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "법무부",
         "행정",
@@ -340,14 +360,15 @@
       "articleUrl": "pages/성폭력-아동학대-장애인학대-인신매매-및-스토킹범죄-피해자-국선변호사-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/127000000026",
-      "summary": "범죄 피해자에게 국선변호사를 지원하여 법률조력 제공"
+      "summary": "범죄 피해자에게 국선변호사를 지원하여 법률조력 제공",
+      "benefit": "성폭력, 아동학대, 장애인학대,인신매매 및 스토킹범죄 피해자 국선변호사 지원"
     },
     {
       "id": "소년원-출원생-등-소외계층-청소년을-위한-청소년자립생활관-운영-지원",
       "title": "소년원 출원생 등 소외계층 청소년을 위한 청소년자립생활관 운영 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "법무부",
         "보육",
@@ -356,14 +377,15 @@
       "articleUrl": "pages/소년원-출원생-등-소외계층-청소년을-위한-청소년자립생활관-운영-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/127000000037",
-      "summary": "소외계층 청소년에게 생활공간을 제공하여 무료숙식, 대학진학 등 사회정착 지원"
+      "summary": "소외계층 청소년에게 생활공간을 제공하여 무료숙식, 대학진학 등 사회정착 지원",
+      "benefit": "소년원 출원생 등 소외계층 청소년을 위한 청소년자립생활관 운영 지원"
     },
     {
       "id": "전역예정군인-재취업-지원",
       "title": "전역예정군인 재취업 지원",
-      "category": "근로/소득",
+      "category": "청년정책",
       "tags": [
         "국방부",
         "고용",
@@ -372,14 +394,14 @@
       "articleUrl": "pages/전역예정군인-재취업-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-23",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000013",
       "summary": "전역예정장병에게 전직상담 및 교육, 취업 등에 대한 서비스 지원"
     },
     {
       "id": "전역예정장병-취업활동지원",
       "title": "전역예정장병 취업활동지원",
-      "category": "근로/소득",
+      "category": "청년정책",
       "tags": [
         "국방부",
         "고용",
@@ -388,9 +410,10 @@
       "articleUrl": "pages/전역예정장병-취업활동지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-23",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000015",
-      "summary": "장기간 사회와 단절된 생활로 사회적응 및 취업준비가 필요한 전역예정장병의 취업활동 지원"
+      "summary": "장기간 사회와 단절된 생활로 사회적응 및 취업준비가 필요한 전역예정장병의 취업활동 지원",
+      "benefit": "전역예정장병 취업활동지원"
     },
     {
       "id": "군무원-채용시험-응시수수료-면제",
@@ -404,14 +427,14 @@
       "articleUrl": "pages/군무원-채용시험-응시수수료-면제.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-08",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000032",
       "summary": "응시 수수료 면제 대상 확대"
     },
     {
       "id": "노인복지시설-지방세-감면",
       "title": "노인복지시설 지방세 감면",
-      "category": "중장년·노년",
+      "category": "세금/환급",
       "tags": [
         "행정안전부",
         "행정",
@@ -420,14 +443,15 @@
       "articleUrl": "pages/노인복지시설-지방세-감면.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/131200000005",
-      "summary": "노인복지시설 설치ㆍ운영을 위해 취득한 부동산의 취득세면제, 재산세경감"
+      "summary": "노인복지시설 설치ㆍ운영을 위해 취득한 부동산의 취득세면제, 재산세경감",
+      "benefit": "노인복지시설 지방세 감면"
     },
     {
       "id": "국가유공자-등이-대부금으로-취득하는-부동산-취득세-감면",
       "title": "국가유공자 등이 대부금으로 취득하는 부동산 취득세 감면",
-      "category": "1인가구",
+      "category": "세금/환급",
       "tags": [
         "행정안전부",
         "행정",
@@ -436,14 +460,15 @@
       "articleUrl": "pages/국가유공자-등이-대부금으로-취득하는-부동산-취득세-감면.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/131200000006",
-      "summary": "국가유공자 등이 대부금으로 취득하는 부동산에 대하여 취득세 감면"
+      "summary": "국가유공자 등이 대부금으로 취득하는 부동산에 대하여 취득세 감면",
+      "benefit": "국가유공자 등이 대부금으로 취득하는 부동산 취득세 감면"
     },
     {
       "id": "다자녀가구-자동차취득세-감면",
       "title": "다자녀가구 자동차취득세 감면",
-      "category": "신혼·육아",
+      "category": "세금/환급",
       "tags": [
         "행정안전부",
         "행정",
@@ -452,14 +477,15 @@
       "articleUrl": "pages/다자녀가구-자동차취득세-감면.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/131200000008",
-      "summary": "다자녀가구가 취득한 자동차 취득세 감면"
+      "summary": "다자녀가구가 취득한 자동차 취득세 감면",
+      "benefit": "다자녀가구 자동차취득세 감면"
     },
     {
       "id": "영유아-보육시설-지방세-감면",
       "title": "영유아 보육시설 지방세 감면",
-      "category": "신혼·육아",
+      "category": "세금/환급",
       "tags": [
         "행정안전부",
         "행정",
@@ -468,14 +494,15 @@
       "articleUrl": "pages/영유아-보육시설-지방세-감면.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/131200000010",
-      "summary": "영육아보육 시설 설치ㆍ운영을 위해 취득한 부동산의 취득세,재산세 면제"
+      "summary": "영육아보육 시설 설치ㆍ운영을 위해 취득한 부동산의 취득세,재산세 면제",
+      "benefit": "영유아 보육시설 지방세 감면"
     },
     {
       "id": "국가유공자-차량취득세-및-자동차세-감면",
       "title": "국가유공자 차량취득세 및 자동차세 감면",
-      "category": "1인가구",
+      "category": "세금/환급",
       "tags": [
         "행정안전부",
         "행정",
@@ -484,9 +511,10 @@
       "articleUrl": "pages/국가유공자-차량취득세-및-자동차세-감면.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/131200000014",
-      "summary": "국가유공자 등이 취득하는 차량에 대한 취득세 및 자동차세 감면"
+      "summary": "국가유공자 등이 취득하는 차량에 대한 취득세 및 자동차세 감면",
+      "benefit": "국가유공자 차량취득세 및 자동차세 감면"
     },
     {
       "id": "다문화-가족-및-국내체류-외국인-대상-운전면허교실-운영-지원",
@@ -500,9 +528,10 @@
       "articleUrl": "pages/다문화-가족-및-국내체류-외국인-대상-운전면허교실-운영-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-22",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/132000000002",
-      "summary": "다문화 가족 및 국내체류 외국인 대상으로 운전면허교실 운영 지원"
+      "summary": "다문화 가족 및 국내체류 외국인 대상으로 운전면허교실 운영 지원",
+      "benefit": "다문화 가족 및 국내체류 외국인 대상 운전면허교실 운영 지원"
     },
     {
       "id": "교육급여",
@@ -516,9 +545,10 @@
       "articleUrl": "pages/교육급여.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-22",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000003",
-      "summary": "초중고 학생에게 교육활동지원비 지원(초중고 학생별 차등지급)"
+      "summary": "초중고 학생에게 교육활동지원비 지원(초중고 학생별 차등지급)",
+      "benefit": "교육급여"
     },
     {
       "id": "국립특수학교-및-국립부설학교-특수학급-지원",
@@ -532,14 +562,15 @@
       "articleUrl": "pages/국립특수학교-및-국립부설학교-특수학급-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-04",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000006",
-      "summary": "방과후학교, 늘봄학교, 돌봄교실, 통학비 및 치료지원비 지원 등 교수학습 활동 지원"
+      "summary": "방과후학교, 늘봄학교, 돌봄교실, 통학비 및 치료지원비 지원 등 교수학습 활동 지원",
+      "benefit": "국립특수학교, 국립대학부설유치원 및 학교 배치 특수교육대상자등 교수학습 활동 지원"
     },
     {
       "id": "대학원-학과-기반-교육연구단-연구장학금-등-지원-4단계-두뇌한국21-사업",
       "title": "대학원 학과 기반 교육연구단 연구장학금 등 지원(4단계 두뇌한국21 사업)",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -548,14 +579,15 @@
       "articleUrl": "pages/대학원-학과-기반-교육연구단-연구장학금-등-지원-4단계-두뇌한국21-사업.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-04",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000007",
-      "summary": "대학원 학과기반 사업단 소속 대학원생에 연구장학금, 산학협력 활동지원비 등 지급"
+      "summary": "대학원 학과기반 사업단 소속 대학원생에 연구장학금, 산학협력 활동지원비 등 지급",
+      "benefit": "대학원 학과 기반 교육연구단 연구장학금 등 지원"
     },
     {
       "id": "글로벌-현장학습-프로그램-운영",
       "title": "글로벌 현장학습 프로그램 운영",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -564,14 +596,15 @@
       "articleUrl": "pages/글로벌-현장학습-프로그램-운영.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-12",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000008",
-      "summary": "대학생에게 글로벌 현장학습을 위한 항공료, 보험료, 체재비 등을 지원"
+      "summary": "대학생에게 글로벌 현장학습을 위한 항공료, 보험료, 체재비 등을 지원",
+      "benefit": "대학생들에게 해외 산업현장 실무 경험 등 다양한 글로벌 현장학습 기회를 제공"
     },
     {
       "id": "장애학생-가족-참여-국외체험-연수-지원",
       "title": "장애학생 가족 참여 국외체험 연수 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -580,14 +613,15 @@
       "articleUrl": "pages/장애학생-가족-참여-국외체험-연수-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-11",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000010",
-      "summary": "특수교육대상 고등학생 및 가족, 특수교사 등에게 국외체험연수 기회 제공"
+      "summary": "특수교육대상 고등학생 및 가족, 특수교사 등에게 국외체험연수 기회 제공",
+      "benefit": "특수교육대상 고등학생과 가족, 특수교사에게 국외체험연수의 기회 제공"
     },
     {
       "id": "인문100년장학금",
       "title": "인문100년장학금",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -596,14 +630,15 @@
       "articleUrl": "pages/인문100년장학금.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-05",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000011",
-      "summary": "대학교 인문사회계열 학과(부) 재학생 대상으로 등록금 및 생활비 지원"
+      "summary": "대학교 인문사회계열 학과(부) 재학생 대상으로 등록금 및 생활비 지원",
+      "benefit": "인문100년장학금"
     },
     {
       "id": "대학입학전형료-면제-감액",
       "title": "대학입학전형료 면제·감액",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -612,9 +647,10 @@
       "articleUrl": "pages/대학입학전형료-면제-감액.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-15",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000014",
-      "summary": "국가보훈대상자 등 경제적 여건이 곤란한 학생의 대학 입학전형료 면제 또는 감액"
+      "summary": "국가보훈대상자 등 경제적 여건이 곤란한 학생의 대학 입학전형료 면제 또는 감액",
+      "benefit": "대학입학전형료 면제·감액"
     },
     {
       "id": "평생교육바우처-지원",
@@ -627,7 +663,7 @@
       ],
       "articleUrl": "pages/평생교육바우처-지원.html",
       "deadline": null,
-      "status": "active",
+      "status": "expired",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000045",
       "summary": "저소득층에게 평생교육시설 강좌를 수강할 수 있는 바우처 제공"
@@ -635,7 +671,7 @@
     {
       "id": "중소기업-취업연계-장학금-희망사다리-유형",
       "title": "중소기업 취업연계 장학금 (희망사다리Ⅰ유형)",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -644,14 +680,15 @@
       "articleUrl": "pages/중소기업-취업연계-장학금-희망사다리-유형.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-13",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000046",
-      "summary": "중소중견기업 취창업을 희망하는 대학생에게 학기당 등록금 전액 지원"
+      "summary": "중소중견기업 취창업을 희망하는 대학생에게 학기당 등록금 전액 지원",
+      "benefit": "중소기업 취업연계 장학금"
     },
     {
       "id": "고졸-후학습자-장학금-희망사다리-유형",
       "title": "고졸 후학습자 장학금 (희망사다리Ⅱ유형)",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -660,14 +697,15 @@
       "articleUrl": "pages/고졸-후학습자-장학금-희망사다리-유형.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-13",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005001",
-      "summary": "재직기간 2년 이상인 고졸 학생에게 학기당 등록금 전액 지원"
+      "summary": "재직기간 2년 이상인 고졸 학생에게 학기당 등록금 전액 지원",
+      "benefit": "고졸 후학습자 장학금"
     },
     {
       "id": "장애인-평생교육이용권-지원",
       "title": "장애인 평생교육이용권 지원",
-      "category": "신혼·육아",
+      "category": "근로/소득",
       "tags": [
         "교육부",
         "보육",
@@ -676,14 +714,15 @@
       "articleUrl": "pages/장애인-평생교육이용권-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-15",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005006",
-      "summary": "장애인 평생교육이용권 지원(1인 35만원)"
+      "summary": "장애인 평생교육이용권 지원(1인 35만원)",
+      "benefit": "장애인 평생교육이용권 지원"
     },
     {
       "id": "위-wee-클래스-상담-지원",
       "title": "위(Wee) 클래스 상담 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -692,7 +731,7 @@
       "articleUrl": "pages/위-wee-클래스-상담-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-04",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005007",
       "summary": "위(Wee) 클래스, 센터, 스쿨 설치 및 운영"
     },
@@ -708,9 +747,10 @@
       "articleUrl": "pages/가정양육수당-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-19",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005012",
-      "summary": "취학 전 24개월~86개월 미만 가정양육 영유아 대상 월 10~20만원 지원"
+      "summary": "취학 전 24개월~86개월 미만 가정양육 영유아 대상 월 10~20만원 지원",
+      "benefit": "가정양육수당 지원"
     },
     {
       "id": "시간제보육-지원",
@@ -724,9 +764,10 @@
       "articleUrl": "pages/시간제보육-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-11",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005031",
-      "summary": "가정양육 부모가 긴급.일시적으로 보육시설 이용이 필요한 경우 시간제보육 서비스 지원"
+      "summary": "가정양육 부모가 긴급.일시적으로 보육시설 이용이 필요한 경우 시간제보육 서비스 지원",
+      "benefit": "시간제보육 지원"
     },
     {
       "id": "영유아보육료-지원",
@@ -740,14 +781,15 @@
       "articleUrl": "pages/영유아보육료-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-04",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005036",
-      "summary": "소득수준에 관계없이 0~5세 아동에게 보육료 지원"
+      "summary": "소득수준에 관계없이 0~5세 아동에게 보육료 지원",
+      "benefit": "영유아보육료 지원"
     },
     {
       "id": "법학전문대학원-취약계층-장학금",
       "title": "법학전문대학원 취약계층 장학금",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -756,14 +798,15 @@
       "articleUrl": "pages/법학전문대학원-취약계층-장학금.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-04",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005041",
-      "summary": "경제적 취약계층 장학금(등록금) 지원"
+      "summary": "경제적 취약계층 장학금(등록금) 지원",
+      "benefit": "법학전문대학원 취약계층 장학금"
     },
     {
       "id": "초-중-고-교육비-지원",
       "title": "초·중·고 교육비 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "교육부",
         "보육",
@@ -772,9 +815,10 @@
       "articleUrl": "pages/초-중-고-교육비-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-03-09",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005044",
-      "summary": "○ 고교 학비 (입학금, 수업료, 학교운영지원비) ○ 학교급식비 ○ 교육정보화지원비"
+      "summary": "○ 고교 학비 (입학금, 수업료, 학교운영지원비) ○ 학교급식비 ○ 교육정보화지원비",
+      "benefit": "초·중·고 교육비 지원"
     },
     {
       "id": "유아교육비-보육료-추가지원",
@@ -788,9 +832,10 @@
       "articleUrl": "pages/유아교육비-보육료-추가지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-03-01",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005047",
-      "summary": "학부모 양육비 부담 경감을 위해 유아교육비·보육료 월 5만원 추가지원"
+      "summary": "학부모 양육비 부담 경감을 위해 유아교육비·보육료 월 5만원 추가지원",
+      "benefit": "유아교육비·보육료 추가지원"
     },
     {
       "id": "의료급여-틀니-치과임플란트-지원",
@@ -804,9 +849,10 @@
       "articleUrl": "pages/의료급여-틀니-치과임플란트-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-08",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000002",
-      "summary": "조건에 해당되는 65세 이상 의료급여 수급자를 대상으로 틀니, 임플란트 급여 적용 등"
+      "summary": "조건에 해당되는 65세 이상 의료급여 수급자를 대상으로 틀니, 임플란트 급여 적용 등",
+      "benefit": "의료급여 틀니·치과임플란트 지원"
     },
     {
       "id": "임산부-및-영유아-영양플러스",
@@ -822,12 +868,13 @@
       "status": "active",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000005",
-      "summary": "임산부 및 영유아에게 정기적인 영양교육 및 상담, 보충 식품패키지 제공"
+      "summary": "임산부 및 영유아에게 정기적인 영양교육 및 상담, 보충 식품패키지 제공",
+      "benefit": "임산부 및 영유아 영양플러스"
     },
     {
       "id": "소년소녀가정-지원",
       "title": "소년소녀가정 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "보건복지부",
         "생활안정"
@@ -835,14 +882,15 @@
       "articleUrl": "pages/소년소녀가정-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000006",
-      "summary": "만 18세 미만 소년소녀가장 세대에게 생계, 교육, 의료, 부가급여 및 전세자금 지원"
+      "summary": "만 18세 미만 소년소녀가장 세대에게 생계, 교육, 의료, 부가급여 및 전세자금 지원",
+      "benefit": "소년소녀가정 지원"
     },
     {
       "id": "아동-공동생활-가정-운영-지원",
       "title": "아동 공동생활 가정 운영 지원",
-      "category": "신혼·육아",
+      "category": "근로/소득",
       "tags": [
         "보건복지부",
         "보육",
@@ -851,14 +899,15 @@
       "articleUrl": "pages/아동-공동생활-가정-운영-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000010",
-      "summary": "아동을 위한 공동생활가정의 운영비, 인건비, 연장근로수당 등을 지원"
+      "summary": "아동을 위한 공동생활가정의 운영비, 인건비, 연장근로수당 등을 지원",
+      "benefit": "아동 공동생활 가정 운영 지원"
     },
     {
       "id": "학대피해아동쉼터-지원",
       "title": "학대피해아동쉼터 지원",
-      "category": "신혼·육아",
+      "category": "청년정책",
       "tags": [
         "보건복지부",
         "보호",
@@ -867,9 +916,10 @@
       "articleUrl": "pages/학대피해아동쉼터-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000012",
-      "summary": "만 18세 미만 학대피해아동이 편히 쉴 수 있도록 생활지원, 상담 및 치료 등을 제공"
+      "summary": "만 18세 미만 학대피해아동이 편히 쉴 수 있도록 생활지원, 상담 및 치료 등을 제공",
+      "benefit": "학대피해아동쉼터 지원"
     },
     {
       "id": "노인실명예방사업",
@@ -883,9 +933,10 @@
       "articleUrl": "pages/노인실명예방사업.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000015",
-      "summary": "저소득층 노인에게 안검진 및 개안수술 지원"
+      "summary": "저소득층 노인에게 안검진 및 개안수술 지원",
+      "benefit": "노인실명예방사업"
     },
     {
       "id": "장애인-노인-보조기기-맞춤형-서비스-지역-보조기기센터",
@@ -899,9 +950,10 @@
       "articleUrl": "pages/장애인-노인-보조기기-맞춤형-서비스-지역-보조기기센터.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000017",
-      "summary": "장애인·노인 등을 대상으로 보조기기 서비스 제공"
+      "summary": "장애인·노인 등을 대상으로 보조기기 서비스 제공",
+      "benefit": "장애인·노인 보조기기 맞춤형 서비스 (지역 보조기기센터)"
     },
     {
       "id": "치매관리-서비스-치매안심센터",
@@ -915,9 +967,10 @@
       "articleUrl": "pages/치매관리-서비스-치매안심센터.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000080",
-      "summary": "○ 전국 치매안심센터에서 상담 및 등록·관리, 조기검진, 치매쉼터, 자원연계 등 제공"
+      "summary": "○ 전국 치매안심센터에서 상담 및 등록·관리, 조기검진, 치매쉼터, 자원연계 등 제공",
+      "benefit": "치매관리 서비스 (치매안심센터)"
     },
     {
       "id": "보건소-방문건강관리-서비스",
@@ -931,9 +984,10 @@
       "articleUrl": "pages/보건소-방문건강관리-서비스.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-23",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000082",
-      "summary": "건강 취약계층 대상으로 전담인력이 가정 등을 방문하여 건강관리서비스 제공"
+      "summary": "건강 취약계층 대상으로 전담인력이 가정 등을 방문하여 건강관리서비스 제공",
+      "benefit": "보건소 방문건강관리 서비스"
     },
     {
       "id": "장애인-공동생활가정-운영-지원",
@@ -947,14 +1001,15 @@
       "articleUrl": "pages/장애인-공동생활가정-운영-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000085",
-      "summary": "장애인을 위한 공동생활가정 운영을 지원하여 돌봄 및 자립지원서비스 제공"
+      "summary": "장애인을 위한 공동생활가정 운영을 지원하여 돌봄 및 자립지원서비스 제공",
+      "benefit": "장애인 공동생활가정 운영 지원"
     },
     {
       "id": "아동복지시설-기능보강-지원",
       "title": "아동복지시설 기능보강 지원",
-      "category": "신혼·육아",
+      "category": "세금/환급",
       "tags": [
         "보건복지부",
         "보육",
@@ -963,9 +1018,10 @@
       "articleUrl": "pages/아동복지시설-기능보강-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000086",
-      "summary": "법인 운영 아동복지시설의 중·개축 및 개보수, 장비보강 등을 지원"
+      "summary": "법인 운영 아동복지시설의 중·개축 및 개보수, 장비보강 등을 지원",
+      "benefit": "아동복지시설 기능보강 지원"
     },
     {
       "id": "아동복지시설-아동치료재활지원",
@@ -979,14 +1035,15 @@
       "articleUrl": "pages/아동복지시설-아동치료재활지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000087",
-      "summary": "문제행동아동을 위한 종합심리검사, 맞춤형 상담치료서비스 등을 제공"
+      "summary": "문제행동아동을 위한 종합심리검사, 맞춤형 상담치료서비스 등을 제공",
+      "benefit": "아동복지시설 아동치료재활지원"
     },
     {
       "id": "지역자율형-사회서비스-투자사업-보수교육-지원",
       "title": "지역자율형 사회서비스 투자사업 보수교육 지원",
-      "category": "신혼·육아",
+      "category": "근로/소득",
       "tags": [
         "보건복지부",
         "보육",
@@ -995,9 +1052,10 @@
       "articleUrl": "pages/지역자율형-사회서비스-투자사업-보수교육-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000088",
-      "summary": "해당사업 책임자 및 인력 등을 위한 역량강화 집합·사이버교육 등을 제공"
+      "summary": "해당사업 책임자 및 인력 등을 위한 역량강화 집합·사이버교육 등을 제공",
+      "benefit": "지역자율형 사회서비스 투자사업 보수교육 지원"
     },
     {
       "id": "발달장애인-가족휴식지원사업",
@@ -1011,9 +1069,10 @@
       "articleUrl": "pages/발달장애인-가족휴식지원사업.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-07",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000094",
-      "summary": "발달장애인 및 가족에게 휴식지원 프로그램 운영 및 돌봄 서비스를 연1회 제공"
+      "summary": "발달장애인 및 가족에게 휴식지원 프로그램 운영 및 돌봄 서비스를 연1회 제공",
+      "benefit": "발달장애인 가족휴식지원사업"
     },
     {
       "id": "재가한센인생계비지원",
@@ -1027,14 +1086,15 @@
       "articleUrl": "pages/재가한센인생계비지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-23",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000102",
-      "summary": "재가한센인을 대상으로 급량비, 피복비, 월동대책비, 수용비, 난방비 등 생계비를 지원"
+      "summary": "재가한센인을 대상으로 급량비, 피복비, 월동대책비, 수용비, 난방비 등 생계비를 지원",
+      "benefit": "재가한센인생계비지원"
     },
     {
       "id": "생활터-금연환경조성",
       "title": "생활터 금연환경조성",
-      "category": "1인가구",
+      "category": "중장년·노년",
       "tags": [
         "보건복지부",
         "보건",
@@ -1043,9 +1103,10 @@
       "articleUrl": "pages/생활터-금연환경조성.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-13",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000112",
-      "summary": "임대주택, 사업장 등 흡연자를 대상으로 상담, 금연보조제 등의 물품 및 서비스 제공"
+      "summary": "임대주택, 사업장 등 흡연자를 대상으로 상담, 금연보조제 등의 물품 및 서비스 제공",
+      "benefit": "생활터 금연환경조성"
     },
     {
       "id": "노인-무릎인공관절-수술-지원",
@@ -1059,9 +1120,10 @@
       "articleUrl": "pages/노인-무릎인공관절-수술-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000113",
-      "summary": "무릎관절증으로 고통받는 저소득 어르신에게 검사비, 진료비 및 수술비 지원"
+      "summary": "무릎관절증으로 고통받는 저소득 어르신에게 검사비, 진료비 및 수술비 지원",
+      "benefit": "노인 무릎인공관절 수술 지원"
     },
     {
       "id": "고위험-임산부-의료비-지원",
@@ -1075,9 +1137,10 @@
       "articleUrl": "pages/고위험-임산부-의료비-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000114",
-      "summary": "19대 고위험 임산부의 입원치료비의 전액본임부담금 및 비급여 진료비 지원"
+      "summary": "19대 고위험 임산부의 입원치료비의 전액본임부담금 및 비급여 진료비 지원",
+      "benefit": "고위험 임산부 의료비 지원"
     },
     {
       "id": "인플루엔자-국가예방접종-지원",
@@ -1091,7 +1154,7 @@
       "articleUrl": "pages/인플루엔자-국가예방접종-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-22",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000115",
       "summary": "어린이, 임신부, 어르신 등 대상으로 인플루엔자 3가백신 1회 예방접종 지원"
     },
@@ -1107,9 +1170,10 @@
       "articleUrl": "pages/아동수당.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-20",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000120",
-      "summary": "만 8세 미만 모든 아동에게 월 10만 원 현금 지원(최대 96개월)"
+      "summary": "만 8세 미만 모든 아동에게 월 10만 원 현금 지원(최대 96개월)",
+      "benefit": "아동수당"
     },
     {
       "id": "치매-상담콜센터-운영",
@@ -1123,9 +1187,10 @@
       "articleUrl": "pages/치매-상담콜센터-운영.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000124",
-      "summary": "전 국민을 대상으로 치매 예방 관련 정보제공과 환자가족에게 심리상담 등 제공"
+      "summary": "전 국민을 대상으로 치매 예방 관련 정보제공과 환자가족에게 심리상담 등 제공",
+      "benefit": "치매 상담콜센터 운영"
     },
     {
       "id": "치매-치료관리비-지원",
@@ -1139,9 +1204,10 @@
       "articleUrl": "pages/치매-치료관리비-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-12-31",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000125",
-      "summary": "치매 어르신에게 약제비와 진료비의 본인부담금 지원 (최대 월 3만 원)"
+      "summary": "치매 어르신에게 약제비와 진료비의 본인부담금 지원 (최대 월 3만 원)",
+      "benefit": "치매 치료관리비 지원"
     },
     {
       "id": "청소년-발달장애인-방과후활동서비스",
@@ -1155,9 +1221,10 @@
       "articleUrl": "pages/청소년-발달장애인-방과후활동서비스.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000132",
-      "summary": "발달장애학생에게 방과후 돌봄이용권(월 66시간) 제공"
+      "summary": "발달장애학생에게 방과후 돌봄이용권(월 66시간) 제공",
+      "benefit": "청소년 발달장애인 방과후활동서비스"
     },
     {
       "id": "긴급복지-주거지원",
@@ -1170,9 +1237,10 @@
       "articleUrl": "pages/긴급복지-주거지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005001",
-      "summary": "위기상황 발생으로 생계가 곤란한 가구에 임시거소 또는 주거비용 지원"
+      "summary": "위기상황 발생으로 생계가 곤란한 가구에 임시거소 또는 주거비용 지원",
+      "benefit": "긴급복지 주거지원"
     },
     {
       "id": "긴급복지-해산비-지원",
@@ -1185,9 +1253,10 @@
       "articleUrl": "pages/긴급복지-해산비-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005002",
-      "summary": "긴급지원 주지원대상자(가구구성원 포함)가 출산(예정)한 경우 현금 지원(1인당 70만원)"
+      "summary": "긴급지원 주지원대상자(가구구성원 포함)가 출산(예정)한 경우 현금 지원(1인당 70만원)",
+      "benefit": "긴급복지 해산비 지원"
     },
     {
       "id": "긴급복지-생계지원",
@@ -1200,9 +1269,10 @@
       "articleUrl": "pages/긴급복지-생계지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005003",
-      "summary": "식료품비, 의복비 등 생계유지에 필요한 비용 지원(최대 6개월)"
+      "summary": "식료품비, 의복비 등 생계유지에 필요한 비용 지원(최대 6개월)",
+      "benefit": "긴급복지 생계지원"
     },
     {
       "id": "긴급복지-연료비-및-전기요금-지원",
@@ -1222,7 +1292,7 @@
     {
       "id": "긴급복지-의료지원",
       "title": "긴급복지 의료지원",
-      "category": "1인가구",
+      "category": "중장년·노년",
       "tags": [
         "보건복지부",
         "생활안정"
@@ -1230,9 +1300,10 @@
       "articleUrl": "pages/긴급복지-의료지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005005",
-      "summary": "중한 질병 또는 부상으로 의료비를 감당하기 곤란한 사람에게 일시적으로 의료지원"
+      "summary": "중한 질병 또는 부상으로 의료비를 감당하기 곤란한 사람에게 일시적으로 의료지원",
+      "benefit": "긴급복지 의료지원"
     },
     {
       "id": "자산형성지원사업-희망저축",
@@ -1245,7 +1316,7 @@
       ],
       "articleUrl": "pages/자산형성지원사업-희망저축.html",
       "deadline": null,
-      "status": "active",
+      "status": "expired",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005010",
       "summary": "일하는 생계‧의료 수급자를 대상으로 본인적립금(10만 원)에 정부지원금(30만 원) 매칭"
@@ -1262,9 +1333,10 @@
       "articleUrl": "pages/입양축하금.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005011",
-      "summary": "1회에 한하여 200만원 입양축하금 지급"
+      "summary": "1회에 한하여 200만원 입양축하금 지급",
+      "benefit": "입양축하금"
     },
     {
       "id": "자산형성지원사업-희망저축-2",
@@ -1277,7 +1349,7 @@
       ],
       "articleUrl": "pages/자산형성지원사업-희망저축-2.html",
       "deadline": null,
-      "status": "active",
+      "status": "expired",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005012",
       "summary": "일하는 주거‧교육급여 수급자와 차상위자를 대상으로 본인적립금(10만 원)에 정부지원금(10"
@@ -1294,9 +1366,10 @@
       "articleUrl": "pages/첫만남이용권-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005015",
-      "summary": "200만원 이상의 첫만남이용권 지급"
+      "summary": "200만원 이상의 첫만남이용권 지급",
+      "benefit": "첫만남이용권 지원"
     },
     {
       "id": "전문아동보호비-지원",
@@ -1310,9 +1383,10 @@
       "articleUrl": "pages/전문아동보호비-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005016",
-      "summary": "위탁가정에 대하여 월 100만원 지급"
+      "summary": "위탁가정에 대하여 월 100만원 지급",
+      "benefit": "전문아동보호비 지원"
     },
     {
       "id": "한국형-상병수당-시범사업",
@@ -1325,9 +1399,10 @@
       "articleUrl": "pages/한국형-상병수당-시범사업.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005017",
-      "summary": "업무 외 질병·부상으로 경제활동이 어려운 경우 치료에 집중할 수 있도록 상병수당 지원"
+      "summary": "업무 외 질병·부상으로 경제활동이 어려운 경우 치료에 집중할 수 있도록 상병수당 지원",
+      "benefit": "한국형 상병수당 시범사업"
     },
     {
       "id": "긴급돌봄-지원",
@@ -1340,14 +1415,15 @@
       "articleUrl": "pages/긴급돌봄-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005026",
-      "summary": "일시적 위기상황에 대응하기 위한 한시적 재가 방문형 돌봄·가사 및 이동지원 서비스 제공"
+      "summary": "일시적 위기상황에 대응하기 위한 한시적 재가 방문형 돌봄·가사 및 이동지원 서비스 제공",
+      "benefit": "긴급돌봄 지원"
     },
     {
       "id": "일상돌봄-서비스",
       "title": "일상돌봄 서비스",
-      "category": "청년정책",
+      "category": "1인가구",
       "tags": [
         "보건복지부",
         "생활안정"
@@ -1355,9 +1431,10 @@
       "articleUrl": "pages/일상돌봄-서비스.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-11",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005027",
-      "summary": "필요에 맞게 기본서비스(재가돌봄, 가사)와 특화서비스(식사영양 등)를 선택적 조합하여 이용"
+      "summary": "필요에 맞게 기본서비스(재가돌봄, 가사)와 특화서비스(식사영양 등)를 선택적 조합하여 이용",
+      "benefit": "일상돌봄 서비스"
     },
     {
       "id": "기초연금-수급자-확인서",
@@ -1371,9 +1448,10 @@
       "articleUrl": "pages/기초연금-수급자-확인서.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005030",
-      "summary": "기초연금 수급자 확인서 발급"
+      "summary": "기초연금 수급자 확인서 발급",
+      "benefit": "기초연금 수급자 확인서"
     },
     {
       "id": "경계선지능아동-맞춤형-사례관리서비스",
@@ -2506,7 +2584,7 @@
     {
       "id": "여성-벤처-활성화-지원",
       "title": "여성 벤처 활성화 지원",
-      "category": "신혼·육아",
+      "category": "근로/소득",
       "tags": [
         "중소벤처기업부",
         "보육",
@@ -2515,9 +2593,10 @@
       "articleUrl": "pages/여성-벤처-활성화-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000078",
-      "summary": "여성 예비창업자 및 여성벤처기업을 대상으로 교육, 멘토링, 사업화 지원 등 지원"
+      "summary": "여성 예비창업자 및 여성벤처기업을 대상으로 교육, 멘토링, 사업화 지원 등 지원",
+      "benefit": "여성 벤처 활성화 지원"
     },
     {
       "id": "인재육성형-중소기업-발굴-및-지원",
@@ -2530,7 +2609,7 @@
       ],
       "articleUrl": "pages/인재육성형-중소기업-발굴-및-지원.html",
       "deadline": null,
-      "status": "active",
+      "status": "expired",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000084",
       "summary": "선정된 중소기업 대상으로 정책자금, 신규 병역지정업체(산업기능요원) 가점 등 지원 제공"
@@ -2546,7 +2625,7 @@
       ],
       "articleUrl": "pages/중소기업-인식개선-교육-등.html",
       "deadline": null,
-      "status": "active",
+      "status": "expired",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000085",
       "summary": "특성화고생 및 학부모 등에게 중소기업 인식개선을 위한 교육실시"
@@ -2563,9 +2642,10 @@
       "articleUrl": "pages/소상공인-재기지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000088",
-      "summary": "경영위기·폐업(예정) 소상공인 대상으로 폐업, 취업, 업종전환, 재창업을 위한 컨설팅 제공"
+      "summary": "경영위기·폐업(예정) 소상공인 대상으로 폐업, 취업, 업종전환, 재창업을 위한 컨설팅 제공",
+      "benefit": "소상공인 재기지원"
     },
     {
       "id": "온누리상품권-가맹점-등록-지원",
@@ -2579,9 +2659,10 @@
       "articleUrl": "pages/온누리상품권-가맹점-등록-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-06-11",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000089",
-      "summary": "전통시장 내 상인 등에게 온누리상품권 취급이 가능하도록 등록 지원"
+      "summary": "전통시장 내 상인 등에게 온누리상품권 취급이 가능하도록 등록 지원",
+      "benefit": "온누리상품권 가맹점 등록 지원"
     },
     {
       "id": "장애인-기업-시제품제작-지원",
@@ -2594,7 +2675,7 @@
       ],
       "articleUrl": "pages/장애인-기업-시제품제작-지원.html",
       "deadline": null,
-      "status": "active",
+      "status": "expired",
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000090",
       "summary": "장애인 및 기업에게 제품디자인 및 시제품모형제작에 소요되는 비용 일부 지원"
@@ -2611,9 +2692,10 @@
       "articleUrl": "pages/수출-중소기업-융자-지원-신시장진출지원자금.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-08",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000098",
-      "summary": "수출 유망 중소기업에 자금지원으로 글로벌화 촉진 및 수출 인프라 조성 지원"
+      "summary": "수출 유망 중소기업에 자금지원으로 글로벌화 촉진 및 수출 인프라 조성 지원",
+      "benefit": "수출 중소기업 융자 지원"
     },
     {
       "id": "청년전용창업자금",
@@ -2627,9 +2709,10 @@
       "articleUrl": "pages/청년전용창업자금.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000099",
-      "summary": "만39세 이하청년(대출한도: 기업당 1억원, 제조업 및 중점지원분야 영위기업 2억원)"
+      "summary": "만39세 이하청년(대출한도: 기업당 1억원, 제조업 및 중점지원분야 영위기업 2억원)",
+      "benefit": "청년전용창업자금"
     },
     {
       "id": "m-a-활성화-지원",
@@ -2643,9 +2726,10 @@
       "articleUrl": "pages/m-a-활성화-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-04-30",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000115",
-      "summary": "M&A 비용지원, M&A 인식개선 사업 운영, 자문기관 등록‧관리 및 M&A 정보망 운영"
+      "summary": "M&A 비용지원, M&A 인식개선 사업 운영, 자문기관 등록‧관리 및 M&A 정보망 운영",
+      "benefit": "M&A 활성화 지원"
     },
     {
       "id": "대-중소-기업-동반진출-지원",
@@ -2659,9 +2743,10 @@
       "articleUrl": "pages/대-중소-기업-동반진출-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-08",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000116",
-      "summary": "중소기업 대상으로 한류연계, 해외홈쇼핑방송, 해외거점 등을 활용한 해외진출을 지원"
+      "summary": "중소기업 대상으로 한류연계, 해외홈쇼핑방송, 해외거점 등을 활용한 해외진출을 지원",
+      "benefit": "대·중소 기업 동반진출 지원"
     },
     {
       "id": "수출컨소시엄-지원-업종별-중소기업-해외전시회-참여",
@@ -2675,9 +2760,10 @@
       "articleUrl": "pages/수출컨소시엄-지원-업종별-중소기업-해외전시회-참여.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-08",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000121",
-      "summary": "중소기업 관련 업종간 컨소시엄을 구성하여 해외 진출 지원"
+      "summary": "중소기업 관련 업종간 컨소시엄을 구성하여 해외 진출 지원",
+      "benefit": "수출컨소시엄 지원 (업종별 중소기업 해외전시회 참여)"
     },
     {
       "id": "공공연-연구인력-파견지원사업",
@@ -2691,9 +2777,10 @@
       "articleUrl": "pages/공공연-연구인력-파견지원사업.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-08",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142100000003",
-      "summary": "중소기업에 파견한 공공연구기관 인력의 인건비 지원"
+      "summary": "중소기업에 파견한 공공연구기관 인력의 인건비 지원",
+      "benefit": "공공연 연구인력 파견지원사업"
     },
     {
       "id": "기술보증-지원",
@@ -2707,9 +2794,10 @@
       "articleUrl": "pages/기술보증-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2025-11-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142100000007",
-      "summary": "신기술사업자에게 자금 공급(같은 기업당 최고한도 30억원)"
+      "summary": "신기술사업자에게 자금 공급(같은 기업당 최고한도 30억원)",
+      "benefit": "기술보증 지원"
     },
     {
       "id": "보증연계투자-지원",
@@ -2723,9 +2811,10 @@
       "articleUrl": "pages/보증연계투자-지원.html",
       "deadline": null,
       "status": "active",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-05-08",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142100000008",
-      "summary": "신기술사업자에게 자금 공급(최고한도 30억원)"
+      "summary": "신기술사업자에게 자금 공급(최고한도 30억원)",
+      "benefit": "보증연계투자 지원"
     }
   ]
 }
