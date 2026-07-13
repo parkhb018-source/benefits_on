@@ -96,10 +96,10 @@
       </table>
 
       <h2>문의 보내기</h2>
-      <div class="contact-form">
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/mlgqepng" method="POST">
         <div class="form-group">
           <label for="contact-type">문의 유형 <span style="color:#E53E3E">*</span></label>
-          <select id="contact-type" required>
+          <select id="contact-type" name="type" required>
             <option value="">선택해주세요</option>
             <option value="ad">📢 광고 게재 문의</option>
             <option value="error">⚠️ 정보 오류 제보</option>
@@ -110,21 +110,21 @@
         </div>
         <div class="form-group">
           <label for="contact-email">이메일 주소 <span style="color:#E53E3E">*</span></label>
-          <input type="email" id="contact-email" placeholder="답변 받으실 이메일 주소를 입력하세요" required>
+          <input type="email" id="contact-email" name="email" placeholder="답변 받으실 이메일 주소를 입력하세요" required>
         </div>
         <div class="form-group">
           <label for="contact-subject">제목 <span style="color:#E53E3E">*</span></label>
-          <input type="text" id="contact-subject" placeholder="문의 내용을 간략히 작성하세요" required>
+          <input type="text" id="contact-subject" name="_subject" placeholder="문의 내용을 간략히 작성하세요" required>
         </div>
         <div class="form-group">
           <label for="contact-message">내용 <span style="color:#E53E3E">*</span></label>
-          <textarea id="contact-message" placeholder="문의 내용을 자세히 작성해 주세요.&#10;&#10;오류 제보의 경우: 문제가 발생한 페이지 URL과 어떤 오류인지 구체적으로 알려주시면 빠르게 처리됩니다." required></textarea>
+          <textarea id="contact-message" name="message" placeholder="문의 내용을 자세히 작성해 주세요.&#10;&#10;오류 제보의 경우: 문제가 발생한 페이지 URL과 어떤 오류인지 구체적으로 알려주시면 빠르게 처리됩니다." required></textarea>
         </div>
-        <button type="button" class="btn-submit" onclick="handleSubmit()">문의 보내기 →</button>
+        <button type="submit" class="btn-submit">문의 보내기 →</button>
         <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">
           * 제출하신 정보는 문의 처리 목적으로만 사용되며, 처리 완료 후 1년간 보관됩니다. (<a href="privacy.html" style="color:var(--primary)">개인정보처리방침</a>)
         </p>
-      </div>
+      </form>
 
       <div id="submit-success" style="display:none; margin-top:16px; padding:16px 20px; background:rgba(46,139,87,0.08); border:1px solid rgba(46,139,87,0.2); border-radius:var(--radius-md); color:var(--accent); font-weight:600;">
         ✅ 문의가 접수되었습니다. 빠른 시일 내에 이메일로 답변드리겠습니다.
@@ -179,7 +179,10 @@
 
   <script src="../main.js?v=20260626"></script>
   <script>
-    function handleSubmit() {
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
       const type = document.getElementById('contact-type').value;
       const email = document.getElementById('contact-email').value;
       const subject = document.getElementById('contact-subject').value;
@@ -194,10 +197,26 @@
         return;
       }
 
-      document.getElementById('submit-success').style.display = 'block';
-      document.querySelector('.contact-form').style.opacity = '0.5';
-      document.querySelector('.btn-submit').disabled = true;
-    }
+      const submitBtn = document.querySelector('.btn-submit');
+      submitBtn.disabled = true;
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          document.getElementById('submit-success').style.display = 'block';
+          form.style.opacity = '0.5';
+        } else {
+          alert('문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+          submitBtn.disabled = false;
+        }
+      }).catch(function () {
+        alert('문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        submitBtn.disabled = false;
+      });
+    });
   </script>
 </body>
 </html>
