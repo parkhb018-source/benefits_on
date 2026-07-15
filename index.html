@@ -158,19 +158,8 @@
     </div>
   </section>
 
-  <!-- ======================== SEASONAL BANNER (DARK) ======================== -->
-  <section class="seasonal-section">
-    <div class="container">
-      <div class="seasonal-dark">
-        <div class="seasonal-content">
-          <span class="seasonal-tag">6월의 추천 정보</span>
-          <h3 class="seasonal-title">여름철 에너지바우처, 신청 안 하면 못 받아요</h3>
-          <p class="seasonal-desc">무더위 시작 전 미리 신청하면 냉방비 부담을 줄일 수 있어요. 대상 여부부터 확인해보세요.</p>
-        </div>
-        <a href="pages/article-energy-voucher.html" class="seasonal-cta">에너지바우처 확인하기 →</a>
-      </div>
-    </div>
-  </section>
+  <!-- ======================== SEASONAL BANNER (DARK, data/home-cards.json — 관리자 🏠 홈 카드 탭에서 편집) ======================== -->
+  <div id="seasonal-banner"></div>
 
   <!-- ======================== AD ======================== -->
   <div class="container ad-wrap">
@@ -323,7 +312,25 @@
       box.innerHTML = visible.map(sectionHtml).join('');
     }
 
-    loadHome().then(render);
+    function seasonalHtml(s) {
+      return '' +
+        '<section class="seasonal-section"><div class="container"><div class="seasonal-dark">' +
+          '<div class="seasonal-content">' +
+            '<span class="seasonal-tag">' + esc(s.tag || '') + '</span>' +
+            '<h3 class="seasonal-title">' + esc(s.title || '') + '</h3>' +
+            '<p class="seasonal-desc">' + esc(s.desc || '') + '</p>' +
+          '</div>' +
+          '<a href="' + esc(s.link || '#') + '" class="seasonal-cta">' + esc(s.linkText || '') + '</a>' +
+        '</div></div></section>';
+    }
+
+    function renderSeasonal(s) {
+      var box = document.getElementById('seasonal-banner');
+      if (!box) return;
+      box.innerHTML = (s && s.visible !== false && s.title) ? seasonalHtml(s) : '';
+    }
+
+    loadHome().then(function (data) { render(data); renderSeasonal(data && data.seasonal); });
   }());
   </script>
 </body>

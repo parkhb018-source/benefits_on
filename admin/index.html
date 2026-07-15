@@ -553,6 +553,20 @@
       <div class="ph">홈 카드 관리</div>
       <p class="ps">홈페이지의 카테고리 섹션과 카드를 편집합니다. 링크는 드롭다운에서 골라 <strong>끊긴 링크를 방지</strong>합니다. 저장 후 <strong>내보내기 → <code>home-cards.json</code></strong>을 <code>data/</code> 폴더에 덮어쓰고 git push하면 모든 방문자에게 반영됩니다.</p>
 
+      <div class="card">
+        <div class="card-hd">
+          <span class="card-title">시즌 배너 (홈 상단)</span>
+          <label style="display:flex;align-items:center;gap:5px;font-size:0.82rem;cursor:pointer;"><input type="checkbox" id="sb-visible">표시</label>
+        </div>
+        <div class="fg">
+          <div class="fv"><label class="fl">태그 텍스트</label><input class="fi" type="text" id="sb-tag" placeholder="예: 6월의 추천 정보"></div>
+          <div class="fv" style="grid-column:1/-1"><label class="fl">제목 <span class="req">*</span></label><input class="fi" type="text" id="sb-title"></div>
+          <div class="fv" style="grid-column:1/-1"><label class="fl">설명</label><input class="fi" type="text" id="sb-desc"></div>
+          <div class="fv"><label class="fl">링크</label><input class="fi" type="text" id="sb-link" placeholder="pages/article-....html"></div>
+          <div class="fv"><label class="fl">버튼 텍스트</label><input class="fi" type="text" id="sb-linkText" placeholder="예: 에너지바우처 확인하기 →"></div>
+        </div>
+      </div>
+
       <div id="homeSections"></div>
 
       <div style="margin:12px 0;">
@@ -794,6 +808,7 @@ function renderAll() {
   renderRulesEditor();
   renderResourcesTable();
   renderHomeEditor();
+  renderSeasonalEditor();
   runValidation();
 }
 
@@ -976,6 +991,16 @@ async function loadSitemapPages() {
     });
     return out;
   } catch (e) { return []; }
+}
+
+function renderSeasonalEditor() {
+  const s = (S.HOME && S.HOME.seasonal) || {};
+  el('sb-visible').checked = s.visible !== false;
+  set('sb-tag', s.tag || '');
+  set('sb-title', s.title || '');
+  set('sb-desc', s.desc || '');
+  set('sb-link', s.link || '');
+  set('sb-linkText', s.linkText || '');
 }
 
 function renderHomeEditor() {
@@ -1418,7 +1443,7 @@ function setupEvents() {
   el('impP').addEventListener('change', e => imp(e, data => { S.P = data; localStorage.setItem(LS.P, JSON.stringify(data)); renderPoliciesTable(); msg('impMsg', 'policies.json 가져오기 완료'); }));
   el('impR').addEventListener('change', e => imp(e, data => { S.R = data; localStorage.setItem(LS.R, JSON.stringify(data)); renderRulesEditor(); msg('impMsg', 'matching-rules.json 가져오기 완료'); }));
   el('impRes').addEventListener('change', e => imp(e, data => { S.RES = data; localStorage.setItem(LS.RES, JSON.stringify(data)); renderResourcesTable(); msg('impMsg', 'resources.json 가져오기 완료'); }));
-  el('impHome').addEventListener('change', e => imp(e, data => { S.HOME = data; localStorage.setItem(LS.HOME, JSON.stringify(data)); renderHomeEditor(); msg('impMsg', 'home-cards.json 가져오기 완료'); }));
+  el('impHome').addEventListener('change', e => imp(e, data => { S.HOME = data; localStorage.setItem(LS.HOME, JSON.stringify(data)); renderHomeEditor(); renderSeasonalEditor(); msg('impMsg', 'home-cards.json 가져오기 완료'); }));
 
   // localStorage 초기화
   el('btnClearLS').addEventListener('click', () => {
@@ -1502,6 +1527,14 @@ function setupEvents() {
     if (!S.HOME) S.HOME = { meta: { lastUpdated: TODAY }, sections: [] };
     S.HOME.meta = S.HOME.meta || {};
     S.HOME.meta.lastUpdated = TODAY;
+    S.HOME.seasonal = {
+      visible: el('sb-visible').checked,
+      tag: g('sb-tag').trim(),
+      title: g('sb-title').trim(),
+      desc: g('sb-desc').trim(),
+      link: g('sb-link').trim(),
+      linkText: g('sb-linkText').trim(),
+    };
     localStorage.setItem(LS.HOME, JSON.stringify(S.HOME));
     flashOk('saveOkHome');
   });
