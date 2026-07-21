@@ -102,8 +102,6 @@
     .vi.error { background: #FFF5F5; color: #9B2C2C; }
 
     /* ── Rules editor ── */
-    .rules-editor { font-family: 'Consolas', 'Monaco', monospace; font-size: 0.78rem; width: 100%; min-height: 300px; padding: 12px; border: 1.5px solid #E2E8F0; border-radius: 7px; resize: vertical; line-height: 1.5; }
-    .rules-editor:focus { border-color: #2E75B6; outline: none; }
 
     /* ── Page heading ── */
     .ph { font-size: 1.2rem; font-weight: 800; color: #1A2332; margin-bottom: 3px; }
@@ -529,21 +527,57 @@
 
     <!-- ════ 자가진단 규칙 ════ -->
     <div id="tab-rules" class="tab">
-      <div class="ph">자가진단 매칭 규칙</div>
-      <p class="ps"><code>matching-rules.json</code> 내용을 직접 편집합니다. 저장하면 자가진단 결과에 즉시 반영됩니다.</p>
+      <div class="ph">자가진단 결과 편집</div>
+      <p class="ps">연령대·가구형태·고용상태 조합을 고르고, 그 조합의 자가진단 결과로 보여줄 정책을 목록에서 직접 골라 담습니다. <strong>상위 3개까지만</strong> 결과 화면에 노출되므로 순서가 중요합니다.</p>
 
       <div class="card">
-        <div class="card-hd">
-          <span class="card-title">benefitsMap (연령·가구·고용상태 → 추천 혜택)</span>
-          <span style="font-size:0.75rem;color:#94A3B8;">JSON 형식으로 편집</span>
+        <div class="card-hd"><span class="card-title">조합 선택</span></div>
+        <div class="fg">
+          <div class="fv"><label class="fl">연령대</label>
+            <select class="fi" id="ruleAge">
+              <option value="10대">10대</option>
+              <option value="20대">20대</option>
+              <option value="30대">30대</option>
+              <option value="40대">40대</option>
+              <option value="50대">50대</option>
+              <option value="60대 이상">60대 이상</option>
+            </select>
+          </div>
+          <div class="fv"><label class="fl">가구형태</label>
+            <select class="fi" id="ruleHousehold">
+              <option value="1인가구">1인가구</option>
+              <option value="부모님과 동거">부모님과 동거</option>
+              <option value="배우자와 동거">배우자와 동거</option>
+              <option value="자녀 있는 가구">자녀 있는 가구</option>
+            </select>
+          </div>
+          <div class="fv"><label class="fl">고용상태</label>
+            <select class="fi" id="ruleEmploy">
+              <option value="직장인">직장인 (재직중)</option>
+              <option value="취업준비중">취업준비중</option>
+              <option value="자영업자">자영업자·프리랜서</option>
+              <option value="무직·기타">무직·기타</option>
+            </select>
+          </div>
         </div>
-        <textarea class="rules-editor" id="rulesEditor" spellcheck="false"></textarea>
-        <p style="font-size:0.72rem;color:#94A3B8;margin-top:8px;" id="rulesStatus"></p>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">이 조합의 혜택 목록</span></div>
+        <table class="pt" id="ruleBenefitTable">
+          <thead><tr><th style="width:80px;">순서</th><th>혜택명</th><th></th></tr></thead>
+          <tbody id="ruleBenefitBody"></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><span class="card-title">정책 추가</span></div>
+        <input class="fi" type="text" id="ruleSearch" placeholder="정책명·카테고리 검색...">
+        <div id="ruleSearchResults" style="margin-top:10px;max-height:280px;overflow-y:auto;"></div>
       </div>
 
       <div class="save-bar">
-        <button class="btn btn-p" id="btnSaveRules">💾 규칙 저장</button>
-        <button class="btn btn-s" id="btnValidateRules">문법 검사</button>
+        <button class="btn btn-p" id="btnSaveRules">💾 저장</button>
         <span class="save-ok" id="saveOkR">✓ 저장 완료</span>
       </div>
     </div>
@@ -940,9 +974,78 @@ function editPol(id) {
   document.getElementById('polEditPanel').scrollIntoView({ behavior: 'smooth' });
 }
 
+function ruleCombo() {
+  return { age: g('ruleAge'), household: g('ruleHousehold'), employ: g('ruleEmploy') };
+}
+
+function policyBenefitName(p) { return String((p && (p.benefit || p.title)) || '').trim(); }
+function findPolicyByBenefitName(name) { return (S.P.policies || []).find(function (p) { return policyBenefitName(p) === name; }); }
+
 function renderRulesEditor() {
-  if (!S.R) return;
-  document.getElementById('rulesEditor').value = JSON.stringify(S.R, null, 2);
+  if (!S.R || !S.P) return;
+  const { age, household, employ } = ruleCombo();
+  const arr = getRuleArray(S.R, age, household, employ);
+  const body = el('ruleBenefitBody');
+  body.innerHTML = arr.map(function (name, i) {
+    const known = !!findPolicyByBenefitName(name);
+    return '<tr>' +
+      '<td style="white-space:nowrap;">' +
+        '<button class="btn btn-s btn-sm" onclick="moveRuleBenefit(' + i + ',-1)">↑</button> ' +
+        '<button class="btn btn-s btn-sm" onclick="moveRuleBenefit(' + i + ',1)">↓</button>' +
+      '</td>' +
+      '<td>' + esc(name) + (known ? '' : ' <span class="sbadge draft">정책 미등록</span>') + '</td>' +
+      '<td style="text-align:right;"><button class="btn btn-d btn-sm" onclick="removeRuleBenefit(' + i + ')">🗑️</button></td>' +
+    '</tr>';
+  }).join('') || '<tr><td colspan="3" style="padding:14px;text-align:center;color:#94A3B8;">등록된 혜택이 없습니다. 아래에서 정책을 추가하세요.</td></tr>';
+  renderRuleSearch();
+}
+
+function renderRuleSearch() {
+  const box = el('ruleSearchResults');
+  if (!box || !S.P) return;
+  const { age, household, employ } = ruleCombo();
+  const arr = getRuleArray(S.R, age, household, employ);
+  const q = (el('ruleSearch').value || '').trim().toLowerCase();
+  const rows = [];
+  (S.P.policies || []).forEach(function (p, i) {
+    const name = policyBenefitName(p);
+    if (!name) return;
+    if (q && !((p.title + ' ' + (p.category || '')).toLowerCase().includes(q))) return;
+    const added = arr.includes(name);
+    rows.push(
+      '<div style="display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid #F0F4F8;">' +
+        '<span style="flex:1;">' + esc(p.title) + ' <span style="color:#94A3B8;font-size:0.72rem;">' + esc(p.category || '') + '</span></span>' +
+        (added
+          ? '<span class="sbadge active">추가됨</span>'
+          : '<button class="btn btn-s btn-sm" onclick="addRuleBenefit(' + i + ')">➕ 추가</button>') +
+      '</div>'
+    );
+  });
+  box.innerHTML = rows.join('') || '<div style="padding:14px;text-align:center;color:#94A3B8;">검색 결과가 없습니다.</div>';
+}
+
+function addRuleBenefit(polIdx) {
+  const p = S.P.policies[polIdx]; if (!p) return;
+  const name = policyBenefitName(p); if (!name) return;
+  const { age, household, employ } = ruleCombo();
+  const arr = getRuleArray(S.R, age, household, employ);
+  if (!arr.includes(name)) arr.push(name);
+  if (!S.R.benefitDetails) S.R.benefitDetails = {};
+  if (!S.R.benefitDetails[name]) {
+    S.R.benefitDetails[name] = { icon: '✨', desc: p.summary || '', url: p.articleUrl || '#' };
+  }
+  renderRulesEditor();
+}
+
+function removeRuleBenefit(idx) {
+  const { age, household, employ } = ruleCombo();
+  getRuleArray(S.R, age, household, employ).splice(idx, 1);
+  renderRulesEditor();
+}
+
+function moveRuleBenefit(idx, dir) {
+  const { age, household, employ } = ruleCombo();
+  if (swapItems(getRuleArray(S.R, age, household, employ), idx, dir)) renderRulesEditor();
 }
 
 // ─── 자료실 ─────────────────────────────────────────────────
@@ -1413,19 +1516,14 @@ function setupEvents() {
   });
 
   // 자가진단 규칙 저장
+  el('ruleAge').addEventListener('change', renderRulesEditor);
+  el('ruleHousehold').addEventListener('change', renderRulesEditor);
+  el('ruleEmploy').addEventListener('change', renderRulesEditor);
+  el('ruleSearch').addEventListener('input', renderRuleSearch);
   el('btnSaveRules').addEventListener('click', () => {
-    try {
-      S.R = JSON.parse(el('rulesEditor').value);
-      localStorage.setItem(LS.R, JSON.stringify(S.R));
-      flashOk('saveOkR');
-      document.getElementById('rulesStatus').textContent = '✓ JSON 유효 — 저장 완료';
-    } catch(e) {
-      document.getElementById('rulesStatus').textContent = '❌ JSON 오류: ' + e.message;
-    }
-  });
-  el('btnValidateRules').addEventListener('click', () => {
-    try { JSON.parse(el('rulesEditor').value); document.getElementById('rulesStatus').textContent = '✓ JSON 형식이 올바릅니다.'; }
-    catch(e) { document.getElementById('rulesStatus').textContent = '❌ JSON 오류: ' + e.message; }
+    S.R.meta = S.R.meta || {}; S.R.meta.lastUpdated = TODAY;
+    localStorage.setItem(LS.R, JSON.stringify(S.R));
+    flashOk('saveOkR');
   });
 
   // 검증
@@ -1434,7 +1532,7 @@ function setupEvents() {
   // 내보내기
   el('btnDlC').addEventListener('click', () => { collectConstants(); dl(S.C, 'constants.json'); });
   el('btnDlP').addEventListener('click', () => dl(S.P, 'policies.json'));
-  el('btnDlR').addEventListener('click', () => { try { S.R = JSON.parse(el('rulesEditor').value); } catch(e) {} dl(S.R, 'matching-rules.json'); });
+  el('btnDlR').addEventListener('click', () => dl(S.R, 'matching-rules.json'));
   el('btnDlRes').addEventListener('click', () => dl(S.RES, 'resources.json'));
   el('btnDlHome').addEventListener('click', () => dl(S.HOME, 'home-cards.json'));
 
@@ -1643,28 +1741,41 @@ function diagUnshift(arr, name) {
   a.unshift(name);
   return a;
 }
-function diagInsert(R, age, household, employ, benefit) {
+// 연령대 노드를 { default: [...] } 형태로 승격/생성해 반환한다.
+function ensureAgeNode(R, age) {
   const map = R.benefitsMap || (R.benefitsMap = {});
   let ageNode = map[age];
   if (Array.isArray(ageNode)) ageNode = map[age] = { default: ageNode };
   else if (!ageNode || typeof ageNode !== 'object') ageNode = map[age] = { default: [] };
   if (!Array.isArray(ageNode.default)) ageNode.default = [];
+  return ageNode;
+}
+
+// (연령·가구·고용) 경로의 혜택 배열 참조를 반환한다. 없으면 만든다(배열↔객체 승격 포함).
+function getRuleArray(R, age, household, employ) {
+  const ageNode = ensureAgeNode(R, age);
+  let hh = ageNode[household];
+  if (hh === undefined) hh = ageNode[household] = { default: ageNode.default.slice() };
+  if (Array.isArray(hh)) hh = ageNode[household] = { default: hh.slice() };
+  if (!Array.isArray(hh.default)) hh.default = [];
+  if (hh[employ] === undefined) hh[employ] = hh.default.slice();
+  return hh[employ];
+}
+
+function diagInsert(R, age, household, employ, benefit) {
+  const ageNode = ensureAgeNode(R, age);
 
   if (!household) { ageNode.default = diagUnshift(ageNode.default, benefit); return; }
 
-  let hh = ageNode[household];
-  if (hh === undefined) hh = ageNode[household] = employ ? { default: ageNode.default.slice() } : ageNode.default.slice();
-
   if (!employ) {
+    let hh = ageNode[household];
+    if (hh === undefined) hh = ageNode[household] = ageNode.default.slice();
     if (Array.isArray(hh)) ageNode[household] = diagUnshift(hh, benefit);
     else hh.default = diagUnshift(hh.default, benefit);
     return;
   }
 
-  if (Array.isArray(hh)) hh = ageNode[household] = { default: hh.slice() };
-  if (!Array.isArray(hh.default)) hh.default = [];
-  if (hh[employ] === undefined) hh[employ] = hh.default.slice();
-  hh[employ] = diagUnshift(hh[employ], benefit);
+  diagUnshift(getRuleArray(R, age, household, employ), benefit);
 }
 
 function validateAdd(d) {
