@@ -244,15 +244,25 @@
         return 0;
       }
 
-      function getIncomeTax(annualGross, dep) {
+      // 근로소득세액공제
+      function getWageCredit(calculatedTax, annualGross) {
+        let credit = calculatedTax <= 1300000 ? calculatedTax * 0.55 : 715000 + (calculatedTax - 1300000) * 0.3;
+        const cap = annualGross <= 33000000 ? 740000 : annualGross <= 70000000 ? 660000 : 500000;
+        return Math.min(credit, cap);
+      }
+
+      function getIncomeTax(annualGross, dep, annualInsurance) {
         const wageDeduction = Math.min(getWageDeduction(annualGross), 20000000);
         const basicDeduction = dep * 1500000; // 기본공제 1인당 150만원
-        const taxableIncome = Math.max(0, annualGross - wageDeduction - basicDeduction);
-        const annualTax = Math.max(0, calcIncomeTax(taxableIncome));
+        const taxableIncome = Math.max(0, annualGross - wageDeduction - basicDeduction - annualInsurance);
+        const calculatedTax = Math.max(0, calcIncomeTax(taxableIncome));
+        const wageCredit = getWageCredit(calculatedTax, annualGross);
+        const annualTax = Math.max(0, calculatedTax - wageCredit);
         return Math.round(annualTax / 12);
       }
 
-      const incomeTax     = getIncomeTax(annual, dependents);
+      const annualInsurance = (pension + health + ltCare + employment) * 12;
+      const incomeTax     = getIncomeTax(annual, dependents, annualInsurance);
       const localTax      = Math.round(incomeTax * 0.1);
       const totalDeduction = pension + health + ltCare + employment + incomeTax + localTax;
       const netMonthly    = Math.round(monthly - totalDeduction);
