@@ -217,28 +217,42 @@
       const ltCare       = Math.round(health * 0.1295);                        // 장기요양보험
       const employment   = Math.round(monthly * 0.009);                        // 고용보험
 
-      // 소득세 간이세액 근사 계산 (과세표준 기반 단순화)
-      function getIncomeTax(monthlyGross, dep) {
-        const taxable = monthlyGross - pension - health - ltCare - employment;
-        let tax = 0;
-        // 간이세액표 근사 (단독, 월 과세소득 기준)
-        const brackets = [
-          [1060000, 0],
-          [1500000, taxable * 0.06 - 63600],
-          [3000000, taxable * 0.15 - 199200],
-          [4500000, taxable * 0.24 - 444000],
-          [8000000, taxable * 0.35 - 940500],
-          [Infinity, taxable * 0.38 - 1180500],
-        ];
-        for (const [threshold, amount] of brackets) {
-          if (taxable <= threshold) { tax = Math.max(0, amount); break; }
-        }
-        // 부양가족 공제 (1인 추가 시 월 약 12,500원 감소 — 간소화)
-        const depDiscount = (dep - 1) * 12500;
-        return Math.max(0, Math.round(tax - depDiscount));
+      // 근로소득공제
+      function getWageDeduction(income) {
+        if (income <= 5000000)   return income * 0.7;
+        if (income <= 15000000)  return 3500000  + (income - 5000000)  * 0.4;
+        if (income <= 45000000)  return 7500000  + (income - 15000000) * 0.15;
+        if (income <= 100000000) return 12000000 + (income - 45000000) * 0.05;
+        return 14750000;
       }
 
-      const incomeTax     = getIncomeTax(monthly, dependents);
+      // 종합소득세 (현행 8단계 초과누진세율)
+      function calcIncomeTax(income) {
+        const brackets = [
+          [14000000, 0.06, 0],
+          [50000000, 0.15, 1260000],
+          [88000000, 0.24, 5760000],
+          [150000000, 0.35, 15440000],
+          [300000000, 0.38, 19940000],
+          [500000000, 0.40, 25940000],
+          [1000000000, 0.42, 35940000],
+          [Infinity, 0.45, 65940000],
+        ];
+        for (const [threshold, rate, deduct] of brackets) {
+          if (income <= threshold) return Math.round(income * rate - deduct);
+        }
+        return 0;
+      }
+
+      function getIncomeTax(annualGross, dep) {
+        const wageDeduction = Math.min(getWageDeduction(annualGross), 20000000);
+        const basicDeduction = dep * 1500000; // 기본공제 1인당 150만원
+        const taxableIncome = Math.max(0, annualGross - wageDeduction - basicDeduction);
+        const annualTax = Math.max(0, calcIncomeTax(taxableIncome));
+        return Math.round(annualTax / 12);
+      }
+
+      const incomeTax     = getIncomeTax(annual, dependents);
       const localTax      = Math.round(incomeTax * 0.1);
       const totalDeduction = pension + health + ltCare + employment + incomeTax + localTax;
       const netMonthly    = Math.round(monthly - totalDeduction);

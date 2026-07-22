@@ -245,7 +245,8 @@
           [150000000, 0.35, 15440000],
           [300000000, 0.38, 19940000],
           [500000000, 0.40, 25940000],
-          [Infinity,  0.42, 35940000],
+          [1000000000, 0.42, 35940000],
+          [Infinity,  0.45, 65940000],
         ];
         for (const [threshold, rate, deduct] of brackets) {
           if (income <= threshold) return Math.round(income * rate - deduct);
