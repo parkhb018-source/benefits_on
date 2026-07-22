@@ -292,11 +292,11 @@
       const finalTax    = Math.max(0, calculatedTax - totalCredit);
       const localTax    = Math.round(finalTax * 0.1);
 
-      // 기납부세액 = 월 소득세 × 12 (근사)
-      const monthlyGross = annual / 12;
-      const prepaidEst   = Math.round(((monthlyGross - monthlyGross * 0.15) * 0.15) * 12 * 0.5);
-      const prepaid      = Math.round(finalTax * 0.95); // 실제 납부와 최종세액 차이 5% 환급 시뮬
-      const refund       = prepaid - finalTax;
+      // 기납부세액: 매월 원천징수 시에는 근로소득세액공제만 반영되고
+      // 카드·의료비·교육비·기부금·보험료 공제는 연말정산 때 비로소 반영되므로,
+      // 그 차이(itemized 공제분)만큼 환급/추가납부가 발생한다.
+      const prepaid = Math.max(0, calculatedTax - wageCredit);
+      const refund  = prepaid - finalTax;
 
       // 표시
       const hero = document.getElementById('resultHero');
