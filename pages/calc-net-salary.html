@@ -6,6 +6,7 @@
   <title>실수령액 계산기 2026 — 4대보험·세금 공제 후 실제 월급 — 혜택on</title>
   <meta name="description" content="2026년 연봉을 입력하면 4대보험과 세금을 뺀 실수령액을 바로 계산해드려요.">
   <link rel="stylesheet" href="../style.css?v=20260626">
+  <link rel="stylesheet" href="pages.css?v=20260626">
   <style>
     .calc-page-wrap { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
     .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
@@ -151,10 +152,56 @@
           </div>
         </div>
       </div>
-    </div>
-  </main>
 
-  
+      <div class="article-body" style="margin-top:8px;">
+        <h2>실수령액은 어떻게 계산되나요?</h2>
+        <p>연봉이나 월급을 그대로 받는 것이 아니라, 4대보험(국민연금·건강보험·장기요양보험·고용보험)과 소득세·지방소득세를 뗀 금액이 통장에 들어오는 <strong>실수령액</strong>입니다. 이 계산기는 급여, 부양가족 수를 입력받아 아래 공식으로 공제액을 산출합니다.</p>
+
+        <h2>계산 방식</h2>
+        <h3>① 4대보험 공제 (월 기준)</h3>
+        <table>
+          <thead><tr><th>항목</th><th>요율</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td>국민연금</td><td>4.5%</td><td>월 소득 590만원 상한 적용</td></tr>
+            <tr><td>건강보험</td><td>3.545%</td><td>2025년 기준 요율</td></tr>
+            <tr><td>장기요양보험</td><td>건강보험료 × 12.95%</td><td>건강보험료에 연동</td></tr>
+            <tr><td>고용보험</td><td>0.9%</td><td>실업급여 재원</td></tr>
+          </tbody>
+        </table>
+        <h3>② 근로소득공제 (연간)</h3>
+        <p>과세 대상 소득을 줄여주는 공제로, 총급여 구간에 따라 공제율이 달라집니다. 500만원 이하분은 70%, 500만~1,500만원 구간은 40%, 1,500만~4,500만원 구간은 15%, 4,500만~1억원 구간은 5%가 적용되며, 공제액은 최대 2,000만원까지만 인정됩니다.</p>
+        <h3>③ 종합소득세 (초과누진세율)</h3>
+        <table>
+          <thead><tr><th>과세표준</th><th>세율</th><th>누진공제</th></tr></thead>
+          <tbody>
+            <tr><td>1,400만원 이하</td><td>6%</td><td>0원</td></tr>
+            <tr><td>5,000만원 이하</td><td>15%</td><td>126만원</td></tr>
+            <tr><td>8,800만원 이하</td><td>24%</td><td>576만원</td></tr>
+            <tr><td>1억 5,000만원 이하</td><td>35%</td><td>1,544만원</td></tr>
+          </tbody>
+        </table>
+        <p>여기에 부양가족 1인당 150만원의 기본공제를 뺀 뒤 세율을 적용하고, 근로소득세액공제(산출세액 130만원 이하분 55%, 초과분 30%, 총급여 구간별 한도 74만~50만원)를 다시 차감해 최종 소득세를 구합니다. 지방소득세는 이 소득세의 10%입니다.</p>
+
+        <h2>계산 예시</h2>
+        <table>
+          <thead><tr><th>구분</th><th>연봉 3,600만원 · 부양가족 2명</th><th>연봉 5,000만원 · 부양가족 1명</th></tr></thead>
+          <tbody>
+            <tr><td>월 4대보험 공제</td><td>약 28만원</td><td>약 39만원</td></tr>
+            <tr><td>월 소득세+지방세</td><td>약 8만 5천원</td><td>약 25만 8천원</td></tr>
+            <tr><td>월 실수령액</td><td>약 263만원</td><td>약 352만원</td></tr>
+          </tbody>
+        </table>
+        <p>같은 연봉이라도 부양가족 수가 많을수록 기본공제가 늘어 소득세 부담이 줄어들고, 실수령액은 커집니다.</p>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>Q. 상여금이나 비과세 수당도 포함해서 입력해야 하나요?</h3>
+        <p>이 계산기는 연봉을 과세 대상 근로소득으로 가정합니다. 식대·차량유지비 등 비과세 항목이 있다면 실제 과세 대상 금액은 입력값보다 적으므로, 실수령액은 계산 결과보다 다소 높을 수 있습니다.</p>
+        <h3>Q. 국민연금 상한선은 왜 있나요?</h3>
+        <p>국민연금 보험료는 기준소득월액이 일정 금액(2025년 기준 590만원)을 넘으면 그 이상 금액에는 보험료를 부과하지 않습니다. 고소득자의 경우 국민연금 공제율이 실제로는 4.5%보다 낮아집니다.</p>
+        <h3>Q. 프리랜서·개인사업자도 이 계산기를 쓸 수 있나요?</h3>
+        <p>아니요. 이 계산기는 4대보험에 가입된 근로소득자 기준입니다. 사업소득자는 건강보험 지역가입자 산정 방식과 종합소득세 신고 방식이 달라 별도 계산이 필요합니다.</p>
+      </div>
+
   <!-- ─── 결과 하단 광고 ─── -->
   <div class="container" style="margin:24px auto;text-align:center;">
     <ins class="adsbygoogle"
@@ -165,6 +212,9 @@
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
+    </div>
+  </main>
+
 <footer class="footer-simple">
     <div class="container footer-simple-inner">
       <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>

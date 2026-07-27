@@ -6,6 +6,7 @@
   <title>최저임금 월급 계산기 2026 — 시급 10,320원 월급 환산 — 혜택on</title>
   <meta name="description" content="2026년 최저시급 10,320원 기준. 주휴수당 포함 월급, 209시간 환산액을 바로 계산하세요.">
   <link rel="stylesheet" href="../style.css?v=20260626">
+  <link rel="stylesheet" href="pages.css?v=20260626">
   <style>
     .calc-page-wrap { max-width: 680px; margin: 0 auto; padding: 48px 16px 80px; }
     .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
@@ -143,10 +144,48 @@
           <p class="result-note-small" id="resultNote"></p>
         </div>
       </div>
+
+      <div class="article-body" style="margin-top:8px;">
+        <h2>주휴수당 포함 월급은 어떻게 계산되나요?</h2>
+        <p>최저임금은 시급 기준이지만, 실제 월급은 시급뿐 아니라 <strong>주휴수당</strong>까지 포함해서 계산해야 정확합니다. 주휴수당은 1주 소정근로시간이 15시간 이상인 근로자가 개근했을 때 지급되는 유급휴일 수당입니다.</p>
+
+        <h2>계산 방식</h2>
+        <table>
+          <thead><tr><th>단계</th><th>계산식</th></tr></thead>
+          <tbody>
+            <tr><td>① 주당 근무시간</td><td>1일 근무시간 × 주 근무일수</td></tr>
+            <tr><td>② 주휴수당 발생 여부</td><td>주당 근무시간이 15시간 이상이면 발생</td></tr>
+            <tr><td>③ 주휴시간</td><td>(주당 근무시간 ÷ 40) × 8시간 (최대 8시간)</td></tr>
+            <tr><td>④ 월 환산 시간</td><td>(주당 근무시간 + 주휴시간) × 4.345주</td></tr>
+            <tr><td>⑤ 월급</td><td>월 환산 시간 × 시급</td></tr>
+          </tbody>
+        </table>
+        <p>4.345는 1년(365일)을 12개월·7일로 나눠 얻은 평균 주 수(52.14주 ÷ 12개월)입니다. 이 계산기는 세금·4대보험을 떼기 전 세전 금액을 보여줍니다.</p>
+
+        <h2>계산 예시</h2>
+        <table>
+          <thead><tr><th>구분</th><th>주 5일 · 하루 8시간 (풀타임)</th><th>주 3일 · 하루 5시간 (파트타임)</th></tr></thead>
+          <tbody>
+            <tr><td>주당 근무시간</td><td>40시간</td><td>15시간</td></tr>
+            <tr><td>주휴수당</td><td>적용 (8시간)</td><td>적용 (3시간)</td></tr>
+            <tr><td>월 환산 시간</td><td>209시간</td><td>78시간</td></tr>
+            <tr><td>월급 (2026년 최저시급 기준)</td><td>2,156,880원</td><td>804,960원</td></tr>
+          </tbody>
+        </table>
+        <p>같은 주 15시간이라도 하루 4시간씩 4일 이하로 쪼개 근무해 주당 근무시간이 15시간 미만이 되면 주휴수당이 발생하지 않으므로, 근무 스케줄을 짤 때 이 기준을 참고하면 좋습니다.</p>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>Q. 아르바이트도 최저임금과 주휴수당이 적용되나요?</h3>
+        <p>네. 근로자 수, 고용 형태와 무관하게 주 15시간 이상 근무하면 주휴수당이 발생합니다. 사업장 규모와 상관없이 모든 근로자에게 최저임금이 적용됩니다.</p>
+        <h3>Q. 수습 기간에는 최저임금보다 적게 받아도 되나요?</h3>
+        <p>1년 이상 계약한 근로자의 수습 기간(최대 3개월)에는 최저임금의 90%까지 감액할 수 있습니다. 다만 단순노무직이나 계약기간이 1년 미만인 경우는 감액 없이 100% 적용됩니다.</p>
+        <h3>Q. 왜 계산 결과가 세전 금액인가요?</h3>
+        <p>이 계산기는 근로계약상 지급되어야 할 급여 총액을 보여주는 것이 목적이라 세전 기준입니다. 4대보험과 세금을 뗀 실제 수령액이 궁금하다면 <a href="calc-net-salary.html">실수령액 계산기</a>를 함께 이용하세요.</p>
+      </div>
     </div>
   </main>
 
-  
+
   <!-- ─── 결과 하단 광고 ─── -->
   <div class="container" style="margin:24px auto;text-align:center;">
     <ins class="adsbygoogle"

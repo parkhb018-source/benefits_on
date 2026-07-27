@@ -6,6 +6,7 @@
   <title>근로장려금 계산기 2026 — 지급액 자동 계산 — 혜택on</title>
   <meta name="description" content="2026년 가구유형과 총소득을 입력하면 근로장려금 예상 지급액을 바로 계산해드려요. 맞벌이 최대 330만원.">
   <link rel="stylesheet" href="../style.css?v=20260626">
+  <link rel="stylesheet" href="pages.css?v=20260626">
   <style>
     .calc-page-wrap { max-width: 700px; margin: 0 auto; padding: 48px 16px 80px; }
     .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
@@ -156,10 +157,52 @@
           </p>
         </div>
       </div>
+
+      <div class="article-body" style="margin-top:8px;">
+        <h2>근로장려금 지급액은 어떻게 계산되나요?</h2>
+        <p>근로장려금은 소득이 낮을수록 무조건 많이 주는 제도가 아니라, 소득 구간별로 지급액이 늘었다가(점증) 최고 수준을 유지하고(평탄) 다시 줄어드는(점감) 3단계 구조로 설계되어 있습니다. 가구 유형(단독·홑벌이·맞벌이)에 따라 각 구간의 소득 기준이 다릅니다.</p>
+
+        <h2>계산 방식 — 3단계 구조</h2>
+        <table>
+          <thead><tr><th>구간</th><th>내용</th><th>계산식</th></tr></thead>
+          <tbody>
+            <tr><td>① 점증구간</td><td>소득이 늘수록 장려금도 함께 증가</td><td>지급액 = 소득 ÷ 점증구간 상한 × 최대지급액</td></tr>
+            <tr><td>② 평탄구간</td><td>최대 지급액을 그대로 받는 구간</td><td>지급액 = 최대지급액</td></tr>
+            <tr><td>③ 점감구간</td><td>소득이 늘수록 장려금이 서서히 감소</td><td>지급액 = (소득상한 − 소득) ÷ (소득상한 − 평탄구간끝) × 최대지급액</td></tr>
+          </tbody>
+        </table>
+        <h3>가구유형별 구간 기준 (2026년)</h3>
+        <table>
+          <thead><tr><th>가구유형</th><th>점증구간 끝</th><th>평탄구간 끝</th><th>소득 상한</th><th>최대지급액</th></tr></thead>
+          <tbody>
+            <tr><td>단독가구</td><td>400만원</td><td>900만원</td><td>2,200만원</td><td>165만원</td></tr>
+            <tr><td>홑벌이가구</td><td>700만원</td><td>1,400만원</td><td>3,200만원</td><td>285만원</td></tr>
+            <tr><td>맞벌이가구</td><td>800만원</td><td>1,700만원</td><td>4,400만원</td><td>330만원</td></tr>
+          </tbody>
+        </table>
+
+        <h2>계산 예시</h2>
+        <table>
+          <thead><tr><th>구분</th><th>단독가구 · 소득 600만원</th><th>맞벌이가구 · 소득 3,000만원</th></tr></thead>
+          <tbody>
+            <tr><td>해당 구간</td><td>평탄구간 (400만~900만원)</td><td>점감구간 (1,700만~4,400만원)</td></tr>
+            <tr><td>계산</td><td>최대지급액 그대로</td><td>(4,400만−3,000만)÷(4,400만−1,700만)×330만</td></tr>
+            <tr><td>예상 지급액</td><td>165만원</td><td>약 171만원</td></tr>
+          </tbody>
+        </table>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>Q. 소득이 아예 없어도 받을 수 있나요?</h3>
+        <p>아니요. 근로·사업·종교인 소득이 전혀 없으면(0원) 지급 대상이 아닙니다. 일정 수준 이상의 근로·사업 활동이 있어야 신청할 수 있습니다.</p>
+        <h3>Q. 재산 기준도 계산기에 반영되나요?</h3>
+        <p>이 계산기는 소득 기준으로만 예상액을 계산합니다. 실제로는 가구원 재산 합계가 2억 4,000만원 미만이어야 하며, 1억 4,000만~2억 4,000만원 구간은 산정액의 50%만 지급됩니다.</p>
+        <h3>Q. 계산 결과와 실제 지급액이 다를 수 있나요?</h3>
+        <p>네. 국세청은 신고된 소득·재산 자료를 바탕으로 최종 심사 후 지급액을 확정하므로, 이 계산기의 결과는 참고용 예상치입니다.</p>
+      </div>
     </div>
   </main>
 
-  
+
   <!-- ─── 결과 하단 광고 ─── -->
   <div class="container" style="margin:24px auto;text-align:center;">
     <ins class="adsbygoogle"

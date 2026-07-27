@@ -6,6 +6,7 @@
   <title>실업급여 계산기 2026 — 수급액·수급기간 계산 — 혜택on</title>
   <meta name="description" content="2026년 기준 퇴직 전 평균임금과 고용보험 가입기간을 입력하면 실업급여 수급액과 기간을 바로 계산해드려요.">
   <link rel="stylesheet" href="../style.css?v=20260626">
+  <link rel="stylesheet" href="pages.css?v=20260626">
   <style>
     .calc-page-wrap { max-width: 700px; margin: 0 auto; padding: 48px 16px 80px; }
     .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
@@ -159,10 +160,58 @@
           </p>
         </div>
       </div>
+
+      <div class="article-body" style="margin-top:8px;">
+        <h2>실업급여(구직급여)는 어떻게 계산되나요?</h2>
+        <p>실업급여는 퇴직 전 평균임금의 60%를 하루 단위로 지급하되, 정해진 상한액·하한액 사이에서만 지급됩니다. 실제 받는 총액은 <strong>일 실업급여 × 소정급여일수</strong>로 결정되며, 소정급여일수는 나이와 고용보험 가입기간에 따라 달라집니다.</p>
+
+        <h2>계산 방식</h2>
+        <table>
+          <thead><tr><th>단계</th><th>계산식</th></tr></thead>
+          <tbody>
+            <tr><td>① 일 평균임금</td><td>퇴직 전 3개월 평균 월급 ÷ 30</td></tr>
+            <tr><td>② 일 실업급여(구직급여일액)</td><td>일 평균임금 × 60%</td></tr>
+            <tr><td>③ 상한·하한 적용</td><td>2026년 상한 68,100원 / 하한 66,048원(최저임금×80%×8시간)</td></tr>
+            <tr><td>④ 소정급여일수</td><td>나이 + 고용보험 가입기간에 따라 120~270일</td></tr>
+            <tr><td>⑤ 총 수령액</td><td>③ × ④</td></tr>
+          </tbody>
+        </table>
+        <h3>소정급여일수표 (가입기간별)</h3>
+        <table>
+          <thead><tr><th>가입기간</th><th>50세 미만</th><th>50세 이상·장애인</th></tr></thead>
+          <tbody>
+            <tr><td>1년 미만</td><td>120일</td><td>120일</td></tr>
+            <tr><td>1~3년</td><td>150일</td><td>180일</td></tr>
+            <tr><td>3~5년</td><td>180일</td><td>210일</td></tr>
+            <tr><td>5~10년</td><td>210일</td><td>240일</td></tr>
+            <tr><td>10년 이상</td><td>240일</td><td>270일</td></tr>
+          </tbody>
+        </table>
+
+        <h2>계산 예시</h2>
+        <table>
+          <thead><tr><th>구분</th><th>평균월급 300만원 · 가입 2년 · 35세</th><th>평균월급 400만원 · 가입 5년 · 55세</th></tr></thead>
+          <tbody>
+            <tr><td>일 평균임금 × 60%</td><td>60,000원 → 하한액 적용</td><td>80,000원 → 상한액 적용</td></tr>
+            <tr><td>일 실업급여</td><td>66,048원</td><td>68,100원</td></tr>
+            <tr><td>소정급여일수</td><td>150일</td><td>240일</td></tr>
+            <tr><td>예상 총 수령액</td><td>약 991만원</td><td>약 1,634만원</td></tr>
+          </tbody>
+        </table>
+        <p>평균임금이 낮으면 하한액이, 평균임금이 높으면 상한액이 적용되어 실제 지급률이 60%보다 낮아지는 경우가 많습니다. 또한 50세 이상은 같은 가입기간이라도 소정급여일수가 더 깁니다.</p>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>Q. 권고사직도 실업급여를 받을 수 있나요?</h3>
+        <p>네. 권고사직, 계약만료, 정리해고 등 회사 사정으로 인한 비자발적 퇴직은 수급 대상입니다. 반면 단순 개인 사정에 의한 자발적 퇴직은 원칙적으로 제한되지만, 질병·임금체불 등 정당한 사유가 있으면 예외적으로 인정될 수 있습니다.</p>
+        <h3>Q. 고용보험 가입기간은 어떻게 합산하나요?</h3>
+        <p>이직 전 18개월 이내에 여러 직장에서 근무했다면, 각 직장의 고용보험 가입기간을 모두 더해 180일(6개월) 이상인지 판단합니다.</p>
+        <h3>Q. 실업급여를 받는 동안 다른 일을 해도 되나요?</h3>
+        <p>구직활동 중 단기 근로나 소득이 발생하면 반드시 고용센터에 신고해야 합니다. 신고하지 않고 소득이 확인되면 부정수급으로 간주되어 지급이 제한되고 추가 징수될 수 있습니다.</p>
+      </div>
     </div>
   </main>
 
-  
+
   <!-- ─── 결과 하단 광고 ─── -->
   <div class="container" style="margin:24px auto;text-align:center;">
     <ins class="adsbygoogle"
