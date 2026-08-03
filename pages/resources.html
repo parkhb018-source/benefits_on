@@ -195,9 +195,11 @@
             '</div>' +
             '<p class="res-card-desc">' + esc(r.description) + '</p>' +
             (meta.length ? '<div class="res-card-meta">' + meta.join('') + '</div>' : '') +
-            (r.fileUrl
-              ? '<a class="res-dl" href="' + esc(r.fileUrl) + '" download>⬇ 무료사용</a>'
-              : '<span class="res-dl" style="background:#CBD5E0;cursor:default;">준비중</span>') +
+            (r.url
+              ? '<a class="res-dl" href="' + esc(r.url) + '">바로 확인</a>'
+              : r.fileUrl
+                ? '<a class="res-dl" href="' + esc(r.fileUrl) + '" download>⬇ 무료사용</a>'
+                : '<span class="res-dl" style="background:#CBD5E0;cursor:default;">준비중</span>') +
           '</div>';
       }).join('');
     }

@@ -13,6 +13,16 @@
       "fileUrl": "../downloads/스탬프앱v1.0.zip",
       "fileSize": "518KB",
       "updatedAt": "2026-06-30"
+    },
+    {
+      "id": "delivery-fee-calc",
+      "title": "배달앱 수수료 계산기",
+      "description": "배민·쿠팡이츠·요기요 수수료·배달비 빼면 내 통장에 얼마가 들어올까?",
+      "version": "v1.0",
+      "icon": "🧮",
+      "category": "계산기",
+      "url": "tools/delivery-fee-calc/index.html",
+      "updatedAt": "2026-08-03"
     }
   ]
 }

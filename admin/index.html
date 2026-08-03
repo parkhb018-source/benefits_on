@@ -671,7 +671,14 @@
           </div>
           <div class="fg">
             <div class="fv"><label class="fl">ID <span class="req">*</span></label><input class="fi" type="text" id="re-id" placeholder="예: sales-tracker"><span class="fh">영문·숫자·하이픈</span></div>
-            <div class="fv"><label class="fl">아이콘(이모지)</label><input class="fi" type="text" id="re-icon" placeholder="📦"></div>
+            <div class="fv">
+              <label class="fl">아이콘(이모지)</label>
+              <div style="display:flex;gap:8px;align-items:center;position:relative;">
+                <input class="fi" type="text" id="re-icon" placeholder="📦" style="flex:1;">
+                <button type="button" class="btn btn-s" id="btnIconPicker">😀</button>
+                <div id="iconPickerPopup" style="display:none;position:absolute;top:100%;left:0;z-index:20;background:#fff;border:1px solid #E2E8F0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:10px;width:260px;"></div>
+              </div>
+            </div>
             <div class="fv" style="grid-column:1/-1"><label class="fl">제목 <span class="req">*</span></label><input class="fi" type="text" id="re-title"></div>
             <div class="fv" style="grid-column:1/-1"><label class="fl">설명</label><input class="fi" type="text" id="re-desc"></div>
             <div class="fv"><label class="fl">카테고리</label><input class="fi" type="text" id="re-cat" placeholder="도구"></div>
@@ -679,12 +686,17 @@
             <div class="fv"><label class="fl">파일 크기</label><input class="fi" type="text" id="re-size" placeholder="2.3MB"></div>
             <div class="fv"><label class="fl">업데이트 날짜</label><input class="fi" type="date" id="re-updated"></div>
             <div class="fv" style="grid-column:1/-1">
-              <label class="fl">파일 경로</label>
+              <label class="fl">실행 페이지 경로 (웹 실행형 도구)</label>
+              <input class="fi" type="text" id="re-page-url" placeholder="tools/도구이름/index.html">
+              <span class="fh">브라우저에서 바로 실행되는 웹 도구면 여기에 경로를 입력하세요. 카드 버튼이 "바로 확인"으로 표시됩니다. 입력하면 아래 파일 경로는 무시됩니다.</span>
+            </div>
+            <div class="fv" style="grid-column:1/-1">
+              <label class="fl">파일 경로 (다운로드형)</label>
               <div style="display:flex;gap:8px;align-items:center;">
                 <input class="fi" type="text" id="re-url" placeholder="../downloads/파일명.zip" style="flex:1;">
                 <label class="btn btn-s" style="cursor:pointer;white-space:nowrap;">📂 파일 선택<input type="file" id="re-file" style="display:none;"></label>
               </div>
-              <span class="fh">파일을 선택하면 경로가 <code>../downloads/파일명</code> 으로 자동 입력됩니다. ※ 실제 파일은 <code>downloads/</code> 폴더에 직접 커밋해야 다운로드가 동작합니다.</span>
+              <span class="fh">파일을 선택하면 경로가 <code>../downloads/파일명</code> 으로 자동 입력됩니다. ※ 실제 파일은 <code>downloads/</code> 폴더에 직접 커밋해야 다운로드가 동작합니다. 위 "실행 페이지 경로"가 비어있을 때만 사용됩니다.</span>
             </div>
           </div>
           <div style="display:flex;gap:8px;margin-top:14px;">
@@ -1053,7 +1065,7 @@ function renderResourcesTable() {
   var list = (S.RES && S.RES.resources) || [];
   document.getElementById('resBody').innerHTML = list.length
     ? list.map(function (r) {
-        var file = r.fileUrl ? (r.fileUrl.split('/').pop()) : '<span style="color:#E53E3E">없음</span>';
+        var file = r.url ? '🔗 웹페이지' : r.fileUrl ? (r.fileUrl.split('/').pop()) : '<span style="color:#E53E3E">없음</span>';
         return '<tr><td><strong>' + esc(r.title) + '</strong></td><td>' + esc(r.category || '-') +
           '</td><td>' + esc(r.version || '-') + '</td><td style="font-size:0.73rem;color:#718096">' + file +
           '</td><td>' + esc(r.updatedAt || '-') + '</td>' +
@@ -1067,6 +1079,7 @@ function openResPanel(r) {
   set('re-id', r ? r.id : ''); set('re-icon', r ? r.icon : ''); set('re-title', r ? r.title : '');
   set('re-desc', r ? r.description : ''); set('re-cat', r ? r.category : ''); set('re-version', r ? r.version : '');
   set('re-size', r ? r.fileSize : ''); set('re-updated', r ? r.updatedAt : TODAY); set('re-url', r ? r.fileUrl : '');
+  set('re-page-url', r ? r.url : '');
   el('re-id').readOnly = !!r;
   el('resEditTitle').textContent = r ? '자료 편집' : '새 자료 추가';
   el('btnDeleteRes').style.display = r ? 'inline-block' : 'none';
@@ -1554,6 +1567,27 @@ function setupEvents() {
   // 자료실
   el('btnAddRes').addEventListener('click', () => openResPanel(null));
   el('btnCancelRes').addEventListener('click', () => { el('resEditPanel').style.display = 'none'; S.resEditId = null; });
+  // 아이콘 이모지 선택창
+  const ICON_CHOICES = ['🧮', '🧾', '📋', '👤', '⏱️', '🕐', '📦', '🛒', '🏠', '🔧', '⚙️', '📱', '💰', '💳', '📈', '📊', '🍽️', '☕', '✂️', '💇', '🚗', '📅', '📌', '⭐'];
+  el('iconPickerPopup').innerHTML = ICON_CHOICES.map(function (ic) {
+    return '<button type="button" class="btn btn-s icon-choice" data-icon="' + ic + '" style="font-size:1.1rem;width:38px;height:38px;padding:0;margin:2px;">' + ic + '</button>';
+  }).join('');
+  el('btnIconPicker').addEventListener('click', e => {
+    e.stopPropagation();
+    const p = el('iconPickerPopup');
+    p.style.display = p.style.display === 'none' ? 'block' : 'none';
+  });
+  el('iconPickerPopup').addEventListener('click', e => {
+    const btn = e.target.closest('.icon-choice');
+    if (!btn) return;
+    el('re-icon').value = btn.dataset.icon;
+    el('iconPickerPopup').style.display = 'none';
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#iconPickerPopup') && e.target.id !== 'btnIconPicker') {
+      el('iconPickerPopup').style.display = 'none';
+    }
+  });
   // 파일 선택 → 경로(../downloads/파일명)·파일 크기 자동 입력
   el('re-file').addEventListener('change', e => {
     const f = e.target.files && e.target.files[0];
@@ -1568,11 +1602,18 @@ function setupEvents() {
     const id = g('re-id').trim(), title = g('re-title').trim();
     if (!id || !title) { alert('ID와 제목은 필수입니다.'); return; }
     if (!S.RES) S.RES = { meta: { lastUpdated: TODAY }, resources: [] };
+    const pageUrl = g('re-page-url').trim();
     const item = {
       id: id, title: title, description: g('re-desc'), version: g('re-version'),
       icon: g('re-icon') || '📦', category: g('re-cat'),
-      fileUrl: g('re-url'), fileSize: g('re-size') || '—', updatedAt: g('re-updated') || TODAY
+      updatedAt: g('re-updated') || TODAY
     };
+    if (pageUrl) {
+      item.url = pageUrl;
+    } else {
+      item.fileUrl = g('re-url');
+      item.fileSize = g('re-size') || '—';
+    }
     const idx = S.RES.resources.findIndex(x => x.id === S.resEditId);
     if (idx >= 0) {
       S.RES.resources[idx] = item;
