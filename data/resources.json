@@ -1,28 +1,28 @@
 {
   "meta": {
-    "lastUpdated": "2026-06-30"
+    "lastUpdated": "2026-08-04"
   },
   "resources": [
     {
-      "id": "Store stamp",
-      "title": "우리가게 스탬프",
-      "description": "단골손님 스탬프 앱",
-      "version": "v1.0",
+      "id": "우리가게 스탬프",
+      "title": "우리 가게 스템프앱",
+      "description": "단골손님 적립(스템프) 툴",
+      "version": "",
       "icon": "📦",
       "category": "",
       "fileUrl": "../downloads/스탬프앱v1.0.zip",
       "fileSize": "518KB",
-      "updatedAt": "2026-06-30"
+      "updatedAt": "2026-07-27"
     },
     {
       "id": "delivery-fee-calc",
       "title": "배달앱 수수료 계산기",
       "description": "배민·쿠팡이츠·요기요 수수료·배달비 빼면 내 통장에 얼마가 들어올까?",
-      "version": "v1.0",
-      "icon": "🧮",
+      "version": "",
+      "icon": "📅",
       "category": "계산기",
-      "url": "tools/delivery-fee-calc/index.html",
-      "updatedAt": "2026-08-03"
+      "updatedAt": "2026-08-04",
+      "url": "tools/delivery-fee-calc/index.html"
     }
   ]
 }
