@@ -1,18 +1,18 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-04"
+    "lastUpdated": "2026-08-05"
   },
   "resources": [
     {
       "id": "우리가게 스탬프",
       "title": "우리 가게 스템프앱",
       "description": "단골손님 적립(스템프) 툴",
-      "version": "",
+      "version": "v1.1",
       "icon": "📦",
       "category": "",
-      "fileUrl": "../downloads/스탬프앱v1.0.zip",
-      "fileSize": "518KB",
-      "updatedAt": "2026-07-27"
+      "fileUrl": "../downloads/스탬프앱v1.1.zip",
+      "fileSize": "1.8MB",
+      "updatedAt": "2026-08-05"
     },
     {
       "id": "delivery-fee-calc",
