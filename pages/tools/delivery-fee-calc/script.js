@@ -215,12 +215,17 @@ const getPlatformShareTier = platformShare => pickTier(platformShare, PLATFORM_S
 const getScoreGradeTier = totalScore => pickTier(totalScore, SCORE_GRADE_TABLE, true);
 
 // 리포트 카드 DOM은 고정 5개뿐이므로 매번 조회하지 않고 한 번만 캐시해둔다
+// defaultTag/defaultText는 마크업에 적힌 안내문구(placeholder)를 그대로 기억해뒀다가 초기화 시 복원하는 데 쓴다
 const reportCardEls = {};
 ["cost-rate", "profit-rate", "delivery-share", "platform-share", "summary"].forEach(prefix => {
+  const tag = document.getElementById(`report-${prefix}-tag`);
+  const text = document.getElementById(`report-${prefix}-text`);
   reportCardEls[prefix] = {
     card: document.getElementById(`report-${prefix}`),
-    tag: document.getElementById(`report-${prefix}-tag`),
-    text: document.getElementById(`report-${prefix}-text`),
+    tag,
+    text,
+    defaultTag: tag.textContent,
+    defaultText: text.textContent,
   };
 });
 
@@ -231,6 +236,14 @@ function applyReportCard(prefix, tier, max) {
   card.classList.add(`tone-${tier.tone}`);
   tag.textContent = tier.tag;
   text.textContent = max ? `${tier.text} (${tier.score}/${max}점)` : tier.text;
+}
+
+function resetReportCards() {
+  Object.values(reportCardEls).forEach(({ card, tag, text, defaultTag, defaultText }) => {
+    card.classList.remove("tone-success", "tone-warning", "tone-info");
+    tag.textContent = defaultTag;
+    text.textContent = defaultText;
+  });
 }
 
 const DONUT_SEGMENTS = [
@@ -418,6 +431,7 @@ function recalculate() {
     applyReportCard("summary", grade);
   } else {
     tierEl.setAttribute("hidden", "");
+    resetReportCards();
   }
 }
 

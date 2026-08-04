@@ -202,9 +202,13 @@ body {
 }
 
 /* ===== 플랫폼 버튼 ===== */
+/* 아이콘 원본이 128px 고정 해상도라 트랙 폭을 1fr로 두면 넓은 컨테이너(예: 아코디언)에서
+   과도하게 확대되어 흐려진다. 트랙 폭에 상한을 둬 컨테이너가 넓어져도 원본 해상도 이상으로
+   확대되지 않게 한다. */
 .platform-buttons {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 96px));
+  justify-content: start;
   gap: 10px;
 }
 .platform-btn {
