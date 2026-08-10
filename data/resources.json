@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-05"
+    "lastUpdated": "2026-08-09"
   },
   "resources": [
     {
@@ -23,6 +23,16 @@
       "category": "계산기",
       "updatedAt": "2026-08-04",
       "url": "tools/delivery-fee-calc/index.html"
+    },
+    {
+      "id": "goodwill-protection-check",
+      "title": "권리금 보호 자가진단",
+      "description": "몇 가지 질문에 답하면 상가건물 임대차보호법상 권리금 보호 관련 사항을 확인해드려요.",
+      "version": "",
+      "icon": "⚖️",
+      "category": "자가진단",
+      "updatedAt": "2026-08-09",
+      "url": "tools/goodwill-protection-check/index.html"
     }
   ]
 }

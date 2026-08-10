@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "order": [
+    "contractStatus",
+    "contractYears",
+    "rentDefault",
+    "tenantBreachGrounds",
+    "eligibleBuilding",
+    "newTenant",
+    "interference",
+    "landlordJustification",
+    "interferencePeriod",
+    "afterThreeYears"
+  ],
+  "skipRules": [
+    {
+      "questionId": "afterThreeYears",
+      "skipIf": { "questionId": "contractStatus", "equals": "active" }
+    }
+  ]
+}

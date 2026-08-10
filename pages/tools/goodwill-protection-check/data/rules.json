@@ -1,0 +1,331 @@
+{
+  "version": "1.1.0",
+  "status": "IMPLEMENTED",
+  "sourceLaw": "상가건물 임대차보호법 [법률 제21083호, 2025. 11. 11., 일부개정][시행 2026. 5. 12.]",
+  "note": "결과 코드(result)의 정밀한 근거조문/사유 서술은 engine/report-engine.js가 answers를 재분석하여 동적으로 구성합니다. 이 파일의 conditions는 어느 결과 코드(R1~R6)로 귀결되는지를 정하는 1차 판정용입니다.",
+  "rules": [
+    {
+      "id": "LAW-EXCL-01",
+      "priority": 10,
+      "conditions": [
+        { "field": "eligibleBuilding", "operator": "equals", "value": "largeScale" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "EXCLUDED_LARGE_SCALE_STORE",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-EXCL-02",
+      "priority": 11,
+      "conditions": [
+        { "field": "eligibleBuilding", "operator": "equals", "value": "publicProperty" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "EXCLUDED_PUBLIC_PROPERTY",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-RENT-DEFAULT",
+      "priority": 20,
+      "conditions": [
+        { "field": "rentDefault", "operator": "equals", "value": "yes" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "RENT_ARREARS_EXCLUSION",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-02",
+      "priority": 21,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "fraudulentLease" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_FRAUDULENT_LEASE",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-03",
+      "priority": 22,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "compensationAgreed" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_COMPENSATION_AGREED",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-04",
+      "priority": 23,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "unauthorizedSublease" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_UNAUTHORIZED_SUBLEASE",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-05",
+      "priority": 24,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "willfulDamage" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_WILLFUL_DAMAGE",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-06",
+      "priority": 25,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "totalLossOfPurpose" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_TOTAL_LOSS_OF_PURPOSE",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-07A",
+      "priority": 26,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "demolitionNoticedPlan" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_DEMOLITION_NOTICED_PLAN",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-07B",
+      "priority": 27,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "demolitionSafetyRisk" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_DEMOLITION_SAFETY_RISK",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-07C",
+      "priority": 28,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "demolitionByOtherLaw" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_DEMOLITION_BY_OTHER_LAW",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-TENANT-BREACH-08",
+      "priority": 29,
+      "conditions": [
+        { "field": "tenantBreachGrounds", "operator": "includes", "value": "severeBreachOrDifficult" }
+      ],
+      "logic": "AND",
+      "result": "R3",
+      "reasonCode": "TENANT_BREACH_SEVERE_OR_DIFFICULT",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-NO-NEW-TENANT",
+      "priority": 30,
+      "conditions": [
+        { "field": "newTenant", "operator": "equals", "value": "no" }
+      ],
+      "logic": "AND",
+      "result": "R2",
+      "reasonCode": "NO_NEW_TENANT_ARRANGED",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-NO-INTERFERENCE",
+      "priority": 40,
+      "conditions": [
+        { "field": "interference", "operator": "isEmpty" },
+        { "field": "interference", "operator": "includes", "value": "none" }
+      ],
+      "logic": "OR",
+      "result": "R5",
+      "reasonCode": "NO_INTERFERENCE_REPORTED",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-OUTSIDE-PERIOD",
+      "priority": 50,
+      "conditions": [
+        { "field": "interferencePeriod", "operator": "equals", "value": "no" }
+      ],
+      "logic": "AND",
+      "result": "R6",
+      "reasonCode": "OUTSIDE_PROTECTION_PERIOD",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-STATUTE-OF-LIMITATIONS",
+      "priority": 55,
+      "conditions": [
+        { "field": "contractStatus", "operator": "equals", "value": "ended" },
+        { "field": "afterThreeYears", "operator": "equals", "value": "yes" }
+      ],
+      "logic": "AND",
+      "result": "R4",
+      "reasonCode": "STATUTE_OF_LIMITATIONS",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-INTERFERENCE-TYPE1",
+      "priority": 60,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "demandOrTakeKeyMoney" },
+        { "field": "interferencePeriod", "operator": "equals", "value": "yes" }
+      ],
+      "logic": "AND",
+      "result": "R1",
+      "reasonCode": "INTERFERENCE_TYPE1_KEYMONEY_DEMAND",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-INTERFERENCE-TYPE2",
+      "priority": 61,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "blockKeyMoneyPayment" },
+        { "field": "interferencePeriod", "operator": "equals", "value": "yes" }
+      ],
+      "logic": "AND",
+      "result": "R1",
+      "reasonCode": "INTERFERENCE_TYPE2_BLOCK_PAYMENT",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-INTERFERENCE-TYPE3",
+      "priority": 62,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "excessiveRentDemand" },
+        { "field": "interferencePeriod", "operator": "equals", "value": "yes" }
+      ],
+      "logic": "AND",
+      "result": "R1",
+      "reasonCode": "INTERFERENCE_TYPE3_EXCESSIVE_RENT",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-INTERFERENCE-TYPE4-UNJUSTIFIED-A",
+      "priority": 63,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "refuseWithoutReason" },
+        { "field": "interferencePeriod", "operator": "equals", "value": "yes" },
+        { "field": "landlordJustification", "operator": "isEmpty" }
+      ],
+      "logic": "AND",
+      "result": "R1",
+      "reasonCode": "INTERFERENCE_TYPE4_UNJUSTIFIED_REFUSAL",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-INTERFERENCE-TYPE4-UNJUSTIFIED-B",
+      "priority": 64,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "refuseWithoutReason" },
+        { "field": "interferencePeriod", "operator": "equals", "value": "yes" },
+        { "field": "landlordJustification", "operator": "includes", "value": "none" }
+      ],
+      "logic": "AND",
+      "result": "R1",
+      "reasonCode": "INTERFERENCE_TYPE4_UNJUSTIFIED_REFUSAL",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-JUSTIFICATION-01",
+      "priority": 70,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "refuseWithoutReason" },
+        { "field": "landlordJustification", "operator": "includes", "value": "noAbility" }
+      ],
+      "logic": "AND",
+      "result": "R6",
+      "reasonCode": "LANDLORD_JUSTIFICATION_NO_ABILITY",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-JUSTIFICATION-02",
+      "priority": 71,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "refuseWithoutReason" },
+        { "field": "landlordJustification", "operator": "includes", "value": "tenantUnsuitable" }
+      ],
+      "logic": "AND",
+      "result": "R6",
+      "reasonCode": "LANDLORD_JUSTIFICATION_TENANT_UNSUITABLE",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-JUSTIFICATION-03",
+      "priority": 72,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "refuseWithoutReason" },
+        { "field": "landlordJustification", "operator": "includes", "value": "vacancyOverEighteenMonths" }
+      ],
+      "logic": "AND",
+      "result": "R6",
+      "reasonCode": "LANDLORD_JUSTIFICATION_VACANCY_PLAN",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-JUSTIFICATION-04",
+      "priority": 73,
+      "conditions": [
+        { "field": "interference", "operator": "includes", "value": "refuseWithoutReason" },
+        { "field": "landlordJustification", "operator": "includes", "value": "keyMoneyAlreadyPaid" }
+      ],
+      "logic": "AND",
+      "result": "R6",
+      "reasonCode": "LANDLORD_JUSTIFICATION_KEYMONEY_PAID",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "LAW-GENERAL-REVIEW",
+      "priority": 999,
+      "conditions": [],
+      "logic": "AND",
+      "result": "R6",
+      "reasonCode": "GENERAL_REVIEW_RECOMMENDED",
+      "severity": "LOW",
+      "stopEvaluation": true
+    }
+  ]
+}

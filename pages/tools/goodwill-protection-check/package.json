@@ -1,0 +1,10 @@
+{
+  "name": "benefitson-goodwill-checker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "BenefitsON Law Engine v1.0 - Goodwill (권리금) Protection Self-Diagnosis MVP",
+  "scripts": {
+    "test": "node tests/integration.test.js"
+  }
+}
