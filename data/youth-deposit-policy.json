@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "policyName": "서울시 청년 임차보증금 이자지원사업",
+    "version": "2026.1",
+    "lastUpdated": "2026-08-13",
+    "note": "정책 숫자가 바뀌면 이 파일만 수정한다. 계산 로직(engine/youth-deposit-calculator.js)은 건드리지 않는다."
+  },
+  "sources": [
+    {
+      "id": "housing-seoul-overview",
+      "title": "서울주거포털 - 사업개요(청년임차보증금)",
+      "url": "https://housing.seoul.go.kr/site/main/content/sh01_040901",
+      "checkedDate": "2026-08-13"
+    },
+    {
+      "id": "kebhana-product",
+      "title": "하나은행 - 서울특별시 청년 임차보증금대출 상품안내",
+      "url": "https://www.kebhana.com/cont/mall/mall08/mall0802/mall080201/1465824_115194.jsp",
+      "checkedDate": "2026-08-13",
+      "note": "대출한도 3중 min 조건, 금리(2026.05.18 기준), 한부모/자립준비청년 추가금리를 명시한 가장 상세한 출처"
+    },
+    {
+      "id": "seoulhousing-sh",
+      "title": "SH서울주택도시공사 - 청년 임차보증금 이자지원",
+      "url": "https://www.seoulhousing.kr/html/0504013.do",
+      "checkedDate": "2026-08-13"
+    },
+    {
+      "id": "youth-seoul-plcy",
+      "title": "청년몽땅정보통 - 정책상세",
+      "url": "https://youth.seoul.go.kr/infoData/plcyInfo/view.do?plcyBizId=R2024032020863",
+      "checkedDate": "2026-08-13"
+    },
+    {
+      "id": "soco-seoul",
+      "title": "공동체주택플랫폼(soco) - 청년 임차보증금 이자지원",
+      "url": "https://soco.seoul.go.kr/youth/main/contents.do?menuNo=400024",
+      "checkedDate": "2026-08-13"
+    }
+  ],
+  "eligibility": {
+    "ageMin": 19,
+    "ageMax": 39,
+    "ageMaxNote": "만 40세가 되는 날부터 이자지원이 중단됨",
+    "incomeSingleMax": 50000000,
+    "incomeMarriedMax": 60000000,
+    "depositMax": 300000000,
+    "monthlyRentMax": 900000,
+    "requireNoHousehold": true,
+    "requireHouseholderOrPlanned": true
+  },
+  "loan": {
+    "loanRatioOfDeposit": 0.9,
+    "loanAbsoluteMax": 200000000,
+    "note": "실제 최종 한도는 위 두 값과 서울시가 건별 심사로 통보하는 '융자추천금액' 중 최솟값이다. 융자추천금액은 공개된 산식이 없어 계산기에 반영할 수 없다 — 이 계산기가 보여주는 금액은 '추정 최대 한도'다.",
+    "termPerCycleMinMonths": 6,
+    "termPerCycleMaxYears": 2,
+    "termExtensionMaxYears": 8
+  },
+  "interestSubsidy": {
+    "baseRate": 0.02,
+    "minSelfRate": 0.01,
+    "exampleBankRate": 0.0394,
+    "exampleBankRateDate": "2026-05-18",
+    "exampleBankRateSource": "kebhana-product",
+    "exampleBankRateNote": "하나은행 COFIX 신잔액(2.490%) + 가산금리(1.450%) = 3.940%. 실제 승인 시 개인별 심사에 따라 달라질 수 있다.",
+    "additionalRateForSingleParentOrCareLeaver": 0.01,
+    "maxRateWithAdditional": 0.03
+  },
+  "disclaimers": [
+    "이 계산 결과는 서울시 청년 임차보증금 이자지원사업의 공개된 정책 기준을 바탕으로 산출한 예상값입니다. 실제 대출 가능 여부와 대출금액, 금리는 금융기관의 심사 및 개인별 조건에 따라 달라질 수 있습니다.",
+    "대출 가능금액은 '임차보증금의 90%'와 '2억원' 중 낮은 금액을 추정 상한으로 계산한 값입니다. 실제 승인 한도는 서울시가 신청 건별로 심사·통보하는 융자추천금액에 따라 이보다 낮아질 수 있습니다.",
+    "예상 이자는 2026.05.18 기준 하나은행 예시금리(3.940%)를 적용한 값이며, 실제 은행 금리는 신청 시점과 개인 신용에 따라 달라질 수 있습니다.",
+    "한부모가정·자립준비청년은 서울시 지원금리가 기본 2.0%에서 최대 3.0%까지 추가 우대될 수 있습니다. 해당 여부는 서울주거포털 또는 하나은행에 별도 확인하세요.",
+    "이 대출은 생애 1회만 이용 가능하며, 전액 상환 후 재신청은 불가합니다.",
+    "서울시 추천서를 받았더라도 은행 내규에 적합하지 않으면 대출 취급이 제한될 수 있습니다."
+  ]
+}

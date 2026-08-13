@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서울시 청년 임차보증금 계산기 — 예상 대출금·이자 확인 — 혜택on</title>
+  <meta name="description" content="서울시 청년 임차보증금 이자지원사업 기준으로 예상 대출 가능금액, 필요 자기자금, 예상 이자를 30초 만에 확인하세요.">
+  <link rel="stylesheet" href="../style.css?v=20260813">
+  <link rel="stylesheet" href="pages.css?v=20260813">
+  <style>
+    .calc-page-wrap { max-width: 680px; margin: 0 auto; padding: 48px 16px 80px; }
+    .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .calc-page-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 32px; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .calc-section-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+    .calc-field { margin-bottom: 20px; }
+    .calc-field label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .calc-field input, .calc-field select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; color: var(--text-dark);
+      background: var(--bg-soft); transition: border-color .2s; box-sizing: border-box;
+    }
+    .calc-field input:focus, .calc-field select:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
+    .calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-btn-reset { width: 100%; padding: 12px; background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all .2s; }
+    .calc-btn-reset:hover { background: var(--bg-soft); color: var(--text-dark); border-color: var(--text-muted); }
+    .calc-result { display: none; margin-top: 24px; background: var(--bg-soft); border-radius: 12px; padding: 20px 24px; border-left: 4px solid var(--primary); }
+    .calc-result.show { display: block; animation: fadeInUp .3s ease; }
+    .result-highlight { font-size: 1.6rem; font-weight: 800; color: var(--primary-dark); margin: 4px 0 16px; }
+    .result-rows { display: flex; flex-direction: column; gap: 8px; }
+    .result-row { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .result-row:last-child { border-bottom: none; }
+    .result-row .r-label { color: var(--text-muted); }
+    .result-row .r-val { font-weight: 600; color: var(--text-dark); }
+    .result-note-small { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.5; }
+    .wage-update-notice { background: #FFF8E6; border: 1px solid #FFD966; border-radius: 8px; padding: 10px 14px; font-size: 0.82rem; color: #7A5700; margin-bottom: 24px; }
+    .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .not-eligible-box { background: #FFF3F0; border: 1px solid #FFC9BC; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; }
+    .not-eligible-box .ne-title { font-weight: 700; color: #C0391E; font-size: 0.9rem; margin-bottom: 6px; }
+    .not-eligible-box ul { margin: 0; padding-left: 18px; }
+    .not-eligible-box li { font-size: 0.82rem; color: #7A2E1A; line-height: 1.6; }
+  </style>
+  <link rel="canonical" href="https://benefitson.pages.dev/pages/calc-youth-deposit.html">
+  <meta property="og:url" content="https://benefitson.pages.dev/pages/calc-youth-deposit.html">
+  <meta property="og:image" content="https://benefitson.pages.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta property="og:title" content="서울시 청년 임차보증금 계산기 — 예상 대출금·이자 확인">
+  <meta property="og:description" content="서울시 청년 임차보증금 이자지원사업 기준으로 예상 대출 가능금액, 필요 자기자금, 예상 이자를 30초 만에 확인하세요.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="서울시 청년 임차보증금 계산기 — 예상 대출금·이자 확인 — 혜택on">
+  <meta name="twitter:description" content="서울시 청년 임차보증금 이자지원사업 기준으로 예상 대출 가능금액, 필요 자기자금, 예상 이자를 30초 만에 확인하세요.">
+  <meta name="twitter:image" content="https://benefitson.pages.dev/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "서울시 청년 임차보증금 계산기",
+    "description": "서울시 청년 임차보증금 이자지원사업 기준으로 예상 대출 가능금액, 필요 자기자금, 예상 이자를 계산하는 도구",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "ko",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+  }
+  </script>
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-4871058922328451">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4871058922328451" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1YVTR39FF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K1YVTR39FF');
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="youth.html">청년정책</a></li>
+          <li><a href="newlywed.html">신혼·육아</a></li>
+          <li><a href="senior.html">중장년·노년</a></li>
+          <li><a href="single.html">1인가구</a></li>
+          <li><a href="income.html">근로/소득</a></li>
+          <li><a href="tax.html">세금/환급</a></li>
+          <li><a href="../index.html#calculators">계산기</a></li>
+          <li><a href="resources.html">무료도구</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="youth.html"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="newlywed.html"><span class="m-icon">👶</span>신혼·육아</a>
+    <a href="senior.html"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="single.html"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="income.html"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="tax.html"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="../index.html#calculators"><span class="m-icon">🧮</span>계산기</a>
+    <a href="resources.html"><span class="m-icon">📂</span>무료도구</a>
+  </nav>
+
+  <main>
+    <div class="calc-page-wrap">
+      <p class="breadcrumb"><a href="../index.html">홈</a> &rsaquo; <a href="../index.html#calculators">계산기</a> &rsaquo; 서울시 청년 임차보증금 계산기</p>
+      <h1 class="calc-page-title">🏠 서울시 청년 임차보증금 계산기</h1>
+      <p class="calc-page-sub">서울시 청년 임차보증금 지원 기준으로 내가 준비할 금액과 예상 이자를 확인해보세요.</p>
+
+      <div class="wage-update-notice">
+        📌 서울시 지원금리 연 <strong>2.0%</strong>, 본인부담 최저금리 연 <strong>1.0%</strong>. 대출한도는 임차보증금의 <strong>90%</strong>와 <strong>2억원</strong> 중 낮은 금액입니다. (2026.08.13 확인 기준)
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-section-label">내 조건 입력</div>
+
+        <div class="calc-field">
+          <label for="deposit">임차보증금 (원)</label>
+          <input type="number" id="deposit" min="0" step="1000000" placeholder="예) 200000000">
+          <p class="field-hint">서울시 관내 주택·주거용 오피스텔 기준, 3억원 이하만 지원 대상입니다.</p>
+        </div>
+
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="age">만 나이</label>
+            <input type="number" id="age" min="0" max="120" step="1" placeholder="예) 28">
+          </div>
+          <div class="calc-field">
+            <label for="marital-status">혼인여부</label>
+            <select id="marital-status">
+              <option value="single" selected>미혼</option>
+              <option value="married">기혼</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label for="income">연소득 (원, 기혼이면 부부합산)</label>
+          <input type="number" id="income" min="0" step="1000000" placeholder="예) 40000000">
+        </div>
+
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="householder">무주택 세대주 여부</label>
+            <select id="householder">
+              <option value="yes" selected>세대주(또는 세대주 예정자)입니다</option>
+              <option value="no">세대주가 아닙니다</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label for="monthly-rent">월세 (원, 전세면 0)</label>
+            <input type="number" id="monthly-rent" min="0" step="10000" placeholder="예) 0">
+          </div>
+        </div>
+
+        <button class="calc-btn" id="calcBtn">계산하기</button>
+        <button class="calc-btn-reset" id="resetBtn">초기화</button>
+
+        <div class="calc-result" id="calcResult">
+          <div class="calc-section-label">계산 결과</div>
+          <div id="eligibilityBox"></div>
+          <div class="result-highlight" id="mainResult">—</div>
+          <div class="result-rows" id="resultRows"></div>
+          <p class="result-note-small" id="resultNote"></p>
+        </div>
+      </div>
+
+      <div class="article-body" style="margin-top:8px;">
+        <h2>서울시 청년 임차보증금 이자지원사업이란?</h2>
+        <p>만 19~39세 무주택 청년이 서울시 관내 주택을 임차할 때, 은행 대출금리 일부를 서울시가 대신 부담해주는 제도입니다. 하나은행을 통해 최대 2억원(임차보증금의 90% 이내)을 대출받고, 서울시가 연 2.0%의 이자를 지원합니다.</p>
+
+        <h2>계산 방식</h2>
+        <table>
+          <thead><tr><th>단계</th><th>계산식</th></tr></thead>
+          <tbody>
+            <tr><td>① 대출 가능금액(추정 최대)</td><td>min(임차보증금 × 90%, 2억원)</td></tr>
+            <tr><td>② 필요 자기자금</td><td>임차보증금 − 대출 가능금액</td></tr>
+            <tr><td>③ 본인부담금리</td><td>max(예시 은행금리 3.940% − 서울시지원금리 2.0%, 최저 1.0%)</td></tr>
+            <tr><td>④ 예상 연간 이자</td><td>대출 가능금액 × 본인부담금리</td></tr>
+            <tr><td>⑤ 예상 월 이자</td><td>예상 연간 이자 ÷ 12</td></tr>
+          </tbody>
+        </table>
+        <p>대출 원금은 만기에 일시상환하고 이자만 매월 납부하는 방식이라, 매달 실제로 나가는 돈은 위 월 이자와 거의 같습니다.</p>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>Q. 계산된 대출 가능금액이 실제 승인 금액과 다를 수 있나요?</h3>
+        <p>네. 이 계산기가 보여주는 금액은 "임차보증금의 90%"와 "2억원" 중 낮은 금액으로 산출한 추정 상한선입니다. 실제 대출한도는 서울시가 신청 건별로 심사해 통보하는 "융자추천금액"에 따라 이보다 낮아질 수 있습니다.</p>
+        <h3>Q. 한부모가정이나 자립준비청년은 이자를 더 지원받나요?</h3>
+        <p>네. 기본 지원금리(2.0%)에 추가로 1.0%p가 더해져 최대 연 3.0%까지 지원받을 수 있습니다. 정확한 대상 조건은 서울주거포털 또는 하나은행에 별도 확인하세요.</p>
+        <h3>Q. 이 계산기 결과로 바로 대출 신청이 되나요?</h3>
+        <p>아니요. 이 계산기는 정책 기준에 따른 예상값을 보여주는 참고용 도구입니다. 실제 대출은 하나은행 영업점 방문 또는 하나원큐 앱을 통해 별도로 신청해야 하며, 서울시 추천서 발급과 은행 심사를 거칩니다.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── 결과 하단 광고 ─── -->
+  <div class="container" style="margin:24px auto;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4871058922328451"
+         data-ad-slot="2452607788"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 서울주거포털·하나은행 등 공식 채널에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about.html">사이트 소개</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="contact.html">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js?v=20260813"></script>
+  <script type="module">
+    import { checkEligibility, calculateLoan } from '../engine/youth-deposit-calculator.js';
+
+    const calcBtn = document.getElementById('calcBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const calcResult = document.getElementById('calcResult');
+    const eligibilityBox = document.getElementById('eligibilityBox');
+    const mainResultEl = document.getElementById('mainResult');
+    const resultRowsEl = document.getElementById('resultRows');
+    const resultNoteEl = document.getElementById('resultNote');
+
+    let policy = null;
+
+    fetch('../data/youth-deposit-policy.json')
+      .then((res) => res.json())
+      .then((data) => { policy = data; })
+      .catch(() => {
+        resultNoteEl.textContent = '정책 데이터를 불러오지 못했습니다. 페이지를 새로고침해주세요.';
+      });
+
+    function won(n) {
+      return Math.round(n).toLocaleString('ko-KR') + '원';
+    }
+
+    function percent(rate) {
+      return (rate * 100).toFixed(2).replace(/\.00$/, '') + '%';
+    }
+
+    calcBtn.addEventListener('click', function () {
+      if (!policy) return;
+
+      const deposit = Number(document.getElementById('deposit').value);
+      const age = Number(document.getElementById('age').value);
+      const maritalStatus = document.getElementById('marital-status').value;
+      const income = Number(document.getElementById('income').value);
+      const isHouseholder = document.getElementById('householder').value === 'yes';
+      const monthlyRent = Number(document.getElementById('monthly-rent').value) || 0;
+
+      if (!deposit || deposit <= 0 || !age || age <= 0) {
+        eligibilityBox.innerHTML = '';
+        mainResultEl.textContent = '입력값을 확인해주세요';
+        resultRowsEl.innerHTML = '';
+        resultNoteEl.textContent = '임차보증금과 나이는 0보다 큰 값을 입력해야 합니다.';
+        calcResult.classList.add('show');
+        return;
+      }
+
+      const input = { deposit, age, maritalStatus, income, isHouseholder, monthlyRent };
+      const eligibility = checkEligibility(input, policy);
+      const loanResult = calculateLoan(input, policy);
+
+      if (eligibility.eligible) {
+        eligibilityBox.innerHTML = '';
+      } else {
+        eligibilityBox.innerHTML =
+          '<div class="not-eligible-box">' +
+          '<div class="ne-title">⚠️ 현재 입력하신 조건에서는 서울시 지원 대상에 해당하지 않을 가능성이 있습니다</div>' +
+          '<ul>' + eligibility.reasons.map((r) => '<li>' + r + '</li>').join('') + '</ul>' +
+          '</div>';
+      }
+
+      mainResultEl.textContent = '예상 대출 가능금액 ' + won(loanResult.estimatedMaxLoan);
+
+      const rows = [
+        ['임차보증금', won(deposit)],
+        ['예상 대출 가능금액 (추정 최대)', won(loanResult.estimatedMaxLoan)],
+        ['필요 자기자금', won(loanResult.requiredSelfFunds)],
+        ['예상 본인부담금리', percent(loanResult.selfRate)],
+        ['예상 연간 이자', won(loanResult.annualInterest)],
+        ['예상 월 이자', won(loanResult.monthlyInterest)],
+      ];
+      resultRowsEl.innerHTML = rows
+        .map(([l, v]) => '<div class="result-row"><span class="r-label">' + l + '</span><span class="r-val">' + v + '</span></div>')
+        .join('');
+
+      resultNoteEl.textContent = policy.disclaimers.join(' ');
+
+      calcResult.classList.add('show');
+      calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    resetBtn.addEventListener('click', function () {
+      document.getElementById('deposit').value = '';
+      document.getElementById('age').value = '';
+      document.getElementById('marital-status').value = 'single';
+      document.getElementById('income').value = '';
+      document.getElementById('householder').value = 'yes';
+      document.getElementById('monthly-rent').value = '';
+      calcResult.classList.remove('show');
+    });
+  </script>
+</body>
+</html>

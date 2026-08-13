@@ -9,7 +9,7 @@
   <meta property="og:title" content="혜택on — 내가 받을 수 있는 혜택, 30초면 확인">
   <meta property="og:description" content="자가진단으로 내가 받을 수 있는 혜택을 30초 만에 확인하세요.">
   <meta property="og:type" content="website">
-  <link rel="stylesheet" href="style.css?v=20260626">
+  <link rel="stylesheet" href="style.css?v=20260813b">
   <link rel="canonical" href="https://benefitson.pages.dev/">
   <meta property="og:url" content="https://benefitson.pages.dev/">
   <meta property="og:image" content="https://benefitson.pages.dev/og-image.png">
@@ -189,14 +189,24 @@
         <a href="#calculators" class="view-all-link">전체 보기 →</a>
       </div>
       <div class="calc-grid-new">
-        <!-- Left: large main card -->
-        <div class="calc-main-card">
-          <div class="calc-icon-wrap orange">
-            <span>₩</span>
+        <!-- Left: main card + secondary card stacked -->
+        <div class="calc-main-col">
+          <div class="calc-main-card">
+            <div class="calc-icon-wrap orange">
+              <span>₩</span>
+            </div>
+            <h3 class="calc-main-title">최저임금 월급 계산기</h3>
+            <p class="calc-main-desc">2026년 시급 기준, 209시간 월급으로 환산해서 바로 확인하세요. 가장 많이 찾는 계산기에요.</p>
+            <a href="pages/calc-minimum-wage.html" class="calc-main-link">바로 계산하기 →</a>
           </div>
-          <h3 class="calc-main-title">최저임금 월급 계산기</h3>
-          <p class="calc-main-desc">2026년 시급 기준, 209시간 월급으로 환산해서 바로 확인하세요. 가장 많이 찾는 계산기에요.</p>
-          <a href="pages/calc-minimum-wage.html" class="calc-main-link">바로 계산하기 →</a>
+          <div class="calc-main-card">
+            <div class="calc-icon-wrap blue">
+              <span>🏘️</span>
+            </div>
+            <h3 class="calc-main-title">서울시 청년 임차보증금 계산기</h3>
+            <p class="calc-main-desc">서울시 지원 기준으로 예상 대출금과 이자를 확인해보세요.</p>
+            <a href="pages/calc-youth-deposit.html" class="calc-main-link">바로 계산하기 →</a>
+          </div>
         </div>
         <!-- Right: 2x2 sub grid -->
         <div class="calc-sub-grid">
@@ -271,8 +281,8 @@
     </div>
   </footer>
 
-  <script src="data/policy-loader.js?v=20260626"></script>
-  <script src="main.js?v=20260626"></script>
+  <script src="data/policy-loader.js?v=20260813b"></script>
+  <script src="main.js?v=20260813b"></script>
 
   <script>
   /* ── 홈 카드 로더 ──

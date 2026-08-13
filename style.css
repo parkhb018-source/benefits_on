@@ -1358,6 +1358,13 @@ h1, h2, h3,
   align-items: stretch;
 }
 
+/* Left column: main card stacked with secondary card(s) */
+.calc-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 /* Left: tall main card */
 .calc-main-card {
   background: white;
@@ -1391,6 +1398,11 @@ h1, h2, h3,
 .calc-icon-wrap.orange {
   background: rgba(237,137,54,0.12);
   color: #DD6B20;
+}
+
+.calc-icon-wrap.blue {
+  background: rgba(46,117,182,0.12);
+  color: var(--primary);
 }
 
 .calc-main-title {
