@@ -679,7 +679,8 @@ if (bannerClose && banner) {
       : '연령대·가구형태·고용상태를 선택해주세요';
   }
 
-  const DIAG_INITIAL_COUNT = 6;
+  const DIAG_INITIAL_COUNT = 5;
+  const DIAG_MAX_COUNT     = 10;
 
   function resultItemHtml(name, jsonDetails) {
     // url은 항상 defaultBenefitDetails에서 가져옴 (JSON/localStorage 무관하게 안정적)
@@ -700,13 +701,17 @@ if (bannerClose && banner) {
   }
 
   function showResult() {
-    const benefits    = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
-    const jsonDetails = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || {};
+    const allBenefits = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
+    const jsonDetails  = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || {};
+    const benefits = allBenefits.slice(0, DIAG_MAX_COUNT);
     const shown = benefits.slice(0, DIAG_INITIAL_COUNT);
     const rest  = benefits.slice(DIAG_INITIAL_COUNT);
+    const countText = allBenefits.length > DIAG_MAX_COUNT
+      ? `총 ${allBenefits.length}개 중 상위 ${DIAG_MAX_COUNT}개를 보여드려요`
+      : `총 ${benefits.length}개의 혜택을 찾았어요`;
     diagResult.innerHTML =
       '<div class="diag-result-inner">' +
-      `<p class="result-count">총 ${benefits.length}개의 혜택을 찾았어요</p>` +
+      `<p class="result-count">${countText}</p>` +
       '<div class="result-list">' + shown.map(name => resultItemHtml(name, jsonDetails)).join('') + '</div>' +
       (rest.length ? `<button type="button" class="result-more-btn" id="diagMoreBtn">더보기 (+${rest.length}개)</button>` : '') +
       '<p class="result-note">* 상세 금액은 개인 상황에 따라 다를 수 있습니다.</p>' +
