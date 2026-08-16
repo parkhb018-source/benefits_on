@@ -188,6 +188,12 @@
 
   <!-- 계산기 페이지 (검색 유입 핵심) -->
   <url>
+    <loc>https://benefitson.pages.dev/pages/calculators.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://benefitson.pages.dev/pages/calc-minimum-wage.html</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>yearly</changefreq>
