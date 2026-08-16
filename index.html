@@ -281,7 +281,7 @@
     </div>
   </footer>
 
-  <script src="data/policy-loader.js?v=20260813b"></script>
+  <script src="data/policy-loader.js?v=20260816"></script>
   <script src="main.js?v=20260813b"></script>
 
   <script>
@@ -297,7 +297,7 @@
         try { return Promise.resolve(JSON.parse(raw)); }
         catch (e) { localStorage.removeItem(LS_KEY); }
       }
-      return fetch('data/home-cards.json?v=20260703')
+      return fetch('data/home-cards.json?v=20260816')
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .catch(function (err) { console.warn('[혜택on] home-cards.json 로드 실패:', err); return null; });
     }
