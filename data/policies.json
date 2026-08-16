@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-07-15"
+    "lastUpdated": "2026-08-16"
   },
   "policies": [
     {
@@ -2878,6 +2878,91 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142100000008",
       "summary": "신기술사업자에게 자금 공급(최고한도 30억원)",
       "benefit": "보증연계투자 지원"
+    },
+    {
+      "id": "성폭력-아동학대-장애인학대-인신매매-스토킹범죄-특정강력범죄-피해자-국선변호사-지원",
+      "title": "성폭력, 아동학대, 장애인학대,인신매매, 스토킹범죄, 특정강력범죄 피해자 국선변호사 지원",
+      "category": "청년정책",
+      "tags": [
+        "법무부",
+        "행정",
+        "안전"
+      ],
+      "articleUrl": "pages/성폭력-아동학대-장애인학대-인신매매-스토킹범죄-특정강력범죄-피해자-국선변호사-지원.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-08-11",
+      "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/127000000026",
+      "summary": "범죄 피해자에게 국선변호사를 지원하여 법률조력 제공",
+      "benefit": "성폭력, 아동학대, 장애인학대,인신매매, 스토킹범죄, 특정강력범죄 피해자 국선변호사 지원"
+    },
+    {
+      "id": "평생교육이용권-지원",
+      "title": "평생교육이용권 지원",
+      "category": "청년정책",
+      "tags": [
+        "교육부",
+        "보육",
+        "교육"
+      ],
+      "articleUrl": "pages/평생교육이용권-지원.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-08-11",
+      "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000045",
+      "summary": "1인당 연간 35만원 평생교육강좌 수강료 및 해당 강좌의 교재비에 사용가능한 이용권 지원",
+      "benefit": "평생교육이용권 지원"
+    },
+    {
+      "id": "자활근로-참여확인서-발급",
+      "title": "자활근로 참여확인서 발급",
+      "category": "근로/소득",
+      "tags": [
+        "보건복지부",
+        "고용",
+        "창업"
+      ],
+      "articleUrl": "pages/자활근로-참여확인서-발급.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-08-13",
+      "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005029",
+      "summary": "근로빈곤층이 스스로 자립할 수 있도록 자활능력 배양, 기술습득 지원 및 근로기회 제공",
+      "benefit": "자활근로 참여확인서 발급"
+    },
+    {
+      "id": "고난도-보호대상아동-맞춤형-사례관리서비스",
+      "title": "고난도 보호대상아동 맞춤형 사례관리서비스",
+      "category": "신혼·육아",
+      "tags": [
+        "보건복지부",
+        "보육",
+        "교육"
+      ],
+      "articleUrl": "pages/고난도-보호대상아동-맞춤형-사례관리서비스.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-08-14",
+      "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005033",
+      "summary": "아동복지시설 보호아동 대상 선별비(종합심리검사비) 및 맞춤형 사례관리서비스 지원",
+      "benefit": "고난도 보호대상아동 맞춤형 사례관리서비스"
+    },
+    {
+      "id": "전자상거래수출시장진출",
+      "title": "전자상거래수출시장진출",
+      "category": "근로/소득",
+      "tags": [
+        "중소벤처기업부",
+        "고용",
+        "창업"
+      ],
+      "articleUrl": "pages/전자상거래수출시장진출.html",
+      "deadline": null,
+      "status": "active",
+      "lastUpdated": "2026-08-14",
+      "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142100000011",
+      "summary": "글로벌 쇼핑몰 입점, 자사몰육성, 온라인전시관 등",
+      "benefit": "전자상거래수출시장진출"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-07-15"
+    "lastUpdated": "2026-08-16"
   },
   "sections": [
     {
@@ -24,11 +24,11 @@
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/137100000217"
         },
         {
-          "tag": "우수한 청년인력의 어촌 유치로 어촌 활성화 도모",
+          "tag": "대학원 학과를 기반으로 구성된 교육연구단",
           "tagStyle": "new",
-          "title": "청년어촌정착지원",
-          "date": "2026.04.29",
-          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000174"
+          "title": "대학원 학과 기반 교육연구단 연구장학금 등 지원",
+          "date": "2026.02.04",
+          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000007"
         },
         {
           "tag": "안정적인 사회정착을 위해 다양한 전직지원교육 및 취업지원서비스",
@@ -38,18 +38,18 @@
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000015"
         },
         {
-          "tag": "대학원 학과를 기반으로 구성된 교육연구단",
-          "tagStyle": "new",
-          "title": "대학원 학과 기반 교육연구단 연구장학금 등 지원",
-          "date": "2026.02.04",
-          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000007"
-        },
-        {
           "tag": "대표자가 만 39세 이하로 사업 개시일로부터 3년 미만 중소기업 및 창업을 준비 중인 자",
           "tagStyle": "new",
           "title": "청년전용창업자금",
           "date": "2026.05.11",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000099"
+        },
+        {
+          "tag": "우수한 청년인력의 어촌 유치로 어촌 활성화 도모",
+          "tagStyle": "new",
+          "title": "청년어촌정착지원",
+          "date": "2026.04.29",
+          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000174"
         }
       ]
     },
@@ -110,18 +110,18 @@
       "visible": true,
       "cards": [
         {
-          "tag": "65세 이상 의료급여 수급권자",
-          "tagStyle": "new",
-          "title": "의료급여 틀니·치과임플란트 지원",
-          "date": "2026.05.08",
-          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000002"
-        },
-        {
           "tag": "안 검진,눈 수술비 지원",
           "tagStyle": "new",
           "title": "노인실명예방사업",
           "date": "2025.11.28",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000015"
+        },
+        {
+          "tag": "65세 이상 의료급여 수급권자",
+          "tagStyle": "new",
+          "title": "의료급여 틀니·치과임플란트 지원",
+          "date": "2026.05.08",
+          "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000002"
         },
         {
           "tag": "강보험급여 '인공관절 치환술(무릎관절)' 인정기준에 준하는 질환자",
@@ -156,7 +156,7 @@
   ],
   "seasonal": {
     "visible": true,
-    "tag": "7월의 추천 정보",
+    "tag": "8월의 추천 정보",
     "title": "여름철 에너지바우처, 신청 안 하면 못 받아요",
     "desc": "무더위 시작 전 미리 신청하면 냉방비 부담을 줄일 수 있어요. 대상 여부부터 확인해보세요.",
     "link": "https://www.energyv.or.kr/",
