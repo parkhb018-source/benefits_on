@@ -140,6 +140,10 @@
       return;
     }
 
+    filtered.sort(function (a, b) {
+      return (b.lastUpdated || '').localeCompare(a.lastUpdated || '');
+    });
+
     plFiltered = filtered;
     plPage = 1;   // 초기 로드·관리자 저장 재렌더 시 1페이지로
     renderPlPage();

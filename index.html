@@ -318,7 +318,10 @@
     }
 
     function sectionHtml(s) {
-      var cards = (s.cards || []).map(cardHtml).join('');
+      var cards = (s.cards || [])
+        .slice()
+        .sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); })
+        .map(cardHtml).join('');
       return '' +
         '<section class="page-section articles-section">' +
           '<div class="container">' +
