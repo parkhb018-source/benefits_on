@@ -141,6 +141,7 @@
 .pl-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(46,117,182,.3); }
 .pl-cat { align-self: flex-start; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 4px; background: #EFF6FF; color: #1E40AF; margin-bottom: 8px; }
 .pl-title { font-size: 1rem; font-weight: 800; color: var(--text-primary); line-height: 1.4; margin-bottom: 8px; }
+.pl-icon { font-size: 1.4rem; }
 .pl-summary { font-size: 0.86rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; flex: 1; }
 .pl-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
 .pl-tag { font-size: 0.72rem; color: var(--text-muted); background: var(--bg-soft); border-radius: 4px; padding: 2px 7px; }
