@@ -664,8 +664,8 @@ if (bannerClose && banner) {
     const ageMap = map[age] || {};
     const hhMap  = ageMap[household] || ageMap.default;
     if (!hhMap) return ['근로장려금', '에너지바우처', '실업급여'];
-    if (Array.isArray(hhMap)) return hhMap.slice(0, 3);
-    return (hhMap[employ] || hhMap.default || ['근로장려금', '에너지바우처', '실업급여']).slice(0, 3);
+    if (Array.isArray(hhMap)) return hhMap;
+    return hhMap[employ] || hhMap.default || ['근로장려금', '에너지바우처', '실업급여'];
   }
 
   function updateUI() {
@@ -679,31 +679,48 @@ if (bannerClose && banner) {
       : '연령대·가구형태·고용상태를 선택해주세요';
   }
 
-  function showResult() {
-    const benefits = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
+  const DIAG_INITIAL_COUNT = 6;
+
+  function resultItemHtml(name, jsonDetails) {
     // url은 항상 defaultBenefitDetails에서 가져옴 (JSON/localStorage 무관하게 안정적)
     // icon·desc만 MATCHING_RULES로 오버라이드 허용
+    const def  = defaultBenefitDetails[name] || { icon: '✨', desc: '혜택 상세 내용을 확인하세요', url: '#' };
+    const json = jsonDetails[name] || {};
+    const icon = json.icon || def.icon;
+    const desc = json.desc || def.desc;
+    const url  = json.url || def.url;   // 관리자 등록 혜택은 benefitDetails.url 사용, 없으면 기본 경로
+    return `<div class="result-item">
+      <div class="result-icon">${icon}</div>
+      <div class="result-content">
+        <div class="result-title">${name}</div>
+        <div class="result-desc">${desc}</div>
+        <a href="${url}" class="result-link">자세히 보기 →</a>
+      </div>
+    </div>`;
+  }
+
+  function showResult() {
+    const benefits    = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
     const jsonDetails = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || {};
+    const shown = benefits.slice(0, DIAG_INITIAL_COUNT);
+    const rest  = benefits.slice(DIAG_INITIAL_COUNT);
     diagResult.innerHTML =
       '<div class="diag-result-inner">' +
-      benefits.map(name => {
-        const def  = defaultBenefitDetails[name] || { icon: '✨', desc: '혜택 상세 내용을 확인하세요', url: '#' };
-        const json = jsonDetails[name] || {};
-        const icon = json.icon || def.icon;
-        const desc = json.desc || def.desc;
-        const url  = json.url || def.url;   // 관리자 등록 혜택은 benefitDetails.url 사용, 없으면 기본 경로
-        return `<div class="result-item">
-          <div class="result-icon">${icon}</div>
-          <div class="result-content">
-            <div class="result-title">${name}</div>
-            <div class="result-desc">${desc}</div>
-            <a href="${url}" class="result-link">자세히 보기 →</a>
-          </div>
-        </div>`;
-      }).join('') +
+      `<p class="result-count">총 ${benefits.length}개의 혜택을 찾았어요</p>` +
+      '<div class="result-list">' + shown.map(name => resultItemHtml(name, jsonDetails)).join('') + '</div>' +
+      (rest.length ? `<button type="button" class="result-more-btn" id="diagMoreBtn">더보기 (+${rest.length}개)</button>` : '') +
       '<p class="result-note">* 상세 금액은 개인 상황에 따라 다를 수 있습니다.</p>' +
       '</div>';
     diagResult.classList.add('show');
+
+    const list    = diagResult.querySelector('.result-list');
+    const moreBtn = document.getElementById('diagMoreBtn');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', () => {
+        list.insertAdjacentHTML('beforeend', rest.map(name => resultItemHtml(name, jsonDetails)).join(''));
+        moreBtn.remove();
+      });
+    }
   }
 
   function resetDiag() {

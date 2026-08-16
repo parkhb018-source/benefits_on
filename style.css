@@ -1244,6 +1244,22 @@ h1, h2, h3,
 .result-link  { font-size: 12px; font-weight: 600; color: var(--primary); display: inline-block; margin-top: 3px; }
 .result-link:hover { text-decoration: underline; }
 .result-note  { font-size: 11px; color: var(--text-muted); margin-top: 10px; }
+.result-count { font-size: 13px; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px; }
+
+.result-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  background: transparent;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.result-more-btn:hover { background: var(--primary); color: white; }
 
 @media (max-width: 600px) {
   .diag-selects-row { grid-template-columns: 1fr; }
