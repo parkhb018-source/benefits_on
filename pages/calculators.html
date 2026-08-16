@@ -28,19 +28,6 @@
 
     gtag('config', 'G-K1YVTR39FF');
   </script>
-  <style>
-    /* ── 계산기 모음 전용 스타일 ── */
-    .calc-list-main { padding: 40px 0 80px; }
-    .calc-list-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-    .calc-list-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; display: flex; flex-direction: column; transition: all .2s; text-decoration: none; }
-    .calc-list-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(46,117,182,.3); }
-    .calc-list-icon { font-size: 2rem; margin-bottom: 12px; }
-    .calc-list-title { font-size: 1.05rem; font-weight: 800; color: var(--text-primary); line-height: 1.4; margin-bottom: 8px; }
-    .calc-list-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; flex: 1; }
-    .calc-list-link { display: inline-flex; align-items: center; gap: 4px; color: var(--primary); font-weight: 700; font-size: 0.9rem; }
-    @media (max-width: 900px) { .calc-list-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 600px) { .calc-list-grid { grid-template-columns: 1fr; } }
-  </style>
 </head>
 <body>
   <header class="site-header">
@@ -103,45 +90,39 @@
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <main class="calc-list-main">
+  <main class="pl-main">
     <div class="inner-wrap">
-      <div class="calc-list-grid">
-        <a href="calc-minimum-wage.html" class="calc-list-card">
-          <div class="calc-list-icon">₩</div>
-          <h3 class="calc-list-title">최저임금 월급 계산기</h3>
-          <p class="calc-list-desc">2026년 시급 기준, 209시간 월급으로 환산해서 바로 확인하세요.</p>
-          <span class="calc-list-link">바로 계산하기 →</span>
-        </a>
-        <a href="calc-youth-deposit.html" class="calc-list-card">
-          <div class="calc-list-icon">🏘️</div>
-          <h3 class="calc-list-title">서울시 청년 임차보증금 계산기</h3>
-          <p class="calc-list-desc">서울시 지원 기준으로 예상 대출금과 이자를 확인해보세요.</p>
-          <span class="calc-list-link">바로 계산하기 →</span>
-        </a>
-        <a href="calc-net-salary.html" class="calc-list-card">
-          <div class="calc-list-icon">🔥</div>
-          <h3 class="calc-list-title">실수령액 계산기</h3>
-          <p class="calc-list-desc">연봉 입력하면 4대보험·세금 빼고 실제 받는 돈을 확인할 수 있어요.</p>
-          <span class="calc-list-link">바로 계산하기 →</span>
-        </a>
-        <a href="calc-tax-refund.html" class="calc-list-card">
-          <div class="calc-list-icon">📑</div>
-          <h3 class="calc-list-title">연말정산 환급 계산기</h3>
-          <p class="calc-list-desc">올해 환급받을 금액을 미리 확인해보세요.</p>
-          <span class="calc-list-link">바로 계산하기 →</span>
-        </a>
-        <a href="calc-unemployment.html" class="calc-list-card">
-          <div class="calc-list-icon">📋</div>
-          <h3 class="calc-list-title">실업급여 계산기</h3>
-          <p class="calc-list-desc">고용보험 가입기간을 입력하고 수급액을 확인하세요.</p>
-          <span class="calc-list-link">바로 계산하기 →</span>
-        </a>
-        <a href="calc-eitc.html" class="calc-list-card">
-          <div class="calc-list-icon">🏠</div>
-          <h3 class="calc-list-title">근로장려금 계산기</h3>
-          <p class="calc-list-desc">소득·재산 기준으로 지급액을 자동 산출해드려요.</p>
-          <span class="calc-list-link">바로 계산하기 →</span>
-        </a>
+      <div class="pl-grid">
+        <div class="pl-card">
+          <div class="pl-title">₩ 최저임금 월급 계산기</div>
+          <p class="pl-summary">2026년 시급 기준, 209시간 월급으로 환산해서 바로 확인하세요.</p>
+          <a href="calc-minimum-wage.html" class="pl-link">바로 계산하기 →</a>
+        </div>
+        <div class="pl-card">
+          <div class="pl-title">🏘️ 서울시 청년 임차보증금 계산기</div>
+          <p class="pl-summary">서울시 지원 기준으로 예상 대출금과 이자를 확인해보세요.</p>
+          <a href="calc-youth-deposit.html" class="pl-link">바로 계산하기 →</a>
+        </div>
+        <div class="pl-card">
+          <div class="pl-title">🔥 실수령액 계산기</div>
+          <p class="pl-summary">연봉 입력하면 4대보험·세금 빼고 실제 받는 돈을 확인할 수 있어요.</p>
+          <a href="calc-net-salary.html" class="pl-link">바로 계산하기 →</a>
+        </div>
+        <div class="pl-card">
+          <div class="pl-title">📑 연말정산 환급 계산기</div>
+          <p class="pl-summary">올해 환급받을 금액을 미리 확인해보세요.</p>
+          <a href="calc-tax-refund.html" class="pl-link">바로 계산하기 →</a>
+        </div>
+        <div class="pl-card">
+          <div class="pl-title">📋 실업급여 계산기</div>
+          <p class="pl-summary">고용보험 가입기간을 입력하고 수급액을 확인하세요.</p>
+          <a href="calc-unemployment.html" class="pl-link">바로 계산하기 →</a>
+        </div>
+        <div class="pl-card">
+          <div class="pl-title">🏠 근로장려금 계산기</div>
+          <p class="pl-summary">소득·재산 기준으로 지급액을 자동 산출해드려요.</p>
+          <a href="calc-eitc.html" class="pl-link">바로 계산하기 →</a>
+        </div>
       </div>
     </div>
   </main>
