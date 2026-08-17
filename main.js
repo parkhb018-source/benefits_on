@@ -650,7 +650,7 @@ if (bannerClose && banner) {
     '연말정산 환급':        { icon: '🧾', desc: '공제 항목별 환급액 미리 계산해보세요',               url: 'pages/calc-tax-refund.html' },
     '자녀 교육비 공제':     { icon: '📚', desc: '1인당 연 300만원 한도 교육비 세액공제',              url: 'pages/article-child-edu.html' },
     '국민연금 수령 조회':   { icon: '📊', desc: '예상 수령액을 미리 확인하세요',                      url: 'pages/article-national-pension.html' },
-    '퇴직금 계산기':        { icon: '💼', desc: '근속연수·평균임금으로 퇴직금 계산',                  url: 'pages/article-severance.html' },
+    '퇴직금 계산기':        { icon: '💰', desc: '퇴직소득세·지방소득세 뺀 예상 실수령액 계산',        url: 'pages/calc-retirement-pay.html' },
     '기초연금':             { icon: '👴', desc: '소득 하위 70% 어르신, 월 최대 349,700원 (2026년)',   url: 'pages/article-basic-pension.html' },
     '노인일자리사업':       { icon: '🌟', desc: '월 최대 76만원, 다양한 사회활동 참여',               url: 'pages/article-senior-jobs.html' },
     '에너지바우처':         { icon: '⚡', desc: '취약계층 에너지 비용, 4인 이상 최대 70만원',         url: 'pages/article-energy-voucher.html' },

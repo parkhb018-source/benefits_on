@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>퇴직금 실수령액 계산기 2026 — 퇴직소득세·지방소득세 자동계산 — 혜택on</title>
+  <meta name="description" content="입사일·퇴사일·급여만 입력하면 예상 퇴직금과 퇴직소득세·지방소득세를 제외한 실수령액을 30초 만에 확인하세요.">
+  <link rel="stylesheet" href="../style.css?v=20260817">
+  <link rel="stylesheet" href="pages.css?v=20260817">
+  <style>
+    .calc-page-wrap { max-width: 680px; margin: 0 auto; padding: 48px 16px 80px; }
+    .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .calc-page-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 32px; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .calc-section-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+    .calc-field { margin-bottom: 20px; }
+    .calc-field label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .calc-field input, .calc-field select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; color: var(--text-dark);
+      background: var(--bg-soft); transition: border-color .2s; box-sizing: border-box;
+    }
+    .calc-field input:focus, .calc-field select:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
+    .calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-btn-reset { width: 100%; padding: 12px; background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all .2s; }
+    .calc-btn-reset:hover { background: var(--bg-soft); color: var(--text-dark); border-color: var(--text-muted); }
+    .calc-result { display: none; margin-top: 24px; background: var(--bg-soft); border-radius: 12px; padding: 20px 24px; border-left: 4px solid var(--primary); }
+    .calc-result.show { display: block; animation: fadeInUp .3s ease; }
+    .result-highlight { font-size: 1.6rem; font-weight: 800; color: var(--primary-dark); margin: 4px 0 16px; }
+    .result-rows { display: flex; flex-direction: column; gap: 8px; }
+    .result-row { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .result-row:last-child { border-bottom: none; }
+    .result-row .r-label { color: var(--text-muted); }
+    .result-row .r-val { font-weight: 600; color: var(--text-dark); }
+    .result-note-small { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.5; }
+    .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .eligibility-box { border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: 0.88rem; line-height: 1.6; }
+    .eligibility-box.warn { background: #FEF9E7; border-left: 3px solid #f1c40f; color: #7B6500; }
+    .info-box { background: #EBF5FB; border-left: 3px solid var(--primary); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 0.82rem; color: var(--primary-dark); margin-bottom: 20px; line-height: 1.6; }
+  </style>
+  <link rel="canonical" href="https://benefitson.pages.dev/pages/calc-retirement-pay.html">
+  <meta property="og:url" content="https://benefitson.pages.dev/pages/calc-retirement-pay.html">
+  <meta property="og:image" content="https://benefitson.pages.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta property="og:title" content="퇴직금 실수령액 계산기 2026 — 퇴직소득세·지방소득세 자동계산">
+  <meta property="og:description" content="입사일·퇴사일·급여만 입력하면 예상 퇴직금과 퇴직소득세·지방소득세를 제외한 실수령액을 30초 만에 확인하세요.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="퇴직금 실수령액 계산기 2026 — 퇴직소득세·지방소득세 자동계산 — 혜택on">
+  <meta name="twitter:description" content="입사일·퇴사일·급여만 입력하면 예상 퇴직금과 퇴직소득세·지방소득세를 제외한 실수령액을 30초 만에 확인하세요.">
+  <meta name="twitter:image" content="https://benefitson.pages.dev/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "퇴직금 실수령액 계산기",
+    "description": "입사일·퇴사일·급여를 입력하면 예상 퇴직금과 퇴직소득세·지방소득세를 제외한 실수령액을 계산하는 도구",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "inLanguage": "ko",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+  }
+  </script>
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-4871058922328451">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4871058922328451" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1YVTR39FF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K1YVTR39FF');
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="youth.html">청년정책</a></li>
+          <li><a href="newlywed.html">신혼·육아</a></li>
+          <li><a href="senior.html">중장년·노년</a></li>
+          <li><a href="single.html">1인가구</a></li>
+          <li><a href="income.html">근로/소득</a></li>
+          <li><a href="tax.html">세금/환급</a></li>
+          <li><a href="calculators.html">계산기</a></li>
+          <li><a href="resources.html">무료도구</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="youth.html"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="newlywed.html"><span class="m-icon">👶</span>신혼·육아</a>
+    <a href="senior.html"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="single.html"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="income.html"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="tax.html"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="calculators.html"><span class="m-icon">🧮</span>계산기</a>
+    <a href="resources.html"><span class="m-icon">📂</span>무료도구</a>
+  </nav>
+
+  <main>
+    <div class="calc-page-wrap">
+      <p class="breadcrumb"><a href="../index.html">홈</a> &rsaquo; <a href="calculators.html">계산기</a> &rsaquo; 퇴직금 실수령액 계산기</p>
+      <h1 class="calc-page-title">💰 퇴직금 실수령액 계산기</h1>
+      <p class="calc-page-sub">입사일·퇴사일·급여만 입력하면 예상 퇴직금과 세금을 제외한 실수령액을 확인할 수 있습니다.</p>
+
+      <div class="calc-card">
+        <div class="calc-section-label">근무 정보 입력</div>
+
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="hire-date">입사일</label>
+            <input type="date" id="hire-date">
+          </div>
+          <div class="calc-field">
+            <label for="resign-date">퇴사일</label>
+            <input type="date" id="resign-date">
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label for="monthly-wage">퇴직 전 3개월 평균 월급여 (원)</label>
+          <input type="number" id="monthly-wage" min="0" step="10000" placeholder="예) 3000000">
+          <p class="field-hint">최근 3개월간 받은 급여(기본급+수당)의 월평균 금액입니다.</p>
+        </div>
+
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="annual-extra">연간 상여금·기타수당 총액 (원, 선택)</label>
+            <input type="number" id="annual-extra" min="0" step="10000" placeholder="예) 0">
+          </div>
+          <div class="calc-field">
+            <label for="age">만 나이 (선택)</label>
+            <input type="number" id="age" min="0" max="120" step="1" placeholder="예) 40">
+            <p class="field-hint">IRP 이전 대상 여부 안내에만 사용됩니다.</p>
+          </div>
+        </div>
+
+        <button class="calc-btn" id="calcBtn">계산하기</button>
+        <button class="calc-btn-reset" id="resetBtn">초기화</button>
+
+        <div class="calc-result" id="calcResult">
+          <div class="calc-section-label">계산 결과</div>
+          <div id="eligibilityBox"></div>
+          <div id="irpBox"></div>
+          <div class="result-highlight" id="mainResult">—</div>
+          <div class="result-rows" id="resultRows"></div>
+          <p class="result-note-small" id="resultNote"></p>
+        </div>
+      </div>
+
+      <div class="article-body" style="margin-top:8px;">
+        <h2>퇴직금 실수령액은 어떻게 계산하나요?</h2>
+        <p>퇴직금은 근로자퇴직급여 보장법에 따라 <strong>1일 평균임금 × 30일 × 근속연수</strong>로 계산합니다. 이 금액에서 퇴직소득세와 지방소득세를 원천징수하고 남은 금액이 실제로 받는 세후 금액입니다.</p>
+
+        <h2>계산 방식 (간편 계산)</h2>
+        <table>
+          <thead><tr><th>단계</th><th>계산식</th></tr></thead>
+          <tbody>
+            <tr><td>① 평균임금</td><td>(3개월 평균 월급여×3 + 기타수당×3/12) ÷ 퇴사일 기준 최근 3개월 총일수</td></tr>
+            <tr><td>② 세전 예상 퇴직금</td><td>1일 평균임금 × 30 × (재직일수 ÷ 365)</td></tr>
+            <tr><td>③ 근속연수공제</td><td>근속연수 구간별 공제(국세청 기준표)</td></tr>
+            <tr><td>④ 환산급여</td><td>(퇴직금 − 근속연수공제) ÷ 근속연수 × 12</td></tr>
+            <tr><td>⑤ 환산급여공제</td><td>환산급여 구간별 공제(국세청 기준표)</td></tr>
+            <tr><td>⑥ 퇴직소득세</td><td>(과세표준×세율−누진공제) ÷ 12 × 근속연수</td></tr>
+            <tr><td>⑦ 지방소득세</td><td>퇴직소득세 × 10%</td></tr>
+            <tr><td>⑧ 예상 세후 금액</td><td>퇴직금 − 퇴직소득세 − 지방소득세</td></tr>
+          </tbody>
+        </table>
+        <p>이 계산기는 최근 3개월 평균 급여를 기준으로 한 <strong>간편 계산</strong>입니다. 수습기간, 휴직·휴업 기간이 있었던 경우 실제 법정 평균임금과 다를 수 있습니다.</p>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>Q. 계산된 금액을 바로 현금으로 받을 수 있나요?</h3>
+        <p>만 55세 미만이며 퇴직금이 300만원을 초과하는 경우, 퇴직금은 원칙적으로 IRP(개인형 퇴직연금) 계좌로 지급되고 세금은 실제 인출 시점까지 이연됩니다. 이 경우 "예상 세후 금액"은 즉시 현금으로 받는 금액이 아니라 향후 부담할 것으로 예상되는 세금을 미리 계산한 참고값입니다.</p>
+        <h3>Q. 근속기간이 1년 미만이면 퇴직금을 못 받나요?</h3>
+        <p>네, 근로자퇴직급여 보장법상 계속근로기간이 1년 미만이거나 4주 평균 1주 소정근로시간이 15시간 미만이면 법정 퇴직금 지급 대상이 아닙니다.</p>
+        <h3>Q. 이 계산기 결과가 실제 지급액과 다를 수 있나요?</h3>
+        <p>네. 이 계산기는 간편 계산이라 수습·휴직 등 예외기간이나 임원 퇴직소득 한도, 중간정산 이력, 동일 과세연도 복수 퇴직소득 같은 특수한 경우는 반영하지 않습니다. 정확한 금액은 회사의 임금대장과 국세청 홈택스 또는 세무 전문가를 통해 확인하세요.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── 결과 하단 광고 ─── -->
+  <div class="container" style="margin:24px auto;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4871058922328451"
+         data-ad-slot="2452607788"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">© 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 국세청·고용노동부 등 공식 채널에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about.html">사이트 소개</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="contact.html">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js?v=20260817"></script>
+  <script type="module">
+    import { checkEligibility, calculate } from '../engine/retirement-pay-calculator.js';
+
+    const calcBtn = document.getElementById('calcBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const calcResult = document.getElementById('calcResult');
+    const eligibilityBox = document.getElementById('eligibilityBox');
+    const irpBox = document.getElementById('irpBox');
+    const mainResultEl = document.getElementById('mainResult');
+    const resultRowsEl = document.getElementById('resultRows');
+    const resultNoteEl = document.getElementById('resultNote');
+
+    let policy = null;
+
+    fetch('../data/retirement-pay-net-calculator-policy.json')
+      .then((res) => res.json())
+      .then((data) => { policy = data; })
+      .catch(() => {
+        resultNoteEl.textContent = '정책 데이터를 불러오지 못했습니다. 페이지를 새로고침해주세요.';
+      });
+
+    function won(n) {
+      return Math.round(n).toLocaleString('ko-KR') + '원';
+    }
+
+    function showError(message) {
+      eligibilityBox.innerHTML = '';
+      irpBox.innerHTML = '';
+      mainResultEl.textContent = '입력값을 확인해주세요';
+      resultRowsEl.innerHTML = '';
+      resultNoteEl.textContent = message;
+      calcResult.classList.add('show');
+    }
+
+    calcBtn.addEventListener('click', function () {
+      if (!policy) return;
+
+      const hireDate = document.getElementById('hire-date').value;
+      const resignDate = document.getElementById('resign-date').value;
+      const monthlyWage = Number(document.getElementById('monthly-wage').value);
+      const annualExtra = Number(document.getElementById('annual-extra').value) || 0;
+      const ageValue = document.getElementById('age').value;
+      const age = ageValue === '' ? undefined : Number(ageValue);
+
+      if (!hireDate || !resignDate) {
+        showError('입사일과 퇴사일을 입력해주세요.');
+        return;
+      }
+      if (new Date(resignDate) <= new Date(hireDate)) {
+        showError('퇴사일은 입사일 이후여야 합니다.');
+        return;
+      }
+      if (!monthlyWage || monthlyWage <= 0) {
+        showError('급여는 0보다 커야 합니다.');
+        return;
+      }
+
+      const input = { hireDate, resignDate, monthlyWage, annualExtra, age };
+      const eligibility = checkEligibility(input, policy);
+
+      if (!eligibility.eligible) {
+        irpBox.innerHTML = '';
+        eligibilityBox.innerHTML =
+          '<div class="eligibility-box warn">⚠️ ' + eligibility.reasons.join(' ') + '</div>';
+        mainResultEl.textContent = '법정 퇴직금 지급 대상이 아닙니다';
+        resultRowsEl.innerHTML =
+          '<div class="result-row"><span class="r-label">계속근로기간</span><span class="r-val">' + eligibility.serviceDays + '일</span></div>';
+        resultNoteEl.textContent = '4주 평균 1주 소정근로시간이 ' + policy.eligibility.minWeeklyHoursOver4Weeks + '시간 미만인 경우에도 법정 퇴직금 지급 대상이 아닙니다.';
+        calcResult.classList.add('show');
+        calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        return;
+      }
+
+      eligibilityBox.innerHTML = '';
+
+      const result = calculate(input, policy);
+
+      if (result.irpNoticeRequired) {
+        irpBox.innerHTML =
+          '<div class="info-box">이 금액은 원칙적으로 IRP(개인형 퇴직연금) 계좌로 이전되며, 세금은 실제 인출 시점까지 과세이연될 수 있습니다. 즉시 현금으로 받는 금액이 아닐 수 있습니다.</div>';
+      } else {
+        irpBox.innerHTML = '';
+      }
+
+      mainResultEl.textContent = '예상 세후 금액 ' + won(result.netPay);
+
+      const rows = [
+        ['재직기간', result.eligibility.serviceDays + '일 (세금계산용 근속연수 ' + result.taxServiceYears + '년)'],
+        ['세전 예상 퇴직금 (간편 계산)', won(result.severancePay)],
+        ['예상 퇴직소득세', won(result.tax.retirementIncomeTax)],
+        ['예상 지방소득세', won(result.tax.localIncomeTax)],
+        ['예상 세후 금액', won(result.netPay)],
+      ];
+      resultRowsEl.innerHTML = rows
+        .map(([l, v]) => '<div class="result-row"><span class="r-label">' + l + '</span><span class="r-val">' + v + '</span></div>')
+        .join('');
+
+      resultNoteEl.textContent = policy.disclaimers.join(' ');
+
+      calcResult.classList.add('show');
+      calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    resetBtn.addEventListener('click', function () {
+      document.getElementById('hire-date').value = '';
+      document.getElementById('resign-date').value = '';
+      document.getElementById('monthly-wage').value = '';
+      document.getElementById('annual-extra').value = '';
+      document.getElementById('age').value = '';
+      calcResult.classList.remove('show');
+    });
+  </script>
+</body>
+</html>
