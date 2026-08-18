@@ -9,4 +9,4 @@ Disallow: /admin/
 # 데이터 파일 크롤링 불필요
 Disallow: /data/
 
-Sitemap: https://benefitson.pages.dev/sitemap.xml
+Sitemap: https://benefitson.org/sitemap.xml
