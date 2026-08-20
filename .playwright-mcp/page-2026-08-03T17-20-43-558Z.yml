@@ -1,0 +1,72 @@
+- generic [ref=f124e1]:
+  - banner [ref=f124e2]:
+    - generic [ref=f124e3]: 혜택on 관리자
+    - generic [ref=f124e4]:
+      - generic [ref=f124e5]: 아직 저장 안 함
+      - generic [ref=f124e6]: 파일에서 로드
+      - link "📖 사용 설명서" [ref=f124e7] [cursor=pointer]:
+        - /url: guide.html
+      - link "🔗 사이트 보기" [ref=f124e8] [cursor=pointer]:
+        - /url: ../index.html
+  - generic [ref=f124e9]:
+    - navigation [ref=f124e10]:
+      - generic [ref=f124e11]: 대시보드
+      - button "📊 현황" [ref=f124e12] [cursor=pointer]
+      - generic [ref=f124e13]: 데이터
+      - button "⚙️ 기준값" [ref=f124e14] [cursor=pointer]
+      - button "📰 정책 목록" [ref=f124e15] [cursor=pointer]
+      - button "➕ 새 정책 추가" [ref=f124e16] [cursor=pointer]
+      - button "🧭 자가진단 규칙" [ref=f124e17] [cursor=pointer]
+      - button "🏠 홈 카드" [ref=f124e18] [cursor=pointer]
+      - button "📂 자료실" [active] [ref=f124e19] [cursor=pointer]
+      - button "📥 일괄 가져오기" [ref=f124e20] [cursor=pointer]
+      - generic [ref=f124e21]: 도구
+      - button "✅ 검증" [ref=f124e22] [cursor=pointer]
+      - button "💾 내보내기" [ref=f124e23] [cursor=pointer]
+    - main [ref=f124e24]:
+      - generic [ref=f124e81]:
+        - generic [ref=f124e82]: 자료실 관리
+        - paragraph [ref=f124e83]:
+          - text: 소상공인용 무료 앱·자료를 등록합니다. 저장 후
+          - code [ref=f124e84]: data/resources.json
+          - text: 을 내보내 Git에 push하면 모든 방문자에게 반영됩니다.
+        - paragraph [ref=f124e85]:
+          - text: ⚠️ 실제 파일은 저장소의
+          - code [ref=f124e86]: downloads/
+          - text: 폴더에 직접 커밋해야 다운로드 링크가 동작합니다.
+          - code [ref=f124e87]: 파일 경로
+          - text: 는
+          - code [ref=f124e88]: ../downloads/파일명
+          - text: 형태로 입력하세요.
+        - table [ref=f124e90]:
+          - rowgroup [ref=f124e91]:
+            - row [ref=f124e92]:
+              - columnheader "제목" [ref=f124e93]
+              - columnheader "카테고리" [ref=f124e94]
+              - columnheader "버전" [ref=f124e95]
+              - columnheader "파일" [ref=f124e96]
+              - columnheader "업데이트" [ref=f124e97]
+              - columnheader [ref=f124e98]
+          - rowgroup [ref=f124e99]:
+            - row [ref=f124e100]:
+              - cell [ref=f124e101]:
+                - strong [ref=f124e102]: 우리가게 스탬프
+              - cell "-" [ref=f124e103]
+              - cell "v1.0" [ref=f124e104]
+              - cell "스탬프앱v1.0.zip" [ref=f124e105]
+              - cell "2026-06-30" [ref=f124e106]
+              - cell [ref=f124e107]:
+                - button "편집" [ref=f124e108] [cursor=pointer]
+            - row [ref=f124e109]:
+              - cell [ref=f124e110]:
+                - strong [ref=f124e111]: 배달앱 수수료 계산기
+              - cell "계산기" [ref=f124e112]
+              - cell "v1.0" [ref=f124e113]
+              - cell "🔗 웹페이지" [ref=f124e114]
+              - cell "2026-08-03" [ref=f124e115]
+              - cell [ref=f124e116]:
+                - button "편집" [ref=f124e117] [cursor=pointer]
+        - button "➕ 새 자료 추가" [ref=f124e119] [cursor=pointer]
+        - generic [ref=f124e120]:
+          - button "💾 자료실 저장 (즉시 반영)" [ref=f124e121] [cursor=pointer]
+          - generic [ref=f124e122]: ✓ 저장 완료

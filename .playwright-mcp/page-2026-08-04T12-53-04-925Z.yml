@@ -1,0 +1,242 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "혜택on" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+      - navigation "주요 메뉴" [ref=e5]:
+        - list [ref=e6]:
+          - listitem [ref=e7]:
+            - link "청년정책" [ref=e8] [cursor=pointer]:
+              - /url: pages/youth.html
+          - listitem [ref=e9]:
+            - link "신혼·육아" [ref=e10] [cursor=pointer]:
+              - /url: pages/newlywed.html
+          - listitem [ref=e11]:
+            - link "중장년·노년" [ref=e12] [cursor=pointer]:
+              - /url: pages/senior.html
+          - listitem [ref=e13]:
+            - link "1인가구" [ref=e14] [cursor=pointer]:
+              - /url: pages/single.html
+          - listitem [ref=e15]:
+            - link "근로/소득" [ref=e16] [cursor=pointer]:
+              - /url: pages/income.html
+          - listitem [ref=e17]:
+            - link "세금/환급" [ref=e18] [cursor=pointer]:
+              - /url: pages/tax.html
+          - listitem [ref=e19]:
+            - link "계산기" [ref=e20] [cursor=pointer]:
+              - /url: "#calculators"
+          - listitem [ref=e21]:
+            - link "무료도구" [ref=e22] [cursor=pointer]:
+              - /url: pages/resources.html
+  - generic [ref=e26]:
+    - generic [ref=e27]: ● 2026년 최신 정책 반영
+    - heading "내가 받을 수 있는 혜택, 30초면 확인" [level=1] [ref=e28]
+    - paragraph [ref=e29]: 나이, 소득, 가구 형태만 입력하면 받을 수 있는 정부지원금을 바로 알려드려요
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - heading "내 혜택 자가진단" [level=3] [ref=e32]
+        - generic [ref=e33]: 0/3 선택
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - combobox "연령대 선택" [ref=e37] [cursor=pointer]:
+            - option "연령대 선택" [selected]
+            - option "10대"
+            - option "20대"
+            - option "30대"
+            - option "40대"
+            - option "50대"
+            - option "60대 이상"
+          - text: ▾
+        - generic [ref=e38]:
+          - combobox "가구 형태 선택" [ref=e39] [cursor=pointer]:
+            - option "가구 형태 선택" [selected]
+            - option "1인가구"
+            - option "부모님과 동거"
+            - option "배우자와 동거"
+            - option "자녀 있는 가구"
+          - text: ▾
+        - generic [ref=e40]:
+          - combobox "고용 상태 선택" [ref=e41] [cursor=pointer]:
+            - option "고용 상태 선택" [selected]
+            - option "직장인 (재직중)"
+            - option "취업준비중"
+            - option "자영업자·프리랜서"
+            - option "무직·기타"
+          - text: ▾
+      - button "연령대·가구형태·고용상태를 선택해주세요" [disabled] [ref=e42]
+  - generic [ref=e46]:
+    - generic [ref=e47]:
+      - generic [ref=e48]: 7월의 추천 정보
+      - heading "여름철 에너지바우처, 신청 안 하면 못 받아요" [level=3] [ref=e49]
+      - paragraph [ref=e50]: 무더위 시작 전 미리 신청하면 냉방비 부담을 줄일 수 있어요. 대상 여부부터 확인해보세요.
+    - link "에너지바우처 확인하기" [ref=e51] [cursor=pointer]:
+      - /url: https://www.energyv.or.kr/
+  - insertion [ref=e53]:
+    - iframe [ref=e55]:
+      
+  - generic [ref=e57]:
+    - generic [ref=e58]:
+      - heading "지금 가장 많이 찾는 계산기" [level=2] [ref=e59]
+      - link "전체 보기 →" [ref=e60] [cursor=pointer]:
+        - /url: "#calculators"
+    - generic [ref=e61]:
+      - generic [ref=e62] [cursor=pointer]:
+        - generic [ref=e63]: ₩
+        - heading "최저임금 월급 계산기" [level=3] [ref=e65]
+        - paragraph [ref=e66]: 2026년 시급 기준, 209시간 월급으로 환산해서 바로 확인하세요. 가장 많이 찾는 계산기에요.
+        - link "바로 계산하기 →" [ref=e67]:
+          - /url: pages/calc-minimum-wage.html
+      - generic [ref=e68]:
+        - link "🔥 실수령액 계산기 연봉 입력하면 4대보험·세금 빼고 실제 받는 돈" [ref=e69] [cursor=pointer]:
+          - /url: pages/calc-net-salary.html
+          - generic [ref=e70]: 🔥
+          - generic [ref=e71]:
+            - generic [ref=e72]: 실수령액 계산기
+            - generic [ref=e73]: 연봉 입력하면 4대보험·세금 빼고 실제 받는 돈
+        - link "📑 연말정산 환급 계산기 올해 환급받을 금액 미리 확인하기" [ref=e74] [cursor=pointer]:
+          - /url: pages/calc-tax-refund.html
+          - generic [ref=e75]: 📑
+          - generic [ref=e76]:
+            - generic [ref=e77]: 연말정산 환급 계산기
+            - generic [ref=e78]: 올해 환급받을 금액 미리 확인하기
+        - link "📋 실업급여 계산기 고용보험 가입기간 입력하고 수급액 확인" [ref=e79] [cursor=pointer]:
+          - /url: pages/calc-unemployment.html
+          - generic [ref=e80]: 📋
+          - generic [ref=e81]:
+            - generic [ref=e82]: 실업급여 계산기
+            - generic [ref=e83]: 고용보험 가입기간 입력하고 수급액 확인
+        - link "🏠 근로장려금 계산기 소득·재산 기준으로 지급액 자동 산출" [ref=e84] [cursor=pointer]:
+          - /url: pages/calc-eitc.html
+          - generic [ref=e85]: 🏠
+          - generic [ref=e86]:
+            - generic [ref=e87]: 근로장려금 계산기
+            - generic [ref=e88]: 소득·재산 기준으로 지급액 자동 산출
+  - link "🎯 사장님이시라면? 소상공인 전용 무료도구도 있어요 →" [ref=e90] [cursor=pointer]:
+    - /url: pages/resources.html
+    - generic [ref=e91]: 🎯
+    - generic [ref=e92]:
+      - text: 사장님이시라면?
+      - strong [ref=e93]: 소상공인 전용 무료도구
+      - text: 도 있어요
+    - generic [ref=e94]: →
+  - generic [ref=e95]:
+    - generic [ref=e97]:
+      - generic [ref=e98]:
+        - heading "청년정책" [level=2] [ref=e99]
+        - link "더보기 →" [ref=e100] [cursor=pointer]:
+          - /url: pages/youth.html
+      - generic [ref=e101]:
+        - link "중소중견기업 취창업을 희망하는 일반대 3학년 이상, 전문대 2학년 이상 중소기업 취업연계 장학금 2026.05.13 업데이트" [ref=e102] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000046
+          - generic [ref=e103]: 중소중견기업 취창업을 희망하는 일반대 3학년 이상, 전문대 2학년 이상
+          - heading "중소기업 취업연계 장학금" [level=3] [ref=e104]
+          - paragraph [ref=e105]: 2026.05.13 업데이트
+        - link "우수 예비인력 대상 실제 프로젝트 형식의 실무교육을 제공 글로벌 광고인재 육성 2026.05.04 업데이트" [ref=e106] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/137100000217
+          - generic [ref=e107]: 우수 예비인력 대상 실제 프로젝트 형식의 실무교육을 제공
+          - heading "글로벌 광고인재 육성" [level=3] [ref=e108]
+          - paragraph [ref=e109]: 2026.05.04 업데이트
+        - link "우수한 청년인력의 어촌 유치로 어촌 활성화 도모 청년어촌정착지원 2026.04.29 업데이트" [ref=e110] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/119200000174
+          - generic [ref=e111]: 우수한 청년인력의 어촌 유치로 어촌 활성화 도모
+          - heading "청년어촌정착지원" [level=3] [ref=e112]
+          - paragraph [ref=e113]: 2026.04.29 업데이트
+        - link "안정적인 사회정착을 위해 다양한 전직지원교육 및 취업지원서비스 전역예정장병 취업활동지원 2026.04.23 업데이트" [ref=e114] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000015
+          - generic [ref=e115]: 안정적인 사회정착을 위해 다양한 전직지원교육 및 취업지원서비스
+          - heading "전역예정장병 취업활동지원" [level=3] [ref=e116]
+          - paragraph [ref=e117]: 2026.04.23 업데이트
+        - link "대학원 학과를 기반으로 구성된 교육연구단 대학원 학과 기반 교육연구단 연구장학금 등 지원 2026.02.04 업데이트" [ref=e118] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000007
+          - generic [ref=e119]: 대학원 학과를 기반으로 구성된 교육연구단
+          - heading "대학원 학과 기반 교육연구단 연구장학금 등 지원" [level=3] [ref=e120]
+          - paragraph [ref=e121]: 2026.02.04 업데이트
+        - link "대표자가 만 39세 이하로 사업 개시일로부터 3년 미만 중소기업 및 창업을 준비 중인 자 청년전용창업자금 2026.05.11 업데이트" [ref=e122] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000099
+          - generic [ref=e123]: 대표자가 만 39세 이하로 사업 개시일로부터 3년 미만 중소기업 및 창업을 준비 중인 자
+          - heading "청년전용창업자금" [level=3] [ref=e124]
+          - paragraph [ref=e125]: 2026.05.11 업데이트
+    - generic [ref=e127]:
+      - generic [ref=e128]:
+        - heading "신혼·육아" [level=2] [ref=e129]
+        - link "더보기 →" [ref=e130] [cursor=pointer]:
+          - /url: pages/newlywed.html
+      - generic [ref=e131]:
+        - link "국공립 및 사립유치원에 다니는 3~5세 유아 유아학비 (누리과정) 지원 2026.01.29 업데이트" [ref=e132] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/000000465790
+          - generic [ref=e133]: 국공립 및 사립유치원에 다니는 3~5세 유아
+          - heading "유아학비 (누리과정) 지원" [level=3] [ref=e134]
+          - paragraph [ref=e135]: 2026.01.29 업데이트
+        - link "중위소득의 100분의 50 이하인 사람 교육급여 2026.04.22 업데이트" [ref=e136] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000003
+          - generic [ref=e137]: 중위소득의 100분의 50 이하인 사람
+          - heading "교육급여" [level=3] [ref=e138]
+          - paragraph [ref=e139]: 2026.04.22 업데이트
+        - link "영양위험요인이 있는 임산부 및 영유아에게 정기적인 영양교육 및 상담 임산부 및 영유아 영양플러스 2026.05.13 업데이트" [ref=e140] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000005
+          - generic [ref=e141]: 영양위험요인이 있는 임산부 및 영유아에게 정기적인 영양교육 및 상담
+          - heading "임산부 및 영유아 영양플러스" [level=3] [ref=e142]
+          - paragraph [ref=e143]: 2026.05.13 업데이트
+        - link "학 전 24개월~86개월 미만 가정양육 영유아 대상 월 10~20만원 지원 가정양육수당 지원 2026.02.19 업데이트" [ref=e144] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005012
+          - generic [ref=e145]: 학 전 24개월~86개월 미만 가정양육 영유아 대상 월 10~20만원 지원
+          - heading "가정양육수당 지원" [level=3] [ref=e146]
+          - paragraph [ref=e147]: 2026.02.19 업데이트
+        - link "0세에서 5세 아동의 연령기준 영유아보육료 지원 2026.06.24 업데이트" [ref=e148] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005036
+          - generic [ref=e149]: 0세에서 5세 아동의 연령기준
+          - heading "영유아보육료 지원" [level=3] [ref=e150]
+          - paragraph [ref=e151]: 2026.06.24 업데이트
+        - link "신규어린이집, 유치원을 이용하지 않고 부모급여 또는 양육수당 수급 중인 영아 시간제보육 지원 2026.05.11 업데이트" [ref=e152] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005031
+          - generic [ref=e153]: 신규어린이집, 유치원을 이용하지 않고 부모급여 또는 양육수당 수급 중인 영아
+          - heading "시간제보육 지원" [level=3] [ref=e154]
+          - paragraph [ref=e155]: 2026.05.11 업데이트
+    - generic [ref=e157]:
+      - generic [ref=e158]:
+        - heading "중장년·노년" [level=2] [ref=e159]
+        - link "더보기 →" [ref=e160] [cursor=pointer]:
+          - /url: pages/senior.html
+      - generic [ref=e161]:
+        - link "65세 이상 의료급여 수급권자 의료급여 틀니·치과임플란트 지원 2026.05.08 업데이트" [ref=e162] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000002
+          - generic [ref=e163]: 65세 이상 의료급여 수급권자
+          - heading "의료급여 틀니·치과임플란트 지원" [level=3] [ref=e164]
+          - paragraph [ref=e165]: 2026.05.08 업데이트
+        - link "안 검진,눈 수술비 지원 노인실명예방사업 2025.11.28 업데이트" [ref=e166] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000015
+          - generic [ref=e167]: 안 검진,눈 수술비 지원
+          - heading "노인실명예방사업" [level=3] [ref=e168]
+          - paragraph [ref=e169]: 2025.11.28 업데이트
+        - link "강보험급여 '인공관절 치환술(무릎관절)' 인정기준에 준하는 질환자 노인 무릎인공관절 수술 지원 2025.11.28 업데이트" [ref=e170] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000113
+          - generic [ref=e171]: 강보험급여 '인공관절 치환술(무릎관절)' 인정기준에 준하는 질환자
+          - heading "노인 무릎인공관절 수술 지원" [level=3] [ref=e172]
+          - paragraph [ref=e173]: 2025.11.28 업데이트
+        - link "치매검진 지원,치매치료관리비 지원 치매관리 서비스 2026.07.13 업데이트" [ref=e174] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000080
+          - generic [ref=e175]: 치매검진 지원,치매치료관리비 지원
+          - heading "치매관리 서비스" [level=3] [ref=e176]
+          - paragraph [ref=e177]: 2026.07.13 업데이트
+        - link "신규보조기기 서비스가 필요한 장애인, 노인 등 장애인·노인 보조기기 맞춤형 서비스 2025.11.27 업데이트" [ref=e178] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000017
+          - generic [ref=e179]: 신규보조기기 서비스가 필요한 장애인, 노인 등
+          - heading "장애인·노인 보조기기 맞춤형 서비스" [level=3] [ref=e180]
+          - paragraph [ref=e181]: 2025.11.27 업데이트
+        - link "중한 질병 또는 부상으로 인하여 발생한 의료비를 감당하기 곤란한 사람 긴급복지 의료지원 2026.02.26 업데이트" [ref=e182] [cursor=pointer]:
+          - /url: https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005005
+          - generic [ref=e183]: 중한 질병 또는 부상으로 인하여 발생한 의료비를 감당하기 곤란한 사람
+          - heading "긴급복지 의료지원" [level=3] [ref=e184]
+          - paragraph [ref=e185]: 2026.02.26 업데이트
+  - insertion [ref=e187]
+  - contentinfo [ref=e189]:
+    - generic [ref=e190]:
+      - generic [ref=e191]: © 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.
+      - generic [ref=e192]:
+        - link "사이트 소개" [ref=e193] [cursor=pointer]:
+          - /url: pages/about.html
+        - link "개인정보처리방침" [ref=e194] [cursor=pointer]:
+          - /url: pages/privacy.html
+        - link "광고문의" [ref=e195] [cursor=pointer]:
+          - /url: pages/contact.html

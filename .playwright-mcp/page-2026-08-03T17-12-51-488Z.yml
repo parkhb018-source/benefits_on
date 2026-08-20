@@ -1,0 +1,120 @@
+- generic [ref=f121e1]:
+  - banner [ref=f121e2]:
+    - generic [ref=f121e3]: 혜택on 관리자
+    - generic [ref=f121e4]:
+      - generic [ref=f121e5]: 아직 저장 안 함
+      - generic [ref=f121e6]: 파일에서 로드
+      - link "📖 사용 설명서" [ref=f121e7] [cursor=pointer]:
+        - /url: guide.html
+      - link "🔗 사이트 보기" [ref=f121e8] [cursor=pointer]:
+        - /url: ../index.html
+  - generic [ref=f121e9]:
+    - navigation [ref=f121e10]:
+      - generic [ref=f121e11]: 대시보드
+      - button "📊 현황" [ref=f121e12] [cursor=pointer]
+      - generic [ref=f121e13]: 데이터
+      - button "⚙️ 기준값" [ref=f121e14] [cursor=pointer]
+      - button "📰 정책 목록" [ref=f121e15] [cursor=pointer]
+      - button "➕ 새 정책 추가" [ref=f121e16] [cursor=pointer]
+      - button "🧭 자가진단 규칙" [ref=f121e17] [cursor=pointer]
+      - button "🏠 홈 카드" [ref=f121e18] [cursor=pointer]
+      - button "📂 자료실" [ref=f121e19] [cursor=pointer]
+      - button "📥 일괄 가져오기" [ref=f121e20] [cursor=pointer]
+      - generic [ref=f121e21]: 도구
+      - button "✅ 검증" [ref=f121e22] [cursor=pointer]
+      - button "💾 내보내기" [ref=f121e23] [cursor=pointer]
+    - main [ref=f121e24]:
+      - generic [ref=f121e81]:
+        - generic [ref=f121e82]: 자료실 관리
+        - paragraph [ref=f121e83]:
+          - text: 소상공인용 무료 앱·자료를 등록합니다. 저장 후
+          - code [ref=f121e84]: data/resources.json
+          - text: 을 내보내 Git에 push하면 모든 방문자에게 반영됩니다.
+        - paragraph [ref=f121e85]:
+          - text: ⚠️ 실제 파일은 저장소의
+          - code [ref=f121e86]: downloads/
+          - text: 폴더에 직접 커밋해야 다운로드 링크가 동작합니다.
+          - code [ref=f121e87]: 파일 경로
+          - text: 는
+          - code [ref=f121e88]: ../downloads/파일명
+          - text: 형태로 입력하세요.
+        - table [ref=f121e90]:
+          - rowgroup [ref=f121e91]:
+            - row [ref=f121e92]:
+              - columnheader "제목" [ref=f121e93]
+              - columnheader "카테고리" [ref=f121e94]
+              - columnheader "버전" [ref=f121e95]
+              - columnheader "파일" [ref=f121e96]
+              - columnheader "업데이트" [ref=f121e97]
+              - columnheader [ref=f121e98]
+          - rowgroup [ref=f121e99]:
+            - row [ref=f121e100]:
+              - cell [ref=f121e101]:
+                - strong [ref=f121e102]: 우리가게 스탬프
+              - cell "-" [ref=f121e103]
+              - cell "v1.0" [ref=f121e104]
+              - cell "스탬프앱v1.0.zip" [ref=f121e105]
+              - cell "2026-06-30" [ref=f121e106]
+              - cell [ref=f121e107]:
+                - button "편집" [ref=f121e108] [cursor=pointer]
+            - row [ref=f121e109]:
+              - cell [ref=f121e110]:
+                - strong [ref=f121e111]: 배달앱 수수료 계산기
+              - cell "계산기" [ref=f121e112]
+              - cell "v1.0" [ref=f121e113]
+              - cell "🔗 웹페이지" [ref=f121e114]
+              - cell "2026-08-03" [ref=f121e115]
+              - cell [ref=f121e116]:
+                - button "편집" [active] [ref=f121e117] [cursor=pointer]
+        - button "➕ 새 자료 추가" [ref=f121e119] [cursor=pointer]
+        - generic [ref=f121e124]:
+          - generic [ref=f121e125]:
+            - generic [ref=f121e126]: 자료 편집
+            - button "✕ 닫기" [ref=f121e127] [cursor=pointer]
+          - generic [ref=f121e128]:
+            - generic [ref=f121e129]:
+              - generic [ref=f121e130]: ID *
+              - 'textbox "예: sales-tracker" [ref=f121e131]': delivery-fee-calc
+              - generic [ref=f121e132]: 영문·숫자·하이픈
+            - generic [ref=f121e133]:
+              - generic [ref=f121e134]: 아이콘(이모지)
+              - textbox "📦" [ref=f121e135]: 🧮
+            - generic [ref=f121e136]:
+              - generic [ref=f121e137]: 제목 *
+              - textbox [ref=f121e138]: 배달앱 수수료 계산기
+            - generic [ref=f121e139]:
+              - generic [ref=f121e140]: 설명
+              - textbox [ref=f121e141]: 배민·쿠팡이츠·요기요 수수료·배달비 빼면 내 통장에 얼마가 들어올까?
+            - generic [ref=f121e142]:
+              - generic [ref=f121e143]: 카테고리
+              - textbox "도구" [ref=f121e144]: 계산기
+            - generic [ref=f121e145]:
+              - generic [ref=f121e146]: 버전
+              - textbox "1.0.0" [ref=f121e147]: v1.0
+            - generic [ref=f121e148]:
+              - generic [ref=f121e149]: 파일 크기
+              - textbox "2.3MB" [ref=f121e150]
+            - generic [ref=f121e151]:
+              - generic [ref=f121e152]: 업데이트 날짜
+              - textbox [ref=f121e153]: 2026-08-03
+            - generic [ref=f121e154]:
+              - generic [ref=f121e155]: 실행 페이지 경로 (웹 실행형 도구)
+              - textbox "tools/도구이름/index.html" [ref=f121e156]: tools/delivery-fee-calc/index.html
+              - generic [ref=f121e157]: 브라우저에서 바로 실행되는 웹 도구면 여기에 경로를 입력하세요. 카드 버튼이 "바로 확인"으로 표시됩니다. 입력하면 아래 파일 경로는 무시됩니다.
+            - generic [ref=f121e158]:
+              - generic [ref=f121e159]: 파일 경로 (다운로드형)
+              - generic [ref=f121e160]:
+                - textbox "../downloads/파일명.zip" [ref=f121e161]
+                - generic [ref=f121e162] [cursor=pointer]: 📂 파일 선택
+              - generic [ref=f121e163]:
+                - text: 파일을 선택하면 경로가
+                - code [ref=f121e164]: ../downloads/파일명
+                - text: 으로 자동 입력됩니다. ※ 실제 파일은
+                - code [ref=f121e165]: downloads/
+                - text: 폴더에 직접 커밋해야 다운로드가 동작합니다. 위 "실행 페이지 경로"가 비어있을 때만 사용됩니다.
+          - generic [ref=f121e166]:
+            - button "적용" [ref=f121e167] [cursor=pointer]
+            - button "🗑️ 삭제" [ref=f121e168] [cursor=pointer]
+        - generic [ref=f121e120]:
+          - button "💾 자료실 저장 (즉시 반영)" [ref=f121e121] [cursor=pointer]
+          - generic [ref=f121e122]: ✓ 저장 완료

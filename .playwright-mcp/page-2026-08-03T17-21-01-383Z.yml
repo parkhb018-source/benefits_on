@@ -1,0 +1,145 @@
+- generic [ref=f124e1]:
+  - banner [ref=f124e2]:
+    - generic [ref=f124e3]: 혜택on 관리자
+    - generic [ref=f124e4]:
+      - generic [ref=f124e5]: 아직 저장 안 함
+      - generic [ref=f124e6]: 파일에서 로드
+      - link "📖 사용 설명서" [ref=f124e7] [cursor=pointer]:
+        - /url: guide.html
+      - link "🔗 사이트 보기" [ref=f124e8] [cursor=pointer]:
+        - /url: ../index.html
+  - generic [ref=f124e9]:
+    - navigation [ref=f124e10]:
+      - generic [ref=f124e11]: 대시보드
+      - button "📊 현황" [ref=f124e12] [cursor=pointer]
+      - generic [ref=f124e13]: 데이터
+      - button "⚙️ 기준값" [ref=f124e14] [cursor=pointer]
+      - button "📰 정책 목록" [ref=f124e15] [cursor=pointer]
+      - button "➕ 새 정책 추가" [ref=f124e16] [cursor=pointer]
+      - button "🧭 자가진단 규칙" [ref=f124e17] [cursor=pointer]
+      - button "🏠 홈 카드" [ref=f124e18] [cursor=pointer]
+      - button "📂 자료실" [ref=f124e19] [cursor=pointer]
+      - button "📥 일괄 가져오기" [ref=f124e20] [cursor=pointer]
+      - generic [ref=f124e21]: 도구
+      - button "✅ 검증" [ref=f124e22] [cursor=pointer]
+      - button "💾 내보내기" [ref=f124e23] [cursor=pointer]
+    - main [ref=f124e24]:
+      - generic [ref=f124e81]:
+        - generic [ref=f124e82]: 자료실 관리
+        - paragraph [ref=f124e83]:
+          - text: 소상공인용 무료 앱·자료를 등록합니다. 저장 후
+          - code [ref=f124e84]: data/resources.json
+          - text: 을 내보내 Git에 push하면 모든 방문자에게 반영됩니다.
+        - paragraph [ref=f124e85]:
+          - text: ⚠️ 실제 파일은 저장소의
+          - code [ref=f124e86]: downloads/
+          - text: 폴더에 직접 커밋해야 다운로드 링크가 동작합니다.
+          - code [ref=f124e87]: 파일 경로
+          - text: 는
+          - code [ref=f124e88]: ../downloads/파일명
+          - text: 형태로 입력하세요.
+        - table [ref=f124e90]:
+          - rowgroup [ref=f124e91]:
+            - row [ref=f124e92]:
+              - columnheader "제목" [ref=f124e93]
+              - columnheader "카테고리" [ref=f124e94]
+              - columnheader "버전" [ref=f124e95]
+              - columnheader "파일" [ref=f124e96]
+              - columnheader "업데이트" [ref=f124e97]
+              - columnheader [ref=f124e98]
+          - rowgroup [ref=f124e99]:
+            - row [ref=f124e100]:
+              - cell [ref=f124e101]:
+                - strong [ref=f124e102]: 우리가게 스탬프
+              - cell "-" [ref=f124e103]
+              - cell "v1.0" [ref=f124e104]
+              - cell "스탬프앱v1.0.zip" [ref=f124e105]
+              - cell "2026-06-30" [ref=f124e106]
+              - cell [ref=f124e107]:
+                - button "편집" [ref=f124e108] [cursor=pointer]
+            - row [ref=f124e109]:
+              - cell [ref=f124e110]:
+                - strong [ref=f124e111]: 배달앱 수수료 계산기
+              - cell "계산기" [ref=f124e112]
+              - cell "v1.0" [ref=f124e113]
+              - cell "🔗 웹페이지" [ref=f124e114]
+              - cell "2026-08-03" [ref=f124e115]
+              - cell [ref=f124e116]:
+                - button "편집" [ref=f124e117] [cursor=pointer]
+        - button "➕ 새 자료 추가" [ref=f124e119] [cursor=pointer]
+        - generic [ref=f124e124]:
+          - generic [ref=f124e125]:
+            - generic [ref=f124e126]: 새 자료 추가
+            - button "✕ 닫기" [ref=f124e127] [cursor=pointer]
+          - generic [ref=f124e128]:
+            - generic [ref=f124e129]:
+              - generic [ref=f124e130]: ID *
+              - 'textbox "예: sales-tracker" [ref=f124e131]'
+              - generic [ref=f124e132]: 영문·숫자·하이픈
+            - generic [ref=f124e133]:
+              - generic [ref=f124e134]: 아이콘(이모지)
+              - generic [ref=f124e135]:
+                - textbox "📦" [ref=f124e136]
+                - button "😀" [active] [ref=f124e137] [cursor=pointer]
+                - generic [ref=f124e170]:
+                  - button "🧮" [ref=f124e171] [cursor=pointer]
+                  - button "🧾" [ref=f124e172] [cursor=pointer]
+                  - button "📋" [ref=f124e173] [cursor=pointer]
+                  - button "👤" [ref=f124e174] [cursor=pointer]
+                  - button "⏱️" [ref=f124e175] [cursor=pointer]
+                  - button "🕐" [ref=f124e176] [cursor=pointer]
+                  - button "📦" [ref=f124e177] [cursor=pointer]
+                  - button "🛒" [ref=f124e178] [cursor=pointer]
+                  - button "🏠" [ref=f124e179] [cursor=pointer]
+                  - button "🔧" [ref=f124e180] [cursor=pointer]
+                  - button "⚙️" [ref=f124e181] [cursor=pointer]
+                  - button "📱" [ref=f124e182] [cursor=pointer]
+                  - button "💰" [ref=f124e183] [cursor=pointer]
+                  - button "💳" [ref=f124e184] [cursor=pointer]
+                  - button "📈" [ref=f124e185] [cursor=pointer]
+                  - button "📊" [ref=f124e186] [cursor=pointer]
+                  - button "🍽️" [ref=f124e187] [cursor=pointer]
+                  - button "☕" [ref=f124e188] [cursor=pointer]
+                  - button "✂️" [ref=f124e189] [cursor=pointer]
+                  - button "💇" [ref=f124e190] [cursor=pointer]
+                  - button "🚗" [ref=f124e191] [cursor=pointer]
+                  - button "📅" [ref=f124e192] [cursor=pointer]
+                  - button "📌" [ref=f124e193] [cursor=pointer]
+                  - button "⭐" [ref=f124e194] [cursor=pointer]
+            - generic [ref=f124e138]:
+              - generic [ref=f124e139]: 제목 *
+              - textbox [ref=f124e140]
+            - generic [ref=f124e141]:
+              - generic [ref=f124e142]: 설명
+              - textbox [ref=f124e143]
+            - generic [ref=f124e144]:
+              - generic [ref=f124e145]: 카테고리
+              - textbox "도구" [ref=f124e146]
+            - generic [ref=f124e147]:
+              - generic [ref=f124e148]: 버전
+              - textbox "1.0.0" [ref=f124e149]
+            - generic [ref=f124e150]:
+              - generic [ref=f124e151]: 파일 크기
+              - textbox "2.3MB" [ref=f124e152]
+            - generic [ref=f124e153]:
+              - generic [ref=f124e154]: 업데이트 날짜
+              - textbox [ref=f124e155]: 2026-08-03
+            - generic [ref=f124e156]:
+              - generic [ref=f124e157]: 실행 페이지 경로 (웹 실행형 도구)
+              - textbox "tools/도구이름/index.html" [ref=f124e158]
+              - generic [ref=f124e159]: 브라우저에서 바로 실행되는 웹 도구면 여기에 경로를 입력하세요. 카드 버튼이 "바로 확인"으로 표시됩니다. 입력하면 아래 파일 경로는 무시됩니다.
+            - generic [ref=f124e160]:
+              - generic [ref=f124e161]: 파일 경로 (다운로드형)
+              - generic [ref=f124e162]:
+                - textbox "../downloads/파일명.zip" [ref=f124e163]
+                - generic [ref=f124e164] [cursor=pointer]: 📂 파일 선택
+              - generic [ref=f124e165]:
+                - text: 파일을 선택하면 경로가
+                - code [ref=f124e166]: ../downloads/파일명
+                - text: 으로 자동 입력됩니다. ※ 실제 파일은
+                - code [ref=f124e167]: downloads/
+                - text: 폴더에 직접 커밋해야 다운로드가 동작합니다. 위 "실행 페이지 경로"가 비어있을 때만 사용됩니다.
+          - button "적용" [ref=f124e169] [cursor=pointer]
+        - generic [ref=f124e120]:
+          - button "💾 자료실 저장 (즉시 반영)" [ref=f124e121] [cursor=pointer]
+          - generic [ref=f124e122]: ✓ 저장 완료
