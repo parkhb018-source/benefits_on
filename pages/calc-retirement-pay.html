@@ -121,6 +121,8 @@
       <h1 class="calc-page-title">💰 퇴직금 실수령액 계산기</h1>
       <p class="calc-page-sub">입사일·퇴사일·급여만 입력하면 예상 퇴직금과 세금을 제외한 실수령액을 확인할 수 있습니다.</p>
 
+      <div class="info-box">내가 퇴직금 지급 대상인지 먼저 확인하고 싶다면? <a href="tools/retirement-pay-eligibility-check/index.html">퇴직금 지급 대상 자가진단</a>에서 1분 만에 확인해보세요.</div>
+
       <div class="calc-card">
         <div class="calc-section-label">근무 정보 입력</div>
 
@@ -286,7 +288,7 @@
         mainResultEl.textContent = '법정 퇴직금 지급 대상이 아닙니다';
         resultRowsEl.innerHTML =
           '<div class="result-row"><span class="r-label">계속근로기간</span><span class="r-val">' + eligibility.serviceDays + '일</span></div>';
-        resultNoteEl.textContent = '4주 평균 1주 소정근로시간이 ' + policy.eligibility.minWeeklyHoursOver4Weeks + '시간 미만인 경우에도 법정 퇴직금 지급 대상이 아닙니다.';
+        resultNoteEl.innerHTML = '4주 평균 1주 소정근로시간이 ' + policy.eligibility.minWeeklyHoursOver4Weeks + '시간 미만인 경우에도 법정 퇴직금 지급 대상이 아닙니다. 계속근로기간·소정근로시간 판단이 애매하다면 <a href="tools/retirement-pay-eligibility-check/index.html">퇴직금 지급 대상 자가진단</a>에서 다시 확인해보세요.';
         calcResult.classList.add('show');
         calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         return;

@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "order": [
+    "workerStatus",
+    "retirementStatus",
+    "continuousPeriod",
+    "fourWeekPrescribedHours",
+    "continuityIssue",
+    "workerType",
+    "evidenceStatus"
+  ],
+  "note": "evidenceStatus는 skipRules가 아니라 showIf/anyOf로 조건부 노출한다. 기존 flow-engine.js의 skipRules(단일 필드 equals/notEquals/includes)만으로는 이 다중 필드 OR 조건을 표현할 수 없어, 엔진 구현 단계에서 showIf/anyOf를 처리하는 소규모 확장이 필요하다(11장 중간보고의 미해결 사항 참고).",
+  "conditionalQuestions": [
+    {
+      "id": "evidenceStatus",
+      "showIf": {
+        "anyOf": [
+          { "field": "fourWeekPrescribedHours", "operator": "equals", "value": "variable" },
+          { "field": "fourWeekPrescribedHours", "operator": "equals", "value": "unknown" },
+          { "field": "continuityIssue", "operator": "equals", "value": "breakOrReentry" },
+          { "field": "continuityIssue", "operator": "equals", "value": "leaveOrClosure" },
+          { "field": "continuityIssue", "operator": "equals", "value": "unknown" },
+          { "field": "workerType", "operator": "equals", "value": "daily" }
+        ]
+      }
+    }
+  ]
+}

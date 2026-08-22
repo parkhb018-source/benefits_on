@@ -1,0 +1,10 @@
+{
+  "name": "benefitson-retirement-pay-eligibility-check",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "BenefitsON Law Engine v1.0 - 퇴직금 지급 대상 자가진단 (근로자퇴직급여 보장법 기준)",
+  "scripts": {
+    "test": "node tests/integration.test.js"
+  }
+}

@@ -33,6 +33,16 @@
       "category": "자가진단",
       "updatedAt": "2026-08-09",
       "url": "tools/goodwill-protection-check/index.html"
+    },
+    {
+      "id": "retirement-pay-eligibility-check",
+      "title": "퇴직금 지급 대상 자가진단",
+      "description": "몇 가지 질문에 답하면 근로자퇴직급여 보장법 기준 퇴직금 지급 대상 여부를 확인해드려요.",
+      "version": "",
+      "icon": "💰",
+      "category": "자가진단",
+      "updatedAt": "2026-08-22",
+      "url": "tools/retirement-pay-eligibility-check/index.html"
     }
   ]
 }

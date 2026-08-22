@@ -1,0 +1,206 @@
+{
+  "version": "1.0.0",
+  "status": "DATA_DRAFT",
+  "sourceLaw": "근로자퇴직급여 보장법 [시행 2026. 7. 1.], 근로기준법",
+  "note": "result 코드는 'HIGH'/'LOW'/'REVIEW' 3단계를 그대로 사용한다(참고 프로젝트의 R1~R6 코드 체계를 따르지 않음). engine/decision.js를 재사용할 경우 reviewRequired 판정 조건(primary.result === 'R6')을 'REVIEW'로 바꾸는 1줄 수정이 필요하다(중간보고 참고).",
+  "rules": [
+    {
+      "id": "RPE-EXCL-01",
+      "priority": 10,
+      "conditions": [
+        { "field": "workerStatus", "operator": "equals", "value": "notWorker" }
+      ],
+      "logic": "AND",
+      "result": "LOW",
+      "reasonCode": "NOT_A_WORKER",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-EXCL-02",
+      "priority": 11,
+      "conditions": [
+        { "field": "continuousPeriod", "operator": "equals", "value": "under1Year" }
+      ],
+      "logic": "AND",
+      "result": "LOW",
+      "reasonCode": "UNDER_ONE_YEAR",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-EXCL-03",
+      "priority": 12,
+      "conditions": [
+        { "field": "fourWeekPrescribedHours", "operator": "equals", "value": "under15" }
+      ],
+      "logic": "AND",
+      "result": "LOW",
+      "reasonCode": "UNDER_15_HOURS",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-07",
+      "priority": 20,
+      "conditions": [
+        { "field": "workerStatus", "operator": "equals", "value": "unknown" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "WORKER_STATUS_UNKNOWN",
+      "severity": "LOW",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-08",
+      "priority": 21,
+      "conditions": [
+        { "field": "continuousPeriod", "operator": "equals", "value": "unknown" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "CONTINUOUS_PERIOD_UNKNOWN",
+      "severity": "LOW",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-02",
+      "priority": 22,
+      "conditions": [
+        { "field": "fourWeekPrescribedHours", "operator": "equals", "value": "unknown" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "HOURS_UNKNOWN",
+      "severity": "LOW",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-03",
+      "priority": 23,
+      "conditions": [
+        { "field": "fourWeekPrescribedHours", "operator": "equals", "value": "variable" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "HOURS_VARIABLE",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-06",
+      "priority": 24,
+      "conditions": [
+        { "field": "workerType", "operator": "equals", "value": "daily" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "DAILY_WORKER",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-04",
+      "priority": 25,
+      "conditions": [
+        { "field": "continuityIssue", "operator": "equals", "value": "breakOrReentry" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "BREAK_OR_REENTRY",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-05",
+      "priority": 26,
+      "conditions": [
+        { "field": "continuityIssue", "operator": "equals", "value": "leaveOrClosure" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "LEAVE_OR_BUSINESS_CHANGE",
+      "severity": "MEDIUM",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-09",
+      "priority": 27,
+      "conditions": [
+        { "field": "continuityIssue", "operator": "equals", "value": "unknown" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "CONTINUITY_ISSUE_UNKNOWN",
+      "severity": "LOW",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-01",
+      "priority": 28,
+      "conditions": [
+        { "field": "retirementStatus", "operator": "equals", "value": "stillWorking" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "STILL_WORKING",
+      "severity": "LOW",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-REVIEW-10",
+      "priority": 29,
+      "conditions": [
+        { "field": "retirementStatus", "operator": "equals", "value": "unknown" }
+      ],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "RETIREMENT_STATUS_UNKNOWN",
+      "severity": "LOW",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-HIGH-01",
+      "priority": 90,
+      "conditions": [
+        { "field": "workerStatus", "operator": "equals", "value": "worker" },
+        { "field": "retirementStatus", "operator": "equals", "value": "retired" },
+        { "field": "continuousPeriod", "operator": "equals", "value": "oneYearOrMore" },
+        { "field": "fourWeekPrescribedHours", "operator": "equals", "value": "15OrMore" },
+        { "field": "continuityIssue", "operator": "equals", "value": "none" }
+      ],
+      "logic": "AND",
+      "result": "HIGH",
+      "reasonCode": "ALL_REQUIREMENTS_MET_RETIRED",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-HIGH-02",
+      "priority": 91,
+      "conditions": [
+        { "field": "workerStatus", "operator": "equals", "value": "worker" },
+        { "field": "retirementStatus", "operator": "equals", "value": "planningToRetire" },
+        { "field": "continuousPeriod", "operator": "equals", "value": "oneYearOrMore" },
+        { "field": "fourWeekPrescribedHours", "operator": "equals", "value": "15OrMore" },
+        { "field": "continuityIssue", "operator": "equals", "value": "none" }
+      ],
+      "logic": "AND",
+      "result": "HIGH",
+      "reasonCode": "ALL_REQUIREMENTS_MET_PLANNING",
+      "severity": "HIGH",
+      "stopEvaluation": true
+    },
+    {
+      "id": "RPE-DEFAULT-01",
+      "priority": 999,
+      "conditions": [],
+      "logic": "AND",
+      "result": "REVIEW",
+      "reasonCode": "INSUFFICIENT_INFORMATION",
+      "severity": "LOW",
+      "stopEvaluation": true
+    }
+  ]
+}

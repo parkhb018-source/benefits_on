@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "questions": [
+    {
+      "id": "workerStatus",
+      "title": "일을 제공하고 임금을 받는 근로자인가요?",
+      "help": "직원인지 여부는 계약서상 이름보다, 실제로 누가 업무를 지시·관리하고 임금을 지급했는지가 중요할 수 있습니다.",
+      "multiple": false,
+      "options": [
+        { "value": "worker", "label": "그렇다, 근로자입니다" },
+        { "value": "notWorker", "label": "아니다, 근로자가 아닙니다 (사업주·프리랜서 등)" },
+        { "value": "unknown", "label": "잘 모르겠습니다" }
+      ]
+    },
+    {
+      "id": "retirementStatus",
+      "title": "현재 퇴직했거나 퇴직할 예정인가요?",
+      "help": "퇴직금은 퇴직을 전제로 판단합니다. 아직 재직 중이라면 장래 예상 판단으로 안내해 드립니다.",
+      "multiple": false,
+      "options": [
+        { "value": "retired", "label": "이미 퇴직했습니다" },
+        { "value": "planningToRetire", "label": "퇴직 예정입니다" },
+        { "value": "stillWorking", "label": "아직 재직 중이고 퇴직 예정이 없습니다" },
+        { "value": "unknown", "label": "잘 모르겠습니다" }
+      ]
+    },
+    {
+      "id": "continuousPeriod",
+      "title": "같은 회사(사업장)와의 근로관계가 총 1년 이상 이어졌나요?",
+      "help": "계약을 여러 번 갱신했더라도 실제로 계속 근무했다면 최초 입사일부터 계산합니다. 퇴사 후 재입사나 긴 공백이 있었다면 다음 질문에서 다시 확인합니다.",
+      "multiple": false,
+      "options": [
+        { "value": "oneYearOrMore", "label": "1년 이상입니다" },
+        { "value": "under1Year", "label": "1년 미만입니다" },
+        { "value": "unknown", "label": "잘 모르겠습니다" }
+      ]
+    },
+    {
+      "id": "fourWeekPrescribedHours",
+      "title": "근로계약서나 근무표상 정해진(소정) 근로시간은 4주 평균으로 1주에 몇 시간인가요?",
+      "help": "실제로 더 일한 시간이 아니라 회사와 정한 시간이 기준입니다. 매주 시간이 다르다면 최근 4주를 평균해서 답해주세요.",
+      "multiple": false,
+      "options": [
+        { "value": "15OrMore", "label": "1주 평균 15시간 이상입니다" },
+        { "value": "under15", "label": "1주 평균 15시간 미만입니다" },
+        { "value": "variable", "label": "주마다 달라서 평균 계산이 필요합니다" },
+        { "value": "unknown", "label": "확인할 자료가 없습니다" }
+      ]
+    },
+    {
+      "id": "continuityIssue",
+      "title": "근로관계가 중간에 끊겼거나 판단이 어려운 사정이 있었나요?",
+      "help": "퇴사 후 재입사, 장기간 공백, 휴직·휴업, 사업주 변경·양도는 계속근로기간 계산에 영향을 줄 수 있습니다.",
+      "multiple": false,
+      "options": [
+        { "value": "none", "label": "특별한 사정 없음" },
+        { "value": "breakOrReentry", "label": "퇴사 후 재입사했거나 공백 기간이 있었음" },
+        { "value": "leaveOrClosure", "label": "휴직·휴업이 있었거나 사업주가 바뀌었음" },
+        { "value": "unknown", "label": "잘 모르겠습니다" }
+      ]
+    },
+    {
+      "id": "workerType",
+      "title": "일용직·하루 단위 계약으로 일했나요?",
+      "help": "\"일용\"이라는 이름만으로 퇴직금 대상에서 제외되지는 않지만, 실제로 근로관계가 계속되었는지 확인이 필요합니다.",
+      "multiple": false,
+      "options": [
+        { "value": "regular", "label": "아니요" },
+        { "value": "daily", "label": "예, 일용·하루 단위 계약이었습니다" },
+        { "value": "unknown", "label": "잘 모르겠습니다" }
+      ]
+    },
+    {
+      "id": "evidenceStatus",
+      "title": "위 내용을 확인할 수 있는 자료가 있나요?",
+      "help": "근로계약서, 근무표, 급여명세서, 출퇴근기록, 퇴직·재입사 서류 등이 있으면 결과 안내에 참고할 수 있습니다.",
+      "multiple": false,
+      "options": [
+        { "value": "clear", "label": "계약서·근무표·급여자료가 있습니다" },
+        { "value": "partial", "label": "일부만 있습니다" },
+        { "value": "unknown", "label": "없습니다" }
+      ]
+    }
+  ]
+}
