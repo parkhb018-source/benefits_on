@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-16"
+    "lastUpdated": "2026-08-23"
   },
   "sections": [
     {
@@ -10,42 +10,42 @@
       "visible": true,
       "cards": [
         {
-          "tag": "중소중견기업 취창업을 희망하는 일반대 3학년 이상, 전문대 2학년 이상",
+          "tag": "대학생·장학금",
           "tagStyle": "new",
           "title": "중소기업 취업연계 장학금",
           "date": "2026.05.13",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000046"
         },
         {
-          "tag": "우수 예비인력 대상 실제 프로젝트 형식의 실무교육을 제공",
+          "tag": "실무교육·인턴형",
           "tagStyle": "new",
           "title": "글로벌 광고인재 육성",
           "date": "2026.05.04",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/137100000217"
         },
         {
-          "tag": "대학원 학과를 기반으로 구성된 교육연구단",
+          "tag": "대학원·연구장학금",
           "tagStyle": "new",
           "title": "대학원 학과 기반 교육연구단 연구장학금 등 지원",
           "date": "2026.02.04",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000007"
         },
         {
-          "tag": "안정적인 사회정착을 위해 다양한 전직지원교육 및 취업지원서비스",
+          "tag": "제대군인·취업지원",
           "tagStyle": "new",
           "title": "전역예정장병 취업활동지원",
           "date": "2026.04.23",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000015"
         },
         {
-          "tag": "대표자가 만 39세 이하로 사업 개시일로부터 3년 미만 중소기업 및 창업을 준비 중인 자",
+          "tag": "청년창업·자금지원",
           "tagStyle": "new",
           "title": "청년전용창업자금",
           "date": "2026.05.11",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000099"
         },
         {
-          "tag": "우수한 청년인력의 어촌 유치로 어촌 활성화 도모",
+          "tag": "귀어·정착지원",
           "tagStyle": "new",
           "title": "청년어촌정착지원",
           "date": "2026.04.29",
@@ -60,42 +60,42 @@
       "visible": true,
       "cards": [
         {
-          "tag": "국공립 및 사립유치원에 다니는 3~5세 유아",
+          "tag": "유치원생·학비지원",
           "tagStyle": "new",
           "title": "유아학비 (누리과정) 지원",
           "date": "2026.01.29",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/000000465790"
         },
         {
-          "tag": "중위소득의 100분의 50 이하인 사람",
+          "tag": "저소득층·교육급여",
           "tagStyle": "new",
           "title": "교육급여",
           "date": "2026.04.22",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000003"
         },
         {
-          "tag": "영양위험요인이 있는 임산부 및 영유아에게 정기적인 영양교육 및 상담",
+          "tag": "임산부·영양지원",
           "tagStyle": "new",
           "title": "임산부 및 영유아 영양플러스",
           "date": "2026.05.13",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000005"
         },
         {
-          "tag": "학 전 24개월~86개월 미만 가정양육 영유아 대상 월 10~20만원 지원",
+          "tag": "가정양육·수당지원",
           "tagStyle": "new",
           "title": "가정양육수당 지원",
           "date": "2026.02.19",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005012"
         },
         {
-          "tag": "0세에서 5세 아동의 연령기준",
+          "tag": "영유아·보육료지원",
           "tagStyle": "new",
           "title": "영유아보육료 지원",
           "date": "2026.06.24",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005036"
         },
         {
-          "tag": "신규어린이집, 유치원을 이용하지 않고 부모급여 또는 양육수당 수급 중인 영아",
+          "tag": "시간제보육·지원",
           "tagStyle": "new",
           "title": "시간제보육 지원",
           "date": "2026.05.11",
@@ -110,42 +110,42 @@
       "visible": true,
       "cards": [
         {
-          "tag": "안 검진,눈 수술비 지원",
+          "tag": "노인·안검진지원",
           "tagStyle": "new",
           "title": "노인실명예방사업",
           "date": "2025.11.28",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000015"
         },
         {
-          "tag": "65세 이상 의료급여 수급권자",
+          "tag": "노인·치과지원",
           "tagStyle": "new",
           "title": "의료급여 틀니·치과임플란트 지원",
           "date": "2026.05.08",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000002"
         },
         {
-          "tag": "강보험급여 '인공관절 치환술(무릎관절)' 인정기준에 준하는 질환자",
+          "tag": "무릎수술·지원",
           "tagStyle": "new",
           "title": "노인 무릎인공관절 수술 지원",
           "date": "2025.11.28",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000113"
         },
         {
-          "tag": "치매검진 지원,치매치료관리비 지원",
+          "tag": "치매관리 지원",
           "tagStyle": "new",
           "title": "치매관리 서비스",
           "date": "2026.07.13",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000080"
         },
         {
-          "tag": "신규보조기기 서비스가 필요한 장애인, 노인 등",
+          "tag": "보조기기·맞춤지원",
           "tagStyle": "new",
           "title": "장애인·노인 보조기기 맞춤형 서비스",
           "date": "2025.11.27",
           "link": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000017"
         },
         {
-          "tag": "중한 질병 또는 부상으로 인하여 발생한 의료비를 감당하기 곤란한 사람",
+          "tag": "보조기기·맞춤지원",
           "tagStyle": "new",
           "title": "긴급복지 의료지원",
           "date": "2026.02.26",
@@ -156,10 +156,10 @@
   ],
   "seasonal": {
     "visible": true,
-    "tag": "8월의 추천 정보",
-    "title": "여름철 에너지바우처, 신청 안 하면 못 받아요",
-    "desc": "무더위 시작 전 미리 신청하면 냉방비 부담을 줄일 수 있어요. 대상 여부부터 확인해보세요.",
-    "link": "https://www.energyv.or.kr/",
-    "linkText": "에너지바우처 확인하기"
+    "tag": "9월의 추천 정보",
+    "title": "근로장려금 반기신청, 9월 15일까지예요",
+    "desc": "근로소득만 있다면 지금 신청해서 12월 말에 먼저 받을 수 있어요. 놓치면 내년 5월까지 기다려야 해요.",
+    "link": "https://benefitson.org/pages/calc-eitc",
+    "linkText": ": 근로장려금 계산기 확인하기"
   }
 }
