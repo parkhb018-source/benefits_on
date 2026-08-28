@@ -751,6 +751,9 @@ if (bannerClose && banner) {
   if (!grid) return;
 
   var cards = Array.prototype.slice.call(grid.querySelectorAll('.pl-card'));
+  var countEl = document.getElementById('pl-count');
+  if (countEl) countEl.textContent = '총 ' + cards.length + '건';
+
   var totalPages = Math.ceil(cards.length / PAGE_SIZE);
   if (totalPages <= 1) return;
 
