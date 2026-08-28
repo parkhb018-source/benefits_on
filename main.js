@@ -742,3 +742,46 @@ if (bannerClose && banner) {
   // 페이지 로드·뒤로가기(bfcache) 복원 시 셀렉트 값과 버튼 상태 동기화
   window.addEventListener('pageshow', updateUI);
 }());
+
+/* ── 카테고리 페이지 정책 카드 페이지네이션 ──
+   카드는 SEO를 위해 정적 HTML로 전부 존재하고, 화면에는 9개씩(3×3) 페이지 번호로 나눠 보여준다. */
+(function () {
+  var PAGE_SIZE = 9;
+  var grid = document.getElementById('pl-grid');
+  if (!grid) return;
+
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.pl-card'));
+  var totalPages = Math.ceil(cards.length / PAGE_SIZE);
+  if (totalPages <= 1) return;
+
+  var pager = document.createElement('div');
+  pager.id = 'pl-pager';
+  pager.className = 'pl-pager';
+  grid.parentNode.insertBefore(pager, grid.nextSibling);
+
+  var page = 1;
+
+  function render() {
+    cards.forEach(function (card, i) {
+      card.style.display = (i >= (page - 1) * PAGE_SIZE && i < page * PAGE_SIZE) ? '' : 'none';
+    });
+    var html = '<button class="pl-pbtn" data-page="' + (page - 1) + '"' + (page === 1 ? ' disabled' : '') + '>이전</button>';
+    for (var i = 1; i <= totalPages; i++) {
+      html += '<button class="pl-pbtn' + (i === page ? ' active' : '') + '" data-page="' + i + '">' + i + '</button>';
+    }
+    html += '<button class="pl-pbtn" data-page="' + (page + 1) + '"' + (page === totalPages ? ' disabled' : '') + '>다음</button>';
+    pager.innerHTML = html;
+  }
+
+  pager.addEventListener('click', function (e) {
+    var btn = e.target.closest('.pl-pbtn');
+    if (!btn || btn.disabled) return;
+    var p = parseInt(btn.dataset.page, 10);
+    if (isNaN(p) || p === page) return;
+    page = p;
+    render();
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  render();
+}());
