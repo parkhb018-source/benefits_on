@@ -5,6 +5,7 @@
 
 | Version | Date | Type | Description |
 |---|---|---|---|
+| 1.2.6 | 2026-09-01 | Updated | "시나리오 비교"를 "3. 분석 리포트" 패널에서 "2. 계산 결과" 패널의 현금 흐름 내역 바로 아래로 이동(결과 → 시나리오 → 상세 분석 순서가 더 직관적). 시나리오 표 밀도 조정(min-width 520→420, padding·폰트 축소)으로 3단 레이아웃에서도 가로 스크롤 없이 5개 열 표시. `#scenario-wrap`이 `#result-body` 하위로 들어가 별도 토글 제거. |
 | 1.2.5 | 2026-09-01 | Fixed | "초기화" 후 분석 리포트 카드(`#report-cards`)가 사라지지 않던 버그. `.report-cards { display:flex }` 가 `[hidden]` 속성을 덮어써서 `hidden`이 무효였음 → `.report-cards[hidden] { display:none }` 규칙 추가. |
 | 1.2.4 | 2026-09-01 | Added | 광고·애널리틱스 스크립트를 다른 도구와 동일하게 삽입 — Google AdSense(ca-pub-4871058922328451), GA4(G-K1YVTR39FF), 카카오 애드핏 배너(DAN-ntJWItYnhuyVV5W8), naver-site-verification. |
 | 1.2.3 | 2026-09-01 | Updated | 내부 정리(동작 불변). 엔진이 헤드라인·안내(`describeSurvival`)와 상태(`status`)를 `analyze()` 결과에 담아 반환 → `app.js`에서 결과 문구·상태 판정 로직 제거(engine import 5개→4개, `formatWon`도 엔진으로). `analysisCards` 포매터 주입 제거. `totalCost` 파생값 제거(= `−월현금흐름`). CAL-002/003 헬퍼로 통합, CAL-004 부호 판정으로 단순화. `evaluateStatus` 오브젝트 재조립 제거. SURV-003/004 중복 상한 제거(평가 순서 의존). localStorage `safeSet/safeRemove/safeParse(fallback)` 헬퍼로 통합. 예약패널 토글·필드 피드백 중복 제거. 시나리오 "월 매출" 칸 `formatWon` 사용. |

@@ -159,10 +159,9 @@ function render(values) {
 
 function setResultVisible(on) {
   $('result-empty').hidden = on;
-  $('result-body').hidden = !on;
+  $('result-body').hidden = !on;   // 시나리오 비교는 이 안에 있어 함께 토글됨
   $('report-empty').hidden = on;
   $('report-cards').hidden = !on;
-  $('scenario-wrap').hidden = !on;
 }
 
 // ───────────────────────── 계산 기록 (localStorage) ─────────────────────────
