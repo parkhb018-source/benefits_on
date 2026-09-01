@@ -16,7 +16,21 @@ const REPORT_ICONS = {
   status: '🚦', 'CAL-001': '💵', 'CAL-004': '⚖️', 'CAL-002': '📦', 'CAL-003': '🏠', 'CAL-005': '🎯',
 };
 
-const $ = (id) => document.getElementById(id);
+// app.js가 다루는 모든 요소 id. init()에서 한 번 조회해 캐시한다.
+// (AdSense auto ads가 로드 직후 빈/숨김 요소를 잠깐 떼어냈다 되돌리므로,
+//  캐시해 두면 그 사이 getElementById가 null을 반환해도 안전하다.)
+const EL_IDS = [
+  ...MONEY_FIELDS,
+  ...MONEY_FIELDS.map((k) => `${k}-error`),
+  'survival-text', 'hero-tier', 'survival-note', 'stat-cashflow', 'stat-decrease',
+  'breakdown-list', 'report-cards', 'scenario-body',
+  'result-empty', 'result-body', 'report-empty',
+  'history-empty', 'history-table', 'history-body', 'reserve-advanced',
+  'calc-btn', 'reset-btn', 'history-clear-btn',
+];
+
+const el = {};
+const $ = (id) => el[id] || document.getElementById(id);
 
 // ───────────────────────── 숫자 유틸 ─────────────────────────
 
@@ -215,9 +229,8 @@ function restoreInputs() {
 
 function setReservePanel(open) {
   $('reserve-advanced').hidden = !open;
-  const toggle = document.querySelector(RESERVE_TOGGLE);
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.textContent = `최소 유지 현금 설정 (선택) ${open ? '▴' : '▾'}`;
+  el.reserveToggle.setAttribute('aria-expanded', String(open));
+  el.reserveToggle.textContent = `최소 유지 현금 설정 (선택) ${open ? '▴' : '▾'}`;
 }
 
 function recalc() {
@@ -228,13 +241,22 @@ function recalc() {
   return render(v.values);
 }
 
+let initTries = 0;
 function init() {
+  // 필요한 요소가 아직 안 보이면(광고 스크립트가 DOM을 재배치 중) 잠시 후 재시도
+  if (EL_IDS.some((id) => !document.getElementById(id)) && initTries++ < 20) {
+    setTimeout(init, 50);
+    return;
+  }
+  EL_IDS.forEach((id) => { el[id] = document.getElementById(id); });
+  el.reserveToggle = document.querySelector(RESERVE_TOGGLE);
+
   MONEY_FIELDS.forEach((k) => {
-    bindCommaInput($(k));
-    $(k).addEventListener('input', recalc);
+    bindCommaInput(el[k]);
+    el[k].addEventListener('input', recalc);
   });
 
-  document.querySelector(RESERVE_TOGGLE).addEventListener('click', () => {
+  el.reserveToggle.addEventListener('click', () => {
     setReservePanel($('reserve-advanced').hidden);
   });
 
