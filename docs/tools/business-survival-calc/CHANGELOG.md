@@ -5,6 +5,7 @@
 
 | Version | Date | Type | Description |
 |---|---|---|---|
+| 1.2.7 | 2026-09-01 | Updated | 정리: 요소별 `[hidden]` 목록(`.advanced-panel/.history-table/.report-cards`)을 전역 `[hidden] { display: none !important }` 한 줄로 대체(modern-normalize 방식) — 같은 버그(1.2.5)가 재발하지 않도록 근본 수정, 코드도 3줄→1줄. 미사용 `id="scenario-wrap"` 제거. |
 | 1.2.6 | 2026-09-01 | Updated | "시나리오 비교"를 "3. 분석 리포트" 패널에서 "2. 계산 결과" 패널의 현금 흐름 내역 바로 아래로 이동(결과 → 시나리오 → 상세 분석 순서가 더 직관적). 시나리오 표 밀도 조정(min-width 520→420, padding·폰트 축소)으로 3단 레이아웃에서도 가로 스크롤 없이 5개 열 표시. `#scenario-wrap`이 `#result-body` 하위로 들어가 별도 토글 제거. |
 | 1.2.5 | 2026-09-01 | Fixed | "초기화" 후 분석 리포트 카드(`#report-cards`)가 사라지지 않던 버그. `.report-cards { display:flex }` 가 `[hidden]` 속성을 덮어써서 `hidden`이 무효였음 → `.report-cards[hidden] { display:none }` 규칙 추가. |
 | 1.2.4 | 2026-09-01 | Added | 광고·애널리틱스 스크립트를 다른 도구와 동일하게 삽입 — Google AdSense(ca-pub-4871058922328451), GA4(G-K1YVTR39FF), 카카오 애드핏 배너(DAN-ntJWItYnhuyVV5W8), naver-site-verification. |

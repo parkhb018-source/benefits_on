@@ -21,10 +21,8 @@
 
 * { box-sizing: border-box; }
 
-/* [hidden] 속성이 아래 요소들의 display 규칙에 가려지지 않도록 명시적으로 숨긴다 */
-.advanced-panel[hidden],
-.history-table[hidden],
-.report-cards[hidden] { display: none; }
+/* hidden 속성은 무조건 숨김 — 요소별 display 규칙(flex/table 등)에 가려지지 않도록. modern-normalize와 동일 */
+[hidden] { display: none !important; }
 
 html { font-size: 17px; }
 

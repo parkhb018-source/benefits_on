@@ -157,9 +157,10 @@ function render(values) {
   return a;
 }
 
+// 결과·리포트 영역 표시 토글. "시나리오 비교"는 #result-body 안에 있어 함께 토글된다.
 function setResultVisible(on) {
   $('result-empty').hidden = on;
-  $('result-body').hidden = !on;   // 시나리오 비교는 이 안에 있어 함께 토글됨
+  $('result-body').hidden = !on;
   $('report-empty').hidden = on;
   $('report-cards').hidden = !on;
 }
