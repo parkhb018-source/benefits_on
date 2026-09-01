@@ -1,8 +1,18 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-09"
+    "lastUpdated": "2026-09-01"
   },
   "resources": [
+    {
+      "id": "business-survival-calc",
+      "title": "사업 생존기간 계산기",
+      "description": "현재 현금·매출·비용을 넣으면 지금 조건으로 몇 개월 버틸 수 있는지(현금 소진 시점) 계산해드려요.",
+      "version": "",
+      "icon": "📉",
+      "category": "계산기",
+      "updatedAt": "2026-09-01",
+      "url": "tools/business-survival-calc/index.html"
+    },
     {
       "id": "우리가게 스탬프",
       "title": "우리 가게 스템프앱",
