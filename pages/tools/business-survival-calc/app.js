@@ -2,7 +2,7 @@
 // 계산·상태·결과 문구는 engine/survival-calculator.js 에만 있다.
 // 이 파일은 입력 검증 · DOM 렌더링 · localStorage 저장만 담당한다.
 
-import { analyze, buildScenarios, analysisCards, formatWon } from './engine/survival-calculator.js?v=20260901b';
+import { analyze, buildScenarios, analysisCards, formatWon } from './engine/survival-calculator.js?v=20260901c';
 
 const INPUTS_KEY = 'survivalCalcInputs';
 const HISTORY_KEY = 'survivalCalcHistory';
@@ -89,7 +89,7 @@ function validate(raw) {
     errors.variable = '월 변동비가 월평균 매출보다 큽니다. 변동비는 매출에 비례하는 비용이라 매출을 초과할 수 없습니다.';
   }
   if (raw.other !== null && raw.revenue !== null && values.other > values.revenue) {
-    warnings.other = '월 기타 현금 유출이 월평균 매출보다 큽니다. 입력값을 확인해 주세요. (계산은 그대로 진행됩니다)';
+    warnings.other = '기타 유출이 매출보다 큽니다. 계산은 그대로 진행됩니다.';
   }
 
   return { values, errors, warnings, complete, ok: Object.keys(errors).length === 0 };

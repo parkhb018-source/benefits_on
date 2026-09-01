@@ -101,6 +101,10 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
   padding: 22px 20px;
+  /* 그리드 항목이 min-content(시나리오 표의 min-width:420px 등)로 부풀어
+     페이지가 가로 스크롤되고, 그 여파로 입력 패널 폭이 줄며 필드 설명이
+     재줄바꿈돼 타이핑마다 세로 리플로우가 나던 문제 방지. */
+  min-width: 0;
 }
 .panel-title { font-size: 1.05rem; font-weight: 800; margin: 0 0 18px; }
 .sub-heading { font-size: 0.95rem; font-weight: 800; margin: 0 0 10px; }
@@ -140,6 +144,14 @@ body {
 .field-error { margin: 6px 0 0; font-size: 0.82rem; color: var(--color-danger); font-weight: 700; }
 .field-error:empty { display: none; }
 .field-error.is-warning { color: var(--color-warning); }
+/* 타이핑 중 경고/에러가 떴다 사라져도 레이아웃이 밀리지 않도록 2줄분 공간 상시 확보
+   (ID 특정성이 .field-error:empty 를 이겨 빈 상태에서도 표시된다) */
+#variable-error,
+#other-error {
+  display: block;
+  line-height: 1.45;
+  min-height: 2.4rem;
+}
 
 /* ===== 고급 옵션 ===== */
 .advanced-toggle {

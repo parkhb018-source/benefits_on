@@ -13,7 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 로컬: `python -m http.server 8000` → `http://localhost:8000`.
   `app.js` 가 ESM(`import`)이라 `file://` 로는 안 열린다 — 반드시 정적 서버로 띄운다.
 - 계산 엔진 테스트: `node engine/survival-calculator.test.js` (외부 의존성 없음, QA-01~08).
-- 회귀 기준: `docs/03_QA_Test_Cases.md`.
+- 회귀 기준: `docs/tools/business-survival-calc/03_QA_Test_Cases.md` (저장소 루트 기준).
 
 ## 아키텍처
 
@@ -24,8 +24,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **`app.js`** — 화면 로직만. 입력 검증 · 콤마 처리 · DOM 조립 · localStorage. 계산식·상태 판정·결과 문구 없음
   (엔진에서 `analyze` / `buildScenarios` / `analysisCards` / `formatWon` 4개만 import).
 - **`engine` 의 `STATUS_RULES` / `analysisCards()` / `describeSurvival()` 는
-  `docs/02_Rule_Engine_Business_Survival.md` 와 1:1 대응**. 문구·임계값을 바꾸면 →
-  엔진 + Rule Engine 문서 + `CHANGELOG.md` 세 곳 동시 수정.
+  `docs/tools/business-survival-calc/02_Rule_Engine_Business_Survival.md` 와 1:1 대응**.
+  문구·임계값을 바꾸면 → 엔진 + Rule Engine 문서 + `docs/tools/business-survival-calc/CHANGELOG.md`
+  세 곳 동시 수정.
 - **`style.css`** — 혜택on 공통 디자인 시스템(토큰·`.panel`·`.hero-card`·`.report-card` 등)을
   이 도구 파일에 복제한 것. 다른 도구(`pages/tools/*/style.css`)와 토큰·클래스명이 일치해야 한다.
 - UI 섹션 순서(back-bar → app-header → notice-bar → 1.입력 / 2.결과 / 3.리포트 → disclaimer
@@ -44,10 +45,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 모든 코드 변경은 `CHANGELOG.md` 에 기록 (형식: `Version | Date | Type | Description`).
 - 버전: Major(기능 변경) / Minor(기능 추가) / Patch(버그). 금요일 야간 배포 금지.
-- 배포: 저장소 `main` push → GitHub Pages (저장소 루트 그대로 업로드). 앞단 Cloudflare가
-  `style.css`/`app.js`를 4시간 캐시하므로, **이 파일들을 고치면 `index.html`의 `?v=YYYYMMDD` 토큰과
-  `app.js` 상단 엔진 import의 `?v=` 토큰을 함께 올려야** 재방문자가 즉시 새 파일을 받는다.
-  새 페이지 추가 시 `sitemap.xml` 갱신. AdSense/GA/Kakao ad 스크립트는 다른 도구와 동일하게 삽입돼 있음.
+- 이 도구는 **`benefitson.org` 모노레포(`github.com/parkhb018-source/benefits_on`)** 의 한 폴더다.
+  런타임 파일은 `pages/tools/business-survival-calc/`, 개발 문서는 `docs/tools/business-survival-calc/`.
+  배포: 저장소 `main` push → `.github/workflows/deploy.yml`(GitHub Pages) + Cloudflare Pages 가
+  자동 빌드, `benefitson.org/pages/tools/business-survival-calc/` 로 서빙(그래서 canonical·OG·JSON-LD·
+  sitemap 은 모두 `benefitson.org` 절대 URL, asset 은 상대경로). Cloudflare 설정은 손댈 것 없음.
+  Cloudflare 가 `style.css`/`app.js` 를 4시간 캐시하므로, **이 파일들을 고치면 `index.html` 의
+  `?v=YYYYMMDD` 토큰과 `app.js` 상단 엔진 import 의 `?v=` 토큰을 함께 올려야** 재방문자가 즉시
+  새 파일을 받는다. 도구를 새로 추가할 때만 **저장소 루트** `sitemap.xml` 에 URL 을 넣는다
+  (`index.html` 의 `<link rel="sitemap" href="/sitemap.xml">` 는 그 사이트 전역 sitemap 을 가리킴).
+  AdSense/GA/Kakao ad 스크립트는 다른 도구와 동일하게 삽입돼 있음.
 - **AdSense auto ads가 로드 직후 빈/숨김 요소를 잠깐 떼어냈다 되돌린다.** `app.js`의 `init()`은
   필요한 요소가 다 보일 때까지 재시도한 뒤 참조를 `el`에 캐시한다 — DOM 조회는 이 캐시(`$()`)를 쓸 것.
-- 참고: `docs/01_PRD_Business_Survival_v1.0.md`, `docs/02_Rule_Engine_Business_Survival.md`.
+- 참고: `docs/tools/business-survival-calc/01_PRD_Business_Survival_v1.0.md`,
+  `docs/tools/business-survival-calc/02_Rule_Engine_Business_Survival.md`,
+  `docs/tools/business-survival-calc/CHANGELOG.md` (모두 저장소 루트 기준 경로).
