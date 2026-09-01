@@ -2,7 +2,7 @@
 // 계산·상태·결과 문구는 engine/survival-calculator.js 에만 있다.
 // 이 파일은 입력 검증 · DOM 렌더링 · localStorage 저장만 담당한다.
 
-import { analyze, buildScenarios, analysisCards, formatWon } from './engine/survival-calculator.js';
+import { analyze, buildScenarios, analysisCards, formatWon } from './engine/survival-calculator.js?v=20260901b';
 
 const INPUTS_KEY = 'survivalCalcInputs';
 const HISTORY_KEY = 'survivalCalcHistory';

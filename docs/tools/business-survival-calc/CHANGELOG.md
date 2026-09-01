@@ -5,7 +5,7 @@
 
 | Version | Date | Type | Description |
 |---|---|---|---|
-| 1.2.8 | 2026-09-01 | Fixed | 배포 환경에서 로드 직후 `setResultVisible`가 `Cannot set properties of null` 예외를 던지던 버그. AdSense auto ads가 로드 직후 빈/숨김 요소(`#report-cards` 등)를 잠깐 떼어냈다 되돌리는데, `type="module"` 스크립트의 `init()`이 그 사이에 실행돼 `getElementById`가 null을 반환. → `init()`이 필요한 요소가 모두 보일 때까지 재시도(최대 1초) 후 참조를 한 번에 캐시(`el`)하도록 변경. 이후 조회는 캐시 사용. |
+| 1.2.8 | 2026-09-01 | Fixed | 배포 환경에서 로드 직후 `setResultVisible`가 `Cannot set properties of null` 예외를 던지던 버그. `style.css`·`app.js`·엔진 import에 `?v=YYYYMMDD` 쿼리 추가(Cloudflare 4시간 캐시 때문에 재방문자가 옛 파일을 받던 문제도 해결 — 배포 시 토큰을 함께 올릴 것). AdSense auto ads가 로드 직후 빈/숨김 요소(`#report-cards` 등)를 잠깐 떼어냈다 되돌리는데, `type="module"` 스크립트의 `init()`이 그 사이에 실행돼 `getElementById`가 null을 반환. → `init()`이 필요한 요소가 모두 보일 때까지 재시도(최대 1초) 후 참조를 한 번에 캐시(`el`)하도록 변경. 이후 조회는 캐시 사용. |
 | 1.2.7 | 2026-09-01 | Updated | 정리: 요소별 `[hidden]` 목록(`.advanced-panel/.history-table/.report-cards`)을 전역 `[hidden] { display: none !important }` 한 줄로 대체(modern-normalize 방식) — 같은 버그(1.2.5)가 재발하지 않도록 근본 수정, 코드도 3줄→1줄. 미사용 `id="scenario-wrap"` 제거. |
 | 1.2.6 | 2026-09-01 | Updated | "시나리오 비교"를 "3. 분석 리포트" 패널에서 "2. 계산 결과" 패널의 현금 흐름 내역 바로 아래로 이동(결과 → 시나리오 → 상세 분석 순서가 더 직관적). 시나리오 표 밀도 조정(min-width 520→420, padding·폰트 축소)으로 3단 레이아웃에서도 가로 스크롤 없이 5개 열 표시. `#scenario-wrap`이 `#result-body` 하위로 들어가 별도 토글 제거. |
 | 1.2.5 | 2026-09-01 | Fixed | "초기화" 후 분석 리포트 카드(`#report-cards`)가 사라지지 않던 버그. `.report-cards { display:flex }` 가 `[hidden]` 속성을 덮어써서 `hidden`이 무효였음 → `.report-cards[hidden] { display:none }` 규칙 추가. |
