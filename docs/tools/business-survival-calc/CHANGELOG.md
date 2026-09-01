@@ -5,6 +5,7 @@
 
 | Version | Date | Type | Description |
 |---|---|---|---|
+| 1.2.4 | 2026-09-01 | Added | 광고·애널리틱스 스크립트를 다른 도구와 동일하게 삽입 — Google AdSense(ca-pub-4871058922328451), GA4(G-K1YVTR39FF), 카카오 애드핏 배너(DAN-ntJWItYnhuyVV5W8), naver-site-verification. |
 | 1.2.3 | 2026-09-01 | Updated | 내부 정리(동작 불변). 엔진이 헤드라인·안내(`describeSurvival`)와 상태(`status`)를 `analyze()` 결과에 담아 반환 → `app.js`에서 결과 문구·상태 판정 로직 제거(engine import 5개→4개, `formatWon`도 엔진으로). `analysisCards` 포매터 주입 제거. `totalCost` 파생값 제거(= `−월현금흐름`). CAL-002/003 헬퍼로 통합, CAL-004 부호 판정으로 단순화. `evaluateStatus` 오브젝트 재조립 제거. SURV-003/004 중복 상한 제거(평가 순서 의존). localStorage `safeSet/safeRemove/safeParse(fallback)` 헬퍼로 통합. 예약패널 토글·필드 피드백 중복 제거. 시나리오 "월 매출" 칸 `formatWon` 사용. |
 | 1.2.2 | 2026-09-01 | Updated | 제목·문구 교체. SEO title "사업 생존기간 계산기 \| 지금 매출로 몇 개월 버틸까?", meta description·OG·JSON-LD를 "현재 현금·매출·비용 → 최소 유지금액 도달 예상 기간" 문구로 통일. 페이지 서브헤딩 "사장님, 지금 매출로 몇 개월 버틸 수 있을까요?". |
 | 1.2.1 | 2026-09-01 | Updated | 계산 결과 영역에서 음수 금액(−)을 붉은색으로 표시: 히어로 "월 현금흐름"(파란 배경용 연한 적색), 현금 흐름 내역 합계, 시나리오 표·계산 기록의 월 현금흐름 열. |
