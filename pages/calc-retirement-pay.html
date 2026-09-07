@@ -82,6 +82,7 @@
     gtag('js', new Date());
     gtag('config', 'G-K1YVTR39FF');
   </script>
+<script src="/assets/js/analytics.js"></script>
 </head>
 <body>
 <ins class="kakao_ad_area" style="display:none;"
@@ -242,6 +243,16 @@ data-ad-height = "100"></ins>
 
     let policy = null;
 
+    // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+    // gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
+    const TOOL_ID = 'calc-retirement-pay';
+    function safeTrack(fn) { try { fn(); } catch (e) { /* 조용히 무시 */ } }
+    document.querySelector('main').addEventListener('input', function (e) {
+      if (e.target.matches('input, select')) {
+        safeTrack(() => window.trackToolStart && window.trackToolStart(TOOL_ID));
+      }
+    }, { once: true });
+
     fetch('../data/retirement-pay-net-calculator-policy.json')
       .then((res) => res.json())
       .then((data) => { policy = data; })
@@ -298,6 +309,7 @@ data-ad-height = "100"></ins>
         resultNoteEl.innerHTML = '4주 평균 1주 소정근로시간이 ' + policy.eligibility.minWeeklyHoursOver4Weeks + '시간 미만인 경우에도 법정 퇴직금 지급 대상이 아닙니다. 계속근로기간·소정근로시간 판단이 애매하다면 <a href="tools/retirement-pay-eligibility-check/index.html">퇴직금 지급 대상 자가진단</a>에서 다시 확인해보세요.';
         calcResult.classList.add('show');
         calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
         return;
       }
 
@@ -329,6 +341,7 @@ data-ad-height = "100"></ins>
 
       calcResult.classList.add('show');
       calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
     });
 
     resetBtn.addEventListener('click', function () {

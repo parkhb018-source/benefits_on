@@ -17,6 +17,13 @@ const state = {
   flow: null
 };
 
+// ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+// gtag·analytics.js 미로딩(광고차단 등) 환경에서도 자가진단이 정상 동작해야 하므로 항상 try/catch로 감싼다.
+const TOOL_ID = "retirement-eligibility";
+function safeTrack(fn) {
+  try { fn(); } catch (e) { /* 조용히 무시 */ }
+}
+
 const screens = {
   start: document.getElementById("start-screen"),
   question: document.getElementById("question-screen"),
@@ -424,6 +431,12 @@ function nextQuestion() {
     return;
   }
 
+  const total = getVisibleQuestions().length;
+  safeTrack(() => window.trackTool && window.trackTool("diagnosis_step", TOOL_ID, {
+    step: state.currentIndex + 1,
+    total_steps: total,
+  }));
+
   state.currentIndex++;
 
   renderQuestion();
@@ -514,6 +527,10 @@ function finishDiagnosis() {
     );
 
     showScreen("result");
+
+    safeTrack(() => window.trackToolOnce && window.trackToolOnce("tool_complete", TOOL_ID, {
+      result: String(report.level || decision.result || "").toLowerCase(),
+    }));
 
   } catch (error) {
 

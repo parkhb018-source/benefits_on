@@ -11,6 +11,14 @@ const HISTORY_LIMIT = 10;
 const MONEY_FIELDS = ['cash', 'revenue', 'variable', 'fixed', 'other', 'minReserve'];
 const REQUIRED_FIELDS = ['cash', 'revenue', 'variable', 'fixed', 'other'];
 
+// ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+// gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
+const TOOL_ID = 'business-survival-calc';
+function safeTrack(fn) {
+  try { fn(); } catch (e) { /* 조용히 무시 */ }
+}
+let startTracked = false;
+
 const RESERVE_TOGGLE = '.advanced-toggle[data-target="reserve-advanced"]';
 const REPORT_ICONS = {
   status: '🚦', 'CAL-001': '💵', 'CAL-004': '⚖️', 'CAL-002': '📦', 'CAL-003': '🏠', 'CAL-005': '🎯',
@@ -253,16 +261,33 @@ function init() {
 
   MONEY_FIELDS.forEach((k) => {
     bindCommaInput(el[k]);
-    el[k].addEventListener('input', recalc);
+    el[k].addEventListener('input', () => {
+      // 5개 필수 항목 중 첫 값이 들어오는 시점 = 실제 사용 시작
+      if (!startTracked && REQUIRED_FIELDS.some((f) => toNumber(el[f].value) !== null)) {
+        startTracked = true;
+        safeTrack(() => window.trackToolStart && window.trackToolStart(TOOL_ID));
+      }
+      recalc();
+    });
   });
 
   el.reserveToggle.addEventListener('click', () => {
-    setReservePanel($('reserve-advanced').hidden);
+    const willOpen = $('reserve-advanced').hidden;
+    setReservePanel(willOpen);
+    if (willOpen) {
+      safeTrack(() => window.trackTool && window.trackTool('tool_advanced', TOOL_ID, { feature: 'min_reserve' }));
+    }
   });
 
   $('calc-btn').addEventListener('click', () => {
     const a = recalc();
-    if (a) addHistory(a);
+    if (a) {
+      addHistory(a);
+      // "계산하기"를 명시적으로 눌러 결과를 확정한 시점 — 1회차는 tool_complete, 2회차부터는 tool_repeat
+      safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID, {
+        months_result: a.survival.infinite ? 'infinite' : Math.round(a.survival.months),
+      }));
+    }
   });
 
   $('reset-btn').addEventListener('click', () => {
@@ -271,6 +296,7 @@ function init() {
     paintFieldFeedback({});
     setResultVisible(false);
     $('cash').focus();
+    safeTrack(() => window.trackTool && window.trackTool('tool_reset', TOOL_ID, {}));
   });
 
   $('history-clear-btn').addEventListener('click', () => {

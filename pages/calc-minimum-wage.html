@@ -66,6 +66,7 @@
 
     gtag('config', 'G-K1YVTR39FF');
   </script>
+<script src="/assets/js/analytics.js"></script>
 </head>
 <body>
 <ins class="kakao_ad_area" style="display:none;"
@@ -234,6 +235,16 @@ data-ad-height = "100"></ins>
     const resultRowsEl = document.getElementById('resultRows');
     const resultNoteEl = document.getElementById('resultNote');
 
+    // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+    // gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
+    const TOOL_ID = 'calc-minimum-wage';
+    function safeTrack(fn) { try { fn(); } catch (e) { /* 조용히 무시 */ } }
+    document.querySelector('main').addEventListener('input', function (e) {
+      if (e.target.matches('input, select')) {
+        safeTrack(() => window.trackToolStart && window.trackToolStart(TOOL_ID));
+      }
+    }, { once: true });
+
     calcBtn.addEventListener('click', function () {
       const dailyHours = parseInt(document.getElementById('daily-hours').value);
       const workDays   = parseInt(document.getElementById('work-days').value);
@@ -274,6 +285,7 @@ data-ad-height = "100"></ins>
 
       calcResult.classList.add('show');
       calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
     });
 
     document.getElementById('resetBtn').addEventListener('click', function () {

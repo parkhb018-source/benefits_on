@@ -46,6 +46,13 @@ if (bannerClose && banner) {
   const diagCounter  = document.getElementById('diagCounter');
   const diagReset    = document.getElementById('diagReset');
 
+  // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+  // gtag·analytics.js 미로딩(광고차단 등) 환경에서도 자가진단이 정상 동작해야 하므로 항상 try/catch로 감싼다.
+  const TOOL_ID = 'policy-self-check';
+  function safeTrack(fn) {
+    try { fn(); } catch (e) { /* 조용히 무시 */ }
+  }
+
   if (!selAge || !diagBtn) return;
 
   const allSelects = [selAge, selHousehold, selEmploy];
@@ -718,6 +725,8 @@ if (bannerClose && banner) {
       '</div>';
     diagResult.classList.add('show');
 
+    safeTrack(() => window.trackToolOnce && window.trackToolOnce('tool_complete', TOOL_ID, { match_count: allBenefits.length }));
+
     const list    = diagResult.querySelector('.result-list');
     const moreBtn = document.getElementById('diagMoreBtn');
     if (moreBtn) {
@@ -735,7 +744,10 @@ if (bannerClose && banner) {
     updateUI();
   }
 
-  allSelects.forEach(s => s.addEventListener('change', updateUI));
+  allSelects.forEach((s, i) => s.addEventListener('change', () => {
+    safeTrack(() => window.trackTool && window.trackTool('diagnosis_step', TOOL_ID, { step: i + 1, total_steps: allSelects.length }));
+    updateUI();
+  }));
   diagBtn.addEventListener('click', showResult);
   if (diagReset) diagReset.addEventListener('click', resetDiag);
 

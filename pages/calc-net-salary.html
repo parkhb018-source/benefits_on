@@ -71,6 +71,7 @@
 
     gtag('config', 'G-K1YVTR39FF');
   </script>
+<script src="/assets/js/analytics.js"></script>
 </head>
 <body>
 <ins class="kakao_ad_area" style="display:none;"
@@ -255,6 +256,16 @@ data-ad-height = "100"></ins>
     const salaryLabel = document.getElementById('salary-label');
     const salaryHint  = document.getElementById('salary-hint');
 
+    // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+    // gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
+    const TOOL_ID = 'calc-net-salary';
+    function safeTrack(fn) { try { fn(); } catch (e) { /* 조용히 무시 */ } }
+    document.querySelector('main').addEventListener('input', function (e) {
+      if (e.target.matches('input, select')) {
+        safeTrack(() => window.trackToolStart && window.trackToolStart(TOOL_ID));
+      }
+    }, { once: true });
+
     tabAnnual.addEventListener('click', function () {
       isAnnualMode = true;
       tabAnnual.classList.add('active'); tabMonthly.classList.remove('active');
@@ -356,6 +367,7 @@ data-ad-height = "100"></ins>
 
       document.getElementById('calcResult').classList.add('show');
       document.getElementById('calcResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
     });
 
     document.getElementById('resetBtn').addEventListener('click', function () {

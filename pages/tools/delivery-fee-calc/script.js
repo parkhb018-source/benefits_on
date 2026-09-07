@@ -13,6 +13,14 @@ const HISTORY_KEY = "menuProfitHistory";
 const INPUTS_KEY = "menuProfitInputs";
 const HISTORY_LIMIT = 10;
 
+// ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+// gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
+const TOOL_ID = "delivery-fee-calc";
+function safeTrack(fn) {
+  try { fn(); } catch (e) { /* 조용히 무시 */ }
+}
+let platformCompareTracked = false; // "플랫폼 비교" 결과가 처음 채워질 때 1회만 전송
+
 // 메인 계산기 입력 필드 id 목록 — comma 처리/실시간 계산/초기화/자동저장이 모두 이 목록을 기준으로 동작함
 const MAIN_MONEY_FIELD_IDS = ["price", "cost", "delivery", "box", "wrap"];
 const MAIN_RATE_FIELD_IDS = ["rate-brokerage", "rate-payment"];
@@ -99,6 +107,17 @@ document.querySelectorAll(".advanced-toggle").forEach(toggle => {
   const baseLabel = toggle.textContent.replace(/\s*[▾▴]$/, "").trim();
   advancedToggles[toggle.dataset.target] = setupToggle(toggle, panel, `${baseLabel} ▾`, `${baseLabel} ▴`);
 });
+
+// "수수료율 직접 수정 (고급)" 패널을 펼칠 때만 tool_advanced 전송 (닫을 때는 제외)
+const rateToggleBtn = document.querySelector('.advanced-toggle[data-target="rate"]');
+if (rateToggleBtn) {
+  rateToggleBtn.addEventListener("click", () => {
+    const willOpen = rateToggleBtn.textContent.includes("▴"); // 클릭 처리 후 라벨이 이미 바뀐 상태
+    if (willOpen) {
+      safeTrack(() => window.trackTool && window.trackTool("tool_advanced", TOOL_ID, { feature: "fee_edit" }));
+    }
+  });
+}
 
 // ===== 플랫폼 선택 버튼 =====
 // idPrefix/advancedKey는 호출부에서 명시적으로 지정 — targetPrefix 값에 따른 특례 분기를 두지 않기 위함
@@ -429,6 +448,12 @@ function recalculate() {
     applyReportCard("delivery-share", deliveryTier, DELIVERY_SHARE_MAX);
     applyReportCard("platform-share", platformTier, PLATFORM_SHARE_MAX);
     applyReportCard("summary", grade);
+
+    // "다른 플랫폼이면 얼마나 다를까?" 비교가 실제 값으로 채워지는 시점 — 세션당 1회만
+    if (!platformCompareTracked) {
+      platformCompareTracked = true;
+      safeTrack(() => window.trackTool && window.trackTool("tool_advanced", TOOL_ID, { feature: "platform_compare" }));
+    }
   } else {
     tierEl.setAttribute("hidden", "");
     resetReportCards();
@@ -437,9 +462,19 @@ function recalculate() {
 
 const recalcDebounced = debounce(recalculate, 120);
 
+let monthlyProfitTracked = false; // "예상 월 순수익" 입력을 직접 바꿔 쓴 경우 1회만 전송
+
 document.querySelectorAll([...MAIN_FIELD_IDS, "daily-qty", "monthly-days"].map(id => `#${id}`).join(", "))
   .forEach(input => {
     input.addEventListener("input", () => {
+      // 판매가 또는 원가에 첫 값이 들어오는 시점 = 실제 사용 시작
+      if ((input.id === "price" || input.id === "cost") && (getNum("price") > 0 || getNum("cost") > 0)) {
+        safeTrack(() => window.trackToolStart && window.trackToolStart(TOOL_ID));
+      }
+      if ((input.id === "daily-qty" || input.id === "monthly-days") && !monthlyProfitTracked) {
+        monthlyProfitTracked = true;
+        safeTrack(() => window.trackTool && window.trackTool("tool_advanced", TOOL_ID, { feature: "monthly_profit" }));
+      }
       recalcDebounced();
       saveInputsDebounced();
     });
@@ -464,6 +499,7 @@ document.getElementById("reset-btn").addEventListener("click", () => {
   selectedMainPlatform = null;
   recalculate();
   saveInputs();
+  safeTrack(() => window.trackTool && window.trackTool("tool_reset", TOOL_ID, {}));
 });
 
 // ===== 계산 기록 (localStorage) =====
@@ -529,6 +565,12 @@ function pushHistory() {
   history.unshift({ time, platformName, price, net, rate });
   localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, HISTORY_LIMIT)));
   renderHistory();
+
+  // "계산하기"를 명시적으로 눌러 결과를 확정한 시점 — 1회차는 tool_complete, 2회차부터는 tool_repeat
+  safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID, {
+    platform: platformName,
+    profit_rate: Math.round(rate),
+  }));
 }
 
 document.getElementById("history-clear-btn").addEventListener("click", () => {
@@ -570,6 +612,16 @@ function restoreInputs() {
 // 접이식: 얼마에 팔아야 할까? (목표 원가율 역산)
 // ========================================================
 setupPlatformButtons("reverse");
+
+// 판매가 역산 아코디언을 펼친 시점 — 세션당 1회만
+const reverseAccordion = document.querySelector(".accordion");
+if (reverseAccordion) {
+  reverseAccordion.addEventListener("toggle", () => {
+    if (reverseAccordion.open) {
+      safeTrack(() => window.trackTool && window.trackTool("tool_advanced", TOOL_ID, { feature: "reverse_price" }));
+    }
+  });
+}
 
 function recalculateReverse() {
   const cost = getNum("reverse-cost");
