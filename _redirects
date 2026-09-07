@@ -1,3 +1,17 @@
 https://benefitson.pages.dev/* https://benefitson.org/:splat 301
+
+# 구버전·오타 경로 → 정식 경로 (301)
+/calc-net-salary        /pages/calc-net-salary        301
+/calc-eitc              /pages/calc-eitc              301
+/calc-minimum-wage      /pages/calc-minimum-wage      301
+/calc-unemployment      /pages/calc-unemployment      301
+/calc-tax-refund        /pages/calc-tax-refund        301
+/calc-retirement-pay    /pages/calc-retirement-pay    301
+/calc-youth-deposit     /pages/calc-youth-deposit     301
+/resources              /pages/resources              301
+/calculators            /pages/calculators            301
+/about                  /pages/about                  301
+
+# 도구 경로 리다이렉트
 /calc-business-survival/* /pages/tools/business-survival-calc/ 301
 /tools/delivery-fee /pages/tools/delivery-fee-calc/ 301
