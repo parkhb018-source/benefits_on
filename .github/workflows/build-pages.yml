@@ -1,0 +1,54 @@
+name: 정적 페이지 재생성
+
+# data/*.json 이 main 에 push 되면 scripts/build-pages.js 를 돌려
+# 카테고리 페이지·홈의 AUTOGEN 마커 사이를 다시 생성하고, 변경이 있으면 커밋한다.
+#
+# 무한 루프 방지 (커밋 메시지에 [skip ci] 를 쓰지 않는다 — Cloudflare Pages 가
+# [skip ci] 커밋의 배포를 건너뛰므로, 넣으면 생성된 HTML 이 사이트에 반영되지 않는다):
+#  1) GITHUB_TOKEN 으로 민 push 는 새 워크플로를 트리거하지 않는다 (GitHub 기본 동작)
+#  2) paths 필터 — 봇 커밋은 *.html 만 건드리고, 이 워크플로는 data/*.json 만 감시
+#
+# 배포(Cloudflare Pages / .github/workflows/deploy.yml)는 이 워크플로가 건드리지 않는다.
+
+on:
+  workflow_dispatch:   # JSON 변경 없이도 GitHub UI 에서 수동 재생성
+  push:
+    branches: [main]
+    paths:
+      - 'data/**/*.json'
+      - 'data/*.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 페이지 빌드
+        # 실패하면 여기서 잡이 중단되고 아래 커밋 스텝은 실행되지 않음 → 기존 HTML 유지
+        run: node scripts/build-pages.js
+
+      - name: 변경분 커밋·푸시
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "변경된 HTML 없음 — 커밋 생략"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: JSON에서 정적 페이지 재생성"
+          git push
