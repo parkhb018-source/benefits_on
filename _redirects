@@ -1,1 +1,3 @@
 https://benefitson.pages.dev/* https://benefitson.org/:splat 301
+/calc-business-survival/* /pages/tools/business-survival-calc/ 301
+/tools/delivery-fee /pages/tools/delivery-fee-calc/ 301
