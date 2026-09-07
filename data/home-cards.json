@@ -6,7 +6,7 @@
     {
       "id": "section-1783012116280",
       "title": "청년정책",
-      "moreLink": "pages/youth.html",
+      "moreLink": "pages/youth",
       "visible": true,
       "cards": [
         {
@@ -56,7 +56,7 @@
     {
       "id": "section-1783587697463",
       "title": "신혼·육아",
-      "moreLink": "pages/newlywed.html",
+      "moreLink": "pages/newlywed",
       "visible": true,
       "cards": [
         {
@@ -106,7 +106,7 @@
     {
       "id": "section-1783587869965",
       "title": "중장년·노년",
-      "moreLink": "pages/senior.html",
+      "moreLink": "pages/senior",
       "visible": true,
       "cards": [
         {

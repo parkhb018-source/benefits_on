@@ -11,7 +11,7 @@
       "icon": "📉",
       "category": "계산기",
       "updatedAt": "2026-09-01",
-      "url": "tools/business-survival-calc/index.html"
+      "url": "tools/business-survival-calc/"
     },
     {
       "id": "우리가게 스탬프",
@@ -32,7 +32,7 @@
       "icon": "📅",
       "category": "계산기",
       "updatedAt": "2026-08-04",
-      "url": "tools/delivery-fee-calc/index.html"
+      "url": "tools/delivery-fee-calc/"
     },
     {
       "id": "goodwill-protection-check",
@@ -42,7 +42,7 @@
       "icon": "⚖️",
       "category": "자가진단",
       "updatedAt": "2026-08-09",
-      "url": "tools/goodwill-protection-check/index.html"
+      "url": "tools/goodwill-protection-check/"
     },
     {
       "id": "retirement-pay-eligibility-check",
@@ -52,7 +52,7 @@
       "icon": "💰",
       "category": "자가진단",
       "updatedAt": "2026-08-22",
-      "url": "tools/retirement-pay-eligibility-check/index.html"
+      "url": "tools/retirement-pay-eligibility-check/"
     }
   ]
 }
