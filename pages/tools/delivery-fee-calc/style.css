@@ -77,8 +77,13 @@ body {
 }
 .app-icon {
   flex-shrink: 0;
+  order: 1;
+}
+.app-title-main {
+  order: 2;
 }
 .app-title-sub-badge {
+  order: 3;
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-sub);
