@@ -64,6 +64,17 @@
   ]
 }
 </script>
+<style>
+  /* 사이트 공통 푸터 */
+  .footer-simple { background:#fff; border-top:1px solid #e6e7eb; padding:20px 16px; margin-top:8px; }
+  .footer-simple-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .footer-simple .footer-copy { font-size:12px; color:#8a8f98; line-height:1.7; }
+  .footer-simple .footer-copy a { color:inherit; }
+  .footer-simple-links { display:flex; gap:16px; flex-shrink:0; }
+  .footer-simple-links a { font-size:13px; color:#5b6270; text-decoration:none; }
+  .footer-simple-links a:hover { color:#1481fa; }
+  @media (max-width:640px) { .footer-simple-inner { flex-direction:column; align-items:flex-start; } }
+</style>
 </head>
 <body>
 <ins class="kakao_ad_area" style="display:none;"
@@ -291,6 +302,19 @@ data-ad-height = "100"></ins>
 <footer class="app-footer">
   <p>입력한 정보와 계산 기록은 서버로 전송되지 않고 내 브라우저(localStorage)에만 저장돼요.</p>
   <p>본 결과는 참고용 시뮬레이션이며, 실제 자금 계획은 세무사·경영지도사 등 전문가와 상담하세요.</p>
+</footer>
+
+<footer class="footer-simple">
+  <div class="footer-simple-inner">
+    <span class="footer-copy">혜택on은 트리플20(Pixel Vibe)이 운영하는 무료 정보 서비스입니다.<br>
+    대표자:&nbsp;박현봉 | 사업자등록번호:&nbsp;342-29-01302 | 문의:&nbsp;<a href="mailto:parkhb018@gmail.com">parkhb018@gmail.com</a><br>
+    © 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+    <div class="footer-simple-links">
+      <a href="../../about">사이트 소개</a>
+      <a href="../../privacy">개인정보처리방침</a>
+      <a href="../../contact">광고문의</a>
+    </div>
+  </div>
 </footer>
 
 <script type="module" src="app.js?v=20260901c"></script>
