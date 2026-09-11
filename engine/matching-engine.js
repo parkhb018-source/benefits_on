@@ -68,17 +68,41 @@ function evalCondition(cond, profile) {
 }
 
 /**
+ * 조건이 "실질 제한(effective constraint)"인지 판단한다.
+ * op가 'in'이 아니면(between/eq/lte/gte/exists) 선택지를 나열하는 게 아니므로 항상 실질 제한.
+ * op가 'in'이면 그 type의 전체 선택지 수(opts.totalOptions[type])보다 value가 적어야
+ * "일부만 대상"이라는 뜻이라 실질 제한 — 전체를 나열한 조건(= 사실상 제한 없음)은 아니다.
+ * totalOptions에 그 type이 없으면(엔진은 type을 모르므로) 안전하게 실질 제한으로 간주한다.
+ * @param {Condition} cond
+ * @param {Object.<string,number>} [totalOptions]
+ * @returns {boolean}
+ */
+function isEffectiveConstraint(cond, totalOptions) {
+  if (cond.op !== 'in') return true;
+  const total = totalOptions ? totalOptions[cond.type] : undefined;
+  if (total === undefined) return true;
+  const values = Array.isArray(cond.value) ? cond.value : [cond.value];
+  return values.length < total;
+}
+
+/**
  * 프로필이 조건 배열·신청기간에 부합하는지 판정한다.
  * @param {Object} profile        도메인 무관 key-value ({age:67, household:'1인가구', ...} 등)
  * @param {Condition[]} conditions
  * @param {Period} [period]
- * @param {{ maxLevel?: 'yellow', today?: string }} [opts]
- * @returns {{ level: 'green'|'yellow'|'blue', score: number, failed: string[] } | null}
+ * @param {{ maxLevel?: 'yellow', today?: string, totalOptions?: Object.<string,number> }} [opts]
+ *   totalOptions: type별 전체 선택지 수(예: { household: 5, employment: 3, incomeLevel: 5 }).
+ *   "실질 제한" 판단에만 쓰인다 — 엔진 자체는 이 값들의 의미를 모른다(호출측이 도메인 지식으로 채운다).
+ * @returns {{ level: 'green'|'yellow'|'blue', score: number, effectiveMatches: number, failed: string[] } | null}
  */
 export function match(profile, conditions, period, opts) {
   opts = opts || {};
   const list = conditions || [];
-  const results = list.map((cond) => ({ cond, status: evalCondition(cond, profile) }));
+  const results = list.map((cond) => ({
+    cond,
+    status: evalCondition(cond, profile),
+    effective: isEffectiveConstraint(cond, opts.totalOptions),
+  }));
 
   // 1) required 조건 불일치(질문했는데 안 맞음) → 제외. 안 물어본 required는 skip이라 여기 안 걸린다.
   for (const r of results) {
@@ -95,19 +119,22 @@ export function match(profile, conditions, period, opts) {
     // 3) 신청기간 미도래 → 향후 가능
     level = 'blue';
   } else {
-    // 4) always:true 포함 — 물어본(skip이 아닌) optional 조건이 전부 일치하면 green, 하나라도 불일치면 yellow.
-    //    안 물어본 조건(skip)은 애초에 비교 대상이 아니므로 green을 막지 않는다.
-    const askedOptional = results.filter((r) => !r.cond.required && r.status !== 'skip');
-    const allAskedOptionalOk = askedOptional.every((r) => r.status === 'ok');
-    level = allAskedOptionalOk ? 'green' : 'yellow';
+    // 4) required(대개 나이) 외에 "실질 제한"이 하나라도 있고 그것이 사용자 입력과 일치하면 green.
+    //    그렇지 않으면(실질 제한이 없거나, 있어도 불일치·불명뿐이면) yellow — "조건 확인 필요".
+    //    전체 선택지를 다 나열한 조건(실질 제한 없음)은 일치해도 green의 근거가 되지 않는다.
+    const hasEffectiveOptionalMatch = results.some(
+      (r) => !r.cond.required && r.effective && r.status === 'ok'
+    );
+    level = hasEffectiveOptionalMatch ? 'green' : 'yellow';
   }
 
   if (opts.maxLevel === 'yellow' && level === 'green') level = 'yellow';
 
   const score = results.filter((r) => r.status === 'ok').length;
+  const effectiveMatches = results.filter((r) => !r.cond.required && r.effective && r.status === 'ok').length;
   const failed = results.filter((r) => r.status === 'fail').map((r) => r.cond.type);
 
-  return { level, score, failed };
+  return { level, score, effectiveMatches, failed };
 }
 
 // 브라우저에서는 빌드 없이 <script type="module">로 로드하고 window에 노출한다.

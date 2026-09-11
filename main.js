@@ -678,6 +678,11 @@ if (bannerClose && banner) {
     return hhMap[employ] || hhMap.default || ['근로장려금', '에너지바우처', '실업급여'];
   }
 
+  // gov24 조건의 household/employment/incomeLevel 'in' 조건은 상당수가 전체 선택지를 다 나열해
+  // 사실상 제한이 없다(household 96건 중 73건, employment 43건 중 34건, incomeLevel 126건 중 88건).
+  // 엔진에 이 type들의 전체 선택지 수를 알려줘야 "실질 제한"을 가려낼 수 있다(엔진 자체는 이 숫자를 모른다).
+  const TOTAL_OPTIONS = { household: 5, employment: 3, incomeLevel: 5 };
+
   // 판정 엔진(engine/matching-engine.js) + data/policies.json + data/benefit-conditions.json으로 매칭
   // → { name, level, failed }[] 를 점수 순으로 반환. 데이터가 준비되지 않았거나 결과가 0건이면 null.
   function getEngineMatches(profile) {
@@ -694,7 +699,7 @@ if (bannerClose && banner) {
         const conditions = useOptional
           ? entry.conditions
           : entry.conditions.filter(function (c) { return c.required; });
-        const result = engine.match(profile, conditions, entry.period);
+        const result = engine.match(profile, conditions, entry.period, { totalOptions: TOTAL_OPTIONS });
         if (!result) return;
         matches.push({ policy: policy, result: result, conditions: entry.conditions });
       });
@@ -709,6 +714,11 @@ if (bannerClose && banner) {
     matches.sort(function (a, b) {
       const levelDiff = LEVEL_RANK[b.result.level] - LEVEL_RANK[a.result.level];
       if (levelDiff) return levelDiff;
+
+      // 0) 실질 제한이 일치한 개수가 많을수록 위로 (이 사람에게 진짜 해당되는 조건이 더 많은 정책)
+      if (b.result.effectiveMatches !== a.result.effectiveMatches) {
+        return b.result.effectiveMatches - a.result.effectiveMatches;
+      }
       if (b.result.score !== a.result.score) return b.result.score - a.result.score;
 
       // 1) 연령 범위가 좁을수록 가점 (그 나이대 전용 정책이 위로)

@@ -31,14 +31,19 @@ test('between 경계값 — 시작 경계 일치', () => {
   const profile = { age: 65 };
   const conditions = [{ type: 'age', op: 'between', value: [65, 120], required: true }];
   const result = match(profile, conditions, ALWAYS);
-  assert.equal(result.level, 'green');
+  // 나이(required)만 있고 그 외 실질 제한이 없으므로 배지는 yellow — 경계값 자체는 일치(제외되지 않음, score=1).
+  assert.notEqual(result, null);
+  assert.equal(result.score, 1);
+  assert.equal(result.level, 'yellow');
 });
 
 test('between 경계값 — 종료 경계 일치', () => {
   const profile = { age: 120 };
   const conditions = [{ type: 'age', op: 'between', value: [65, 120], required: true }];
   const result = match(profile, conditions, ALWAYS);
-  assert.equal(result.level, 'green');
+  assert.notEqual(result, null);
+  assert.equal(result.score, 1);
+  assert.equal(result.level, 'yellow');
 });
 
 test('between 경계값 — 경계 밖은 불일치', () => {
@@ -105,11 +110,12 @@ test('maxLevel:yellow — 이미 yellow/blue는 그대로', () => {
   assert.equal(result.level, 'yellow');
 });
 
-test('프로필에 없는 키(=안 물어본/모르는 type) → skip, 에러 없이 green도 가능', () => {
+test('프로필에 없는 키(=안 물어본/모르는 type) → skip, 에러 없이 처리(실질 제한 일치가 없어 yellow)', () => {
   const profile = { region: '경기' };
   const conditions = [{ type: 'ㅁㅕㅈㄷㅇ이런타입은몰라', op: 'eq', value: 'x', required: false }];
   const result = match(profile, conditions, ALWAYS);
-  assert.equal(result.level, 'green'); // 불일치가 아니므로 green을 막지 않는다
+  assert.notEqual(result, null); // skip은 불일치가 아니므로 제외되지 않는다
+  assert.equal(result.level, 'yellow'); // 다만 실질 제한이 일치한 것도 없으므로 green은 아니다
   assert.deepEqual(result.failed, []); // skip은 failed에 안 들어간다
 });
 
@@ -126,12 +132,12 @@ test('안 물어본 항목이 있어도 green이 나온다 (물어본 항목만 
   assert.deepEqual(result.failed, []);
 });
 
-test('required 조건인데 프로필에 그 키가 없으면(안 물어봄) skip — 제외되지 않는다', () => {
+test('required 조건인데 프로필에 그 키가 없으면(안 물어봄) skip — 제외되지 않는다(단, 실질 제한 매칭이 없어 yellow)', () => {
   const profile = { age: 30 };
   const conditions = [{ type: 'region', op: 'in', value: ['경기'], required: true }];
   const result = match(profile, conditions, ALWAYS);
   assert.notEqual(result, null);
-  assert.equal(result.level, 'green');
+  assert.equal(result.level, 'yellow'); // required는 green 판단(나이 외 실질 제한)에서 제외된다
 });
 
 test('사장님 타입(region/businessType/field)도 엔진이 그대로 처리한다', () => {
@@ -144,6 +150,35 @@ test('사장님 타입(region/businessType/field)도 엔진이 그대로 처리�
   const result = match(profile, conditions, ALWAYS);
   assert.equal(result.level, 'green');
   assert.equal(result.score, 3);
+});
+
+test('전부선택 조건(실질 제한 없음)은 일치해도 green 근거가 되지 않는다', () => {
+  // household 조건이 전체 5개 선택지를 다 나열 → 사실상 누구나 통과, 실질 제한이 아니다.
+  const profile = { age: 30, household: '1인가구' };
+  const conditions = [
+    { type: 'age', op: 'between', value: [20, 39], required: true },
+    {
+      type: 'household', op: 'in',
+      value: ['1인가구', '다자녀가구', '한부모가정', '다문화가족', '무주택세대'],
+      required: false,
+    },
+  ];
+  const totalOptions = { household: 5 };
+  const result = match(profile, conditions, ALWAYS, { totalOptions });
+  assert.equal(result.level, 'yellow'); // 일치(ok)는 했지만 실질 제한이 아니므로 green이 아니다
+  assert.equal(result.effectiveMatches, 0);
+});
+
+test('실질 제한(전체보다 적은 선택지)이 일치하면 green, effectiveMatches에 반영된다', () => {
+  const profile = { age: 30, household: '1인가구' };
+  const conditions = [
+    { type: 'age', op: 'between', value: [20, 39], required: true },
+    { type: 'household', op: 'in', value: ['1인가구', '다자녀가구'], required: false }, // 5개 중 2개만
+  ];
+  const totalOptions = { household: 5 };
+  const result = match(profile, conditions, ALWAYS, { totalOptions });
+  assert.equal(result.level, 'green');
+  assert.equal(result.effectiveMatches, 1);
 });
 
 test('score는 일치한 조건 수(required+optional 합)', () => {
