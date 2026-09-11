@@ -18,7 +18,8 @@
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/000000465790",
       "summary": "유치원에 다니는 3~5세 아동에게 유아학비, 방과후과정비 등 지원, 사립유치원을 다니는 법정저소득층 유아에게 저소득층 유아학비를 추가 지급",
-      "benefit": "유아학비 (누리과정) 지원"
+      "benefit": "유아학비 (누리과정) 지원",
+      "detailUrl": "pages/article-childcare"
     },
     {
       "id": "근로-자녀장려금",
@@ -35,7 +36,8 @@
       "lastUpdated": "2026-07-02",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/105100000001",
       "summary": "소득과 재산이 적은 근로소득자에게 근로장려금을, 자녀가 있을 경우 자녀장려금 지급",
-      "benefit": "근로·자녀장려금"
+      "benefit": "근로·자녀장려금",
+      "detailUrl": "pages/article-eitc"
     },
     {
       "id": "주택금융공사-월세자금보증",
@@ -548,7 +550,8 @@
       "lastUpdated": "2026-04-22",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000003",
       "summary": "초중고 학생에게 교육활동지원비 지원(초중고 학생별 차등지급)",
-      "benefit": "교육급여"
+      "benefit": "교육급여",
+      "detailUrl": "pages/article-teen-edu"
     },
     {
       "id": "국립특수학교-및-국립부설학교-특수학급-지원",
@@ -683,7 +686,8 @@
       "lastUpdated": "2026-05-13",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000046",
       "summary": "중소중견기업 취창업을 희망하는 대학생에게 학기당 등록금 전액 지원",
-      "benefit": "중소기업 취업연계 장학금"
+      "benefit": "중소기업 취업연계 장학금",
+      "detailUrl": "pages/article-youth-sme-tax"
     },
     {
       "id": "고졸-후학습자-장학금-희망사다리-유형",
@@ -767,7 +771,8 @@
       "lastUpdated": "2026-05-11",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005031",
       "summary": "가정양육 부모가 긴급.일시적으로 보육시설 이용이 필요한 경우 시간제보육 서비스 지원",
-      "benefit": "시간제보육 지원"
+      "benefit": "시간제보육 지원",
+      "detailUrl": "pages/article-childcare"
     },
     {
       "id": "영유아보육료-지원",
@@ -784,7 +789,8 @@
       "lastUpdated": "2026-02-04",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005036",
       "summary": "소득수준에 관계없이 0~5세 아동에게 보육료 지원",
-      "benefit": "영유아보육료 지원"
+      "benefit": "영유아보육료 지원",
+      "detailUrl": "pages/article-childcare"
     },
     {
       "id": "법학전문대학원-취약계층-장학금",
@@ -818,7 +824,8 @@
       "lastUpdated": "2026-03-09",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005044",
       "summary": "○ 고교 학비 (입학금, 수업료, 학교운영지원비) ○ 학교급식비 ○ 교육정보화지원비",
-      "benefit": "초·중·고 교육비 지원"
+      "benefit": "초·중·고 교육비 지원",
+      "detailUrl": "pages/article-child-edu"
     },
     {
       "id": "유아교육비-보육료-추가지원",
@@ -835,7 +842,8 @@
       "lastUpdated": "2026-03-01",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005047",
       "summary": "학부모 양육비 부담 경감을 위해 유아교육비·보육료 월 5만원 추가지원",
-      "benefit": "유아교육비·보육료 추가지원"
+      "benefit": "유아교육비·보육료 추가지원",
+      "detailUrl": "pages/article-childcare"
     },
     {
       "id": "의료급여-틀니-치과임플란트-지원",
@@ -1224,7 +1232,8 @@
       "lastUpdated": "2025-11-28",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000132",
       "summary": "발달장애학생에게 방과후 돌봄이용권(월 66시간) 제공",
-      "benefit": "청소년 발달장애인 방과후활동서비스"
+      "benefit": "청소년 발달장애인 방과후활동서비스",
+      "detailUrl": "pages/article-after-school"
     },
     {
       "id": "긴급복지-주거지원",
@@ -1288,7 +1297,8 @@
       "lastUpdated": "2026-02-26",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005004",
       "summary": "긴급지원 주지원 가구 중 연료비, 전기요금이 필요한 경우 지원",
-      "benefit": "긴급복지 연료비 및 전기요금 지원"
+      "benefit": "긴급복지 연료비 및 전기요금 지원",
+      "detailUrl": "pages/article-energy-voucher"
     },
     {
       "id": "긴급복지-의료지원",
@@ -1452,7 +1462,8 @@
       "lastUpdated": "2026-04-27",
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005030",
       "summary": "기초연금 수급자 확인서 발급",
-      "benefit": "기초연금 수급자 확인서"
+      "benefit": "기초연금 수급자 확인서",
+      "detailUrl": "pages/article-basic-pension"
     },
     {
       "id": "경계선지능아동-맞춤형-사례관리서비스",

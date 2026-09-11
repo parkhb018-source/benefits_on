@@ -1,0 +1,5470 @@
+{
+  "meta": {
+    "lastUpdated": "2026-09-11",
+    "source": "https://api.odcloud.kr/api/gov24/v3/supportConditions"
+  },
+  "conditions": {
+    "유아학비-누리과정-지원": {
+      "serviceId": "000000465790",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            3,
+            5
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "2027-02-28",
+        "start": null,
+        "end": "2027-02-28",
+        "always": false
+      }
+    },
+    "근로-자녀장려금": {
+      "serviceId": "105100000001",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            65
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "주택금융공사-월세자금보증": {
+      "serviceId": "116010000001",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            35
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "선원복지고용센터-운영": {
+      "serviceId": "119200000162",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            64
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "해양문화행사-및-해양영토-대장정": {
+      "serviceId": "119200000176",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "북한이탈주민-자산형성-지원-미래행복통장": {
+      "serviceId": "125000000004",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "북한이탈주민-정착금-지원-기본금": {
+      "serviceId": "125000000014",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "북한이탈주민-정착금-지원-가산금": {
+      "serviceId": "125000000015",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "특별공로자-및-우수인재-특별귀화-허가-신청-수수료-면제-안내": {
+      "serviceId": "127000000022",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "귀화허가-국적회복허가-신청-및-국적업무-증명서-발급-수수료-면제-안내": {
+      "serviceId": "127000000023",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "성폭력-아동학대-인신매매등범죄의-피해-아동과-범죄-피해자인-장애인을-위한-진술조력인-지원": {
+      "serviceId": "127000000025",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "성폭력-아동학대-장애인학대-인신매매-스토킹범죄-특정강력범죄-피해자-국선변호사-지원": {
+      "serviceId": "127000000026",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "소년원-출원생-등-소외계층-청소년을-위한-청소년자립생활관-운영-지원": {
+      "serviceId": "127000000037",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            13,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "전역예정군인-재취업-지원": {
+      "serviceId": "129000000013",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            32
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "전역예정장병-취업활동지원": {
+      "serviceId": "129000000015",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "군무원-채용시험-응시수수료-면제": {
+      "serviceId": "129000000032",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            65
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "국가유공자-등이-대부금으로-취득하는-부동산-취득세-감면": {
+      "serviceId": "131200000006",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "다자녀가구-자동차취득세-감면": {
+      "serviceId": "131200000008",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다자녀가구"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "국가유공자-차량취득세-및-자동차세-감면": {
+      "serviceId": "131200000014",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "다문화-가족-및-국내체류-외국인-대상-운전면허교실-운영-지원": {
+      "serviceId": "132000000002",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "교육급여": {
+      "serviceId": "134200000003",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            19
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "국립특수학교-및-국립부설학교-특수학급-지원": {
+      "serviceId": "134200000006",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            20
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "대학원-학과-기반-교육연구단-연구장학금-등-지원-4단계-두뇌한국21-사업": {
+      "serviceId": "134200000007",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "글로벌-현장학습-프로그램-운영": {
+      "serviceId": "134200000008",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "장애학생-가족-참여-국외체험-연수-지원": {
+      "serviceId": "134200000010",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "인문100년장학금": {
+      "serviceId": "134200000011",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "대학입학전형료-면제-감액": {
+      "serviceId": "134200000014",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            16,
+            19
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "평생교육이용권-지원": {
+      "serviceId": "134200000045",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "중소기업-취업연계-장학금-희망사다리-유형": {
+      "serviceId": "134200000046",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "고졸-후학습자-장학금-희망사다리-유형": {
+      "serviceId": "134200005001",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            64
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "장애인-평생교육이용권-지원": {
+      "serviceId": "134200005006",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "위-wee-클래스-상담-지원": {
+      "serviceId": "134200005007",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            19
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "가정양육수당-지원": {
+      "serviceId": "134200005012",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            2,
+            7
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "시간제보육-지원": {
+      "serviceId": "134200005031",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            3
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "영유아보육료-지원": {
+      "serviceId": "134200005036",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            5
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "법학전문대학원-취약계층-장학금": {
+      "serviceId": "134200005041",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "초-중-고-교육비-지원": {
+      "serviceId": "134200005044",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "한부모가정"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "유아교육비-보육료-추가지원": {
+      "serviceId": "134200005047",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            5,
+            7
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "의료급여-틀니-치과임플란트-지원": {
+      "serviceId": "135200000002",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            65,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "임산부-및-영유아-영양플러스": {
+      "serviceId": "135200000005",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            44
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "소년소녀가정-지원": {
+      "serviceId": "135200000006",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            17
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "학대피해아동쉼터-지원": {
+      "serviceId": "135200000012",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "노인실명예방사업": {
+      "serviceId": "135200000015",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "장애인-노인-보조기기-맞춤형-서비스-지역-보조기기센터": {
+      "serviceId": "135200000017",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "치매관리-서비스-치매안심센터": {
+      "serviceId": "135200000080",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "보건소-방문건강관리-서비스": {
+      "serviceId": "135200000082",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            65,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "장애인-공동생활가정-운영-지원": {
+      "serviceId": "135200000085",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "아동복지시설-아동치료재활지원": {
+      "serviceId": "135200000087",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            12
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "지역자율형-사회서비스-투자사업-보수교육-지원": {
+      "serviceId": "135200000088",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            64
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "발달장애인-가족휴식지원사업": {
+      "serviceId": "135200000094",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "재가한센인생계비지원": {
+      "serviceId": "135200000102",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "생활터-금연환경조성": {
+      "serviceId": "135200000112",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "노인-무릎인공관절-수술-지원": {
+      "serviceId": "135200000113",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "고위험-임산부-의료비-지원": {
+      "serviceId": "135200000114",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            44
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "인플루엔자-국가예방접종-지원": {
+      "serviceId": "135200000115",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            13
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "아동수당": {
+      "serviceId": "135200000120",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            7
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "치매-상담콜센터-운영": {
+      "serviceId": "135200000124",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "치매-치료관리비-지원": {
+      "serviceId": "135200000125",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "청소년-발달장애인-방과후활동서비스": {
+      "serviceId": "135200000132",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "긴급복지-주거지원": {
+      "serviceId": "135200005001",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "긴급복지-해산비-지원": {
+      "serviceId": "135200005002",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            44
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "긴급복지-생계지원": {
+      "serviceId": "135200005003",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "긴급복지-연료비-및-전기요금-지원": {
+      "serviceId": "135200005004",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "긴급복지-의료지원": {
+      "serviceId": "135200005005",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "자산형성지원사업-희망저축": {
+      "serviceId": "135200005010",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            15,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "입양축하금": {
+      "serviceId": "135200005011",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "자산형성지원사업-희망저축-2": {
+      "serviceId": "135200005012",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            15,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "첫만남이용권-지원": {
+      "serviceId": "135200005015",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            44
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "전문아동보호비-지원": {
+      "serviceId": "135200005016",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            17
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "한국형-상병수당-시범사업": {
+      "serviceId": "135200005017",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            15,
+            65
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "긴급돌봄-지원": {
+      "serviceId": "135200005026",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "일상돌봄-서비스": {
+      "serviceId": "135200005027",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            9,
+            64
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "기초연금-수급자-확인서": {
+      "serviceId": "135200005030",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            65,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "고난도-보호대상아동-맞춤형-사례관리서비스": {
+      "serviceId": "135200005033",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            12
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "노인-안검진-및-개안수술": {
+      "serviceId": "135200005034",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "아동-입원진료비-지원": {
+      "serviceId": "135200005038",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            15
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "자립지원-전담기관-운영": {
+      "serviceId": "135200005039",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            23
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "치매검진-지원": {
+      "serviceId": "135200005043",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "전국민-마음투자-지원": {
+      "serviceId": "135200005045",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "임산부-외래진료비-본인부담률-경감": {
+      "serviceId": "135200005046",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            55
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "위기임신-및-보호출산-지원": {
+      "serviceId": "135200005048",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            55
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "2세미만-영유아-입원진료비-본인부담금-면제": {
+      "serviceId": "135200005050",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            2
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "어린이-불소-도포": {
+      "serviceId": "135200005051",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            3,
+            15
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "배회감지기-무상보급": {
+      "serviceId": "135200005053",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "가정위탁-아동양육보조금-지원": {
+      "serviceId": "135200005055",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            17
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다자녀가구",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "두루누리-사회보험료-지원": {
+      "serviceId": "135200005059",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            65
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "노숙인-등-복지-지원": {
+      "serviceId": "135200005060",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "스포츠-강좌-이용권-지원": {
+      "serviceId": "137100000006",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            5,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "문화로-치유-지원": {
+      "serviceId": "137100000032",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "지역맞춤형-생활체육-활성화-어르신-스포츠강좌-프로그램-지원": {
+      "serviceId": "137100000033",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            50,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "장애-체육인-생활지원금-지원": {
+      "serviceId": "137100000034",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "글로벌-광고인재-육성": {
+      "serviceId": "137100000217",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "국립청소년인터넷드림마을-운영-지원": {
+      "serviceId": "138300000008",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "결혼이민예정자-현지사전교육-지원": {
+      "serviceId": "138300000009",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            44
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "가정폭력피해자-국민임대주택-우선-입주권-부여": {
+      "serviceId": "138300000016",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "한부모가족-임대주택-특별공급": {
+      "serviceId": "138300000017",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "한부모가정",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "폭력-피해-이주여성-보호시설-운영-지원": {
+      "serviceId": "138300000020",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            44
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "다문화가족-이중언어-교육지원": {
+      "serviceId": "138300000021",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "찾아가는-폭력예방교육-서비스-제공": {
+      "serviceId": "138300000023",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "청소년-상담-서비스-제공": {
+      "serviceId": "138300000030",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            9,
+            24
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "학교-밖-청소년-건강검진-지원": {
+      "serviceId": "138300000033",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            9,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "한부모무료법률구조": {
+      "serviceId": "138300000040",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "한부모가정"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "청소년부모-아동양육비-지원사업": {
+      "serviceId": "138300000051",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            24
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "청소년-미혼-한부모-자립지원-우리원더패밀리": {
+      "serviceId": "138300000052",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            24
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "한부모가정"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "가정폭력-피해자-보호시설-퇴소자-자립지원금": {
+      "serviceId": "138300000053",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "고립-은둔-청소년-원스톱-패키지-지원": {
+      "serviceId": "138300000054",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            9,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "경력보유여성-등-취업지원": {
+      "serviceId": "138300000055",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "다문화가족지원센터-이용": {
+      "serviceId": "138300000056",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "저소득-다문화-자녀-교육활동비-지원": {
+      "serviceId": "138300000057",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            7,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "기초학습-지원": {
+      "serviceId": "138300000058",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            6,
+            12
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "진로설계-지원": {
+      "serviceId": "138300000059",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            8,
+            19
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "결혼이민자-역량강화지원": {
+      "serviceId": "138300000060",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "다문화가족"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "청소년회복지원시설운영": {
+      "serviceId": "138300000062",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            13,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "가정-밖-청소년-자립지원": {
+      "serviceId": "138300000063",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            13,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "양육비-선지급-지원": {
+      "serviceId": "138300000065",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "한부모가정"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "양육비-이행-지원-서비스": {
+      "serviceId": "138300000066",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            18
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "한부모가정"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "청소년복지시설-퇴소청소년-자립지원수당": {
+      "serviceId": "138300000067",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            25
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "국가유공자-등의-국립수목원-관람료-할인": {
+      "serviceId": "140000000002",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "국가유공자-등의-국가정원의-관람료-면제": {
+      "serviceId": "140000000171",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            60,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "사립휴양시설-조성-보완-운영-사업비-융자": {
+      "serviceId": "140000000175",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            64
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "산림복지서비스이용권-바우처-지급": {
+      "serviceId": "140000000176",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인",
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "목재이용명예-감시원-일자리-제공": {
+      "serviceId": "140000000194",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "산사태현장예방단-일자리-제공": {
+      "serviceId": "140000000204",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            20,
+            64
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "산림보호지원단-일자리-제공": {
+      "serviceId": "140000000218",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            64
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "1인가구",
+            "다자녀가구",
+            "한부모가정",
+            "다문화가족",
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "취업준비중",
+            "무직·기타"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "중소기업-내일채움공제-핵심인력-성과보상기금-지원": {
+      "serviceId": "142000000008",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            64
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "중소기업장기근속자주택우선공급": {
+      "serviceId": "142000000014",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            64
+          ],
+          "required": true
+        },
+        {
+          "type": "household",
+          "op": "in",
+          "value": [
+            "무주택세대"
+          ],
+          "required": false
+        },
+        {
+          "type": "employment",
+          "op": "in",
+          "value": [
+            "직장인"
+          ],
+          "required": false
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "혁신-소상공인-창업지원": {
+      "serviceId": "142000000038",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            18,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "중소기업-인식개선-교육-등": {
+      "serviceId": "142000000085",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            19,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100",
+            "중위101-200",
+            "중위200초과"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    },
+    "자활근로-참여확인서-발급": {
+      "serviceId": "135200005029",
+      "conditions": [
+        {
+          "type": "age",
+          "op": "between",
+          "value": [
+            0,
+            120
+          ],
+          "required": true
+        },
+        {
+          "type": "incomeLevel",
+          "op": "in",
+          "value": [
+            "중위0-50",
+            "중위51-75",
+            "중위76-100"
+          ],
+          "required": false
+        }
+      ],
+      "period": {
+        "raw": "예산 소진시까지",
+        "start": null,
+        "end": null,
+        "always": true
+      }
+    }
+  }
+}

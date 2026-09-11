@@ -253,6 +253,19 @@ function main() {
   if (!policies) fail('policies.json 에 policies 배열이 없습니다.');
   if (policies.length === 0) fail('policies.json 의 policies 배열이 비어 있습니다. (페이지를 비우는 사고 방지)');
 
+  // detailUrl(pages/*) 검증 — 가리키는 파일이 실제로 없으면 빌드 중단.
+  // articleUrl 177개가 전부 404였던 사고의 재발 방지(전부 모아서 한 번에 알려준다).
+  const missingDetailPages = [];
+  policies.forEach((p) => {
+    if (!p.detailUrl) return;
+    const file = path.join(ROOT, p.detailUrl + '.html');
+    if (!fs.existsSync(file)) missingDetailPages.push(p.title + ' → ' + p.detailUrl + '.html');
+  });
+  if (missingDetailPages.length) {
+    fail('detailUrl이 가리키는 파일이 없는 정책 ' + missingDetailPages.length + '건:\n  - ' +
+      missingDetailPages.join('\n  - '));
+  }
+
   // 카테고리별 분류
   const byCategory = {};
   Object.keys(CATEGORY_PAGES).forEach((c) => { byCategory[c] = []; });

@@ -3248,27 +3248,27 @@
     "": {
       "icon": "",
       "desc": "",
-      "url": "pages/article-newlywed-260625"
+      "url": "pages/article-newlywed-support"
     },
     "dd": {
       "icon": "dd",
       "desc": "dd",
-      "url": "pages/article-newlywed-260625"
+      "url": "pages/article-newlywed-support"
     },
     "유아 학비지원": {
       "icon": "✨",
       "desc": "3~5세에 대해 교육비,방과후과정비를 지급합니다.를 지급합니다.",
-      "url": "pages/article-newlywed-260702"
+      "url": "pages/article-newlywed-support"
     },
     "근로·자녀장려금": {
       "icon": "✨",
       "desc": "소득과 재산이 적은 근로소득자에게 근로장려금을, 자녀가 있을 경우 자녀장려금 지급",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/105100000001"
+      "url": "pages/article-eitc"
     },
     "유아학비 (누리과정) 지원": {
       "icon": "✨",
       "desc": "유치원에 다니는 3~5세 아동에게 유아학비, 방과후과정비 등 지원, 사립유치원을 다니는 법정저소득층 유아에게 저소득층 유아학비를 추가 지급",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/000000465790"
+      "url": "pages/article-childcare"
     },
     "주택금융공사 월세자금보증": {
       "icon": "✨",
@@ -3408,7 +3408,7 @@
     "교육급여": {
       "icon": "✨",
       "desc": "초중고 학생에게 교육활동지원비 지원(초중고 학생별 차등지급)",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000003"
+      "url": "pages/article-teen-edu"
     },
     "국립특수학교, 국립대학부설유치원 및 학교 배치 특수교육대상자등 교수학습 활동 지원": {
       "icon": "✨",
@@ -3463,12 +3463,12 @@
     "시간제보육 지원": {
       "icon": "✨",
       "desc": "가정양육 부모가 긴급.일시적으로 보육시설 이용이 필요한 경우 시간제보육 서비스 지원",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005031"
+      "url": "pages/article-childcare"
     },
     "영유아보육료 지원": {
       "icon": "✨",
       "desc": "소득수준에 관계없이 0~5세 아동에게 보육료 지원",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005036"
+      "url": "pages/article-childcare"
     },
     "법학전문대학원 취약계층 장학금": {
       "icon": "✨",
@@ -3478,12 +3478,12 @@
     "초·중·고 교육비 지원": {
       "icon": "✨",
       "desc": "○ 고교 학비 (입학금, 수업료, 학교운영지원비) ○ 학교급식비 ○ 교육정보화지원비",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005044"
+      "url": "pages/article-child-edu"
     },
     "유아교육비·보육료 추가지원": {
       "icon": "✨",
       "desc": "학부모 양육비 부담 경감을 위해 유아교육비·보육료 월 5만원 추가지원",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005047"
+      "url": "pages/article-childcare"
     },
     "의료급여 틀니·치과임플란트 지원": {
       "icon": "✨",
@@ -3593,7 +3593,7 @@
     "청소년 발달장애인 방과후활동서비스": {
       "icon": "✨",
       "desc": "발달장애학생에게 방과후 돌봄이용권(월 66시간) 제공",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000132"
+      "url": "pages/article-after-school"
     },
     "긴급복지 주거지원": {
       "icon": "✨",
@@ -3613,7 +3613,7 @@
     "긴급복지 연료비 및 전기요금 지원": {
       "icon": "✨",
       "desc": "긴급지원 주지원 가구 중 연료비, 전기요금이 필요한 경우 지원",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005004"
+      "url": "pages/article-energy-voucher"
     },
     "긴급복지 의료지원": {
       "icon": "✨",
@@ -3653,7 +3653,7 @@
     "기초연금 수급자 확인서": {
       "icon": "✨",
       "desc": "기초연금 수급자 확인서 발급",
-      "url": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005030"
+      "url": "pages/article-basic-pension"
     },
     "보증연계투자 지원": {
       "icon": "✨",

@@ -12,9 +12,10 @@
   const loaderSrc = document.currentScript ? document.currentScript.src.split('?')[0] : '';
   const base      = loaderSrc ? loaderSrc.replace('policy-loader.js', '') : 'data/';
 
-  window.POLICY_DATA    = null;
-  window.POLICIES       = null;
-  window.MATCHING_RULES = null;
+  window.POLICY_DATA        = null;
+  window.POLICIES           = null;
+  window.MATCHING_RULES     = null;
+  window.BENEFIT_CONDITIONS = null;
 
   // localStorage keys
   var LS_CONSTANTS = 'htkon_constants';
@@ -37,19 +38,33 @@
       });
   }
 
+  /* ── benefit-conditions.json은 scripts/fetch-conditions.js가 만드는 빌드 산출물이라
+     관리자 편집 대상이 아니다(localStorage 저장 없이 파일만 읽는다). ── */
+  function loadConditions() {
+    return fetch(base + 'benefit-conditions.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .catch(function (err) {
+        console.warn('[혜택on] benefit-conditions.json 로드 실패:', err);
+        return null;
+      });
+  }
+
   /* ── 모든 파일 병렬 로드 ── */
   Promise.all([
     loadSource(LS_CONSTANTS, 'constants.json'),
     loadSource(LS_POLICIES,  'policies.json'),
     loadSource(LS_RULES,     'matching-rules.json'),
+    loadConditions(),
   ]).then(function (results) {
-    var constants = results[0];
-    var policies  = results[1];
-    var rules     = results[2];
+    var constants   = results[0];
+    var policies    = results[1];
+    var rules       = results[2];
+    var conditions  = results[3];
 
-    window.POLICY_DATA    = constants;
-    window.POLICIES       = policies;
-    window.MATCHING_RULES = rules;
+    window.POLICY_DATA        = constants;
+    window.POLICIES           = policies;
+    window.MATCHING_RULES     = rules;
+    window.BENEFIT_CONDITIONS = conditions;
 
     if (constants) applyConstants(constants);
     applyPolicies(policies || { policies: [] });

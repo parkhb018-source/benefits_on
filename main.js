@@ -665,14 +665,80 @@ if (bannerClose && banner) {
     '방과후 지원 프로그램': { icon: '🏫', desc: '방과후 학교 자유수강권 지원',                        url: 'pages/article-after-school' }
   };
 
-  function getBenefits(age, household, employ) {
-    // matching-rules.json이 로드되었으면 우선 사용 (관리자에서 편집 가능)
+  // 연령대 대표값 — 판정 엔진의 age 조건(between)과 비교할 기준 나이
+  const AGE_REPRESENTATIVE = { '10대': 16, '20대': 25, '30대': 35, '40대': 45, '50대': 55, '60대 이상': 67 };
+
+  // matching-rules.json이 로드되었으면 우선 사용 (관리자에서 편집 가능) — 엔진 실패 시 폴백
+  function getBenefitsFallback(age, household, employ) {
     const map = (window.MATCHING_RULES && window.MATCHING_RULES.benefitsMap) || defaultBenefitsMap;
     const ageMap = map[age] || {};
     const hhMap  = ageMap[household] || ageMap.default;
     if (!hhMap) return ['근로장려금', '에너지바우처', '실업급여'];
     if (Array.isArray(hhMap)) return hhMap;
     return hhMap[employ] || hhMap.default || ['근로장려금', '에너지바우처', '실업급여'];
+  }
+
+  // 판정 엔진(engine/matching-engine.js) + data/policies.json + data/benefit-conditions.json으로 매칭
+  // → { name, level, failed }[] 를 점수 순으로 반환. 데이터가 준비되지 않았거나 결과가 0건이면 null.
+  function getEngineMatches(profile) {
+    const engine = window.HtkonMatchingEngine;
+    const policies = (window.POLICIES && window.POLICIES.policies) || [];
+    const conditionsMap = (window.BENEFIT_CONDITIONS && window.BENEFIT_CONDITIONS.conditions) || {};
+    if (!engine || !policies.length || !Object.keys(conditionsMap).length) return null;
+
+    function runPass(useOptional) {
+      const matches = [];
+      policies.forEach(function (policy) {
+        const entry = conditionsMap[policy.id];
+        if (!entry) return; // 조건 데이터가 없는 정책은 자가진단 결과에서 제외(있는 걸 지어내지 않음)
+        const conditions = useOptional
+          ? entry.conditions
+          : entry.conditions.filter(function (c) { return c.required; });
+        const result = engine.match(profile, conditions, entry.period);
+        if (!result) return;
+        matches.push({ policy: policy, result: result, conditions: entry.conditions });
+      });
+      return matches;
+    }
+
+    let matches = runPass(true);
+    if (matches.length === 0) matches = runPass(false); // 결과 0건 → optional 조건 빼고 재검색
+    if (matches.length === 0) return null;
+
+    const LEVEL_RANK = { green: 2, yellow: 1, blue: 0 };
+    matches.sort(function (a, b) {
+      const levelDiff = LEVEL_RANK[b.result.level] - LEVEL_RANK[a.result.level];
+      if (levelDiff) return levelDiff;
+      if (b.result.score !== a.result.score) return b.result.score - a.result.score;
+
+      // 1) 연령 범위가 좁을수록 가점 (그 나이대 전용 정책이 위로)
+      const ageCondA = a.conditions.find(function (c) { return c.type === 'age'; });
+      const ageCondB = b.conditions.find(function (c) { return c.type === 'age'; });
+      const widthA = ageCondA ? ageCondA.value[1] - ageCondA.value[0] : Infinity;
+      const widthB = ageCondB ? ageCondB.value[1] - ageCondB.value[0] : Infinity;
+      if (widthA !== widthB) return widthA - widthB;
+
+      // 2) 지원유형에 '현금' 포함 시 가점
+      const cashA = /현금/.test(a.policy.summary || '') ? 1 : 0;
+      const cashB = /현금/.test(b.policy.summary || '') ? 1 : 0;
+      if (cashA !== cashB) return cashB - cashA;
+
+      // 3) 본문이 길수록 가점
+      return (b.policy.summary || '').length - (a.policy.summary || '').length;
+    });
+
+    return matches.map(function (m) {
+      return { name: m.policy.title, level: m.result.level, failed: m.result.failed };
+    });
+  }
+
+  function getBenefits(age, household, employ) {
+    const profile = { age: AGE_REPRESENTATIVE[age], household: household, employment: employ };
+    const engineMatches = getEngineMatches(profile);
+    if (engineMatches) return engineMatches;
+    return getBenefitsFallback(age, household, employ).map(function (name) {
+      return { name: name, level: null, failed: [] };
+    });
   }
 
   function updateUI() {
@@ -689,49 +755,105 @@ if (bannerClose && banner) {
   const DIAG_INITIAL_COUNT = 5;
   const DIAG_MAX_COUNT     = 10;
 
-  function resultItemHtml(name, jsonDetails) {
-    // url은 항상 defaultBenefitDetails에서 가져옴 (JSON/localStorage 무관하게 안정적)
-    // icon·desc만 MATCHING_RULES로 오버라이드 허용
-    const def  = defaultBenefitDetails[name] || { icon: '✨', desc: '혜택 상세 내용을 확인하세요', url: '#' };
+  const LEVEL_BADGE = {
+    green:  { label: '🟢 가능성 높음',   cls: 'result-badge-green' },
+    yellow: { label: '🟡 조건 확인 필요', cls: 'result-badge-yellow' },
+    blue:   { label: '🔵 향후 가능',     cls: 'result-badge-blue' },
+  };
+
+  function levelBadgeHtml(level, failed) {
+    const badge = LEVEL_BADGE[level];
+    if (!badge) return ''; // 폴백 결과(level: null)는 배지 없이 표시
+    const title = (level === 'yellow' && failed && failed.length)
+      ? ` title="확인 필요: ${failed.join(', ')}"`
+      : '';
+    return ` <span class="result-badge ${badge.cls}"${title}>${badge.label}</span>`;
+  }
+
+  // data/policies.json 정책 대부분은 자체 상세 페이지가 없어 sourceUrl(gov.kr 등 공식 페이지)이 유일한 링크지만,
+  // 자체 아티클이 있는 일부는 detailUrl(pages/*)이 채워져 있다 — 있으면 그걸 내부 링크로 우선 쓴다.
+  // title로 한 번만 찾아 캐시해둔다.
+  let policyUrlIndex = null;
+  function policyUrlByTitle(name) {
+    if (!policyUrlIndex) {
+      policyUrlIndex = {};
+      const policies = (window.POLICIES && window.POLICIES.policies) || [];
+      policies.forEach(function (p) { policyUrlIndex[p.title] = p.detailUrl || p.sourceUrl; });
+    }
+    return policyUrlIndex[name] || null;
+  }
+
+  // url이 http(s)로 시작하면 정부 공식 사이트(gov.kr 등) 외부 링크 → 새 탭으로 보내고 "공식 사이트에서 확인"이라 안내한다.
+  // 아니면 자체 콘텐츠(pages/*) 내부 링크 → 같은 탭에서 "자세히 보기"로 이동한다.
+  function resultItemHtml(item, jsonDetails) {
+    const name = item.name;
+    // url 우선순위: 관리자 등록(benefitDetails.json) → 사이트 자체 콘텐츠(defaultBenefitDetails) → policies.json의 공식 링크
+    const def  = defaultBenefitDetails[name]; // 없으면 undefined(아래에서 policies.json으로 폴백)
     const json = jsonDetails[name] || {};
-    const icon = json.icon || def.icon;
-    const desc = json.desc || def.desc;
-    const url  = json.url || def.url;   // 관리자 등록 혜택은 benefitDetails.url 사용, 없으면 기본 경로
+    const icon = json.icon || (def && def.icon) || '✨';
+    const desc = json.desc || (def && def.desc) || '혜택 상세 내용을 확인하세요';
+    const url  = json.url || (def && def.url) || policyUrlByTitle(name) || '#';
+
+    const isExternal = /^https?:\/\//.test(url);
+    const linkClass = isExternal ? 'result-link is-external' : 'result-link';
+    const linkAttrs = isExternal ? ' target="_blank" rel="noopener"' : '';
+    const linkText  = isExternal ? '공식 사이트에서 확인 →' : '자세히 보기 →';
+    const badge = levelBadgeHtml(item.level, item.failed);
+
     return `<div class="result-item">
       <div class="result-icon">${icon}</div>
       <div class="result-content">
-        <div class="result-title">${name}</div>
+        <div class="result-title">${name}${badge}</div>
         <div class="result-desc">${desc}</div>
-        <a href="${url}" class="result-link">자세히 보기 →</a>
+        <a href="${url}" class="${linkClass}"${linkAttrs}>${linkText}</a>
       </div>
     </div>`;
   }
 
+  function isInternalUrl(name, jsonDetails) {
+    const def  = defaultBenefitDetails[name];
+    const json = jsonDetails[name] || {};
+    const url  = json.url || (def && def.url) || policyUrlByTitle(name) || '#';
+    return !/^https?:\/\//.test(url);
+  }
+
+  // 매칭 결과가 이 건수를 넘으면(주로 나이 조건만 있는 정책이 많이 걸릴 때) "총 N개"라는 문구가
+  // 무의미해진다 — 상위 10개만 보여주고 "조건에 맞는 혜택 중 상위 10개"로 표현을 바꾼다.
+  const DIAG_OVERFLOW_THRESHOLD = 20;
+
   function showResult() {
     const allBenefits = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
     const jsonDetails  = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || {};
+    const isOverflow = allBenefits.length > DIAG_OVERFLOW_THRESHOLD;
     const benefits = allBenefits.slice(0, DIAG_MAX_COUNT);
-    const shown = benefits.slice(0, DIAG_INITIAL_COUNT);
-    const rest  = benefits.slice(DIAG_INITIAL_COUNT);
-    const countText = allBenefits.length > DIAG_MAX_COUNT
-      ? `총 ${allBenefits.length}개 중 상위 ${DIAG_MAX_COUNT}개를 보여드려요`
-      : `총 ${benefits.length}개의 혜택을 찾았어요`;
+    const shown = isOverflow ? benefits : benefits.slice(0, DIAG_INITIAL_COUNT);
+    const rest  = isOverflow ? [] : benefits.slice(DIAG_INITIAL_COUNT);
+    const countText = isOverflow
+      ? `조건에 맞는 혜택 중 상위 ${DIAG_MAX_COUNT}개`
+      : allBenefits.length > DIAG_MAX_COUNT
+        ? `총 ${allBenefits.length}개 중 상위 ${DIAG_MAX_COUNT}개를 보여드려요`
+        : `총 ${benefits.length}개의 혜택을 찾았어요`;
     diagResult.innerHTML =
       '<div class="diag-result-inner">' +
       `<p class="result-count">${countText}</p>` +
-      '<div class="result-list">' + shown.map(name => resultItemHtml(name, jsonDetails)).join('') + '</div>' +
+      '<div class="result-list">' + shown.map(item => resultItemHtml(item, jsonDetails)).join('') + '</div>' +
       (rest.length ? `<button type="button" class="result-more-btn" id="diagMoreBtn">더보기 (+${rest.length}개)</button>` : '') +
-      '<p class="result-note">* 상세 금액은 개인 상황에 따라 다를 수 있습니다.</p>' +
+      '<p class="result-note">* 상세 금액은 개인 상황에 따라 다를 수 있습니다. 🟢 표시도 신청 가능을 확정하지 않으니 최종 자격은 공식 사이트에서 확인하세요.</p>' +
       '</div>';
     diagResult.classList.add('show');
 
-    safeTrack(() => window.trackToolOnce && window.trackToolOnce('tool_complete', TOOL_ID, { match_count: allBenefits.length }));
+    const internalCount = benefits.filter(item => isInternalUrl(item.name, jsonDetails)).length;
+    const internalRatio = benefits.length ? internalCount / benefits.length : 0;
+    safeTrack(() => window.trackToolOnce && window.trackToolOnce('tool_complete', TOOL_ID, {
+      match_count: allBenefits.length,
+      internal_ratio: internalRatio,
+    }));
 
     const list    = diagResult.querySelector('.result-list');
     const moreBtn = document.getElementById('diagMoreBtn');
     if (moreBtn) {
       moreBtn.addEventListener('click', () => {
-        list.insertAdjacentHTML('beforeend', rest.map(name => resultItemHtml(name, jsonDetails)).join(''));
+        list.insertAdjacentHTML('beforeend', rest.map(item => resultItemHtml(item, jsonDetails)).join(''));
         moreBtn.remove();
       });
     }
