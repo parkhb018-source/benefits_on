@@ -90,9 +90,11 @@ function isEffectiveConstraint(cond, totalOptions) {
  * @param {Object} profile        도메인 무관 key-value ({age:67, household:'1인가구', ...} 등)
  * @param {Condition[]} conditions
  * @param {Period} [period]
- * @param {{ maxLevel?: 'yellow', today?: string, totalOptions?: Object.<string,number> }} [opts]
+ * @param {{ maxLevel?: 'yellow', today?: string, totalOptions?: Object.<string,number>, narrowRequiredTypes?: Object.<string, function([*, *]): boolean> }} [opts]
  *   totalOptions: type별 전체 선택지 수(예: { household: 5, employment: 3, incomeLevel: 5 }).
  *   "실질 제한" 판단에만 쓰인다 — 엔진 자체는 이 값들의 의미를 모른다(호출측이 도메인 지식으로 채운다).
+ *   narrowRequiredTypes: required 'between' 조건이 "그 구간 전용"인지 판단하는 함수(type별).
+ *   예: { age: (value) => value[0] >= 55 || value[1] <= 39 } — 이것도 엔진은 의미를 모르고 호출측 함수를 그대로 쓴다.
  * @returns {{ level: 'green'|'yellow'|'blue', score: number, effectiveMatches: number, failed: string[] } | null}
  */
 export function match(profile, conditions, period, opts) {
@@ -109,6 +111,12 @@ export function match(profile, conditions, period, opts) {
     if (r.cond.required && r.status === 'fail') return null;
   }
 
+  // 1-1) optional(비required) "실질 제한" 조건을 사용자가 답했는데 불일치 → 제외.
+  //      실질 제한이 아닌 조건(전체 선택지를 나열해 사실상 제한이 없는 조건)은 불일치해도 제외하지 않는다.
+  for (const r of results) {
+    if (!r.cond.required && r.effective && r.status === 'fail') return null;
+  }
+
   const today = opts.today || new Date().toISOString().slice(0, 10);
 
   // 2) 신청기간 종료 → 제외
@@ -119,13 +127,20 @@ export function match(profile, conditions, period, opts) {
     // 3) 신청기간 미도래 → 향후 가능
     level = 'blue';
   } else {
-    // 4) required(대개 나이) 외에 "실질 제한"이 하나라도 있고 그것이 사용자 입력과 일치하면 green.
-    //    그렇지 않으면(실질 제한이 없거나, 있어도 불일치·불명뿐이면) yellow — "조건 확인 필요".
+    // 4) green의 근거는 둘 중 하나.
+    //    (a) required 조건(대개 나이)이 그 구간 전용이고 사용자와 일치(narrowRequiredTypes로 호출측이 판단 기준을 줌).
+    //    (b) required 외 "실질 제한"이 하나라도 있고 그것이 사용자 입력과 일치.
+    //    둘 다 아니면(실질 제한이 없거나, 있어도 불일치·불명뿐이면) yellow — "조건 확인 필요".
     //    전체 선택지를 다 나열한 조건(실질 제한 없음)은 일치해도 green의 근거가 되지 않는다.
+    const hasNarrowRequiredMatch = results.some((r) => {
+      if (!r.cond.required || r.cond.op !== 'between' || r.status !== 'ok') return false;
+      const test = opts.narrowRequiredTypes && opts.narrowRequiredTypes[r.cond.type];
+      return typeof test === 'function' && !!test(r.cond.value);
+    });
     const hasEffectiveOptionalMatch = results.some(
       (r) => !r.cond.required && r.effective && r.status === 'ok'
     );
-    level = hasEffectiveOptionalMatch ? 'green' : 'yellow';
+    level = (hasNarrowRequiredMatch || hasEffectiveOptionalMatch) ? 'green' : 'yellow';
   }
 
   if (opts.maxLevel === 'yellow' && level === 'green') level = 'yellow';

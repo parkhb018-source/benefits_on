@@ -683,6 +683,13 @@ if (bannerClose && banner) {
   // 엔진에 이 type들의 전체 선택지 수를 알려줘야 "실질 제한"을 가려낼 수 있다(엔진 자체는 이 숫자를 모른다).
   const TOTAL_OPTIONS = { household: 5, employment: 3, incomeLevel: 5 };
 
+  // required 나이 조건이 "그 나이대 전용"인지 판단하는 기준 — AGE_REPRESENTATIVE의 구간 경계에 맞춘다
+  // (50대 대표값 55부터 또는 30대 대표값 35가 속한 구간 끝 39까지). 실질 제한이 하나도 없는 정책이라도
+  // 이 나이대 전용이면 green으로 본다(예: 60대 전용 정책은 가구/고용/소득 제한이 없어도 green).
+  const NARROW_REQUIRED_TYPES = {
+    age: function (value) { return value[0] >= 55 || value[1] <= 39; },
+  };
+
   // 판정 엔진(engine/matching-engine.js) + data/policies.json + data/benefit-conditions.json으로 매칭
   // → { name, level, failed }[] 를 점수 순으로 반환. 데이터가 준비되지 않았거나 결과가 0건이면 null.
   function getEngineMatches(profile) {
@@ -699,7 +706,10 @@ if (bannerClose && banner) {
         const conditions = useOptional
           ? entry.conditions
           : entry.conditions.filter(function (c) { return c.required; });
-        const result = engine.match(profile, conditions, entry.period, { totalOptions: TOTAL_OPTIONS });
+        const result = engine.match(profile, conditions, entry.period, {
+          totalOptions: TOTAL_OPTIONS,
+          narrowRequiredTypes: NARROW_REQUIRED_TYPES,
+        });
         if (!result) return;
         matches.push({ policy: policy, result: result, conditions: entry.conditions });
       });
@@ -831,6 +841,12 @@ if (bannerClose && banner) {
   // 무의미해진다 — 상위 10개만 보여주고 "조건에 맞는 혜택 중 상위 10개"로 표현을 바꾼다.
   const DIAG_OVERFLOW_THRESHOLD = 20;
 
+  // 자영업자·프리랜서는 개인 대상 혜택 데이터(gov24)에 대응값이 없어 자가진단 결과에 반영되지 않는다.
+  // 대신 사장님 혜택 모음(무료도구) 페이지로 안내한다.
+  const SELF_EMPLOYED_NOTICE =
+    '<p class="result-note">🏪 자영업자·프리랜서 대상 혜택은 이 진단에 포함되지 않아요. ' +
+    '<a href="pages/resources">사장님 혜택에서 더 많이 찾을 수 있어요 →</a></p>';
+
   function showResult() {
     const allBenefits = getBenefits(selAge.value, selHousehold.value, selEmploy.value);
     const jsonDetails  = (window.MATCHING_RULES && window.MATCHING_RULES.benefitDetails) || {};
@@ -845,6 +861,7 @@ if (bannerClose && banner) {
         : `총 ${benefits.length}개의 혜택을 찾았어요`;
     diagResult.innerHTML =
       '<div class="diag-result-inner">' +
+      (selEmploy.value === '자영업자' ? SELF_EMPLOYED_NOTICE : '') +
       `<p class="result-count">${countText}</p>` +
       '<div class="result-list">' + shown.map(item => resultItemHtml(item, jsonDetails)).join('') + '</div>' +
       (rest.length ? `<button type="button" class="result-more-btn" id="diagMoreBtn">더보기 (+${rest.length}개)</button>` : '') +

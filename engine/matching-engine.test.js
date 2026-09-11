@@ -79,13 +79,29 @@ test('always:true — optional 전부 일치 → green', () => {
   assert.equal(result.failed.length, 0);
 });
 
-test('always:true — optional 조건을 물어봤는데 불일치 → yellow, failed에 type 기록', () => {
-  const profile = { age: 30, household: '부모님과 동거' }; // household를 물어봤지만 조건과 다름
+test('실질 제한(optional) 조건을 물어봤는데 불일치 → 제외(null)', () => {
+  // household 조건이 '1인가구'만 나열(=실질 제한) → 다른 가구형태를 답한 사용자는 대상이 아니므로 제외.
+  const profile = { age: 30, household: '다자녀가구' }; // household를 물어봤지만 조건과 다름
   const conditions = [
     { type: 'age', op: 'between', value: [20, 39], required: true },
     { type: 'household', op: 'in', value: ['1인가구'], required: false },
   ];
-  const result = match(profile, conditions, ALWAYS);
+  assert.equal(match(profile, conditions, ALWAYS), null);
+});
+
+test('실질 제한이 아닌(전체 선택지 나열) 조건은 불일치해도 제외하지 않는다 — yellow, failed에 기록', () => {
+  const profile = { age: 30, household: '해당없음' }; // 조건이 나열한 어떤 값과도 다름
+  const conditions = [
+    { type: 'age', op: 'between', value: [20, 39], required: true },
+    {
+      type: 'household', op: 'in',
+      value: ['1인가구', '다자녀가구', '한부모가정', '다문화가족', '무주택세대'],
+      required: false,
+    },
+  ];
+  const totalOptions = { household: 5 };
+  const result = match(profile, conditions, ALWAYS, { totalOptions });
+  assert.notEqual(result, null);
   assert.equal(result.level, 'yellow');
   assert.deepEqual(result.failed, ['household']);
 });
@@ -181,16 +197,37 @@ test('실질 제한(전체보다 적은 선택지)이 일치하면 green, effect
   assert.equal(result.effectiveMatches, 1);
 });
 
-test('score는 일치한 조건 수(required+optional 합)', () => {
-  const profile = { age: 30, household: '1인가구', employment: '무직·기타' };
+test('score는 일치한 조건 수(required+optional 합) — 실질 제한 아닌 조건의 불일치는 제외되지 않는다', () => {
+  const profile = { age: 30, household: '1인가구', employment: '해당없음' };
   const conditions = [
     { type: 'age', op: 'between', value: [20, 39], required: true },
     { type: 'household', op: 'in', value: ['1인가구'], required: false },
-    { type: 'employment', op: 'in', value: ['직장인'], required: false },
+    // employment는 전체 선택지(3개)를 다 나열 → 실질 제한이 아니므로 불일치해도 제외되지 않는다.
+    { type: 'employment', op: 'in', value: ['직장인', '취업준비중', '무직·기타'], required: false },
   ];
-  const result = match(profile, conditions, ALWAYS);
+  const totalOptions = { employment: 3 };
+  const result = match(profile, conditions, ALWAYS, { totalOptions });
+  assert.notEqual(result, null);
   assert.equal(result.score, 2);
   assert.deepEqual(result.failed, ['employment']);
+});
+
+test('narrowRequiredTypes — required 나이 조건이 구간 전용이면 다른 실질 제한 없이도 green', () => {
+  const profile = { age: 67 }; // 다른 항목은 물어보지 않음
+  const conditions = [{ type: 'age', op: 'between', value: [65, 120], required: true }];
+  const result = match(profile, conditions, ALWAYS, {
+    narrowRequiredTypes: { age: (v) => v[0] >= 55 || v[1] <= 39 },
+  });
+  assert.equal(result.level, 'green');
+});
+
+test('narrowRequiredTypes — 구간이 전용이 아니면(예: 성인 전체) green 근거가 되지 않는다', () => {
+  const profile = { age: 30 };
+  const conditions = [{ type: 'age', op: 'between', value: [19, 120], required: true }];
+  const result = match(profile, conditions, ALWAYS, {
+    narrowRequiredTypes: { age: (v) => v[0] >= 55 || v[1] <= 39 },
+  });
+  assert.equal(result.level, 'yellow');
 });
 
 console.log(`\n${passed} passed, ${failed} failed`);
