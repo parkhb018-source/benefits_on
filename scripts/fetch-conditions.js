@@ -35,12 +35,11 @@ function readEnvKey(envPath, key) {
   throw new Error(`${key} 를 ${envPath} 에서 찾을 수 없습니다`);
 }
 
-/** policies.json의 sourceUrl(.../dtlEx/{12자리})에서 서비스ID를 뽑는다. */
+/** policies.json의 id가 곧 서비스ID다(정책선정 CSV 기준 스키마). */
 function extractServiceIds(policies) {
   const map = new Map(); // serviceId -> policy.id
   for (const p of policies) {
-    const m = /\/dtlEx\/(\d{12})/.exec(p.sourceUrl || '');
-    if (m) map.set(m[1], p.id);
+    if (p.id) map.set(p.id, p.id);
   }
   return map;
 }

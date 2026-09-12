@@ -690,6 +690,59 @@ if (bannerClose && banner) {
     age: function (value) { return value[0] >= 55 || value[1] <= 39; },
   };
 
+  // 정렬 점수 계산용 — engine/matching-engine.js와 같은 "실질 제한" 판정을 main.js에서 다시 쓴다
+  // (엔진은 type별 일치 여부를 밖으로 내보내지 않으므로 정렬은 여기서 조건을 직접 훑는다).
+  function isEffectiveConstraintForSort(cond) {
+    if (!cond) return false;
+    if (cond.op !== 'in') return true;
+    const total = TOTAL_OPTIONS[cond.type];
+    if (total === undefined) return true;
+    const values = Array.isArray(cond.value) ? cond.value : [cond.value];
+    return values.length < total;
+  }
+
+  function conditionMatchesProfileForSort(cond, profile) {
+    if (!cond) return false;
+    const profileValue = profile[cond.type];
+    if (profileValue === undefined || profileValue === null) return false;
+    switch (cond.op) {
+      case 'eq': return profileValue === cond.value;
+      case 'in': {
+        const candidates = Array.isArray(cond.value) ? cond.value : [cond.value];
+        return candidates.indexOf(profileValue) !== -1;
+      }
+      case 'between': return profileValue >= cond.value[0] && profileValue <= cond.value[1];
+      case 'lte': return profileValue <= cond.value;
+      case 'gte': return profileValue >= cond.value;
+      case 'exists': return true;
+      default: return false;
+    }
+  }
+
+  // 자가진단 결과 정렬 점수 — 가구·고용 조건이 "실질 제한"이면서 사용자와 일치할 때 가장 크게 가점한다.
+  // 검색으로도 찾을 수 있는(popularity 높은) 정책보다, 자가진단이 아니면 못 찾는 가구·고용 조건부
+  // 정책을 위로 올리기 위함. 특정 정책을 상위에 올리려는 튜닝 목적으로 이 가중치를 바꾸지 않는다.
+  function computeSortScore(policy, profile, conditions) {
+    const householdCond = conditions.find(function (c) { return c.type === 'household'; });
+    const employmentCond = conditions.find(function (c) { return c.type === 'employment'; });
+    const ageCond = conditions.find(function (c) { return c.type === 'age'; });
+
+    let score = 0;
+    if (isEffectiveConstraintForSort(householdCond) && conditionMatchesProfileForSort(householdCond, profile)) {
+      score += 25;
+    }
+    if (isEffectiveConstraintForSort(employmentCond) && conditionMatchesProfileForSort(employmentCond, profile)) {
+      score += 8;
+    }
+    if (ageCond && ageCond.op === 'between' && (ageCond.value[0] >= 55 || ageCond.value[1] <= 39)) {
+      score += 10;
+    }
+    const popularity = typeof policy.popularity === 'number' ? policy.popularity : 0;
+    score += Math.log10(1 + popularity * 9) * 20;
+    if (policy.detailUrl) score += 8;
+    return score;
+  }
+
   // 판정 엔진(engine/matching-engine.js) + data/policies.json + data/benefit-conditions.json으로 매칭
   // → { name, level, failed }[] 를 점수 순으로 반환. 데이터가 준비되지 않았거나 결과가 0건이면 null.
   function getEngineMatches(profile) {
@@ -711,7 +764,12 @@ if (bannerClose && banner) {
           narrowRequiredTypes: NARROW_REQUIRED_TYPES,
         });
         if (!result) return;
-        matches.push({ policy: policy, result: result, conditions: entry.conditions });
+        matches.push({
+          policy: policy,
+          result: result,
+          conditions: entry.conditions,
+          sortScore: computeSortScore(policy, profile, entry.conditions),
+        });
       });
       return matches;
     }
@@ -724,27 +782,7 @@ if (bannerClose && banner) {
     matches.sort(function (a, b) {
       const levelDiff = LEVEL_RANK[b.result.level] - LEVEL_RANK[a.result.level];
       if (levelDiff) return levelDiff;
-
-      // 0) 실질 제한이 일치한 개수가 많을수록 위로 (이 사람에게 진짜 해당되는 조건이 더 많은 정책)
-      if (b.result.effectiveMatches !== a.result.effectiveMatches) {
-        return b.result.effectiveMatches - a.result.effectiveMatches;
-      }
-      if (b.result.score !== a.result.score) return b.result.score - a.result.score;
-
-      // 1) 연령 범위가 좁을수록 가점 (그 나이대 전용 정책이 위로)
-      const ageCondA = a.conditions.find(function (c) { return c.type === 'age'; });
-      const ageCondB = b.conditions.find(function (c) { return c.type === 'age'; });
-      const widthA = ageCondA ? ageCondA.value[1] - ageCondA.value[0] : Infinity;
-      const widthB = ageCondB ? ageCondB.value[1] - ageCondB.value[0] : Infinity;
-      if (widthA !== widthB) return widthA - widthB;
-
-      // 2) 지원유형에 '현금' 포함 시 가점
-      const cashA = /현금/.test(a.policy.summary || '') ? 1 : 0;
-      const cashB = /현금/.test(b.policy.summary || '') ? 1 : 0;
-      if (cashA !== cashB) return cashB - cashA;
-
-      // 3) 본문이 길수록 가점
-      return (b.policy.summary || '').length - (a.policy.summary || '').length;
+      return b.sortScore - a.sortScore;
     });
 
     return matches.map(function (m) {
