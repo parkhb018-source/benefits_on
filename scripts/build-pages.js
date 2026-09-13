@@ -243,6 +243,62 @@ function writeIfChanged(file, nextText, report) {
   return true;
 }
 
+/* ── 정책 상세 페이지 등급 검증 ─────────────────────────────── */
+
+function loadPolicyNotes() {
+  const file = path.join(DATA_DIR, 'policy-notes.json');
+  if (!fs.existsSync(file)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (e) {
+    fail('policy-notes.json 파싱 실패: ' + e.message);
+  }
+}
+
+const ADSENSE_PATTERN = /adsbygoogle|google-adsense-account|pagead2\.googlesyndication\.com/;
+
+function validatePolicyDetailPages() {
+  const notes = loadPolicyNotes();
+  if (!fs.existsSync(PAGES_DIR)) return;
+  const files = fs.readdirSync(PAGES_DIR).filter((f) => /^policy-.+\.html$/.test(f));
+  const badAds = [];
+  const badIndex = [];
+  files.forEach((f) => {
+    const id = f.slice('policy-'.length, -'.html'.length);
+    const isA = Object.prototype.hasOwnProperty.call(notes, id);
+    const html = fs.readFileSync(path.join(PAGES_DIR, f), 'utf8');
+    if (!isA && ADSENSE_PATTERN.test(html)) badAds.push(f);
+    if (!isA && !/<meta name="robots" content="noindex/.test(html)) badIndex.push(f);
+  });
+  if (badAds.length) {
+    fail('A등급이 아닌 정책 상세 페이지에 애드센스 블록/스크립트가 있습니다 (' + badAds.length + '건):\n  - ' +
+      badAds.join('\n  - '));
+  }
+  if (badIndex.length) {
+    fail('A등급이 아닌 정책 상세 페이지에 noindex 메타가 없습니다 (' + badIndex.length + '건):\n  - ' +
+      badIndex.join('\n  - '));
+  }
+}
+
+function validateSitemapGrades() {
+  const sitemapFile = path.join(ROOT, 'sitemap.xml');
+  if (!fs.existsSync(sitemapFile)) return;
+  const notes = loadPolicyNotes();
+  const xml = fs.readFileSync(sitemapFile, 'utf8');
+  const locs = Array.from(xml.matchAll(/<loc>([^<]+)<\/loc>/g)).map((m) => m[1]);
+  const bad = [];
+  locs.forEach((loc) => {
+    const m = loc.match(/\/pages\/policy-(.+)$/);
+    if (!m) return;
+    const id = m[1];
+    if (!Object.prototype.hasOwnProperty.call(notes, id)) bad.push(loc);
+  });
+  if (bad.length) {
+    fail('sitemap.xml 에 A등급이 아닌 정책 상세 페이지가 등록되어 있습니다 (' + bad.length + '건):\n  - ' +
+      bad.join('\n  - '));
+  }
+}
+
 /* ── 메인 ───────────────────────────────────────────────── */
 
 function main() {
@@ -265,6 +321,14 @@ function main() {
     fail('detailUrl이 가리키는 파일이 없는 정책 ' + missingDetailPages.length + '건:\n  - ' +
       missingDetailPages.join('\n  - '));
   }
+
+  // 정책 상세 페이지(pages/policy-*.html) 등급 검증.
+  // A등급(=data/policy-notes.json 에 해설이 있는 서비스ID)이 아니면 noindex 여야 하고
+  // 애드센스 블록/스크립트가 한 줄도 있으면 안 된다. (애드센스 3차 거절 방지 안전판)
+  validatePolicyDetailPages();
+
+  // sitemap 에는 A등급 정책 상세 페이지만 등록되어야 한다.
+  validateSitemapGrades();
 
   // 카테고리별 분류
   const byCategory = {};

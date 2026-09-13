@@ -14,7 +14,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005006",
       "summary": "장애인이 평생교육을 통해 역량을 개발하고 적극적으로 사회에 참여하도록 19세 이상 등록 장애인 학습자에게 평생교육 수강료 및 교육교재 등 비용 지원",
       "benefit": "장애인 평생교육이용권 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-134200005006",
       "popularity": 3.32
     },
     {
@@ -31,7 +31,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SPE000000010",
       "summary": "장애로 인하여 생활이 어려운 18세 이상의 경증장애인(종전3~6급)의 생활 안정 지원",
       "benefit": "장애수당",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SPE000000010",
       "popularity": 0.19
     },
     {
@@ -48,7 +48,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001620",
       "summary": "저소득층 암 환자에게 의료비를 지원하여 암 진단부터 치료까지 연속적 지원으로 치료 접근성 높이기 위함",
       "benefit": "암환자의료비지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001620",
       "popularity": 0.02
     },
     {
@@ -65,7 +65,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000008",
       "summary": "대학생들에게 해외 산업현장 실무 경험 등 다양한 글로벌 현장학습 기회를 제공하여 경력 및 진로설계를 돕고 글로벌 감각을 갖춘 핵심 인재로 양성",
       "benefit": "글로벌 현장학습 프로그램 운영",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-134200000008",
       "popularity": 0
     },
     {
@@ -82,7 +82,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000016",
       "summary": "가정폭력 피해자들의 자립을 지원하고 사회적응 여건을 조성하기 위하여 피해 여성과 그 가족들이 생활할 수 있도록 국민임대주택 우선 입주권 부여",
       "benefit": "가정폭력피해자 국민임대주택 우선 입주권 부여",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000016",
       "popularity": 0
     },
     {
@@ -133,7 +133,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/B55252900010",
       "summary": "학업에 대한 의지와 열정이 있는 저소득층 성적 우수고등학생에게 해외유학 기회를 제공하여 글로벌 인재로의 성장 지원",
       "benefit": "우수고등학생 해외유학 장학금 (드림장학금)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-B55252900010",
       "popularity": 0
     },
     {
@@ -150,7 +150,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/154300005037",
       "summary": "농촌지역 취약계층의 노후·불량 주택에 대한 집수리 봉사 지원을 통해 안전하고 위생적인 주거환경 조성과 농어촌지역 공동체 활성화 기여",
       "benefit": "농촌취약계층주거개선",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-154300005037",
       "popularity": 0
     },
     {
@@ -167,7 +167,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SPE000000030",
       "summary": "1. 장애인등록진단서 발급비 지원 (지원대상) 기초생활수급자로서 신규 등록 장애인 재판정으로 재진단 받는 등록장애인 중 기초수급자 또는 차상위계층 직권재판정 대상자(소득 무관) 위 조건을 충족하는 장애등록 외국인 포",
       "benefit": "저소득장애인 장애심사용 진단서 발급비 및 검사비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SPE000000030",
       "popularity": 0
     },
     {
@@ -235,7 +235,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005005",
       "summary": "중한 질병 또는 부상의 위기상황에 처하여 생계곤란한 자에게 일시적으로 의료지원(각종 검사 및 치료 등 의료서비스 및 약제비 지원)을 실시하여 위기상황에서 벗어나도록 지원함",
       "benefit": "긴급복지 의료지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005005",
       "popularity": 0
     },
     {
@@ -269,7 +269,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000000480",
       "summary": "민간운전학원에서 운전교육 받기 어려운 장애인 중 운전보조기기가 장착된 차량이나 수어로 교육이 필요한 장애인에게 거주지까지 ‘찾아가는 운전교육’을 무료로 제공함으로써 장애인의 이동권 보장과 사회참여를 확대하기 위함",
       "benefit": "장애인 운전교육 사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000000480",
       "popularity": 0
     },
     {
@@ -286,7 +286,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000008743",
       "summary": "소득수준에 비하여 과도한 의료비 지출로 경제적 어려움을 겪는 국민들에게 의료비의 일부를 지원하여 가계 파탄을 방지",
       "benefit": "재난적 의료비 지원 사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000008743",
       "popularity": 0
     },
     {
@@ -303,7 +303,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000085",
       "summary": "지역사회 내 일반주택을 이용하여 장애인들이 스스로 사회에 적응하도록 가정생활, 사회활동 등의 자립생활을 지원하는 장애인 공동생활 가정을 운영",
       "benefit": "장애인 공동생활가정 운영 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000085",
       "popularity": 0
     },
     {
@@ -320,7 +320,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/161300000106",
       "summary": "지자체 및 주거복지센터 등 지역 주거복지 역량을 활용하여 비주택거주 주거급여 수급자가 공공임대주택에 이주할 수 있도록 밀착 지원하고 지속 관리",
       "benefit": "주거취약계층 주거상향 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-161300000106",
       "popularity": 0
     },
     {
@@ -337,7 +337,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/GKC000000050",
       "summary": "시각·청각 장애인들이 방송매체에 손쉽게 접근할 수 있도록 맞춤형 TV 보급을 통해 방송 소외계층의 방송접근권 보장",
       "benefit": "시각·청각장애인용 TV 보급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-GKC000000050",
       "popularity": 0
     },
     {
@@ -354,7 +354,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/161300000081",
       "summary": "저소득 등록 장애인의 생활 및 이동에 불편이 없도록 주거용 편의시설 설치를 지원함으로써 장애인의 일상생활 편의 증진 도모",
       "benefit": "장애인 주택주거용 편의시설 설치지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-161300000081",
       "popularity": 0
     },
     {
@@ -439,7 +439,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005059",
       "summary": "사회보험료(고용보험·국민연금)의 일부를 국가에서 지원함으로써 사회보험 사각지대를 해소",
       "benefit": "두루누리 사회보험료 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005059",
       "popularity": 0.38
     },
     {
@@ -456,7 +456,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000063",
       "summary": "소정급여일수를 1/2 이상 남기고 조기에 재취업한 경우로서 12개월 이상 계속하여 고용되거나 사업을 영위한 경우 남아 있는 소정급여의 절반을 인센티브를 지급하여 구직급여 수급자의 조기 재취업을 촉진",
       "benefit": "조기재취업수당",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000063",
       "popularity": 0.5
     },
     {
@@ -473,7 +473,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005017",
       "summary": "근로자가 업무 외 질병·부상으로 경제활동이 어려운 경우 치료에 집중할 수 있도록 소득을 보전하는 제도",
       "benefit": "한국형 상병수당 시범사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005017",
       "popularity": 0.18
     },
     {
@@ -490,7 +490,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000009",
       "summary": "저소득 노동자 등의 혼례, 장례, 질병 등 예기치 못한 사유 발생 시 생활안정자금을 융자함으로써 해당 노동자의 근로의욕 고취 및 생활안정에 기여",
       "benefit": "생활안정자금(융자)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000009",
       "popularity": 0
     },
     {
@@ -507,7 +507,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000006941",
       "summary": "건강보험, 의료급여 등 각종 의료보장제도에 의해서 의료혜택을 받을 수 없는 사람들에게 의료 서비스를 제공함으로써 인간으로서 누려야 할 최소한의 건강한 삶의 질 보장",
       "benefit": "외국인근로자 등 의료지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000006941",
       "popularity": 0
     },
     {
@@ -524,7 +524,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000037",
       "summary": "취약계층(비정규직근로자, 전직실업자, 무급휴직자, 자영업자인 피보험자)이 생계비에 대한 부담 없이 장기간 체계적인 훈련을 받고 더 나은 일자리로의 취업을 할 수 있도록 생계비를 융자 신청할 수 있도록 함",
       "benefit": "직업훈련 생계비대부사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000037",
       "popularity": 0
     },
     {
@@ -541,7 +541,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000018",
       "summary": "산재노동자 및 유족의 생활안정에 필요한 자금을 필요시기에 장기저리로 융자함으로써 생활안정 및 복지증진 도모",
       "benefit": "산재근로자 생활안정자금 융자",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000018",
       "popularity": 0.04
     },
     {
@@ -558,7 +558,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000004",
       "summary": "배우자 출산휴가를 사용한 남성 근로자에게 급여를 지원함으로써 남성의 육아 참여 활성화와 모성보호 도모",
       "benefit": "배우자 출산휴가 급여",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000004",
       "popularity": 0.39
     },
     {
@@ -575,7 +575,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000007",
       "summary": "육아기에 근로시간을 단축하여 근무하는 경우 급여를 지원하여 출산육아기 근로자의 경력단절을 방지하고 일과 가정의 양립을 지원",
       "benefit": "육아기 근로시간 단축 급여",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000007",
       "popularity": 0.11
     },
     {
@@ -609,7 +609,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000030",
       "summary": "근로자들에게 임금을 체불한 사업주와 임금체불로 생계에 어려움을 겪는 근로자에게 융자 지원",
       "benefit": "체불청산 지원 융자(사업주 및 근로자)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000030",
       "popularity": 0
     },
     {
@@ -626,7 +626,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/GFO000000030",
       "summary": "정부 사회서비스 일자리 사업 일환으로 숲생태관리인, 숲길등산지도사 등 산림복지일자리사업 참여자들이 국민에게 산림서비스를 제공하고, 이에 필요한 인력을 고용하여 일자리 창출에 기여",
       "benefit": "산림서비스도우미(산림복지일자리)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-GFO000000030",
       "popularity": 0
     },
     {
@@ -643,7 +643,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000051327",
       "summary": "임금(또는 휴업수당, 출산전후휴가기간 중 급여) 또는 퇴직급여등을 지급받지 못한 근로자에게 사업주를 대신하여 체불액을 지급함으로써 체불근로자의 생활안정 도모",
       "benefit": "체불근로자 대지급금 지급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000051327",
       "popularity": 0
     },
     {
@@ -660,7 +660,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/VOU000000020",
       "summary": "혼자서 생활이 어려운 장애인에게 활동 지원 서비스를 제공하여 장애인의 자립생활 지원 및 그 가족의 부담 경감에 기여",
       "benefit": "장애인 활동지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-VOU000000020",
       "popularity": 1.21
     },
     {
@@ -694,7 +694,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000069",
       "summary": "북한이탈주민의 취업을 통한 자립자활 유도",
       "benefit": "북한이탈주민 정착장려금 지급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000069",
       "popularity": 0
     },
     {
@@ -711,7 +711,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000016119",
       "summary": "중증 장애인의 생활 안정 지원과 복지증진 및 사회통합도모 * 「장애정도판정기준」(보건복지부고시 제2025-228호) 제5장 '장애인연금 수급을 위한 중증장애인 기준'에 해당하는 중증장애인에 대해 지급",
       "benefit": "장애인연금",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000016119",
       "popularity": 0.65
     },
     {
@@ -728,7 +728,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/142000000014",
       "summary": "중소기업 근로자의 주거안정 지원을 통해 장기재직 유도",
       "benefit": "중소기업장기근속자주택우선공급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-142000000014",
       "popularity": 0
     },
     {
@@ -745,7 +745,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/GMW000000220",
       "summary": "전염성 다제내성 및 치료비순응 등의 결핵환자에게 입원명령을 시행하여 타인에 대한 결핵균 전파를 방지하고 치료 성공률을 제고하기 위함",
       "benefit": "입원·격리치료명령 결핵환자 부양가족생활보호비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-GMW000000220",
       "popularity": 0
     },
     {
@@ -762,7 +762,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/429000000646",
       "summary": "희귀질환자에게 의료비지원을 통하여 대상자와 그 가족의 사회경제적, 심리적 안녕을 도모하고 국민건강 및 복지수준을 제고",
       "benefit": "희귀질환자 의료비 지원사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-429000000646",
       "popularity": 0
     },
     {
@@ -779,7 +779,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000027",
       "summary": "지방고용노동관서에 도산등사실인정 신청과 도산대지급금 신청을 하고자 하는 체불근로자들에게 공인노무사의 조력을 받을 수 있도록 지원",
       "benefit": "대지급금 관련업무 공인노무사 조력지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000027",
       "popularity": 0
     },
     {
@@ -796,7 +796,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SBA000000100",
       "summary": "수급자 및 저소득층이 스스로 자립할 수 있도록 자활능력 배양, 기술습득 지원 및 근로 기회 제공",
       "benefit": "자활근로(기초, 차상위)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SBA000000100",
       "popularity": 0
     },
     {
@@ -813,7 +813,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/B49000100043",
       "summary": "산재근로자를 대상으로 해당 신체 부위 또는 기능 상실에 대한 보조를 위하여 의학적으로 필요한 경우 해당 유형 및 용도별로 재활보조기구를 지급함",
       "benefit": "요양급여(보조기)-산재보험급여",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-B49000100043",
       "popularity": 0
     },
     {
@@ -847,7 +847,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/145000000065",
       "summary": "석탄 탄광의 폐광 또는 생산감축으로 인한 이직근로자의 생활안정을 도모",
       "benefit": "폐광 및 감축 이직근로자대책비 및 광업자대책비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-145000000065",
       "popularity": 0
     },
     {
@@ -1119,7 +1119,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000017",
       "summary": "국가유공자 등에 대한 주거안정을 위하여 주택(분양,임대) 지원",
       "benefit": "국가보훈대상자 주택우선공급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000017",
       "popularity": 0
     },
     {
@@ -1136,7 +1136,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000103",
       "summary": "경제적으로 어렵거나 법을 모르기 때문에 법의 보호를 충분히 받지 못하는 법률보호 취약계층인 장애인에 대해 법률구조(법률상담, 소송대리, 기타 법률 사무 지원)를 실시",
       "benefit": "장애인법률구조지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000103",
       "popularity": 0
     },
     {
@@ -1153,7 +1153,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000056",
       "summary": "진로설계, 기초학습 지원, 가족상담, 관련 프로그램 등을 다문화가족지원센터에서 제공함으로써 다문화 가족의 한국 적응과 안정적인 정착을 도움.",
       "benefit": "다문화가족지원센터 이용",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000056",
       "popularity": 0
     },
     {
@@ -1170,7 +1170,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001340",
       "summary": "저소득 장애인에게 생업, 출퇴근용 자동차 구입, 기술훈련, 보조기기 구입 등에 필요한 자금을 장기 저리로 대여하여 자립을 유도하고 생활안정 도모",
       "benefit": "장애인 자립자금 대여",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001340",
       "popularity": 0
     },
     {
@@ -1187,7 +1187,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000041",
       "summary": "주된 일자리에서 퇴직(예정) 하는 40세 이상 중장년층에게 생애경력설계 프로그램, 재취업 및 전직지원서비스 등을 통하여 제2의 근로생애 지원",
       "benefit": "중장년내일센터",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000041",
       "popularity": 0
     },
     {
@@ -1204,7 +1204,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000092",
       "summary": "구직자는 자신의 능력을 발휘할 수 있는 직업에 취업할 수 있도록 돕고, 기업은 원하는 일재를 빠르게 찾을 수 있도록 지원",
       "benefit": "구직자 취업지원 서비스 제공",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000092",
       "popularity": 0
     },
     {
@@ -1221,7 +1221,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/B55370000011",
       "summary": "채무조정 성실상환자를 대상으로 생활안정자금, 학자금, 운영자금 등 긴급자금을 지원하는 제도",
       "benefit": "신용회복위원회 성실상환자 소액대출",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-B55370000011",
       "popularity": 0
     },
     {
@@ -1238,7 +1238,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000029",
       "summary": "광업 종사 근로자의 건강보호 및 생활안정을 위해 재직자(이직자) 건강진단비, 2차 건강진단 진단수당 및 이송료 지급",
       "benefit": "광업 종사 근로자 건강진단 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000029",
       "popularity": 0
     },
     {
@@ -1255,7 +1255,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000008",
       "summary": "ㅇ 특수임무와 관련하여 국가를 위하여 특별한 희생을 한 특수임무 수행자와 그 유족에 대하여 필요한 보상을 함으로써 특수임무 수행자와 그 유족의 생활안정을 도모하고 국민화합에 기여",
       "benefit": "특수임무수행자와 그 유족에 대한 보상",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-129000000008",
       "popularity": 0
     },
     {
@@ -1272,7 +1272,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/129000000014",
       "summary": "6·25 비정규군 공로자 보상은 나라가 어려움에 처해 있을 때 국가수호의 일념으로 미군 첩보부대 등에 소속되어 국가를 위해 헌신하셨던 분들로 외국군 소속이거나 정규 군인이 아닌 민간인 신분이라는 이유로 공로를 인정받",
       "benefit": "6·25 비정규군 공로자 보상 안내",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-129000000014",
       "popularity": 0
     },
     {
@@ -1289,7 +1289,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000091",
       "summary": "1급, 2급 일부 법정 감염병환자에 대하여 일정 기간 격리를 통하여 타인의 감염을 예방하고 국민의 건강한 삶을 보장",
       "benefit": "격리대상 감염병환자 격리치료비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000091",
       "popularity": 0
     },
     {
@@ -1306,7 +1306,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/140000000175",
       "summary": "산림휴양‧문화증진을 위하여 사립 수목원‧자연휴양림‧수목장림 등을 조성‧제공함으로써 국민 보건휴양과 정서 함양에 기여 산림교육 활성화를 위한 산림교육시설 운영을 지원함으로써 국민의 생태적 감수성 증진 및 정서함양에 기",
       "benefit": "사립휴양시설 조성·보완·운영 사업비 융자",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-140000000175",
       "popularity": 0
     },
     {
@@ -1323,7 +1323,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/147100000002",
       "summary": "의약품의 정상적인 사용에도 불구하고 예기치 않게 발생한 부작용으로 인해 질병, 장애, 사망한 경우에 소송 없이 국가가 보상",
       "benefit": "의약품부작용피해구제",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-147100000002",
       "popularity": 0
     },
     {
@@ -1340,7 +1340,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/148000000035",
       "summary": "상수원관리지역 지정에 따라 재산권 행사 등에 제약을 받는 지역주민에게 소득증대, 복지증진 등을 위한 재정지원을 함으로써 상수원 수질 보전 정책에 적극적인 참여․협조 유도",
       "benefit": "한강수계 주민지원(일반지원사업)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-148000000035",
       "popularity": 0
     },
     {
@@ -1357,7 +1357,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/179038700008",
       "summary": "56세 국가건강검진으로 발견된 C형간염 항체 양성자에 대한 확진검사비 지원을 통한 검진효과 제고 및 치료 유도",
       "benefit": "56세 C형간염 확진검사비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-179038700008",
       "popularity": 0
     },
     {
@@ -1374,7 +1374,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/183000000004",
       "summary": "국가보훈대상자의 취업역량강화를 통한 취업지원의 실효성 제고",
       "benefit": "국가보훈대상자 취업능력개발비용(취업수강료) 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-183000000004",
       "popularity": 0
     },
     {
@@ -1391,7 +1391,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/183000000006",
       "summary": "ㅇ 보훈관계 법령상 학비가 면제되지 않는 대학원 재학 국가유공자, 5·18민주유공자, 특수임무유공자, 보훈보상대상자 본인 등에 대한 장학지원을 통하여 면학의욕을 고취하고, 생계안정에 기여",
       "benefit": "국가보훈대상자 보훈장학금 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-183000000006",
       "popularity": 0
     },
     {
@@ -1408,7 +1408,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/183000000015",
       "summary": "국가를 위해 희생･공헌한 국가유공자 등 보훈가족의 영예로운 삶이 유지･보장되도록 보훈급여금 등을 지원",
       "benefit": "국가유공자 등 보상금",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-183000000015",
       "popularity": 0
     },
     {
@@ -1425,7 +1425,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000051390",
       "summary": "국가유공자 등에 대한 장기저금리 대부지원으로 주거안정과 자립기반 조성",
       "benefit": "국가보훈대상자 대부지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000051390",
       "popularity": 0
     },
     {
@@ -1442,7 +1442,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001360",
       "summary": "장기복무 제대군인에 대한 장기저리 대부지원으로 조기 사회정착 기반 조성 도모",
       "benefit": "제대군인 대부지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001360",
       "popularity": 0
     },
     {
@@ -1459,7 +1459,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000006",
       "summary": "사업장의 안전·보건시설 개선을 위하여 재해예방 시설 개선에 소요되는 자금을 장기저리로 융자하여 산업재해예방 및 작업환경개선에 기여",
       "benefit": "산재예방시설 융자",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000006",
       "popularity": 0
     },
     {
@@ -1476,7 +1476,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000015",
       "summary": "지역대학의 우수 인재 유치 및 미래 인재 양성을 위한 장학금 지원",
       "benefit": "지역인재장학금",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000015",
       "popularity": 0
     },
     {
@@ -1493,7 +1493,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000051328",
       "summary": "체불근로자가 소송을 통해 임금채권을 행사할 수 있도록 대한법률구조공단에서 법률구조지원 서비스 제공 (필요 비용은 고용노동부에서 지급)",
       "benefit": "체불근로자 무료법률구조지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000051328",
       "popularity": 0
     },
     {
@@ -1527,7 +1527,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001510",
       "summary": "한국인 원폭 피해자에게 진료비, 진료보조비, 장제비 및 합천 원폭 피해자복지회관 입주 지원 등을 통한 복지증진 도모",
       "benefit": "원폭피해자지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001510",
       "popularity": 0
     },
     {
@@ -1544,7 +1544,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/174100000088",
       "summary": "구직자 도약보장 패키지는 고용센터 담당자가 개인의 취업역량을 진단하고, 분석하여 경력설계에 필요한 맞춤형 취업지원서비스를 일대일(1:1)로 제공하는 심층상담 프로그램입니다.",
       "benefit": "구직자·기업 도약보장 패키지",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-174100000088",
       "popularity": 0
     },
     {
@@ -1561,7 +1561,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/183000000007",
       "summary": "불의의 재난으로 피해를 입은 국가유공자 및 그 유족에게 위문금을 지급하여 재해복구 및 자활의지 고취",
       "benefit": "재해위로금 지급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-183000000007",
       "popularity": 0
     },
     {
@@ -1612,7 +1612,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WLU000000020",
       "summary": "차상위계층의 요양급여비 본인부담비용 경감 지원을 통해 의료보장 강화 도모",
       "benefit": "차상위 본인부담 경감대상자 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WLU000000020",
       "popularity": 0.13
     },
     {
@@ -1629,7 +1629,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/140000000163",
       "summary": "종자의 생산.보증 및 유통, 종자산업의 육성 및 지원 등 종자산업발전 도모를 위해 국가유공자 등에 대해 종자 관련 각종 수수료 면제",
       "benefit": "국가유공자 등의 종자 관련 수수료 면제 및 반환",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-140000000163",
       "popularity": 0
     },
     {
@@ -1646,7 +1646,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/140000000161",
       "summary": "식물의 신품종과 품종보호제도의 발전에 이바지하기 위해 국가유공자 등에 대해 품종보호출원 수수료 및 보호료 면제",
       "benefit": "국가유공자 등의 품종보호 수수료 면제 및 반환",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-140000000161",
       "popularity": 0
     },
     {
@@ -1680,7 +1680,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/140000000002",
       "summary": "국립수목원을 이용하시는 관람객 중 사회적 약자, 국가유공자, 다자녀 가족 등에 대한 관람료 무료입장 혜택을 제공하여 대국민 서비스 만족도 제고에 기여하고자 함",
       "benefit": "국가유공자 등의 국립수목원 관람료 할인",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-140000000002",
       "popularity": 0
     },
     {
@@ -1697,7 +1697,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/GPV000000390",
       "summary": "국가유공상이자의 LPG 보철용 차량에 대해 LPG개별소비세 인상분을 지원하여 이동권 보장 및 경제적 부담 경감",
       "benefit": "국가유공자 등 LPG차량 세금인상분 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-GPV000000390",
       "popularity": 0
     },
     {
@@ -1714,7 +1714,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000019989",
       "summary": "경제적 약자 등의 발명의욕 고취, 기술 개발 촉진을 통해 지식재산 창출 장려",
       "benefit": "특허료·등록료 및 수수료의 감면",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000019989",
       "popularity": 0
     },
     {
@@ -1731,7 +1731,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/155000000015",
       "summary": "국민들의 문화유산 향유 기회 확대",
       "benefit": "4대궁, 종묘 및 조선왕릉 무료 관람",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-155000000015",
       "popularity": 0
     },
     {
@@ -1748,7 +1748,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/131200000014",
       "summary": "국가유공자 등이 취득하는 차량에 대한 취득세 및 자동차세 감면을 통해 국가유공자 등 지원",
       "benefit": "국가유공자 차량취득세 및 자동차세 감면",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-131200000014",
       "popularity": 0
     },
     {
@@ -1765,7 +1765,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/143000000019",
       "summary": "등록된 특허·공개된 출원 특허·실용신안에 대한 가치평가 소요비용을 지원하여, 지식재산의 사업화 및 활용 촉진",
       "benefit": "사업화 연계 지식재산평가 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-143000000019",
       "popularity": 0
     },
     {
@@ -1782,7 +1782,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/131200000004",
       "summary": "장애인이 차량을 구입 시 취득세 및 자동차세를 감면하여 이동권 보장 및 생활 안정 도모",
       "benefit": "장애인차량취득세및자동차세감면",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-131200000004",
       "popularity": 0
     },
     {
@@ -1799,7 +1799,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000090",
       "summary": "장애인에 대한 치과 의료서비스의 접근성 및 전문성을 향상하기 위하여 장애인구강진료센터를 설치운영하고, 장애인구강진료센터에서 치료받는 장애인 치과 진료 비급여 진료비를 일부 지원",
       "benefit": "장애인구강진료센터를 설치 운영하여 장애인에 대한 치과 의료서비스 제공",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000090",
       "popularity": 0
     },
     {
@@ -1816,7 +1816,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/155000000018",
       "summary": "개인의 소규모 및 생활밀접형 건설사업에 따른 발굴비용을 지원하여 영세사업자의 경제적 부담 해소와 신속한 발굴조사로 매장유산 적기보존의 효율성 도모",
       "benefit": "매장유산 발굴조사 비용 국비지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-155000000018",
       "popularity": 0
     },
     {
@@ -1850,7 +1850,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000051906",
       "summary": "병역을 명예롭게 이행한 사람이 존경받고 긍지를 가질 수 있는 건강한 병역문화 정착",
       "benefit": "병역명문가 선양사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000051906",
       "popularity": 0
     },
     {
@@ -1867,7 +1867,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SPE000000060",
       "summary": "건강보험 가입자 중 장애인에 대한 특례로 보조기기 보험급여를 적용",
       "benefit": "보험급여 (건강보험 장애인보조기기)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SPE000000060",
       "popularity": 0
     },
     {
@@ -1884,7 +1884,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000011447",
       "summary": "장애인, 국가유공상이자, 한무보가족, 기초생활수급자 등 이동권 보장을 위해 운전면허시험장에서 디딤돌 운전면허 지원센터를 개소하여 학과, 기능, 도로주행시험에 대한 운전교육을 무료로 지원하는 서비스",
       "benefit": "디딤돌 운전면허 지원센터",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000011447",
       "popularity": 0
     },
     {
@@ -1901,7 +1901,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005031",
       "summary": "장기요양급여비용에 부담을 느끼는 소득계층의 비용부담을 실질적으로 해소하여 저소득 가구의 장기요양 급여이용 권리를 보장",
       "benefit": "장기요양급여비용 본인부담금 감경",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005031",
       "popularity": 0
     },
     {
@@ -2054,7 +2054,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/161300000088",
       "summary": "저소득 무주택 청년의 주택구입과 자산형성을 지원하기 위하여 위해 재형 기능을 강화한 청약통장 도입",
       "benefit": "청년주택드림 청약통장",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-161300000088",
       "popularity": 0.85
     },
     {
@@ -2071,7 +2071,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000120",
       "summary": "아동에게 아동수당을 지급하여 아동 양육에 따른 경제적 부담을 경감하고 건강한 성장환경을 조성함으로써 아동의 기본적 권리와 복지 증진에 기여",
       "benefit": "아동수당",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000120",
       "popularity": 2.91
     },
     {
@@ -2105,7 +2105,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/161300000076",
       "summary": "근로자 및 서민의 주거안정을 위한 전세자금 대출",
       "benefit": "버팀목전세자금대출",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-161300000076",
       "popularity": 0.32
     },
     {
@@ -2173,7 +2173,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/161300000103",
       "summary": "저소득층의 주거비 부담 완화를 위해 임차인이 가입·납부하는 전세보증금반환보증 보증료를 지원",
       "benefit": "국토교통부 전세보증금반환보증 보증료 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-161300000103",
       "popularity": 0.3
     },
     {
@@ -2190,7 +2190,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001410",
       "summary": "생활이 어려운 생계급여 수급자에게 일상생활에 필요한 급여를 지급하여 최저 생활을 보장하고 자활을 돕는 것을 목적으로 함",
       "benefit": "생계급여",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001410",
       "popularity": 0.81
     },
     {
@@ -2207,7 +2207,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001550",
       "summary": "24세 이하의 청소년 한부모가 스스로 자녀를 키울 수 있도록 자녀 양육환경을 조성하고 조기 자립할 수 있도록 지원",
       "benefit": "청소년한부모 아동양육 및 자립지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001550",
       "popularity": 0
     },
     {
@@ -2224,7 +2224,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000002",
       "summary": "의료급여 노인 수급권자의 경제적 부담을 완화하고, 치아건강 증진 도모",
       "benefit": "의료급여 틀니·치과임플란트 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000002",
       "popularity": 0.42
     },
     {
@@ -2241,7 +2241,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005001",
       "summary": "갑작스러운 위기상황에 처하여 생계유지 등이 어려운 저소득 가구를 신속하게 지원하여 위기상황에서 벗어나게 함",
       "benefit": "긴급복지 주거지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005001",
       "popularity": 0.01
     },
     {
@@ -2258,7 +2258,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SSI000000020",
       "summary": "저소득 한부모가족 및 조손가족의 가족기능 유지 및 생활 안정, 복지증진 유지",
       "benefit": "한부모가족 아동양육비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SSI000000020",
       "popularity": 0
     },
     {
@@ -2275,7 +2275,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SHE000000020",
       "summary": "의료급여 수급권자에 대한 요양비를 지원하여 저소득층 국민 보건 향상과 사회복지 증진에 기여",
       "benefit": "의료급여 (요양비)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SHE000000020",
       "popularity": 0.42
     },
     {
@@ -2292,7 +2292,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001470",
       "summary": "저소득층의 주거안정 및 무주택자의 내 집 마련 기회 제공",
       "benefit": "공공분양 주택공급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001470",
       "popularity": 0
     },
     {
@@ -2309,7 +2309,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000000320",
       "summary": "취약한 독거노인과 장애인 대상으로 댁내에센서(화재, 활동감지 센서 및 응급호출 버튼 등)를 설치하여 응급상황 발생 시 신속한 대응체계 마련",
       "benefit": "독거노인·장애인 응급안전안심서비스",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000000320",
       "popularity": 0
     },
     {
@@ -2326,7 +2326,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000090",
       "summary": "다자녀 가정에 대한 대학 교육비 부담 경감을 통해 다자녀 가정에 대한 사회적 우대 분위기 조성",
       "benefit": "다자녀(세 자녀 이상) 국가장학금",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000090",
       "popularity": 0
     },
     {
@@ -2343,7 +2343,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000045",
       "summary": "저소득층의 지속적 평생학습과 자기계발을 장려함으로써, 삶의 질 향상 및 자아실현 지원",
       "benefit": "평생교육이용권 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-134200000045",
       "popularity": 3.32
     },
     {
@@ -2360,7 +2360,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001600",
       "summary": "9세 이상~ 24세 이하 청소년 중 보호자가 없거나, 보호자가 있어도 실질적으로 보호를 받지 못하는 사회·경제적으로 어려움이 있는 위기청소년 등을 대상으로 생활, 건강, 자립, 학업, 상담, 법률, 기타 지원",
       "benefit": "위기청소년 특별 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001600",
       "popularity": 0
     },
     {
@@ -2394,7 +2394,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SCY000000170",
       "summary": "맞춤형 통합서비스(보건, 복지, 교육) 제공을 통해 취약계층 아동의 건강한 성장 발달 도모",
       "benefit": "취약계층 아동통합서비스 지원(드림스타트)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SCY000000170",
       "popularity": 0
     },
     {
@@ -2411,7 +2411,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000052",
       "summary": "청소년 미혼 한부모의 자녀양육 부담 경감 및 생활안정을 위한 생활비 등 지원",
       "benefit": "청소년 미혼 한부모 자립지원 (우리원더패밀리)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000052",
       "popularity": 0
     },
     {
@@ -2428,7 +2428,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000051702",
       "summary": "부도 임대주택에 거주하는 입주민의 주거안정을 위한 금융 지원",
       "benefit": "부도 임대주택 경락 자금 융자",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000051702",
       "popularity": 0
     },
     {
@@ -2462,7 +2462,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000012326",
       "summary": "의료급여 수급권자에 대한 의료비를 지원하여 저소득층 국민 보건 향상과 사회복지 증진에 기여",
       "benefit": "의료급여 (임신·출산진료비)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000012326",
       "popularity": 0.42
     },
     {
@@ -2479,7 +2479,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005058",
       "summary": "영구 불임이 되기 전에 생식세포(난자·정자)의 동결·보존을 지원하여 가임력을 보전하고 임신·출산 가능성을 확보",
       "benefit": "2025 영구 불임예상 난자·정자 냉동 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005058",
       "popularity": 0
     },
     {
@@ -2496,7 +2496,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200005017",
       "summary": "출산 또는 유산ㆍ사산을 이유로 노무를 제공할 수 없는 고용보험 가입 예술인ㆍ노무제공자에게 출산전후급여 등을 지급함으로써 모성보호 및 생계보장 지원",
       "benefit": "예술인ㆍ노무제공자 출산전후급여등",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200005017",
       "popularity": 0
     },
     {
@@ -2513,7 +2513,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/B55140800003",
       "summary": "저소득, 무주택자에 대해 주택 구입자금 대출이자율을 추가 감면하여 주택 마련 부담을 완화하고 내 집 마련 지원을 통해 주거생활의 안정을 도모",
       "benefit": "내집마련 디딤돌 대출",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-B55140800003",
       "popularity": 0
     },
     {
@@ -2530,7 +2530,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000007043",
       "summary": "선천성대사이상 유무를 조기에 발견·치료하고 특수식이 등을 지속적으로 지원함으로써 정신지체 등 장애 발생을 사전에 예방",
       "benefit": "선천성 대사이상검사 및 환아관리 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000007043",
       "popularity": 0
     },
     {
@@ -2547,7 +2547,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005003",
       "summary": "갑작스러운 위기상황에 처하여 생계유지 등이 어려운 저소득 가구를 신속하게 지원하여 위기상황에서 벗어나게 함",
       "benefit": "긴급복지 생계지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005003",
       "popularity": 0.13
     },
     {
@@ -2564,7 +2564,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000022",
       "summary": "저소득층 주거안정 도모",
       "benefit": "기존주택 전세임대주택 지원사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000022",
       "popularity": 0.06
     },
     {
@@ -2581,7 +2581,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000051703",
       "summary": "부도 임대주택에서 퇴거 또는 퇴거 예정인 입주민의 주거안정을 위한 금융 지원",
       "benefit": "부도 임대주택 퇴거자 전세자금 융자",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000051703",
       "popularity": 0
     },
     {
@@ -2615,7 +2615,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SCY000000080",
       "summary": "미래성장동력인 아동에 대한 사회투자로 취약계층 아동의 사회 진출 시 초기비용 마련을 위한 적극적·장기적 자산형성을 지원함으로써, 빈곤의 대물림을 방지하고 건전한 사회인을 육성하고자 함",
       "benefit": "아동발달지원계좌(디딤씨앗통장) 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SCY000000080",
       "popularity": 0
     },
     {
@@ -2632,7 +2632,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/161300000001",
       "summary": "주택도시기금과 주택 구입자가 주택가격 변동에 따른 위험과 수익을 공유하여 전월세보다 저렴한 비용으로 내집마련 꿈을 이루기 위해 지원되는 자금대출 서비스",
       "benefit": "공유형모기지 융자",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-161300000001",
       "popularity": 0
     },
     {
@@ -2649,7 +2649,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000000500",
       "summary": "저소득층 영아(0~24개월) 가정의 육아 필수재인 기저귀 및 조제분유 지원을 통해 경제적 부담 경감 및 아이 낳기 좋은 환경 조성",
       "benefit": "저소득층 기저귀·조제분유 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000000500",
       "popularity": 0
     },
     {
@@ -2683,7 +2683,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005012",
       "summary": "어린이집, 유치원(특수학교 포함) 등 시설 미이용 아동에 대한 부모의 가정양육 부담 경감 및 아동의 건강한 발달 지원",
       "benefit": "가정양육수당 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-134200005012",
       "popularity": 0.14
     },
     {
@@ -2768,7 +2768,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SSE000000050",
       "summary": "홀로 일상생활을 영위하기 어려운 취약노인에게 복지 서비스 자원 발굴/연계, 생활교육, 정기적인 안전 확인 및 정서적 지원 등의 기본 서비스 제공",
       "benefit": "노인맞춤돌봄서비스",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SSE000000050",
       "popularity": 0
     },
     {
@@ -2785,7 +2785,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000043",
       "summary": "의료급여수급권자에 대한 의료비를 지원하여 저소득층 국민보건 향상과 사회복지 증진에 기여",
       "benefit": "의료급여 (의료급여)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000043",
       "popularity": 0.42
     },
     {
@@ -2802,7 +2802,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000113",
       "summary": "무릎관절증으로 지속적인 통증에 시달리나, 경제적 이유로 수술을 받지 못하는 노인들의 고통을 경감하여 삶의 질을 개선 ○ 무릎관절수술 지원을 통한 노인 건강 보장 및 의료비 부담 경감",
       "benefit": "노인 무릎인공관절 수술 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000113",
       "popularity": 0
     },
     {
@@ -2836,7 +2836,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SCH000000070",
       "summary": "그 밖의 연장형 보육 이용 영유아에 대한 보육료 지원을 통해 부모의 자녀 양육 부담 경감 및 원활한 경제활동 지원",
       "benefit": "그 밖의 연장형 보육료 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SCH000000070",
       "popularity": 0
     },
     {
@@ -2853,7 +2853,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/172100000012",
       "summary": "장애인, 국가유공자, 기초생활수급자, 차상위계층, 기초연금수급자 등 전기통신사업법 시행령 제2조 제3항에 해당하는 취약계층에 대한 통신요금 감면 지원",
       "benefit": "취약계층 통신요금감면",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-172100000012",
       "popularity": 0
     },
     {
@@ -2870,7 +2870,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001250",
       "summary": "체계적ㆍ전문적 언어발달지원 서비스 제공을 통해 다문화 가족 자녀들의 원만한 언어발달이 이루어지고, 글로벌 인재로 성장할 수 있는 초석 마련",
       "benefit": "다문화가족 자녀 언어발달 지원서비스",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001250",
       "popularity": 0
     },
     {
@@ -2887,7 +2887,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/161300000104",
       "summary": "국민 교통비 절감 및 대중교통 이용 활성화를 위해 정기적 대중교통 이용시 교통비 지출액의 일정비율 환급",
       "benefit": "K-패스",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-161300000104",
       "popularity": 0.67
     },
     {
@@ -2904,7 +2904,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000051706",
       "summary": "무주택 서민의 주택 구입 기회를 확대하고 주택금융 부담 완화",
       "benefit": "오피스텔구입 자금융자",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000051706",
       "popularity": 0
     },
     {
@@ -2921,7 +2921,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000007044",
       "summary": "선천성 난청을 조기 진단과 재활치료를 통해, 난청으로 인해 발생할 수 있는 언어‧지능 발달장애, 사회부적응 등을 예방, 건강한 성장 발달 도모",
       "benefit": "선천성 난청검사 및 보청기 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000007044",
       "popularity": 0
     },
     {
@@ -2955,7 +2955,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000080",
       "summary": "노후에도 안정적인 삶을 누릴 수 있도록 치매를 조기에 치료하고 지속적으로 관리하여 증상을 호전시키거나 심화를 예방",
       "benefit": "치매관리 서비스 (치매안심센터)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000080",
       "popularity": 0.72
     },
     {
@@ -2972,7 +2972,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005034",
       "summary": "저소득층 노인 등에 대한 정밀 안검진의 실시로 안질환을 조기 발견･적기 치료함으로써 노인들의 실명 예방 및 일상생활 가능한 시력 유지",
       "benefit": "노인 안검진 및 개안수술",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005034",
       "popularity": 0
     },
     {
@@ -3023,7 +3023,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000125",
       "summary": "치매를 조기에 지속적으로 치료,관리함으로써 치매증상을 호전시키고 증상 심화를 방지하여 노후 삶의 질 제고 및 사회경제적 비용 절감에 기여",
       "benefit": "치매 치료관리비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000125",
       "popularity": 0.02
     },
     {
@@ -3040,7 +3040,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/140000000171",
       "summary": "국가 정원을 이용 시, 입장료를 면제해주는 서비스 제공",
       "benefit": "국가유공자 등의 국가정원의 관람료 면제",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-140000000171",
       "popularity": 0
     },
     {
@@ -3057,7 +3057,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005043",
       "summary": "어르신의 치매를 조기 발견하고 즉시 치료할 수 있도록 지원",
       "benefit": "치매검진 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005043",
       "popularity": 0
     },
     {
@@ -3091,7 +3091,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000048",
       "summary": "장기 요양 수급자가 도서, 벽지 지역에 거주하거나 천재지변, 신체, 정신 또는 성격 등의 사유로 장기요양급여를 지정된 시설에 받지 못하고 그 가족 등으로부터 방문요양에 상당하는 장기요양 급여를 받을 때 지급하는 현금",
       "benefit": "특별현금급여 (가족요양비)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000048",
       "popularity": 0.06
     },
     {
@@ -3125,7 +3125,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001260",
       "summary": "강제징용으로 고통받은 사할린 한인들이 영주 귀국하여 고국에서 편안한 노후생활을 보낼 수 있도록 정착비 등을 지원",
       "benefit": "영주귀국 사할린 한인 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001260",
       "popularity": 0
     },
     {
@@ -3142,7 +3142,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000015528",
       "summary": "고령운전자가 자신의 신체기능의 변화를 체감할 수 있는 인지 지각검사 등 교통안전교육 무료 실시 서비스 제공",
       "benefit": "고령운전자 교통안전교육 서비스 제공",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000015528",
       "popularity": 0
     },
     {
@@ -3159,7 +3159,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000035",
       "summary": "중증 고령의 산재장해인에게 전문 간병서비스 제공하여 가족의 간병 부담 완화",
       "benefit": "산재근로자 케어센터 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000035",
       "popularity": 0
     },
     {
@@ -3193,7 +3193,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/GMW000000210",
       "summary": "심뇌혈관질환 고위험군인 고혈압, 당뇨병 환자의 지속치료율 및 자가관리 역량을 향상 시켜 뇌졸중, 심근경색증 등 합병증 예방 및 의료비 절감 도모",
       "benefit": "고혈압·당뇨병 등록관리서비스",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-GMW000000210",
       "popularity": 0
     },
     {
@@ -3227,7 +3227,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005006",
       "summary": "고령이나 노인성 질병 등의 사유로 일상생활을 혼자서 수행하기 어려운 노인 등에게 제공하는 신체활동 또는 가사활동 지원 등을 제공하여 노후의 건강증진 및 생활 안정을 도모하고 그 가족의 부담을 덜어주어 국민의 삶의 질",
       "benefit": "시설급여",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005006",
       "popularity": 0
     },
     {
@@ -3295,7 +3295,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000008913",
       "summary": "일제에 의하여 강제동원되어 일본군위안부로서의 생활을 강요당한 피해자의 생활 안정과 복지 증진",
       "benefit": "일본군 위안부 피해자 생활안정 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000008913",
       "popularity": 0
     },
     {
@@ -3363,7 +3363,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SPE000000020",
       "summary": "장애로 인하여 생활이 어려운 18세 미만의 장애 아동의 생활 안정 지원",
       "benefit": "장애아동수당",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SPE000000020",
       "popularity": 2.91
     },
     {
@@ -3380,7 +3380,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200005033",
       "summary": "구직단념청년 등을 대상으로 맞춤형 프로그램을 제공하여 청년의 구직의욕 고취, 노동시장 참여 및 취업 촉진 지원",
       "benefit": "청년도전지원사업 안내",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200005033",
       "popularity": 0.96
     },
     {
@@ -3397,7 +3397,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000011848",
       "summary": "청년·기업·정부 3자 적립을 통해 노동시장 중소기업 신규취업 진입 청년에게 만기공제금 지원 ('24년부터 신규지원 중단, 기가입자 계속 지원)",
       "benefit": "청년내일채움공제",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000011848",
       "popularity": 0.76
     },
     {
@@ -3414,7 +3414,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000065",
       "summary": "양육비 채권이 있음에도 양육비를 못 받고 있는 한부모가족 등의 미성년 자녀를 위한 안정적인 양육 환경 조성 및 양육비 채무자의 양육비 이행 책임 강화",
       "benefit": "양육비 선지급 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000065",
       "popularity": 0.07
     },
     {
@@ -3448,7 +3448,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/GES000000120",
       "summary": "대학생에게 학자금(등록금과 생활비) 마련을 위한 근로기회를 제공하고 그에 따른 대가(장학금)를 지급함으로써 안정적인 학업 여건 조성 및 사회‧직업체험 기회 제공으로 취업역량 제고",
       "benefit": "국가근로장학금",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-GES000000120",
       "popularity": 0.72
     },
     {
@@ -3465,7 +3465,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000057",
       "summary": "저소득(중위소득 100%이하) 다문화가족 자녀에게 교육활동비를 지급해 학습격차를 해소하고 미래 인재로 성장할 수 있도록 지원",
       "benefit": "저소득 다문화 자녀 교육활동비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000057",
       "popularity": 0
     },
     {
@@ -3482,7 +3482,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000001310",
       "summary": "국가유공자와 그 유족 또는 가족이 교육을 받음으로써 건전한 사회인으로 자립할 수 있도록 교육비 지원",
       "benefit": "국가보훈대상자 교육지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000001310",
       "popularity": 0
     },
     {
@@ -3516,7 +3516,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000004508",
       "summary": "경제적 여건과 관계없이 능력과 의지가 있는 학생이면 누구나 대학교육의 혜택을 누릴 수 있는 여건 마련",
       "benefit": "국가장학금 Ⅰ유형 (학생직접지원형)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000004508",
       "popularity": 0
     },
     {
@@ -3533,7 +3533,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000066",
       "summary": "미성년 자녀를 직접 양육하는 부 또는 모가 미성년 자녀를 양육하지 아니하는 부 또는 모로부터 양육비를 원활히 받을 수 있도록 양육비 이행확보 등을 지원하여 미성년 자녀의 안전한 양육환경 조성",
       "benefit": "양육비 이행 지원 서비스",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000066",
       "popularity": 0
     },
     {
@@ -3550,7 +3550,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/PTR000050831",
       "summary": "구인기업이 요구하는 어학 및 직무능력, 생활문화 등에 대한 맞춤형 교육(연수)과정 제공 후 해외취업 연계",
       "benefit": "K-Move스쿨(해외취업연수사업)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-PTR000050831",
       "popularity": 0
     },
     {
@@ -3567,7 +3567,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000026",
       "summary": "만19~39세 청년, (예비)신혼부부, 한부모가족, 대학생 등 젊은층의 주거안정을 위하여 대중교통이 편리하거나 직주근접이 가능한 부지에 주변 시세보다 저렴하게 공급",
       "benefit": "행복주택 공급",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000026",
       "popularity": 0.02
     },
     {
@@ -3584,7 +3584,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000067",
       "summary": "보호 대상 아동(아동 복지 시설, 가정 위탁)의 자립 준비 역량 강화 및 보호 종료 후 자립 준비 청년의 안정적인 사회 적응과 자립 실현",
       "benefit": "청소년복지시설 퇴소청소년 자립지원수당",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000067",
       "popularity": 0
     },
     {
@@ -3601,7 +3601,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/GES000000110",
       "summary": "대학생에게 학자금을 대출하고 그 원리금은 소득이 발생한 후에 소득 수준에 따라 상환하도록 하여 현재의 경제적 여건에 관계없이 누구나 원하는 고등교육 기회를 가질 수 있도록 함",
       "benefit": "취업 후 상환 학자금대출",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-GES000000110",
       "popularity": 0
     },
     {
@@ -3618,7 +3618,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200000014",
       "summary": "각 대학이 정하는 바에 따라 국가보훈대상자, 기초생활보장 수급자 및 그 밖에 경제적 여건이 곤란한 학생의 대학 입학전형료 부담 경감",
       "benefit": "대학입학전형료 면제·감액",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-134200000014",
       "popularity": 0
     },
     {
@@ -3635,7 +3635,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000016137",
       "summary": "생계곤란 등의 위기상황에 처하여 도움이 필요한 사람을 일시적으로 신속하게 지원하여 위기상황에서 벗어날 수 있도록 지원",
       "benefit": "긴급복지 교육지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000016137",
       "popularity": 0
     },
     {
@@ -3652,7 +3652,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000014",
       "summary": "저소득층 중·고생 중 잠재력 있는 학생을 조기 발굴, 대학까지 연계 지원하는 국가 장학제도를 통해 교육의 희망사다리 기능 강화",
       "benefit": "복권기금 꿈사다리 장학사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000014",
       "popularity": 0
     },
     {
@@ -3669,7 +3669,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005002",
       "summary": "대학의 등록금 동결 인하 및 장학금 유지, 확충 등 대학 자체노력과 연계하여 지원하는 장학금",
       "benefit": "국가장학금 Ⅱ유형 (대학자체노력연계형)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-134200005002",
       "popularity": 0
     },
     {
@@ -3720,7 +3720,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/B49000700017",
       "summary": "해외취업에 성공 시 해외에서의 초기 정착 및 장기 근속을 유인하기 위해 지원금 지급",
       "benefit": "해외취업정착지원금",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-B49000700017",
       "popularity": 0
     },
     {
@@ -3737,7 +3737,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200005016",
       "summary": "기업의 청년고용 확대를 지원하고, 취업애로청년의 취업을 촉진함으로써 청년고용 활성화를 목적으로 함",
       "benefit": "청년일자리도약장려금",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200005016",
       "popularity": 0
     },
     {
@@ -3754,7 +3754,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000000080",
       "summary": "북향민 자녀에 대한 안정적인 정착기반을 마련하는 한편 학력에 의한 계층 단절 방지 등",
       "benefit": "북향민 자녀 교육 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000000080",
       "popularity": 0
     },
     {
@@ -3771,7 +3771,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/174100000087",
       "summary": "고용노동부·자치단체가 협업하여 미취업 청년 등에게 청년친화적 인프라 및 다양한 프로그램을 제공하여 쉬었음 전환 예방",
       "benefit": "청년성장프로젝트",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-174100000087",
       "popularity": 0
     },
     {
@@ -3788,7 +3788,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/SD0000010578",
       "summary": "농촌지역 학부모의 교육비 부담 경감 및 농촌 출신 대학생에게 균등한 교육 기회 제공",
       "benefit": "농어촌 출신 대학(원)생 학자금 융자 지원 (무이자)",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-SD0000010578",
       "popularity": 0
     },
     {
@@ -3805,7 +3805,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005016",
       "summary": "(위기아동 가정보호) 즉각분리 또는 응급조치에 따라 원가정에서 분리된 학대피해아동, 2세 이하 아동, 장애아동 경계선지능아동 등을 일시보호 하는 것을 목적으로 하는 가정위탁보호 -(전문가정위탁) 학대피해아동, 2세 ",
       "benefit": "전문아동보호비 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005016",
       "popularity": 0
     },
     {
@@ -3822,7 +3822,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000000200",
       "summary": "학생 누구나 자신의 꿈과 끼를 발현할 수 있도록 학생 개개인의 여건에 맞는 교육복지 지원을 하여 취약계층 학생의 삶의 질과 교육성취 수준을 제고",
       "benefit": "교육복지우선지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000000200",
       "popularity": 0
     },
     {
@@ -3839,7 +3839,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/VOU000000050",
       "summary": "성장기 장애 아동에게 적절한 발달재활서비스를 제공하여 기능 향상과 행동발달을 지원하고 장애 아동 가족의 경제적 부담 경감",
       "benefit": "발달재활서비스 바우처 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-VOU000000050",
       "popularity": 0
     },
     {
@@ -3856,7 +3856,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000000230",
       "summary": "대학생의 다문화 감수성 및 봉사의식 제고 ○ 다문화학생과 대학생을 1:1 매칭하여 다문화학생의 학교생활 적응 및 기초학습 지원 ○ 탈북학생이 우리 사회에 안정적으로 정착하여 통일 미래의 맞춤형 인재로 성장할 수 있도",
       "benefit": "다문화·탈북학생 멘토링",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000000230",
       "popularity": 0
     },
     {
@@ -3873,7 +3873,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200000132",
       "summary": "발달장애학생이 취미·여가, 직업탐구, 관람·체험 등 다양한 프로그램을 통해 의미 있는 방과후 시간을 보내도록 함",
       "benefit": "청소년 발달장애인 방과후활동서비스",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200000132",
       "popularity": 0
     },
     {
@@ -3924,7 +3924,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/149200000028",
       "summary": "광업 종사 근로자의 건강보호 및 생활안정을 위해 자녀에게 장학금 지급",
       "benefit": "진폐근로자복지지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-149200000028",
       "popularity": 0
     },
     {
@@ -3992,7 +3992,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/135200005039",
       "summary": "아동복지시설 및 위탁가정 (예비)자립준비청년의 지속 가능한 자립을 위해 종합적 자립 지원 체계를 구축",
       "benefit": "자립지원 전담기관 운영",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-135200005039",
       "popularity": 0
     },
     {
@@ -4009,7 +4009,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/138300000054",
       "summary": "우리사회 고립‧은둔 청소년이 심리적‧사회적 관계를 조기에 회복하고, 건강하게 성장할 수 있도록 지원",
       "benefit": "고립·은둔 청소년 원스톱 패키지 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-138300000054",
       "popularity": 0
     },
     {
@@ -4094,7 +4094,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/999000000034",
       "summary": "졸업후 농업‧농산업 분야 신규 청년인력 유입구조 마련",
       "benefit": "청년창업농장학금 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-999000000034",
       "popularity": 0
     },
     {
@@ -4111,7 +4111,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/WII000000770",
       "summary": "학교폭력, 비행, 가출, 정신건강 등 위기에 처한 청소년이 긴급 상담서비스(실시간 채팅상담 및 게시판 상담, 웹심리검사 등)를 365일 24시간 제공받을 수 있는 안전한 보호환경 조성 - 지역사회 중심의 청소년안전망",
       "benefit": "청소년상담1388 온라인상담 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-WII000000770",
       "popularity": 0
     },
     {
@@ -4128,7 +4128,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/134200005007",
       "summary": "전문상담을 통하여 모든 학생의 심리 정서적 지원 및 학교생활 적응력 제고",
       "benefit": "위(Wee) 클래스 상담 지원",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-134200005007",
       "popularity": 0
     },
     {
@@ -4145,7 +4145,7 @@
       "sourceUrl": "https://www.gov.kr/portal/rcvfvrSvc/dtlEx/154300000391",
       "summary": "우리 대학 졸업생들의 영농·영어 정착에 필요한 사안 및 현장의 문제 해결을 지원 ○ 새로운 아이디어를 발굴·지원하여 졸업생들의 성공적인 영농·영어정착을 유도함으로써 미래 전문경영인으로서 정착할 토대를 구축",
       "benefit": "한국농수산대학교 졸업생 영농영어정착 우수과제사업",
-      "detailUrl": null,
+      "detailUrl": "pages/policy-154300000391",
       "popularity": 0
     }
   ]
