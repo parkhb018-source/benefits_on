@@ -126,16 +126,23 @@ function sortByLastUpdatedDesc(items, getKey) {
 
 /* ── 카테고리 카드 렌더 ──────────────────────────────────── */
 
+/* detailUrl(pages/policy-XXX, pages/article-XXX)이 있으면 내부 링크, 없으면 sourceUrl 외부 링크.
+   카테고리 페이지는 pages/ 안에 있으므로 앞의 "pages/"는 떼고 상대 경로로 쓴다. .html은 붙이지 않는다. */
 function renderPolicyCard(p) {
   const cat = esc(p.category);
   const title = esc(p.title);
   const summary = esc(p.summary);
   const tags = Array.isArray(p.tags) ? p.tags : [];
   const tagHtml = tags.map((t) => '<span class="pl-tag">' + esc(t) + '</span>').join('');
-  const href = esc(p.sourceUrl);
   const deadlineHtml = p.deadline
     ? '<div class="pl-deadline">신청기한 ' + esc(p.deadline) + '</div>'
     : '';
+
+  const isInternal = !!p.detailUrl;
+  const href = isInternal ? esc(p.detailUrl.replace(/^pages\//, '')) : esc(p.sourceUrl);
+  const linkAttrs = isInternal ? '' : ' target="_blank" rel="noopener nofollow"';
+  const linkText = isInternal ? '자세히 보기 →' : '공식 사이트에서 확인 →';
+
   return (
     '        <div class="pl-card">' +
     '<span class="pl-cat">' + cat + '</span>' +
@@ -143,7 +150,7 @@ function renderPolicyCard(p) {
     '<p class="pl-summary">' + summary + '</p>' +
     '<div class="pl-meta">' + tagHtml + '</div>' +
     deadlineHtml +
-    '<a class="pl-link" href="' + href + '" target="_blank" rel="noopener">공식 사이트에서 확인 →</a>' +
+    '<a class="pl-link" href="' + href + '"' + linkAttrs + '>' + linkText + '</a>' +
     '</div>'
   );
 }
@@ -161,10 +168,14 @@ function renderCategoryInner(category, policies) {
 
 /* ── 홈 카드 렌더 ────────────────────────────────────────── */
 
-function renderHomeCard(c) {
+/* home-cards.json 의 카드는 자체 link(주로 gov.kr) 를 갖는 큐레이션 카드다.
+   다만 그 link 가 policies.json 의 sourceUrl 과 일치하고 그 정책에 detailUrl 이 있으면
+   (=카테고리 카드와 동일한 정책을 가리키는 경우) 내부 링크로 바꿔준다. 그 외엔 link 그대로. */
+function renderHomeCard(c, sourceUrlToDetailUrl) {
   const style = c.tagStyle ? String(c.tagStyle) : 'new';
+  const href = sourceUrlToDetailUrl[c.link] || c.link;
   return (
-    '            <a href="' + esc(c.link) + '" class="article-card">' +
+    '            <a href="' + esc(href) + '" class="article-card">' +
     '<span class="art-tag tag-' + esc(style) + '">' + esc(c.tag) + '</span>' +
     '<h3 class="art-title">' + esc(c.title) + '</h3>' +
     '<p class="art-date">' + esc(c.date) + ' 업데이트</p>' +
@@ -172,7 +183,7 @@ function renderHomeCard(c) {
   );
 }
 
-function renderHomeSection(s) {
+function renderHomeSection(s, sourceUrlToDetailUrl) {
   const cards = (Array.isArray(s.cards) ? s.cards : []).slice();
   const sorted = cards
     .map((c, i) => ({ c, i }))
@@ -193,17 +204,17 @@ function renderHomeSection(s) {
     '          <a href="' + esc(s.moreLink) + '" class="view-all-link">더보기 →</a>\n' +
     '        </div>\n' +
     '        <div class="articles-grid">\n' +
-    sorted.map(renderHomeCard).join('\n') + '\n' +
+    sorted.map((c) => renderHomeCard(c, sourceUrlToDetailUrl)).join('\n') + '\n' +
     '        </div>\n' +
     '      </div>\n' +
     '    </section>'
   );
 }
 
-function renderHomeCardsInner(homeData) {
+function renderHomeCardsInner(homeData, sourceUrlToDetailUrl) {
   const sections = (Array.isArray(homeData.sections) ? homeData.sections : [])
     .filter((s) => s.visible !== false);
-  const blocks = sections.map(renderHomeSection).join('\n');
+  const blocks = sections.map((s) => renderHomeSection(s, sourceUrlToDetailUrl)).join('\n');
   return '  <div id="home-cards">\n' + blocks + '\n  </div>';
 }
 
@@ -297,6 +308,77 @@ function validateSitemapGrades() {
     fail('sitemap.xml 에 A등급이 아닌 정책 상세 페이지가 등록되어 있습니다 (' + bad.length + '건):\n  - ' +
       bad.join('\n  - '));
   }
+}
+
+/* detailUrl 이 있는 정책의 pl-card 가 실제로 내부 링크를 걸었는지 검증.
+   카테고리 페이지 파일을 디스크에서 다시 읽어(re-read) 확인한다 — 코드 경로 재사용이 아니라
+   최종 산출물을 독립적으로 다시 검사한다. */
+function validateCategoryCardLinks(byCategory) {
+  let totalInternal = 0;
+  let totalExternal = 0;
+  const badExternalForDetail = [];
+  const badInternalTarget = [];
+  const badExternalNofollow = [];
+  const missingInternalFiles = [];
+
+  Object.keys(CATEGORY_PAGES).forEach((category) => {
+    const file = path.join(PAGES_DIR, CATEGORY_PAGES[category]);
+    if (!fs.existsSync(file)) return;
+    const html = fs.readFileSync(file, 'utf8');
+    const sorted = sortByLastUpdatedDesc(byCategory[category], (p) => p.lastUpdated);
+    const tags = Array.from(html.matchAll(/<a class="pl-link"([^>]*)>/g)).map((m) => m[1]);
+
+    if (tags.length !== sorted.length) {
+      fail(CATEGORY_PAGES[category] + ' 의 pl-link 개수(' + tags.length + ')가 정책 수(' +
+        sorted.length + ')와 다릅니다.');
+    }
+
+    sorted.forEach((p, i) => {
+      const attrs = tags[i] || '';
+      const hrefM = attrs.match(/href="([^"]*)"/);
+      const href = hrefM ? hrefM[1] : '';
+      const isInternal = href !== '' && !/^https?:\/\//.test(href);
+
+      if (isInternal) {
+        totalInternal++;
+        if (!p.detailUrl) badExternalForDetail.push(p.title + ' (detailUrl 없는데 내부 링크)');
+        if (/target="_blank"/.test(attrs)) badInternalTarget.push(p.title);
+        const detailFile = path.join(PAGES_DIR, href + '.html');
+        if (!fs.existsSync(detailFile)) missingInternalFiles.push(p.title + ' → ' + href + '.html');
+      } else {
+        totalExternal++;
+        if (p.detailUrl) badExternalForDetail.push(p.title + ' (detailUrl 있는데 외부 링크)');
+        const relM = attrs.match(/rel="([^"]*)"/);
+        const rel = relM ? relM[1] : '';
+        if (!/nofollow/.test(rel)) badExternalNofollow.push(p.title);
+      }
+    });
+  });
+
+  if (badExternalForDetail.length) {
+    fail('detailUrl 유무와 카드 링크 종류가 어긋나는 정책 ' + badExternalForDetail.length + '건:\n  - ' +
+      badExternalForDetail.join('\n  - '));
+  }
+  if (missingInternalFiles.length) {
+    fail('카테고리 카드 내부 링크가 가리키는 파일이 없습니다 (' + missingInternalFiles.length + '건):\n  - ' +
+      missingInternalFiles.join('\n  - '));
+  }
+  if (badInternalTarget.length) {
+    fail('내부 링크 카드에 target="_blank" 가 있습니다 (' + badInternalTarget.length + '건):\n  - ' +
+      badInternalTarget.join('\n  - '));
+  }
+  if (badExternalNofollow.length) {
+    fail('외부 링크 카드에 rel="nofollow" 가 없습니다 (' + badExternalNofollow.length + '건):\n  - ' +
+      badExternalNofollow.join('\n  - '));
+  }
+  if (totalInternal !== 185) {
+    fail('카테고리 페이지 6개 합계 내부 링크 수가 185가 아닙니다: ' + totalInternal);
+  }
+  if (totalExternal !== 59) {
+    fail('카테고리 페이지 6개 합계 외부 링크 수가 59가 아닙니다: ' + totalExternal);
+  }
+
+  console.log('[build-pages] 카드 링크 검증 통과: 내부 ' + totalInternal + ' · 외부 ' + totalExternal);
 }
 
 /* ── 메인 ───────────────────────────────────────────────── */
@@ -409,6 +491,10 @@ function main() {
     writeIfChanged(file, nextText, report);
   });
 
+  // 카테고리 카드가 detailUrl 을 실제로 링크로 걸었는지 검증 (지시 2).
+  // 디스크에 쓰여진 최종 파일을 다시 읽어서 확인한다.
+  validateCategoryCardLinks(byCategory);
+
   // ── index.html (HOME_CARDS + SEASONAL) ──
   const indexFile = path.join(ROOT, 'index.html');
   let indexHtml;
@@ -425,7 +511,11 @@ function main() {
     let touchedIndex = false;
     let homeCardCount = 0;
 
-    const homeInner = renderHomeCardsInner(homeData);
+    const sourceUrlToDetailUrl = {};
+    policies.forEach((p) => {
+      if (p.detailUrl && p.sourceUrl) sourceUrlToDetailUrl[p.sourceUrl] = p.detailUrl;
+    });
+    const homeInner = renderHomeCardsInner(homeData, sourceUrlToDetailUrl);
     const afterHome = replaceBetweenMarkers(work, 'HOME_CARDS', homeInner);
     if (afterHome === null) {
       console.warn('[build-pages] 경고: AUTOGEN:HOME_CARDS 마커 없음, 홈 카드 건너뜀');
