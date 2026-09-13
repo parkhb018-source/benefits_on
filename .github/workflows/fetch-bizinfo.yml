@@ -1,0 +1,45 @@
+name: 기업마당 지원사업 데이터 갱신
+
+# 기업마당(bizinfo.go.kr) 공고를 매일 수집해 data/biz-benefits.json 을 갱신한다.
+# 커밋 메시지에 [skip ci] 를 넣지 않는다 — deploy.yml 이 돌아야 배포된다.
+
+on:
+  workflow_dispatch:   # 수동 실행
+  schedule:
+    - cron: '0 22 * * *'   # 매일 07:00 KST (UTC 22:00)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-bizinfo
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 데이터 수집
+        env:
+          BIZINFO_CRTFC_KEY: ${{ secrets.BIZINFO_CRTFC_KEY }}
+        run: node scripts/fetch-bizinfo.js
+
+      - name: 변경분 커밋·푸시
+        run: |
+          if [ -z "$(git status --porcelain data/biz-benefits.json)" ]; then
+            echo "변경 없음 — 커밋 생략"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/biz-benefits.json
+          git commit -m "chore: 기업마당 지원사업 데이터 갱신"
+          git push

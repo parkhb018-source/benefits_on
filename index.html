@@ -121,56 +121,116 @@ data-ad-height = "100"></ins>
     <div class="container">
       <div class="hero-center">
         <div class="hero-badge-green">● 2026년 최신 정책 반영</div>
-        <h1 class="hero-title">내가 받을 수 있는 혜택, <span class="highlight">30초면 확인</span></h1>
-        <p class="hero-sub">나이, 소득, 가구 형태만 입력하면 받을 수 있는 정부지원금을 바로 알려드려요</p>
+        <h1 class="hero-title">개인도 사장님도, <span class="highlight">30초면 확인</span></h1>
+        <p class="hero-sub">나이·소득·가구 형태부터 사업 지역·업종까지, 받을 수 있는 정부지원금을 바로 알려드려요</p>
 
-        <!-- Self-Diagnosis Card (centered, wide) -->
-        <div class="diag-card-wide">
-          <div class="diag-card-header">
-            <h3 class="diag-title">내 혜택 자가진단</h3>
-            <div class="diag-header-right">
-              <span class="diag-counter" id="diagCounter">0/3 선택</span>
-              <button class="diag-reset" id="diagReset" aria-label="초기화">↺ 초기화</button>
+        <!-- Self-Diagnosis: 개인 / 사장님 2분할 -->
+        <div class="diag-split">
+          <div class="diag-card">
+            <div class="diag-card-header">
+              <h3 class="diag-title">내 혜택 자가진단</h3>
+              <div class="diag-header-right">
+                <span class="diag-counter" id="diagCounter">0/3 선택</span>
+                <button class="diag-reset" id="diagReset" aria-label="초기화">↺ 초기화</button>
+              </div>
             </div>
+            <div class="diag-selects-row">
+              <div class="select-wrap">
+                <select id="sel-age" aria-label="연령대 선택">
+                  <option value="">연령대 선택</option>
+                  <option value="10대">10대</option>
+                  <option value="20대">20대</option>
+                  <option value="30대">30대</option>
+                  <option value="40대">40대</option>
+                  <option value="50대">50대</option>
+                  <option value="60대 이상">60대 이상</option>
+                </select>
+              </div>
+              <div class="select-wrap">
+                <select id="sel-household" aria-label="가구 형태 선택">
+                  <option value="">가구 형태 선택</option>
+                  <option value="1인가구">1인가구</option>
+                  <option value="한부모가정">한부모가정</option>
+                  <option value="다자녀가구">다자녀가구</option>
+                  <option value="다문화가족">다문화가족</option>
+                  <option value="무주택세대">무주택세대</option>
+                  <option value="해당없음">해당 없음</option>
+                </select>
+              </div>
+              <div class="select-wrap">
+                <select id="sel-employ" aria-label="고용 상태 선택">
+                  <option value="">고용 상태 선택</option>
+                  <option value="직장인">직장인 (재직중)</option>
+                  <option value="취업준비중">취업준비중</option>
+                  <option value="자영업자">자영업자·프리랜서</option>
+                  <option value="무직·기타">무직·기타</option>
+                </select>
+              </div>
+            </div>
+            <button class="diag-btn-wide diag-btn" id="diagBtn" disabled>
+              연령대·가구형태·고용상태를 선택해주세요
+            </button>
           </div>
-          <div class="diag-selects-row">
-            <div class="select-wrap">
-              <select id="sel-age" aria-label="연령대 선택">
-                <option value="">연령대 선택</option>
-                <option value="10대">10대</option>
-                <option value="20대">20대</option>
-                <option value="30대">30대</option>
-                <option value="40대">40대</option>
-                <option value="50대">50대</option>
-                <option value="60대 이상">60대 이상</option>
-              </select>
+
+          <div class="diag-card">
+            <div class="diag-card-header">
+              <h3 class="diag-title">사장님 지원사업 자가진단</h3>
+              <div class="diag-header-right">
+                <span class="diag-counter" id="bizDiagCounter">0/2 선택</span>
+              </div>
             </div>
-            <div class="select-wrap">
-              <select id="sel-household" aria-label="가구 형태 선택">
-                <option value="">가구 형태 선택</option>
-                <option value="1인가구">1인가구</option>
-                <option value="한부모가정">한부모가정</option>
-                <option value="다자녀가구">다자녀가구</option>
-                <option value="다문화가족">다문화가족</option>
-                <option value="무주택세대">무주택세대</option>
-                <option value="해당없음">해당 없음</option>
-              </select>
+            <div class="diag-selects-row">
+              <div class="select-wrap">
+                <select id="sel-biz-region" aria-label="사업 지역 선택">
+                  <option value="">사업 지역 선택</option>
+                  <option value="서울">서울</option>
+                  <option value="부산">부산</option>
+                  <option value="대구">대구</option>
+                  <option value="인천">인천</option>
+                  <option value="전남광주">전남광주</option>
+                  <option value="대전">대전</option>
+                  <option value="울산">울산</option>
+                  <option value="세종">세종</option>
+                  <option value="경기">경기</option>
+                  <option value="강원">강원</option>
+                  <option value="충북">충북</option>
+                  <option value="충남">충남</option>
+                  <option value="전북">전북</option>
+                  <option value="경북">경북</option>
+                  <option value="경남">경남</option>
+                  <option value="제주">제주</option>
+                </select>
+              </div>
+              <div class="select-wrap">
+                <select id="sel-biz-type" aria-label="지원 대상 선택">
+                  <option value="">지원 대상 선택</option>
+                  <option value="소상공인">소상공인</option>
+                  <option value="중소기업">중소기업</option>
+                  <option value="예비·초기창업">예비·초기창업</option>
+                  <option value="사회적기업">사회적기업</option>
+                  <option value="여성기업">여성기업</option>
+                  <option value="장애인기업">장애인기업</option>
+                </select>
+              </div>
+              <div class="select-wrap">
+                <select id="sel-biz-field" aria-label="관심 분야 선택">
+                  <option value="">관심 분야 (선택)</option>
+                  <option value="자금·융자">자금·융자</option>
+                  <option value="판로·마케팅">판로·마케팅</option>
+                  <option value="인력·고용">인력·고용</option>
+                  <option value="기술·인증">기술·인증</option>
+                  <option value="경영·컨설팅">경영·컨설팅</option>
+                  <option value="창업">창업</option>
+                </select>
+              </div>
             </div>
-            <div class="select-wrap">
-              <select id="sel-employ" aria-label="고용 상태 선택">
-                <option value="">고용 상태 선택</option>
-                <option value="직장인">직장인 (재직중)</option>
-                <option value="취업준비중">취업준비중</option>
-                <option value="자영업자">자영업자·프리랜서</option>
-                <option value="무직·기타">무직·기타</option>
-              </select>
-            </div>
+            <button class="diag-btn-wide" id="bizDiagBtn" disabled>
+              사업 지역·지원 대상을 선택해주세요
+            </button>
           </div>
-          <button class="diag-btn-wide diag-btn" id="diagBtn" disabled>
-            연령대·가구형태·고용상태를 선택해주세요
-          </button>
-          <div class="diagnosis-result" id="diagResult" aria-live="polite"></div>
         </div>
+
+        <div class="diagnosis-result" id="diagResult" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -340,6 +400,7 @@ data-ad-height = "100"></ins>
 
   <script src="data/policy-loader.js?v=20260912"></script>
   <script type="module" src="engine/matching-engine.js?v=20260912"></script>
+  <script type="module" src="engine/biz-sort.js?v=20260913"></script>
   <script src="main.js?v=20260912"></script>
 </body>
 </html>

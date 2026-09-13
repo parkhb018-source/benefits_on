@@ -1217,9 +1217,51 @@ h1, h2, h3,
 
 .diag-btn-wide:disabled { cursor: not-allowed; }
 
-/* Diagnosis Result (inside wide card) */
-.diagnosis-result { display: none; }
-.diagnosis-result.show { display: block; }
+/* Diagnosis Split (개인 / 사장님 2분할) */
+.diag-split {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.diag-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px 26px;
+  flex: 1 1 0;
+  min-width: 0;
+  box-shadow: var(--shadow-md);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.diag-card .diag-selects-row { flex: 1; }
+
+/* Diagnosis Result (공용, 두 카드 아래 전체 폭) */
+.diagnosis-result {
+  display: none;
+  width: 100%;
+  max-width: 900px;
+}
+.diagnosis-result.show {
+  display: block;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 26px;
+  margin-top: 20px;
+  box-shadow: var(--shadow-md);
+  text-align: left;
+}
+.diagnosis-result.show .diag-result-inner {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
 
 .diag-result-inner {
   margin-top: 16px;
@@ -1266,9 +1308,42 @@ h1, h2, h3,
 }
 .result-more-btn:hover { background: var(--primary); color: white; }
 
+/* 사장님 지원사업 카드 */
+.biz-result-list { display: flex; flex-direction: column; gap: 12px; }
+
+.biz-card {
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  animation: fadeInUp 0.25s ease both;
+}
+
+.biz-card-title { font-size: 14px; font-weight: 700; color: var(--primary-dark); margin-bottom: 8px; line-height: 1.4; }
+
+.biz-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+
+.biz-chip {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-soft);
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+.biz-status { font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.biz-summary { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
+.biz-apply-link { font-size: 12px; font-weight: 600; color: var(--primary); display: inline-block; }
+.biz-apply-link:hover { text-decoration: underline; }
+
 @media (max-width: 600px) {
   .diag-selects-row { grid-template-columns: 1fr; }
   .diag-card-wide { padding: 20px 16px; }
+}
+
+@media (max-width: 768px) {
+  .diag-split { flex-direction: column; }
+  .diag-card { padding: 20px 16px; }
 }
 
 /* ===========================

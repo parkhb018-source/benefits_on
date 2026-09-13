@@ -942,6 +942,186 @@ if (bannerClose && banner) {
   window.addEventListener('pageshow', updateUI);
 }());
 
+// 사장님 지원사업 자가진단 — 개인 자가진단과 별개 함수, #diagResult 만 공유한다.
+// 매칭·정렬은 engine/matching-engine.js · engine/biz-sort.js 를 그대로 쓴다(로직 복제 금지).
+(function () {
+  const selBizRegion  = document.getElementById('sel-biz-region');
+  const selBizType    = document.getElementById('sel-biz-type');
+  const selBizField   = document.getElementById('sel-biz-field');
+  const bizDiagBtn     = document.getElementById('bizDiagBtn');
+  const bizDiagCounter = document.getElementById('bizDiagCounter');
+  const diagResult    = document.getElementById('diagResult');
+  const diagReset     = document.getElementById('diagReset');
+
+  if (!selBizRegion || !bizDiagBtn || !diagResult) return;
+
+  // 소상공인은 법적으로 중소기업의 부분집합 — 확장하지 않으면 실제 신청 가능한 사업 다수를 놓친다.
+  const BUSINESS_TYPE_EXPAND = {
+    '소상공인':     ['소상공인', '중소기업'],
+    '중소기업':     ['중소기업'],
+    '예비·초기창업': ['창업벤처', '중소기업'],
+    '사회적기업':   ['사회적기업', '협동조합', '마을기업', '중소기업'],
+    '여성기업':     ['여성기업', '중소기업'],
+    '장애인기업':   ['장애인기업', '중소기업'],
+  };
+
+  const FIELD_MAP = {
+    '자금·융자':   ['금융'],
+    '판로·마케팅': ['내수', '수출'],
+    '인력·고용':   ['인력'],
+    '기술·인증':   ['기술'],
+    '경영·컨설팅': ['경영'],
+    '창업':        ['창업'],
+  };
+
+  const BIZ_PAGE_SIZE = 10;
+
+  let bizDataCache = null;
+  let bizDataPromise = null;
+
+  function loadBizData() {
+    if (bizDataCache) return Promise.resolve(bizDataCache);
+    if (bizDataPromise) return bizDataPromise;
+    bizDataPromise = fetch('data/biz-benefits.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (data) { bizDataCache = data; return data; })
+      .catch(function (err) { bizDataPromise = null; throw err; });
+    return bizDataPromise;
+  }
+
+  function updateBizUI() {
+    const done = !!(selBizRegion.value && selBizType.value);
+    if (bizDiagCounter) {
+      const count = [selBizRegion, selBizType].filter(function (s) { return s.value; }).length;
+      bizDiagCounter.textContent = count + '/2 선택';
+    }
+    bizDiagBtn.disabled = !done;
+    bizDiagBtn.textContent = done
+      ? '사장님 지원사업 찾기 →'
+      : '사업 지역·지원 대상을 선택해주세요';
+  }
+
+  function daysUntilLocal(dateStr, today) {
+    return Math.round((Date.parse(dateStr) - Date.parse(today)) / 86400000);
+  }
+
+  function bizStatusLabel(period, today) {
+    if (!period) return '';
+    if (period.start && period.start > today) return '접수예정';
+    if (period.end) return 'D-' + daysUntilLocal(period.end, today);
+    return period.raw || '';
+  }
+
+  function bizCardHtml(item, today) {
+    const btCond = item.conditions.find(function (c) { return c.type === 'businessType'; });
+    const chip2  = btCond ? btCond.value[0] : '';
+    const chip3  = item.fieldMid || item.fields[0] || '';
+    const status = bizStatusLabel(item.period, today);
+    return '<div class="biz-card">' +
+      '<div class="biz-card-title">' + item.title + '</div>' +
+      '<div class="biz-chips">' +
+        '<span class="biz-chip">' + item.regionLabel + '</span>' +
+        '<span class="biz-chip">' + chip2 + '</span>' +
+        '<span class="biz-chip">' + chip3 + '</span>' +
+      '</div>' +
+      '<div class="biz-status">' + status + '</div>' +
+      '<p class="biz-summary">' + item.summary + '</p>' +
+      '<a href="' + item.applyUrl + '" class="biz-apply-link" target="_blank" rel="nofollow noopener">기업마당에서 신청하기 →</a>' +
+    '</div>';
+  }
+
+  function computeMatches(profile, data) {
+    const today = new Date().toISOString().slice(0, 10);
+    const engine = window.HtkonMatchingEngine;
+    const sort = window.HtkonBizSort;
+    const matched = [];
+    (data.items || []).forEach(function (item) {
+      const result = engine.match(profile, item.conditions, item.period, {});
+      if (!result) return;
+      matched.push({ item: item, score: sort.scoreItem(profile, item, today) });
+    });
+    matched.sort(function (a, b) { return sort.compareByScore(a, b, profile, today); });
+    return matched;
+  }
+
+  function renderBizResult(matched) {
+    const today = new Date().toISOString().slice(0, 10);
+    const localCount = matched.filter(function (m) { return m.item.regionCount <= 3; }).length;
+    const nationalCount = matched.length - localCount;
+    const headText = '총 ' + matched.length + '건 · 내 지역 사업 ' + localCount + '건 · 전국 사업 ' + nationalCount + '건';
+
+    const shown = matched.slice(0, BIZ_PAGE_SIZE);
+
+    diagResult.innerHTML =
+      '<div class="diag-result-inner">' +
+      '<p class="result-count">' + headText + '</p>' +
+      '<div class="result-list biz-result-list">' + shown.map(function (m) { return bizCardHtml(m.item, today); }).join('') + '</div>' +
+      (matched.length > BIZ_PAGE_SIZE
+        ? '<button type="button" class="result-more-btn" id="bizMoreBtn">더보기 (+' + Math.min(matched.length - BIZ_PAGE_SIZE, BIZ_PAGE_SIZE) + '개)</button>'
+        : '') +
+      '<p class="result-note">* 신청 자격·기한은 기업마당 공식 페이지에서 다시 확인하세요.</p>' +
+      '</div>';
+    diagResult.classList.add('show');
+
+    const list = diagResult.querySelector('.biz-result-list');
+    let shownCount = shown.length;
+    const moreBtn = document.getElementById('bizMoreBtn');
+    if (moreBtn) {
+      moreBtn.addEventListener('click', function () {
+        const nextBatch = matched.slice(shownCount, shownCount + BIZ_PAGE_SIZE);
+        list.insertAdjacentHTML('beforeend', nextBatch.map(function (m) { return bizCardHtml(m.item, today); }).join(''));
+        shownCount += nextBatch.length;
+        if (shownCount >= matched.length) {
+          moreBtn.remove();
+        } else {
+          moreBtn.textContent = '더보기 (+' + Math.min(matched.length - shownCount, BIZ_PAGE_SIZE) + '개)';
+        }
+      });
+    }
+  }
+
+  function showBizResult() {
+    const profile = {
+      region: selBizRegion.value,
+      businessType: BUSINESS_TYPE_EXPAND[selBizType.value] || [selBizType.value],
+      businessTypePicked: selBizType.value,
+      fields: FIELD_MAP[selBizField.value] || [],
+    };
+
+    bizDiagBtn.disabled = true;
+    bizDiagBtn.textContent = '불러오는 중…';
+
+    loadBizData().then(function (data) {
+      const matched = computeMatches(profile, data);
+      renderBizResult(matched);
+    }).catch(function () {
+      diagResult.innerHTML = '<div class="diag-result-inner"><p class="result-note">잠시 후 다시 시도해주세요</p></div>';
+      diagResult.classList.add('show');
+    }).then(function () {
+      updateBizUI();
+    });
+  }
+
+  [selBizRegion, selBizType, selBizField].forEach(function (s) {
+    s.addEventListener('change', updateBizUI);
+  });
+  bizDiagBtn.addEventListener('click', showBizResult);
+
+  // #diagReset 은 개인 카드 소속이지만, 초기화는 두 진단 모두를 비운다(개인 쪽 diagResult 초기화는
+  // 기존 personal resetDiag가 처리 — 여기서는 사장님 쪽 셀렉트만 되돌린다).
+  if (diagReset) {
+    diagReset.addEventListener('click', function () {
+      selBizRegion.selectedIndex = 0;
+      selBizType.selectedIndex = 0;
+      selBizField.selectedIndex = 0;
+      updateBizUI();
+    });
+  }
+
+  window.addEventListener('pageshow', updateBizUI);
+  updateBizUI();
+}());
+
 /* ── 카테고리 페이지 정책 카드 페이지네이션 ──
    카드는 SEO를 위해 정적 HTML로 전부 존재하고, 화면에는 9개씩(3×3) 페이지 번호로 나눠 보여준다. */
 (function () {
