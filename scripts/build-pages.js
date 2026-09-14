@@ -267,7 +267,7 @@ function loadPolicyNotes() {
 }
 
 const ADSENSE_PATTERN = /adsbygoogle|google-adsense-account|pagead2\.googlesyndication\.com/;
-const ADFIT_PATTERN = /kakao_ad_area|ba\.min\.js|DAN-/;
+const ADFIT_PATTERN = /kakao_ad_area|ba\.min\.js|DAN-|adfit-slot|adfit\.js/;
 
 function validatePolicyDetailPages() {
   const notes = loadPolicyNotes();
