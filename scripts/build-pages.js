@@ -267,6 +267,7 @@ function loadPolicyNotes() {
 }
 
 const ADSENSE_PATTERN = /adsbygoogle|google-adsense-account|pagead2\.googlesyndication\.com/;
+const ADFIT_PATTERN = /kakao_ad_area|ba\.min\.js|DAN-/;
 
 function validatePolicyDetailPages() {
   const notes = loadPolicyNotes();
@@ -274,12 +275,14 @@ function validatePolicyDetailPages() {
   const files = fs.readdirSync(PAGES_DIR).filter((f) => /^policy-.+\.html$/.test(f));
   const badAds = [];
   const badIndex = [];
+  const badAdfit = [];
   files.forEach((f) => {
     const id = f.slice('policy-'.length, -'.html'.length);
     const isA = Object.prototype.hasOwnProperty.call(notes, id);
     const html = fs.readFileSync(path.join(PAGES_DIR, f), 'utf8');
     if (!isA && ADSENSE_PATTERN.test(html)) badAds.push(f);
     if (!isA && !/<meta name="robots" content="noindex/.test(html)) badIndex.push(f);
+    if (!isA && ADFIT_PATTERN.test(html)) badAdfit.push(f);
   });
   if (badAds.length) {
     fail('A등급이 아닌 정책 상세 페이지에 애드센스 블록/스크립트가 있습니다 (' + badAds.length + '건):\n  - ' +
@@ -288,6 +291,10 @@ function validatePolicyDetailPages() {
   if (badIndex.length) {
     fail('A등급이 아닌 정책 상세 페이지에 noindex 메타가 없습니다 (' + badIndex.length + '건):\n  - ' +
       badIndex.join('\n  - '));
+  }
+  if (badAdfit.length) {
+    fail('A등급이 아닌 정책 상세 페이지에 애드핏(kakao_ad_area/ba.min.js/DAN-) 이 있습니다 (' + badAdfit.length + '건):\n  - ' +
+      badAdfit.join('\n  - '));
   }
 }
 

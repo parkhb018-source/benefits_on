@@ -1436,6 +1436,9 @@ h1, h2, h3,
 
 .ad-wrap { padding: 12px 24px; }
 
+/* 카카오 애드핏 — assets/js/adfit.js 가 화면 폭에 맞는 <ins> 하나를 이 안에 넣는다 */
+.adfit-slot { margin: 16px auto; text-align: center; overflow: hidden; }
+
 /* ===========================
    PAGE SECTION
    =========================== */
