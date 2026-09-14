@@ -950,10 +950,13 @@ if (bannerClose && banner) {
   const selBizField   = document.getElementById('sel-biz-field');
   const bizDiagBtn     = document.getElementById('bizDiagBtn');
   const bizDiagCounter = document.getElementById('bizDiagCounter');
+  const bizDiagReset   = document.getElementById('bizDiagReset');
   const diagResult    = document.getElementById('diagResult');
   const diagReset     = document.getElementById('diagReset');
 
   if (!selBizRegion || !bizDiagBtn || !diagResult) return;
+
+  const bizSelects = [selBizRegion, selBizType, selBizField];
 
   // 소상공인은 법적으로 중소기업의 부분집합 — 확장하지 않으면 실제 신청 가능한 사업 다수를 놓친다.
   const BUSINESS_TYPE_EXPAND = {
@@ -995,10 +998,21 @@ if (bannerClose && banner) {
       const count = [selBizRegion, selBizType].filter(function (s) { return s.value; }).length;
       bizDiagCounter.textContent = count + '/2 선택';
     }
+    if (bizDiagReset) {
+      const anySelected = bizSelects.some(function (s) { return s.value; });
+      bizDiagReset.classList.toggle('visible', anySelected);
+    }
     bizDiagBtn.disabled = !done;
     bizDiagBtn.textContent = done
       ? '사장님 지원사업 찾기 →'
       : '사업 지역·지원 대상을 선택해주세요';
+  }
+
+  function resetBizDiag() {
+    bizSelects.forEach(function (s) { s.selectedIndex = 0; });
+    diagResult.innerHTML = '';
+    diagResult.classList.remove('show');
+    updateBizUI();
   }
 
   function daysUntilLocal(dateStr, today) {
@@ -1102,20 +1116,16 @@ if (bannerClose && banner) {
     });
   }
 
-  [selBizRegion, selBizType, selBizField].forEach(function (s) {
+  bizSelects.forEach(function (s) {
     s.addEventListener('change', updateBizUI);
   });
   bizDiagBtn.addEventListener('click', showBizResult);
+  if (bizDiagReset) bizDiagReset.addEventListener('click', resetBizDiag);
 
   // #diagReset 은 개인 카드 소속이지만, 초기화는 두 진단 모두를 비운다(개인 쪽 diagResult 초기화는
-  // 기존 personal resetDiag가 처리 — 여기서는 사장님 쪽 셀렉트만 되돌린다).
+  // 기존 personal resetDiag가 처리 — 여기서는 사장님 쪽만 resetBizDiag로 같이 비운다).
   if (diagReset) {
-    diagReset.addEventListener('click', function () {
-      selBizRegion.selectedIndex = 0;
-      selBizType.selectedIndex = 0;
-      selBizField.selectedIndex = 0;
-      updateBizUI();
-    });
+    diagReset.addEventListener('click', resetBizDiag);
   }
 
   window.addEventListener('pageshow', updateBizUI);
