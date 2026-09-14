@@ -45,7 +45,7 @@
 
 /* ─ 아티클 상세 페이지 ─ */
 .article-layout { display: grid; grid-template-columns: 1fr 300px; gap: 36px; padding: 40px 0 80px; align-items: start; }
-.article-main {}
+.article-main { min-width: 0; }
 .article-sidebar { position: sticky; top: 80px; }
 
 .article-header { margin-bottom: 28px; }
