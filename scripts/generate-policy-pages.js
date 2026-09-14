@@ -369,7 +369,7 @@ function renderPage(row, detail, cond, notes) {
   <title>${title}</title>
   <meta name="description" content="${description}">
   <link rel="stylesheet" href="../style.css?v=20260626">
-  <link rel="stylesheet" href="pages.css?v=20260626">
+  <link rel="stylesheet" href="pages.css?v=20260914b">
   <link rel="canonical" href="${canonical}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${SITE}/og-image.png">

@@ -158,6 +158,11 @@
 .pl-pbtn:hover:not([disabled]):not(.active) { border-color: var(--primary); color: var(--primary); }
 .pl-pbtn.active { background: var(--primary); border-color: var(--primary); color: #fff; cursor: default; }
 
+/* ── 정책 상세(A등급) 해설 ── */
+.policy-note { background: var(--bg-soft); border-left: 3px solid var(--primary); border-radius: var(--radius-sm); padding: 16px 18px; margin: 0 0 20px; }
+.policy-note p { margin: 0 0 12px; line-height: 1.7; color: var(--text-primary); }
+.policy-note p:last-child { margin-bottom: 0; }
+
 /* ── 정책 상세(C등급) 관련 도구 카드 ── */
 .policy-tool-cards { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
 .policy-tool-card { display: inline-block; padding: 10px 16px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; color: var(--primary-dark); font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: all .15s; }
