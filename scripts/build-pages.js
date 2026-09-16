@@ -516,21 +516,9 @@ function main() {
     const eol = detectEol(indexHtml);
     let work = indexHtml.split('\r\n').join('\n');
     let touchedIndex = false;
-    let homeCardCount = 0;
 
-    const sourceUrlToDetailUrl = {};
-    policies.forEach((p) => {
-      if (p.detailUrl && p.sourceUrl) sourceUrlToDetailUrl[p.sourceUrl] = p.detailUrl;
-    });
-    const homeInner = renderHomeCardsInner(homeData, sourceUrlToDetailUrl);
-    const afterHome = replaceBetweenMarkers(work, 'HOME_CARDS', homeInner);
-    if (afterHome === null) {
-      console.warn('[build-pages] 경고: AUTOGEN:HOME_CARDS 마커 없음, 홈 카드 건너뜀');
-    } else {
-      work = afterHome;
-      touchedIndex = true;
-      homeCardCount = (homeInner.match(/class="article-card"/g) || []).length;
-    }
+    // index.html에서 홈카드(청년정책/신혼육아/중장년노년) 섹션을 제거했으므로
+    // AUTOGEN:HOME_CARDS 블록 생성은 건너뛴다. (data/home-cards.json 의 sections 는 참고용으로만 남김)
 
     const seasonalInner = renderSeasonalInner(homeData);
     const afterSeasonal = replaceBetweenMarkers(work, 'SEASONAL', seasonalInner);
@@ -546,10 +534,6 @@ function main() {
       if (!/<link[^>]+rel=["']canonical["']/.test(nextText)) {
         fail('교체 후 index.html 에 canonical 태그가 없습니다. 중단합니다.');
       }
-      if (afterHome !== null && homeCardCount === 0) {
-        fail('index.html 홈 카드가 0개입니다. (home-cards.json 손상 방지) 중단합니다.');
-      }
-      report.counts['홈(index.html)'] = homeCardCount;
       writeIfChanged(indexFile, nextText, report);
     }
   }
