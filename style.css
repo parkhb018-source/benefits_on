@@ -1436,6 +1436,14 @@ h1, h2, h3,
 
 .ad-wrap { padding: 12px 24px; }
 
+/* 애드센스 재승인 전까지 광고 자리를 완전히 숨긴다. index.html 의 .ad-wrap 에
+   ad-pending 클래스를 붙여두면 이 규칙이 적용된다. 재신청 시 그 클래스만 빼면 된다. */
+.ad-wrap.ad-pending { display: none; }
+
+/* 애드센스가 이 슬롯에 채울 광고가 없을 때(data-ad-status="unfilled") 구글이
+   공식으로 권장하는 처리 — 빈 사각형 대신 자리를 접는다. 승인 후에도 유지. */
+ins.adsbygoogle[data-ad-status="unfilled"] { display: none !important; }
+
 /* 카카오 애드핏 — assets/js/adfit.js 가 화면 폭에 맞는 <ins> 하나를 이 안에 넣는다 */
 .adfit-slot { margin: 16px auto; text-align: center; overflow: hidden; }
 
