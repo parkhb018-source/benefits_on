@@ -1,8 +1,18 @@
 {
   "meta": {
-    "lastUpdated": "2026-09-01"
+    "lastUpdated": "2026-09-16"
   },
   "resources": [
+    {
+      "id": "profit-drop-diagnosis",
+      "title": "이익 변동 진단",
+      "description": "지난달과 이번 달 매출·비용을 넣으면 이익 변동에 영향을 준 항목을 순위로 보여드려요.",
+      "version": "",
+      "icon": "🔍",
+      "category": "계산기",
+      "updatedAt": "2026-09-16",
+      "url": "tools/profit-drop-diagnosis/"
+    },
     {
       "id": "business-survival-calc",
       "title": "사업 생존기간 계산기",

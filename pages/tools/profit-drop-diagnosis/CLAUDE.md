@@ -1,0 +1,70 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## 프로젝트
+
+혜택on 무료도구 — **이익 변동 진단 ("왜 이번 달에 돈이 덜 남았지?")**.
+지난달과 이번 달의 매출·비용을 입력하면 이익 변동에 영향을 준 항목을 순위로 보여주는
+두 기간 비교 진단 도구. 혜택on 사이트(`benefitson.org`)의
+`pages/tools/profit-drop-diagnosis/` 에 들어갈 무빌드 정적 도구.
+
+**회계 프로그램이 아니다.** 장부 입력을 요구하지 않고, "원인"이라는 단어도 쓰지 않는다.
+항상 "이익 변동에 영향을 준 항목"으로 표현한다.
+
+## 실행 / 테스트
+
+- 로컬: `python -m http.server 8000` → `http://localhost:8000`.
+  `app.js` 가 ESM(`import`)이라 `file://` 로는 안 열린다 — 반드시 정적 서버로 띄운다.
+- 계산 엔진 테스트: `node engine/profit-analyzer.test.js` (외부 의존성 없음, QA-01~15).
+- 회귀 기준: `docs/tools/profit-drop-diagnosis/03_QA_Test_Cases.md` (저장소 루트 기준).
+
+## 아키텍처
+
+- **`engine/profit-analyzer.js`** — 계산 + 결과 문구 전부. `analyze(prev, curr)` 하나가
+  `{profitPrev, profitCurr, profitChange, status, headline, rankedImpacts, actionHints, caveats, deltas}`
+  를 반환한다. `formatWon` 도 여기 있다.
+  DOM·localStorage·시간·난수 의존 없음, 로케일 ko-KR 고정. 동일 입력 → 동일 출력.
+  내부 함수(`normalizeInput`/`calculateProfit`/`calculateDelta`/`calculateImpacts`/`rankImpacts`)는
+  테스트를 위해 export 하지만, `app.js` 는 `analyze`·`formatWon` 두 개만 import 한다.
+- **`app.js`** — 화면 로직만. 입력 검증 · 콤마 처리 · DOM 조립 · localStorage.
+  계산식·판정·결과 문구 없음.
+- **`engine` 의 상태 규칙(`STATUS`)·영향 순위(`rankImpacts`)·행동 힌트(`ACTION_TABLE`)는
+  `docs/tools/profit-drop-diagnosis/02_Rule_Engine_Profit_Drop_Diagnosis.md` 와 1:1 대응**.
+  문구·순위 규칙을 바꾸면 → 엔진 + Rule Engine 문서 + `docs/tools/profit-drop-diagnosis/CHANGELOG.md`
+  세 곳 동시 수정.
+- **`style.css`** — 혜택on 공통 디자인 시스템(토큰·`.panel`·`.hero-card`·`.report-card` 등)을
+  이 도구 파일에 복제한 것. 다른 도구(`pages/tools/*/style.css`)와 토큰·클래스명이 일치해야 한다.
+- UI 섹션 순서(back-bar → app-header → notice-bar → 1.입력 / 2.결과 / 3.리포트 → disclaimer
+  → accordion → footer)는 혜택on Design System 고정 규격.
+
+## 불변 제약
+
+- 서버·API·로그인 없음. 입력값은 localStorage(내 브라우저)에만, 전송 없음. 계산 기록(history) 저장 없음.
+- 외부 JS 라이브러리 추가 금지 (Pretendard CDN은 사이트 공통이라 예외).
+- 입력 필드 6개(매출/식재료비/인건비/임대료/수수료/기타비용) × 지난달·이번 달 = 12개, 전부 필수.
+  쉼표·원화기호는 UI에서 허용하고 내부는 정수로 normalize(소수점 반올림), 안전정수 초과는 에러.
+- 영향 순위 동률 타이브레이크: 매출 → 식재료비 → 인건비 → 수수료 → 임대료 → 기타 순 고정.
+  "가장 큰 영향 항목"은 `rankedImpacts[0]` 을 그대로 쓴다 — 별도로 다시 계산하지 않는다.
+- 영향 합계(모든 `rankedImpacts[].impact` 합) == 이익 증감(`profitChange`) 항등식이 항상 성립해야 한다.
+- 결과 화면에 세무·회계 자문이 아니라는 면책 문구가 상시 노출돼야 한다(`tool-disclaimer`).
+
+## 문서 / 릴리스
+
+- 모든 코드 변경은 `CHANGELOG.md` 에 기록 (형식: `Version | Date | Type | Description`).
+- 버전: Major(기능 변경) / Minor(기능 추가) / Patch(버그). 금요일 야간 배포 금지.
+- 이 도구는 **`benefitson.org` 모노레포(`github.com/parkhb018-source/benefits_on`)** 의 한 폴더다.
+  런타임 파일은 `pages/tools/profit-drop-diagnosis/`, 개발 문서는 `docs/tools/profit-drop-diagnosis/`.
+  배포: 저장소 `main` push → `.github/workflows/deploy.yml`(GitHub Pages) 가 자동 빌드,
+  `benefitson.org/pages/tools/profit-drop-diagnosis/` 로 서빙(그래서 canonical·OG·JSON-LD·
+  sitemap 은 모두 `benefitson.org` 절대 URL, asset 은 상대경로). Cloudflare 가 `style.css`/`app.js`
+  를 4시간 캐시하므로, **이 파일들을 고치면 `index.html` 의 `?v=YYYYMMDD` 토큰과 `app.js` 상단
+  엔진 import 의 `?v=` 토큰을 함께 올려야** 재방문자가 즉시 새 파일을 받는다. 세 곳(`index.html`
+  의 `style.css?v=`, `index.html` 의 `app.js?v=`, `app.js` 의 엔진 import `?v=`)은 항상 같은 값.
+  도구를 새로 추가할 때만 **저장소 루트** `sitemap.xml` 에 URL 을 넣는다.
+  AdSense/GA/Kakao ad 스크립트는 다른 도구와 동일하게 삽입돼 있음.
+- **AdSense auto ads가 로드 직후 빈/숨김 요소를 잠깐 떼어냈다 되돌린다.** `app.js`의 `init()`은
+  필요한 요소가 다 보일 때까지 재시도한 뒤 참조를 `el`에 캐시한다 — DOM 조회는 이 캐시(`$()`)를 쓸 것.
+- 참고: `docs/tools/profit-drop-diagnosis/01_PRD_Profit_Drop_Diagnosis_v1.0.md`,
+  `docs/tools/profit-drop-diagnosis/02_Rule_Engine_Profit_Drop_Diagnosis.md`,
+  `docs/tools/profit-drop-diagnosis/CHANGELOG.md` (모두 저장소 루트 기준 경로).
