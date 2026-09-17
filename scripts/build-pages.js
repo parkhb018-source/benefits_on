@@ -256,6 +256,8 @@ function writeIfChanged(file, nextText, report) {
 
 /* ── 정책 상세 페이지 등급 검증 ─────────────────────────────── */
 
+const SITE_URL = 'https://benefitson.org';
+
 function loadPolicyNotes() {
   const file = path.join(DATA_DIR, 'policy-notes.json');
   if (!fs.existsSync(file)) return {};
@@ -264,6 +266,140 @@ function loadPolicyNotes() {
   } catch (e) {
     fail('policy-notes.json 파싱 실패: ' + e.message);
   }
+}
+
+/* &, <, >, " 이스케이프 후 줄바꿈을 <br>로. 정책 해설 문단(policy-notes.json)을
+   .policy-note 블록으로 렌더할 때 쓴다. generate-policy-pages.js 의 textToHtml 과 동일 규칙. */
+function textToHtml(v) {
+  if (v == null) return '';
+  return esc(v).replace(/\r\n|\r|\n/g, '<br>');
+}
+
+/* A등급 정책 해설 문단 배열 → .policy-note 블록. 비어 있으면 빈 문자열(C등급). */
+function renderPolicyNoteBlock(paragraphs) {
+  if (!Array.isArray(paragraphs) || !paragraphs.length) return '';
+  return '<div class="policy-note">' +
+    paragraphs.map((p) => '<p>' + textToHtml(p) + '</p>').join('\n            ') +
+    '</div>';
+}
+
+/* A등급 정책 상세 페이지의 광고 블록: 기존 애드센스(in-article) + 신규 애드핏(동적 삽입).
+   애드핏은 홈(index.html)·카테고리 페이지(pages/youth.html 등)와 동일하게
+   .adfit-slot 빈 div + adfit.js 스크립트 태그 방식(하드코딩 <ins> 아님). */
+const ADSENSE_IN_ARTICLE_BLOCK =
+  '<ins class="adsbygoogle"\n' +
+  '                 style="display:block; text-align:center;"\n' +
+  '                 data-ad-layout="in-article"\n' +
+  '                 data-ad-format="fluid"\n' +
+  '                 data-ad-client="ca-pub-4871058922328451"\n' +
+  '                 data-ad-slot="2985171819"></ins>\n' +
+  '            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+const ADFIT_SLOT_BLOCK =
+  '<div class="adfit-slot"></div>\n' +
+  '            <script src="/assets/js/adfit.js?v=20260914"></script>';
+
+function renderPolicyAdBlock() {
+  return ADSENSE_IN_ARTICLE_BLOCK + '\n            ' + ADFIT_SLOT_BLOCK;
+}
+
+/* <head> 의 애드센스 라이브러리 스크립트. POLICY_AD(본문 <ins>)와 짝을 이룬다 — 이게 없으면
+   본문의 <ins class="adsbygoogle"> 가 렌더되지 않는다. */
+const ADSENSE_HEAD_SCRIPT =
+  '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4871058922328451" crossorigin="anonymous"></script>';
+
+/* pages/policy-*.html 164개를 순회하며 POLICY_NOTE/POLICY_AD 마커 사이를 채우고
+   robots 메타를 등급에 맞게 써넣는다. "쓰기"가 끝난 뒤 validatePolicyDetailPages() /
+   validateSitemapGrades() 가 그대로 결과를 검증한다.
+   ★ CSV/gov24 등 저장소 밖 소스에 의존하지 않는다 — 오직 policy-notes.json 과
+   이미 존재하는 HTML 파일(마커)만 본다. generate-policy-pages.js 를 실행하지 않아도 된다. */
+function renderPolicyPages(report) {
+  const notes = loadPolicyNotes();
+  if (!fs.existsSync(PAGES_DIR)) return [];
+  const files = fs.readdirSync(PAGES_DIR).filter((f) => /^policy-.+\.html$/.test(f)).sort();
+  const missingNote = [];
+  const missingAd = [];
+  const missingAdsenseHead = [];
+  const pageIds = [];
+
+  files.forEach((f) => {
+    const id = f.slice('policy-'.length, -'.html'.length);
+    pageIds.push(id);
+    const isA = Object.prototype.hasOwnProperty.call(notes, id);
+    const file = path.join(PAGES_DIR, f);
+    const raw = fs.readFileSync(file, 'utf8');
+    const eol = detectEol(raw);
+    let work = raw.split('\r\n').join('\n');
+
+    const noteInner = isA ? renderPolicyNoteBlock(notes[id]) : '';
+    const afterNote = replaceBetweenMarkers(work, 'POLICY_NOTE', noteInner ? '          ' + noteInner : '');
+    if (afterNote === null) { missingNote.push(f); return; }
+    work = afterNote;
+
+    const adInner = isA ? renderPolicyAdBlock() : '';
+    const afterAd = replaceBetweenMarkers(work, 'POLICY_AD', adInner ? '            ' + adInner : '');
+    if (afterAd === null) { missingAd.push(f); return; }
+    work = afterAd;
+
+    // <head> 의 애드센스 라이브러리 스크립트(adsbygoogle.js)도 등급에 따라 있어야/없어야 한다.
+    // POLICY_AD 마커(본문 광고 단위)만 채우고 이 태그를 빼먹으면, 본문의 <ins class="adsbygoogle">
+    // 가 라이브러리 없이 렌더돼 광고가 실제로는 뜨지 않는다.
+    const adsenseHeadInner = isA ? ADSENSE_HEAD_SCRIPT : '';
+    const afterAdsenseHead = replaceBetweenMarkers(work, 'POLICY_ADSENSE_HEAD', adsenseHeadInner ? '  ' + adsenseHeadInner : '');
+    if (afterAdsenseHead === null) { missingAdsenseHead.push(f); return; }
+    work = afterAdsenseHead;
+
+    const robotsContent = isA ? 'index,follow' : 'noindex,follow';
+    work = work.replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="' + robotsContent + '">');
+
+    const nextText = eol === '\r\n' ? work.split('\n').join('\r\n') : work;
+    writeIfChanged(file, nextText, report);
+  });
+
+  if (missingNote.length || missingAd.length || missingAdsenseHead.length) {
+    const parts = [];
+    if (missingNote.length) parts.push('POLICY_NOTE 마커 없음 (' + missingNote.length + '건):\n  - ' + missingNote.join('\n  - '));
+    if (missingAd.length) parts.push('POLICY_AD 마커 없음 (' + missingAd.length + '건):\n  - ' + missingAd.join('\n  - '));
+    if (missingAdsenseHead.length) parts.push('POLICY_ADSENSE_HEAD 마커 없음 (' + missingAdsenseHead.length + '건):\n  - ' + missingAdsenseHead.join('\n  - '));
+    fail(parts.join('\n'));
+  }
+
+  return pageIds;
+}
+
+/* sitemap.xml 의 policy- URL 을 A등급(policy-notes.json 에 해설이 있는 서비스ID)만 남도록 동기화.
+   이미 등록돼 있던 항목은 원래 줄(= lastmod 포함)을 그대로 유지하고, 새로 A등급이 된 것만
+   오늘 날짜로 추가한다 — 한 건 승격할 때마다 무관한 기존 항목들의 lastmod 가 같이 바뀌는
+   잡음을 막기 위함(구 generate-policy-pages.js 의 syncSitemapPolicyEntries 는 매번 전체를 오늘 날짜로 재작성했다). */
+function renderSitemapPolicyEntries(pageIds, report) {
+  const sitemapFile = path.join(ROOT, 'sitemap.xml');
+  if (!fs.existsSync(sitemapFile)) return;
+  const notes = loadPolicyNotes();
+  const raw = fs.readFileSync(sitemapFile, 'utf8');
+  const eol = detectEol(raw);
+  const work = raw.split('\r\n').join('\n');
+
+  const urlLineRe = /  <url><loc>https:\/\/benefitson\.org\/pages\/policy-([^<]+)<\/loc>[^\n]*<\/url>\n/g;
+  const existing = [];
+  let m;
+  while ((m = urlLineRe.exec(work)) !== null) {
+    existing.push({ id: m[1], line: m[0] });
+  }
+
+  const aIdSet = new Set(pageIds.filter((id) => Object.prototype.hasOwnProperty.call(notes, id)));
+  const keptIds = new Set();
+  const keptLines = existing.filter((e) => aIdSet.has(e.id)).map((e) => { keptIds.add(e.id); return e.line; });
+
+  const today = new Date().toISOString().slice(0, 10);
+  const newLines = pageIds
+    .filter((id) => aIdSet.has(id) && !keptIds.has(id))
+    .map((id) => '  <url><loc>' + SITE_URL + '/pages/policy-' + id + '</loc><lastmod>' + today +
+      '</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n');
+
+  const allLines = keptLines.concat(newLines).join('');
+  const stripped = work.replace(/  <url><loc>https:\/\/benefitson\.org\/pages\/policy-[^<]+<\/loc>[^\n]*<\/url>\n/g, '');
+  const next = stripped.replace('</urlset>', allLines + '</urlset>');
+  const nextText = eol === '\r\n' ? next.split('\n').join('\r\n') : next;
+  writeIfChanged(sitemapFile, nextText, report);
 }
 
 const ADSENSE_PATTERN = /adsbygoogle|google-adsense-account|pagead2\.googlesyndication\.com/;
@@ -411,9 +547,20 @@ function main() {
       missingDetailPages.join('\n  - '));
   }
 
-  // 정책 상세 페이지(pages/policy-*.html) 등급 검증.
-  // A등급(=data/policy-notes.json 에 해설이 있는 서비스ID)이 아니면 noindex 여야 하고
-  // 애드센스 블록/스크립트가 한 줄도 있으면 안 된다. (애드센스 3차 거절 방지 안전판)
+  const report = { written: [], unchanged: [], skipped: [], counts: {} };
+
+  // 정책 상세 페이지(pages/policy-*.html) 등급 반영 — "쓰기"가 먼저다.
+  // A등급(=data/policy-notes.json 에 해설이 있는 서비스ID)이면 POLICY_NOTE/POLICY_AD 마커를
+  // 채우고 robots 를 index,follow 로, 아니면 두 마커를 비우고 noindex,follow 로 쓴다.
+  // CSV/gov24 등 저장소 밖 소스에 의존하지 않는다(generate-policy-pages.js 를 실행할 필요 없음).
+  const policyPageIds = renderPolicyPages(report);
+
+  // sitemap.xml 의 policy- URL 을 A등급만 남도록 동기화. 기존 항목의 lastmod 는 보존하고
+  // 새로 A등급이 된 것만 오늘 날짜로 추가한다.
+  renderSitemapPolicyEntries(policyPageIds, report);
+
+  // 위 "쓰기" 결과를 독립적으로 재검증. A등급이 아니면 noindex 여야 하고
+  // 애드센스/애드핏 블록/스크립트가 한 줄도 있으면 안 된다. (애드센스 3차 거절 방지 안전판)
   validatePolicyDetailPages();
 
   // sitemap 에는 A등급 정책 상세 페이지만 등록되어야 한다.
@@ -430,8 +577,6 @@ function main() {
       unknownCategories.add(p.category);
     }
   });
-
-  const report = { written: [], unchanged: [], skipped: [], counts: {} };
 
   // expired 경고 (지시 B)
   const expired = policies.filter((p) => p.status === 'expired');

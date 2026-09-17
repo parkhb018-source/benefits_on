@@ -3,7 +3,18 @@
  * scripts/generate-policy-pages.js
  *
  * 상세페이지_생성목록_244.csv 의 "생성" 164건에 대해 pages/policy-{서비스ID}.html 을 생성하고,
- * data/policies.json 의 detailUrl 을 채우고, data/policy-notes.json 을 생성한다.
+ * data/policies.json 의 detailUrl 을 채운다.
+ *
+ * ★ gov24 원문이 실제로 갱신됐을 때만 실행한다. A등급 승격에는 필요 없다
+ *   (data/policy-notes.json 편집 후 node scripts/build-pages.js 실행으로 끝난다).
+ *   저장소 밖 소스(CSV/gov24 JSON)가 뒤처진 상태로 이 스크립트를 실행하면
+ *   164건 전체가 그 시점의 낡은 내용으로 되감긴다 — 카테고리 오배치·캐시버스터
+ *   역행 등 이미 한 번 겪은 사고다. 실행 전 반드시 소스 최신화 여부를 확인할 것.
+ *
+ * 정책 해설(.policy-note) 렌더링 · robots(A/C 등급) 판정 · 광고(애드센스/애드핏) 삽입 ·
+ * sitemap.xml 정책 URL 동기화는 이제 이 스크립트가 하지 않는다 — 전부 scripts/build-pages.js
+ * 가 담당한다(POLICY_NOTE/POLICY_AD/POLICY_ADSENSE_HEAD 마커 기반). 이 스크립트는 항상
+ * C등급 기본값(noindex, 마커 3종 전부 빈 채로)으로만 페이지를 만든다.
  *
  * 소스 데이터(로컬 절대경로, 저장소 밖):
  *   E:\사업\Pixel Vibe\수익화 웹사이트01\Claude outputs\상세페이지_생성목록_244.csv
@@ -21,21 +32,12 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const PAGES_DIR = path.join(ROOT, 'pages');
 const DATA_DIR = path.join(ROOT, 'data');
-const SITEMAP_FILE = path.join(ROOT, 'sitemap.xml');
 
 const SRC_ROOT = 'E:/사업/Pixel Vibe/수익화 웹사이트01';
 const CSV_PATH = SRC_ROOT + '/Claude outputs/상세페이지_생성목록_244.csv';
 const GOV24_DIR = SRC_ROOT + '/gov24';
 
 const SITE = 'https://benefitson.org';
-
-/* A등급(=data/policy-notes.json 에 해설이 있는 서비스ID) 판정은 scripts/build-pages.js 와 동일 기준.
-   해설은 문단 단위 문자열 배열 — h1 바로 아래, "어떤 지원인가요" 위에 문단으로 렌더한다. */
-function loadNotes() {
-  const file = path.join(DATA_DIR, 'policy-notes.json');
-  if (!fs.existsSync(file)) return {};
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
 
 /* ── CSV 파서 (RFC4180 최소 구현: 따옴표 안 콤마 처리) ─────────── */
 function parseCSV(text) {
@@ -271,12 +273,11 @@ function splitList(v) {
   return String(v).split('||').map((s) => s.trim()).filter(Boolean);
 }
 
-function renderPage(row, detail, cond, notes) {
+function renderPage(row, detail, cond) {
   const id = row.id;
   const name = row.name;
   const category = row.category;
   const hubPage = CATEGORY_PAGES[category] || 'calculators';
-  const isA = Object.prototype.hasOwnProperty.call(notes, id);
 
   const purpose = detail['서비스목적'] || '';
   const target = detail['지원대상'] || '';
@@ -333,27 +334,6 @@ function renderPage(row, detail, cond, notes) {
   const title = esc(name) + ' 신청 자격·지원금액·신청방법 — 혜택on';
   const description = esc((purpose || target || name).toString().slice(0, 90));
 
-  const robotsContent = isA ? 'index,follow' : 'noindex,follow';
-
-  const adsenseHeadScript = isA
-    ? '\n  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4871058922328451" crossorigin="anonymous"></script>'
-    : '';
-
-  const noteParagraphs = isA ? (notes[id] || []) : [];
-  const noteHtml = noteParagraphs.length
-    ? '<div class="policy-note">' + noteParagraphs.map((p) => '<p>' + textToHtml(p) + '</p>').join('\n            ') + '</div>'
-    : '';
-
-  const adsenseInArticleHtml = isA
-    ? '\n            <ins class="adsbygoogle"\n' +
-      '                 style="display:block; text-align:center;"\n' +
-      '                 data-ad-layout="in-article"\n' +
-      '                 data-ad-format="fluid"\n' +
-      '                 data-ad-client="ca-pub-4871058922328451"\n' +
-      '                 data-ad-slot="2985171819"></ins>\n' +
-      '            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>\n'
-    : '';
-
   const lastUpdated = detail['수정일시'] || '';
   const freshnessNote = lastUpdated
     ? '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:16px;">이 내용은 정부24 ' +
@@ -368,13 +348,13 @@ function renderPage(row, detail, cond, notes) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${description}">
-  <link rel="stylesheet" href="../style.css?v=20260914">
+  <link rel="stylesheet" href="../style.css?v=20260916">
   <link rel="stylesheet" href="pages.css?v=20260914b">
   <link rel="canonical" href="${canonical}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${SITE}/og-image.png">
   <meta property="og:site_name" content="혜택on">
-  <meta name="robots" content="${robotsContent}">
+  <meta name="robots" content="noindex,follow">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1YVTR39FF"></script>
@@ -384,7 +364,9 @@ function renderPage(row, detail, cond, notes) {
     gtag('js', new Date());
     gtag('config', 'G-K1YVTR39FF');
   </script>
-<script src="/assets/js/analytics.js"></script>${adsenseHeadScript}
+<script src="/assets/js/analytics.js"></script>
+<!-- AUTOGEN:POLICY_ADSENSE_HEAD:START -->
+<!-- AUTOGEN:POLICY_ADSENSE_HEAD:END -->
 </head>
 <body>
   <header class="site-header">
@@ -432,7 +414,8 @@ function renderPage(row, detail, cond, notes) {
             <h1 class="article-h1">${esc(name)}</h1>
           </header>
 
-          ${noteHtml}
+          <!-- AUTOGEN:POLICY_NOTE:START -->
+          <!-- AUTOGEN:POLICY_NOTE:END -->
 
           ${eligibilityHtml}
 
@@ -477,7 +460,8 @@ ${toolCardsHtml}
             </div>
 
             ${laws.length ? '<h2>근거 법령</h2>' + lawsHtml : ''}
-${adsenseInArticleHtml}
+            <!-- AUTOGEN:POLICY_AD:START -->
+            <!-- AUTOGEN:POLICY_AD:END -->
             ${freshnessNote}
             <p style="margin-top:8px;"><a href="${esc(finalUrl)}" class="cta-link" rel="nofollow noopener" target="_blank" style="font-size:0.85rem;">정부24에서 신청하기 →</a></p>
           </div>
@@ -513,7 +497,6 @@ function main() {
   console.log('CSV 생성 대상:', genRows.length, '건 (기대값 164)');
 
   const { detailMap, condMap } = loadJoinedMaps();
-  const notes = loadNotes();
 
   let written = 0;
   const missing = [];
@@ -521,12 +504,12 @@ function main() {
     const detail = detailMap.get(row.id);
     if (!detail) { missing.push(row.id + ' ' + row.name); return; }
     const cond = condMap.get(row.id) || null;
-    const html = renderPage(row, detail, cond, notes);
+    const html = renderPage(row, detail, cond);
     fs.writeFileSync(path.join(PAGES_DIR, 'policy-' + row.id + '.html'), html);
     written++;
   });
 
-  console.log('생성 완료:', written, '개 파일');
+  console.log('생성 완료:', written, '개 파일 (전부 C등급 기본값 — noindex, 마커 3종 빈 채로)');
   if (missing.length) {
     console.log('⚠ detail 조인 실패:', missing.length, '건');
     missing.forEach((m) => console.log('  - ' + m));
@@ -546,41 +529,8 @@ function main() {
   fs.writeFileSync(policiesFile, JSON.stringify(policiesData, null, 2) + '\n');
   console.log('policies.json detailUrl 갱신:', updated, '건');
 
-  // policy-notes.json 생성 (없을 때만)
-  const notesFile = path.join(DATA_DIR, 'policy-notes.json');
-  if (!fs.existsSync(notesFile)) {
-    fs.writeFileSync(notesFile, '{}\n');
-    console.log('data/policy-notes.json 생성 (빈 객체)');
-  } else {
-    console.log('data/policy-notes.json 이미 존재, 건드리지 않음');
-  }
-
-  // sitemap.xml 동기화 — A등급(policy-notes.json 에 해설이 있는) 정책 상세 페이지만 등록한다.
-  syncSitemapPolicyEntries(genRows, notes);
-}
-
-function syncSitemapPolicyEntries(genRows, notes) {
-  if (!fs.existsSync(SITEMAP_FILE)) return;
-  const genIdSet = new Set(genRows.map((r) => r.id));
-  const aIds = genRows
-    .map((r) => r.id)
-    .filter((id) => genIdSet.has(id) && Object.prototype.hasOwnProperty.call(notes, id));
-
-  let xml = fs.readFileSync(SITEMAP_FILE, 'utf8');
-  const eol = /\r\n/.test(xml) ? '\r\n' : '\n';
-
-  // 기존 policy- URL 블록 전부 제거 후, A등급만 다시 추가한다(등급이 바뀌어도 항상 정합).
-  xml = xml.replace(/ {2}<url><loc>https:\/\/benefitson\.org\/pages\/policy-[^<]+<\/loc>[^\n]*<\/url>\r?\n/g, '');
-
-  const today = new Date().toISOString().slice(0, 10);
-  const newEntries = aIds
-    .map((id) => '  <url><loc>' + SITE + '/pages/policy-' + id + '</loc><lastmod>' + today +
-      '</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>' + eol)
-    .join('');
-
-  xml = xml.replace('</urlset>', newEntries + '</urlset>');
-  fs.writeFileSync(SITEMAP_FILE, xml);
-  console.log('sitemap.xml 정책 상세 페이지 동기화: A등급 ' + aIds.length + '건');
+  console.log('\n다음: node scripts/build-pages.js 를 실행해 data/policy-notes.json 기준으로');
+  console.log('A등급 마커(POLICY_NOTE/POLICY_AD/POLICY_ADSENSE_HEAD)·robots·sitemap 을 채운다.');
 }
 
 main();

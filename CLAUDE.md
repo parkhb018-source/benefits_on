@@ -40,6 +40,23 @@
 > 매칭 규칙은 `matching-rules.json`(런타임 소스)과 `main.js`의 `defaultBenefitsMap`(fallback)
 > **두 곳에 존재**합니다. 혜택 항목을 추가/변경하면 두 곳의 정합성을 함께 확인하세요.
 
+## 정책 상세 페이지 A등급 승격
+
+`pages/policy-*.html` 164개는 A등급(해설·광고 포함, index 허용)과 C등급(광고 없음, noindex)
+두 등급으로 나뉩니다. 등급 판정 기준은 오직 `data/policy-notes.json`에 해당 서비스ID 키가
+있는지입니다. 정책 하나를 A등급으로 승격하려면:
+
+1. `data/policy-notes.json`에 서비스ID 키와 해설 문단(문자열 배열)을 추가한다.
+2. `node scripts/build-pages.js`를 실행한다.
+3. 끝. 해설 렌더링·`robots` 메타·애드센스/애드핏 광고·sitemap 등록을 모두
+   `build-pages.js`가 `pages/policy-*.html`에 이미 심어둔 `AUTOGEN:POLICY_NOTE` /
+   `AUTOGEN:POLICY_AD` / `AUTOGEN:POLICY_ADSENSE_HEAD` 마커 사이에 채워 넣습니다.
+
+`scripts/generate-policy-pages.js`는 **실행하지 않습니다.** 이 스크립트는 저장소 밖의
+gov24 원문(CSV·JSON)이 실제로 갱신됐을 때만 쓰는 것이고, 그 소스가 낡은 상태로 돌리면
+164개 페이지 전체가 그 시점 내용으로 되감깁니다. 자세한 내용은 두 스크립트 상단 주석을
+참고하세요.
+
 ## 작업 시 주의사항
 
 - 콘텐츠 언어는 **한국어**. 새 문구·UI 텍스트는 기존 톤을 따릅니다.
