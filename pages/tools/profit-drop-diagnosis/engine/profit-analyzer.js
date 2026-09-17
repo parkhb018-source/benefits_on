@@ -115,26 +115,36 @@ function describeStatus({ profitChange, allZero, allItemsSame }) {
   return allItemsSame ? STATUS.PROFIT_SAME : STATUS.PROFIT_SAME_BUT_ITEMS_CHANGED;
 }
 
-// status(PROFIT_UP/PROFIT_DOWN)는 이익 증감의 부호만 보고 판정하지만, headline 문구는
-// 두 기간이 모두 적자인지(축소) / 흑자에서 적자로 넘어갔는지(전환)까지 반영한다.
-// "이익이 늘었습니다"만 보여주면 여전히 적자인 상태를 흑자로 오해할 수 있기 때문이다.
-function buildHeadline(status, { profitPrev, profitCurr, profitChange }) {
-  switch (status) {
-    case STATUS.NO_DATA:
-      return '비교할 숫자가 없습니다.';
-    case STATUS.PROFIT_DOWN:
-      if (profitPrev >= 0 && profitCurr < 0) return '이번 달 적자로 전환되었습니다.';
-      return `이번 달 이익이 지난달보다 ${formatWon(-profitChange)} 줄었습니다.`;
-    case STATUS.PROFIT_UP:
-      if (profitPrev < 0 && profitCurr < 0) return `적자 규모가 ${formatWon(profitChange)} 줄었습니다.`;
-      return `이번 달 이익이 지난달보다 ${formatWon(profitChange)} 늘었습니다.`;
-    case STATUS.PROFIT_SAME:
-      return '지난달과 이번 달 이익이 같습니다.';
-    case STATUS.PROFIT_SAME_BUT_ITEMS_CHANGED:
-      return '이익은 지난달과 같지만, 항목별로는 변화가 있었습니다.';
-    default:
-      return '';
+// 배지(heroTier)와 headline 문구를 같은 분기에서 함께 결정한다(둘이 어긋나면 오해를 부른다).
+// status enum(PROFIT_UP/PROFIT_DOWN/...)과는 별개 함수 — status 는 이익 증감 부호만 보지만,
+// 이 함수는 두 기간의 흑자/적자 여부(부호)까지 봐서 9가지 상황을 구분한다.
+// 핵심 원칙: 아직 적자인데 success(초록)를 쓰지 않는다 — 적자 축소/유지는 warning(주황).
+function describeOutcome({ profitPrev, profitCurr, profitChange, allZero, allItemsSame }) {
+  if (allZero) {
+    return { heroTier: { label: '데이터 없음', tone: '' }, headline: '비교할 숫자가 없습니다.' };
   }
+
+  const prevNeg = profitPrev < 0;
+  const currNeg = profitCurr < 0;
+
+  if (!prevNeg && currNeg) {
+    return { heroTier: { label: '적자 전환', tone: 'danger' }, headline: '이번 달 적자로 전환되었습니다.' };
+  }
+  if (prevNeg && !currNeg) {
+    return { heroTier: { label: '흑자 전환', tone: 'success' }, headline: '이번 달 흑자로 전환되었습니다.' };
+  }
+  if (prevNeg && currNeg) {
+    if (profitChange > 0) return { heroTier: { label: '적자 축소', tone: 'warning' }, headline: `적자 규모가 ${formatWon(profitChange)} 줄었습니다.` };
+    if (profitChange < 0) return { heroTier: { label: '적자 확대', tone: 'danger' }, headline: `적자 규모가 ${formatWon(-profitChange)} 늘었습니다.` };
+    return { heroTier: { label: '적자 유지', tone: 'warning' }, headline: '적자 규모가 지난달과 같습니다.' };
+  }
+
+  // 두 기간 모두 흑자(0 포함)
+  if (profitChange < 0) return { heroTier: { label: '이익 감소', tone: 'danger' }, headline: `이번 달 이익이 지난달보다 ${formatWon(-profitChange)} 줄었습니다.` };
+  if (profitChange > 0) return { heroTier: { label: '이익 증가', tone: 'success' }, headline: `이번 달 이익이 지난달보다 ${formatWon(profitChange)} 늘었습니다.` };
+  return allItemsSame
+    ? { heroTier: { label: '변화 없음', tone: '' }, headline: '지난달과 이번 달 이익이 같습니다.' }
+    : { heroTier: { label: '이익 동일', tone: '' }, headline: '이익은 지난달과 같지만, 항목별로는 변화가 있었습니다.' };
 }
 
 /**
@@ -157,7 +167,7 @@ export function analyze(prev, curr) {
   const allItemsSame = FIELD_KEYS.every((k) => deltas[k] === 0);
 
   const status = describeStatus({ profitChange, allZero, allItemsSame });
-  const headline = buildHeadline(status, { profitPrev, profitCurr, profitChange });
+  const { heroTier, headline } = describeOutcome({ profitPrev, profitCurr, profitChange, allZero, allItemsSame });
 
   const top = rankedImpacts[0];
   const hasTopImpact = !allZero && !!top && top.impact !== 0;
@@ -177,6 +187,7 @@ export function analyze(prev, curr) {
     status,
     heroLabel: HERO_LABEL,
     heroAmount: profitChange,
+    heroTier,
     headline,
     topImpactLine,
     notCauseLine,
@@ -184,4 +195,45 @@ export function analyze(prev, curr) {
     actionHints: buildActionHints(rankedImpacts),
     caveats: [CAVEAT_TEXT],
   };
+}
+
+// ───────────────────────── 워터폴 좌표 계산 (그리기 전용, 문구 아님) ─────────────────────────
+// 0 기준선이 있는 양방향 축. 지난달 이익 → 항목별 영향 → 이번 달 이익을 누적해 도메인을 잡는다.
+// 순수 함수(DOM 의존 없음)라 app.js 는 이 좌표를 그대로 스타일(left/width %)에 꽂기만 한다.
+
+/** @param {ReturnType<typeof analyze>} a */
+export function computeWaterfallLayout(a) {
+  const { profitPrev, profitCurr, rankedImpacts } = a;
+  const moved = rankedImpacts.filter((i) => i.impact !== 0);
+
+  const stops = [0, profitPrev, profitCurr];
+  let run = profitPrev;
+  moved.forEach((i) => { run += i.impact; stops.push(run); });
+
+  const domainMin = Math.min(...stops);
+  const domainMax = Math.max(...stops);
+  const span = (domainMax - domainMin) || 1;
+  const x = (v) => (v - domainMin) / span * 100;
+  const zeroPct = x(0);
+
+  const edgeGeometry = (value) => ({
+    left: x(Math.min(0, value)),
+    width: Math.max(0.8, Math.abs(x(value) - x(0))),
+  });
+
+  const rows = [];
+  rows.push({ kind: 'prev', name: '지난달 이익', value: profitPrev, negative: profitPrev < 0, ...edgeGeometry(profitPrev) });
+
+  run = profitPrev;
+  moved.forEach((i) => {
+    const from = run, to = run + i.impact; run = to;
+    rows.push({
+      kind: 'impact', id: i.id, name: i.name, impact: i.impact, delta: i.delta,
+      left: x(Math.min(from, to)), width: Math.max(0.8, Math.abs(x(to) - x(from))),
+    });
+  });
+
+  rows.push({ kind: 'curr', name: '이번 달 이익', value: profitCurr, negative: profitCurr < 0, ...edgeGeometry(profitCurr) });
+
+  return { zeroPct, domainMin, domainMax, rows };
 }

@@ -2,7 +2,7 @@
 // 계산·상태·결과 문구는 engine/profit-analyzer.js 에만 있다.
 // 이 파일은 입력 검증 · 콤마 처리 · DOM 조립 · localStorage 저장만 담당한다.
 
-import { analyze, formatWon } from './engine/profit-analyzer.js?v=20260917';
+import { analyze, formatWon, computeWaterfallLayout } from './engine/profit-analyzer.js?v=20260917b';
 
 const INPUTS_KEY = 'profitDropDiagnosisInputs';
 
@@ -19,14 +19,6 @@ const FIELDS = [
 const SAMPLE = {
   prev: { sales: 30_000_000, foodCost: 11_000_000, laborCost: 7_000_000, rent: 3_000_000, platformFee: 2_000_000, otherCost: 3_000_000 },
   curr: { sales: 30_000_000, foodCost: 12_500_000, laborCost: 7_800_000, rent: 3_000_000, platformFee: 2_100_000, otherCost: 3_100_000 },
-};
-
-const STATUS_TIER = {
-  PROFIT_DOWN: { label: '이익 감소', tone: 'tone-danger' },
-  PROFIT_UP: { label: '이익 증가', tone: 'tone-success' },
-  PROFIT_SAME: { label: '변화 없음', tone: '' },
-  PROFIT_SAME_BUT_ITEMS_CHANGED: { label: '이익 동일', tone: '' },
-  NO_DATA: { label: '데이터 없음', tone: '' },
 };
 
 // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
@@ -181,24 +173,25 @@ function refresh() {
 // ───────────────────────── 진단 (결과 패널 렌더 + 공개) ─────────────────────────
 
 function renderWaterfall(a) {
-  const moved = a.rankedImpacts.filter((i) => i.impact !== 0);
-  const scale = Math.max(Math.abs(a.profitPrev), Math.abs(a.profitCurr), 1);
-  let run = a.profitPrev;
-  const rows = [`
-    <div class="wf-row is-edge"><div class="wf-name">지난달 이익</div>
-      <div class="wf-track"><div class="wf-bar base" style="left:0;width:${Math.min(100, Math.abs(a.profitPrev) / scale * 100)}%"></div></div>
-      <div class="wf-val muted">${formatWon(a.profitPrev)}</div></div>`];
-  moved.forEach((i, idx) => {
-    const from = run, to = run + i.impact; run = to;
-    const left = Math.min(from, to) / scale * 100, width = Math.abs(i.impact) / scale * 100;
-    rows.push(`<div class="wf-row${idx === 0 ? ' is-top' : ''}"><div class="wf-name">${i.name}</div>
-      <div class="wf-track"><div class="wf-bar ${i.impact > 0 ? 'pos' : ''}" style="left:${Math.max(0, left)}%;width:${Math.max(1.2, width)}%"></div></div>
-      <div class="wf-val ${i.impact < 0 ? 'neg' : 'pos'}">${signed(i.impact)}</div></div>`);
-  });
-  rows.push(`<div class="wf-row is-edge"><div class="wf-name">이번 달 이익</div>
-      <div class="wf-track"><div class="wf-bar final" style="left:0;width:${Math.min(100, Math.abs(a.profitCurr) / scale * 100)}%"></div></div>
-      <div class="wf-val muted">${formatWon(a.profitCurr)}</div></div>`);
-  $('waterfall').innerHTML = rows.join('');
+  const layout = computeWaterfallLayout(a);
+  const zeroLine = `<div class="wf-zero-line" style="left:${layout.zeroPct}%"></div>`;
+  let sawTop = false;
+
+  const rowHtml = (row) => {
+    if (row.kind === 'prev' || row.kind === 'curr') {
+      const toneClass = row.negative ? '' : (row.kind === 'prev' ? 'base' : 'final');
+      return `<div class="wf-row is-edge"><div class="wf-name">${row.name}</div>
+        <div class="wf-track">${zeroLine}<div class="wf-bar ${toneClass}" style="left:${row.left}%;width:${row.width}%"></div></div>
+        <div class="wf-val muted">${signed(row.value)}원</div></div>`;
+    }
+    const isTop = !sawTop;
+    sawTop = true;
+    return `<div class="wf-row${isTop ? ' is-top' : ''}"><div class="wf-name">${row.name}</div>
+      <div class="wf-track">${zeroLine}<div class="wf-bar ${row.impact > 0 ? 'pos' : ''}" style="left:${row.left}%;width:${row.width}%"></div></div>
+      <div class="wf-val ${row.impact < 0 ? 'neg' : 'pos'}">${signed(row.impact)}</div></div>`;
+  };
+
+  $('waterfall').innerHTML = layout.rows.map(rowHtml).join('');
 }
 
 function renderCheckList(a) {
@@ -226,9 +219,8 @@ function diagnose() {
   const a = refresh();
   if (!a) return null;
 
-  const tier = STATUS_TIER[a.status] || { label: a.status, tone: '' };
-  $('heroTier').textContent = tier.label;
-  $('heroTier').className = 'hero-tier ' + tier.tone;
+  $('heroTier').textContent = a.heroTier.label;
+  $('heroTier').className = 'hero-tier' + (a.heroTier.tone ? ' tone-' + a.heroTier.tone : '');
   $('heroAmount').innerHTML = (a.heroAmount === 0 ? '0' : signed(a.heroAmount)) + '<span class="won">원</span>';
   $('heroSent').textContent = a.headline;
   $('statPrev').textContent = formatWon(a.profitPrev);

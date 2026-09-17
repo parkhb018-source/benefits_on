@@ -3,26 +3,21 @@
 기준 문서: `08_BenefitsON_Rule_Engine_Standard_v1.0`. 카테고리 접두어는 이익 변동 상태 판정이므로
 **`PDD`**(Profit Drop Diagnosis) 를 신설한다.
 
-이 문서는 `engine/profit-analyzer.js` 의 `STATUS` / `describeStatus()` / `buildHeadline()` /
-`rankImpacts()` / `ACTION_TABLE` 과 **1:1로 대응**한다. 한쪽을 고치면 다른 쪽과 `CHANGELOG.md` 를
-함께 갱신한다.
+이 문서는 `engine/profit-analyzer.js` 의 `STATUS` / `describeStatus()` / `describeOutcome()` /
+`rankImpacts()` / `ACTION_TABLE` / `computeWaterfallLayout()` 과 **1:1로 대응**한다. 한쪽을 고치면
+다른 쪽과 `CHANGELOG.md` 를 함께 갱신한다.
 
 원칙: 동일 입력 → 동일 출력. 난수·시간·로케일 의존 금지. "원인"이라는 단어를 쓰지 않는다 —
 항상 "이익 변동에 영향을 준 항목"으로 표현한다.
 
-> **v1.1 변경**: `analyze()` 반환 형태를 `headline` 한 문장 조립에서
-> `heroLabel`/`heroAmount`/`headline`/`topImpactLine`/`notCauseLine` 5개 필드로 분리했다.
-> 동시에 상태를 `{id, tone, label}` 오브젝트에서 문자열 enum(`status`)으로 단순화하면서,
-> 적자 전환·적자 축소 전용 상태(구 `DEFICIT_FLIP`/`DEFICIT_REDUCED`)를 없애고
-> 이익 증감의 부호만으로 판정하도록 통합했다(`status` 는 흑자/적자 구분 없이 부호만 본다).
-> 이 변경으로도 **금액·순위 계산 로직은 전혀 바뀌지 않았다** — 문구 조립 방식과 상태 분류만 바뀌었다.
->
-> **주의(v1.1.1 수정)**: `status` 를 합친다고 해서 **문구까지 "줄었다/늘었다"로 뭉개면 안 된다.**
-> 두 기간이 모두 적자인데 적자가 줄었을 뿐인 경우 `status='PROFIT_UP'` + "늘었습니다"만 보여주면
-> 흑자로 착각할 수 있다. 그래서 `headline` 은 `status` 뿐 아니라 `profitPrev`/`profitCurr` 부호도
-> 함께 보고, 적자 축소·적자 전환일 때는 구 `DEFICIT_REDUCED`/`DEFICIT_FLIP` 과 동일한 문구를 그대로
-> 낸다(아래 PDD-DOWN/PDD-UP 참고). **`status` enum 은 5종으로 유지하되 `headline` 문장은 상황별로
-> 분기한다** — 이것이 이 엔진의 실제 동작이다.
+> **v1.2 변경 요약**: `status` enum(`NO_DATA`/`PROFIT_DOWN`/`PROFIT_UP`/`PROFIT_SAME`/
+> `PROFIT_SAME_BUT_ITEMS_CHANGED`, 5종)은 그대로 유지하되(`describeStatus()`, 이익 증감의
+> 부호만 본다), **배지(`heroTier`)와 `headline` 문구는 별도 함수 `describeOutcome()`이
+> `profitPrev`/`profitCurr`의 부호까지 함께 보고 9가지 상황으로 나눠 같은 분기에서 함께
+> 결정**한다(핵심 원칙: 아직 적자인데 success 톤을 쓰지 않는다 — 아래 상태 규칙 표 참고).
+> 또한 워터폴 그리기 좌표를 `computeWaterfallLayout()`으로 분리해 0 기준선이 있는 양방향
+> 축으로 바꿨다(이전엔 `Math.max(0, ...)`로 음수 구간이 잘려 적자 구간이 전혀 표현되지
+> 않던 버그 수정). **이 변경들로도 금액·순위·영향 합계 계산 로직은 전혀 바뀌지 않았다.**
 
 ## 표준 면책문구
 
@@ -47,53 +42,33 @@
 
 ## 상태 규칙 (PDD)
 
-평가 순서: **PDD-NODATA → PDD-DOWN → PDD-UP → PDD-SAME → PDD-CHANGED** (먼저 참이 되는 규칙 적용).
+`status`(enum, `describeStatus()`)와 `heroTier`+`headline`(`describeOutcome()`)은 **서로 다른
+함수가 계산하지만 같은 입력을 본다.** `status` 는 이익 증감 부호만, `describeOutcome()` 은 거기에
+더해 `profitPrev`/`profitCurr` 의 부호(흑자/적자 여부)까지 봐서 9가지 조합으로 나눈다.
 
-### PDD-NODATA — 전부 0
-```
-IF   allZero
-THEN status = NO_DATA
-     headline = "비교할 숫자가 없습니다."
-     topImpactLine = ""   notCauseLine = ""
-```
+평가 순서(`describeOutcome()`): **allZero → (흑자→적자 전환) → (적자→흑자 전환) →
+(둘 다 적자: 축소/확대/유지) → (둘 다 흑자: 감소/증가/동일)** — 먼저 참이 되는 분기 적용.
 
-### PDD-DOWN — 이익 감소 (적자 전환 포함)
-```
-IF   profitChange < 0
-THEN status = PROFIT_DOWN
-     IF   profitPrev ≥ 0  AND  profitCurr < 0
-     THEN headline = "이번 달 적자로 전환되었습니다."          (구 DEFICIT_FLIP 과 동일 문구)
-     ELSE headline = "이번 달 이익이 지난달보다 {−profitChange}원 줄었습니다."
-```
-`status` 는 흑자→적자 전환도 그냥 `PROFIT_DOWN` 이지만(별도 enum 없음), **`headline` 문구는
-구 `DEFICIT_FLIP` 과 동일하게 "적자로 전환되었습니다"를 낸다.** 두 기간 모두 적자이면서 더
-악화된 경우(예: −100만→−200만)는 이 분기에 해당하지 않아 일반 "줄었습니다" 문구를 쓴다.
+| # | 조건 (prev/curr/change 부호) | `status` | `heroTier.label` | `heroTier.tone` | `headline` |
+|---|---|---|---|---|---|
+| 1 | prev≥0, curr≥0, change<0 | `PROFIT_DOWN` | 이익 감소 | `danger` | 이번 달 이익이 지난달보다 N원 줄었습니다. |
+| 2 | prev≥0, curr≥0, change>0 | `PROFIT_UP` | 이익 증가 | `success` | 이번 달 이익이 지난달보다 N원 늘었습니다. |
+| 3 | change=0, 항목 변화 있음 | `PROFIT_SAME_BUT_ITEMS_CHANGED` | 이익 동일 | *(기본)* | 이익은 지난달과 같지만, 항목별로는 변화가 있었습니다. |
+| 4 | change=0, 항목 변화 없음 | `PROFIT_SAME` | 변화 없음 | *(기본)* | 지난달과 이번 달 이익이 같습니다. |
+| 5 | prev<0, curr<0, change>0 | `PROFIT_UP` | 적자 축소 | `warning` | 적자 규모가 N원 줄었습니다. |
+| 6 | prev<0, curr<0, change<0 | `PROFIT_DOWN` | 적자 확대 | `danger` | 적자 규모가 N원 늘었습니다. |
+| 7 | prev<0, curr<0, change=0 | `PROFIT_SAME` 또는 `PROFIT_SAME_BUT_ITEMS_CHANGED`(항목 변화 여부에 따름) | 적자 유지 | `warning` | 적자 규모가 지난달과 같습니다. |
+| 8 | prev≥0, curr<0 (자동으로 change<0) | `PROFIT_DOWN` | 적자 전환 | `danger` | 이번 달 적자로 전환되었습니다. |
+| 9 | prev<0, curr≥0 (자동으로 change>0) | `PROFIT_UP` | 흑자 전환 | `success` | 이번 달 흑자로 전환되었습니다. |
+| — | allZero | `NO_DATA` | 데이터 없음 | *(기본)* | 비교할 숫자가 없습니다. |
 
-### PDD-UP — 이익 증가 (적자 축소 포함)
-```
-IF   profitChange > 0
-THEN status = PROFIT_UP
-     IF   profitPrev < 0  AND  profitCurr < 0
-     THEN headline = "적자 규모가 {profitChange}원 줄었습니다."   (구 DEFICIT_REDUCED 과 동일 문구)
-     ELSE headline = "이번 달 이익이 지난달보다 {profitChange}원 늘었습니다."
-```
-`status` 는 적자 축소도 그냥 `PROFIT_UP` 이지만(별도 enum 없음), **두 기간이 모두 적자일 때는
-`headline` 이 구 `DEFICIT_REDUCED` 와 동일하게 "적자 규모가 ~ 줄었습니다"를 낸다** — 여전히
-적자인 상태를 "늘었습니다"라고만 표시해 흑자로 오해하게 만들지 않기 위함이다.
-
-### PDD-SAME — 이익 동일, 항목도 전부 동일
-```
-IF   profitChange = 0  AND  allItemsSame
-THEN status = PROFIT_SAME
-     headline = "지난달과 이번 달 이익이 같습니다."
-```
-
-### PDD-CHANGED — 이익 동일, 항목은 변화
-```
-IF   profitChange = 0  AND  NOT allItemsSame
-THEN status = PROFIT_SAME_BUT_ITEMS_CHANGED
-     headline = "이익은 지난달과 같지만, 항목별로는 변화가 있었습니다."
-```
+**핵심 원칙: 아직 적자인데 success(초록) 톤을 쓰지 않는다.** 행 5·7의 `tone` 이 `success` 가
+아니라 `warning` 인 이유가 이것이다 — 적자 규모가 줄거나 그대로여도 여전히 적자이므로,
+"좋아졌다"는 인상을 주는 초록보다 "아직 주의가 필요하다"는 주황을 쓴다. 반대로 행 6(적자 확대)은
+`PROFIT_DOWN` 이지만 이미 danger 인 행 1과 톤이 같아 자연스럽게 구분되지 않는데, 이는 의도된
+것이다(적자든 흑자든 "악화"는 danger 로 통일). 행 8·9(부호 자체가 바뀌는 전환)는 `profitChange`
+의 부호가 항상 결정되어 있으므로(흑자→적자는 반드시 감소, 적자→흑자는 반드시 증가) 별도의
+`profitChange` 조건 분기가 필요 없다.
 
 ### 1등 항목 문장 — `topImpactLine` / `notCauseLine`
 ```
@@ -147,7 +122,7 @@ ELSE                                        flag = null
 숫자 변화 기준으로 확인할 항목을 보여드립니다. 실제 원인은 거래내역을 확인해야 합니다.
 ```
 
-## `analyze(prev, curr)` 반환 형태 (v1.1)
+## `analyze(prev, curr)` 반환 형태 (v1.2)
 
 ```
 {
@@ -155,7 +130,8 @@ ELSE                                        flag = null
   status,                                     // 'NO_DATA'|'PROFIT_DOWN'|'PROFIT_UP'|'PROFIT_SAME'|'PROFIT_SAME_BUT_ITEMS_CHANGED'
   heroLabel,                                  // "이익 변동" (고정)
   heroAmount,                                 // = profitChange. 포맷은 UI(formatWon)에서.
-  headline,                                   // 1차 상태 문장
+  heroTier,                                   // { label, tone } — tone: 'danger'|'success'|'warning'|'' (기본)
+  headline,                                   // 1차 상태 문장 (heroTier 와 같은 분기에서 함께 결정)
   topImpactLine,                              // 1등 항목 문장 (없으면 "")
   notCauseLine,                               // "원인 아님" 문장 (없으면 "")
   rankedImpacts,                              // [{ id, name, delta, impact, prev, curr, flag }]
@@ -163,3 +139,35 @@ ELSE                                        flag = null
   caveats,                                    // [string]
 }
 ```
+
+## `computeWaterfallLayout(a)` — 워터폴 그리기 좌표 (v1.2 신설)
+
+`analyze()` 의 결과(`profitPrev`/`profitCurr`/`rankedImpacts`)를 받아 워터폴 막대의 `left`/`width`
+좌표(0~100, %)를 계산하는 순수 함수. **"그리기 방식"이지 "문구"가 아니지만**, DOM 의존 없이
+결정적이고 테스트가 필요해 이 파일에 함께 둔다. `app.js` 는 이 좌표를 그대로 스타일에 꽂기만 한다.
+
+```
+IF   0 기준선이 없는 기존 방식(Math.max(0,...))은 이익이 음수면 left 가 전부 0으로 잘려
+     적자 구간이 전혀 표현되지 않았다 (v1.2 버그 수정 대상)
+THEN 0 을 포함한 양방향 축으로 바꾼다:
+
+  stops = [0, profitPrev, profitCurr, ...(rankedImpacts 중 impact≠0 인 항목을 누적한 중간값들)]
+  domainMin = min(stops)   domainMax = max(stops)   span = (domainMax - domainMin) || 1
+  x(v) = (v - domainMin) / span * 100                 // 0~100 스케일
+
+  지난달 이익 막대: left = x(min(0, profitPrev))   width = |x(profitPrev) - x(0)|
+  각 영향 막대(from→to 누적):  left = x(min(from, to))   width = |x(to) - x(from)|
+  이번 달 이익 막대: left = x(min(0, profitCurr))   width = |x(profitCurr) - x(0)|
+  모든 폭은 최소 0.8(%) 보장 — 폭이 0에 가까운 막대도 보이게.
+
+  zeroPct = x(0)   // 트랙에 0 기준선을 그리는 위치. domainMin=0(전부 양수)이면 0%(왼쪽 끝)라
+                    // 사실상 안 보여도 무방하지만, 조건 분기 없이 항상 그린다.
+```
+
+색상 규칙: 지난달/이번 달 이익 막대는 값이 음수면 danger(빨강), 0 이상이면 기존처럼
+`.wf-bar.base`(지난달, 회색)/`.wf-bar.final`(이번 달, 파랑). 영향 막대는 기존과 동일하게
+`impact>0` 이면 `.pos`(초록), 아니면 기본(빨강). 금액 텍스트는 항상 부호를 표기한다
+(`-3,000,000` / `+2,000,000`) — 색만으로 증감을 구분하지 않는다(규약).
+
+전부 양수인 도메인(모든 stops ≥ 0)에서는 `domainMin=0` 이 되어 **개편 전(v1.1)과 좌표값이
+동일하다** — 기획문서 검증 케이스로 확인(QA-20).

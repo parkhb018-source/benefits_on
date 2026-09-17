@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 로컬: `python -m http.server 8000` → `http://localhost:8000`.
   `app.js` 가 ESM(`import`)이라 `file://` 로는 안 열린다 — 반드시 정적 서버로 띄운다.
-- 계산 엔진 테스트: `node engine/profit-analyzer.test.js` (외부 의존성 없음, QA-01~15).
+- 계산 엔진 테스트: `node engine/profit-analyzer.test.js` (외부 의존성 없음, QA-01~20, 23개).
 - 회귀 기준: `docs/tools/profit-drop-diagnosis/03_QA_Test_Cases.md` (저장소 루트 기준).
 
 ## 아키텍처
@@ -26,21 +26,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   { profitPrev, profitCurr, profitChange,
     status,                        // 'NO_DATA'|'PROFIT_DOWN'|'PROFIT_UP'|'PROFIT_SAME'|'PROFIT_SAME_BUT_ITEMS_CHANGED'
     heroLabel, heroAmount,         // 히어로 큰 숫자용 (heroAmount = profitChange, 포맷은 UI에서)
+    heroTier,                      // { label, tone } — tone: 'danger'|'success'|'warning'|''. headline 과 같은
+                                    // 분기(describeOutcome())에서 함께 결정 — 어긋나면 안 됨(9가지 상황, 02번 문서)
     headline, topImpactLine, notCauseLine,
     rankedImpacts,                 // [{ id, name, delta, impact, prev, curr, flag }]
     actionHints,                   // [{ id, name, impact, text, toolUrl }]
     caveats }
   ```
-  를 반환한다. `formatWon` 도 여기 있다.
+  를 반환한다. `formatWon` 도 여기 있다. `computeWaterfallLayout(a)` 는 워터폴 막대의 `left`/`width`
+  좌표(0 기준선이 있는 양방향 축, % 단위)를 계산하는 별도 순수 함수 — "그리기 방식"이라 문구는
+  아니지만 DOM 의존 없이 결정적이라 여기 함께 둔다.
   DOM·localStorage·시간·난수 의존 없음, 로케일 ko-KR 고정. 동일 입력 → 동일 출력.
   내부 함수(`normalizeInput`/`calculateProfit`/`calculateDelta`/`calculateImpacts`/`rankImpacts`)는
-  테스트를 위해 export 하지만, `app.js` 는 `analyze`·`formatWon` 두 개만 import 한다.
+  테스트를 위해 export 하지만, `app.js` 는 `analyze`·`formatWon`·`computeWaterfallLayout` 세 개만
+  import 한다.
   `rankedImpacts[].flag` 는 열거값(`NEW_COST`/`COST_ENDED`/`null`)만 반환 — "신규 발생"/
   "이번 달 없음" 같은 배지 문구는 `app.js` 가 매핑한다(순수 표시 라벨이라 예외적으로 UI에 둠).
 - **`app.js`** — 화면 로직만. 입력 검증 · 콤마 처리 · DOM 조립(6행 입력표를 `FIELDS` 배열로
-  생성) · localStorage. 계산식·판정·결과 문구 없음. 입력마다 `analyze()` 를 다시 호출해
-  행별 증감·합계를 갱신하고(라이브 피드백), "진단하기" 클릭 시에만 결과·리포트 패널을
-  공개하고 `scrollIntoView`.
+  생성) · localStorage. 계산식·판정·결과 문구·좌표 계산 없음(전부 엔진에서 가져다 그리기만).
+  입력마다 `analyze()` 를 다시 호출해 행별 증감·합계를 갱신하고(라이브 피드백), "진단하기"
+  클릭 시에만 결과·리포트 패널을 공개하고 `scrollIntoView`.
 - **`engine` 의 상태 규칙(`STATUS`)·영향 순위(`rankImpacts`)·행동 힌트(`ACTION_TABLE`)는
   `docs/tools/profit-drop-diagnosis/02_Rule_Engine_Profit_Drop_Diagnosis.md` 와 1:1 대응**.
   문구·순위 규칙을 바꾸면 → 엔진 + Rule Engine 문서 + `docs/tools/profit-drop-diagnosis/CHANGELOG.md`

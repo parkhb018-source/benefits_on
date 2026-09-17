@@ -101,7 +101,8 @@ button { font-family: inherit; }
 .num-input::placeholder { font-weight: 400; color: #b9bcc4; }
 .num-input:focus { background: #eaf2ff; }
 .money-input .unit { padding: 0 14px; font-size: 1rem; color: var(--color-sub); white-space: nowrap; }
-.read-hint { margin: 3px 12px 0 0; font-size: 0.72rem; color: var(--color-sub); text-align: right; min-height: 1em; font-variant-numeric: tabular-nums; }
+.read-hint { margin: 3px 12px 0 0; font-size: 0.72rem; color: var(--color-sub); text-align: right; font-variant-numeric: tabular-nums; }
+.read-hint:empty { display: none; }
 
 .delta { font-size: 0.85rem; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--color-sub); }
 .delta.up { color: var(--color-danger); }   /* 비용 증가 = 이익에 마이너스 */
@@ -119,12 +120,13 @@ button { font-family: inherit; }
 
 /* ===== 액션 버튼 ===== */
 .sheet-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-.calc-btn { flex: 1 1 220px; border: 0; border-radius: 14px; background: var(--color-primary); color: #fff; padding: 15px 18px; font-size: 1rem; font-weight: 800; cursor: pointer; }
+.calc-btn { display: block; width: 100%; border: 0; border-radius: 14px; background: var(--color-primary); color: #fff; padding: 15px 18px; font-size: 1rem; font-weight: 800; cursor: pointer; }
 .calc-btn:active { background: var(--color-primary-dark); }
 .ghost-btn { border: 1px solid var(--color-border); background: #fff; border-radius: 14px; padding: 14px 16px; font-size: 0.88rem; font-weight: 700; color: var(--color-text); cursor: pointer; }
 .ghost-btn:hover { background: #fafbfc; border-color: #d7d9df; }
 .ghost-btn.accent { color: var(--color-accent); border-color: #cfe3ff; background: var(--color-accent-tint); }
 .hint-line { margin: 10px 0 0; font-size: 0.8rem; color: var(--color-sub); }
+.calc-btn-wrap { margin-top: 18px; }
 
 /* ===== 결과 2단 ===== */
 .result-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 18px; margin-top: 18px; align-items: start; }
@@ -135,13 +137,14 @@ button { font-family: inherit; }
 .hero-tier { font-size: 0.78rem; font-weight: 800; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.2); }
 .hero-tier.tone-danger { background: var(--color-danger); }
 .hero-tier.tone-success { background: var(--color-success); }
+.hero-tier.tone-warning { background: var(--color-warning); }
 .hero-amount { margin: 8px 0 2px; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
 .hero-amount .won { font-size: 1.2rem; font-weight: 700; margin-left: 2px; }
 .hero-sent { margin: 6px 0 14px; font-size: 0.88rem; opacity: 0.9; }
 .hero-stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
 .hero-stat { background: rgba(255,255,255,0.12); border-radius: 14px; padding: 10px 12px; }
 .hero-stat-label { display: block; font-size: 0.75rem; opacity: 0.85; margin-bottom: 2px; }
-.hero-stat-value { display: block; font-size: 1.1rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.hero-stat-value { display: block; font-size: 1.1rem; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 /* ===== 워터폴: 이익이 어디서 깎였나 (가로 행 누적형, CSS만) ===== */
 .wf-title { font-size: 0.9rem; font-weight: 800; margin: 0 0 4px; }
@@ -150,6 +153,7 @@ button { font-family: inherit; }
 .wf-row { display: grid; grid-template-columns: minmax(92px, 0.85fr) minmax(0, 1fr) minmax(96px, auto); gap: 10px; align-items: center; }
 .wf-name { font-size: 0.85rem; font-weight: 700; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .wf-track { position: relative; height: 26px; background: #f4f5f7; border-radius: 7px; overflow: hidden; }
+.wf-zero-line { position: absolute; top: 0; bottom: 0; width: 1px; background: #c9ccd3; }
 .wf-bar { position: absolute; top: 4px; bottom: 4px; border-radius: 5px; background: var(--color-danger); }
 .wf-bar.pos { background: var(--color-success); }
 .wf-bar.base { background: #98a2b3; top: 2px; bottom: 2px; }
@@ -223,15 +227,26 @@ button { font-family: inherit; }
   html { font-size: 16px; }
   .panel { padding: 20px 16px; border-radius: 18px; }
   .sheet-head { display: none; }
-  .sheet-row { display: block; padding: 12px 0; border-bottom: 1px solid #f1f2f4; }
-  .row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
+  .sheet-row { display: block; padding: 9px 0; border-bottom: 1px solid #f1f2f4; }
+  .row-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 5px; }
   .row-inputs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 9px; }
   .row-inputs .col-tag { font-size: 0.7rem; color: var(--color-sub); font-weight: 700; margin-bottom: 3px; display: block; }
   .delta { text-align: right; }
   .sheet-total { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
   .total-val { padding-right: 0; }
   .hero-amount { font-size: 2.1rem; }
+  .hero-stat-value { font-size: 1rem; }
   .wf-row { grid-template-columns: minmax(74px, 0.8fr) minmax(0, 1fr) minmax(84px, auto); gap: 8px; }
+
+  /* 진단 버튼만 화면 하단에 고정 — 나머지 3개 버튼(지난달과 같음/예시 숫자/비우기)은 흐름 안에 둔다 */
+  .calc-btn-wrap {
+    position: sticky;
+    bottom: 0;
+    background: var(--color-card);
+    border-top: 1px solid var(--color-border);
+    margin: 16px 0 0;
+    padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
