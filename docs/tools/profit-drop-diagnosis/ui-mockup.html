@@ -1,0 +1,592 @@
+<title>이익 변동 진단 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
+<style>
+/* ===== 혜택on 무료도구 공통 디자인 시스템 토큰 (style.css 원본 그대로) ===== */
+:root{
+  --color-bg:#f2f3f5; --color-card:#ffffff; --color-text:#1c1c1e; --color-sub:#8a8f98;
+  --color-primary:#171717; --color-primary-dark:#000000;
+  --color-accent:#1481fa; --color-accent-tint:#e7f1ff; --color-border:#e6e7eb;
+  --color-danger:#e0245e; --color-success:#12b76a; --color-success-tint:#e5f9ee;
+  --color-warning:#f79009; --color-warning-tint:#fff4e5;
+  --radius:22px;
+  --shadow-card:0 2px 14px rgba(20,20,30,.06);
+  --shadow-pop:0 6px 20px rgba(20,20,30,.10);
+  --mock:#6b3fa0; --mock-tint:#f3edfb;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:17px}
+body{
+  margin:0; background:var(--color-bg); color:var(--color-text); line-height:1.5;
+  font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--color-accent); outline-offset:2px}
+
+/* ===== 시안 표시 바 ===== */
+.mock-bar{
+  background:var(--mock); color:#fff; padding:8px 16px; font-size:.78rem;
+  display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; text-align:center;
+}
+.mock-bar strong{font-weight:800}
+.mock-bar span{opacity:.85}
+
+/* ===== 상단 돌아가기 바 ===== */
+.tool-back-bar{display:block;padding:10px 16px;background:#1F4E79;color:#fff;font-size:.85rem;text-decoration:none;text-align:center}
+
+/* ===== 헤더 ===== */
+.app-header{text-align:center;padding:22px 16px 10px}
+.app-header h1{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;font-size:1.5rem;margin:0 0 8px;text-wrap:balance}
+.app-sub{max-width:52ch;margin:0 auto}
+.app-title-sub-badge{font-size:.75rem;font-weight:700;color:var(--color-sub);background:#eaebee;padding:4px 10px;border-radius:999px}
+.app-sub{font-size:.95rem;color:var(--color-sub);margin:0}
+
+/* ===== 안내 바 ===== */
+.notice-bar{max-width:1320px;margin:0 auto 16px;padding:0 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px}
+.notice-bar p{margin:0;font-size:.85rem;color:var(--color-sub)}
+.notice-badge{font-size:.78rem;font-weight:700;color:var(--color-accent);background:var(--color-accent-tint);padding:5px 12px;border-radius:999px}
+
+/* ===== 레이아웃 ===== */
+.app-main{max-width:1320px;margin:0 auto;padding:0 18px 40px}
+.panel{background:var(--color-card);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:24px 22px}
+.panel+.panel{margin-top:18px}
+.panel-title{font-size:1.05rem;font-weight:800;margin:0 0 4px}
+.panel-lead{margin:0 0 18px;font-size:.85rem;color:var(--color-sub)}
+
+/* ===== 입력 표 ===== */
+.sheet-head,.sheet-row{
+  display:grid; grid-template-columns:minmax(130px,1.25fr) 1fr 1fr minmax(104px,.8fr);
+  gap:10px; align-items:center;
+}
+.sheet-head{padding:0 2px 8px;border-bottom:1px solid var(--color-border);margin-bottom:6px}
+.sheet-head span{font-size:.78rem;font-weight:700;color:var(--color-sub);letter-spacing:.02em}
+.sheet-head span:nth-child(n+2){text-align:center}
+.sheet-row{padding:9px 2px;border-bottom:1px solid #f1f2f4}
+.sheet-row:last-of-type{border-bottom:0}
+.row-label{font-size:.95rem;font-weight:700;min-width:0}
+.row-label .opt{display:block;font-weight:400;color:var(--color-sub);font-size:.78rem}
+
+.money-input{display:flex;align-items:center;background:#f4f5f7;border-radius:12px;overflow:hidden}
+.money-input:focus-within{background:#eaf2ff;box-shadow:inset 0 0 0 1.5px var(--color-accent)}
+.num-input{
+  flex:1; min-width:0; border:0; background:transparent; padding:11px 4px 11px 12px;
+  font:inherit; font-size:1rem; font-weight:700; text-align:right; color:var(--color-text);
+  font-variant-numeric:tabular-nums;
+}
+.num-input::placeholder{font-weight:400;color:#b9bcc4}
+.num-input:focus{outline:none}
+.money-input .unit{padding:0 11px 0 2px;font-size:.9rem;color:var(--color-sub)}
+.read-hint{margin:3px 12px 0 0;font-size:.72rem;color:var(--color-sub);text-align:right;min-height:1em;font-variant-numeric:tabular-nums}
+
+.delta{
+  font-size:.85rem;font-weight:800;text-align:right;font-variant-numeric:tabular-nums;
+  white-space:nowrap;color:var(--color-sub)
+}
+.delta.up{color:var(--color-danger)}      /* 비용 증가 = 이익에 마이너스 */
+.delta.down{color:var(--color-success)}
+.delta.same{color:#c3c6cc;font-weight:400}
+.delta .badge{display:block;font-size:.68rem;font-weight:700;color:var(--color-sub)}
+
+/* 합계 줄 */
+.sheet-total{
+  display:grid;grid-template-columns:minmax(130px,1.25fr) 1fr 1fr minmax(104px,.8fr);gap:10px;
+  align-items:center;margin-top:10px;padding:14px 2px 2px;border-top:2px solid var(--color-border);
+}
+.sheet-total .row-label{font-size:.95rem}
+.total-val{text-align:right;padding-right:12px;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* ===== 액션 ===== */
+.sheet-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.calc-btn{
+  flex:1 1 220px;border:0;border-radius:14px;background:var(--color-primary);color:#fff;
+  padding:15px 18px;font-size:1rem;font-weight:800;cursor:pointer;
+}
+.calc-btn:active{background:var(--color-primary-dark)}
+.ghost-btn{
+  border:1px solid var(--color-border);background:#fff;border-radius:14px;
+  padding:14px 16px;font-size:.88rem;font-weight:700;color:var(--color-text);cursor:pointer;
+}
+.ghost-btn:hover{background:#fafbfc;border-color:#d7d9df}
+.ghost-btn.accent{color:var(--color-accent);border-color:#cfe3ff;background:var(--color-accent-tint)}
+.hint-line{margin:10px 0 0;font-size:.8rem;color:var(--color-sub)}
+
+/* ===== 결과 2단 ===== */
+.result-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:18px;align-items:start}
+
+.hero-card{
+  background:linear-gradient(135deg,#1f2937,#111827);color:#fff;border-radius:18px;padding:20px 20px 18px;margin-bottom:16px;
+}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hero-label{margin:0;font-size:.9rem;opacity:.85}
+.hero-tier{font-size:.78rem;font-weight:800;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.2)}
+.hero-tier.tone-danger{background:var(--color-danger)}
+.hero-tier.tone-success{background:var(--color-success)}
+.hero-amount{
+  margin:8px 0 2px;font-size:2.5rem;font-weight:800;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;line-height:1.1;
+}
+.hero-amount .won{font-size:1.2rem;font-weight:700;margin-left:2px}
+.hero-sent{margin:6px 0 14px;font-size:.88rem;opacity:.9}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hero-stat{background:rgba(255,255,255,.12);border-radius:14px;padding:10px 12px}
+.hero-stat-label{display:block;font-size:.75rem;opacity:.85;margin-bottom:2px}
+.hero-stat-value{display:block;font-size:1.1rem;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* 워터폴 */
+.wf-title{font-size:.9rem;font-weight:800;margin:0 0 4px}
+.wf-sub{margin:0 0 14px;font-size:.78rem;color:var(--color-sub)}
+.wf{display:flex;flex-direction:column;gap:7px}
+.wf-row{display:grid;grid-template-columns:minmax(92px,.85fr) 1fr minmax(96px,auto);gap:10px;align-items:center}
+.wf-name{font-size:.85rem;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wf-track{position:relative;height:26px;background:#f4f5f7;border-radius:7px;overflow:hidden}
+.wf-bar{position:absolute;top:4px;bottom:4px;border-radius:5px;background:var(--color-danger)}
+.wf-bar.pos{background:var(--color-success)}
+.wf-bar.base{background:#98a2b3;top:2px;bottom:2px}
+.wf-bar.final{background:var(--color-accent);top:2px;bottom:2px}
+.wf-val{font-size:.82rem;font-weight:800;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wf-val.neg{color:var(--color-danger)}
+.wf-val.pos{color:var(--color-success)}
+.wf-val.muted{color:var(--color-sub);font-weight:700}
+.wf-row.is-top .wf-name{color:var(--color-danger)}
+.wf-row.is-edge .wf-name{color:var(--color-sub);font-weight:800}
+
+/* 원인 아님 경고 */
+.not-cause{
+  margin:16px 0 0;padding:12px 14px;border-radius:12px;
+  background:var(--color-warning-tint);border-left:3px solid var(--color-warning);
+  font-size:.82rem;line-height:1.55;
+}
+.not-cause b{font-weight:800}
+
+/* 리포트 */
+.report-lead{margin:0 0 14px;font-size:.85rem;color:var(--color-sub)}
+.check-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.check-item{
+  display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border-radius:14px;
+  background:#f8f9fb;border-left:3px solid var(--color-border);cursor:pointer;
+}
+.check-item.rank1{background:var(--color-accent-tint);border-left-color:var(--color-accent)}
+.check-item input{margin:3px 0 0;width:17px;height:17px;flex-shrink:0;accent-color:var(--color-accent);cursor:pointer}
+.check-body{min-width:0}
+.check-head{display:flex;gap:7px;align-items:baseline;flex-wrap:wrap}
+.check-name{font-size:.92rem;font-weight:800}
+.check-amt{font-size:.78rem;font-weight:700;color:var(--color-danger);font-variant-numeric:tabular-nums}
+.check-text{margin:3px 0 0;font-size:.83rem;color:#5b6270;line-height:1.5}
+.check-tool{display:inline-block;margin-top:6px;font-size:.78rem;font-weight:700;color:var(--color-accent);text-decoration:none}
+.check-item.done .check-body{opacity:.42}
+.check-item.done .check-name{text-decoration:line-through}
+.report-foot{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+/* 결과 없을 때 */
+.result-empty{
+  margin-top:18px;background:var(--color-card);border-radius:var(--radius);box-shadow:var(--shadow-card);
+  padding:34px 22px;text-align:center;color:var(--color-sub);font-size:.9rem
+}
+
+/* 면책 / 아코디언 / 푸터 */
+.tool-disclaimer{max-width:1320px;margin:20px auto 0;padding:0 18px;font-size:.8rem;color:var(--color-sub);line-height:1.6}
+.acc-wrap{max-width:1320px;margin:14px auto 0;padding:0 18px;display:flex;flex-direction:column;gap:8px}
+.accordion{background:#fff;border:1px solid var(--color-border);border-radius:14px;overflow:hidden}
+.accordion-summary{padding:14px 16px;font-size:.9rem;font-weight:700;cursor:pointer;list-style:none}
+.accordion-summary::-webkit-details-marker{display:none}
+.accordion-summary::after{content:"＋";float:right;color:var(--color-sub)}
+.accordion[open] .accordion-summary::after{content:"－"}
+.accordion-body{padding:0 16px 16px;font-size:.85rem;color:#5b6270;line-height:1.65}
+.footer-simple{background:#fff;border-top:1px solid var(--color-border);padding:20px 16px;margin-top:26px}
+.footer-simple-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer-copy{font-size:12px;color:#8a8f98;line-height:1.7}
+
+/* 변경점 */
+.changes{max-width:1320px;margin:26px auto 0;padding:0 18px}
+.changes-card{background:var(--mock-tint);border:1px solid #e2d6f2;border-radius:18px;padding:22px}
+.changes-card h2{margin:0 0 4px;font-size:1rem;font-weight:800;color:var(--mock)}
+.changes-card p.lead{margin:0 0 16px;font-size:.83rem;color:#6b5a80}
+.chg-table{width:100%;border-collapse:collapse;font-size:.83rem}
+.chg-table th,.chg-table td{padding:9px 8px;text-align:left;border-bottom:1px solid #e6dcf3;vertical-align:top}
+.chg-table th{font-weight:800;color:#5a4a70;font-size:.78rem;white-space:nowrap}
+.chg-table td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.chg-table td .was{color:var(--color-sub)}
+.chg-table td .now{color:var(--color-success);font-weight:800}
+
+@media (max-width:900px){
+  .result-grid{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  html{font-size:16px}
+  .panel{padding:20px 16px;border-radius:18px}
+  .sheet-head{display:none}
+  .sheet-row{
+    display:block;padding:12px 0;border-bottom:1px solid #f1f2f4;
+  }
+  .row-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:7px}
+  .row-inputs{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .row-inputs .col-tag{font-size:.7rem;color:var(--color-sub);font-weight:700;margin-bottom:3px;display:block}
+  .delta{text-align:right}
+  .sheet-total{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .total-val{padding-right:0}
+  .hero-amount{font-size:2.1rem}
+  .wf-row{grid-template-columns:minmax(74px,.8fr) 1fr minmax(84px,auto);gap:8px}
+  .chg-table th:nth-child(4),.chg-table td:nth-child(4){display:none}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+<div class="mock-bar">
+  <strong>UI 시안</strong>
+  <span>실제 사이트가 아닙니다 · 숫자는 기획문서 예시 · 입력·계산·체크 전부 동작합니다</span>
+</div>
+
+<a class="tool-back-bar" href="#" onclick="return false">← 혜택on 무료도구로 돌아가기</a>
+
+<header class="app-header">
+  <h1>
+    <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="16" fill="#1481fa"/>
+      <rect x="13" y="30" width="8" height="20" rx="2" fill="#fff"/>
+      <rect x="28" y="22" width="8" height="28" rx="2" fill="#fff" opacity=".8"/>
+      <rect x="43" y="36" width="8" height="14" rx="2" fill="#fff" opacity=".55"/>
+      <path d="M17 26 L32 18 L47 32" stroke="#bfe0ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    왜 이번 달에 돈이 덜 남았지?
+    <span class="app-title-sub-badge">이익 변동 진단</span>
+  </h1>
+  <p class="app-sub">지난달과 이번 달의 숫자만 입력하면 이익 변동의 영향 항목과 우선 확인사항을 보여주는 초간단 진단기</p>
+</header>
+
+<div class="notice-bar">
+  <p>💡 입력한 정보는 서버에 저장되지 않고 내 브라우저에만 저장돼요.</p>
+  <span class="notice-badge">100% 무료 · 설치 없이 바로 사용</span>
+</div>
+
+<main class="app-main">
+
+  <section class="panel" aria-labelledby="input-h">
+    <h2 class="panel-title" id="input-h">1. 지난달과 이번 달 숫자</h2>
+    <p class="panel-lead">모르는 항목은 <b>0으로 두셔도 됩니다.</b> 아는 항목만으로도 진단됩니다.</p>
+
+    <div class="sheet-head" aria-hidden="true">
+      <span>항목</span><span>지난달</span><span>이번 달</span><span>증감</span>
+    </div>
+
+    <div id="sheet"></div>
+
+    <div class="sheet-total">
+      <div class="row-label">남은 이익</div>
+      <div class="total-val" id="totalPrev">—</div>
+      <div class="total-val" id="totalCurr">—</div>
+      <div class="delta" id="totalDelta">—</div>
+    </div>
+
+    <div class="sheet-actions">
+      <button type="button" class="calc-btn" id="runBtn">진단하기</button>
+      <button type="button" class="ghost-btn accent" id="copyMonthBtn">지난달과 같음 ↓</button>
+      <button type="button" class="ghost-btn" id="sampleBtn">예시 숫자</button>
+      <button type="button" class="ghost-btn" id="clearBtn">비우기</button>
+    </div>
+    <p class="hint-line" id="hintLine">임대료처럼 안 바뀌는 항목이 많다면 <b>‘지난달과 같음’</b>으로 한 번에 옮기고, 바뀐 것만 고치세요.</p>
+  </section>
+
+  <div id="resultEmpty" class="result-empty">숫자를 넣고 <b>진단하기</b>를 누르면 여기에 결과가 나옵니다.</div>
+
+  <div class="result-grid" id="resultGrid" hidden>
+    <section class="panel" aria-labelledby="res-h">
+      <h2 class="panel-title" id="res-h">2. 결과</h2>
+      <p class="panel-lead">입력하신 숫자를 기준으로 계산했습니다.</p>
+
+      <div class="hero-card">
+        <div class="hero-top">
+          <p class="hero-label">이익 변동</p>
+          <span class="hero-tier" id="heroTier">—</span>
+        </div>
+        <div class="hero-amount" id="heroAmount">—</div>
+        <p class="hero-sent" id="heroSent">—</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="hero-stat-label">지난달 이익</span><span class="hero-stat-value" id="statPrev">—</span></div>
+          <div class="hero-stat"><span class="hero-stat-label">이번 달 이익</span><span class="hero-stat-value" id="statCurr">—</span></div>
+        </div>
+      </div>
+
+      <p class="wf-title">이익이 어디서 깎였나</p>
+      <p class="wf-sub">지난달 이익에서 시작해 항목별로 쌓아가면 이번 달 이익이 됩니다.</p>
+      <div class="wf" id="waterfall"></div>
+
+      <div class="not-cause" id="notCause"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="rep-h">
+      <h2 class="panel-title" id="rep-h">3. 다음에 확인할 것</h2>
+      <p class="report-lead">영향이 큰 항목부터 순서대로입니다. 확인한 것은 눌러서 체크해두세요.</p>
+      <ul class="check-list" id="checkList"></ul>
+      <div class="report-foot">
+        <button type="button" class="ghost-btn" id="copyResBtn">결과 요약 복사</button>
+        <button type="button" class="ghost-btn" id="againBtn">다른 기간으로 다시</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<p class="tool-disclaimer">
+  본 도구는 입력하신 숫자를 비교·계산하는 참고용 도구이며 세무·회계 자문이 아닙니다.
+  매출·비용 항목의 변화만으로 거래의 실제 원인이나 적정 원가율을 단정하지 않습니다.
+</p>
+
+<div class="acc-wrap">
+  <details class="accordion"><summary class="accordion-summary">숫자를 정확히 모르면요?</summary>
+    <div class="accordion-body">대략이어도 됩니다. 이 도구는 정확한 금액이 아니라 <b>어느 항목이 얼마나 움직였는지</b>를 봅니다. 모르는 항목은 지난달·이번 달 모두 0으로 두면 계산에서 빠집니다.</div></details>
+  <details class="accordion"><summary class="accordion-summary">이 도구로 알 수 없는 것</summary>
+    <div class="accordion-body">왜 그 항목이 늘었는지는 알 수 없습니다. 원재료 단가가 올랐는지, 폐기가 늘었는지, 매입량 자체가 늘었는지는 거래내역을 봐야 알 수 있습니다. 이 도구는 <b>어디를 먼저 볼지</b>까지만 알려드립니다.</div></details>
+  <details class="accordion"><summary class="accordion-summary">사업 생존기간 계산기와 무엇이 다른가요?</summary>
+    <div class="accordion-body">생존기간 계산기는 “지금 조건이면 언제 현금이 바닥나는가”를 봅니다. 이 도구는 “지난달 대비 무엇이 달라졌는가”를 봅니다. 앞으로를 보는 도구와 지난달을 되짚는 도구입니다.</div></details>
+</div>
+
+<div class="changes">
+  <div class="changes-card">
+    <h2>지금 라이브와 달라진 점</h2>
+    <p class="lead">2026-09-16 benefitson.org 실측값 기준 (모바일 375×812)</p>
+    <table class="chg-table">
+      <thead><tr><th>항목</th><th>지금</th><th>시안</th><th>무엇이 바뀌었나</th></tr></thead>
+      <tbody>
+        <tr><td>입력 구조</td><td class="num"><span class="was">12칸 세로</span></td><td class="num"><span class="now">6행 좌우</span></td><td>같은 항목의 두 달치를 한 줄에서 비교</td></tr>
+        <tr><td>진단 버튼 위치</td><td class="num"><span class="was">1,624px</span></td><td class="num"><span class="now">약 900px</span></td><td>스크롤 두 번 → 한 번</td></tr>
+        <tr><td>페이지 전체 높이</td><td class="num"><span class="was">2,903px</span></td><td class="num"><span class="now">절반 이하</span></td><td>결과는 진단 후에만 펼침</td></tr>
+        <tr><td>결과 도달</td><td class="num"><span class="was">화면 밖</span></td><td class="num"><span class="now">자동 스크롤</span></td><td>눌러도 아무 일 없어 보이던 문제</td></tr>
+        <tr><td>이익 변동 금액</td><td class="num"><span class="was">문장 속</span></td><td class="num"><span class="now">2.5rem</span></td><td>제일 중요한 숫자를 제일 크게</td></tr>
+        <tr><td>입력 중 피드백</td><td class="num"><span class="was">없음</span></td><td class="num"><span class="now">실시간 증감</span></td><td>끝까지 입력할 동기</td></tr>
+        <tr><td>반복 입력</td><td class="num"><span class="was">12번</span></td><td class="num"><span class="now">2~3번</span></td><td>‘지난달과 같음’ 복사</td></tr>
+        <tr><td>“원인 아님” 고지</td><td class="num"><span class="was">하단 면책</span></td><td class="num"><span class="now">1등 바로 밑</span></td><td>오해가 생기는 그 자리에</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer class="footer-simple">
+  <div class="footer-simple-inner">
+    <div class="footer-copy">혜택on · 이익 변동 진단 UI 시안 · 실제 서비스 화면이 아닙니다</div>
+  </div>
+</footer>
+
+<script>
+const FIELDS = [
+  {id:'sales',     name:'매출',        opt:'',              cost:false},
+  {id:'foodCost',  name:'식재료비',    opt:'또는 상품매입비', cost:true},
+  {id:'laborCost', name:'인건비',      opt:'',              cost:true},
+  {id:'rent',      name:'임대료',      opt:'',              cost:true},
+  {id:'platformFee',name:'수수료',     opt:'플랫폼·카드·결제',cost:true},
+  {id:'otherCost', name:'기타비용',    opt:'',              cost:true}
+];
+// 동점 타이브레이크: 매출 → 식재료비 → 인건비 → 수수료 → 임대료 → 기타
+const TIE = ['sales','foodCost','laborCost','platformFee','rent','otherCost'];
+const HINTS = {
+  sales:      {t:'고객수와 객단가 변화를 구분해 확인', tool:'사업 생존기간 계산기'},
+  foodCost:   {t:'주요 원재료 단가, 폐기·로스, 매입량 변화 확인', tool:null},
+  laborCost:  {t:'근무시간, 인원, 영업일수, 추가수당 변화 확인', tool:'퇴직금 계산기'},
+  rent:       {t:'월세 변경·관리비·추가비용 여부 확인', tool:null},
+  platformFee:{t:'배달·결제 수수료율과 주문 구성 변화 확인', tool:'배달앱 수수료 계산기'},
+  otherCost:  {t:'큰 단일 비용부터 거래내역 확인', tool:null}
+};
+const SAMPLE = {
+  prev:{sales:30000000,foodCost:11000000,laborCost:7000000,rent:3000000,platformFee:2000000,otherCost:3000000},
+  curr:{sales:30000000,foodCost:12500000,laborCost:7800000,rent:3000000,platformFee:2100000,otherCost:3100000}
+};
+
+const won = n => n.toLocaleString('ko-KR');
+const signed = n => (n>0?'+':n<0?'-':'') + won(Math.abs(n));
+function readable(n){
+  n = Math.abs(n);
+  if(!n) return '';
+  if(n>=100000000){const e=Math.floor(n/100000000),m=Math.floor((n%100000000)/10000);return e+'억'+(m?' '+won(m)+'만':'')+'원';}
+  if(n>=10000){const m=Math.floor(n/10000),r=n%10000;return won(m)+'만'+(r?' '+won(r):'')+'원';}
+  return won(n)+'원';
+}
+const parseNum = s => {const v=parseInt(String(s).replace(/[^\d]/g,''),10);return Number.isFinite(v)?v:0;};
+
+/* ── 입력표 생성 ── */
+const sheet = document.getElementById('sheet');
+sheet.innerHTML = FIELDS.map(f=>`
+  <div class="sheet-row" data-f="${f.id}">
+    <div class="row-top">
+      <div class="row-label">${f.name}${f.opt?`<span class="opt">${f.opt}</span>`:''}</div>
+      <div class="delta same" id="d-${f.id}">—</div>
+    </div>
+    <div class="row-inputs">
+      <div>
+        <span class="col-tag">지난달</span>
+        <div class="money-input">
+          <input class="num-input" id="prev-${f.id}" inputmode="numeric" type="text" placeholder="0"
+                 aria-label="${f.name} 지난달"><span class="unit">원</span>
+        </div>
+        <p class="read-hint" id="rh-prev-${f.id}"></p>
+      </div>
+      <div>
+        <span class="col-tag">이번 달</span>
+        <div class="money-input">
+          <input class="num-input" id="curr-${f.id}" inputmode="numeric" type="text" placeholder="0"
+                 aria-label="${f.name} 이번 달"><span class="unit">원</span>
+        </div>
+        <p class="read-hint" id="rh-curr-${f.id}"></p>
+      </div>
+    </div>
+  </div>`).join('');
+
+/* 데스크톱에서는 row-top / row-inputs 를 grid 셀로 풀어준다 */
+function relayout(){
+  const wide = window.matchMedia('(min-width:721px)').matches;
+  document.querySelectorAll('.sheet-row').forEach(row=>{
+    const top=row.querySelector('.row-top'), ins=row.querySelector('.row-inputs');
+    top.style.display   = wide?'contents':'flex';
+    ins.style.display   = wide?'contents':'grid';
+    row.querySelectorAll('.col-tag').forEach(t=>t.hidden=wide);
+    if(wide){ row.appendChild(row.querySelector('.delta')); }
+    else { top.appendChild(row.querySelector('.delta')); }
+  });
+}
+relayout(); window.addEventListener('resize',relayout);
+
+/* ── 값 읽기/쓰기 ── */
+const get = p => Object.fromEntries(FIELDS.map(f=>[f.id,parseNum(document.getElementById(p+'-'+f.id).value)]));
+function set(p,data){FIELDS.forEach(f=>{const el=document.getElementById(p+'-'+f.id);el.value=data[f.id]?won(data[f.id]):'';});}
+
+function profit(m){const cost=FIELDS.filter(f=>f.cost).reduce((s,f)=>s+m[f.id],0);return {cost,profit:m.sales-cost};}
+
+function refresh(){
+  const prev=get('prev'), curr=get('curr');
+  FIELDS.forEach(f=>{
+    ['prev','curr'].forEach(p=>{
+      const v=(p==='prev'?prev:curr)[f.id];
+      document.getElementById('rh-'+p+'-'+f.id).textContent = v?readable(v):'';
+    });
+    const d = curr[f.id]-prev[f.id];
+    const el = document.getElementById('d-'+f.id);
+    if(!prev[f.id] && !curr[f.id]){el.className='delta same';el.textContent='—';return;}
+    if(d===0){el.className='delta same';el.textContent='변화 없음';return;}
+    if(prev[f.id]===0){el.className='delta up';el.innerHTML=signed(d)+'<span class="badge">신규 발생</span>';return;}
+    if(curr[f.id]===0){el.className='delta down';el.innerHTML=signed(d)+'<span class="badge">이번 달 없음</span>';return;}
+    el.className='delta '+(d>0?'up':'down');
+    el.textContent=(d>0?'▲ ':'▼ ')+signed(d);
+  });
+  const P=profit(prev), C=profit(curr);
+  const any = FIELDS.some(f=>prev[f.id]||curr[f.id]);
+  document.getElementById('totalPrev').textContent = any?won(P.profit)+'원':'—';
+  document.getElementById('totalCurr').textContent = any?won(C.profit)+'원':'—';
+  const td=document.getElementById('totalDelta'), dd=C.profit-P.profit;
+  if(!any){td.className='delta same';td.textContent='—';}
+  else if(dd===0){td.className='delta same';td.textContent='변화 없음';}
+  else {td.className='delta '+(dd<0?'up':'down');td.textContent=(dd<0?'▼ ':'▲ ')+signed(dd);}
+}
+
+/* ── 진단 ── */
+function diagnose(){
+  const prev=get('prev'), curr=get('curr');
+  const any = FIELDS.some(f=>prev[f.id]||curr[f.id]);
+  if(!any){ alert('비교할 숫자가 없습니다. 지난달과 이번 달 숫자를 넣어주세요.'); return; }
+
+  const P=profit(prev), C=profit(curr), change=C.profit-P.profit;
+
+  const impacts = FIELDS.map(f=>{
+    const d=curr[f.id]-prev[f.id];
+    return {id:f.id,name:f.name,delta:d,impact:f.cost?-d:d,cost:f.cost,prev:prev[f.id],curr:curr[f.id]};
+  });
+  const ranked=[...impacts].sort((a,b)=>{
+    const ad=Math.abs(a.impact),bd=Math.abs(b.impact);
+    if(ad!==bd) return bd-ad;
+    return TIE.indexOf(a.id)-TIE.indexOf(b.id);
+  });
+  const top=ranked[0];
+
+  // 히어로
+  const tier=document.getElementById('heroTier');
+  const itemsMoved = impacts.some(i=>i.delta!==0);
+  document.getElementById('heroAmount').innerHTML =
+    (change===0?'0':signed(change))+'<span class="won">원</span>';
+  if(change<0){tier.textContent='이익 감소';tier.className='hero-tier tone-danger';
+    document.getElementById('heroSent').textContent='이번 달 이익이 지난달보다 '+won(Math.abs(change))+'원 줄었습니다.';}
+  else if(change>0){tier.textContent='이익 증가';tier.className='hero-tier tone-success';
+    document.getElementById('heroSent').textContent='이번 달 이익이 지난달보다 '+won(change)+'원 늘었습니다.';}
+  else {tier.textContent=itemsMoved?'이익 동일':'변화 없음';tier.className='hero-tier';
+    document.getElementById('heroSent').textContent = itemsMoved
+      ? '이익은 지난달과 같지만, 항목별로는 변화가 있었습니다.'
+      : '지난달과 이번 달 이익이 같습니다.';}
+  document.getElementById('statPrev').textContent=won(P.profit)+'원';
+  document.getElementById('statCurr').textContent=won(C.profit)+'원';
+
+  // 워터폴
+  const moved = ranked.filter(i=>i.impact!==0);
+  const scale = Math.max(Math.abs(P.profit),Math.abs(C.profit),1);
+  let run=P.profit;
+  const rows=[`
+    <div class="wf-row is-edge"><div class="wf-name">지난달 이익</div>
+      <div class="wf-track"><div class="wf-bar base" style="left:0;width:${Math.min(100,Math.abs(P.profit)/scale*100)}%"></div></div>
+      <div class="wf-val muted">${won(P.profit)}</div></div>`];
+  moved.forEach((i,idx)=>{
+    const from=run, to=run+i.impact; run=to;
+    const l=Math.min(from,to)/scale*100, w=Math.abs(i.impact)/scale*100;
+    rows.push(`<div class="wf-row${idx===0?' is-top':''}"><div class="wf-name">${i.name}</div>
+      <div class="wf-track"><div class="wf-bar ${i.impact>0?'pos':''}" style="left:${Math.max(0,l)}%;width:${Math.max(1.2,w)}%"></div></div>
+      <div class="wf-val ${i.impact<0?'neg':'pos'}">${signed(i.impact)}</div></div>`);
+  });
+  rows.push(`<div class="wf-row is-edge"><div class="wf-name">이번 달 이익</div>
+      <div class="wf-track"><div class="wf-bar final" style="left:0;width:${Math.min(100,Math.abs(C.profit)/scale*100)}%"></div></div>
+      <div class="wf-val muted">${won(C.profit)}</div></div>`);
+  document.getElementById('waterfall').innerHTML=rows.join('');
+
+  // 원인 아님
+  document.getElementById('notCause').innerHTML = top.impact===0
+    ? '항목별 변화가 없어 순위를 매길 수 없습니다.'
+    : `<b>이익 변동에 가장 큰 영향을 준 항목은 ${signed(top.delta)}원 변화한 ${top.name}입니다.</b><br>
+       다만 이것은 “${top.name}가 원인이다”라는 뜻이 아니라, 숫자상 영향이 가장 크다는 뜻입니다.
+       실제 원인은 거래내역을 확인해야 알 수 있습니다.`;
+
+  // 체크리스트
+  document.getElementById('checkList').innerHTML = (moved.length?moved:ranked.slice(0,3)).map((i,idx)=>`
+    <li class="check-item${idx===0&&i.impact!==0?' rank1':''}">
+      <input type="checkbox" id="ck-${i.id}">
+      <label class="check-body" for="ck-${i.id}">
+        <span class="check-head"><span class="check-name">${idx+1}. ${i.name}</span>
+          <span class="check-amt">이익 영향 ${signed(i.impact)}원</span></span>
+        <p class="check-text">${HINTS[i.id].t}</p>
+        ${HINTS[i.id].tool?`<a class="check-tool" href="#" onclick="return false">${HINTS[i.id].tool} 열기 →</a>`:''}
+      </label>
+    </li>`).join('');
+  document.querySelectorAll('.check-item input').forEach(cb=>{
+    cb.addEventListener('change',()=>cb.closest('.check-item').classList.toggle('done',cb.checked));
+  });
+
+  document.getElementById('resultEmpty').hidden=true;
+  document.getElementById('resultGrid').hidden=false;
+  document.getElementById('resultGrid').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── 이벤트 ── */
+document.querySelectorAll('.num-input').forEach(el=>{
+  el.addEventListener('input',()=>{
+    const pos=el.selectionStart, before=el.value.length;
+    const n=parseNum(el.value);
+    el.value = el.value.trim()===''?'':won(n);
+    const after=el.value.length;
+    try{el.setSelectionRange(Math.max(0,pos+(after-before)),Math.max(0,pos+(after-before)));}catch(e){}
+    refresh();
+  });
+});
+document.getElementById('runBtn').addEventListener('click',diagnose);
+document.getElementById('copyMonthBtn').addEventListener('click',()=>{set('curr',get('prev'));refresh();
+  document.getElementById('hintLine').innerHTML='지난달 숫자를 이번 달로 옮겼습니다. <b>바뀐 항목만 고치세요.</b>';});
+document.getElementById('sampleBtn').addEventListener('click',()=>{set('prev',SAMPLE.prev);set('curr',SAMPLE.curr);refresh();});
+document.getElementById('clearBtn').addEventListener('click',()=>{
+  set('prev',{});set('curr',{});refresh();
+  document.getElementById('resultGrid').hidden=true;document.getElementById('resultEmpty').hidden=false;});
+document.getElementById('againBtn').addEventListener('click',()=>{
+  document.querySelector('.panel').scrollIntoView({behavior:'smooth',block:'start'});});
+document.getElementById('copyResBtn').addEventListener('click',e=>{
+  const prev=get('prev'),curr=get('curr'),P=profit(prev),C=profit(curr);
+  const txt=`[이익 변동 진단]\n지난달 이익 ${won(P.profit)}원 → 이번 달 ${won(C.profit)}원 (${signed(C.profit-P.profit)}원)\n`
+    + FIELDS.map(f=>`${f.name} ${won(prev[f.id])} → ${won(curr[f.id])} (${signed(curr[f.id]-prev[f.id])})`).join('\n');
+  navigator.clipboard?.writeText(txt).then(()=>{e.target.textContent='복사됨 ✓';setTimeout(()=>e.target.textContent='결과 요약 복사',1600);})
+    .catch(()=>{e.target.textContent='복사 실패';setTimeout(()=>e.target.textContent='결과 요약 복사',1600);});
+});
+
+/* 예시로 시작 */
+set('prev',SAMPLE.prev); set('curr',SAMPLE.curr); refresh(); diagnose();
+</script>

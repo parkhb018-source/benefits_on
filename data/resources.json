@@ -1,16 +1,16 @@
 {
   "meta": {
-    "lastUpdated": "2026-09-16"
+    "lastUpdated": "2026-09-17"
   },
   "resources": [
     {
       "id": "profit-drop-diagnosis",
-      "title": "이익 변동 진단",
-      "description": "지난달과 이번 달 매출·비용을 넣으면 이익 변동에 영향을 준 항목을 순위로 보여드려요.",
+      "title": "왜 이번 달에 돈이 덜 남았지?",
+      "description": "지난달과 이번 달의 숫자만 입력하면 이익 변동의 영향 항목과 우선 확인사항을 보여주는 초간단 진단기",
       "version": "",
       "icon": "🔍",
       "category": "계산기",
-      "updatedAt": "2026-09-16",
+      "updatedAt": "2026-09-17",
       "url": "tools/profit-drop-diagnosis/"
     },
     {

@@ -22,21 +22,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 아키텍처
 
 - **`engine/profit-analyzer.js`** — 계산 + 결과 문구 전부. `analyze(prev, curr)` 하나가
-  `{profitPrev, profitCurr, profitChange, status, headline, rankedImpacts, actionHints, caveats, deltas}`
+  ```
+  { profitPrev, profitCurr, profitChange,
+    status,                        // 'NO_DATA'|'PROFIT_DOWN'|'PROFIT_UP'|'PROFIT_SAME'|'PROFIT_SAME_BUT_ITEMS_CHANGED'
+    heroLabel, heroAmount,         // 히어로 큰 숫자용 (heroAmount = profitChange, 포맷은 UI에서)
+    headline, topImpactLine, notCauseLine,
+    rankedImpacts,                 // [{ id, name, delta, impact, prev, curr, flag }]
+    actionHints,                   // [{ id, name, impact, text, toolUrl }]
+    caveats }
+  ```
   를 반환한다. `formatWon` 도 여기 있다.
   DOM·localStorage·시간·난수 의존 없음, 로케일 ko-KR 고정. 동일 입력 → 동일 출력.
   내부 함수(`normalizeInput`/`calculateProfit`/`calculateDelta`/`calculateImpacts`/`rankImpacts`)는
   테스트를 위해 export 하지만, `app.js` 는 `analyze`·`formatWon` 두 개만 import 한다.
-- **`app.js`** — 화면 로직만. 입력 검증 · 콤마 처리 · DOM 조립 · localStorage.
-  계산식·판정·결과 문구 없음.
+  `rankedImpacts[].flag` 는 열거값(`NEW_COST`/`COST_ENDED`/`null`)만 반환 — "신규 발생"/
+  "이번 달 없음" 같은 배지 문구는 `app.js` 가 매핑한다(순수 표시 라벨이라 예외적으로 UI에 둠).
+- **`app.js`** — 화면 로직만. 입력 검증 · 콤마 처리 · DOM 조립(6행 입력표를 `FIELDS` 배열로
+  생성) · localStorage. 계산식·판정·결과 문구 없음. 입력마다 `analyze()` 를 다시 호출해
+  행별 증감·합계를 갱신하고(라이브 피드백), "진단하기" 클릭 시에만 결과·리포트 패널을
+  공개하고 `scrollIntoView`.
 - **`engine` 의 상태 규칙(`STATUS`)·영향 순위(`rankImpacts`)·행동 힌트(`ACTION_TABLE`)는
   `docs/tools/profit-drop-diagnosis/02_Rule_Engine_Profit_Drop_Diagnosis.md` 와 1:1 대응**.
   문구·순위 규칙을 바꾸면 → 엔진 + Rule Engine 문서 + `docs/tools/profit-drop-diagnosis/CHANGELOG.md`
   세 곳 동시 수정.
-- **`style.css`** — 혜택on 공통 디자인 시스템(토큰·`.panel`·`.hero-card`·`.report-card` 등)을
-  이 도구 파일에 복제한 것. 다른 도구(`pages/tools/*/style.css`)와 토큰·클래스명이 일치해야 한다.
-- UI 섹션 순서(back-bar → app-header → notice-bar → 1.입력 / 2.결과 / 3.리포트 → disclaimer
-  → accordion → footer)는 혜택on Design System 고정 규격.
+- **`style.css`** — 혜택on 공통 디자인 토큰(`--color-*`/`--radius`/`--shadow-*`)을 그대로 쓰되,
+  레이아웃은 확정 시안(`docs/tools/profit-drop-diagnosis/ui-mockup.html`, 참고용 — 런타임에 복사 금지)
+  전용 클래스(`.sheet-row`/`.hero-card`/`.wf-*`/`.check-item` 등)를 이 파일에 둔다.
+  다른 도구(`pages/tools/*/style.css`)와는 토큰만 공유하고, 클래스 구조는 이 도구 고유다.
+- 입력 패널은 항상 전체 폭(3단 그리드 아님). 결과·리포트는 진단 전 숨김, 진단 후에만
+  2단(`result-grid`, 900px 이하 1단)으로 공개된다.
+- UI 섹션 순서(back-bar → app-header → notice-bar → 1.입력표 → 2.결과·3.리포트(진단 후) →
+  disclaimer → accordion → footer)는 이 도구의 확정 시안 규격.
 
 ## 불변 제약
 
@@ -44,7 +60,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 외부 JS 라이브러리 추가 금지 (Pretendard CDN은 사이트 공통이라 예외).
 - 입력 필드 6개(매출/식재료비/인건비/임대료/수수료/기타비용) × 지난달·이번 달 = 12개, 전부 필수.
   쉼표·원화기호는 UI에서 허용하고 내부는 정수로 normalize(소수점 반올림), 안전정수 초과는 에러.
-- 영향 순위 동률 타이브레이크: 매출 → 식재료비 → 인건비 → 수수료 → 임대료 → 기타 순 고정.
+- 영향 순위 동률 타이브레이크: 매출 → 식재료비 → 인건비 → 수수료 → 임대료 → 기타비용 순 고정.
   "가장 큰 영향 항목"은 `rankedImpacts[0]` 을 그대로 쓴다 — 별도로 다시 계산하지 않는다.
 - 영향 합계(모든 `rankedImpacts[].impact` 합) == 이익 증감(`profitChange`) 항등식이 항상 성립해야 한다.
 - 결과 화면에 세무·회계 자문이 아니라는 면책 문구가 상시 노출돼야 한다(`tool-disclaimer`).
