@@ -13,8 +13,8 @@ const FIELDS = [
   { id: 'foodCost', name: '식재료비', opt: '또는 상품매입비' },
   { id: 'laborCost', name: '인건비', opt: '' },
   { id: 'rent', name: '임대료', opt: '' },
-  { id: 'platformFee', name: '수수료', opt: '플랫폼·카드·결제' },
   { id: 'otherCost', name: '기타비용', opt: '관리비·공과금·통신비·소모품 등' },
+  { id: 'platformFee', name: '수수료', opt: '플랫폼·카드·결제' },
 ];
 
 const DELIVERY_PLATFORM_ORDER = ['baemin', 'coupangeats', 'yogiyo'];
