@@ -171,3 +171,62 @@ THEN 0 을 포함한 양방향 축으로 바꾼다:
 
 전부 양수인 도메인(모든 stops ≥ 0)에서는 `domainMin=0` 이 되어 **개편 전(v1.1)과 좌표값이
 동일하다** — 기획문서 검증 케이스로 확인(QA-20).
+
+---
+
+## 수수료 계산 보조 엔진 (`engine/fee-calc.js`, v1.3 신설)
+
+수수료 행(`platformFee`) 입력을 돕는 별도 계산창(카드수수료·배달수수료)의 계산식.
+`analyze()`/`computeWaterfallLayout()`(진단 로직)과는 완전히 독립된 순수 함수이며,
+결과는 오직 `platformFee` 입력칸에 값을 채워 넣는 데만 쓰인다 — 진단 계산·상태 판정에 관여하지 않는다.
+
+### 카드수수료 — `CARD_RATE_TIERS` / `calcCardFee({ tier, cardSales })`
+
+우대수수료율(금융위 고시) 기준. 기본은 신용카드 요율로 계산한다.
+
+| 연매출 구간 (`id`) | 신용카드(`credit`) | 체크카드(`check`) |
+|---|---|---|
+| 3억 이하 (`under3`) | 0.40% | 0.15% |
+| 3~5억 (`3to5`) | 1.00% | 0.75% |
+| 5~10억 (`5to10`) | 1.15% | 0.90% |
+| 10~30억 (`10to30`) | 1.45% | 1.15% |
+| 30억 초과 (`over30`) | 우대 대상 아님 (계산 안 함) | 우대 대상 아님 |
+
+```
+IF   tier = 'over30'
+THEN { rate: null, fee: null, note: CARD_OVER30_NOTE }   // 계산하지 않고 안내만
+ELSE { rate: tier.credit, fee: round(cardSales × tier.credit / 100), note: null }
+```
+`note`(30억 초과 전용 안내)와 별개로, 계산이 된 경우 UI는 "체크카드 비중이 높으면 실제 수수료는
+이보다 낮습니다" 안내를 항상 함께 보여준다(고정 문구, `app.js`).
+
+### 배달수수료 — `DELIVERY_RATES` / `calcDeliveryFee(selections)`
+
+> **이 값은 `pages/tools/delivery-fee-calc/script.js` 의 `PLATFORM_RATES` 와 반드시 일치해야
+> 한다.** 두 파일 모두 `<script>` 로만 로드되는 무빌드 도구라 import 를 공유할 수 없어 값을
+> 각자 갖고 있고, `scripts/build-pages.js` 가 빌드 시점에 두 값을 파싱·대조해 다르면 빌드를
+> 실패시킨다(드리프트 가드).
+
+| 배달앱 | 중개수수료(`brokerage`) | 결제수수료(`payment`) | 합계 |
+|---|---|---|---|
+| 배민 (`baemin`) | 7.8% | 3.0% | 10.8% |
+| 쿠팡이츠 (`coupangeats`) | 7.8% | 3.0% | 10.8% |
+| 요기요 (`yogiyo`) | 9.7% | 3.0% | 12.7% |
+
+```
+calcDeliveryFee([{ platform, sales }, ...]) →
+  perPlatform: [{ platform, name, brokerage: round(sales×brokerage%), payment: round(sales×payment%), fee: brokerage+payment }, ...]
+  total: Σ perPlatform[].fee
+```
+화면에는 중개·결제를 항상 나눠서 보여준다(합계만 보이면 왜 그 금액인지 알 수 없음). 배민1플러스·
+쿠팡이츠 상생요금제(매출 상위 비율에 따라 중개수수료 2.0~7.8% 차등)와 부가세 10% 별도 안내는
+고정 문구로 항상 노출한다(`app.js`).
+
+### 합산 — `sumFees({ card, delivery })`
+
+```
+sumFees({ card, delivery }) = (card?.fee 가 숫자면 그 값, 아니면 0) + (delivery?.total 이 숫자면 그 값, 아니면 0)
+```
+`card.fee`는 30억 초과(`note` 있음)일 때 `null` — 이 경우 0으로 취급되어 배달수수료만 합산된다.
+UI 는 이 합계를 "지난달 수수료에 넣기"/"이번 달 수수료에 넣기" 버튼으로 해당 `platformFee` 칸에
+**덮어쓰기**(누적 아님)로 반영한다.

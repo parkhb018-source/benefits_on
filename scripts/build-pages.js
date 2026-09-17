@@ -524,9 +524,61 @@ function validateCategoryCardLinks(byCategory) {
   console.log('[build-pages] 카드 링크 검증 통과: 내부 ' + totalInternal + ' · 외부 ' + totalExternal);
 }
 
+/* pages/tools/delivery-fee-calc/script.js 의 PLATFORM_RATES 와
+   pages/tools/profit-drop-diagnosis/engine/fee-calc.js 의 DELIVERY_RATES 는
+   같은 배달앱 수수료율을 각자 들고 있다(둘 다 <script src> 로만 로드되는 무빌드 도구라 import 공유 불가).
+   한쪽만 고쳤을 때 드리프트가 생기지 않도록, 두 파일에서 배민/쿠팡이츠/요기요의
+   brokerage·payment 값을 파싱해 비교한다. */
+function parseDeliveryRateBlock(text, blockRegex) {
+  const m = text.match(blockRegex);
+  if (!m) return null;
+  const block = m[0];
+  const out = {};
+  const entryRe = /(\w+):\s*\{[^}]*?brokerage:\s*([\d.]+)[^}]*?payment:\s*([\d.]+)[^}]*?\}/g;
+  let em;
+  while ((em = entryRe.exec(block))) {
+    out[em[1]] = { brokerage: Number(em[2]), payment: Number(em[3]) };
+  }
+  return out;
+}
+
+function validateDeliveryFeeRatesMatch() {
+  const scriptFile = path.join(PAGES_DIR, 'tools', 'delivery-fee-calc', 'script.js');
+  const feeCalcFile = path.join(PAGES_DIR, 'tools', 'profit-drop-diagnosis', 'engine', 'fee-calc.js');
+  if (!fs.existsSync(scriptFile) || !fs.existsSync(feeCalcFile)) return;
+
+  const scriptRates = parseDeliveryRateBlock(fs.readFileSync(scriptFile, 'utf8'), /const PLATFORM_RATES = \{[\s\S]*?\n\};/);
+  const feeCalcRates = parseDeliveryRateBlock(fs.readFileSync(feeCalcFile, 'utf8'), /export const DELIVERY_RATES = \{[\s\S]*?\n\};/);
+
+  if (!scriptRates || !feeCalcRates) {
+    fail('배달 수수료율 드리프트 가드: PLATFORM_RATES 또는 DELIVERY_RATES 를 파싱하지 못했습니다. 두 파일의 상수 선언 형태가 바뀌었는지 확인하세요.');
+  }
+
+  const diffs = [];
+  ['baemin', 'coupangeats', 'yogiyo'].forEach((key) => {
+    const a = scriptRates[key];
+    const b = feeCalcRates[key];
+    if (!a || !b) { diffs.push(key + ': 한쪽 파일에만 존재합니다.'); return; }
+    if (a.brokerage !== b.brokerage || a.payment !== b.payment) {
+      diffs.push(key + ': delivery-fee-calc(중개 ' + a.brokerage + '% · 결제 ' + a.payment +
+        '%) vs profit-drop-diagnosis(중개 ' + b.brokerage + '% · 결제 ' + b.payment + '%)');
+    }
+  });
+
+  if (diffs.length) {
+    fail('pages/tools/delivery-fee-calc/script.js 의 PLATFORM_RATES 와 ' +
+      'pages/tools/profit-drop-diagnosis/engine/fee-calc.js 의 DELIVERY_RATES 가 다릅니다 (' + diffs.length + '건):\n  - ' +
+      diffs.join('\n  - '));
+  }
+
+  console.log('[build-pages] 배달 수수료율 드리프트 가드 통과 (배민/쿠팡이츠/요기요)');
+}
+
 /* ── 메인 ───────────────────────────────────────────────── */
 
 function main() {
+  validateDeliveryFeeRatesMatch();
+
   const policyData = readJson('policies.json');
   const homeData = readJson('home-cards.json');
 

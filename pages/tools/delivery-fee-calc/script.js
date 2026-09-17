@@ -2,6 +2,7 @@
 // 배민1플러스·쿠팡이츠 상생요금제는 매출 상위 비율에 따라 2.0~7.8%로 차등 적용됨.
 // 여기서는 "매출 상위 35%·신규 사장님" 구간(가장 흔한 기본 구간) 기준값을 사용.
 // 부가세 10%는 별도로 붙으므로 실제 청구액은 아래 수수료율보다 조금 더 높을 수 있음.
+// 이 값은 pages/tools/profit-drop-diagnosis/engine/fee-calc.js 의 DELIVERY_RATES 와 일치해야 한다. 다르면 build-pages.js 가 빌드를 실패시킨다.
 const PLATFORM_RATES = {
   baemin:       { name: "배민",     brokerage: 7.8, payment: 3.0 },
   coupangeats:  { name: "쿠팡이츠", brokerage: 7.8, payment: 3.0 },

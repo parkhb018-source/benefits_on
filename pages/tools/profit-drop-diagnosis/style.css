@@ -118,6 +118,56 @@ button { font-family: inherit; }
 .sheet-total .row-label { font-size: 0.95rem; }
 .total-val { text-align: right; padding-right: 12px; font-weight: 800; font-variant-numeric: tabular-nums; }
 
+/* ===== 수수료 계산 보조 패널 (수수료 행 바로 아래, #sheet 의 형제) ===== */
+.fee-calc-panel { margin-top: 8px; margin-bottom: 6px; }
+.fee-calc-acc {
+  border: 1px solid var(--color-border); border-radius: 14px; background: #f8f9fb;
+  margin-bottom: 8px; padding: 0 14px; overflow: hidden;
+}
+.fee-calc-summary {
+  cursor: pointer; list-style: none; padding: 13px 0; font-size: 0.9rem; font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
+}
+.fee-calc-summary::-webkit-details-marker { display: none; }
+.fee-calc-acc[open] { background: #fff; }
+.fee-calc-body { padding: 2px 0 16px; display: flex; flex-direction: column; gap: 14px; }
+.fee-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.fee-label { font-size: 0.82rem; font-weight: 700; color: var(--color-text); }
+.fee-hint-inline { font-weight: 400; color: var(--color-sub); }
+
+.fee-tier-group, .fee-platform-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.fee-tier-btn, .fee-platform-chip {
+  position: relative; display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--color-border); background: #fff; font-size: 0.82rem; font-weight: 700; cursor: pointer;
+}
+.fee-tier-btn input, .fee-platform-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.fee-tier-btn:has(input:checked), .fee-platform-chip:has(input:checked) {
+  background: var(--color-accent-tint); border-color: #cfe3ff; color: var(--color-accent);
+}
+
+.fee-delivery-inputs { display: flex; flex-direction: column; gap: 10px; }
+.fee-delivery-row { display: flex; flex-direction: column; gap: 6px; }
+.fee-delivery-row-label { font-size: 0.8rem; font-weight: 700; color: var(--color-sub); }
+
+.fee-result { padding: 12px 14px; border-radius: 12px; background: #fff; border: 1px solid var(--color-border); }
+.fee-result-amount { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.fee-result-sub { margin: 6px 0 0; font-size: 0.76rem; color: var(--color-sub); line-height: 1.5; }
+.fee-note-warning { color: var(--color-warning); font-weight: 700; }
+.fee-note { margin: 10px 0 0; font-size: 0.76rem; color: var(--color-sub); line-height: 1.55; }
+.fee-result-line { margin: 0 0 6px; font-size: 0.86rem; font-weight: 700; }
+.fee-result-line:last-of-type { margin-bottom: 0; }
+.fee-result-detail { font-weight: 400; color: var(--color-sub); font-size: 0.76rem; }
+.fee-result-total { margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--color-border); font-size: 0.92rem; font-weight: 800; }
+
+.fee-sum {
+  margin-top: 4px; padding: 14px 16px; border-radius: 14px; background: var(--color-accent-tint);
+  border: 1px solid #cfe3ff;
+}
+.fee-sum-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.85rem; padding: 4px 0; font-variant-numeric: tabular-nums; }
+.fee-sum-row.fee-sum-total { font-size: 1rem; font-weight: 800; border-top: 1px solid #cfe3ff; margin-top: 4px; padding-top: 10px; }
+.fee-sum-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.fee-sum-actions .ghost-btn { flex: 1; min-width: 140px; text-align: center; }
+
 /* ===== 액션 버튼 ===== */
 .sheet-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .calc-btn { display: block; width: 100%; border: 0; border-radius: 14px; background: var(--color-primary); color: #fff; padding: 15px 18px; font-size: 1rem; font-weight: 800; cursor: pointer; }

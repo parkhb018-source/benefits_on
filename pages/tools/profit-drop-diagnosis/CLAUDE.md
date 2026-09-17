@@ -17,6 +17,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 로컬: `python -m http.server 8000` → `http://localhost:8000`.
   `app.js` 가 ESM(`import`)이라 `file://` 로는 안 열린다 — 반드시 정적 서버로 띄운다.
 - 계산 엔진 테스트: `node engine/profit-analyzer.test.js` (외부 의존성 없음, QA-01~20, 23개).
+- 수수료 계산 보조 엔진 테스트: `node engine/fee-calc.test.js` (QA-FEE-01~10).
 - 회귀 기준: `docs/tools/profit-drop-diagnosis/03_QA_Test_Cases.md` (저장소 루트 기준).
 
 ## 아키텍처
@@ -42,10 +43,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   import 한다.
   `rankedImpacts[].flag` 는 열거값(`NEW_COST`/`COST_ENDED`/`null`)만 반환 — "신규 발생"/
   "이번 달 없음" 같은 배지 문구는 `app.js` 가 매핑한다(순수 표시 라벨이라 예외적으로 UI에 둠).
+- **`engine/fee-calc.js`** — 수수료 행(`platformFee`) 입력을 돕는 계산 보조 엔진(카드수수료·
+  배달수수료). `profit-analyzer.js`(진단 로직)와 완전히 독립. DOM·localStorage 의존 없는 순수
+  함수: `CARD_RATE_TIERS`(우대수수료율 4구간+30억초과)·`calcCardFee({tier, cardSales})`,
+  `DELIVERY_RATES`(배민/쿠팡이츠/요기요)·`calcDeliveryFee(selections)`, `sumFees({card, delivery})`.
+  결과는 오직 `platformFee` 칸에 값을 채워 넣는 데만 쓰이고, 진단 계산(`analyze`)에는 관여하지
+  않는다. **`DELIVERY_RATES` 는 `pages/tools/delivery-fee-calc/script.js` 의 `PLATFORM_RATES`
+  와 값이 항상 같아야 한다** — 둘 다 `<script>` 로만 로드되는 무빌드 도구라 import 를 공유할 수
+  없어 값을 각자 갖고 있고, `scripts/build-pages.js` 가 빌드 시점에 두 값을 파싱·대조해 다르면
+  빌드를 실패시킨다(드리프트 가드). 회귀 테스트: `node engine/fee-calc.test.js`(QA-FEE-01~10).
 - **`app.js`** — 화면 로직만. 입력 검증 · 콤마 처리 · DOM 조립(6행 입력표를 `FIELDS` 배열로
   생성) · localStorage. 계산식·판정·결과 문구·좌표 계산 없음(전부 엔진에서 가져다 그리기만).
   입력마다 `analyze()` 를 다시 호출해 행별 증감·합계를 갱신하고(라이브 피드백), "진단하기"
   클릭 시에만 결과·리포트 패널을 공개하고 `scrollIntoView`.
+  수수료 계산 보조 패널(`buildFeePanel()`)은 `.sheet-row[data-f="platformFee"]` 바로 뒤에
+  형제로 삽입한다(`#sheet` 안에 넣지 않음 — 데스크톱 4열 grid 셀로 풀리는 걸 피하기 위함).
+  카드수수료·배달수수료 계산은 `fee-calc.js` 의 함수만 가져다 쓰고 계산식은 이 파일에 두지
+  않는다. 결과 합계를 "지난달/이번 달 수수료에 넣기" 버튼으로 해당 `platformFee` 칸에
+  **덮어쓰기**(누적 아님)로 반영한 뒤 기존 `refresh()`/`saveInputs()` 를 그대로 호출한다.
 - **`engine` 의 상태 규칙(`STATUS`)·영향 순위(`rankImpacts`)·행동 힌트(`ACTION_TABLE`)는
   `docs/tools/profit-drop-diagnosis/02_Rule_Engine_Profit_Drop_Diagnosis.md` 와 1:1 대응**.
   문구·순위 규칙을 바꾸면 → 엔진 + Rule Engine 문서 + `docs/tools/profit-drop-diagnosis/CHANGELOG.md`
@@ -80,8 +95,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   `benefitson.org/pages/tools/profit-drop-diagnosis/` 로 서빙(그래서 canonical·OG·JSON-LD·
   sitemap 은 모두 `benefitson.org` 절대 URL, asset 은 상대경로). Cloudflare 가 `style.css`/`app.js`
   를 4시간 캐시하므로, **이 파일들을 고치면 `index.html` 의 `?v=YYYYMMDD` 토큰과 `app.js` 상단
-  엔진 import 의 `?v=` 토큰을 함께 올려야** 재방문자가 즉시 새 파일을 받는다. 세 곳(`index.html`
-  의 `style.css?v=`, `index.html` 의 `app.js?v=`, `app.js` 의 엔진 import `?v=`)은 항상 같은 값.
+  엔진 import 의 `?v=` 토큰을 함께 올려야** 재방문자가 즉시 새 파일을 받는다. 네 곳(`index.html`
+  의 `style.css?v=`, `index.html` 의 `app.js?v=`, `app.js` 의 `profit-analyzer.js`/`fee-calc.js`
+  엔진 import `?v=` 2건)은 항상 같은 값.
   도구를 새로 추가할 때만 **저장소 루트** `sitemap.xml` 에 URL 을 넣는다.
   AdSense/GA/Kakao ad 스크립트는 다른 도구와 동일하게 삽입돼 있음.
 - **AdSense auto ads가 로드 직후 빈/숨김 요소를 잠깐 떼어냈다 되돌린다.** `app.js`의 `init()`은

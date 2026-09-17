@@ -55,3 +55,41 @@ rankedImpacts: 식재료비 -1,500,000 > 인건비 -800,000 > 수수료 -100,000
 영향 합계: -2,500,000 (profitChange와 일치)
 워터폴: 지난달(left 0%/width 100%) · 식재료비(left 62.5%/width 37.5%) · 이번 달(left 0%/width 37.5%) · zeroPct 0%
 ```
+
+---
+
+## 수수료 계산 보조 엔진 (`engine/fee-calc.test.js`)
+
+`engine/fee-calc.test.js` 와 1:1 대응. 실행: `node engine/fee-calc.test.js`.
+수수료 행(`platformFee`) 입력을 돕는 계산창(카드수수료·배달수수료)의 계산식만 검증한다 —
+진단 로직(`profit-analyzer.test.js`, QA-01~20)과는 완전히 독립.
+
+| ID | 시나리오 | 기대 결과 |
+|---|---|---|
+| QA-FEE-01 | 카드수수료 — 연매출 3억 이하, 월 카드매출 4,500만원 | `rate=0.40`, `fee=180,000` |
+| QA-FEE-02 | 카드수수료 — 연매출 3~5억, 월 카드매출 1,000만원 | `rate=1.00`, `fee=100,000` |
+| QA-FEE-03 | 카드수수료 — 연매출 30억 초과 | `rate=null`, `fee=null`, `note`에 "카드사와 협의한 요율" 포함(계산 안 함) |
+| QA-FEE-04 | 배달수수료 — 배민 단독 300만원 | `brokerage=234,000`, `payment=90,000`, `fee=324,000`, `total=324,000` |
+| QA-FEE-05 | 배달수수료 — 배민 300만 + 쿠팡이츠 200만 + 요기요 100만 합산 | 배민 `fee=324,000` / 쿠팡이츠 `fee=216,000` / 요기요 `fee=127,000`, `total=667,000` |
+| QA-FEE-06 | 카드+배달 합산(카드 3억이하 4,500만 + 배달 배민 300만·요기요 100만) | 카드 `fee=180,000`, 배달 `total=451,000`, `sumFees=631,000` |
+| QA-FEE-07 | 한쪽만 계산(배달만 / 카드만) | `sumFees({card:null, delivery})=324,000`, `sumFees({card, delivery:null})=180,000` |
+| QA-FEE-08 | 0원 입력 | 카드·배달 `fee=0`, `sumFees=0`, 둘 다 없을 때(`sumFees({})`)도 `0` |
+| QA-FEE-09 | `CARD_RATE_TIERS` 요율표 검증 | 4개 구간의 신용/체크 요율이 금융위 고시값과 일치, `over30.credit=null` |
+| QA-FEE-10 | `DELIVERY_RATES` 요율표 검증 | 배민/쿠팡이츠 10.8%(7.8+3.0), 요기요 12.7%(9.7+3.0) |
+
+### 검증값 실측 (E. 합산과 반영 예시)
+
+```
+카드: 연매출 3억 이하, 월 카드매출 45,000,000원 → 신용카드 0.40% → 180,000원
+배달: 배민 3,000,000원 × 10.8% = 324,000원 (중개 234,000 + 결제 90,000)
+      요기요 1,000,000원 × 12.7% = 127,000원 (중개 97,000 + 결제 30,000)
+      배달수수료 합계 451,000원
+```
+
+### 드리프트 가드
+
+`pages/tools/delivery-fee-calc/script.js` 의 `PLATFORM_RATES` 와 `engine/fee-calc.js` 의
+`DELIVERY_RATES` 는 값이 항상 같아야 한다. `scripts/build-pages.js` 가 빌드 시점에 두 파일에서
+배민/쿠팡이츠/요기요의 `brokerage`/`payment` 값을 파싱해 대조하고, 하나라도 다르면 어느 값이
+어떻게 다른지 출력하며 빌드를 실패시킨다(수동 확인: 한쪽 값을 임의로 바꾸고
+`node scripts/build-pages.js` 를 돌려 실패하는지 본 뒤 되돌린다).
