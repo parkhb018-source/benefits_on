@@ -45,7 +45,7 @@ const EXPECTED_COUNTS = {
   '신혼·육아': 65,
   '중장년·노년': 29,
   '1인가구': 22,
-  '근로/소득': 70,
+  '근로/소득': 71,
   '세금/환급': 20,
 };
 
@@ -514,8 +514,8 @@ function validateCategoryCardLinks(byCategory) {
     fail('외부 링크 카드에 rel="nofollow" 가 없습니다 (' + badExternalNofollow.length + '건):\n  - ' +
       badExternalNofollow.join('\n  - '));
   }
-  if (totalInternal !== 185) {
-    fail('카테고리 페이지 6개 합계 내부 링크 수가 185가 아닙니다: ' + totalInternal);
+  if (totalInternal !== 186) {
+    fail('카테고리 페이지 6개 합계 내부 링크 수가 186이 아닙니다: ' + totalInternal);
   }
   if (totalExternal !== 59) {
     fail('카테고리 페이지 6개 합계 외부 링크 수가 59가 아닙니다: ' + totalExternal);

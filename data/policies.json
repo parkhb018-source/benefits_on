@@ -562,6 +562,23 @@
       "popularity": 0.39
     },
     {
+      "id": "999000000091",
+      "title": "배우자 유산·사산휴가",
+      "category": "근로/소득",
+      "tags": [
+        "고용노동부",
+        "현금"
+      ],
+      "deadline": "유산 또는 사산이 있었던 날부터 20일 이내에 청구",
+      "status": "active",
+      "lastUpdated": "2026-09-20",
+      "sourceUrl": "https://www.moel.go.kr",
+      "summary": "배우자가 유산·사산했을 때 최대 5일(최초 3일 유급)의 휴가를 사용할 수 있도록 지원 — 2026년 9월 18일 신설",
+      "benefit": "배우자 유산·사산휴가",
+      "detailUrl": "pages/article-spouse-bereavement-leave",
+      "popularity": 0.05
+    },
+    {
       "id": "999000000007",
       "title": "육아기 근로시간 단축 급여",
       "category": "근로/소득",
