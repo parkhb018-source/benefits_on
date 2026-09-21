@@ -729,6 +729,10 @@ function lintPolicyDeps(report) {
    승수를 미리 곱해(6.4) 하나의 multiplier로 표현할 수 있으면 그렇게 쓴다.
    페이지가 아니라 정책 JSON 자체를 보므로, policy-deps 선언 여부와 무관하게 항상 실행된다.
    이진 부동소수점 오차(예: 10320 * 6.4)를 피하기 위해 Math.round로 비교한다. */
+/* 현재까지 확인된 invariants 총 개수(2026-09 기준 5건). 이 상수 자체를 늘리는 것은
+   invariants를 새로 등록했을 때만이고, 검사 목적은 이 값 "밑으로" 떨어지는 것을 잡는 것이다. */
+const MIN_INVARIANT_COUNT = 5;
+
 function checkPolicyInvariants(report) {
   const violations = [];
   let checkedCount = 0;
@@ -763,8 +767,19 @@ function checkPolicyInvariants(report) {
     });
   });
 
+  // invariants 선언 자체가 통째로 비어버리면(예: 편집 중 배열이 날아감) 검사 ②가
+  // "검사할 게 없어 조용히 통과"하는 사고를 막는다 — 파일별로 있어야 할 개수를 강제하면
+  // 파생 관계가 아예 없는 income-tax-policy.json 등에도 억지로 항목을 만들게 되므로,
+  // 대신 전체 합계가 현재까지 확인된 최솟값(5) 밑으로 떨어지면 그 자체를 위반으로 취급한다.
+  if (checkedCount < MIN_INVARIANT_COUNT) {
+    violations.push({
+      file: '(전체 정책 JSON)', key: '(invariants 총 개수)',
+      reason: 'invariants 선언이 ' + checkedCount + '건 — 최소 ' + MIN_INVARIANT_COUNT + '건이어야 함 (배열이 비었거나 일부가 소실되었을 수 있음)',
+    });
+  }
+
   console.log('\n[build-pages] 파생값 불변식 검사 ②');
-  console.log('  선언 ' + checkedCount + '건 — 통과 ' + (checkedCount - violations.length) + ' / 위반 ' + violations.length);
+  console.log('  불변식 ' + checkedCount + '건 검사, ' + (violations.length === 0 ? '전부 통과' : '위반 ' + violations.length + '건'));
   report.invariantCheck = { checked: checkedCount, violated: violations.length, violations };
   return violations;
 }
@@ -809,7 +824,12 @@ function scanHeadDrift(report) {
 
     const headEndIdx = html.indexOf('</head>');
     const head = headEndIdx === -1 ? html : html.slice(0, headEndIdx);
-    const tokens = Array.from(new Set(head.match(HEAD_NUM_UNIT_RE) || []));
+    // <style> 내용(예: width:100% 같은 CSS 값)은 정책값이 아니므로 제거한다. <script>도 마찬가지로
+    // 제거하되, application/ld+json 스크립트(JSON-LD)는 스캔 대상에 포함해야 하므로 남겨둔다.
+    const headText = head
+      .replace(/<style[\s\S]*?<\/style>/gi, '')
+      .replace(/<script(?![^>]*application\/ld\+json)[^>]*>[\s\S]*?<\/script>/gi, '');
+    const tokens = Array.from(new Set(headText.match(HEAD_NUM_UNIT_RE) || []));
 
     tokens.forEach((token) => {
       const matched = candidatePool.some((c) => token.includes(c));

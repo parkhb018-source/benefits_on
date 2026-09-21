@@ -56,6 +56,8 @@
     "earnedIncomeDeductionNote": "소득인정액 산정 시 근로소득 기본공제액. 2025년 1,120,000원에서 인상",
     "nationalPensionLinkThreshold": 524550,
     "nationalPensionLinkThresholdNote": "국민연금 연계 감액 기준선 = maxAmountSingle(349,700원)의 150%. maxAmountSingle이 바뀌면 이 값도 함께 갱신해야 함",
+    "recipientRatio": "70%",
+    "recipientRatioNote": "기초연금법상 지급 대상 — 만 65세 이상 중 소득 하위 비율",
     "source": "보건복지부 2026년 고시"
   },
   "eitc": {
