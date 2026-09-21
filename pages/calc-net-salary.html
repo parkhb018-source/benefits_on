@@ -162,7 +162,7 @@ data-ad-height = "100"></ins>
               <tbody id="deductionRows"></tbody>
             </table>
             <p class="result-note-small">
-              ※ 2025년 기준 (국민연금 4.5%, 건강보험 3.545%, 장기요양보험 건강보험료×12.95%, 고용보험 0.9%)<br>
+              ※ 2026년 기준 (국민연금 4.75%, 건강보험 3.595%, 장기요양보험 건강보험료×13.14%, 고용보험 0.9%)<br>
               ※ 소득세는 간이세액표 기준 근사치이며, 실제 납부액과 다를 수 있습니다.<br>
               ※ 정확한 금액은 회사 급여명세서 또는 국세청 홈택스를 통해 확인하세요.
             </p>
@@ -179,9 +179,9 @@ data-ad-height = "100"></ins>
         <table>
           <thead><tr><th>항목</th><th>요율</th><th>비고</th></tr></thead>
           <tbody>
-            <tr><td>국민연금</td><td>4.5%</td><td>월 소득 590만원 상한 적용</td></tr>
-            <tr><td>건강보험</td><td>3.545%</td><td>2025년 기준 요율</td></tr>
-            <tr><td>장기요양보험</td><td>건강보험료 × 12.95%</td><td>건강보험료에 연동</td></tr>
+            <tr><td>국민연금</td><td>4.75%</td><td>월 소득 637만원 상한 적용</td></tr>
+            <tr><td>건강보험</td><td>3.595%</td><td>2026년 기준 요율</td></tr>
+            <tr><td>장기요양보험</td><td>건강보험료 × 13.14%</td><td>건강보험료에 연동</td></tr>
             <tr><td>고용보험</td><td>0.9%</td><td>실업급여 재원</td></tr>
           </tbody>
         </table>
@@ -214,7 +214,7 @@ data-ad-height = "100"></ins>
         <h3>Q. 상여금이나 비과세 수당도 포함해서 입력해야 하나요?</h3>
         <p>이 계산기는 연봉을 과세 대상 근로소득으로 가정합니다. 식대·차량유지비 등 비과세 항목이 있다면 실제 과세 대상 금액은 입력값보다 적으므로, 실수령액은 계산 결과보다 다소 높을 수 있습니다.</p>
         <h3>Q. 국민연금 상한선은 왜 있나요?</h3>
-        <p>국민연금 보험료는 기준소득월액이 일정 금액(2025년 기준 590만원)을 넘으면 그 이상 금액에는 보험료를 부과하지 않습니다. 고소득자의 경우 국민연금 공제율이 실제로는 4.5%보다 낮아집니다.</p>
+        <p>국민연금 보험료는 기준소득월액이 일정 금액(2026년 기준 637만원)을 넘으면 그 이상 금액에는 보험료를 부과하지 않습니다. 고소득자의 경우 국민연금 공제율이 실제로는 4.75%보다 낮아집니다.</p>
         <h3>Q. 프리랜서·개인사업자도 이 계산기를 쓸 수 있나요?</h3>
         <p>아니요. 이 계산기는 4대보험에 가입된 근로소득자 기준입니다. 사업소득자는 건강보험 지역가입자 산정 방식과 종합소득세 신고 방식이 달라 별도 계산이 필요합니다.</p>
       </div>
@@ -290,11 +290,11 @@ data-ad-height = "100"></ins>
       const annual    = isAnnualMode ? inputVal * 10000 : inputVal * 10000 * 12;
       const monthly   = annual / 12;
 
-      // 4대보험 (2025년 기준)
-      const pension      = Math.round(Math.min(monthly, 5900000) * 0.045);    // 국민연금 (상한 590만원)
-      const health       = Math.round(monthly * 0.03545);                      // 건강보험
-      const ltCare       = Math.round(health * 0.1295);                        // 장기요양보험
-      const employment   = Math.round(monthly * 0.009);                        // 고용보험
+      // 4대보험 (2026년 기준)
+      const pension      = Math.round(Math.min(monthly, 6370000) * 0.0475);   // 국민연금 (상한 637만원)
+      const health       = Math.round(monthly * 0.03595);                     // 건강보험
+      const ltCare       = Math.round(health * 0.1314);                       // 장기요양보험
+      const employment   = Math.round(monthly * 0.009);                       // 고용보험 (2025년과 동일)
 
       // 근로소득공제
       function getWageDeduction(income) {
@@ -351,9 +351,9 @@ data-ad-height = "100"></ins>
       document.getElementById('netAnnual').textContent  = '연간 실수령액: ' + netAnnual.toLocaleString() + '원';
 
       const rows = [
-        ['국민연금 (4.5%)',           pension,    '4.5%'],
-        ['건강보험 (3.545%)',          health,     '3.545%'],
-        ['장기요양보험 (건보료×12.95%)', ltCare,   '-'],
+        ['국민연금 (4.75%)',           pension,    '4.75%'],
+        ['건강보험 (3.595%)',          health,     '3.595%'],
+        ['장기요양보험 (건보료×13.14%)', ltCare,   '-'],
         ['고용보험 (0.9%)',            employment, '0.9%'],
         ['소득세 (간이세액표)',         incomeTax,  '-'],
         ['지방소득세 (소득세×10%)',     localTax,   '-'],
