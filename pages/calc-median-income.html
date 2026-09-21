@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta name="naver-site-verification" content="7275bfd241a8eaef8de75ca865a8e2a6a6093555" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기준중위소득 계산기 2026 — 생계급여·의료급여·주거급여·교육급여 자격 확인 — 혜택on</title>
+  <meta name="description" content="가구원수와 월 소득을 입력하면 기준중위소득 대비 몇 %인지, 생계급여·의료급여·주거급여·교육급여 각각의 소득 기준을 충족하는지 바로 확인할 수 있습니다.">
+  <link rel="stylesheet" href="../style.css?v=20260916">
+  <link rel="stylesheet" href="pages.css?v=20260914b">
+  <style>
+    .calc-page-wrap { max-width: 700px; margin: 0 auto; padding: 48px 16px 80px; }
+    .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .calc-page-title::before { content: "📊 "; }
+    .calc-page-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 32px; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 20px; }
+    .calc-section-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+    .calc-field { margin-bottom: 20px; }
+    .calc-field label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .calc-field input, .calc-field select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; color: var(--text-dark);
+      background: var(--bg-soft); transition: border-color .2s; box-sizing: border-box;
+    }
+    .calc-field input:focus, .calc-field select:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
+    .calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-result { display: none; margin-top: 24px; }
+    .calc-result.show { display: block; animation: fadeInUp .3s ease; }
+    .result-hero { border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
+    .result-hero.eligible   { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: #fff; }
+    .result-hero.ineligible { background: linear-gradient(135deg, #636e72, #b2bec3); color: #fff; }
+    .result-hero-label  { font-size: 0.85rem; opacity: .85; margin-bottom: 4px; }
+    .result-hero-amount { font-size: 2rem; font-weight: 800; }
+    .result-hero-sub    { font-size: 0.85rem; opacity: .8; margin-top: 8px; line-height: 1.5; }
+    .income-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 16px; }
+    .income-table th { background: var(--bg-soft); padding: 8px 10px; text-align: center; font-weight: 700; color: var(--text-dark); }
+    .income-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: center; }
+    .income-table tr.met-row { background: #EAFAF1; }
+    .income-table a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .income-table a:hover { text-decoration: underline; }
+    .eitc-table-wrap { overflow-x: auto; margin-bottom: 20px; }
+    .info-box { background: #EBF5FB; border-left: 3px solid var(--primary); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 0.82rem; color: var(--primary-dark); margin-bottom: 20px; line-height: 1.6; }
+    .result-note-small { font-size: 0.78rem; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
+    .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .section-divider { border: none; border-top: 1px dashed var(--border); margin: 20px 0; }
+    .calc-btn-reset { width: 100%; padding: 12px; background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all .2s; }
+    .calc-btn-reset:hover { background: var(--bg-soft); color: var(--text-dark); border-color: var(--text-muted); }
+  </style>
+  <link rel="canonical" href="https://benefitson.org/pages/calc-median-income">
+  <meta property="og:url" content="https://benefitson.org/pages/calc-median-income">
+  <meta property="og:image" content="https://benefitson.org/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="기준중위소득 계산기 2026 — 생계급여·의료급여·주거급여·교육급여 자격 확인 — 혜택on">
+  <meta name="twitter:description" content="가구원수와 월 소득을 입력하면 기준중위소득 대비 몇 %인지, 생계급여·의료급여·주거급여·교육급여 각각의 소득 기준을 충족하는지 바로 확인할 수 있습니다.">
+  <meta name="twitter:image" content="https://benefitson.org/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-4871058922328451">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4871058922328451" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1YVTR39FF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-K1YVTR39FF');
+  </script>
+<script src="/assets/js/analytics.js"></script>
+</head>
+<body>
+<ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-ntJWItYnhuyVV5W8"
+data-ad-width = "320"
+data-ad-height = "100"></ins>
+<script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="youth">청년정책</a></li>
+          <li><a href="newlywed">신혼·육아</a></li>
+          <li><a href="senior">중장년·노년</a></li>
+          <li><a href="single">1인가구</a></li>
+          <li><a href="income">근로/소득</a></li>
+          <li><a href="tax">세금/환급</a></li>
+          <li><a href="calculators">계산기</a></li>
+          <li><a href="resources">무료도구</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="youth"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="newlywed"><span class="m-icon">👶</span>신혼·육아</a>
+    <a href="senior"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="single"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="income"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="tax"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="calculators"><span class="m-icon">🧮</span>계산기</a>
+    <a href="resources"><span class="m-icon">📂</span>무료도구</a>
+  </nav>
+
+  <main>
+    <div class="calc-page-wrap">
+      <p class="breadcrumb"><a href="../">홈</a> &rsaquo; <a href="calculators">계산기</a> &rsaquo; 기준중위소득 계산기</p>
+      <div class="policy-data-badge">✅ <strong data-policy-date>2026-06-18</strong> 기준 최신 데이터</div>
+      <h1 class="calc-page-title">기준중위소득 계산기</h1>
+      <p class="calc-page-sub">가구원수와 월 소득을 입력하면 기준중위소득 대비 몇 %인지, 생계급여·의료급여·주거급여·교육급여 소득 기준을 충족하는지 바로 확인해드려요.</p>
+
+      <div class="info-box">
+        💡 <strong>기준중위소득이란?</strong> 정부가 매년 고시하는 국민 소득의 중간값으로, 생계급여·의료급여·주거급여·교육급여 등 각종 복지제도의 소득 기준선으로 쓰입니다. 가구원수가 많을수록 기준 금액도 커집니다.
+      </div>
+
+      <div class="calc-card">
+        <div class="calc-section-label">가구 정보 입력</div>
+        <div class="calc-row2">
+          <div class="calc-field">
+            <label for="household-size">가구원수 (인)</label>
+            <input type="number" id="household-size" value="" min="1" step="1" placeholder="예) 4">
+            <p class="field-hint">본인 포함 실제 거주 가구원 수</p>
+          </div>
+          <div class="calc-field">
+            <label for="monthly-income">월 소득 (만원)</label>
+            <input type="number" id="monthly-income" value="" min="0" step="10" placeholder="예) 300">
+            <p class="field-hint">가구원 전체 소득 합산</p>
+          </div>
+        </div>
+        <button class="calc-btn" id="calcBtn">기준중위소득 계산하기</button>
+        <button class="calc-btn-reset" id="resetBtn">초기화</button>
+
+        <div class="calc-result" id="calcResult">
+          <div class="result-hero" id="resultHero">
+            <div class="result-hero-label" id="resultLabel">—</div>
+            <div class="result-hero-amount" id="resultAmount">—</div>
+            <div class="result-hero-sub" id="resultSub">—</div>
+          </div>
+
+          <hr class="section-divider">
+          <div class="calc-section-label">급여별 자격 기준 비교</div>
+          <div class="eitc-table-wrap">
+            <table class="income-table" id="benefitTable">
+              <thead>
+                <tr><th>급여명</th><th>기준(%)</th><th>기준금액(원)</th><th>내 소득과 비교</th><th>충족여부</th></tr>
+              </thead>
+              <tbody id="benefitTableBody"></tbody>
+            </table>
+          </div>
+          <p class="result-note-small">
+            ※ 실제 수급 여부는 소득뿐 아니라 재산을 소득으로 환산한 소득인정액, 부양의무자 기준 등을 종합적으로 봅니다. 이 계산기는 소득만으로 계산한 참고용 결과이며, 정확한 자격은 거주지 읍면동 주민센터 또는 복지로(bokjiro.go.kr)에서 확인하세요.<br>
+            ※ 2026년 보건복지부 고시 기준중위소득 기준입니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="article-body" style="margin-top:8px;">
+        <h2>기준중위소득은 어떻게 계산되나요?</h2>
+        <p>기준중위소득은 보건복지부가 매년 8월 다음 연도 기준으로 고시하는 국민 가구소득의 중간값입니다. 생계급여·의료급여·주거급여·교육급여는 각각 이 기준중위소득의 일정 비율 이하 소득 가구를 지원 대상으로 합니다. 내 소득이 기준중위소득의 몇 %에 해당하는지 알면 어떤 급여를 신청할 수 있는지 가늠할 수 있습니다.</p>
+
+        <h2>2026년 기준중위소득 (100%, 월 기준)</h2>
+        <table>
+          <thead><tr><th>가구원수</th><th>기준중위소득(100%)</th></tr></thead>
+          <tbody>
+            <tr><td>1인</td><td>2,564,238원</td></tr>
+            <tr><td>2인</td><td>4,199,292원</td></tr>
+            <tr><td>3인</td><td>5,359,036원</td></tr>
+            <tr><td>4인</td><td>6,494,738원</td></tr>
+            <tr><td>5인</td><td>7,556,719원</td></tr>
+            <tr><td>6인</td><td>8,555,952원</td></tr>
+            <tr><td>7인</td><td>9,515,150원</td></tr>
+            <tr><td>8인 이상</td><td>7인 기준액 + (가구원수−7) × 959,198원</td></tr>
+          </tbody>
+        </table>
+
+        <h3>급여별 선정기준 (기준중위소득 대비 비율)</h3>
+        <table>
+          <thead><tr><th>급여</th><th>비율</th></tr></thead>
+          <tbody>
+            <tr><td>생계급여</td><td>32% 이하</td></tr>
+            <tr><td>의료급여</td><td>40% 이하</td></tr>
+            <tr><td>주거급여</td><td>48% 이하</td></tr>
+            <tr><td>교육급여</td><td>50% 이하</td></tr>
+          </tbody>
+        </table>
+
+        <h2>계산 예시</h2>
+        <table>
+          <thead><tr><th>구분</th><th>4인가구 · 월 소득 300만원</th></tr></thead>
+          <tbody>
+            <tr><td>기준중위소득 대비 비율</td><td>300만 ÷ 649.4738만 × 100 ≈ 46.2%</td></tr>
+            <tr><td>생계급여(32%)</td><td>미충족</td></tr>
+            <tr><td>의료급여(40%)</td><td>미충족</td></tr>
+            <tr><td>주거급여(48%)</td><td>충족</td></tr>
+            <tr><td>교육급여(50%)</td><td>충족</td></tr>
+          </tbody>
+        </table>
+
+        <h2>자주 묻는 질문</h2>
+        <h3>Q. 소득만 기준 이하면 무조건 받을 수 있나요?</h3>
+        <p>아니요. 실제 수급 여부는 소득뿐 아니라 재산을 소득으로 환산한 소득인정액(소득+재산의 소득환산액), 부양의무자 기준(생계급여·의료급여 일부) 등을 종합적으로 심사합니다. 이 계산기는 소득만으로 계산한 참고용 결과입니다.</p>
+        <h3>Q. 가구원수는 어떻게 세나요?</h3>
+        <p>주민등록표상 함께 거주하는 가구원 전체를 기준으로 합니다. 실제 산정 시에는 세대 분리, 별거 등 예외 사항이 있을 수 있으므로 정확한 가구원수 판단은 주민센터에 문의하세요.</p>
+        <h3>Q. 8인 이상 가구는 어떻게 계산하나요?</h3>
+        <p>7인 가구 기준중위소득(9,515,150원)에 1인 초과할 때마다 959,198원을 더해 계산합니다. 예를 들어 8인 가구는 9,515,150원 + 959,198원 = 10,474,348원입니다.</p>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- ─── 결과 하단 광고 ─── -->
+  <div class="container" style="margin:24px auto;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4871058922328451"
+         data-ad-slot="2452607788"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+<footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">혜택on은 트리플20(Pixel Vibe)이 운영하는 무료 정보 서비스입니다.<br>
+      대표자:&nbsp;박현봉 | 사업자등록번호:&nbsp;342-29-01302 | 문의:&nbsp;<a href="mailto:parkhb018@gmail.com">parkhb018@gmail.com</a><br>
+      © 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about">사이트 소개</a>
+        <a href="privacy">개인정보처리방침</a>
+        <a href="contact">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../data/policy-loader.js?v=20260816"></script>
+  <script src="../main.js?v=20260626"></script>
+  <script>
+  (function () {
+    // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+    // gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
+    const TOOL_ID = 'calc-median-income';
+    function safeTrack(fn) { try { fn(); } catch (e) { /* 조용히 무시 */ } }
+    document.querySelector('main').addEventListener('input', function (e) {
+      if (e.target.matches('input, select')) {
+        safeTrack(() => window.trackToolStart && window.trackToolStart(TOOL_ID));
+      }
+    }, { once: true });
+
+    // 2026년 보건복지부 고시 기준중위소득 (100%, 월 기준)
+    const MEDIAN_INCOME_2026 = {
+      1: 2564238,
+      2: 4199292,
+      3: 5359036,
+      4: 6494738,
+      5: 7556719,
+      6: 8555952,
+      7: 9515150,
+    };
+    const PERSON8_STEP = 959198;
+
+    function getMedianIncome(size) {
+      if (size <= 7) return MEDIAN_INCOME_2026[size] || MEDIAN_INCOME_2026[1];
+      return MEDIAN_INCOME_2026[7] + (size - 7) * PERSON8_STEP;
+    }
+
+    const BENEFITS = [
+      { name: '생계급여', pct: 32, link: 'policy-WII000001410' },
+      { name: '의료급여', pct: 40, link: null },
+      { name: '주거급여', pct: 48, link: 'article-housing-benefit' },
+      { name: '교육급여', pct: 50, link: 'article-teen-edu' },
+    ];
+
+    document.getElementById('calcBtn').addEventListener('click', function () {
+      const size   = parseInt(document.getElementById('household-size').value) || 0;
+      const income = (parseFloat(document.getElementById('monthly-income').value) || 0) * 10000;
+
+      const hero   = document.getElementById('resultHero');
+      const calcResult = document.getElementById('calcResult');
+
+      if (size < 1) {
+        hero.className = 'result-hero ineligible';
+        document.getElementById('resultLabel').textContent  = '입력 필요';
+        document.getElementById('resultAmount').textContent = '—';
+        document.getElementById('resultSub').textContent    = '가구원수를 1명 이상 입력해주세요.';
+        document.getElementById('benefitTableBody').innerHTML = '';
+        calcResult.classList.add('show');
+        safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
+        return;
+      }
+
+      const medianIncome = getMedianIncome(size);
+      const ratio = Math.round((income / medianIncome) * 1000) / 10;
+
+      hero.className = 'result-hero eligible';
+      document.getElementById('resultLabel').textContent  = size + '인 가구 기준중위소득 대비';
+      document.getElementById('resultAmount').textContent = ratio + '%';
+      document.getElementById('resultSub').textContent    =
+        '당신의 소득은 ' + size + '인 가구 기준중위소득의 ' + ratio + '%입니다. (기준중위소득 100%: ' + medianIncome.toLocaleString() + '원)';
+
+      document.getElementById('benefitTableBody').innerHTML = BENEFITS.map(function (b) {
+        const threshold = Math.round(medianIncome * b.pct / 100);
+        const met = income <= threshold;
+        const nameCell = b.link
+          ? '<a href="' + b.link + '">' + b.name + '</a>'
+          : b.name;
+        return '<tr class="' + (met ? 'met-row' : '') + '">' +
+          '<td>' + nameCell + '</td>' +
+          '<td>' + b.pct + '%</td>' +
+          '<td>' + threshold.toLocaleString() + '원</td>' +
+          '<td>' + income.toLocaleString() + '원</td>' +
+          '<td>' + (met ? '✅ 충족' : '❌ 미충족') + '</td>' +
+        '</tr>';
+      }).join('') + '<tr><td colspan="5" style="text-align:left;font-size:0.78rem;color:var(--text-muted);">※ 의료급여 관련 세부 지원 사업(요양비·틀니 등)은 근로/소득 카테고리에서 확인하세요.</td></tr>';
+
+      calcResult.classList.add('show');
+      calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      document.getElementById('household-size').value = '';
+      document.getElementById('monthly-income').value = '';
+      document.getElementById('calcResult').classList.remove('show');
+    });
+  }());
+  </script>
+</body>
+</html>
