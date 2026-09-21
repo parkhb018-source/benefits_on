@@ -63,6 +63,13 @@ gov24 원문(CSV·JSON)이 실제로 갱신됐을 때만 쓰는 것이고, 그 �
 - 새 페이지 추가 시 [sitemap.xml](sitemap.xml)도 갱신하세요.
 - `YOUR-DOMAIN.com`, `ca-pub-XXXX`(AdSense) 등은 배포 전 교체되는 **플레이스홀더**입니다 — 임의로 채우지 마세요.
 - 외부 의존성·프레임워크를 새로 도입하지 마세요. 정적·무빌드 구조를 유지합니다.
+- 아티클·계산기 페이지에 정책 숫자(금액·요율·기준액)를 넣을 때는 `data/*.json`의 키를
+  참조하고, 페이지 상단에 `<!-- policy-deps: alias:dot.path, ... -->` 주석으로 선언하세요.
+  대응 키가 없으면 먼저 정책 JSON에 키를 만드세요.
+- 다른 값에서 계산되는 파생값(예: A × 1.5 = B)을 정책 JSON에 넣을 때는 그 파일 최상위
+  `invariants` 배열에도 `{ key, fromKey, multiplier }` 형태로 등록하세요.
+- `node scripts/build-pages.js`는 위 선언들을 검사합니다. 선언된 키가 본문에 없거나
+  불변식이 어긋나면 빌드가 실패합니다(`exit 1`).
 
 ---
 

@@ -124,5 +124,12 @@
     "housing": 48,
     "education": 50,
     "source": "보건복지부 2026년 기준 중위소득 고시 (급여별 선정기준 비율)"
-  }
+  },
+  "invariants": [
+    { "key": "basicPension.nationalPensionLinkThreshold", "fromKey": "basicPension.maxAmountSingle", "multiplier": 1.5 },
+    { "key": "basicPension.coupleEachAmount", "fromKey": "basicPension.maxAmountSingle", "multiplier": 0.8 },
+    { "key": "basicPension.coupleTotalMax", "fromKey": "basicPension.coupleEachAmount", "multiplier": 2 },
+    { "key": "minimumWage.monthlyStandard209", "fromKey": "minimumWage.hourlyRate", "multiplier": 209 },
+    { "key": "unemployment.dailyFloor", "fromKey": "unemployment.minWageBase", "multiplier": 6.4 }
+  ]
 }

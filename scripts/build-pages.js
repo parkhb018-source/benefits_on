@@ -610,7 +610,19 @@ function currencyCandidates(num) {
   const raw = String(num);
   const comma = num.toLocaleString('ko-KR');
   if (comma !== raw) candidates.push(comma);
-  if (num >= 10000) {
+  if (num >= 100000000) {
+    // 억 단위. "만" 자리 나머지만 다룬다 — 현재 정책 데이터에 억 단위 값 중
+    // 만 단위 미만 자투리(원)가 있는 값이 없어, 그 경우는 다루지 않는다.
+    const eok = Math.floor(num / 100000000);
+    const manRest = Math.floor((num % 100000000) / 10000);
+    const eokStr = eok.toLocaleString('ko-KR') + '억';
+    if (manRest === 0) {
+      candidates.push(eokStr, eokStr + '원');
+    } else {
+      const manStr = manRest.toLocaleString('ko-KR') + '만';
+      candidates.push(eokStr + ' ' + manStr, eokStr + manStr);
+    }
+  } else if (num >= 10000) {
     const man = Math.floor(num / 10000);
     const rest = num % 10000;
     const manStr = man.toLocaleString('ko-KR') + '만';
@@ -642,8 +654,19 @@ function generateCandidates(value) {
   return Array.from(new Set([...currencyCandidates(value), ...percentCandidates(value)]));
 }
 
+/* 예기치 못하게 배포가 막히면 이 한 줄만 false로 바꿔 즉시 경고 모드로 되돌릴 수 있다.
+   ①(policy-deps 선언 키 존재)·②(파생값 불변식) 검사에만 적용된다 — ③(head 드리프트 스캔)은
+   아직 휴리스틱이 검증되지 않아 이 스위치와 무관하게 항상 경고만 낸다. */
+const LINT_HARD_FAIL = true;
+
+/* pages/*.html 안의 <!-- policy-deps: alias:dot.path, ... --> 주석이 선언한 정책 값이
+   실제로 그 페이지 본문 어딘가에 사람이 읽을 수 있는 표기로 남아있는지 검사한다(①).
+   본문을 치환하지 않으므로(=값을 하나로 정하지 않으므로) "마커 바깥은 건드리지 않는다"
+   불변식과 충돌하지 않는다. fs.writeFileSync/writeIfChanged를 호출하지 않는다 — 어떤
+   파일도 이 함수로 인해 바뀌지 않는다. 위반 목록만 반환하고, fail() 호출 여부는
+   main()이 ②(불변식) 위반과 합쳐서 한 번에 결정한다(0단계 (가) 참고). */
 function lintPolicyDeps(report) {
-  if (!fs.existsSync(PAGES_DIR)) return;
+  if (!fs.existsSync(PAGES_DIR)) return [];
   const files = fs.readdirSync(PAGES_DIR).filter((f) => f.endsWith('.html')).sort();
   const policyCache = {};
   function loadPolicyFile(alias) {
@@ -694,16 +717,115 @@ function lintPolicyDeps(report) {
     });
   });
 
-  console.log('\n[build-pages] policy-deps 린트 (경고 모드 — 위반이 있어도 빌드를 막지 않음)');
+  console.log('\n[build-pages] policy-deps 린트 ①(선언 키 존재)');
   console.log('  선언 ' + (passes.length + violations.length) + '건 — 통과 ' + passes.length + ' / 위반 ' + violations.length);
-  if (violations.length) {
-    console.warn('[build-pages] 경고: policy-deps 위반 (' + violations.length + '건):');
-    violations.forEach((v) => {
-      const expected = v.value !== undefined ? ' (기대값 ' + JSON.stringify(v.value) + ', 후보 ' + JSON.stringify(v.candidates) + ')' : '';
-      console.warn('  - ' + v.file + ' : ' + v.key + expected + ' — ' + v.reason);
-    });
-  }
   report.policyDepsLint = { passed: passes.length, violated: violations.length, passes, violations };
+  return violations;
+}
+
+/* 파생값 불변식 검사(②). 정책 JSON(constants.json 등) 최상위 "invariants" 배열에
+   { key, fromKey, multiplier } 형태로 선언된 관계가 실제 데이터에서 성립하는지 확인한다.
+   표현식 파서를 두지 않고 선언형(곱셈 하나)만 지원한다 — 2단계 곱셈(예: ×0.8×8)도
+   승수를 미리 곱해(6.4) 하나의 multiplier로 표현할 수 있으면 그렇게 쓴다.
+   페이지가 아니라 정책 JSON 자체를 보므로, policy-deps 선언 여부와 무관하게 항상 실행된다.
+   이진 부동소수점 오차(예: 10320 * 6.4)를 피하기 위해 Math.round로 비교한다. */
+function checkPolicyInvariants(report) {
+  const violations = [];
+  let checkedCount = 0;
+
+  Object.keys(POLICY_FILE_ALIASES).forEach((alias) => {
+    const filename = POLICY_FILE_ALIASES[alias];
+    const file = path.join(DATA_DIR, filename);
+    if (!fs.existsSync(file)) return;
+    let data;
+    try {
+      data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    } catch (e) {
+      return; // readJson()이 policies/home-cards 등 필수 파일의 파싱 실패는 이미 별도로 fail() 처리한다
+    }
+    const invariants = Array.isArray(data.invariants) ? data.invariants : [];
+    invariants.forEach((inv) => {
+      checkedCount++;
+      const fromVal = getDeep(data, inv.fromKey);
+      const actualVal = getDeep(data, inv.key);
+      if (typeof fromVal !== 'number' || typeof actualVal !== 'number') {
+        violations.push({ file: filename, key: inv.key, fromKey: inv.fromKey, reason: '값을 숫자로 찾을 수 없음' });
+        return;
+      }
+      const expected = fromVal * inv.multiplier;
+      if (Math.round(expected) !== Math.round(actualVal)) {
+        violations.push({
+          file: filename, key: inv.key, fromKey: inv.fromKey, multiplier: inv.multiplier,
+          expected, actual: actualVal,
+          reason: inv.fromKey + ' × ' + inv.multiplier + ' = ' + expected + ' 와 불일치',
+        });
+      }
+    });
+  });
+
+  console.log('\n[build-pages] 파생값 불변식 검사 ②');
+  console.log('  선언 ' + checkedCount + '건 — 통과 ' + (checkedCount - violations.length) + ' / 위반 ' + violations.length);
+  report.invariantCheck = { checked: checkedCount, violated: violations.length, violations };
+  return violations;
+}
+
+/* <head> 드리프트 스캔(③, 경고 전용 — 하드 실패로 만들지 않는다).
+   policy-deps를 선언한 페이지의 <head> 블록(meta description/og/twitter/JSON-LD 포함)만 떼어내
+   단위가 붙은 숫자(예: "349,700원", "247만원", "2.1%")를 추출하고, 그 페이지가 선언한 키들의
+   현재 값의 허용 표기 후보 중 어느 것과도 일치하지 않으면 경고로 기록한다.
+   "적어도 하나는 최신"만 보증하는 ①의 사각지대(meta/h1 등 head 안의 중복 리터럴이 갱신을
+   놓쳐도 ①은 통과함)를 드러내기 위한 것으로, 아직 휴리스틱이 검증되지 않아 경고만 낸다. */
+const HEAD_NUM_UNIT_RE = /\d{1,3}(?:,\d{3})*만원|\d{1,3}(?:,\d{3})+원|\d+(?:\.\d+)?%/g;
+
+function scanHeadDrift(report) {
+  if (!fs.existsSync(PAGES_DIR)) return [];
+  const files = fs.readdirSync(PAGES_DIR).filter((f) => f.endsWith('.html')).sort();
+  const warnings = [];
+
+  files.forEach((f) => {
+    const html = fs.readFileSync(path.join(PAGES_DIR, f), 'utf8');
+    const m = html.match(/<!--\s*policy-deps:\s*(.+?)\s*-->/);
+    if (!m) return; // policy-deps를 선언하지 않은 페이지는 대응 키가 없어 스캔 대상이 아니다
+
+    const declared = m[1].split(',').map((s) => s.trim()).filter(Boolean);
+    const candidatePool = [];
+    declared.forEach((keyExpr) => {
+      const sep = keyExpr.indexOf(':');
+      if (sep === -1) return;
+      const alias = keyExpr.slice(0, sep);
+      const dotPath = keyExpr.slice(sep + 1);
+      const filename = POLICY_FILE_ALIASES[alias];
+      if (!filename) return;
+      let data;
+      try {
+        data = JSON.parse(fs.readFileSync(path.join(DATA_DIR, filename), 'utf8'));
+      } catch (e) {
+        return;
+      }
+      const value = getDeep(data, dotPath);
+      if (value === undefined) return;
+      candidatePool.push(...generateCandidates(value));
+    });
+
+    const headEndIdx = html.indexOf('</head>');
+    const head = headEndIdx === -1 ? html : html.slice(0, headEndIdx);
+    const tokens = Array.from(new Set(head.match(HEAD_NUM_UNIT_RE) || []));
+
+    tokens.forEach((token) => {
+      const matched = candidatePool.some((c) => token.includes(c));
+      if (!matched) warnings.push({ file: f, token });
+    });
+  });
+
+  console.log('\n[build-pages] head 드리프트 스캔 ③ (경고 전용, 하드 실패 아님)');
+  if (warnings.length) {
+    console.warn('[build-pages] 경고: head 블록 숫자가 선언된 policy-deps 값과 매칭되지 않음 (' + warnings.length + '건):');
+    warnings.forEach((w) => console.warn('  - ' + w.file + ' : "' + w.token + '"'));
+  } else {
+    console.log('  위반 없음');
+  }
+  report.headDriftScan = { violated: warnings.length, warnings };
+  return warnings;
 }
 
 /* ── 메인 ───────────────────────────────────────────────── */
@@ -712,7 +834,28 @@ function main() {
   validateDeliveryFeeRatesMatch();
 
   const report = { written: [], unchanged: [], skipped: [], counts: {} };
-  lintPolicyDeps(report);
+  const depsViolations = lintPolicyDeps(report);         // ①
+  const invariantViolations = checkPolicyInvariants(report); // ②
+  scanHeadDrift(report);                                  // ③ (경고 전용)
+
+  // 0단계 (가): ①②의 위반을 각자 바로 fail() 하지 않고 모아서 마지막에 한 번만 부른다.
+  const hardViolations = []
+    .concat(depsViolations.map((v) => {
+      const expected = v.value !== undefined ? ' (기대값 ' + JSON.stringify(v.value) + ', 후보 ' + JSON.stringify(v.candidates) + ')' : '';
+      return '[policy-deps] ' + v.file + ' : ' + v.key + expected + ' — ' + v.reason;
+    }))
+    .concat(invariantViolations.map((v) => {
+      return '[invariant] ' + v.file + ' : ' + v.key + ' — ' + v.reason;
+    }));
+
+  if (hardViolations.length) {
+    const msg = 'policy-deps / 파생값 불변식 검증 실패 (' + hardViolations.length + '건):\n  - ' + hardViolations.join('\n  - ');
+    if (LINT_HARD_FAIL) {
+      fail(msg);
+    } else {
+      console.warn('\n[build-pages] 경고(LINT_HARD_FAIL=false — 하드 실패 비활성화 상태): ' + msg);
+    }
+  }
 
   const policyData = readJson('policies.json');
   const homeData = readJson('home-cards.json');
