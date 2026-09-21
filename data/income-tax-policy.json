@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "policyName": "근로소득세·4대보험 계산 (실수령액·연말정산 공통)",
+    "version": "2026.1",
+    "lastUpdated": "2026-09-21",
+    "note": "정책 숫자가 바뀌면 이 파일만 수정한다. 계산 로직(engine/income-tax-calculator.js)은 건드리지 않는다."
+  },
+  "sources": [
+    {
+      "id": "law-wage-income-deduction",
+      "title": "국가법령정보센터 - 소득세법 제47조(근로소득공제)",
+      "url": "https://www.law.go.kr",
+      "checkedDate": "2026-09-21",
+      "note": "총급여 구간별 공제율 5단계, 공제 한도 2,000만원. 1억원 초과분은 1,475만원 + 초과액의 2%"
+    },
+    {
+      "id": "law-income-tax-rate",
+      "title": "국가법령정보센터 - 소득세법 제55조(종합소득세 세율)",
+      "url": "https://www.law.go.kr",
+      "checkedDate": "2026-09-21",
+      "note": "8단계 초과누진세율표(누진공제 포함)"
+    },
+    {
+      "id": "insurance-rates-2026",
+      "title": "국민연금공단·국민건강보험공단 - 2026년 4대보험 요율 고시",
+      "url": "https://www.nps.or.kr",
+      "checkedDate": "2026-09-21",
+      "note": "국민연금 4.75%(기준소득월액 상한 637만원), 건강보험 3.595%, 장기요양보험(건강보험료×13.14%), 고용보험 0.9%"
+    },
+    {
+      "id": "law-local-income-tax",
+      "title": "국가법령정보센터 - 지방세법 제91조·제92조",
+      "url": "https://www.law.go.kr",
+      "checkedDate": "2026-09-21",
+      "note": "지방소득세 = 소득세의 10%"
+    }
+  ],
+  "insurance": {
+    "pensionRate": 0.0475,
+    "pensionCap": 6370000,
+    "healthRate": 0.03595,
+    "ltCareRate": 0.1314,
+    "employmentRate": 0.009,
+    "sourceId": "insurance-rates-2026"
+  },
+  "wageDeduction": {
+    "note": "공제액 = base + (annualGross - threshold) * rate, 최종값은 cap으로 상한 적용",
+    "brackets": [
+      { "max": 5000000,    "base": 0,        "threshold": 0,         "rate": 0.7 },
+      { "max": 15000000,   "base": 3500000,  "threshold": 5000000,   "rate": 0.4 },
+      { "max": 45000000,   "base": 7500000,  "threshold": 15000000,  "rate": 0.15 },
+      { "max": 100000000,  "base": 12000000, "threshold": 45000000,  "rate": 0.05 },
+      { "max": null,       "base": 14750000, "threshold": 100000000, "rate": 0.02 }
+    ],
+    "cap": 20000000,
+    "sourceId": "law-wage-income-deduction"
+  },
+  "incomeTaxBrackets": [
+    { "max": 14000000,   "rate": 0.06, "progressiveDeduction": 0 },
+    { "max": 50000000,   "rate": 0.15, "progressiveDeduction": 1260000 },
+    { "max": 88000000,   "rate": 0.24, "progressiveDeduction": 5760000 },
+    { "max": 150000000,  "rate": 0.35, "progressiveDeduction": 15440000 },
+    { "max": 300000000,  "rate": 0.38, "progressiveDeduction": 19940000 },
+    { "max": 500000000,  "rate": 0.40, "progressiveDeduction": 25940000 },
+    { "max": 1000000000, "rate": 0.42, "progressiveDeduction": 35940000 },
+    { "max": null,       "rate": 0.45, "progressiveDeduction": 65940000 }
+  ],
+  "incomeTaxBracketsSourceId": "law-income-tax-rate",
+  "wageIncomeTaxCredit": {
+    "lowThreshold": 1300000,
+    "lowRate": 0.55,
+    "highRate": 0.3,
+    "capBrackets": [
+      { "max": 33000000, "cap": 740000 },
+      { "max": 70000000, "cap": 660000 },
+      { "max": null,     "cap": 500000 }
+    ],
+    "sourceId": "law-income-tax-rate"
+  },
+  "basicDeductionPerPerson": 1500000,
+  "localIncomeTax": {
+    "rate": 0.1,
+    "sourceId": "law-local-income-tax"
+  }
+}

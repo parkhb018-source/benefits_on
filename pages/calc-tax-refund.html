@@ -266,10 +266,12 @@ data-ad-height = "100"></ins>
     </div>
   </footer>
 
-  <script src="../data/policy-loader.js?v=20260816"></script>
   <script src="../main.js?v=20260626"></script>
-  <script>
-  (function () {
+  <script type="module">
+    import { getWageDeduction, calcIncomeTax, calcWageIncomeTaxCredit } from '../engine/income-tax-calculator.js';
+
+    let policy = null;
+
     // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
     // gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
     const TOOL_ID = 'calc-tax-refund';
@@ -280,7 +282,16 @@ data-ad-height = "100"></ins>
       }
     }, { once: true });
 
+    fetch('../data/income-tax-policy.json')
+      .then((res) => res.json())
+      .then((data) => { policy = data; })
+      .catch(() => {
+        document.getElementById('resultAmount').textContent = '정책 데이터를 불러오지 못했습니다';
+      });
+
     document.getElementById('calcBtn').addEventListener('click', function () {
+      if (!policy) return;
+
       const annual       = (parseFloat(document.getElementById('annual-income').value) || 0) * 10000;
       const depCount     = parseInt(document.getElementById('dep-count').value);
       const creditCard   = (parseFloat(document.getElementById('credit-card').value)   || 0) * 10000;
@@ -291,42 +302,18 @@ data-ad-height = "100"></ins>
       const donationFee  = (parseFloat(document.getElementById('donation-fee').value)  || 0) * 10000;
 
       // ── 근로소득공제 ──
-      function getWageDeduction(income) {
-        if (income <= 5000000)   return income * 0.7;
-        if (income <= 15000000)  return 3500000  + (income - 5000000)  * 0.4;
-        if (income <= 45000000)  return 7500000  + (income - 15000000) * 0.15;
-        if (income <= 100000000) return 12000000 + (income - 45000000) * 0.05;
-        return 14750000 + (income - 100000000) * 0.02;
-      }
-      const wageDeduction = Math.min(getWageDeduction(annual), 20000000);
-      const basicDeduction = depCount * 1500000; // 기본공제 1인당 150만원
+      const wageDeduction = getWageDeduction(annual, policy);
+      const basicDeduction = depCount * policy.basicDeductionPerPerson;
 
       // ── 소득공제 후 과세표준 ──
       const taxableIncome = Math.max(0, annual - wageDeduction - basicDeduction);
 
       // ── 종합소득세 산출 ──
-      function calcIncomeTax(income) {
-        const brackets = [
-          [14000000, 0.06, 0],
-          [50000000, 0.15, 1260000],
-          [88000000, 0.24, 5760000],
-          [150000000, 0.35, 15440000],
-          [300000000, 0.38, 19940000],
-          [500000000, 0.40, 25940000],
-          [1000000000, 0.42, 35940000],
-          [Infinity,  0.45, 65940000],
-        ];
-        for (const [threshold, rate, deduct] of brackets) {
-          if (income <= threshold) return Math.round(income * rate - deduct);
-        }
-        return 0;
-      }
-      const calculatedTax = Math.max(0, calcIncomeTax(taxableIncome));
+      const calculatedTax = Math.max(0, calcIncomeTax(taxableIncome, policy));
 
       // ── 세액공제 ──
       // 근로소득세액공제
-      let wageCredit = calculatedTax <= 1300000 ? calculatedTax * 0.55 : 715000 + (calculatedTax - 1300000) * 0.3;
-      wageCredit = Math.min(wageCredit, annual <= 33000000 ? 740000 : annual <= 70000000 ? 660000 : 500000);
+      const wageCredit = calcWageIncomeTaxCredit(calculatedTax, annual, policy);
 
       // 보험료 세액공제 (12%, 연 100만원 한도)
       const insuranceCredit = Math.round(Math.min(insuranceFee, 1000000) * 0.12);
@@ -413,7 +400,6 @@ data-ad-height = "100"></ins>
       document.getElementById('donation-fee').value = '';
       document.getElementById('calcResult').classList.remove('show');
     });
-  }());
   </script>
 </body>
 </html>
