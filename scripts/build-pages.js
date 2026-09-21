@@ -574,10 +574,145 @@ function validateDeliveryFeeRatesMatch() {
   console.log('[build-pages] 배달 수수료율 드리프트 가드 통과 (배민/쿠팡이츠/요기요)');
 }
 
+/* ── policy-deps 린트 (경고 전용 — 파일을 쓰지 않는 읽기 전용 검사) ──────
+   pages/*.html 안의 <!-- policy-deps: alias:dot.path, ... --> 주석이 선언한 정책 값이
+   실제로 그 페이지 본문 어딘가에 사람이 읽을 수 있는 표기로 남아있는지 검사한다.
+   본문을 치환하지 않으므로(=값을 하나로 정하지 않으므로) "마커 바깥은 건드리지 않는다"
+   불변식과 충돌하지 않는다. fs.writeFileSync/writeIfChanged를 호출하지 않는다 — 어떤
+   파일도 이 함수로 인해 바뀌지 않는다. 위반이 있어도 fail()을 부르지 않고 console.warn만
+   한다(하드 실패 전환은 이 경고 결과를 검토한 뒤 별도로 결정).
+   ★ 정책 JSON이 여러 개(constants/income-tax/youth-deposit/retirement-pay)라 별칭
+     접두사로 어느 파일인지 명시한다. income-tax-policy.json과
+     retirement-pay-net-calculator-policy.json은 둘 다 최상위 키 "localIncomeTax"를
+     쓰고, youth-deposit-policy.json과 retirement-pay 정책은 둘 다 "eligibility"를
+     쓴다 — 파일 순서대로 탐색하는 방식이었다면 이런 이름 충돌에서 엉뚱한 파일의 값을
+     조용히 골랐을 수 있어 접두사 방식을 택했다. */
+const POLICY_FILE_ALIASES = {
+  'constants': 'constants.json',
+  'income-tax': 'income-tax-policy.json',
+  'youth-deposit': 'youth-deposit-policy.json',
+  'retirement-pay': 'retirement-pay-net-calculator-policy.json',
+};
+
+function getDeep(obj, dotPath) {
+  if (!dotPath) return undefined;
+  return dotPath.split('.').reduce((acc, key) => (acc != null && acc[key] !== undefined ? acc[key] : undefined), obj);
+}
+
+/* 통화성 숫자의 허용 표기 후보. 콤마 표기나 "만" 표기가 실제로 붙은 것만 반환한다 —
+   맨 숫자(raw)와 동일한 문자열은 오탐 방지를 위해 절대 포함하지 않는다.
+   정수가 아니면(예: 세율 0.0475) 통화 표기 자체가 의미 없으므로 후보를 내지 않는다 —
+   toLocaleString이 소수점을 반올림한 값("0.048" 등)이 우연히 다른 문맥과 매칭되는
+   오탐을 막기 위함. 그런 값은 percentCandidates 쪽에서만 판단한다. */
+function currencyCandidates(num) {
+  if (!Number.isInteger(num)) return [];
+  const candidates = [];
+  const raw = String(num);
+  const comma = num.toLocaleString('ko-KR');
+  if (comma !== raw) candidates.push(comma);
+  if (num >= 10000) {
+    const man = Math.floor(num / 10000);
+    const rest = num % 10000;
+    const manStr = man.toLocaleString('ko-KR') + '만';
+    if (rest === 0) {
+      candidates.push(manStr, manStr + '원');
+    } else {
+      const restStr = rest.toLocaleString('ko-KR');
+      candidates.push(manStr + ' ' + restStr, manStr + restStr);
+    }
+  }
+  return candidates;
+}
+
+/* 비율의 허용 표기 후보. % 기호가 붙은 것만 반환한다 — 맨 숫자 단독 매칭은 절대
+   인정하지 않는다. 값이 이미 정수 비율(예: 32)인 경우와, 0~1 사이 소수 비율(예:
+   0.0475)인 경우 둘 다 대응하기 위해 두 표기를 모두 후보로 낸다. */
+function percentCandidates(num) {
+  const candidates = [num + '%'];
+  const scaled = Number((num * 100).toPrecision(12));
+  if (scaled !== num) candidates.push(scaled + '%');
+  return candidates;
+}
+
+/* 값 하나의 "허용 표기 후보" 전체를 생성한다. 문자열 값(예: "2.1%")은 이미 사람이
+   포맷해 둔 것이므로 그대로 유일한 후보로 쓴다. */
+function generateCandidates(value) {
+  if (typeof value === 'string') return [value];
+  if (typeof value !== 'number' || !isFinite(value)) return [];
+  return Array.from(new Set([...currencyCandidates(value), ...percentCandidates(value)]));
+}
+
+function lintPolicyDeps(report) {
+  if (!fs.existsSync(PAGES_DIR)) return;
+  const files = fs.readdirSync(PAGES_DIR).filter((f) => f.endsWith('.html')).sort();
+  const policyCache = {};
+  function loadPolicyFile(alias) {
+    if (Object.prototype.hasOwnProperty.call(policyCache, alias)) return policyCache[alias];
+    const filename = POLICY_FILE_ALIASES[alias];
+    if (!filename) { policyCache[alias] = null; return null; }
+    try {
+      policyCache[alias] = JSON.parse(fs.readFileSync(path.join(DATA_DIR, filename), 'utf8'));
+    } catch (e) {
+      policyCache[alias] = null;
+    }
+    return policyCache[alias];
+  }
+
+  const passes = [];
+  const violations = [];
+
+  files.forEach((f) => {
+    const html = fs.readFileSync(path.join(PAGES_DIR, f), 'utf8'); // 읽기만 함 — 여기서 절대 쓰지 않는다
+    const m = html.match(/<!--\s*policy-deps:\s*(.+?)\s*-->/);
+    if (!m) return;
+
+    m[1].split(',').map((s) => s.trim()).filter(Boolean).forEach((keyExpr) => {
+      const sep = keyExpr.indexOf(':');
+      if (sep === -1) {
+        violations.push({ file: f, key: keyExpr, reason: '별칭:경로 형식이 아님(예: constants:foo.bar)' });
+        return;
+      }
+      const alias = keyExpr.slice(0, sep);
+      const dotPath = keyExpr.slice(sep + 1);
+      const policyData = loadPolicyFile(alias);
+      if (!policyData) {
+        violations.push({ file: f, key: keyExpr, reason: '알 수 없는 정책 파일 별칭: ' + alias });
+        return;
+      }
+      const value = getDeep(policyData, dotPath);
+      if (value === undefined) {
+        violations.push({ file: f, key: keyExpr, reason: '정책 JSON에 해당 경로 없음' });
+        return;
+      }
+      const candidates = generateCandidates(value);
+      const matched = candidates.find((c) => html.includes(c));
+      if (matched) {
+        passes.push({ file: f, key: keyExpr, value, matched });
+      } else {
+        violations.push({ file: f, key: keyExpr, value, candidates, reason: '본문에서 허용 표기 후보를 찾지 못함' });
+      }
+    });
+  });
+
+  console.log('\n[build-pages] policy-deps 린트 (경고 모드 — 위반이 있어도 빌드를 막지 않음)');
+  console.log('  선언 ' + (passes.length + violations.length) + '건 — 통과 ' + passes.length + ' / 위반 ' + violations.length);
+  if (violations.length) {
+    console.warn('[build-pages] 경고: policy-deps 위반 (' + violations.length + '건):');
+    violations.forEach((v) => {
+      const expected = v.value !== undefined ? ' (기대값 ' + JSON.stringify(v.value) + ', 후보 ' + JSON.stringify(v.candidates) + ')' : '';
+      console.warn('  - ' + v.file + ' : ' + v.key + expected + ' — ' + v.reason);
+    });
+  }
+  report.policyDepsLint = { passed: passes.length, violated: violations.length, passes, violations };
+}
+
 /* ── 메인 ───────────────────────────────────────────────── */
 
 function main() {
   validateDeliveryFeeRatesMatch();
+
+  const report = { written: [], unchanged: [], skipped: [], counts: {} };
+  lintPolicyDeps(report);
 
   const policyData = readJson('policies.json');
   const homeData = readJson('home-cards.json');
@@ -598,8 +733,6 @@ function main() {
     fail('detailUrl이 가리키는 파일이 없는 정책 ' + missingDetailPages.length + '건:\n  - ' +
       missingDetailPages.join('\n  - '));
   }
-
-  const report = { written: [], unchanged: [], skipped: [], counts: {} };
 
   // 정책 상세 페이지(pages/policy-*.html) 등급 반영 — "쓰기"가 먼저다.
   // A등급(=data/policy-notes.json 에 해설이 있는 서비스ID)이면 POLICY_NOTE/POLICY_AD 마커를
