@@ -93,7 +93,7 @@
   </script>
 </head>
 <body>
-<!-- policy-deps: constants:basicPension.maxAmountSingle, constants:basicPension.coupleTotalMax, constants:basicPension.singleSelectionCriteria, constants:basicPension.coupleSelectionCriteria, constants:basicPension.coupleEachAmount, constants:basicPension.increaseRate -->
+<!-- policy-deps: constants:basicPension.maxAmountSingle, constants:basicPension.coupleTotalMax, constants:basicPension.singleSelectionCriteria, constants:basicPension.coupleSelectionCriteria, constants:basicPension.coupleEachAmount, constants:basicPension.increaseRate, constants:basicPension.earnedIncomeDeduction, constants:basicPension.nationalPensionLinkThreshold -->
 <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-ntJWItYnhuyVV5W8"
 data-ad-width = "320"
@@ -183,7 +183,7 @@ data-ad-height = "100"></ins>
             <h3>소득인정액이란?</h3>
             <p>소득인정액 = 월 소득평가액 + 재산의 월 소득환산액으로 계산합니다. 단순히 매월 받는 금액만이 아니라 보유 재산도 소득으로 환산하여 합산합니다.</p>
             <ul>
-              <li><strong>근로소득</strong>: 실제 소득에서 98만원 공제 후 70% 반영</li>
+              <li><strong>근로소득</strong>: 실제 소득에서 <span data-policy="basicPension.earnedIncomeDeduction" data-policy-format="currency-man">116만원</span> 공제 후 70% 반영</li>
               <li><strong>사업소득·재산소득</strong>: 실제 발생 금액 그대로 반영</li>
               <li><strong>재산</strong>: (재산가액 - 기본재산액 - 부채) × 4% ÷ 12</li>
             </ul>
@@ -202,7 +202,7 @@ data-ad-height = "100"></ins>
             <div class="warn-box">
               ⚠️ <strong>감액 기준 주의!</strong><br>
               • 부부 모두 기초연금 수급 시: 각각 20% 감액 적용 (각 279,760원)<br>
-              • 국민연금 수령액이 기초연금 기준액(524,550원)의 150%를 초과하면 최대 50%까지 감액<br>
+              • 국민연금 수령액이 기준연금액(349,700원)의 150%인 <span data-policy="basicPension.nationalPensionLinkThreshold" data-policy-format="currency">524,550원</span>을 초과하면 최대 50%까지 감액<br>
               • 소득인정액이 선정기준액에 가까울수록 감액 폭이 커질 수 있음
             </div>
 
