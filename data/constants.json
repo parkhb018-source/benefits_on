@@ -113,5 +113,12 @@
     "person7": 9515150,
     "person8Step": 959198,
     "source": "보건복지부 2026년 기준 중위소득 고시"
+  },
+  "medianIncomeBenefitRatios2026": {
+    "livelihood": 32,
+    "medical": 40,
+    "housing": 48,
+    "education": 50,
+    "source": "보건복지부 2026년 기준 중위소득 고시 (급여별 선정기준 비율)"
   }
 }
