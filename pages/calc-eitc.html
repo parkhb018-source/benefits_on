@@ -26,6 +26,9 @@
     .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
     .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
     .calc-btn:hover { background: var(--primary-dark); }
+    .calc-btn:disabled { opacity: .55; cursor: not-allowed; }
+    .policy-fallback-notice { display: none; background: #FFF8E6; border: 1px solid #FFD966; border-radius: 8px; padding: 10px 14px; margin-top: 12px; font-size: 0.82rem; color: #7B6500; line-height: 1.5; }
+    .policy-fallback-notice.show { display: block; }
     .calc-result { display: none; margin-top: 24px; }
     .calc-result.show { display: block; animation: fadeInUp .3s ease; }
     .result-hero { border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
@@ -151,6 +154,7 @@ data-ad-height = "100"></ins>
             <div class="result-hero-amount" id="resultAmount">—</div>
             <div class="result-hero-sub" id="resultSub">—</div>
           </div>
+          <p class="policy-fallback-notice" id="policyFallbackNotice">※ 최신 기준값을 불러오지 못해 저장된 기준으로 계산했습니다. 정확한 최신 기준은 새로고침 후 다시 확인해주세요.</p>
           <div class="detail-rows" id="detailRows"></div>
 
           <hr class="section-divider">
@@ -257,6 +261,25 @@ data-ad-height = "100"></ins>
       }
     }, { once: true });
 
+    // ===== POLICY_DATA 로딩 대기 — 로드 끝날 때까지 계산 버튼 비활성화 =====
+    // (data/policy-loader.js 는 로드 완료/실패 신호를 별도로 주지 않으므로 짧은 간격으로 폴링한다.
+    //  보통 100ms 이내에 끝나고, 아무리 늦어도 3초 뒤엔 버튼을 풀어 계산기가 먹통이 되지 않게 한다.)
+    const calcBtn = document.getElementById('calcBtn');
+    const calcBtnDefaultLabel = calcBtn.textContent;
+    calcBtn.disabled = true;
+    calcBtn.textContent = '기준값 불러오는 중...';
+    (function waitForPolicyData() {
+      let waited = 0;
+      const timer = setInterval(function () {
+        waited += 50;
+        if (window.POLICY_DATA || waited >= 3000) {
+          clearInterval(timer);
+          calcBtn.disabled = false;
+          calcBtn.textContent = calcBtnDefaultLabel;
+        }
+      }, 50);
+    }());
+
     // 근로장려금 산정 공식 — 상한소득·최대지급액은 policy-data.json에서 자동 갱신
     function getEITCParams() {
       const pd = window.POLICY_DATA && window.POLICY_DATA.eitc;
@@ -289,6 +312,9 @@ data-ad-height = "100"></ins>
       const p      = EITC_PARAMS[type];
       const amount = calcEITC(income, type);
       const hero   = document.getElementById('resultHero');
+
+      const usedFallback = !(window.POLICY_DATA && window.POLICY_DATA.eitc);
+      document.getElementById('policyFallbackNotice').classList.toggle('show', usedFallback);
 
       const typeLabel = { single: '단독가구', 'single-earner': '홑벌이 가구', 'dual-earner': '맞벌이 가구' }[type];
       const ceiling   = p.phase_out_end;

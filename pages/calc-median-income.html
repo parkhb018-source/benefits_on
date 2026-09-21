@@ -27,6 +27,9 @@
     .calc-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
     .calc-btn:hover { background: var(--primary-dark); }
+    .calc-btn:disabled { opacity: .55; cursor: not-allowed; }
+    .policy-fallback-notice { display: none; background: #FFF8E6; border: 1px solid #FFD966; border-radius: 8px; padding: 10px 14px; margin-top: 12px; font-size: 0.82rem; color: #7B6500; line-height: 1.5; }
+    .policy-fallback-notice.show { display: block; }
     .calc-result { display: none; margin-top: 24px; }
     .calc-result.show { display: block; animation: fadeInUp .3s ease; }
     .result-hero { border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
@@ -147,6 +150,7 @@ data-ad-height = "100"></ins>
             <div class="result-hero-amount" id="resultAmount">—</div>
             <div class="result-hero-sub" id="resultSub">—</div>
           </div>
+          <p class="policy-fallback-notice" id="policyFallbackNotice">※ 최신 기준값을 불러오지 못해 저장된 기준으로 계산했습니다. 정확한 최신 기준은 새로고침 후 다시 확인해주세요.</p>
 
           <hr class="section-divider">
           <div class="calc-section-label">급여별 자격 기준 비교</div>
@@ -256,6 +260,25 @@ data-ad-height = "100"></ins>
       }
     }, { once: true });
 
+    // ===== POLICY_DATA 로딩 대기 — 로드 끝날 때까지 계산 버튼 비활성화 =====
+    // (data/policy-loader.js 는 로드 완료/실패 신호를 별도로 주지 않으므로 짧은 간격으로 폴링한다.
+    //  보통 100ms 이내에 끝나고, 아무리 늦어도 3초 뒤엔 버튼을 풀어 계산기가 먹통이 되지 않게 한다.)
+    const calcBtn = document.getElementById('calcBtn');
+    const calcBtnDefaultLabel = calcBtn.textContent;
+    calcBtn.disabled = true;
+    calcBtn.textContent = '기준값 불러오는 중...';
+    (function waitForPolicyData() {
+      let waited = 0;
+      const timer = setInterval(function () {
+        waited += 50;
+        if (window.POLICY_DATA || waited >= 3000) {
+          clearInterval(timer);
+          calcBtn.disabled = false;
+          calcBtn.textContent = calcBtnDefaultLabel;
+        }
+      }, 50);
+    }());
+
     // 2026년 보건복지부 고시 기준중위소득 (100%, 월 기준) — data/constants.json 갱신 실패 시 폴백
     const MEDIAN_INCOME_2026 = {
       1: 2564238,
@@ -303,6 +326,7 @@ data-ad-height = "100"></ins>
 
       const hero   = document.getElementById('resultHero');
       const calcResult = document.getElementById('calcResult');
+      const fallbackNotice = document.getElementById('policyFallbackNotice');
 
       if (size < 1) {
         hero.className = 'result-hero ineligible';
@@ -310,10 +334,14 @@ data-ad-height = "100"></ins>
         document.getElementById('resultAmount').textContent = '—';
         document.getElementById('resultSub').textContent    = '가구원수를 1명 이상 입력해주세요.';
         document.getElementById('benefitTableBody').innerHTML = '';
+        fallbackNotice.classList.remove('show');
         calcResult.classList.add('show');
         safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
         return;
       }
+
+      const usedFallback = !(window.POLICY_DATA && window.POLICY_DATA.medianIncome2026 && window.POLICY_DATA.medianIncomeBenefitRatios2026);
+      fallbackNotice.classList.toggle('show', usedFallback);
 
       const medianIncome = getMedianIncome(size);
       const ratio = Math.round((income / medianIncome) * 1000) / 10;
