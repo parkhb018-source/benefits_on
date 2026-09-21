@@ -296,7 +296,7 @@ data-ad-height = "100"></ins>
         if (income <= 15000000)  return 3500000  + (income - 5000000)  * 0.4;
         if (income <= 45000000)  return 7500000  + (income - 15000000) * 0.15;
         if (income <= 100000000) return 12000000 + (income - 45000000) * 0.05;
-        return 14750000;
+        return 14750000 + (income - 100000000) * 0.02;
       }
       const wageDeduction = Math.min(getWageDeduction(annual), 20000000);
       const basicDeduction = depCount * 1500000; // 기본공제 1인당 150만원
