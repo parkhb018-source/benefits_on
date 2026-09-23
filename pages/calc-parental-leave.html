@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta name="naver-site-verification" content="7275bfd241a8eaef8de75ca865a8e2a6a6093555" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>육아휴직 급여 계산기 2026 — 개월별 지급액·6+6 부모육아휴직제 — 혜택on</title>
+  <meta name="description" content="월 통상임금과 사용 개월 수를 입력하면 2026년 기준 육아휴직 급여를 개월별로 계산해드려요. 일반·6+6 부모육아휴직제·한부모 모두 지원해요.">
+  <link rel="stylesheet" href="../style.css?v=20260916">
+  <link rel="stylesheet" href="pages.css?v=20260914b">
+  <style>
+    .calc-page-wrap { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+    .calc-page-title { font-size: 1.6rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 6px; }
+    .calc-page-title::before { content: "👶 "; }
+    .calc-page-sub { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 32px; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,.06); margin-bottom: 20px; }
+    .calc-section-label { font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 16px; }
+    .calc-field { margin-bottom: 20px; }
+    .calc-field label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .calc-field input, .calc-field select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.95rem; color: var(--text-dark);
+      background: var(--bg-soft); transition: border-color .2s; box-sizing: border-box;
+    }
+    .calc-field input:focus, .calc-field select:focus { border-color: var(--primary); outline: none; background: #fff; }
+    .calc-field .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 5px; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background .2s; }
+    .calc-btn:hover { background: var(--primary-dark); }
+    .calc-btn:disabled { background: var(--border); cursor: not-allowed; }
+    .calc-error { font-size: 0.85rem; color: #c0392b; margin-top: 10px; display: none; }
+    .calc-error.show { display: block; }
+    .calc-result { display: none; margin-top: 24px; }
+    .calc-result.show { display: block; animation: fadeInUp .3s ease; }
+    .result-hero { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: #fff; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 16px; }
+    .result-hero-label { font-size: 0.85rem; opacity: .85; margin-bottom: 4px; }
+    .result-hero-amount { font-size: 2rem; font-weight: 800; }
+    .result-hero-sub { font-size: 0.85rem; opacity: .8; margin-top: 6px; }
+    .result-info { display: none; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 0.86rem; color: var(--text-dark); margin-bottom: 16px; }
+    .result-info.show { display: block; }
+    .deduction-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .deduction-table th { text-align: left; padding: 8px 12px; background: var(--bg-soft); font-weight: 700; color: var(--text-dark); font-size: 0.8rem; }
+    .deduction-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-dark); }
+    .deduction-table tr:last-child td { border-bottom: none; font-weight: 700; }
+    .deduction-table .total-row td { background: var(--bg-soft); color: var(--primary-dark); }
+    .limit-badge { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 10px; font-size: 0.72rem; font-weight: 700; vertical-align: middle; }
+    .limit-badge.cap { background: #fdecea; color: #c0392b; }
+    .limit-badge.floor { background: #e8f4fd; color: var(--primary-dark); }
+    .result-note-small { font-size: 0.78rem; color: var(--text-muted); margin-top: 16px; line-height: 1.6; }
+    .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--primary); text-decoration: none; }
+    .calc-btn-reset { width: 100%; padding: 12px; background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all .2s; }
+    .calc-btn-reset:hover { background: var(--bg-soft); color: var(--text-dark); border-color: var(--text-muted); }
+  </style>
+  <link rel="canonical" href="https://benefitson.org/pages/calc-parental-leave">
+  <meta property="og:url" content="https://benefitson.org/pages/calc-parental-leave">
+  <meta property="og:image" content="https://benefitson.org/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="혜택on">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="육아휴직 급여 계산기 2026 — 개월별 지급액·6+6 부모육아휴직제 — 혜택on">
+  <meta name="twitter:description" content="월 통상임금과 사용 개월 수를 입력하면 2026년 기준 육아휴직 급여를 개월별로 계산해드려요. 일반·6+6 부모육아휴직제·한부모 모두 지원해요.">
+  <meta name="twitter:image" content="https://benefitson.org/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-4871058922328451">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4871058922328451" crossorigin="anonymous"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1YVTR39FF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-K1YVTR39FF');
+  </script>
+<script src="/assets/js/analytics.js"></script>
+</head>
+<body>
+<!-- policy-deps: parental-leave:general.brackets.0.rate, parental-leave:general.brackets.0.cap, parental-leave:general.brackets.1.cap, parental-leave:general.brackets.2.rate, parental-leave:general.brackets.2.cap, parental-leave:benefitFloor, parental-leave:parents66.brackets.0.cap, parental-leave:parents66.brackets.1.cap, parental-leave:parents66.brackets.2.cap, parental-leave:parents66.brackets.3.cap, parental-leave:parents66.brackets.4.cap, parental-leave:parents66.brackets.5.cap, parental-leave:parents66.perPersonMax, parental-leave:parents66.bothParentsMax, parental-leave:singleParent.brackets.0.cap, parental-leave:history.postPaymentAbolished -->
+<ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-ntJWItYnhuyVV5W8"
+data-ad-width = "320"
+data-ad-height = "100"></ins>
+<script type="text/javascript" src="//t1.kakaocdn.net/kas/static/ba.min.js" async></script>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../" class="logo">혜택<span class="on">on</span></a>
+      <nav class="nav-main" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="youth">청년정책</a></li>
+          <li><a href="newlywed">신혼·육아</a></li>
+          <li><a href="senior">중장년·노년</a></li>
+          <li><a href="single">1인가구</a></li>
+          <li><a href="income">근로/소득</a></li>
+          <li><a href="tax">세금/환급</a></li>
+          <li><a href="calculators">계산기</a></li>
+          <li><a href="resources">무료도구</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-menu" aria-label="모바일 메뉴">
+    <a href="youth"><span class="m-icon">🎓</span>청년정책</a>
+    <a href="newlywed"><span class="m-icon">👶</span>신혼·육아</a>
+    <a href="senior"><span class="m-icon">👴</span>중장년·노년</a>
+    <a href="single"><span class="m-icon">🏠</span>1인가구</a>
+    <a href="income"><span class="m-icon">💼</span>근로/소득</a>
+    <a href="tax"><span class="m-icon">🧾</span>세금/환급</a>
+    <a href="calculators"><span class="m-icon">🧮</span>계산기</a>
+    <a href="resources"><span class="m-icon">📂</span>무료도구</a>
+  </nav>
+
+  <main>
+    <div class="calc-page-wrap">
+      <p class="breadcrumb"><a href="../">홈</a> &rsaquo; <a href="calculators">계산기</a> &rsaquo; 육아휴직 급여 계산기</p>
+      <h1 class="calc-page-title">육아휴직 급여 계산기</h1>
+      <p class="calc-page-sub">월 통상임금과 사용 개월 수를 입력하면 개월별 육아휴직 급여와 총 수령액을 계산해드려요.</p>
+
+      <div class="calc-card">
+        <div class="calc-section-label">휴직 정보 입력</div>
+        <div class="calc-field">
+          <label for="wage-input">월 통상임금 (만원)</label>
+          <input type="number" id="wage-input" value="" min="0" step="10" placeholder="예) 300">
+          <p class="field-hint">예) 300 입력 → 월 통상임금 300만원 (기본급·고정수당 기준, 세전)</p>
+        </div>
+        <div class="calc-field">
+          <label for="months-input">육아휴직 사용 개월 수</label>
+          <input type="number" id="months-input" value="" min="1" max="18" step="1" placeholder="예) 12">
+          <p class="field-hint">1~18개월 (2025년 2월 23일부터 최대 1년 6개월)</p>
+        </div>
+        <div class="calc-field">
+          <label for="type-select">유형</label>
+          <select id="type-select">
+            <option value="general" selected>일반</option>
+            <option value="parents66">부모 모두 사용 (6+6 부모육아휴직제)</option>
+            <option value="singleParent">한부모</option>
+          </select>
+          <p class="field-hint">6+6은 자녀 생후 18개월 이내에 부모가 모두 육아휴직을 쓸 때(동시·순차 무관) 적용돼요.</p>
+        </div>
+        <button class="calc-btn" id="calcBtn">육아휴직 급여 계산하기</button>
+        <button class="calc-btn-reset" id="resetBtn">초기화</button>
+        <p class="calc-error" id="calcError"></p>
+
+        <div class="calc-result" id="calcResult">
+          <div class="result-hero">
+            <div class="result-hero-label">육아휴직 급여 총 수령액</div>
+            <div class="result-hero-amount" id="totalAmount">—</div>
+            <div class="result-hero-sub" id="totalSub">—</div>
+          </div>
+          <div class="result-info" id="parents66Info"></div>
+          <div class="calc-card" style="margin-bottom:0; padding: 20px;">
+            <div class="calc-section-label">월별 지급액</div>
+            <table class="deduction-table">
+              <thead>
+                <tr>
+                  <th>개월차</th>
+                  <th style="text-align:right">지급률</th>
+                  <th style="text-align:right">상한</th>
+                  <th style="text-align:right">실지급액</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleRows"></tbody>
+            </table>
+            <p class="result-note-small">
+              ※ 2026년 기준이며, 사후지급금 제도는 2025년 1월 1일 폐지되어 휴직 중 매월 전액 지급됩니다.<br>
+              ※ 고용보험 피보험단위기간 180일 이상, 같은 자녀에 30일 이상 사용이 요건입니다.<br>
+              ※ 실제 지급액은 통상임금 산정 방식에 따라 달라질 수 있습니다. 정확한 금액은 고용24(work24.go.kr) 또는 관할 고용센터에서 확인하세요.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-body" style="margin-top:8px;">
+        <h2>육아휴직 급여는 어떻게 계산되나요?</h2>
+        <p>육아휴직 급여는 <strong>휴직 시작일 기준 월 통상임금</strong>에 개월차별 지급률을 곱한 뒤, 개월차별 상한액과 하한액을 적용해 정해집니다. 사용 개월이 길어질수록 상한액이 낮아지는 구조라서, 통상임금이 높을수록 뒤쪽 개월의 지급액이 크게 줄어들어요.</p>
+
+        <h2>일반 육아휴직 급여</h2>
+        <table>
+          <thead><tr><th>개월차</th><th>지급률</th><th>상한</th><th>하한</th></tr></thead>
+          <tbody>
+            <tr><td>1~3개월</td><td>통상임금 100%</td><td>월 250만원</td><td>월 70만원</td></tr>
+            <tr><td>4~6개월</td><td>통상임금 100%</td><td>월 200만원</td><td>월 70만원</td></tr>
+            <tr><td>7개월~</td><td>통상임금 80%</td><td>월 160만원</td><td>월 70만원</td></tr>
+          </tbody>
+        </table>
+        <p>통상임금 × 지급률이 하한액(70만원)보다 적으면 70만원이 지급됩니다(고용보험법 시행령 제95조).</p>
+
+        <h2>6+6 부모육아휴직제</h2>
+        <p>자녀 생후 18개월 이내에 부모가 모두 육아휴직을 쓰면(동시·순차 무관) 부모 각각 첫 6개월간 통상임금 100%를 받고, 상한액이 개월마다 올라갑니다.</p>
+        <table>
+          <thead><tr><th>개월차</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr></thead>
+          <tbody>
+            <tr><td>상한</td><td>250만원</td><td>250만원</td><td>300만원</td><td>350만원</td><td>400만원</td><td>450만원</td></tr>
+          </tbody>
+        </table>
+        <p>첫 6개월 상한을 모두 받으면 1인 최대 2,000만원, 부모 합산 최대 4,000만원입니다. 7개월차부터는 일반 기준(통상임금 80%, 상한 월 160만원)으로 바뀝니다.</p>
+
+        <h2>한부모 육아휴직 급여</h2>
+        <p>한부모 근로자는 첫 3개월간 통상임금 100%, 상한 월 300만원을 받고, 4개월차부터는 일반 기준을 따릅니다.</p>
+
+        <h2>계산 예시 (월 통상임금 300만원)</h2>
+        <table>
+          <thead><tr><th>유형</th><th>개월별 지급액</th><th>합계</th></tr></thead>
+          <tbody>
+            <tr><td>일반 12개월</td><td>250만원×3 + 200만원×3 + 160만원×6</td><td>2,310만원</td></tr>
+            <tr><td>6+6 6개월</td><td>250 + 250 + 300 + 300 + 300 + 300 (만원)</td><td>1,700만원</td></tr>
+            <tr><td>한부모 3개월</td><td>300만원×3</td><td>900만원</td></tr>
+          </tbody>
+        </table>
+        <p>6+6에서 4~6개월차 상한은 350~450만원이지만, 통상임금이 300만원이면 통상임금 100%인 300만원까지만 지급됩니다.</p>
+
+        <h2>함께 보면 좋은 글</h2>
+        <ul>
+          <li><a href="article-parental-leave">2026 육아휴직 급여 총정리 — 구간별 지급액·6+6 부모육아휴직제·신청 방법</a></li>
+          <li><a href="article-spouse-bereavement-leave">배우자 유산·사산휴가 안내 — 5일, 3일 유급</a></li>
+          <li><a href="policy-999000000004">배우자 출산휴가 급여 신청 자격·지원금액·신청방법</a></li>
+        </ul>
+      </div>
+
+  <!-- ─── 결과 하단 광고 ─── -->
+  <div class="container" style="margin:24px auto;text-align:center;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4871058922328451"
+         data-ad-slot="2452607788"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+    </div>
+  </main>
+
+<footer class="footer-simple">
+    <div class="container footer-simple-inner">
+      <span class="footer-copy">혜택on은 트리플20(Pixel Vibe)이 운영하는 무료 정보 서비스입니다.<br>
+      대표자:&nbsp;박현봉 | 사업자등록번호:&nbsp;342-29-01302 | 문의:&nbsp;<a href="mailto:parkhb018@gmail.com">parkhb018@gmail.com</a><br>
+      © 2026 혜택on, 본 사이트의 정보는 참고용이며, 정확한 내용은 정부24·복지로 등 공식 사이트에서 확인하세요.</span>
+      <div class="footer-simple-links">
+        <a href="about">사이트 소개</a>
+        <a href="privacy">개인정보처리방침</a>
+        <a href="contact">광고문의</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js?v=20260626"></script>
+  <script type="module">
+    import { calcSchedule } from '../engine/parental-leave-calculator.js';
+
+    let policy = null;
+
+    const wageInput   = document.getElementById('wage-input');
+    const monthsInput = document.getElementById('months-input');
+    const typeSelect  = document.getElementById('type-select');
+    const calcBtn     = document.getElementById('calcBtn');
+    const calcError   = document.getElementById('calcError');
+
+    // ===== GA4 맞춤 이벤트 (assets/js/analytics.js) =====
+    // gtag·analytics.js 미로딩(광고차단 등) 환경에서도 계산기가 정상 동작해야 하므로 항상 try/catch로 감싼다.
+    const TOOL_ID = 'calc-parental-leave';
+    function safeTrack(fn) { try { fn(); } catch (e) { /* 조용히 무시 */ } }
+    document.querySelector('main').addEventListener('input', function (e) {
+      if (e.target.matches('input, select')) {
+        safeTrack(() => window.trackToolStart && window.trackToolStart(TOOL_ID));
+      }
+    }, { once: true });
+
+    function showError(msg) {
+      calcError.textContent = msg;
+      calcError.classList.add('show');
+    }
+
+    fetch('../data/parental-leave-policy.json')
+      .then((res) => res.json())
+      .then((data) => { policy = data; })
+      .catch(() => {
+        calcBtn.disabled = true;
+        showError('정책 데이터를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.');
+      });
+
+    const won = (n) => n.toLocaleString() + '원';
+    const man = (n) => (n / 10000).toLocaleString() + '만원';
+    const pct = (r) => Math.round(r * 100) + '%';
+
+    calcBtn.addEventListener('click', function () {
+      if (!policy) return;
+      calcError.classList.remove('show');
+
+      const wageMan = parseFloat(wageInput.value);
+      const months  = parseInt(monthsInput.value, 10);
+      const type    = typeSelect.value;
+      const maxMonths = policy.eligibility.maxLeaveMonths;
+
+      if (!(wageMan > 0)) { showError('월 통상임금을 입력해 주세요.'); return; }
+      if (!(months >= 1 && months <= maxMonths)) { showError(`사용 개월 수는 1~${maxMonths}개월 사이로 입력해 주세요.`); return; }
+
+      const { schedule, total } = calcSchedule({ ordinaryWage: Math.round(wageMan * 10000), months, type }, policy);
+
+      document.getElementById('totalAmount').textContent = won(total);
+      document.getElementById('totalSub').textContent = `${months}개월 · 월 평균 ${won(Math.round(total / months))}`;
+
+      const info = document.getElementById('parents66Info');
+      if (type === 'parents66') {
+        const p = policy.parents66;
+        info.innerHTML = `👨‍👩‍👧 6+6 부모육아휴직제는 부모가 각각 받습니다. 첫 6개월 기준 <strong>1인 최대 ${man(p.perPersonMax)}, 부모 합산 최대 ${man(p.bothParentsMax)}</strong>이에요. 위 금액은 한 사람 기준입니다.`;
+        info.classList.add('show');
+      } else {
+        info.classList.remove('show');
+      }
+
+      const rows = schedule.map((row) => {
+        let badge = '';
+        if (row.capApplied) badge = '<span class="limit-badge cap">상한 적용</span>';
+        else if (row.floorApplied) badge = '<span class="limit-badge floor">하한 적용</span>';
+        return `<tr><td>${row.month}개월차</td><td style="text-align:right">${pct(row.rate)}</td><td style="text-align:right;color:var(--text-muted)">${man(row.cap)}</td><td style="text-align:right">${won(row.amount)}${badge}</td></tr>`;
+      });
+      document.getElementById('scheduleRows').innerHTML = rows.join('') +
+        `<tr class="total-row"><td><strong>합계</strong></td><td></td><td></td><td style="text-align:right"><strong>${won(total)}</strong></td></tr>`;
+
+      document.getElementById('calcResult').classList.add('show');
+      document.getElementById('calcResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      safeTrack(() => window.trackToolRun && window.trackToolRun(TOOL_ID));
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      wageInput.value = '';
+      monthsInput.value = '';
+      typeSelect.value = 'general';
+      calcError.classList.remove('show');
+      document.getElementById('calcResult').classList.remove('show');
+    });
+  </script>
+</body>
+</html>

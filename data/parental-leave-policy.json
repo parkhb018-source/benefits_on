@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "policyName": "육아휴직급여 계산 (일반·6+6 부모육아휴직제·한부모)",
+    "version": "2026.1",
+    "lastUpdated": "2026-09-24",
+    "note": "정책 숫자가 바뀌면 이 파일만 수정한다. 계산 로직(engine/parental-leave-calculator.js)은 건드리지 않는다. 유형별 brackets에 없는 개월차는 general.brackets 기준을 따른다."
+  },
+  "sources": [
+    {
+      "id": "law-parental-leave-benefit",
+      "title": "국가법령정보센터 - 고용보험법 제70조, 고용보험법 시행령 제95조(육아휴직 급여)",
+      "url": "https://www.law.go.kr",
+      "checkedDate": "2026-09-24",
+      "note": "1~3개월 통상임금 100%(상한 250만원), 4~6개월 100%(상한 200만원), 7개월~ 80%(상한 160만원). 각 호 모두 '해당 금액이 70만원보다 적은 경우에는 70만원으로 한다' — 하한 보장. [시행 2026.9.18.] 대통령령 제36588호 기준 조문"
+    },
+    {
+      "id": "law-parents-66",
+      "title": "국가법령정보센터 - 고용보험법 시행령 제95조의3(6+6 부모육아휴직제)",
+      "url": "https://www.law.go.kr",
+      "checkedDate": "2026-09-24",
+      "note": "자녀 생후 18개월 이내 부모 모두 육아휴직(동시·순차 무관) 시 첫 6개월 통상임금 100%, 월별 상한 250/250/300/350/400/450만원. 7개월차부터 일반 기준"
+    },
+    {
+      "id": "moel-2025-changes",
+      "title": "고용노동부 - 2025년 1월 1일부터 달라지는 육아지원제도",
+      "url": "https://www.moel.go.kr/policy/policydata/view.do?bbs_seq=20250100172",
+      "checkedDate": "2026-09-24",
+      "note": "사후지급금 폐지(2025.1.1, 휴직 중 매월 전액 지급), 육아휴직 기간 최대 1년 6개월로 확대(2025.2.23 시행)"
+    },
+    {
+      "id": "easylaw-parental-leave-benefit",
+      "title": "찾기쉬운 생활법령정보 - 육아휴직 급여",
+      "url": "https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=1380&ccfNo=2&cciNo=1&cnpClsNo=2",
+      "checkedDate": "2026-09-24",
+      "note": "구간별 지급률·상한·하한 70만원, 한부모 첫 3개월 상한 300만원"
+    },
+    {
+      "id": "work24-parental-leave",
+      "title": "고용24 - 육아휴직급여 제도안내",
+      "url": "https://www.work24.go.kr",
+      "checkedDate": "2026-09-24",
+      "note": "수급요건(피보험단위기간 180일 이상, 같은 자녀 30일 이상 사용), 신청기한(개시 1개월 후 ~ 종료 후 12개월 이내)"
+    }
+  ],
+  "benefitFloor": 700000,
+  "benefitFloorSourceId": "law-parental-leave-benefit",
+  "general": {
+    "note": "fromMonth~toMonth 개월차에 통상임금 × rate, 최종값은 cap(상한)·benefitFloor(하한) 적용. toMonth null = 종료일까지",
+    "brackets": [
+      { "fromMonth": 1, "toMonth": 3,    "rate": 1,   "cap": 2500000 },
+      { "fromMonth": 4, "toMonth": 6,    "rate": 1,   "cap": 2000000 },
+      { "fromMonth": 7, "toMonth": null, "rate": 0.8, "cap": 1600000 }
+    ],
+    "sourceId": "law-parental-leave-benefit"
+  },
+  "parents66": {
+    "note": "자녀 생후 18개월 이내 부모 모두 사용(동시·순차 무관). 7개월차부터는 general.brackets 적용",
+    "childAgeMonthsMax": 18,
+    "brackets": [
+      { "fromMonth": 1, "toMonth": 1, "rate": 1, "cap": 2500000 },
+      { "fromMonth": 2, "toMonth": 2, "rate": 1, "cap": 2500000 },
+      { "fromMonth": 3, "toMonth": 3, "rate": 1, "cap": 3000000 },
+      { "fromMonth": 4, "toMonth": 4, "rate": 1, "cap": 3500000 },
+      { "fromMonth": 5, "toMonth": 5, "rate": 1, "cap": 4000000 },
+      { "fromMonth": 6, "toMonth": 6, "rate": 1, "cap": 4500000 }
+    ],
+    "perPersonMax": 20000000,
+    "bothParentsMax": 40000000,
+    "sourceId": "law-parents-66"
+  },
+  "singleParent": {
+    "note": "한부모가족지원법상 한부모. 4개월차부터는 general.brackets 적용",
+    "brackets": [
+      { "fromMonth": 1, "toMonth": 3, "rate": 1, "cap": 3000000 }
+    ],
+    "sourceId": "easylaw-parental-leave-benefit"
+  },
+  "eligibility": {
+    "insuredDaysMin": 180,
+    "leaveDaysMin": 30,
+    "applyStartAfterMonths": 1,
+    "applyDeadlineMonthsAfterEnd": 12,
+    "maxLeaveMonths": 18,
+    "sourceId": "work24-parental-leave"
+  },
+  "history": {
+    "postPaymentAbolished": "2025년 1월 1일",
+    "maxLeaveExtended": "2025년 2월 23일",
+    "sourceId": "moel-2025-changes"
+  },
+  "invariants": [
+    { "key": "parents66.bothParentsMax", "fromKey": "parents66.perPersonMax", "multiplier": 2 }
+  ]
+}
