@@ -49,6 +49,11 @@ const EXPECTED_COUNTS = {
   '세금/환급': 20,
 };
 
+/* A등급(index,follow) → C등급(noindex) 강등 허용 목록(서비스ID).
+   policy-notes.json 에서 키가 빠지거나 이름이 바뀌어 A등급 페이지가 조용히 C등급이 되는 사고를 막는다.
+   의도적으로 강등할 때만 여기에 ID 를 적는다. 강등이 끝난 빌드 뒤에는 다시 비워 둔다. */
+const ALLOWED_DEMOTIONS = [];
+
 /* ── 유틸 ────────────────────────────────────────────────── */
 
 function fail(msg) {
@@ -364,6 +369,43 @@ function renderPolicyPages(report) {
   }
 
   return pageIds;
+}
+
+/* 등급 가드 — renderPolicyPages() 가 쓰기 전에 실행한다.
+   (1) 지금 robots 가 index,follow 인 페이지가 이번 빌드에서 C등급이 되면 위반(ALLOWED_DEMOTIONS 제외).
+   (2) policy-notes.json 의 키마다 pages/policy-{키}.html 이 실제로 있어야 한다(오타 키 방지). */
+function checkPolicyGradeGuard(report) {
+  const notes = loadPolicyNotes();
+  const violations = [];
+  const files = fs.existsSync(PAGES_DIR)
+    ? fs.readdirSync(PAGES_DIR).filter((f) => /^policy-.+\.html$/.test(f))
+    : [];
+  const pageIdSet = new Set(files.map((f) => f.slice('policy-'.length, -'.html'.length)));
+
+  const demoted = [];
+  files.forEach((f) => {
+    const id = f.slice('policy-'.length, -'.html'.length);
+    const raw = fs.readFileSync(path.join(PAGES_DIR, f), 'utf8');
+    const m = raw.match(/<meta name="robots" content="([^"]*)">/);
+    if (!m || m[1] !== 'index,follow') return;
+    if (Object.prototype.hasOwnProperty.call(notes, id)) return;
+    demoted.push(id);
+    if (ALLOWED_DEMOTIONS.indexOf(id) === -1) {
+      violations.push({ id, reason: id + ' 강등 — 현재 A등급(index,follow)인데 policy-notes.json 에 키가 없음. ' +
+        '의도한 강등이면 ALLOWED_DEMOTIONS 에 추가' });
+    }
+  });
+
+  Object.keys(notes).forEach((id) => {
+    if (!pageIdSet.has(id)) {
+      violations.push({ id, reason: id + ' 키 무효 — pages/policy-' + id + '.html 이 없음 (키 오타?)' });
+    }
+  });
+
+  console.log('\n[build-pages] 등급 가드 ④');
+  console.log('  A등급 ' + Object.keys(notes).length + '건, 강등 ' + demoted.length + '건');
+  report.gradeGuard = { aCount: Object.keys(notes).length, demoted, violated: violations.length };
+  return violations;
 }
 
 /* sitemap.xml 의 policy- URL 을 A등급(policy-notes.json 에 해설이 있는 서비스ID)만 남도록 동기화.
@@ -859,8 +901,9 @@ function main() {
   const depsViolations = lintPolicyDeps(report);         // ①
   const invariantViolations = checkPolicyInvariants(report); // ②
   scanHeadDrift(report);                                  // ③ (경고 전용)
+  const gradeViolations = checkPolicyGradeGuard(report);  // ④ (정책 페이지 쓰기 전)
 
-  // 0단계 (가): ①②의 위반을 각자 바로 fail() 하지 않고 모아서 마지막에 한 번만 부른다.
+  // 0단계 (가): ①②④의 위반을 각자 바로 fail() 하지 않고 모아서 마지막에 한 번만 부른다.
   const hardViolations = []
     .concat(depsViolations.map((v) => {
       const expected = v.value !== undefined ? ' (기대값 ' + JSON.stringify(v.value) + ', 후보 ' + JSON.stringify(v.candidates) + ')' : '';
@@ -868,10 +911,11 @@ function main() {
     }))
     .concat(invariantViolations.map((v) => {
       return '[invariant] ' + v.file + ' : ' + v.key + ' — ' + v.reason;
-    }));
+    }))
+    .concat(gradeViolations.map((v) => '[grade-guard] ' + v.reason));
 
   if (hardViolations.length) {
-    const msg = 'policy-deps / 파생값 불변식 검증 실패 (' + hardViolations.length + '건):\n  - ' + hardViolations.join('\n  - ');
+    const msg = 'policy-deps / 파생값 불변식 / 등급 가드 검증 실패 (' + hardViolations.length + '건):\n  - ' + hardViolations.join('\n  - ');
     if (LINT_HARD_FAIL) {
       fail(msg);
     } else {

@@ -52,6 +52,8 @@
    `build-pages.js`가 `pages/policy-*.html`에 이미 심어둔 `AUTOGEN:POLICY_NOTE` /
    `AUTOGEN:POLICY_AD` / `AUTOGEN:POLICY_ADSENSE_HEAD` 마커 사이에 채워 넣습니다.
 
+A등급 승격은 policy-notes.json에 새 키를 추가하는 방식으로만 한다. 기존 키의 이름을 바꾸지 않는다.
+
 `scripts/generate-policy-pages.js`는 **실행하지 않습니다.** 이 스크립트는 저장소 밖의
 gov24 원문(CSV·JSON)이 실제로 갱신됐을 때만 쓰는 것이고, 그 소스가 낡은 상태로 돌리면
 164개 페이지 전체가 그 시점 내용으로 되감깁니다. 자세한 내용은 두 스크립트 상단 주석을
