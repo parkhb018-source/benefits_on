@@ -51,7 +51,8 @@ const EXPECTED_COUNTS = {
 
 /* A등급(index,follow) → C등급(noindex) 강등 허용 목록(서비스ID).
    policy-notes.json 에서 키가 빠지거나 이름이 바뀌어 A등급 페이지가 조용히 C등급이 되는 사고를 막는다.
-   의도적으로 강등할 때만 여기에 ID 를 적는다. 강등이 끝난 빌드 뒤에는 다시 비워 둔다. */
+   의도적으로 강등할 때만 여기에 ID 를 적는다. 강등이 끝나면 다음 빌드가 비우라고 알려준다
+   (이미 C등급인 ID 가 남아 있으면 빌드 실패). */
 const ALLOWED_DEMOTIONS = [];
 
 /* ── 유틸 ────────────────────────────────────────────────── */
@@ -395,6 +396,12 @@ function checkPolicyGradeGuard(report) {
         '의도한 강등이면 ALLOWED_DEMOTIONS 에 추가' });
     }
   });
+
+  const unusedAllowed = ALLOWED_DEMOTIONS.filter((id) => demoted.indexOf(id) === -1);
+  if (unusedAllowed.length) {
+    violations.push({ id: null, reason: 'ALLOWED_DEMOTIONS에 쓰이지 않는 ID가 남아 있습니다: ' + unusedAllowed.join(', ') +
+      ' (이미 C등급이거나 policy-notes.json 에 키가 있음 — 목록에서 지우세요)' });
+  }
 
   Object.keys(notes).forEach((id) => {
     if (!pageIdSet.has(id)) {
@@ -903,7 +910,7 @@ function main() {
   scanHeadDrift(report);                                  // ③ (경고 전용)
   const gradeViolations = checkPolicyGradeGuard(report);  // ④ (정책 페이지 쓰기 전)
 
-  // 0단계 (가): ①②④의 위반을 각자 바로 fail() 하지 않고 모아서 마지막에 한 번만 부른다.
+  // 0단계 (가): ①②의 위반을 각자 바로 fail() 하지 않고 모아서 마지막에 한 번만 부른다.
   const hardViolations = []
     .concat(depsViolations.map((v) => {
       const expected = v.value !== undefined ? ' (기대값 ' + JSON.stringify(v.value) + ', 후보 ' + JSON.stringify(v.candidates) + ')' : '';
@@ -911,16 +918,22 @@ function main() {
     }))
     .concat(invariantViolations.map((v) => {
       return '[invariant] ' + v.file + ' : ' + v.key + ' — ' + v.reason;
-    }))
-    .concat(gradeViolations.map((v) => '[grade-guard] ' + v.reason));
+    }));
 
   if (hardViolations.length) {
-    const msg = 'policy-deps / 파생값 불변식 / 등급 가드 검증 실패 (' + hardViolations.length + '건):\n  - ' + hardViolations.join('\n  - ');
+    const msg = 'policy-deps / 파생값 불변식 검증 실패 (' + hardViolations.length + '건):\n  - ' + hardViolations.join('\n  - ');
     if (LINT_HARD_FAIL) {
       fail(msg);
     } else {
       console.warn('\n[build-pages] 경고(LINT_HARD_FAIL=false — 하드 실패 비활성화 상태): ' + msg);
     }
+  }
+
+  // 등급 가드(④)는 LINT_HARD_FAIL 과 무관하게 항상 실패시킨다 — 정확한 비교라 오탐이 없고,
+  // 의도적 강등은 ALLOWED_DEMOTIONS 로 처리한다. 정책 페이지 쓰기 전에 멈춘다.
+  if (gradeViolations.length) {
+    fail('등급 가드 검증 실패 (' + gradeViolations.length + '건):\n  - ' +
+      gradeViolations.map((v) => '[grade-guard] ' + v.reason).join('\n  - '));
   }
 
   const policyData = readJson('policies.json');
