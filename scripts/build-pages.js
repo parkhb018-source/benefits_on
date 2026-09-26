@@ -779,10 +779,10 @@ function lintPolicyDeps(report) {
    승수를 미리 곱해(6.4) 하나의 multiplier로 표현할 수 있으면 그렇게 쓴다.
    페이지가 아니라 정책 JSON 자체를 보므로, policy-deps 선언 여부와 무관하게 항상 실행된다.
    이진 부동소수점 오차(예: 10320 * 6.4)를 피하기 위해 Math.round로 비교한다. */
-/* 현재까지 확인된 invariants 총 개수(2026-09 기준 6건 — constants 5 + parental-leave 1).
+/* 현재까지 확인된 invariants 총 개수(2026-09 기준 11건 — constants 10 + parental-leave 1).
    이 상수 자체를 늘리는 것은 invariants를 새로 등록했을 때만이고, 검사 목적은 이 값
    "밑으로" 떨어지는 것을 잡는 것이다. */
-const MIN_INVARIANT_COUNT = 6;
+const MIN_INVARIANT_COUNT = 11;
 
 function checkPolicyInvariants(report) {
   const violations = [];
@@ -821,7 +821,7 @@ function checkPolicyInvariants(report) {
   // invariants 선언 자체가 통째로 비어버리면(예: 편집 중 배열이 날아감) 검사 ②가
   // "검사할 게 없어 조용히 통과"하는 사고를 막는다 — 파일별로 있어야 할 개수를 강제하면
   // 파생 관계가 아예 없는 income-tax-policy.json 등에도 억지로 항목을 만들게 되므로,
-  // 대신 전체 합계가 현재까지 확인된 최솟값(6) 밑으로 떨어지면 그 자체를 위반으로 취급한다.
+  // 대신 전체 합계가 현재까지 확인된 최솟값(MIN_INVARIANT_COUNT) 밑으로 떨어지면 그 자체를 위반으로 취급한다.
   if (checkedCount < MIN_INVARIANT_COUNT) {
     violations.push({
       file: '(전체 정책 JSON)', key: '(invariants 총 개수)',

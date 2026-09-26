@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastUpdated": "2026-09-22",
+    "lastUpdated": "2026-09-27",
     "version": "2026.1",
     "note": "이 파일만 수정하면 전체 계산기·아티클에 즉시 반영됩니다."
   },
@@ -127,11 +127,37 @@
     "education": 50,
     "source": "보건복지부 2026년 기준 중위소득 고시 (급여별 선정기준 비율)"
   },
+  "youthFutureSavings": {
+    "year": 2026,
+    "termMonths": 36,
+    "monthlyMax": 500000,
+    "principalMax": 18000000,
+    "contribRateGeneral": 6,
+    "contribRatePreferred": 12,
+    "contribMonthlyMaxGeneral": 30000,
+    "contribMonthlyMaxPreferred": 60000,
+    "contribTotalMaxGeneral": 1080000,
+    "contribTotalMaxPreferred": 2160000,
+    "incomeLimitGross": 75000000,
+    "incomeLimitGlobal": 63000000,
+    "incomeLimitBizRevenue": 300000000,
+    "contribIncomeLimitGross": 60000000,
+    "contribIncomeLimitGrossNote": "총급여가 이 금액 초과 ~ incomeLimitGross 이하면 정부기여금 없이 비과세만 적용",
+    "householdMedianPct": 200,
+    "householdMedianPctCouple": 250,
+    "round2": "2026년 12월 (잠정)",
+    "source": "금융위원회 출시·가입절차 보도자료, 정책브리핑 궁금증 총정리"
+  },
   "invariants": [
     { "key": "basicPension.nationalPensionLinkThreshold", "fromKey": "basicPension.maxAmountSingle", "multiplier": 1.5 },
     { "key": "basicPension.coupleEachAmount", "fromKey": "basicPension.maxAmountSingle", "multiplier": 0.8 },
     { "key": "basicPension.coupleTotalMax", "fromKey": "basicPension.coupleEachAmount", "multiplier": 2 },
     { "key": "minimumWage.monthlyStandard209", "fromKey": "minimumWage.hourlyRate", "multiplier": 209 },
-    { "key": "unemployment.dailyFloor", "fromKey": "unemployment.minWageBase", "multiplier": 6.4 }
+    { "key": "unemployment.dailyFloor", "fromKey": "unemployment.minWageBase", "multiplier": 6.4 },
+    { "key": "youthFutureSavings.principalMax", "fromKey": "youthFutureSavings.monthlyMax", "multiplier": 36 },
+    { "key": "youthFutureSavings.contribMonthlyMaxGeneral", "fromKey": "youthFutureSavings.monthlyMax", "multiplier": 0.06 },
+    { "key": "youthFutureSavings.contribMonthlyMaxPreferred", "fromKey": "youthFutureSavings.monthlyMax", "multiplier": 0.12 },
+    { "key": "youthFutureSavings.contribTotalMaxGeneral", "fromKey": "youthFutureSavings.contribMonthlyMaxGeneral", "multiplier": 36 },
+    { "key": "youthFutureSavings.contribTotalMaxPreferred", "fromKey": "youthFutureSavings.contribMonthlyMaxPreferred", "multiplier": 36 }
   ]
 }
