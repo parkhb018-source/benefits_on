@@ -735,9 +735,12 @@ function lintPolicyDeps(report) {
   const violations = [];
 
   files.forEach((f) => {
-    const html = fs.readFileSync(path.join(PAGES_DIR, f), 'utf8'); // 읽기만 함 — 여기서 절대 쓰지 않는다
-    const m = html.match(/<!--\s*policy-deps:\s*(.+?)\s*-->/);
+    const raw = fs.readFileSync(path.join(PAGES_DIR, f), 'utf8'); // 읽기만 함 — 여기서 절대 쓰지 않는다
+    const m = raw.match(/<!--\s*policy-deps:\s*(.+?)\s*-->/);
     if (!m) return;
+    // data-lint-exclude 가 붙은 요소(예: 미확정 개편안 박스) 안의 숫자로는 통과시키지 않는다.
+    // 같은 태그가 안에 중첩되지 않는 요소에만 쓴다(첫 닫는 태그까지를 요소로 본다).
+    const html = raw.replace(/<(\w+)\b[^>]*\bdata-lint-exclude\b[^>]*>[\s\S]*?<\/\1>/g, '');
 
     m[1].split(',').map((s) => s.trim()).filter(Boolean).forEach((keyExpr) => {
       const sep = keyExpr.indexOf(':');

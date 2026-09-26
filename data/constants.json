@@ -145,8 +145,11 @@
     "contribIncomeLimitGrossNote": "총급여가 이 금액 초과 ~ incomeLimitGross 이하면 정부기여금 없이 비과세만 적용",
     "householdMedianPct": 200,
     "householdMedianPctCouple": 250,
-    "round2": "2026년 12월 (잠정)",
-    "source": "금융위원회 출시·가입절차 보도자료, 정책브리핑 궁금증 총정리"
+    "round2": "2026년 10월 7일~16일",
+    "round2Review": "2026년 10월 19일~11월 13일",
+    "round2AccountOpen": "2026년 11월 16일~27일",
+    "round2BirthRange": "1991년 11월 17일~2007년 11월 27일생",
+    "source": "금융위원회 출시·가입절차 보도자료, 정책브리핑 궁금증 총정리, 금융위원회 2차 가입 보도자료(2026.9.16)"
   },
   "invariants": [
     { "key": "basicPension.nationalPensionLinkThreshold", "fromKey": "basicPension.maxAmountSingle", "multiplier": 1.5 },

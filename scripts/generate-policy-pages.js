@@ -483,7 +483,7 @@ ${toolCardsHtml}
     </div>
   </footer>
   <script src="../data/policy-loader.js?v=20260816"></script>
-  <script src="../main.js?v=20260626"></script>
+  <script src="../main.js?v=20260927"></script>
 </body>
 </html>
 `;

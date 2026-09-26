@@ -645,8 +645,8 @@ if (bannerClose && banner) {
 
   const defaultBenefitDetails = {
     '청년월세 특별지원':    { icon: '🏠', desc: '월 최대 20만원, 최장 24개월 지원 (생애 1회)',        url: 'pages/article-youth-rent' },
-    '청년미래적금':         { icon: '💰', desc: '월 50만원 납입 시 정부 매칭 최대 36만원',            url: 'pages/article-youth-savings' },
-    '청년도약계좌':         { icon: '📈', desc: '월 40~70만원 납입, 5년 후 최대 5,000만원',           url: 'pages/article-youth-dream-account' },
+    '청년미래적금':         { icon: '💰', desc: '월 최대 50만원·3년, 정부기여금 6%(우대형 12%) · 2차 신청 10/7~16', url: 'pages/article-youth-savings' },
+    '청년도약계좌':         { icon: '📈', desc: '신규 가입 종료(2025.12) · 가입자는 미래적금 갈아타기 가능',   url: 'pages/article-youth-dream-account' },
     '청년취업지원금':       { icon: '🎯', desc: '취업 준비 청년 월 50만원, 최대 6개월',               url: 'pages/article-youth-job-support' },
     '청년구직활동지원금':   { icon: '🔍', desc: '구직활동 지원금 월 50만원, 최대 6개월',              url: 'pages/article-youth-job-support' },
     '청년 소득공제':        { icon: '💳', desc: '중소기업 취업 청년 소득세 90% 감면',                 url: 'pages/article-youth-sme-tax' },
