@@ -151,6 +151,28 @@
     "round2BirthRange": "1991년 11월 17일~2007년 11월 27일생",
     "source": "금융위원회 출시·가입절차 보도자료, 정책브리핑 궁금증 총정리, 금융위원회 2차 가입 보도자료(2026.9.16)"
   },
+  "youthLeapAccount": {
+    "monthlyMax": 700000,
+    "termMonths": 60,
+    "extraMatchRate": 3.0,
+    "baseMatchLimit2400": 400000,
+    "baseMatchRate2400": 6.0,
+    "baseMatchLimit3600": 500000,
+    "baseMatchRate3600": 4.6,
+    "baseMatchLimit4800": 600000,
+    "baseMatchRate4800": 3.7,
+    "baseMatchLimit6000": 700000,
+    "baseMatchRate6000": 3.0,
+    "contribMonthlyMax2400": 33000,
+    "contribMonthlyMax3600": 29000,
+    "contribMonthlyMax4800": 25200,
+    "contribMonthlyMax6000": 21000,
+    "contribMonthlyMaxNote": "구간별 월 최대 기여금 = baseMatchLimit × baseMatchRate + (monthlyMax − baseMatchLimit) × extraMatchRate",
+    "contribIncomeLimitGross": 60000000,
+    "incomeLimitGross": 75000000,
+    "contribExpansionFrom": "2025년 1월 납입분",
+    "source": "금융위원회 「'25년 1월부터 청년도약계좌 기여금이 확대됩니다」"
+  },
   "invariants": [
     { "key": "basicPension.nationalPensionLinkThreshold", "fromKey": "basicPension.maxAmountSingle", "multiplier": 1.5 },
     { "key": "basicPension.coupleEachAmount", "fromKey": "basicPension.maxAmountSingle", "multiplier": 0.8 },

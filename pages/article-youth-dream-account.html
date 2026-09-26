@@ -93,6 +93,7 @@
   </script>
 </head>
 <body>
+<!-- policy-deps: constants:youthLeapAccount.monthlyMax, constants:youthLeapAccount.contribMonthlyMax2400, constants:youthLeapAccount.contribMonthlyMax3600, constants:youthLeapAccount.contribMonthlyMax4800, constants:youthLeapAccount.contribMonthlyMax6000, constants:youthLeapAccount.contribIncomeLimitGross, constants:youthLeapAccount.incomeLimitGross, constants:youthLeapAccount.contribExpansionFrom -->
 <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-ntJWItYnhuyVV5W8"
 data-ad-width = "320"
@@ -157,7 +158,7 @@ data-ad-height = "100"></ins>
             ⚠️ <strong>청년도약계좌는 2025년 12월 신규 가입이 종료됐습니다.</strong> 지금은 가입자만 유지할 수 있으며, 새로 목돈을 모으려는 청년은 <a href="article-youth-savings">청년미래적금</a>을 확인하세요.
           </div>
           <div class="article-summary">
-            <strong>핵심 요약:</strong> 청년도약계좌는 <strong>만기 5년(60개월), 월 최대 70만원 납입</strong> 상품으로, 가입자는 정부기여금(최대 월 2만4천원)과 비과세 혜택을 받는 장기 자산형성 상품입니다.
+            <strong>핵심 요약:</strong> 청년도약계좌는 <strong>만기 5년(60개월), 월 최대 70만원 납입</strong> 상품으로, 가입자는 정부기여금과 비과세 혜택을 받는 장기 자산형성 상품입니다. 정부기여금은 최대 월 3만3천원(총급여 2,400만원 이하, 월 70만원 납입 시)입니다.
           </div>
 
           <div class="article-body">
@@ -167,7 +168,7 @@ data-ad-height = "100"></ins>
             <div class="highlight-box">
               💡 <strong>청년도약계좌 한눈에 보기</strong><br>
               • 만기 5년(60개월), 월 최대 70만원 납입<br>
-              • 정부기여금 최대 월 2만4천원 (소득구간별, 아래 구간표 참고)<br>
+              • 정부기여금 최대 월 3만3천원(총급여 2,400만원 이하, 월 70만원 납입 시) — 소득구간별, 아래 구간표 참고<br>
               • 이자소득 <strong>비과세</strong> 적용
             </div>
 
@@ -175,7 +176,7 @@ data-ad-height = "100"></ins>
             <table>
               <thead><tr><th>항목</th><th>내용</th></tr></thead>
               <tbody>
-                <tr><td>월 납입한도</td><td>최대 <strong>70만원</strong> (최소 40만원 권장)</td></tr>
+                <tr><td>월 납입한도</td><td>최대 <strong><span data-policy="youthLeapAccount.monthlyMax" data-policy-format="currency-man">70만원</span></strong></td></tr>
                 <tr><td>정부기여금</td><td>소득구간별 차등 지급 (아래 구간표 참고)</td></tr>
                 <tr><td>만기</td><td><strong>5년</strong> (60개월)</td></tr>
                 <tr><td>비과세</td><td>이자소득세 <strong>면제</strong></td></tr>
@@ -184,23 +185,25 @@ data-ad-height = "100"></ins>
             </table>
 
             <h2>정부기여금 소득구간별 지급 기준</h2>
+            <p><span data-policy="youthLeapAccount.contribExpansionFrom">2025년 1월 납입분</span>부터 모든 소득구간의 매칭한도가 월 <span data-policy="youthLeapAccount.monthlyMax" data-policy-format="currency-man">70만원</span>까지 확대됐습니다. 기존 가입자에게도 자동 적용됩니다.</p>
             <table>
-              <thead><tr><th>개인소득 구간 (총급여 기준)</th><th>정부기여금 (월)</th><th>비고</th></tr></thead>
+              <thead><tr><th>총급여</th><th>기본 매칭</th><th>추가 매칭(3.0%)</th><th>월 최대 기여금</th></tr></thead>
               <tbody>
-                <tr><td>2,400만원 이하</td><td><strong>2만4천원</strong></td><td>기여금 + 비과세</td></tr>
-                <tr><td>2,400만원 초과 ~ 3,600만원 이하</td><td><strong>2만원</strong></td><td>기여금 + 비과세</td></tr>
-                <tr><td>3,600만원 초과 ~ 4,800만원 이하</td><td><strong>1만2천원</strong></td><td>기여금 + 비과세</td></tr>
-                <tr><td>4,800만원 초과 ~ 6,000만원 이하</td><td><strong>6천원</strong></td><td>기여금 + 비과세</td></tr>
-                <tr><td>6,000만원 초과 ~ 7,500만원 이하</td><td>없음</td><td>비과세만 적용</td></tr>
+                <tr><td>2,400만원 이하</td><td>40만원까지 6.0%</td><td>40만원 초과 ~ 70만원</td><td><strong><span data-policy="youthLeapAccount.contribMonthlyMax2400" data-policy-format="currency">33,000원</span></strong></td></tr>
+                <tr><td>2,400만원 초과 ~ 3,600만원 이하</td><td>50만원까지 4.6%</td><td>50만원 초과 ~ 70만원</td><td><strong><span data-policy="youthLeapAccount.contribMonthlyMax3600" data-policy-format="currency">29,000원</span></strong></td></tr>
+                <tr><td>3,600만원 초과 ~ 4,800만원 이하</td><td>60만원까지 3.7%</td><td>60만원 초과 ~ 70만원</td><td><strong><span data-policy="youthLeapAccount.contribMonthlyMax4800" data-policy-format="currency">25,200원</span></strong></td></tr>
+                <tr><td>4,800만원 초과 ~ <span data-policy="youthLeapAccount.contribIncomeLimitGross" data-policy-format="currency-man">6,000만원</span> 이하</td><td>70만원까지 3.0%</td><td>없음</td><td><strong><span data-policy="youthLeapAccount.contribMonthlyMax6000" data-policy-format="currency">21,000원</span></strong></td></tr>
+                <tr><td><span data-policy="youthLeapAccount.contribIncomeLimitGross" data-policy-format="currency-man">6,000만원</span> 초과 ~ <span data-policy="youthLeapAccount.incomeLimitGross" data-policy-format="currency-man">7,500만원</span> 이하</td><td>없음</td><td>없음</td><td>없음 (비과세만 적용)</td></tr>
               </tbody>
             </table>
-            <p>기여금 기준은 가입 시점에 따라 다를 수 있습니다. 본인 기준은 서민금융진흥원 청년도약계좌 누리집에서 확인하세요.</p>
+            <p>출처: 금융위원회 보도자료. 개인별 기여금은 서민금융진흥원 청년도약계좌 누리집에서 확인하세요.</p>
 
             <a href="https://www.kinfa.or.kr" class="cta-link" target="_blank" rel="noopener">서민금융진흥원에서 정보 확인하기 →</a>
 
             <h2>자주 묻는 질문 (FAQ)</h2>
             <h3>Q. 5년 중도해지하면 정부기여금을 돌려줘야 하나요?</h3>
-            <p>네, 일반적인 중도해지 시 정부기여금은 전액 반환해야 하며 비과세 혜택도 소급 취소됩니다. 다만 퇴직, 폐업, 사망, 장기입원, 천재지변 등 특별중도해지 사유에 해당하면 기여금을 유지할 수 있습니다.</p>
+            <p>네, 일반적인 중도해지 시 정부기여금은 전액 반환해야 하며 비과세 혜택도 소급 취소됩니다. 다만 3년 이상 유지한 뒤 중도해지하면 비과세 혜택과 정부기여금 일부를 받을 수 있습니다. 정확한 지급 비율은 가입 은행에 확인하세요.</p>
+            <p>가입자의 사망·해외이주, 퇴직, 폐업, 천재지변, 질병 등으로 인한 장기 치료, 생애최초 주택구입 등 특별중도해지 사유에 해당하면 기여금을 유지할 수 있습니다. 혼인·출산 사유도 특별중도해지에 추가하는 제도 개선이 추진됐습니다. 해당 여부와 제출서류는 가입 은행에 확인하세요.</p>
 
             <h3>Q. 가입 후 소득이 기준을 초과하면 어떻게 되나요?</h3>
             <p>가입 후 소득이 변동되어도 가입 유지는 가능합니다. 다만 매년 유지심사를 통해 소득 변동을 확인하며, 소득 증가 시 정부기여금 지급액이 변경될 수 있습니다.</p>
