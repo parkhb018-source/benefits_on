@@ -782,10 +782,10 @@ function lintPolicyDeps(report) {
    승수를 미리 곱해(6.4) 하나의 multiplier로 표현할 수 있으면 그렇게 쓴다.
    페이지가 아니라 정책 JSON 자체를 보므로, policy-deps 선언 여부와 무관하게 항상 실행된다.
    이진 부동소수점 오차(예: 10320 * 6.4)를 피하기 위해 Math.round로 비교한다. */
-/* 현재까지 확인된 invariants 총 개수(2026-09 기준 11건 — constants 10 + parental-leave 1).
+/* 현재까지 확인된 invariants 총 개수(2026-09 기준 13건 — constants 12 + parental-leave 1).
    이 상수 자체를 늘리는 것은 invariants를 새로 등록했을 때만이고, 검사 목적은 이 값
    "밑으로" 떨어지는 것을 잡는 것이다. */
-const MIN_INVARIANT_COUNT = 11;
+const MIN_INVARIANT_COUNT = 13;
 
 function checkPolicyInvariants(report) {
   const violations = [];

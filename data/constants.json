@@ -173,6 +173,28 @@
     "contribExpansionFrom": "2025년 1월 납입분",
     "source": "금융위원회 「'25년 1월부터 청년도약계좌 기여금이 확대됩니다」"
   },
+  "youthTomorrowSavings": {
+    "year": 2026,
+    "householdMedianPct": 50,
+    "ageMin": 15,
+    "ageMax": 39,
+    "earnedIncomeMinMonthly": 100000,
+    "selfMonthlyMin": 100000,
+    "selfMonthlyMax": 500000,
+    "govMonthly": 300000,
+    "termMonths": 36,
+    "selfTotalExample": 3600000,
+    "govTotal": 10800000,
+    "totalExample": 14400000,
+    "suspendMonthsMax": 12,
+    "educationHours": 10,
+    "recruit2026": "2026년 5월 4일~20일",
+    "recruitCount2026": 25000,
+    "resultNotice2026": "2026년 8월",
+    "bank": "하나은행",
+    "callCenter": "1522-3690",
+    "source": "보건복지부 청년내일저축계좌 신규 모집 보도자료(2026.5.4), 정책브리핑 2026.2.27"
+  },
   "invariants": [
     { "key": "basicPension.nationalPensionLinkThreshold", "fromKey": "basicPension.maxAmountSingle", "multiplier": 1.5 },
     { "key": "basicPension.coupleEachAmount", "fromKey": "basicPension.maxAmountSingle", "multiplier": 0.8 },
@@ -183,6 +205,8 @@
     { "key": "youthFutureSavings.contribMonthlyMaxGeneral", "fromKey": "youthFutureSavings.monthlyMax", "multiplier": 0.06 },
     { "key": "youthFutureSavings.contribMonthlyMaxPreferred", "fromKey": "youthFutureSavings.monthlyMax", "multiplier": 0.12 },
     { "key": "youthFutureSavings.contribTotalMaxGeneral", "fromKey": "youthFutureSavings.contribMonthlyMaxGeneral", "multiplier": 36 },
-    { "key": "youthFutureSavings.contribTotalMaxPreferred", "fromKey": "youthFutureSavings.contribMonthlyMaxPreferred", "multiplier": 36 }
+    { "key": "youthFutureSavings.contribTotalMaxPreferred", "fromKey": "youthFutureSavings.contribMonthlyMaxPreferred", "multiplier": 36 },
+    { "key": "youthTomorrowSavings.govTotal", "fromKey": "youthTomorrowSavings.govMonthly", "multiplier": 36 },
+    { "key": "youthTomorrowSavings.selfTotalExample", "fromKey": "youthTomorrowSavings.selfMonthlyMin", "multiplier": 36 }
   ]
 }
