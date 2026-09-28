@@ -219,6 +219,41 @@
     "callCenter": "1688-8114",
     "source": "한국주택금융공사 보도자료(2026.9.28) 및 참고1·참고2, 금융위원회 부동산 시장 안정을 위한 금융 종합대책(2026.8.13)"
   },
+  "nationalEmploymentSupport": {
+    "year": 2026,
+    "allowanceMonthly": 600000,
+    "allowanceMonthlyPrev": 500000,
+    "allowanceMonths": 6,
+    "allowanceTotal": 3600000,
+    "allowanceFrom": "2026년 1월 1일",
+    "dependentAdd": 100000,
+    "dependentAddMax": 400000,
+    "type1MedianPct": 60,
+    "youthMedianPct": 120,
+    "midAgeMedianPct": 100,
+    "assetLimit": 400000000,
+    "youthAssetLimit": 500000000,
+    "workExpDays": 100,
+    "workExpHours": 800,
+    "ageMin": 15,
+    "ageMax": 69,
+    "youthAgeMax": 34,
+    "youthAgeMaxMilitary": 37,
+    "selfIncomeLimit": 1538543,
+    "partTimeHoursLimit": 30,
+    "bizIncomeLimitMonthly": 2500000,
+    "successPay6": 500000,
+    "successPay12More": 1000000,
+    "successPayTotal": 1500000,
+    "participationBase": 150000,
+    "participationAddMin": 30000,
+    "participationAddMax": 100000,
+    "encouragementMonthly": 20000,
+    "encouragementMaxTimes": 5,
+    "deferReapplyDays": 30,
+    "callCenter": "1350",
+    "source": "고용24 국민취업지원제도 취업지원신청 소개(2026.9.28 조회), 고용노동부 국정성과 노동부-25-011(2026.2.26)"
+  },
   "invariants": [
     { "key": "basicPension.nationalPensionLinkThreshold", "fromKey": "basicPension.maxAmountSingle", "multiplier": 1.5 },
     { "key": "basicPension.coupleEachAmount", "fromKey": "basicPension.maxAmountSingle", "multiplier": 0.8 },
@@ -231,6 +266,7 @@
     { "key": "youthFutureSavings.contribTotalMaxGeneral", "fromKey": "youthFutureSavings.contribMonthlyMaxGeneral", "multiplier": 36 },
     { "key": "youthFutureSavings.contribTotalMaxPreferred", "fromKey": "youthFutureSavings.contribMonthlyMaxPreferred", "multiplier": 36 },
     { "key": "youthTomorrowSavings.govTotal", "fromKey": "youthTomorrowSavings.govMonthly", "multiplier": 36 },
-    { "key": "youthTomorrowSavings.selfTotalExample", "fromKey": "youthTomorrowSavings.selfMonthlyMin", "multiplier": 36 }
+    { "key": "youthTomorrowSavings.selfTotalExample", "fromKey": "youthTomorrowSavings.selfMonthlyMin", "multiplier": 36 },
+    { "key": "nationalEmploymentSupport.allowanceTotal", "fromKey": "nationalEmploymentSupport.allowanceMonthly", "multiplier": 6 }
   ]
 }
