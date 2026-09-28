@@ -74,7 +74,7 @@ if (bannerClose && banner) {
           "청년월세 특별지원"
         ],
         "취업준비중": [
-          "청년구직활동지원금",
+          "국민취업지원제도",
           "국민내일배움카드",
           "청년월세 특별지원"
         ],
@@ -99,16 +99,15 @@ if (bannerClose && banner) {
           "청년미래적금"
         ],
         "취업준비중": [
-          "청년구직활동지원금",
-          "국민내일배움카드",
-          "청년취업지원금"
+          "국민취업지원제도",
+          "국민내일배움카드"
         ],
         "자영업자": [
           "근로장려금",
           "청년미래적금"
         ],
         "무직·기타": [
-          "청년구직활동지원금",
+          "국민취업지원제도",
           "국민내일배움카드",
           "청년미래적금"
         ],
@@ -124,7 +123,7 @@ if (bannerClose && banner) {
           "청년월세 특별지원"
         ],
         "취업준비중": [
-          "청년구직활동지원금",
+          "국민취업지원제도",
           "국민내일배움카드",
           "주거급여"
         ],
@@ -151,7 +150,7 @@ if (bannerClose && banner) {
           "청년 소득공제"
         ],
         "취업준비중": [
-          "청년구직활동지원금",
+          "국민취업지원제도",
           "자녀 교육비 공제",
           "국민내일배움카드"
         ],
@@ -643,8 +642,7 @@ if (bannerClose && banner) {
     '청년월세 특별지원':    { icon: '🏠', desc: '월 최대 20만원, 최장 24개월 지원 (생애 1회)',        url: 'pages/article-youth-rent' },
     '청년미래적금':         { icon: '💰', desc: '월 최대 50만원·3년, 정부기여금 6%(우대형 12%) · 2차 신청 10/7~16', url: 'pages/article-youth-savings' },
     '청년도약계좌':         { icon: '📈', desc: '신규 가입 종료(2025.12) · 가입자는 미래적금 갈아타기 가능',   url: 'pages/article-youth-dream-account' },
-    '청년취업지원금':       { icon: '🎯', desc: '취업 준비 청년 월 50만원, 최대 6개월',               url: 'pages/article-youth-job-support' },
-    '청년구직활동지원금':   { icon: '🔍', desc: '구직활동 지원금 월 50만원, 최대 6개월',              url: 'pages/article-youth-job-support' },
+    '국민취업지원제도':     { icon: '💼', desc: '구직촉진수당 월 60만원 × 6개월 (Ⅰ유형)',            url: 'pages/article-youth-job-support' },
     '청년 소득공제':        { icon: '💳', desc: '중소기업 취업 청년 소득세 90% 감면',                 url: 'pages/article-youth-sme-tax' },
     '국민내일배움카드':     { icon: '🎓', desc: '직업훈련 비용 최대 500만원 지원',                    url: 'pages/article-tomorrow-learning' },
     '근로장려금':           { icon: '💵', desc: '맞벌이 기준 연간 최대 330만원',                      url: 'pages/article-eitc' },
