@@ -266,6 +266,29 @@
     "callCenter": "1350",
     "source": "고용24 국민취업지원제도 취업지원신청 소개(2026.9.28 조회), 고용노동부 국정성과 노동부-25-011(2026.2.26)"
   },
+  "seniorJobs": {
+    "year": 2026,
+    "total2026": 1152000,
+    "total2025": 1098000,
+    "total2024": 1030000,
+    "publicMonthly": 290000,
+    "publicHours": 30,
+    "publicMonths": 11,
+    "publicCount": 709000,
+    "capacityMonthly": 761000,
+    "capacityHours": 60,
+    "capacityMonths": 10,
+    "capacityCount": 197000,
+    "communityAnnual": 2670000,
+    "internMonthly": 400000,
+    "internMonths": 6,
+    "internSupportMax": 2400000,
+    "childcareSpecialMonthly": 900000,
+    "recruitStart": "2025년 11월 28일",
+    "recruitEnd": "2025년 12월 26일",
+    "callCenter": "1544-3388",
+    "source": "보건복지부 보도자료(2025.11.27) 붙임1 2026년 노인 일자리 및 사회활동 지원사업 개요, 정책브리핑(2026.2.2)"
+  },
   "invariants": [
     { "key": "basicPension.nationalPensionLinkThreshold", "fromKey": "basicPension.maxAmountSingle", "multiplier": 1.5 },
     { "key": "basicPension.coupleEachAmount", "fromKey": "basicPension.maxAmountSingle", "multiplier": 0.8 },
@@ -280,6 +303,7 @@
     { "key": "youthTomorrowSavings.govTotal", "fromKey": "youthTomorrowSavings.govMonthly", "multiplier": 36 },
     { "key": "youthTomorrowSavings.selfTotalExample", "fromKey": "youthTomorrowSavings.selfMonthlyMin", "multiplier": 36 },
     { "key": "nationalEmploymentSupport.allowanceTotal", "fromKey": "nationalEmploymentSupport.allowanceMonthly", "multiplier": 6 },
-    { "key": "youthMonthlyRent.youthIncomeLimit1p", "fromKey": "medianIncome2026.person1", "multiplier": 0.6 }
+    { "key": "youthMonthlyRent.youthIncomeLimit1p", "fromKey": "medianIncome2026.person1", "multiplier": 0.6 },
+    { "key": "seniorJobs.internSupportMax", "fromKey": "seniorJobs.internMonthly", "multiplier": 6 }
   ]
 }
