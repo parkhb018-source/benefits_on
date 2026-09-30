@@ -94,7 +94,15 @@
     "maxMonths": 24,
     "depositLimit": 50000000,
     "rentLimit": 600000,
-    "source": "국토교통부 2026년 기준"
+    "youthIncomePct": 60,
+    "familyIncomePct": 100,
+    "youthIncomeLimit1p": 1538543,
+    "youthAssetLimit": 122000000,
+    "familyAssetLimit": 470000000,
+    "applyPeriod2026": "2026년 3월 30일~5월 29일",
+    "payUntil": "2028년 12월",
+    "newRecipients2026": 60000,
+    "source": "복지로 2026년 청년월세 지원 신청 안내, 국토교통부 청년월세 지원"
   },
   "energyVoucher": {
     "year": 2026,
@@ -271,6 +279,7 @@
     { "key": "youthFutureSavings.contribTotalMaxPreferred", "fromKey": "youthFutureSavings.contribMonthlyMaxPreferred", "multiplier": 36 },
     { "key": "youthTomorrowSavings.govTotal", "fromKey": "youthTomorrowSavings.govMonthly", "multiplier": 36 },
     { "key": "youthTomorrowSavings.selfTotalExample", "fromKey": "youthTomorrowSavings.selfMonthlyMin", "multiplier": 36 },
-    { "key": "nationalEmploymentSupport.allowanceTotal", "fromKey": "nationalEmploymentSupport.allowanceMonthly", "multiplier": 6 }
+    { "key": "nationalEmploymentSupport.allowanceTotal", "fromKey": "nationalEmploymentSupport.allowanceMonthly", "multiplier": 6 },
+    { "key": "youthMonthlyRent.youthIncomeLimit1p", "fromKey": "medianIncome2026.person1", "multiplier": 0.6 }
   ]
 }
