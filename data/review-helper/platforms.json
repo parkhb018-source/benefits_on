@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "2026-10-02",
+  "staleAfterDays": 90,
+  "disclaimer": "참고용 안내이며, 최종 판단은 각 플랫폼 정책에 따라요.",
+  "legalCommon": {
+    "act": "정보통신망 이용촉진 및 정보보호 등에 관한 법률 제44조의2",
+    "maxTemporaryBlockDays": 30,
+    "summary": "사생활 침해·명예훼손 등 권리를 침해받은 사람이 소명하며 삭제를 요청하면, 플랫폼은 삭제하거나 최대 30일 임시조치(게시중단)를 할 수 있다. 작성자에게 통보하고 이의를 받는다."
+  },
+  "strengthLegend": {
+    "mandatory": "정책이 '조치하지 않습니다'라고 단정함",
+    "principle": "정책이 '원칙적으로 조치하지 않습니다'라고 하며 예외가 있음",
+    "may": "정책이 '조치하지 않을 수 있습니다'라고 함",
+    "info": "참고 정보"
+  },
+  "confidenceLegend": {
+    "high": "공식 정책 원문을 직접 확인함",
+    "medium": "일부만 공식 확인, 나머지는 2차 자료",
+    "low": "2차 자료(기사·블로그)만 확인함. 공식 원문 확인 필요"
+  },
+  "platforms": [
+    {
+      "id": "baemin",
+      "name": "배달의민족",
+      "kind": "delivery_app",
+      "inScope": true,
+      "policy": {
+        "title": "리뷰운영정책",
+        "versionLabel": "2024-10-08 시행안",
+        "effectiveDate": "2024-10-08",
+        "verifiedDate": "2026-10-02",
+        "verification": "app_capture",
+        "confidence": "high",
+        "officialUrl": null,
+        "officialUrlNote": "배민 앱 안의 '리뷰운영정책'에서 원문을 볼 수 있어요."
+      },
+      "generalReport": {
+        "text": "가입자 누구나 사유를 밝혀 리뷰를 신고할 수 있다. 명백한 위반이 아니면 삭제·차단하지 않을 수 있다.",
+        "article": "제7조"
+      },
+      "request": {
+        "name": "게시중단 요청",
+        "legalBasis": "정보통신망법 제44조의2",
+        "whoCanRequest": "리뷰로 사생활침해·명예훼손 등 권리를 침해받은 사람(권리침해 주장자)",
+        "channels": [
+          {
+            "type": "customer_center",
+            "label": "사장님 고객센터(카카오톡 채널 등)",
+            "source": "blog",
+            "verifiedOfficial": false,
+            "note": "정책 원문에는 접수 경로가 적혀 있지 않음"
+          }
+        ],
+        "requirements": [
+          {
+            "id": "party",
+            "text": "권리침해 당사자임을 밝혀야 한다",
+            "article": "제8조 ①1호"
+          },
+          {
+            "id": "specify_right",
+            "text": "어떤 권리가 침해되었는지 구체적으로 소명해야 한다",
+            "article": "제8조 ①2호"
+          },
+          {
+            "id": "quote_expression",
+            "text": "권리침해에 해당하는 표현을 요청서 양식에 적어야 한다",
+            "article": "제8조 ①3호"
+          }
+        ],
+        "inputsKnown": [
+          {
+            "label": "가게번호(8자리)",
+            "source": "blog"
+          },
+          {
+            "label": "리뷰번호",
+            "source": "blog"
+          }
+        ],
+        "notAccepted": {
+          "strength": "principle",
+          "items": [
+            {
+              "id": "no_content",
+              "text": "글·사진·이미지·영상이 없는 리뷰",
+              "article": "제9조 1호"
+            },
+            {
+              "id": "symbols_only",
+              "text": "무의미한 기호만 있는 리뷰",
+              "article": "제9조 2호"
+            },
+            {
+              "id": "stars_only",
+              "text": "리뷰점수(별점)만 있는 리뷰",
+              "article": "제9조 3호"
+            },
+            {
+              "id": "reposted",
+              "text": "게시중단 뒤 재게시된 리뷰",
+              "article": "제9조 4호"
+            }
+          ],
+          "exception": "권리침해 주장자가 사생활침해·명예훼손 등을 충분히 소명하면 조치할 수 있다 (제9조 단서)"
+        },
+        "actions": [
+          {
+            "id": "delete_or_permanent_block",
+            "text": "삭제 또는 영구 차단: 불법성이 명확하고 긴급한 피해 구제가 필요하다고 판단할 때",
+            "article": "제8조 ②1호"
+          },
+          {
+            "id": "temporary_block",
+            "text": "게시중단: 권리침해 여부를 판단하기 어렵거나 분쟁이 예상될 때 최대 30일 임시 차단",
+            "days": 30,
+            "article": "제8조 ②2호"
+          },
+          {
+            "id": "mediation",
+            "text": "그 밖에 분쟁 중재에 필요한 조치",
+            "article": "제8조 ②3호"
+          }
+        ],
+        "process": {
+          "temporaryBlockDays": 30,
+          "notifyAuthor": true,
+          "objection": "작성자가 게시중단에 동의하지 않아 이의를 내면 게시중단 기간이 지난 뒤 재게시할 수 있고, 이의가 없으면 영구 차단할 수 있다",
+          "reRequestAfterRestore": false,
+          "scoreExcludedWhileBlocked": true,
+          "articles": "제8조 ③④⑤, 제16조 ②4호"
+        }
+      },
+      "sources": [
+        {
+          "label": "배달의민족 앱 내 리뷰운영정책 (사용자 제공 캡처 15장)",
+          "type": "official_capture",
+          "date": "2026-10-02"
+        },
+        {
+          "label": "비즈워치 2025-02-14",
+          "type": "news",
+          "url": "https://news.bizwatch.co.kr/article/consumer/2025/02/14/0045"
+        },
+        {
+          "label": "배민 리뷰게시중단 신청 방법 (아우에 매거진)",
+          "type": "blog",
+          "url": "https://aueaue.com/%EB%85%B8%ED%95%98%EC%9A%B0/%EB%B0%B0%EB%AF%BC-%EB%A6%AC%EB%B7%B0%EA%B2%8C%EC%8B%9C%EC%A4%91%EB%8B%A8-%EC%8B%A0%EC%B2%AD-%EB%A6%AC%EB%B7%B0-%EC%BC%80%EC%96%B4%EC%9A%94%EC%B2%AD-%EB%B0%A9%EB%B2%95/"
+        }
+      ],
+      "openQuestions": [
+        "사장님 고객센터 신청 화면의 입력 항목은 블로그 기준이라 공식 확인 필요"
+      ]
+    },
+    {
+      "id": "coupangeats",
+      "name": "쿠팡이츠",
+      "kind": "delivery_app",
+      "inScope": true,
+      "policy": {
+        "title": "리뷰 운영정책",
+        "versionLabel": "2025-11-25 시행본",
+        "effectiveDate": "2025-11-25",
+        "verifiedDate": "2026-10-02",
+        "verification": "official_pdf",
+        "confidence": "high",
+        "officialUrl": "https://partners.coupangeats.com/wp-content/uploads/2025/11/251125_%EC%8B%9C%ED%96%89%EC%BF%A0%ED%8C%A1%EC%9D%B4%EC%B8%A0-%EB%A6%AC%EB%B7%B0-%EC%9A%B4%EC%98%81%EC%A0%95%EC%B1%85.pdf",
+        "officialUrlNote": null
+      },
+      "generalReport": null,
+      "request": {
+        "name": "게시중단 요청하기",
+        "legalBasis": "정보통신망법 제44조의2",
+        "whoCanRequest": "이용자 또는 판매자가 작성한 게시물로 명예·초상권·사생활 등의 권리를 침해받았다고 생각하는 신청인",
+        "channels": [
+          {
+            "type": "phone",
+            "label": "쿠팡이츠 고객센터(유선)",
+            "source": "official",
+            "verifiedOfficial": true,
+            "article": "제4조 ②"
+          },
+          {
+            "type": "email",
+            "label": "이메일 접수",
+            "value": "eatspartners@coupang.com",
+            "source": "official",
+            "verifiedOfficial": true,
+            "article": "제4조 ②"
+          }
+        ],
+        "requirements": [],
+        "inputsKnown": [],
+        "notAccepted": {
+          "strength": "mandatory",
+          "items": [
+            {
+              "id": "stars_only",
+              "text": "리뷰 별점만 기재된 경우",
+              "article": "제4조 ⑦ 1호"
+            },
+            {
+              "id": "reposted",
+              "text": "재게시된 리뷰를 대상으로 하는 경우",
+              "article": "제4조 ⑦ 2호"
+            },
+            {
+              "id": "no_content_or_symbols",
+              "text": "리뷰에 글·사진 등이 없거나 무의미한 기호 등만 있는 경우",
+              "article": "제4조 ⑦ 3호"
+            }
+          ],
+          "exception": null
+        },
+        "discretion": {
+          "text": "게시중단 요청이 있어도 해당 게시물이 정상적인 이용후기 등에 관한 내용으로 판단되면 조치하지 않을 수 있다",
+          "article": "제4조 ②"
+        },
+        "actions": [
+          {
+            "id": "temporary_block",
+            "text": "정보통신망법 제44조의2에 따라 30일간 임시조치(게시중단)",
+            "days": 30,
+            "article": "제4조 ②"
+          }
+        ],
+        "process": {
+          "temporaryBlockDays": 30,
+          "notifyAuthor": true,
+          "objection": "임시조치 기간 중 피신청인의 이의(복원) 신청이 있으면 기간 내에도 복원될 수 있고, 이의가 없으면 30일 뒤에도 게시중단 상태가 유지된다",
+          "reRequestAfterRestore": null,
+          "scoreExcludedWhileBlocked": null,
+          "otherRoute": "신청인은 별도로 적법한 유관 기관(방송미디어통신심의위원회 등)을 통해 권리침해 여부 판단을 요청할 수 있다",
+          "companyBlind": "회사가 부적합하다고 판단해 블라인드하면 작성자에게 사유를 통지하고, 작성자는 3영업일 이내 고객센터에 이의를 낼 수 있다 (욕설 포함 시 통지 없이 가능)",
+          "articles": "제4조 ①②"
+        },
+        "otherRules": [
+          {
+            "text": "특정 판매자에게 고의·반복적으로 악의적인 별점을 부여한 예외적인 경우 그 별점은 판매자 별점 통계에 미산입될 수 있다",
+            "article": "제4조 ⑥"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "label": "쿠팡이츠 리뷰 운영정책 (공식 PDF)",
+          "type": "official_pdf",
+          "url": "https://partners.coupangeats.com/wp-content/uploads/2025/11/251125_%EC%8B%9C%ED%96%89%EC%BF%A0%ED%8C%A1%EC%9D%B4%EC%B8%A0-%EB%A6%AC%EB%B7%B0-%EC%9A%B4%EC%98%81%EC%A0%95%EC%B1%85.pdf",
+          "date": "2025-11-25"
+        },
+        {
+          "label": "머니투데이 2026-08-27 (사유 미통지·이의제기 논란)",
+          "type": "news",
+          "url": "https://www.mt.co.kr/tech/2026/08/27/2026082614361680857"
+        }
+      ],
+      "openQuestions": [
+        "신청 시 입력해야 하는 상세 항목은 정책에 명시되어 있지 않음. 고객센터 안내 확인"
+      ]
+    },
+    {
+      "id": "yogiyo",
+      "name": "요기요",
+      "kind": "delivery_app",
+      "inScope": true,
+      "policy": {
+        "title": "리뷰운영정책",
+        "versionLabel": "2023-10-04 시행본",
+        "effectiveDate": "2023-10-04",
+        "verifiedDate": "2026-10-03",
+        "verification": "official_web",
+        "confidence": "high",
+        "officialUrl": "https://www.yogiyo.co.kr/media/static/terms/r/20231004.html",
+        "officialUrlNote": "사용자 제공 정책 텍스트와 조문 구성·내용이 같음. 2026-10-03 운영자가 직접 확인: 2023-10-04판 이후 개정본 없음"
+      },
+      "generalReport": {
+        "text": "이용자는 제7조 위반 리뷰를 신고할 수 있고, 회사는 검토 후 삭제 또는 제한할 수 있다.",
+        "article": "제9조"
+      },
+      "request": {
+        "name": "게시중단 요청",
+        "legalBasis": "정보통신망법 제44조의2",
+        "whoCanRequest": "이용자의 리뷰로 권리 침해, 명예 훼손 등 피해를 주장하는 사람",
+        "channels": [
+          {
+            "type": "customer_center",
+            "label": "요기요 고객센터",
+            "source": "official",
+            "verifiedOfficial": true,
+            "article": "제11조 ⑦"
+          },
+          {
+            "type": "email",
+            "label": "이메일 접수",
+            "value": "support@wesang.com",
+            "source": "official",
+            "verifiedOfficial": true,
+            "article": "제11조 ⑦"
+          }
+        ],
+        "requirements": [
+          {
+            "id": "party",
+            "text": "권리 침해받은 당사자임을 확인해야 한다",
+            "article": "제11조 ①1호"
+          },
+          {
+            "id": "specify_right",
+            "text": "명예훼손이나 권리 침해(기타) 게시물의 내용을 구체적으로 소명해야 한다",
+            "article": "제11조 ①2호"
+          },
+          {
+            "id": "form",
+            "text": "회사가 요청하는 필수 양식에 따라 게시중단 요청서를 작성해야 한다",
+            "article": "제11조 ①3호"
+          }
+        ],
+        "inputsKnown": [],
+        "notAccepted": {
+          "strength": "may",
+          "items": [
+            {
+              "id": "stars_only",
+              "text": "리뷰 평점만을 대상으로 하는 경우",
+              "article": "제12조 1호"
+            },
+            {
+              "id": "symbols_only",
+              "text": "의미 없는 단어나 기호로 구성된 내용",
+              "article": "제12조 2호"
+            },
+            {
+              "id": "requirements_missing",
+              "text": "제11조 제1항의 요건을 갖추지 못한 경우",
+              "article": "제12조 3호"
+            },
+            {
+              "id": "reposted",
+              "text": "재게시된 리뷰",
+              "article": "제12조 4호"
+            }
+          ],
+          "exception": null
+        },
+        "actions": [
+          {
+            "id": "temporary_block",
+            "text": "정보통신망법 제44조의2에 따른 게시중단(최대 30일)",
+            "days": 30,
+            "article": "제11조 ①④"
+          }
+        ],
+        "process": {
+          "temporaryBlockDays": 30,
+          "notifyAuthor": true,
+          "objection": "작성자가 동의하거나 의사를 표현하지 않으면 영구 삭제될 수 있고, 동의하지 않으면 최대 30일 이후 재게시될 수 있다. 이의가 없으면 30일 후 영구 삭제된다",
+          "reRequestAfterRestore": false,
+          "scoreExcludedWhileBlocked": null,
+          "articles": "제11조 ③④⑤⑥"
+        },
+        "otherRules": [
+          {
+            "text": "리뷰는 서비스 이용일 포함 최대 7일 이내에 작성·수정할 수 있다",
+            "article": "제3조 ④"
+          }
+        ]
+      },
+      "sources": [
+        {
+          "label": "요기요 리뷰운영정책 (공식 웹)",
+          "type": "official_web",
+          "url": "https://www.yogiyo.co.kr/media/static/terms/r/20231004.html",
+          "date": "2023-10-04"
+        },
+        {
+          "label": "요기요 리뷰운영정책 (사용자 제공 텍스트)",
+          "type": "official_text",
+          "date": "2026-10-02"
+        }
+      ],
+      "openQuestions": [
+        "이후 개정본이 있는지 확인 필요"
+      ]
+    },
+    {
+      "id": "naver_place",
+      "name": "네이버 (스마트플레이스 리뷰)",
+      "kind": "place",
+      "inScope": false,
+      "policy": {
+        "title": "권리보호센터 안내 / 스마트플레이스 리뷰 이용정책",
+        "versionLabel": "공식 원문 미확인",
+        "effectiveDate": null,
+        "verifiedDate": null,
+        "researchedDate": "2026-10-02",
+        "verification": "secondary",
+        "confidence": "low",
+        "officialUrl": null,
+        "officialUrlNote": "네이버 권리보호센터 고객센터의 '권리 침해 게시물 신고(게시중단 요청) 방법' 도움말을 확인하세요."
+      },
+      "generalReport": {
+        "text": "리뷰 화면의 일반 '신고' 버튼은 운영원칙 위반 신고 창구이며 결과를 따로 안내하지 않는다 (2차 자료)",
+        "article": null
+      },
+      "request": {
+        "name": "권리 침해 신고(게시중단 요청)",
+        "legalBasis": "정보통신망법 제44조의2",
+        "whoCanRequest": "명예훼손·사생활 침해 등 권리를 침해받은 사람. 비회원도 접수 가능 (2차 자료)",
+        "channels": [
+          {
+            "type": "web_portal",
+            "label": "네이버 권리보호센터(right.naver.com)",
+            "source": "secondary",
+            "verifiedOfficial": false,
+            "note": "기존 '게시중단 요청 서비스'가 2024년부터 통합되었다는 2차 자료 기준"
+          }
+        ],
+        "steps": [
+          "신고 사유 선택",
+          "본인인증(비회원 접수 시)",
+          "신고자 정보 입력",
+          "권리 정보 입력",
+          "신고할 게시물 URL 입력"
+        ],
+        "limits": {
+          "maxUrlsPerReport": 50,
+          "reasonMaxChars": 500,
+          "shortUrlAllowed": false
+        },
+        "requirements": [],
+        "inputsKnown": [],
+        "notAccepted": {
+          "strength": "info",
+          "items": [
+            {
+              "id": "receipt_review_deletion",
+              "text": "영수증 리뷰는 저작권이 작성자에게 있어 임의 삭제할 수 없고, 비방성 내용만 게시중단 요청 가능 (파트너센터 안내 인용)",
+              "article": null
+            }
+          ],
+          "exception": null
+        },
+        "actions": [
+          {
+            "id": "temporary_block",
+            "text": "게시물을 30일간 임시 비공개",
+            "days": 30,
+            "article": null
+          }
+        ],
+        "process": {
+          "temporaryBlockDays": 30,
+          "notifyAuthor": true,
+          "objection": "작성자가 재게시를 요청하지 않으면 30일 후 자동 삭제되고, 이의를 내면 복원될 수 있다. 조치 시 작성자에게 신고 사유와 요청자가 관련 당사자라는 점이 안내된다",
+          "reRequestAfterRestore": false,
+          "scoreExcludedWhileBlocked": null,
+          "otherRoute": "복원된 게시물은 같은 사유의 재차 게시중단이 제한되고 방송미디어통신심의위원회 권리침해정보 심의신청을 안내한다"
+        },
+        "otherRules": [
+          {
+            "text": "사업주는 리뷰 답글로 의견을 남길 수 있다",
+            "article": null
+          },
+          {
+            "text": "2026년 플레이스 리뷰에 5점 척도 별점이 추가되고 평균 별점이 공개된다(사업주가 노출 ON/OFF 선택). 리뷰는 작성 후 3개월 이내에만 수정할 수 있다",
+            "article": null
+          },
+          {
+            "text": "합리적 이유 없이 3점 미만 별점을 무분별하게 주는 행위는 금지된다 (리뷰 이용정책)",
+            "article": null
+          }
+        ]
+      },
+      "sources": [
+        {
+          "label": "aboutusforyou.com (명예훼손 게시물 삭제 안내)",
+          "type": "secondary",
+          "url": "https://www.aboutusforyou.com/%EB%AA%85%EC%98%88%ED%9B%BC%EC%86%90-%EA%B2%8C%EC%8B%9C%EB%AC%BC-%EC%82%AD%EC%A0%9C"
+        },
+        {
+          "label": "aboutusforyou.com (카페 게시글 삭제 안내)",
+          "type": "secondary",
+          "url": "https://www.aboutusforyou.com/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%B9%B4%ED%8E%98-%EC%82%AD%EC%A0%9C"
+        },
+        {
+          "label": "비즈한국",
+          "type": "news",
+          "url": "https://bizhankook.com/articles/20950.html"
+        },
+        {
+          "label": "뉴시스 2025-10-14",
+          "type": "news",
+          "url": "https://mobile.newsis.com/view/NISX20250908_0003319149"
+        },
+        {
+          "label": "경향신문 2026-06-01",
+          "type": "news",
+          "url": "https://www.khan.co.kr/article/202606011504001/"
+        }
+      ],
+      "openQuestions": [
+        "별점만 있는 리뷰·재게시 리뷰의 처리 기준",
+        "신청에 필요한 서류의 구체적 내용",
+        "공식 도움말 원문 확인 필요"
+      ]
+    }
+  ],
+  "industryNotes": [
+    {
+      "id": "kisa_recommendation_2026_02",
+      "date": "2026-02-11",
+      "text": "한국인터넷기업협회 배달 플랫폼 자율분쟁조정협의회가 리뷰 임시조치(게시중단) 권고안을 발표했다. 5대 권고: 투명성 제고 / 리뷰 작성자의 주관적 평가는 임시조치 대상에서 제외 / 제한 기준 명확화·엄정 집행 / 운영정책 미비 사업자 기준 마련 / 부당한 임시조치에 대한 작성자 이의신청 절차 마련",
+      "confidence": "low",
+      "legalForce": "확인하지 못함(권고)",
+      "source": {
+        "label": "와우테일 2026-02-11 (검색 요약만 확인)",
+        "url": "https://wowtale.net/2026/02/11/254484/"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-02",
+      "note": "최초 작성. 배민·쿠팡이츠·요기요 공식 정책 기준, 네이버는 2차 자료 기준"
+    },
+    {
+      "date": "2026-10-03",
+      "note": "요기요 리뷰운영정책 개정 여부 운영자 확인(2023-10-04판 이후 개정 없음), verifiedDate 갱신"
+    }
+  ]
+}

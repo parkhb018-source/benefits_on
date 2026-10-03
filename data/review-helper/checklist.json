@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "2026-10-02",
+  "disclaimer": "참고용 안내이며, 최종 판단은 각 플랫폼 정책에 따라요.",
+  "wordingRules": [
+    "'허위', '거짓' 같은 단정 표현을 쓰지 않는다",
+    "정책이 '원칙적으로'인 경우 '원칙적으로'를 붙인다",
+    "'~할 수 있어요', '~확인해 보세요'처럼 판정이 아니라 확인을 돕는 말투를 쓴다"
+  ],
+  "items": [
+    {
+      "id": "c01_has_content",
+      "order": 1,
+      "text": "리뷰에 글이나 사진이 있나요? 별점만 있거나 기호뿐이면 원칙적으로 요청 대상이 아니에요.",
+      "basis": [
+        {
+          "platformId": "baemin",
+          "ref": "제9조 1~3호",
+          "strength": "principle",
+          "verified": true,
+          "note": "충분히 소명하면 예외(단서)"
+        },
+        {
+          "platformId": "coupangeats",
+          "ref": "제4조 ⑦",
+          "strength": "mandatory",
+          "verified": true
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": "제12조 1·2호",
+          "strength": "may",
+          "verified": true
+        },
+        {
+          "platformId": "naver_place",
+          "ref": null,
+          "strength": "info",
+          "verified": false,
+          "note": "별점만 있는 리뷰의 처리 기준 미확인"
+        }
+      ]
+    },
+    {
+      "id": "c02_abuse_or_personal_info",
+      "order": 2,
+      "text": "욕설·비방·개인정보 노출이 있나요? 있다면 해당 문구를 따로 적어 두세요.",
+      "basis": [
+        {
+          "platformId": "baemin",
+          "ref": "제4조 ② 3·5·6호, 제8조 ①3호",
+          "strength": "info",
+          "verified": true,
+          "note": "침해 표현을 요청서에 적어야 함"
+        },
+        {
+          "platformId": "coupangeats",
+          "ref": "제3조 ② 6·7호",
+          "strength": "info",
+          "verified": true
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": "제7조 5·6호",
+          "strength": "info",
+          "verified": true
+        },
+        {
+          "platformId": "naver_place",
+          "ref": null,
+          "strength": "info",
+          "verified": false
+        }
+      ]
+    },
+    {
+      "id": "c03_subjective",
+      "order": 3,
+      "text": "맛·양·배달 시간 같은 주관적 평가인가요? 그렇다면 받아들여지지 않을 수 있어요.",
+      "basis": [
+        {
+          "platformId": "coupangeats",
+          "ref": "제4조 ②",
+          "strength": "may",
+          "verified": true,
+          "note": "정상적인 이용후기로 판단되면 조치하지 않을 수 있음"
+        },
+        {
+          "platformId": "baemin",
+          "ref": null,
+          "strength": "info",
+          "verified": false,
+          "note": "해당 문구 없음. 업계 권고안(2026-02, 2차 자료) 참고"
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": null,
+          "strength": "info",
+          "verified": false,
+          "note": "해당 문구 없음. 업계 권고안(2026-02, 2차 자료) 참고"
+        }
+      ]
+    },
+    {
+      "id": "c04_unrelated_to_order",
+      "order": 4,
+      "text": "주문과 관련 없는 내용인가요? 주문 기록과 직접 비교해 보세요.",
+      "basis": [
+        {
+          "platformId": "baemin",
+          "ref": "제4조 ② 1호 가",
+          "strength": "info",
+          "verified": true
+        },
+        {
+          "platformId": "coupangeats",
+          "ref": "제3조 ② 1호",
+          "strength": "info",
+          "verified": true
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": "제7조 8호",
+          "strength": "info",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "c05_evidence",
+      "order": 5,
+      "text": "사실과 다르다고 설명할 근거(주문 내역·기록)가 있나요?",
+      "basis": [
+        {
+          "platformId": "baemin",
+          "ref": "제8조 ①2호",
+          "strength": "mandatory",
+          "verified": true,
+          "note": "구체적 소명 필요"
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": "제11조 ①2호",
+          "strength": "mandatory",
+          "verified": true,
+          "note": "구체적 소명 필요"
+        },
+        {
+          "platformId": "coupangeats",
+          "ref": "제4조 ②",
+          "strength": "info",
+          "verified": true,
+          "note": "소명 항목이 정책에 명시되어 있지 않음"
+        }
+      ]
+    },
+    {
+      "id": "c06_eligibility",
+      "order": 6,
+      "text": "신청할 수 있는 사람인가요? 플랫폼에 따라 대표자·운영자 본인만 가능해요.",
+      "basis": [
+        {
+          "platformId": "baemin",
+          "ref": "제8조 ①1호",
+          "strength": "mandatory",
+          "verified": true,
+          "note": "권리침해 당사자임을 밝혀야 함. 대표자·운영자 본인만 가능하다는 설명은 블라인드 기준(2차 자료)"
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": "제11조 ①1호",
+          "strength": "mandatory",
+          "verified": true
+        },
+        {
+          "platformId": "coupangeats",
+          "ref": "제4조 ②",
+          "strength": "info",
+          "verified": true,
+          "note": "권리를 침해받았다고 생각하는 신청인"
+        }
+      ]
+    },
+    {
+      "id": "c07_reposted",
+      "order": 7,
+      "text": "이미 게시중단 뒤 다시 게시된 리뷰는 아닌가요? 이 경우 다시 요청할 수 없어요.",
+      "basis": [
+        {
+          "platformId": "baemin",
+          "ref": "제8조 ⑤, 제9조 4호",
+          "strength": "principle",
+          "verified": true
+        },
+        {
+          "platformId": "coupangeats",
+          "ref": "제4조 ⑦ 2호",
+          "strength": "mandatory",
+          "verified": true
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": "제11조 ⑤, 제12조 4호",
+          "strength": "may",
+          "verified": true
+        },
+        {
+          "platformId": "naver_place",
+          "ref": null,
+          "strength": "info",
+          "verified": false,
+          "note": "복원된 게시물의 재차 게시중단은 제한된다는 2차 자료"
+        }
+      ]
+    },
+    {
+      "id": "c08_prepare",
+      "order": 8,
+      "text": "가게번호·리뷰번호·작성일을 준비했나요?",
+      "basis": [
+        {
+          "platformId": "baemin",
+          "ref": null,
+          "strength": "info",
+          "verified": false,
+          "note": "가게번호·리뷰번호는 블로그(2차 자료) 기준"
+        },
+        {
+          "platformId": "yogiyo",
+          "ref": "제11조 ①3호",
+          "strength": "info",
+          "verified": true,
+          "note": "필수 양식의 요청서 작성"
+        },
+        {
+          "platformId": "coupangeats",
+          "ref": null,
+          "strength": "info",
+          "verified": false,
+          "note": "입력 항목은 고객센터 안내 확인"
+        }
+      ]
+    }
+  ],
+  "officialLinksRule": "각 플랫폼의 policy.officialUrl이 있으면 링크로, 없으면 officialUrlNote를 보여준다. 확인일(verifiedDate)과 시행일(effectiveDate)을 함께 표시한다."
+}

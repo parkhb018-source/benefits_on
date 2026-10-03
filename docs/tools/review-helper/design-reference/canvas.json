@@ -1,0 +1,100 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Confirm.dc.html": {
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 960,
+      "title": "2 확인",
+      "is_interactive": true
+    },
+    "Desktop.dc.html": {
+      "h": 1000,
+      "is_interactive": true,
+      "title": "PC 3열 화면",
+      "w": 1280,
+      "x": 0,
+      "y": 1160
+    },
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 880,
+      "title": "0 처음 화면",
+      "is_interactive": true
+    },
+    "Reply.dc.html": {
+      "x": 2350,
+      "y": 0,
+      "w": 390,
+      "h": 1060,
+      "title": "4 답변",
+      "is_interactive": true
+    },
+    "Report.dc.html": {
+      "x": 2820,
+      "y": 0,
+      "w": 390,
+      "h": 1120,
+      "title": "5 신고 전 체크리스트 (선택)",
+      "is_interactive": true
+    },
+    "Result.dc.html": {
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 1020,
+      "title": "3 결과",
+      "is_interactive": true
+    },
+    "Capture.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 880,
+      "title": "1a 리뷰 캡쳐하기",
+      "is_interactive": true
+    },
+    "Paste.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 880,
+      "title": "1b 리뷰 붙여넣기",
+      "is_interactive": true
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-02T12:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "title": {
+      "kind": "title1",
+      "maxW": 3210,
+      "text": "혜택on 리뷰 대응 도우미 1차 시안",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Capture.dc.html",
+    "Paste.dc.html",
+    "Confirm.dc.html",
+    "Result.dc.html",
+    "Reply.dc.html",
+    "Report.dc.html",
+    "Desktop.dc.html"
+  ],
+  "pages": [],
+  "title": "혜택on 리뷰 대응 도우미 UI 시안"
+}

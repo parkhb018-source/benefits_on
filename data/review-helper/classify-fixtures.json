@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "note": "리뷰 유형 분류 시험 문장. expectMain=null은 '미분류(사장님이 유형을 직접 고름)'. 칭찬 문장이 불만 유형으로 잘못 분류되지 않는지도 함께 시험한다",
+  "cases": [
+    {
+      "id": "c01",
+      "text": "배달이 너무 늦게 와서 음식이 다 식었어요. 다시는 안 시킬 것 같아요.",
+      "rating": 2,
+      "expectMain": "T01",
+      "expectSecondaryContains": [
+        "T02"
+      ]
+    },
+    {
+      "id": "c02",
+      "text": "너무 짜고 맛이 별로예요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c03",
+      "text": "치킨 시켰는데 무가 빠졌어요",
+      "rating": 2,
+      "expectMain": "T05"
+    },
+    {
+      "id": "c04",
+      "text": "음식에서 머리카락이 나왔어요",
+      "rating": 1,
+      "expectMain": "T06"
+    },
+    {
+      "id": "c05",
+      "text": "포장이 터져서 국물이 다 샜어요",
+      "rating": 2,
+      "expectMain": "T07"
+    },
+    {
+      "id": "c06",
+      "text": "덜 맵게 해달라고 요청했는데 무시했네요",
+      "rating": 2,
+      "expectMain": "T08"
+    },
+    {
+      "id": "c07",
+      "text": "전화받는 사장님 말투가 너무 불친절했어요",
+      "rating": 1,
+      "expectMain": "T09"
+    },
+    {
+      "id": "c08",
+      "text": "라이더가 문 앞에 던져놓고 갔어요",
+      "rating": 2,
+      "expectMain": "T10"
+    },
+    {
+      "id": "c09",
+      "text": "양이 너무 적고 가격이 비싸요",
+      "rating": 2,
+      "expectMain": "T04"
+    },
+    {
+      "id": "c10",
+      "text": "",
+      "rating": 1,
+      "expectMain": "T11"
+    },
+    {
+      "id": "c11",
+      "text": "씨발 배달이 한 시간이나 걸리네",
+      "rating": 1,
+      "expectMain": "T12",
+      "expectAbusive": true
+    },
+    {
+      "id": "c12",
+      "text": "시킨 적 없는 주문인데 리뷰가 달렸어요",
+      "rating": 1,
+      "expectMain": "T13"
+    },
+    {
+      "id": "c13",
+      "text": "맛있어요 최고예요 또 시킬게요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c14",
+      "text": "맛있게 먹었는데 배달이 늦었어요",
+      "rating": 4,
+      "expectMain": "T15",
+      "expectSecondaryContains": [
+        "T01"
+      ]
+    },
+    {
+      "id": "c15",
+      "text": "늦은 밤에도 맛있게 먹었어요 최고",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c16",
+      "text": "맛있네요 근데 배달 한 시간 걸렸어요 별 하나",
+      "rating": 1,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c17",
+      "text": "그냥 그랬어요",
+      "rating": 3,
+      "expectMain": null
+    },
+    {
+      "id": "c18",
+      "text": "씨발 음식에서 머리카락 나왔어요",
+      "rating": 1,
+      "expectMain": "T06",
+      "expectAbusive": true
+    },
+    {
+      "id": "c19",
+      "text": "음식이 쓰레기 같아요 맛이 없어요",
+      "rating": 1,
+      "expectMain": "T03",
+      "expectAbusive": false
+    },
+    {
+      "id": "c20",
+      "text": "존맛 개맛있어요 또 시킬게요",
+      "rating": 5,
+      "expectMain": "T14",
+      "expectAbusive": false
+    },
+    {
+      "id": "c21",
+      "text": "배달 오래 걸려서 짜증났어요",
+      "rating": 2,
+      "expectMain": "T01",
+      "expectSecondaryExcludes": [
+        "T03",
+        "T09"
+      ]
+    },
+    {
+      "id": "c22",
+      "text": "앱이 자꾸 꺼져요",
+      "rating": 1,
+      "expectMain": null,
+      "expectAbusive": false
+    },
+    {
+      "id": "c23",
+      "text": "맛이 없었어요",
+      "rating": 2,
+      "expectMain": "T03",
+      "expectSecondaryExcludes": [
+        "T05"
+      ]
+    },
+    {
+      "id": "c24",
+      "text": "사장님 친절하시고 맛있어요 감사합니다",
+      "rating": 5,
+      "expectMain": "T14",
+      "expectSecondaryExcludes": [
+        "T09"
+      ]
+    },
+    {
+      "id": "c25",
+      "text": "포장도 깔끔하고 가격 대비 만족해요",
+      "rating": 4,
+      "expectMain": "T14",
+      "expectSecondaryExcludes": [
+        "T04",
+        "T07"
+      ]
+    },
+    {
+      "id": "c26",
+      "text": "위생적이고 깨끗해서 좋았어요",
+      "rating": 5,
+      "expectMain": "T14",
+      "expectSecondaryExcludes": [
+        "T06"
+      ]
+    },
+    {
+      "id": "c27",
+      "text": "라이더님 친절하게 전달해 주셔서 감사합니다",
+      "rating": 5,
+      "expectMain": "T14",
+      "expectSecondaryExcludes": [
+        "T10"
+      ]
+    },
+    {
+      "id": "c28",
+      "text": "요청사항 잘 반영해 주셔서 감사합니다",
+      "rating": 5,
+      "expectMain": "T14",
+      "expectSecondaryExcludes": [
+        "T08"
+      ]
+    },
+    {
+      "id": "c29",
+      "text": "ㅅㅂ 진짜",
+      "rating": 1,
+      "expectMain": "T12",
+      "expectAbusive": true
+    },
+    {
+      "id": "c30",
+      "text": "주문한 지 두 시간 만에 왔어요 이게 맞나요",
+      "rating": 1,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c31",
+      "text": "별로",
+      "rating": 1,
+      "expectMain": "T11"
+    }
+  ]
+}

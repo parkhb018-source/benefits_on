@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "2026-10-02",
+  "status": "draft",
+  "purpose": "리뷰에 욕설·모욕·저주·협박 표현이 있는지 찾아서, 분석 결과의 '신고 검토가 가능할 수 있어요'(유형 T12) 안내에 쓴다.",
+  "scope": {
+    "included": [
+      "욕설",
+      "사람을 향한 모욕",
+      "저주·협박",
+      "거친 표현(태그만)"
+    ],
+    "excluded": [
+      "혐오·차별 표현(성별·국적·장애·지역 등): 별도 사전이 필요함",
+      "음식·서비스에 대한 강한 불만(예: '쓰레기 같은 맛'): 사람을 향하지 않으면 모욕으로 보지 않음",
+      "정당한 항의 표현(신고하겠다, 환불해 달라, 책임져라 등)"
+    ]
+  },
+  "categories": {
+    "profanity": {
+      "label": "욕설",
+      "triggersAbusive": true
+    },
+    "insult": {
+      "label": "모욕",
+      "triggersAbusive": "사람을 가리키는 말이 근처에 있을 때"
+    },
+    "ambiguous_insult": {
+      "label": "모욕(문맥)",
+      "triggersAbusive": "사람을 가리키는 말이 근처에 있을 때"
+    },
+    "curse_threat": {
+      "label": "저주·협박",
+      "triggersAbusive": true
+    },
+    "vulgar": {
+      "label": "거친 표현",
+      "triggersAbusive": false
+    }
+  },
+  "severityLegend": {
+    "3": "단독으로 신고 검토 안내 대상",
+    "2": "사람 대상일 때 신고 검토 안내 대상",
+    "1": "단독으로는 대상 아님. 태그만 표시"
+  },
+  "matchingRules": [
+    "1. 리뷰 글을 소문자로 바꾸고, 같은 글자가 3번 이상 반복되면 2번으로 줄인다.",
+    "2. allowSeparators가 true인 항목은 글자 사이에 점·별표·숫자 같은 구분 기호가 1~2개 끼어 있어도 같은 단어로 본다(예: 씨.발, 시1발). 띄어쓰기는 허용하지 않는다(예: '김씨 발길' 오탐 방지).",
+    "3. pattern이 있는 항목은 그 정규식으로 찾고, 없으면 term과 variants로 찾는다.",
+    "4. 찾은 위치가 exclusions의 낱말과 겹치면 무시한다.",
+    "5. severity 3은 찾으면 곧바로 '욕설·모욕 있음'으로 본다.",
+    "6. requiresPerson인 항목은 personTargets 낱말이 앞뒤 personWindowChars 글자 안에 있을 때만 센다.",
+    "7. escalateWithPerson인 항목(새끼)은 같은 조건일 때 모욕으로 승격하고, 아니면 무시한다.",
+    "8. severity 1(vulgar)은 '거친 표현' 태그만 달고 신고 검토 안내에는 쓰지 않는다.",
+    "9. '욕설·모욕 있음'이면 유형 T12(priority 2)로 분류한다."
+  ],
+  "personWindowChars": 10,
+  "personTargets": [
+    "사장",
+    "점주",
+    "업주",
+    "사모님",
+    "주인",
+    "직원",
+    "알바",
+    "종업원",
+    "주방",
+    "셰프",
+    "요리사",
+    "라이더",
+    "기사",
+    "배달원",
+    "가게",
+    "업체",
+    "장사",
+    "대표"
+  ],
+  "exclusions": [
+    {
+      "term": "시발점",
+      "reason": "출발점이라는 뜻의 일반 단어"
+    },
+    {
+      "term": "시발역",
+      "reason": "출발역"
+    },
+    {
+      "term": "병신년",
+      "reason": "해(年) 이름"
+    },
+    {
+      "term": "새끼손가락",
+      "reason": "신체 부위"
+    },
+    {
+      "term": "새끼 손가락",
+      "reason": "신체 부위"
+    },
+    {
+      "term": "새끼발가락",
+      "reason": "신체 부위"
+    },
+    {
+      "term": "새끼 고양이",
+      "reason": "동물"
+    },
+    {
+      "term": "새끼 강아지",
+      "reason": "동물"
+    },
+    {
+      "term": "새끼 오리",
+      "reason": "동물"
+    },
+    {
+      "term": "새끼 돼지",
+      "reason": "동물"
+    },
+    {
+      "term": "쓰레기통",
+      "reason": "물건"
+    },
+    {
+      "term": "쓰레기봉투",
+      "reason": "물건"
+    },
+    {
+      "term": "쓰레기 봉투",
+      "reason": "물건"
+    },
+    {
+      "term": "쓰레기를",
+      "reason": "배출 안내 등 일반 문장"
+    },
+    {
+      "term": "음식물쓰레기",
+      "reason": "일반 단어"
+    },
+    {
+      "term": "음식물 쓰레기",
+      "reason": "일반 단어"
+    },
+    {
+      "term": "쓰레기 분리",
+      "reason": "일반 문장"
+    },
+    {
+      "term": "쓰레기 버리",
+      "reason": "일반 문장"
+    },
+    {
+      "term": "도둑맞",
+      "reason": "도난을 당했다는 사실 표현"
+    },
+    {
+      "term": "좀도둑",
+      "reason": "일반 단어"
+    },
+    {
+      "term": "죽어라 일",
+      "reason": "'열심히'라는 뜻의 부사"
+    },
+    {
+      "term": "죽어라 노력",
+      "reason": "'열심히'라는 뜻의 부사"
+    }
+  ],
+  "notInDictionaryOnPurpose": [
+    {
+      "term": "꺼져",
+      "reason": "'앱이 자꾸 꺼져요'처럼 정상적인 불만에서 오탐이 많아 제외"
+    },
+    {
+      "term": "닥치고",
+      "reason": "'닥치고 주문하세요' 같은 추천 표현에서 오탐이 많아 제외"
+    },
+    {
+      "term": "씹",
+      "reason": "'씹히다', '씹었다' 같은 일반 단어에서 오탐이 많아 제외"
+    },
+    {
+      "term": "개 (접두어)",
+      "reason": "'개맛있어요'처럼 칭찬에도 쓰여 단독으로 쓰지 않음"
+    },
+    {
+      "term": "돼지",
+      "reason": "'돼지고기', '돼지국밥' 등 음식 이름에서 오탐이 많아 제외"
+    }
+  ],
+  "knownLimits": [
+    "글자를 늘여 쓴 표기(예: 씨이이발), 자모를 쪼갠 표기, 외래어 발음 변형은 아직 대응하지 못함",
+    "빈정거림이나 반어법은 찾지 못함",
+    "'주인 미친 거 아니야?'처럼 짧은 모욕은 '거친 표현' 태그만 붙음('미친 맛' 같은 칭찬과 구별하기 어려워 일부러 승격하지 않음)",
+    "사전은 초안이며 실제 리뷰로 시험하면서 계속 고쳐야 함"
+  ],
+  "entries": [
+    {
+      "term": "씨발",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "시발",
+        "씨바",
+        "씨팔",
+        "시팔",
+        "씨벌",
+        "시벌",
+        "씨빨",
+        "시빨",
+        "ㅆㅂ",
+        "ㅅㅂ"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true,
+      "note": "초성 표기(ㅅㅂ) 포함. '시발점' 같은 일반 단어는 exclusions로 제외"
+    },
+    {
+      "term": "좆",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "좃"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "지랄",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "지럴",
+        "ㅈㄹ"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "개새끼",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "개새키",
+        "개색기",
+        "개새꺄",
+        "개세끼",
+        "개섀끼"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "씹새끼",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "씹새키",
+        "씹색기"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "미친놈",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "미친넘",
+        "미친년",
+        "미친새끼"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true,
+      "note": "'미친 맛' 같은 칭찬 표현은 걸리지 않도록 '미친' 단독은 vulgar로만 분류"
+    },
+    {
+      "term": "병신",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "븅신",
+        "병쉰",
+        "뱅신",
+        "ㅂㅅ"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true,
+      "note": "'병신년'은 exclusions로 제외"
+    },
+    {
+      "term": "등신",
+      "category": "profanity",
+      "severity": 3,
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "썅",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "쌍놈",
+        "쌍년",
+        "썅놈",
+        "썅년"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "염병",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "옘병"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "개년",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "개놈"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "후레자식",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "호로자식",
+        "호로새끼",
+        "후레새끼"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "니미럴",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "니미",
+        "느금마",
+        "니애미",
+        "니에미"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true,
+      "note": "가족을 대상으로 한 욕설"
+    },
+    {
+      "term": "닥쳐",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "닥쳐라",
+        "닥치세요"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true,
+      "note": "'닥치고 주문하세요' 같은 추천 표현은 오탐이 커서 제외"
+    },
+    {
+      "term": "처먹",
+      "category": "profanity",
+      "severity": 3,
+      "variants": [
+        "처먹어",
+        "쳐먹",
+        "쳐먹어"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true
+    },
+    {
+      "term": "엿먹어",
+      "category": "profanity",
+      "severity": 3,
+      "pattern": "엿\\s?(먹어|드세요|처먹)",
+      "requiresPerson": false,
+      "note": "패턴으로 매칭"
+    },
+    {
+      "term": "(이|저|그|네|니|너) 새끼",
+      "category": "profanity",
+      "severity": 3,
+      "pattern": "(이|저|그|네|니|너)\\s?(새끼|새키|색기|쉐끼)",
+      "requiresPerson": false,
+      "note": "'그 새끼 고양이'는 exclusions의 '새끼 고양이'와 겹치면 제외"
+    },
+    {
+      "term": "쓰레기",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "쓰레기같은",
+        "쓰레기 같은"
+      ],
+      "requiresPerson": true,
+      "note": "'쓰레기 같은 음식'처럼 음식 평가는 사람 대상이 아니므로 제외"
+    },
+    {
+      "term": "사기꾼",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "사기꾼들",
+        "사기범"
+      ],
+      "requiresPerson": true
+    },
+    {
+      "term": "도둑놈",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "도둑년",
+        "도둑들",
+        "도둑 같은"
+      ],
+      "requiresPerson": true
+    },
+    {
+      "term": "양아치",
+      "category": "insult",
+      "severity": 2,
+      "requiresPerson": true
+    },
+    {
+      "term": "거지",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "거지같",
+        "거지 같"
+      ],
+      "requiresPerson": true
+    },
+    {
+      "term": "찐따",
+      "category": "insult",
+      "severity": 2,
+      "requiresPerson": true
+    },
+    {
+      "term": "또라이",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "돌아이",
+        "똘아이",
+        "또라이같"
+      ],
+      "requiresPerson": true
+    },
+    {
+      "term": "정신병자",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "정신나간",
+        "정신 나간"
+      ],
+      "requiresPerson": true
+    },
+    {
+      "term": "머저리",
+      "category": "insult",
+      "severity": 2,
+      "requiresPerson": true
+    },
+    {
+      "term": "얼간이",
+      "category": "insult",
+      "severity": 2,
+      "requiresPerson": true
+    },
+    {
+      "term": "멍청이",
+      "category": "insult",
+      "severity": 2,
+      "requiresPerson": true
+    },
+    {
+      "term": "버러지",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "벌레 같은"
+      ],
+      "requiresPerson": true
+    },
+    {
+      "term": "말종",
+      "category": "insult",
+      "severity": 2,
+      "variants": [
+        "인간말종",
+        "인간 말종"
+      ],
+      "requiresPerson": true
+    },
+    {
+      "term": "인성 쓰레기",
+      "category": "insult",
+      "severity": 2,
+      "pattern": "인성\\s?(쓰레기|바닥|파탄)",
+      "requiresPerson": false,
+      "note": "사람의 인성을 직접 겨냥한 표현"
+    },
+    {
+      "term": "새끼",
+      "category": "ambiguous_insult",
+      "severity": 1,
+      "variants": [
+        "새끼들",
+        "새키",
+        "색기",
+        "쉐끼"
+      ],
+      "requiresPerson": false,
+      "escalateWithPerson": true,
+      "note": "사람을 가리키는 말이 근처에 있을 때만 모욕으로 승격. '새끼손가락' 등은 exclusions"
+    },
+    {
+      "term": "망해라",
+      "category": "curse_threat",
+      "severity": 3,
+      "variants": [
+        "망해버려",
+        "망하길",
+        "망했으면",
+        "망하세요",
+        "망해버렸으면"
+      ],
+      "requiresPerson": false,
+      "allowSeparators": true,
+      "note": "'망했다'(실패했다)는 걸리지 않음"
+    },
+    {
+      "term": "장사 접어",
+      "category": "curse_threat",
+      "severity": 3,
+      "pattern": "장사\\s?(접어|접으세요|그만\\s?(둬|두세요|하세요))",
+      "requiresPerson": false
+    },
+    {
+      "term": "문 닫아라",
+      "category": "curse_threat",
+      "severity": 3,
+      "pattern": "(문\\s?닫아라|문\\s?닫으세요|폐업\\s?(해라|하세요))",
+      "requiresPerson": false
+    },
+    {
+      "term": "뒤져라",
+      "category": "curse_threat",
+      "severity": 3,
+      "pattern": "(뒤져라|뒤져\\s?버려|뒈져|디져라)",
+      "requiresPerson": false,
+      "note": "'리뷰 뒤져보니'(찾아보니)는 걸리지 않도록 패턴으로 한정"
+    },
+    {
+      "term": "죽어버려",
+      "category": "curse_threat",
+      "severity": 3,
+      "pattern": "(죽어\\s?버려|죽어라|나가\\s?죽)",
+      "requiresPerson": false,
+      "note": "'죽어라 일하다'는 exclusions로 제외"
+    },
+    {
+      "term": "죽여버리",
+      "category": "curse_threat",
+      "severity": 3,
+      "pattern": "(죽여\\s?버리|죽여\\s?버려|죽여\\s?줄|죽이고\\s?싶)",
+      "requiresPerson": false
+    },
+    {
+      "term": "가만 안 두",
+      "category": "curse_threat",
+      "severity": 3,
+      "pattern": "가만\\s?(안|못)\\s?(두|둘|놔|놓)",
+      "requiresPerson": false
+    },
+    {
+      "term": "불 질러",
+      "category": "curse_threat",
+      "severity": 3,
+      "pattern": "불\\s?(질러|지르|싸질러)",
+      "requiresPerson": false
+    },
+    {
+      "term": "각오해",
+      "category": "curse_threat",
+      "severity": 2,
+      "pattern": "각오\\s?(해라|하세요|해둬)",
+      "requiresPerson": false,
+      "note": "'각오하고 시켰는데'는 걸리지 않음"
+    },
+    {
+      "term": "존나",
+      "category": "vulgar",
+      "severity": 1,
+      "variants": [
+        "졸라",
+        "존니",
+        "조낸",
+        "존내",
+        "좆나",
+        "ㅈㄴ"
+      ],
+      "requiresPerson": false,
+      "note": "'존맛' 같은 칭찬에도 쓰이므로 단독으로는 신고 검토로 보지 않음"
+    },
+    {
+      "term": "미친",
+      "category": "vulgar",
+      "severity": 1,
+      "variants": [
+        "미쳤"
+      ],
+      "requiresPerson": false,
+      "note": "'미친 맛', '미쳤다 진짜 맛있다' 같은 칭찬에도 쓰임"
+    },
+    {
+      "term": "빡치",
+      "category": "vulgar",
+      "severity": 1,
+      "variants": [
+        "빡친",
+        "빡쳐",
+        "빡쳤"
+      ],
+      "requiresPerson": false
+    }
+  ]
+}
