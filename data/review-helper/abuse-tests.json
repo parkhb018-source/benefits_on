@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "note": "욕설·모욕 사전 시험 문장. expectAbusive=true는 '신고 검토 안내(T12)' 대상, false는 아님. expectVulgar는 '거친 표현' 태그 여부",
+  "cases": [
+    {
+      "id": "t01",
+      "text": "씨발 배달이 한 시간이나 걸리네",
+      "expectAbusive": true,
+      "why": "욕설"
+    },
+    {
+      "id": "t02",
+      "text": "시1발 음식이 다 식었어",
+      "expectAbusive": true,
+      "why": "구분 기호를 끼운 표기"
+    },
+    {
+      "id": "t03",
+      "text": "ㅅㅂ 진짜 짜증나네",
+      "expectAbusive": true,
+      "why": "초성 표기"
+    },
+    {
+      "id": "t04",
+      "text": "사장 쓰레기네요 다시는 안 시킴",
+      "expectAbusive": true,
+      "why": "모욕 + 사람"
+    },
+    {
+      "id": "t05",
+      "text": "여기 사장 사기꾼입니다",
+      "expectAbusive": true,
+      "why": "모욕 + 사람"
+    },
+    {
+      "id": "t06",
+      "text": "이 가게 망해라",
+      "expectAbusive": true,
+      "why": "저주"
+    },
+    {
+      "id": "t07",
+      "text": "병신같이 포장했네",
+      "expectAbusive": true,
+      "why": "욕설"
+    },
+    {
+      "id": "t08",
+      "text": "알바 새끼들 일 똑바로 해라",
+      "expectAbusive": true,
+      "why": "문맥 모욕 + 사람"
+    },
+    {
+      "id": "t09",
+      "text": "배달기사 개새끼",
+      "expectAbusive": true,
+      "why": "욕설"
+    },
+    {
+      "id": "t10",
+      "text": "죽여버리고 싶다 진짜",
+      "expectAbusive": true,
+      "why": "협박"
+    },
+    {
+      "id": "t11",
+      "text": "가만 안 둘 줄 알아",
+      "expectAbusive": true,
+      "why": "협박"
+    },
+    {
+      "id": "t12",
+      "text": "돈 받고 장사하는 도둑놈들",
+      "expectAbusive": true,
+      "why": "모욕 + 사람(장사)"
+    },
+    {
+      "id": "t13",
+      "text": "사장 쓰레기 같은 인간",
+      "expectAbusive": true,
+      "why": "모욕 + 사람"
+    },
+    {
+      "id": "t14",
+      "text": "이 새끼 장난하나",
+      "expectAbusive": true,
+      "why": "'이 새끼' 패턴"
+    },
+    {
+      "id": "t15",
+      "text": "인성 쓰레기 가게네요",
+      "expectAbusive": true,
+      "why": "인성 직접 겨냥"
+    },
+    {
+      "id": "t16",
+      "text": "존나 늦게 오고 사장 새끼 불친절",
+      "expectAbusive": true,
+      "why": "거친 표현과 문맥 모욕이 함께",
+      "expectVulgar": true
+    },
+    {
+      "id": "f01",
+      "text": "존맛 개맛있어요 또 시킬게요",
+      "expectAbusive": false,
+      "why": "칭찬에 쓰인 강조어"
+    },
+    {
+      "id": "f02",
+      "text": "시발점 근처에 있는 가게예요",
+      "expectAbusive": false,
+      "why": "일반 단어(제외)"
+    },
+    {
+      "id": "f03",
+      "text": "음식이 쓰레기 같아요 맛이 없어요",
+      "expectAbusive": false,
+      "why": "음식 평가라 사람 대상 아님"
+    },
+    {
+      "id": "f04",
+      "text": "쓰레기봉투를 같이 넣어주세요",
+      "expectAbusive": false,
+      "why": "일반 문장(제외)"
+    },
+    {
+      "id": "f05",
+      "text": "새끼손가락만한 크기라 아쉬워요",
+      "expectAbusive": false,
+      "why": "신체 부위(제외)"
+    },
+    {
+      "id": "f06",
+      "text": "앱이 자꾸 꺼져요 짜증나요",
+      "expectAbusive": false,
+      "why": "정상 불만(사전에서 제외한 단어)"
+    },
+    {
+      "id": "f07",
+      "text": "리뷰 뒤져보니 다들 같은 말이네요",
+      "expectAbusive": false,
+      "why": "'찾아보니'라는 뜻"
+    },
+    {
+      "id": "f08",
+      "text": "미친 맛이에요 사장님 최고",
+      "expectAbusive": false,
+      "why": "칭찬(거친 표현 태그만)",
+      "expectVulgar": true
+    },
+    {
+      "id": "f09",
+      "text": "배달이 너무 늦어서 화가 납니다 환불해 주세요",
+      "expectAbusive": false,
+      "why": "정당한 항의"
+    },
+    {
+      "id": "f10",
+      "text": "신고하겠습니다 고객센터에 문의할게요",
+      "expectAbusive": false,
+      "why": "정당한 항의"
+    },
+    {
+      "id": "f11",
+      "text": "사장님 불친절해요",
+      "expectAbusive": false,
+      "why": "불만이지만 욕설·모욕 아님"
+    },
+    {
+      "id": "f12",
+      "text": "존나 늦게 와서 화났어요",
+      "expectAbusive": false,
+      "why": "거친 표현 태그만, 신고 검토 아님",
+      "expectVulgar": true
+    },
+    {
+      "id": "f13",
+      "text": "김씨 발길이 끊겼대요",
+      "expectAbusive": false,
+      "why": "다른 낱말 사이 우연한 결합"
+    },
+    {
+      "id": "f14",
+      "text": "2016 병신년 이후 처음 와봤어요",
+      "expectAbusive": false,
+      "why": "해(年) 이름"
+    },
+    {
+      "id": "f15",
+      "text": "도둑맞은 기분이에요 배달이 중간에 사라졌어요",
+      "expectAbusive": false,
+      "why": "도난 사실 표현"
+    },
+    {
+      "id": "f16",
+      "text": "사장님이 쓰레기통 앞에서 받으래요",
+      "expectAbusive": false,
+      "why": "물건(제외)"
+    },
+    {
+      "id": "f17",
+      "text": "그 새끼 고양이 사진이 걸려 있어요",
+      "expectAbusive": false,
+      "why": "동물(제외)"
+    },
+    {
+      "id": "f18",
+      "text": "장사 잘 되는 집이에요 망했다 싶었는데 맛있네요",
+      "expectAbusive": false,
+      "why": "'망했다'는 저주가 아님"
+    },
+    {
+      "id": "f19",
+      "text": "각오하고 시켰는데 생각보다 맛있어요",
+      "expectAbusive": false,
+      "why": "'각오하고'는 협박 아님"
+    },
+    {
+      "id": "f20",
+      "text": "죽어라 일하는 사장님 모습이 보기 좋아요",
+      "expectAbusive": false,
+      "why": "'열심히'라는 뜻(제외)"
+    }
+  ]
+}

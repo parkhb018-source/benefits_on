@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>PC 화면 3열</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#4458E8}
+</style>
+</helmet>
+<div style="width: 1280px; height: 1000px; box-sizing: border-box; background: #F5F7FF; color: #1E2340; font-family: 'Noto Sans KR', system-ui, sans-serif; display: flex; flex-direction: column;">
+<div style="height: 64px; box-sizing: border-box; padding: 0 32px; background: #FFFFFF; border-bottom: 1px solid #E3E7F7; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0">
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="font-size: 24px; font-weight: 700">혜택<span style="color: #4458E8">on</span></div>
+<div style="width: 1px; height: 20px; background: #E3E7F7"></div>
+<div style="font-size: 16px; font-weight: 500">리뷰 대응 도우미</div>
+</div>
+<div style="font-size: 13px; color: #5F6588">참고용 안내이며, 최종 판단은 각 플랫폼 정책에 따릅니다.</div>
+</div>
+<div style="padding: 24px 32px 32px; display: grid; grid-template-columns: 360px minmax(0, 1fr) minmax(0, 1fr); gap: 20px; flex-grow: 1; align-items: start">
+<div style="padding: 20px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E3E7F7; box-shadow: 0 2px 10px rgba(68,88,232,0.08); display: flex; flex-direction: column; gap: 14px">
+<div style="font-size: 17px; font-weight: 700">리뷰 원문</div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="font-size: 14px; font-weight: 700">플랫폼</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><button type="button" aria-pressed="true" style="min-height: 44px; border-radius: 12px; border: 1.5px solid #4458E8; background: #EEF1FF; color: #3547C9; font-family: inherit; font-size: 15px; font-weight: 700">배달의민족</button>
+<button type="button" aria-pressed="false" style="min-height: 44px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px">쿠팡이츠</button>
+<button type="button" aria-pressed="false" style="min-height: 44px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px">요기요</button>
+<button type="button" aria-pressed="false" style="min-height: 44px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px">네이버·기타</button>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><div style="font-size: 14px; font-weight: 700">별점</div>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px"><button type="button" aria-label="1점" aria-pressed="false" style="min-height: 44px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px">1</button>
+<button type="button" aria-label="2점" aria-pressed="true" style="min-height: 44px; border-radius: 12px; border: 1.5px solid #4458E8; background: #EEF1FF; color: #3547C9; font-family: inherit; font-size: 15px; font-weight: 700">2</button>
+<button type="button" aria-label="3점" aria-pressed="false" style="min-height: 44px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px">3</button>
+<button type="button" aria-label="4점" aria-pressed="false" style="min-height: 44px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px">4</button>
+<button type="button" aria-label="5점" aria-pressed="false" style="min-height: 44px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px">5</button>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="d-review" style="font-size: 14px; font-weight: 700">리뷰 내용</label>
+<sc-if value="{{hasText}}" hint-placeholder-val="{{ true }}"><textarea id="d-review" style="width: 100%; height: 170px; box-sizing: border-box; padding: 14px 16px; border: 1px solid #E3E7F7; border-radius: 12px; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 16px; line-height: 1.5; resize: none">배달이 너무 늦게 와서 음식이 다 식었어요. 다시는 안 시킬 것 같아요.</textarea></sc-if><sc-if value="{{noText}}" hint-placeholder-val="{{ false }}"><textarea id="d-review" placeholder="여기에 리뷰를 붙여넣어 주세요" style="width: 100%; height: 170px; box-sizing: border-box; padding: 14px 16px; border: 1px solid #E3E7F7; border-radius: 12px; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 16px; line-height: 1.5; resize: none"></textarea></sc-if></div>
+<div style="padding: 16px; border-radius: 12px; border: 1.5px dashed #A9B4F2; background: #EEF1FF; display: flex; flex-direction: column; gap: 4px; text-align: center"><div style="font-size: 14px; font-weight: 700; color: #3547C9">스크린샷을 끌어다 놓거나 Ctrl+V로 붙여넣기</div><div style="font-size: 13px; line-height: 1.5; color: #5F6588">글자가 틀리게 읽힐 수 있으니 위 칸에서 확인해 주세요.</div></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><label for="d-shop" style="font-size: 14px; font-weight: 700">가게 이름</label>
+<input id="d-shop" type="text" placeholder="가게 이름" style="width: 100%; height: 44px; box-sizing: border-box; padding: 0 14px; border: 1px solid #E3E7F7; border-radius: 12px; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 16px"></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px"><button type="button" style="height: 52px; border-radius: 12px; border: none; background: #4458E8; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 700">다시 분석하기</button><button type="button" onClick="{{resetAll}}" style="height: 52px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px; font-weight: 700">처음부터 다시하기</button></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="padding: 20px; border-radius: 16px; background: #EEF1FF; border: 1px solid #D5DBFA; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px">
+<div style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: #4458E8; flex-shrink: 0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/></svg></div>
+<div style="font-size: 17px; line-height: 1.45; font-weight: 700; color: #3547C9">{{typeTitle}}</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{pills}}" as="pill" hint-placeholder-count="3"><div style="padding: 6px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #D5DBFA; color: #3547C9; font-size: 13px; font-weight: 500">{{pill.t}}</div></sc-for></div>
+<div style="font-size: 14px; line-height: 1.55; color: #3D4468"><span>{{typeDesc}}</span> <span style="{{statusStyle}}">{{status}}</span></div>
+<div style="font-size: 13px; line-height: 1.5; color: #5F6588">{{reason}}</div>
+<button type="button" aria-expanded="{{showTypes}}" onClick="{{toggleTypes}}" style="align-self: flex-start; min-height: 44px; padding: 0; border: none; background: transparent; color: #4458E8; font-family: inherit; font-size: 14px; font-weight: 700">{{toggleLabel}}</button>
+<sc-if value="{{showTypes}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-wrap: wrap; gap: 8px"><sc-for list="{{typeChips}}" as="chip" hint-placeholder-count="6"><button type="button" aria-pressed="{{chip.pressed}}" onClick="{{chip.pick}}" style="{{chip.style}}">{{chip.label}}</button></sc-for></div></sc-if>
+<div style="padding-top: 10px; border-top: 1px solid #D5DBFA; font-size: 12px; line-height: 1.5; color: #5F6588">참고용 안내이며, 최종 판단은 각 플랫폼 정책에 따라요.</div>
+</div>
+<div style="padding: 20px; border-radius: 16px; background: #FFF6E6; border: 1px solid #FBE3B5; display: flex; flex-direction: column; gap: 12px">
+<div style="font-size: 15px; font-weight: 700; color: #7A4200">확인해 볼 점</div>
+<sc-for list="{{checks}}" as="chk" hint-placeholder-count="3"><div style="display: flex; gap: 10px; font-size: 14px; line-height: 1.55"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><path d="M5 12l5 5 9-10"/></svg><div>{{chk.t}}</div></div></sc-for>
+</div>
+<div style="padding: 20px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E3E7F7; box-shadow: 0 2px 10px rgba(68,88,232,0.08); display: flex; flex-direction: column; gap: 14px">
+<div style="font-size: 15px; font-weight: 700">신고 전 체크리스트 (선택)</div>
+<div style="font-size: 14px; line-height: 1.55; color: #5F6588">단순 불만이나 주관적 평가는 게시중단 요청이 받아들여지지 않을 수 있어요.</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">글이나 사진이 있나요? (별점만이면 원칙적으로 대상이 아니에요)</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">욕설·비방·개인정보 노출이 있나요?</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">맛·양·배달 시간 같은 주관적 평가는 아닌가요?</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">주문과 관련 없는 내용인가요?</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">사실과 다르다고 설명할 근거가 있나요?</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">신청 자격(대표자·운영자)이 있나요?</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">이미 다시 게시된 리뷰는 아닌가요?</label>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 14px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; font-size: 14px"><input type="checkbox" style="width: 20px; height: 20px; margin: 0; flex-shrink: 0; accent-color: #4458E8">가게번호·리뷰번호·작성일을 준비했나요?</label>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="padding: 20px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E3E7F7; box-shadow: 0 2px 10px rgba(68,88,232,0.08); display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; justify-content: space-between"><div style="font-size: 17px; font-weight: 700">답변 초안</div><div style="font-size: 13px; color: #5F6588">{{blankLabel}}</div></div>
+<div style="font-size: 14px; line-height: 1.55; font-weight: 700; color: #3547C9">{{banner}}</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px"><sc-for list="{{chips}}" as="chip" hint-placeholder-count="3"><button type="button" aria-pressed="{{chip.pressed}}" onClick="{{chip.pick}}" style="{{chip.style}}">{{chip.label}}</button></sc-for></div>
+<div style="padding: 16px; border-radius: 12px; background: #F5F7FF; border: 1px solid #E3E7F7; white-space: pre-line; font-size: 16px; line-height: 1.75; color: #1E2340"><sc-for list="{{segs}}" as="seg" hint-placeholder-count="5"><sc-if value="{{seg.isBlank}}" hint-placeholder-val="{{ false }}"><span style="background: #FFF1C2; color: #5C3D00; border-radius: 4px; padding: 1px 4px; font-weight: 500">{{seg.t}}</span></sc-if><sc-if value="{{seg.notBlank}}" hint-placeholder-val="{{ true }}"><span>{{seg.t}}</span></sc-if></sc-for></div>
+<div style="font-size: 14px; line-height: 1.55; color: #5F6588">노란 칸은 가게 상황에 맞게 직접 채워 주세요. 사실과 다른 사과나 고객을 탓하는 표현은 피하는 게 좋아요.</div>
+<button type="button" onClick="{{copy}}" style="height: 52px; border-radius: 12px; border: none; background: #4458E8; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700">{{copyLabel}}</button>
+</div>
+<div style="padding: 20px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E3E7F7; box-shadow: 0 2px 10px rgba(68,88,232,0.08); display: flex; flex-direction: column; gap: 14px">
+<div style="font-size: 15px; font-weight: 700">공식 안내 바로가기</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px"><div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14px; font-weight: 700">쿠팡이츠</div><div style="font-size: 13px; line-height: 1.5; color: #5F6588">리뷰 운영정책 · 2025-11-25 시행 · 확인일 2026-10-02</div></div><a href="https://partners.coupangeats.com/wp-content/uploads/2025/11/251125_%EC%8B%9C%ED%96%89%EC%BF%A0%ED%8C%A1%EC%9D%B4%EC%B8%A0-%EB%A6%AC%EB%B7%B0-%EC%9A%B4%EC%98%81%EC%A0%95%EC%B1%85.pdf" style="display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 700; color: #4458E8; text-decoration: none; flex-shrink: 0">열기</a></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px"><div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14px; font-weight: 700">요기요</div><div style="font-size: 13px; line-height: 1.5; color: #5F6588">리뷰 운영정책 · 2023-10-04 시행 · 확인일 2026-10-02</div></div><a href="https://www.yogiyo.co.kr/media/static/terms/r/20231004.html" style="display: flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 700; color: #4458E8; text-decoration: none; flex-shrink: 0">열기</a></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px"><div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14px; font-weight: 700">배달의민족</div><div style="font-size: 13px; line-height: 1.5; color: #5F6588">리뷰운영정책 · 2024-10-08 시행 · 확인일 2026-10-02. 배민 앱 안의 '리뷰운영정책'에서 원문을 볼 수 있어요.</div></div></div>
+</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+const s = this.state || {};
+const TYPES = {
+delay: { label: '배달 지연', title: '배달이 늦어 음식이 식은 데 대한 불만이에요', pills: ['배달 지연', '음식 온도', '재주문 의사 없음'], desc: '이런 유형은 사과와 개선 약속을 담은 답변으로 풀어가는 경우가 많아요.', status: '신고대상은 아닙니다.', tone: 'no', reason: '이유: 욕설·비방·개인정보 노출이 없고, 배달 경험에 대한 평가예요.', checks: ['주문 시각과 도착 시각을 주문 기록에서 확인해 보세요.', '라이더 배차가 늦었다면, 플랫폼에 문의할 수 있는 경로가 있는지 살펴보세요.', '같은 시간대에 비슷한 불만이 더 있었는지 확인해 보세요.'], step2Title: '신고 전 체크리스트 (선택)', step2Desc: '단순 불만이나 주관적 평가는 게시중단 요청이 받아들여지지 않을 수 있어요.' },
+taste: { label: '맛 불만', title: '음식 맛에 대한 아쉬움을 말하는 리뷰예요', pills: ['맛', '주관적 평가'], desc: '이런 유형은 반박하지 않고, 의견에 감사하며 개선 의지를 보이는 답변이 어울려요.', status: '신고대상은 아닙니다.', tone: 'no', reason: '이유: 맛에 대한 주관적 평가예요.', checks: ['같은 메뉴에 비슷한 평가가 반복되는지 확인해 보세요.', '해당 메뉴의 조리 기준과 간을 다시 살펴보세요.', '취향 차이로 보이더라도 반박하는 표현은 피하세요.'], step2Title: '신고 전 체크리스트 (선택)', step2Desc: '주관적 평가는 게시중단 요청이 받아들여지지 않을 수 있어요.' },
+foreign: { label: '이물질·위생', title: '음식에서 이물질이 나왔다는 리뷰예요', pills: ['이물질', '위생', '고객 안전'], desc: '이런 유형은 먼저 사과하고, 상황을 확인할 수 있도록 연락을 유도하는 답변이 필요해요.', status: '신고 여부를 판단하기 전에 상황부터 확인하세요.', tone: 'check', reason: '이유: 고객 안전과 관련된 내용일 수 있어요.', checks: ['해당 주문의 조리·포장 기록을 확인해 보세요.', '고객이 연락할 수 있는 경로를 답변에 안내하세요.', '원인을 단정하는 표현은 피하세요.'], step2Title: '신고 전 체크리스트 (선택)', step2Desc: '상황 확인이 끝난 뒤에 필요한지 살펴보세요.' },
+abuse: { label: '욕설·비방', title: '욕설이나 비방 표현이 섞인 리뷰예요', pills: ['욕설', '비방', '감정적 표현'], desc: '이런 유형은 감정적으로 반박하지 않고 차분하게 답하는 편이 안전해요.', status: '신고 검토가 가능할 수 있어요.', tone: 'check', reason: '이유: 욕설·비방 표현이 감지됐어요. 해당 표현을 적어 두고 신고 전 체크리스트를 확인하세요.', checks: ['문제가 되는 표현을 그대로 적어 두세요.', '화면 캡쳐와 리뷰 번호를 저장해 두세요.', '주문 기록과 일치하는 리뷰인지 확인하세요.'], step2Title: '신고 전 체크리스트 확인 (권장)', step2Desc: '요청서에 침해 표현을 적어야 하는 플랫폼이 있어요.' },
+verify: { label: '사실 확인 필요', title: '주문한 적 없다는 등 사실 확인이 필요한 리뷰예요', pills: ['사실 확인', '주문 기록'], desc: '이런 유형은 주문 기록을 확인한 뒤 사실에 맞게 차분히 답하는 것이 먼저예요.', status: '주문 기록을 확인한 뒤에 판단하세요.', tone: 'check', reason: '이유: 확인 전에는 신고 대상 여부를 말하지 않아요.', checks: ['주문 일시·메뉴·결제 기록을 찾아보세요.', '리뷰 속 주장과 기록이 일치하는지 비교하세요.', '허위 같은 단정 표현은 쓰지 마세요.'], step2Title: '신고 전 체크리스트 (선택)', step2Desc: '기록을 확인한 뒤에 필요한지 살펴보세요.' },
+stars: { label: '별점만', title: '별점만 남기고 글이 없는 리뷰예요', pills: ['별점만', '내용 없음'], desc: '이런 유형은 짧게 감사 인사를 하고 연락 창구를 알려 주는 답변이 어울려요.', status: '원칙적으로 신고대상은 아닙니다.', tone: 'no', reason: '이유: 세 배달앱 정책 모두 별점만 있는 리뷰는 원칙적으로 게시중단 요청 대상에서 제외해요.', checks: ['주문 기록으로 어떤 주문인지 확인해 보세요.', '불편한 점이 있었는지 연락 창구를 열어 두세요.', '이유를 추측해서 답변하지 마세요.'], step2Title: '신고 전 체크리스트 (선택)', step2Desc: '별점만 있는 리뷰는 요청이 받아들여지지 않는 경우가 많아요.' }
+};
+const ORDER = ['delay', 'taste', 'foreign', 'abuse', 'verify', 'stars'];
+const curT = s.type || 'delay';
+const showT = !!s.showTypes;
+const td = TYPES[curT];
+const TON = 'min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #4458E8; background: #EEF1FF; color: #3547C9; font-family: inherit; font-size: 14px; font-weight: 700';
+const TOFF = 'min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 14px; font-weight: 400';
+const typeVals = {
+typeChips: ORDER.map((k) => ({ label: TYPES[k].label, pressed: k === curT ? 'true' : 'false', style: k === curT ? TON : TOFF, pick: () => this.setState({ type: k, showTypes: false }) })),
+showTypes: showT,
+toggleTypes: () => this.setState({ showTypes: !showT }),
+toggleLabel: showT ? '닫기' : '유형이 맞지 않나요? 바꾸기',
+typeTitle: td.title,
+pills: td.pills.map((t) => ({ t: t })),
+typeDesc: td.desc,
+status: td.status,
+statusStyle: td.tone === 'no' ? 'font-weight: 700; color: #3547C9' : 'font-weight: 700; color: #7A4200',
+reason: td.reason,
+checks: td.checks.map((t) => ({ t: t })),
+step2Title: td.step2Title,
+step2Desc: td.step2Desc
+};
+const MAP = { delay: 'T01', taste: 'T03', foreign: 'T06', abuse: 'T12', verify: 'T13', stars: 'T11' };
+const TPL = {"T01": ["안녕하세요, [가게 이름]입니다.\n배달이 늦어져 오래 기다리시게 한 점 진심으로 죄송합니다. 기다리시는 동안 얼마나 불편하셨을지 생각하니 송구한 마음입니다.\n이번 지연은 [지연 사유] 때문이었고, [개선 내용]으로 같은 일이 반복되지 않도록 하겠습니다.\n소중한 의견 감사드립니다.", "안녕하세요, [가게 이름]입니다. 배달이 늦어 불편을 드려 죄송합니다. [개선 내용]으로 바로잡겠습니다. 의견 감사합니다.", "[가게 이름]입니다. 소중한 시간을 내어 후기를 남겨 주셔서 감사합니다.\n오래 기다리셨을 시간을 생각하면 마음이 무겁습니다. 배달 시간은 저희가 가장 신경 써야 할 부분인데 부족했습니다.\n[개선 내용]부터 바로 점검하겠습니다. 다시 기회를 주신다면 더 나은 모습으로 보답하겠습니다."], "T02": ["안녕하세요, [가게 이름]입니다.\n음식이 식은 채로 도착해 마음 편히 드시지 못하셨다니 죄송합니다. 따뜻한 상태로 전해드리는 것이 저희 몫인데 부족했습니다.\n[개선 내용]으로 포장과 출고 과정을 다시 살펴보겠습니다.\n말씀해 주셔서 감사합니다.", "안녕하세요, [가게 이름]입니다. 음식이 식어서 도착해 죄송합니다. [개선 내용]으로 보완하겠습니다. 의견 감사합니다.", "[가게 이름]입니다. 후기를 남겨 주셔서 감사합니다.\n정성껏 만든 음식이 식은 채로 도착했다니 저희도 속상합니다. 기대하신 만큼 따뜻하게 드시지 못한 점 죄송합니다.\n[개선 내용]을 바로 적용해 보겠습니다. 다시 기회를 주시면 더 따뜻하게 보내드리겠습니다."], "T03": ["안녕하세요, [가게 이름]입니다.\n기대하신 맛과 달라 아쉬우셨다니 죄송합니다. 솔직한 의견을 남겨 주셔서 감사합니다.\n말씀해 주신 [메뉴명]은 [개선 내용]을 통해 다시 살펴보겠습니다.\n다음에는 더 만족하실 수 있도록 노력하겠습니다.", "안녕하세요, [가게 이름]입니다. 맛이 입에 맞지 않아 아쉬우셨다니 죄송합니다. 말씀 주신 [메뉴명]은 [개선 내용]으로 살펴보겠습니다. 감사합니다.", "[가게 이름]입니다. 맛에 대해 솔직하게 말씀해 주셔서 감사합니다.\n입맛은 저마다 달라 쉽지 않지만, 기대에 못 미쳤다는 말씀은 가볍게 듣지 않겠습니다.\n[메뉴명]의 맛은 [개선 내용]으로 다시 점검하겠습니다."], "T04": ["안녕하세요, [가게 이름]입니다.\n양이나 가격이 기대에 못 미쳐 아쉬우셨다니 죄송합니다.\n[메뉴명]의 구성은 [확인 결과]이고, 안내가 부족했던 부분은 [개선 내용]으로 보완하겠습니다.\n의견 감사드립니다.", "안녕하세요, [가게 이름]입니다. 양과 가격에 아쉬움을 드려 죄송합니다. [메뉴명] 구성은 [확인 결과]이며, [개선 내용]으로 보완하겠습니다.", "[가게 이름]입니다. 솔직한 후기 감사합니다.\n가격에 비해 만족스럽지 못하셨다는 말씀, 무겁게 받아들이겠습니다. [메뉴명] 구성과 안내를 [개선 내용]으로 다시 살펴보겠습니다.\n다음에는 만족하실 수 있도록 노력하겠습니다."], "T05": ["안녕하세요, [가게 이름]입니다.\n주문하신 [메뉴명]이 빠지거나 다르게 전달됐다니 정말 죄송합니다.\n확인해 보니 [확인 결과]였고, [조치 내용]으로 도와드리겠습니다. [연락 방법]으로 연락 주시면 바로 처리하겠습니다.\n같은 일이 없도록 [개선 내용]을 하겠습니다.", "안녕하세요, [가게 이름]입니다. 주문과 다르게 전달돼 죄송합니다. [연락 방법]으로 연락 주시면 [조치 내용]으로 바로 도와드리겠습니다.", "[가게 이름]입니다. 후기를 남겨 주셔서 감사합니다.\n기다려서 받은 음식이 주문과 달랐다니 얼마나 실망스러우셨을지 죄송한 마음입니다.\n[연락 방법]으로 연락 주시면 [조치 내용]으로 도와드리겠습니다. 포장 단계의 확인 방법은 [개선 내용]으로 바꾸겠습니다."], "T06": ["안녕하세요, [가게 이름]입니다.\n음식에서 불쾌한 일을 겪으셨다니 정말 죄송합니다. 놀라고 불편하셨을 점 깊이 사과드립니다.\n정확한 상황 확인을 위해 [연락 방법]으로 연락 주시면 바로 확인하고 [조치 내용]으로 도와드리겠습니다.\n재발 방지를 위해 [개선 내용]을 하겠습니다.", "안녕하세요, [가게 이름]입니다. 불쾌한 경험을 드려 정말 죄송합니다. [연락 방법]으로 연락 주시면 바로 확인하겠습니다. [개선 내용]으로 재발을 막겠습니다.", "[가게 이름]입니다. 이런 일을 겪게 해드려 깊이 사과드립니다.\n음식을 만드는 사람으로서 가장 있어서는 안 될 일이라고 생각합니다. [연락 방법]으로 연락 주시면 상황을 정확히 확인하고 [조치 내용]으로 도와드리겠습니다.\n[개선 내용]으로 다시 점검하겠습니다."], "T07": ["안녕하세요, [가게 이름]입니다.\n포장이 제대로 되지 않아 음식이 쏟아지거나 흐트러진 채 도착해 죄송합니다. 받으시고 많이 속상하셨을 것 같습니다.\n[개선 내용]으로 포장 방법을 보완하겠습니다. [연락 방법]으로 연락 주시면 [조치 내용]으로 도와드리겠습니다.", "안녕하세요, [가게 이름]입니다. 포장 상태가 좋지 않아 죄송합니다. [개선 내용]으로 보완하겠습니다. [연락 방법]으로 연락 주세요.", "[가게 이름]입니다. 후기 감사합니다.\n정성껏 담은 음식이 흐트러진 채 도착했다니 저희도 마음이 아픕니다. 포장은 끝까지 책임져야 할 부분인데 부족했습니다.\n[개선 내용]을 바로 적용하겠습니다."], "T08": ["안녕하세요, [가게 이름]입니다.\n요청사항을 제대로 반영하지 못해 죄송합니다. 확인해 보니 [확인 결과]였고, 앞으로는 [개선 내용]으로 꼼꼼히 확인하겠습니다.\n다음에는 요청하신 대로 준비해 드리겠습니다.", "안녕하세요, [가게 이름]입니다. 요청사항을 놓쳐 죄송합니다. [개선 내용]으로 꼼꼼히 확인하겠습니다.", "[가게 이름]입니다. 말씀해 주셔서 감사합니다.\n주문하실 때 남겨 주신 요청이 지켜지지 않았다니 마음이 편치 않으셨을 것 같습니다. 죄송합니다.\n[확인 결과]를 바탕으로 [개선 내용]을 하겠습니다."], "T09": ["안녕하세요, [가게 이름]입니다.\n응대 과정에서 불편을 드려 정말 죄송합니다. 기분이 상하셨을 점 헤아려 보겠습니다.\n상황을 확인해 [개선 내용]을 하겠습니다. 말씀해 주셔서 감사합니다.", "안녕하세요, [가게 이름]입니다. 응대에서 불편을 드려 죄송합니다. [개선 내용]으로 살피겠습니다. 의견 감사합니다.", "[가게 이름]입니다. 솔직하게 말씀해 주셔서 감사합니다.\n찾아 주신 손님께 편안한 응대를 드리지 못해 죄송합니다. 가볍게 넘기지 않고 [개선 내용]으로 바로 점검하겠습니다."], "T10": ["안녕하세요, [가게 이름]입니다.\n배달 과정에서 불편을 겪으셨다니 죄송합니다. 음식을 보내는 입장에서 저희도 안타깝습니다.\n말씀하신 내용은 [확인 결과]였고, [연락 방법]을 통해 배달 쪽에 전달해 개선을 요청하겠습니다.\n불편을 드려 다시 한번 사과드립니다.", "안녕하세요, [가게 이름]입니다. 배달 과정에서 불편을 드려 죄송합니다. 내용은 배달 쪽에 전달해 개선을 요청하겠습니다.", "[가게 이름]입니다. 후기 감사합니다.\n음식이 손님께 닿는 마지막 순간까지 신경 써야 하는데 불편을 드렸습니다. 죄송합니다.\n말씀해 주신 내용은 [연락 방법]으로 전달하고 [확인 결과]를 바탕으로 개선을 요청하겠습니다."], "T11": ["안녕하세요, [가게 이름]입니다.\n주문해 주시고 별점을 남겨 주셔서 감사합니다. 혹시 불편하셨던 점이 있었다면 [연락 방법]으로 편하게 말씀해 주세요. 소중한 의견으로 참고하겠습니다.", "안녕하세요, [가게 이름]입니다. 별점 남겨 주셔서 감사합니다. 불편하신 점은 [연락 방법]으로 말씀해 주세요.", "[가게 이름]입니다. 주문과 별점 모두 감사합니다. 어떤 점이 아쉬우셨는지 알려 주시면 큰 도움이 됩니다. [연락 방법]으로 편하게 말씀해 주세요."], "T12": ["안녕하세요, [가게 이름]입니다.\n불편한 경험을 드린 것 같아 죄송합니다. 말씀해 주신 의견은 개선에 참고하겠습니다.\n자세한 상황을 알려 주시면 확인하겠습니다. [연락 방법]으로 연락 주세요.", "안녕하세요, [가게 이름]입니다. 불편을 드려 죄송합니다. 상황을 알려 주시면 확인하겠습니다. [연락 방법]으로 연락 주세요.", "[가게 이름]입니다. 많이 불편하셨던 것 같아 마음에 걸립니다. 무엇이 문제였는지 알려 주시면 확인하고 바로잡겠습니다. [연락 방법]으로 연락 주세요."], "T13": ["안녕하세요, [가게 이름]입니다.\n후기를 남겨 주셔서 감사합니다. 말씀해 주신 내용을 주문 기록 기준으로 확인해 보았습니다.\n확인 결과는 [확인 결과]입니다. 저희가 놓친 부분이 있다면 [연락 방법]으로 알려 주세요. 다시 확인하겠습니다.", "안녕하세요, [가게 이름]입니다. 말씀하신 내용을 확인한 결과 [확인 결과]였습니다. 다른 의견이 있으시면 [연락 방법]으로 알려 주세요.", "[가게 이름]입니다. 말씀해 주셔서 감사합니다. 불편하셨다니 저희도 정확히 살펴보고 싶어 주문 기록을 확인했습니다.\n확인된 내용은 [확인 결과]입니다. 오해가 있었다면 풀고 싶으니 [연락 방법]으로 편하게 연락 주세요."], "T14": ["안녕하세요, [가게 이름]입니다.\n[메뉴명]을 맛있게 드셨다니 정말 기쁩니다. 좋은 후기 남겨 주셔서 감사합니다.\n앞으로도 같은 맛과 정성으로 보답하겠습니다.", "[가게 이름]입니다. 맛있게 드셔서 기쁩니다. 좋은 후기 감사합니다. 또 주문해 주세요.", "[가게 이름]입니다. 후기를 읽고 하루가 즐거워졌습니다. [메뉴명]을 맛있게 드셨다니 힘이 납니다. 다음에도 만족하실 수 있도록 정성을 다하겠습니다."], "T15": ["안녕하세요, [가게 이름]입니다.\n[메뉴명]을 좋게 봐 주셔서 감사합니다. 한편 [아쉬운 점]이 아쉬우셨다니 죄송합니다.\n말씀해 주신 부분은 [개선 내용]으로 보완하겠습니다. 다음에 더 만족스럽게 보내드리겠습니다.", "안녕하세요, [가게 이름]입니다. 좋게 봐 주셔서 감사합니다. [아쉬운 점]은 [개선 내용]으로 보완하겠습니다.", "[가게 이름]입니다. 칭찬과 함께 솔직한 의견까지 남겨 주셔서 감사합니다.\n[아쉬운 점]은 저희도 놓치지 않고 [개선 내용]으로 살피겠습니다. 다음에는 더 만족하실 수 있도록 하겠습니다."]};
+const META = [{"id": "T01", "label": "배달 지연", "banner": "사과와 개선 약속이 어울리는 일반 고객 의견으로 보여요.", "caution": false}, {"id": "T02", "label": "식어서 도착", "banner": "따뜻하게 전하지 못한 점을 사과하고 개선을 약속하는 답변이 어울려요.", "caution": false}, {"id": "T03", "label": "맛 불만", "banner": "맛은 취향 차이가 있어요. 반박하지 않고 의견에 감사하는 답변이 어울려요.", "caution": false}, {"id": "T04", "label": "양·가격", "banner": "기대와 실제의 차이를 사실대로 안내하고 사과하는 답변이 어울려요.", "caution": false}, {"id": "T05", "label": "누락·오배달", "banner": "먼저 사과하고, 실제로 가능한 조치를 안내하는 답변이 어울려요.", "caution": false}, {"id": "T06", "label": "이물질·위생", "banner": "먼저 사과하고 연락을 유도하세요. 원인을 단정하지 마세요.", "caution": true}, {"id": "T07", "label": "포장 불량", "banner": "포장 문제를 사과하고 보완 방법을 알려 주는 답변이 어울려요.", "caution": false}, {"id": "T08", "label": "요청사항", "banner": "요청을 놓친 점을 인정하고 확인 방법을 안내하는 답변이 어울려요.", "caution": false}, {"id": "T09", "label": "응대 불만", "banner": "사실을 확인한 뒤 짧게 사과하는 답변이 어울려요.", "caution": false}, {"id": "T10", "label": "배달 과정", "banner": "배달 쪽에 전달하겠다고 안내하세요. 기사를 탓하지 마세요.", "caution": false}, {"id": "T11", "label": "별점만", "banner": "짧은 감사 인사와 연락 창구 안내가 어울려요.", "caution": false}, {"id": "T12", "label": "욕설·비방", "banner": "감정적으로 반박하지 않고 차분히 답하세요. 욕설을 다시 쓰지 마세요.", "caution": true}, {"id": "T13", "label": "사실 확인", "banner": "주문 기록으로 확인한 결과만 사실대로 쓰세요. 허위, 거짓 같은 표현은 피하세요.", "caution": true}, {"id": "T14", "label": "칭찬 감사", "banner": "짧고 따뜻한 감사 인사가 어울려요.", "caution": false}, {"id": "T15", "label": "칭찬+아쉬움", "banner": "칭찬에 감사하고, 아쉬운 점은 사과하며 개선을 약속하세요.", "caution": false}];
+const TONES = ['정중하게', '간결하게', '진정성 있게'];
+const ONT = 'min-height: 48px; padding: 0 8px; border-radius: 12px; border: 1.5px solid #4458E8; background: #EEF1FF; color: #3547C9; font-family: inherit; font-size: 15px; font-weight: 700';
+const OFFT = 'min-height: 48px; padding: 0 8px; border-radius: 12px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 15px; font-weight: 400';
+const ONC = 'flex-shrink: 0; white-space: nowrap; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #4458E8; background: #EEF1FF; color: #3547C9; font-family: inherit; font-size: 14px; font-weight: 700';
+const OFFC = 'flex-shrink: 0; white-space: nowrap; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #E3E7F7; background: #FFFFFF; color: #1E2340; font-family: inherit; font-size: 14px; font-weight: 400';
+const tid = MAP[curT];
+const tone = s.tone === undefined ? 0 : s.tone;
+const meta = META.find((m) => m.id === tid);
+const text = TPL[tid][tone];
+const segs = text.split(/(\[[^\]]+\])/).filter(Boolean).map((t) => ({ t: t, isBlank: t.charAt(0) === '[', notBlank: t.charAt(0) !== '[' }));
+const blanks = segs.filter((g) => g.isBlank).length;
+const done = () => this.setState({ copied: true });
+const replyVals = {
+chips: TONES.map((l, i) => ({ label: l, pressed: i === tone ? 'true' : 'false', style: i === tone ? ONT : OFFT, pick: () => this.setState({ tone: i, copied: false }) })),
+segs: segs,
+blankLabel: '빈칸 ' + blanks + '곳',
+banner: meta.banner, isCaution: meta.caution, notCaution: !meta.caution,
+copyLabel: s.copied ? '복사했어요' : '답변문 복사하기',
+copy: () => {
+try { navigator.clipboard.writeText(text).then(done, done); } catch (e) { done(); }
+}
+};
+const resetVals = {
+hasText: !s.cleared,
+noText: !!s.cleared,
+resetAll: () => this.setState({ cleared: true, type: 'delay', tone: 0, showTypes: false, copied: false })
+};
+return Object.assign({}, typeVals, replyVals, resetVals);
+}
+}
+</script>
+</body>
+</html>
