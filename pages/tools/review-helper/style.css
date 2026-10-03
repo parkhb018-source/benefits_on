@@ -35,6 +35,7 @@
   --amber-icon: #D97706;
   --green-bg: #EAF7F1;
   --green: #17835A;
+  --rh-green-text: #167f57;     /* --green 과 같은 색상, 명도만 낮춤 — 초록 바탕 4.53 · 흰 4.99 */
   --blank-bg: #FFF1C2;
   --blank-text: #5C3D00;
   --dark: #0B0E1F;
@@ -162,7 +163,7 @@ legend.rh-card-title + * { clear: both; }
 .rh-info p { margin: 0; }
 .rh-info-title { font-weight: 700; color: var(--primary-dark); margin-bottom: 4px !important; }
 .rh-info-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--rh-accent-strong); color: var(--white); font-weight: 700; font-style: italic; }
-.rh-privacy { margin: 0; padding: 14px 16px; border-radius: 14px; background: var(--green-bg); color: var(--green); font-size: 14px; font-weight: 700; line-height: 1.5; }
+.rh-privacy { margin: 0; padding: 14px 16px; border-radius: 14px; background: var(--green-bg); color: var(--rh-green-text); font-size: 14px; font-weight: 700; line-height: 1.5; }
 
 /* ===== 처음 화면 ===== */
 .rh-hero { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 26px 24px 0; }
