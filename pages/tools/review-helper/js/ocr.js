@@ -1,6 +1,7 @@
 // 캡쳐 이미지 글자 읽기 — Tesseract.js(한국어)를 필요할 때만 불러와 브라우저 안에서만 처리한다.
 // 이미지·읽은 글자는 어디로도 보내지 않는다(라이브러리가 받는 것은 프로그램·언어 데이터 파일뿐).
 import { TESSERACT, OCR_MAX_SIDE, OCR_TIMEOUT_MS } from './config.js?v=20261004';
+import { cleanOcrText } from './ocr-clean.js?v=20261004';
 
 let scriptPromise = null;
 let workerPromise = null;
@@ -71,8 +72,8 @@ export async function recognizeImage(file, onProgress) {
     try { image = await downscale(file); } catch (e) { return { ok: false, reason: 'image' }; }
     const worker = await Promise.race([prepareOcr(), timeout]);
     const { data } = await Promise.race([worker.recognize(image), timeout]);
-    const text = (data.text || '').split('\n').map((l) => l.trim()).filter(Boolean).join('\n');
-    return text ? { ok: true, text } : { ok: false, reason: 'empty' };
+    const { text, removed } = cleanOcrText(data.text);
+    return text ? { ok: true, text, removed } : { ok: false, reason: 'empty' };
   } catch (e) {
     return { ok: false, reason: e && e.message === 'timeout' ? 'timeout' : 'load' };
   } finally {

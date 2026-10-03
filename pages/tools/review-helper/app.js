@@ -54,7 +54,7 @@ const EL_IDS = [
   'pasteText', 'pasteClear', 'pasteSample', 'pasteHint', 'pasteNext',
   'capFrame', 'capPreview', 'capEmpty', 'capFile', 'capCamera', 'capSheet', 'capSheetTitle', 'capSheetSub', 'capConfirm', 'capToPaste', 'capPrep',
   'platformChips', 'ratingChips', 'confirmText', 'shopName', 'confirmHint', 'confirmNext', 'deskReset',
-  'deskDrop', 'deskFile', 'deskDropStatus', 'deskDropToPaste',
+  'deskDrop', 'deskFile', 'deskDropStatus', 'deskDropToPaste', 'ocrCleanNote',
   'midEmpty', 'rightEmpty', 'deskOfficialCard', 'deskOfficial',
   'resTitle', 'resPills', 'resAdvice', 'resAdviceText', 'resStatus', 'resReason', 'resAbuseExtra', 'resSecondary',
   'resToggle', 'resTypeChips', 'resChecksCard', 'resChecks', 'resPolicyName', 'resPolicyLine', 'resPolicyFlag',
@@ -429,6 +429,13 @@ const OCR_FAIL = {
 let previewUrl = null;
 let ocrRun = 0; // 초기화·새 이미지 뒤에 끝난 이전 작업 결과는 버린다
 let ocrText = '';
+let ocrRemoved = 0;
+
+// 깨진 줄을 뺐으면 확인 화면 입력창 위에 알린다(뺀 게 없으면 숨김)
+function showCleanNote(removed) {
+  $('ocrCleanNote').textContent = removed ? `읽다가 깨진 줄 ${removed}개를 뺐어요. 리뷰와 상관없는 줄이 남아 있다면 지워 주세요.` : '';
+  show('ocrCleanNote', removed > 0);
+}
 
 function prepareCapture() {
   if (isOcrBusy()) return;
@@ -444,6 +451,8 @@ function clearCapture() {
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = null;
   ocrText = '';
+  ocrRemoved = 0;
+  showCleanNote(0);
   $('capPreview').removeAttribute('src');
   show('capPreview', false);
   show('capEmpty', true);
@@ -476,6 +485,7 @@ async function handleImage(file) {
     ev('review_helper_start', { method: 'capture' });
   }
   const run = ++ocrRun;
+  showCleanNote(0);
   if (desktop) {
     $('deskDropStatus').textContent = '이미지에서 텍스트를 인식하고 있어요...';
     show('deskDropToPaste', false);
@@ -498,9 +508,11 @@ async function handleImage(file) {
     if (desktop) {
       state.text = r.text;
       syncTextFields();
+      showCleanNote(r.removed);
       $('deskDropStatus').textContent = '글자를 읽었어요. 위 칸에서 확인하고 고쳐 주세요.';
     } else {
       ocrText = r.text;
+      ocrRemoved = r.removed;
       setSheet('글자를 읽었어요.', '다음 화면에서 내용을 확인하고 고쳐 주세요.', 'ok');
     }
     return;
@@ -672,6 +684,7 @@ function bindEvents() {
   });
   $('capConfirm').addEventListener('click', () => {
     state.text = ocrText;
+    showCleanNote(ocrRemoved);
     navigate('confirm');
   });
   $('deskDropToPaste').addEventListener('click', (e) => {

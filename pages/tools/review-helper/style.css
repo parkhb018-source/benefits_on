@@ -222,6 +222,8 @@ legend.rh-card-title + * { clear: both; }
 .rh-sheet-sub { font-size: 14px; color: var(--muted); }
 .rh-sheet-warn { font-size: 13px; color: var(--amber-text); margin-bottom: 8px !important; }
 
+.rh-ocr-note { margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber-text); font-size: 13px; line-height: 1.5; font-weight: 700; }
+
 /* PC 끌어다 놓기 칸 */
 .rh-drop { padding: 16px; border-radius: 12px; border: 1.5px dashed var(--rh-accent-soft); background: var(--primary-light); text-align: center; }
 .rh-drop > * + * { margin-top: 6px; }

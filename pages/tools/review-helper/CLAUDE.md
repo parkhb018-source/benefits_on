@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 로컬: `python -m http.server 8000` → `http://localhost:8000/pages/tools/review-helper/`.
   ESM + 절대경로 fetch(`/data/review-helper/…`)라 `file://` 로는 안 열리고, 반드시 저장소 루트에서 띄운다.
-- JS 엔진 시험: `node --test tests/review-helper/engine.test.mjs tests/review-helper/josa.test.mjs`
+- JS 엔진 시험: `node --test tests/review-helper/engine.test.mjs tests/review-helper/josa.test.mjs tests/review-helper/ocr-clean.test.mjs`
   (욕설 36개·분류 31개·수용 기준 문장·빈칸·정책 판단)
 - 데이터·참고 구현 시험: `python data/review-helper/validate.py`, `abuse_check.py`, `classify_check.py`
   (`python` 이 안 되면 `py`)
@@ -31,6 +31,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **`js/josa.js`** — 채운 빈칸 뒤 조사 보정(으로/로·을/를·은/는·이/가만, 다음 글자가 한글이면 미적용, 한글 아닌 값은 "(으)로" 같은 중립 표기). `templates.json` 원문은 고치지 않는다. **`js/policy.js`** — 확인 중/확인일 경과 판단.
 - **`js/config.js`** — `HUB_URL`·데이터 경로·플랫폼 칩·`OCR_ENABLED`·`TESSERACT` 등 설정값.
 - **`js/ocr.js`** — Tesseract 지연 로드·이미지 축소(긴 변 `OCR_MAX_SIDE`)·시간 제한(`OCR_TIMEOUT_MS`)·정리.
+- **`js/ocr-clean.js`** — 읽은 글자에서 깨진 줄만 보수적으로 제거(의미 문자 2개 미만이면서 한글 음절 없음, 또는 의미 문자 비율 40% 미만). 지운 줄이 있으면 확인 화면에 안내.
 - **`js/data.js`** — JSON 5개를 한 번에 읽음. 실패 시 안내만 띄우고 입력은 막지 않는다.
 - **`app.js`** — 상태(메모리 객체 하나) · 해시 라우팅(`#home #paste #capture #confirm #result #reply #report`)
   · DOM 그리기 · GA 이벤트. 960px 이상은 같은 DOM 을 3열 그리드로 보여 준다(왼쪽 확인 / 가운데 결과·체크리스트 /
@@ -62,7 +63,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 개발 문서: `docs/tools/review-helper/` (PRD·TASKS·OPEN-ITEMS·DESIGN-TOKENS·02_Rule_Engine·03_QA_Test_Cases·
   CHANGELOG·design-reference). 모든 코드 변경은 `CHANGELOG.md` 에 기록.
 - 캐시 버스터: `index.html` 의 `style.css?v=`·`app.js?v=`, `app.js` 의 `js/*.js?v=` import 7건,
-  `js/data.js`·`js/ocr.js` 의 `config.js?v=`, `js/fill.js` 의 `josa.js?v=` import 는 **항상 같은 값(YYYYMMDD)**. 한 파일만 고쳐도 전부 올린다.
+  `js/data.js`·`js/ocr.js` 의 `config.js?v=`, `js/fill.js` 의 `josa.js?v=`, `js/ocr.js` 의 `ocr-clean.js?v=` import 는 **항상 같은 값(YYYYMMDD)**. 한 파일만 고쳐도 전부 올린다.
 - 배포: 저장소 `main` push → GitHub Pages / Cloudflare Pages. `data/**/*.json` 변경은
   `.github/workflows/build-pages.yml` 도 트리거하지만 `build-pages.js` 는 이 폴더를 읽지 않아 변경이 없다.
   커밋 메시지에 `[skip ci]` 금지.
