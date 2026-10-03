@@ -1,14 +1,25 @@
-/* 리뷰 대응도우미 — 색·크기는 docs/tools/review-helper/DESIGN-TOKENS.md 그대로. 글꼴만 사이트 공통(Pretendard). */
+/* 리뷰 대응도우미 — 크기·모양은 docs/tools/review-helper/DESIGN-TOKENS.md 기준.
+   색은 "사이트 값 우선"(2026-10-04 결정): 혜택on 무료도구 공통 토큰(--color-*, profit-drop-diagnosis 등과 같은 값)을 쓰고,
+   대응 토큰이 없는 값과 도구 고유 의미색(주황 주의·초록 개인정보·노랑 빈칸·캡쳐 화면 어두운 배경)만 시안 값을 둔다. */
 :root {
-  --primary: #4458E8;
-  --primary-dark: #3547C9;
-  --primary-light: #EEF1FF;
-  --primary-border: #D5DBFA;
-  --text: #1E2340;
-  --muted: #5F6588;
-  --border: #E3E7F7;
-  --surface: #F5F7FF;
-  --white: #FFFFFF;
+  --color-bg: #f2f3f5;
+  --color-card: #ffffff;
+  --color-text: #1c1c1e;
+  --color-sub: #8a8f98;
+  --color-accent: #1481fa;
+  --color-accent-tint: #e7f1ff;
+  --color-border: #e6e7eb;
+  --shadow-card: 0 2px 14px rgba(20, 20, 30, 0.06);
+
+  --primary: var(--color-accent);
+  --primary-dark: #3547C9;      /* 대응 토큰 없음(시안 값) */
+  --primary-light: var(--color-accent-tint);
+  --primary-border: #D5DBFA;    /* 대응 토큰 없음(시안 값) */
+  --text: var(--color-text);
+  --muted: var(--color-sub);
+  --border: var(--color-border);
+  --surface: var(--color-bg);
+  --white: var(--color-card);
   --amber-bg: #FFF6E6;
   --amber-border: #FBE3B5;
   --amber-text: #7A4200;
@@ -19,7 +30,6 @@
   --blank-text: #5C3D00;
   --dark: #0B0E1F;
   --toast: #1E2340;
-  --shadow-card: 0 2px 10px rgba(68, 88, 232, 0.08);
 }
 
 * { box-sizing: border-box; }
