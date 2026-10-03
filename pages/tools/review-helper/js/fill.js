@@ -1,6 +1,8 @@
 // 답변 템플릿의 [빈칸] 처리 — 찾기, 채우기, 남은 빈칸 세기. DOM 의존 없음.
 // values 는 { '[가게 이름]': '○○분식', ... } 처럼 빈칸 토큰을 키로 쓴다. 빈 문자열은 '안 채움'.
 
+import { resolveJosa } from './josa.js?v=20261004';
+
 const TOKEN_RE = /\[[^\]]+\]/g;
 
 const filled = (values, token) => typeof values[token] === 'string' && values[token].trim() !== '';
@@ -11,7 +13,9 @@ export function listBlanks(template) {
 }
 
 // 미리보기용 조각: [{ text, blank: true|false }] — blank 는 '아직 안 채운 빈칸'만 true
-export function splitTemplate(template, values = {}) {
+// 채운 빈칸 뒤 조사는 값에 맞게 보정한다(js/josa.js). 복사(fillTemplate)도 이 함수를 거쳐 화면과 항상 같다.
+export function splitTemplate(rawTemplate, values = {}) {
+  const template = resolveJosa(rawTemplate, values);
   const out = [];
   let last = 0;
   for (const m of template.matchAll(TOKEN_RE)) {

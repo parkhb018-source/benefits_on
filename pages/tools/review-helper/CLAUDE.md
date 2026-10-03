@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 로컬: `python -m http.server 8000` → `http://localhost:8000/pages/tools/review-helper/`.
   ESM + 절대경로 fetch(`/data/review-helper/…`)라 `file://` 로는 안 열리고, 반드시 저장소 루트에서 띄운다.
-- JS 엔진 시험: `node --test tests/review-helper/engine.test.mjs`
+- JS 엔진 시험: `node --test tests/review-helper/engine.test.mjs tests/review-helper/josa.test.mjs`
   (욕설 36개·분류 31개·수용 기준 문장·빈칸·정책 판단)
 - 데이터·참고 구현 시험: `python data/review-helper/validate.py`, `abuse_check.py`, `classify_check.py`
   (`python` 이 안 되면 `py`)
@@ -27,7 +27,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **`js/abuse.js`** — `abuse_check.py` 이식. **`js/classify.js`** — `classify_check.py` 이식.
   두 파일은 Python 참고 구현과 결과가 항상 같아야 한다(규칙을 바꾸면 Python·JS·시험 문장 함께).
   욕설 단어 자체는 반환하지 않는다(화면에 다시 출력 금지).
-- **`js/fill.js`** — 템플릿 `[빈칸]` 찾기·채우기·남은 수. **`js/policy.js`** — 확인 중/확인일 경과 판단.
+- **`js/fill.js`** — 템플릿 `[빈칸]` 찾기·채우기·남은 수. 미리보기·복사 모두 `js/josa.js` 의 `resolveJosa` 를 거친다(화면 = 복사 결과).
+- **`js/josa.js`** — 채운 빈칸 뒤 조사 보정(으로/로·을/를·은/는·이/가만, 다음 글자가 한글이면 미적용, 한글 아닌 값은 "(으)로" 같은 중립 표기). `templates.json` 원문은 고치지 않는다. **`js/policy.js`** — 확인 중/확인일 경과 판단.
 - **`js/config.js`** — `HUB_URL`·데이터 경로·플랫폼 칩·`OCR_ENABLED`·`TESSERACT` 등 설정값.
 - **`js/ocr.js`** — Tesseract 지연 로드·이미지 축소(긴 변 `OCR_MAX_SIDE`)·시간 제한(`OCR_TIMEOUT_MS`)·정리.
 - **`js/data.js`** — JSON 5개를 한 번에 읽음. 실패 시 안내만 띄우고 입력은 막지 않는다.
@@ -61,7 +62,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 개발 문서: `docs/tools/review-helper/` (PRD·TASKS·OPEN-ITEMS·DESIGN-TOKENS·02_Rule_Engine·03_QA_Test_Cases·
   CHANGELOG·design-reference). 모든 코드 변경은 `CHANGELOG.md` 에 기록.
 - 캐시 버스터: `index.html` 의 `style.css?v=`·`app.js?v=`, `app.js` 의 `js/*.js?v=` import 7건,
-  `js/data.js`·`js/ocr.js` 의 `config.js?v=` import 는 **항상 같은 값(YYYYMMDD)**. 한 파일만 고쳐도 전부 올린다.
+  `js/data.js`·`js/ocr.js` 의 `config.js?v=`, `js/fill.js` 의 `josa.js?v=` import 는 **항상 같은 값(YYYYMMDD)**. 한 파일만 고쳐도 전부 올린다.
 - 배포: 저장소 `main` push → GitHub Pages / Cloudflare Pages. `data/**/*.json` 변경은
   `.github/workflows/build-pages.yml` 도 트리거하지만 `build-pages.js` 는 이 폴더를 읽지 않아 변경이 없다.
   커밋 메시지에 `[skip ci]` 금지.
