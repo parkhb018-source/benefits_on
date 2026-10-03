@@ -15,8 +15,10 @@ export function isBrokenLine(line) {
 }
 
 // 결과: { text, removed } — removed 는 지운 줄 수(빈 줄은 세지 않는다)
+// 모든 줄이 제거 조건에 걸리면 지우지 않고 원문을 그대로 돌려준다(사장님이 직접 확인·수정, 안내 없음).
 export function cleanOcrText(text) {
   const lines = (text || '').split('\n').map((l) => l.trim()).filter(Boolean);
   const kept = lines.filter((l) => !isBrokenLine(l));
+  if (kept.length === 0) return { text: lines.join('\n'), removed: 0 };
   return { text: kept.join('\n'), removed: lines.length - kept.length };
 }

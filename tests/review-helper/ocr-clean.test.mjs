@@ -28,3 +28,7 @@ test('여러 줄 정리 — 남은 줄 순서 유지, 지운 수', () => {
   assert.deepEqual(cleanOcrText('맛있어요'), { text: '맛있어요', removed: 0 });
   assert.deepEqual(cleanOcrText(''), { text: '', removed: 0 });
 });
+
+test('모든 줄이 제거 조건에 걸리면 원문을 그대로 넘기고 안내 없음(removed 0)', () => {
+  assert.deepEqual(cleanOcrText('★★★★☆ 4\n👍👍\n5'), { text: '★★★★☆ 4\n👍👍\n5', removed: 0 });
+});
