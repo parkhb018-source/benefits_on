@@ -203,6 +203,16 @@ legend.rh-card-title + * { clear: both; }
 .rh-sheet-sub { font-size: 14px; color: var(--muted); }
 .rh-sheet-warn { font-size: 13px; color: var(--amber-text); margin-bottom: 8px !important; }
 
+/* PC 끌어다 놓기 칸 */
+.rh-drop { padding: 16px; border-radius: 12px; border: 1.5px dashed #A9B4F2; background: var(--primary-light); text-align: center; }
+.rh-drop > * + * { margin-top: 6px; }
+.rh-drop.is-drag { border-color: var(--primary); }
+.rh-drop-title { margin: 0; font-size: 14px; font-weight: 700; color: var(--primary-dark); }
+.rh-drop-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--white); color: var(--text); font-size: 14px; font-weight: 700; cursor: pointer; }
+.rh-drop-btn:focus-within { outline: 2px solid var(--primary); outline-offset: 2px; }
+.rh-drop-status { margin: 0; font-size: 13px; line-height: 1.5; color: var(--text); font-weight: 700; }
+.rh-drop-status:empty { display: none; }
+
 /* ===== 분석 결과 ===== */
 .rh-card--summary { background: var(--primary-light); border-color: var(--primary-border); box-shadow: none; }
 .rh-sum-head { display: flex; align-items: center; gap: 12px; }

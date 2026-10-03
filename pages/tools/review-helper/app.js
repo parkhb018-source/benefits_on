@@ -11,6 +11,7 @@ import { createAbuseChecker } from './js/abuse.js?v=20261004';
 import { createClassifier } from './js/classify.js?v=20261004';
 import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261004';
 import { policyFlags } from './js/policy.js?v=20261004';
+import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261004';
 
 const SAMPLE_REVIEW = '배달이 너무 늦게 와서 음식이 다 식었어요. 다시는 안 시킬 것 같아요.';
 const MSG_CHECKING = '아직 확인 중인 정보예요. 공식 안내를 꼭 확인하세요.';
@@ -51,8 +52,9 @@ const EL_IDS = [
   'rhDataError', 'rhToast', 'rhToastText', 'rhToastClose', 'tabHub', 'tabRecord', 'tabStats', 'goPaste', 'goCapture',
   ...Object.values(SCREENS),
   'pasteText', 'pasteClear', 'pasteSample', 'pasteHint', 'pasteNext',
-  'capFrame', 'capPreview', 'capEmpty', 'capFile', 'capCamera', 'capSheet', 'capSheetTitle', 'capSheetSub', 'capConfirm', 'capToPaste',
+  'capFrame', 'capPreview', 'capEmpty', 'capFile', 'capCamera', 'capSheet', 'capSheetTitle', 'capSheetSub', 'capConfirm', 'capToPaste', 'capPrep',
   'platformChips', 'ratingChips', 'confirmText', 'shopName', 'confirmHint', 'confirmNext', 'deskReset',
+  'deskDrop', 'deskFile', 'deskDropStatus', 'deskDropToPaste',
   'midEmpty', 'rightEmpty', 'deskOfficialCard', 'deskOfficial',
   'resTitle', 'resPills', 'resAdvice', 'resAdviceText', 'resStatus', 'resReason', 'resAbuseExtra', 'resSecondary',
   'resToggle', 'resTypeChips', 'resChecksCard', 'resChecks', 'resPolicyName', 'resPolicyLine', 'resPolicyFlag',
@@ -145,6 +147,9 @@ function applyRoute(userNav) {
   show('midEmpty', false);
   show('rightEmpty', false);
   syncTextFields();
+  // Tesseract 는 캡쳐 화면에 들어올 때만 준비하고, 화면을 떠나면 (작업 중이 아닐 때) 정리한다
+  if (route === 'capture') prepareCapture();
+  else if (!isOcrBusy()) terminateOcr();
   if (route === 'report') ev('review_helper_checklist_open', { platform: state.platform });
   if (userNav) {
     window.scrollTo(0, 0);
@@ -414,32 +419,99 @@ function resetAll(screen) {
   }
 }
 
-// ===== 1a. 캡쳐 (글자 읽기는 Tesseract.js 로드 방식이 승인된 뒤 연결) =====
+// ===== 1a. 캡쳐 / PC 끌어다 놓기 — 글자 읽기(js/ocr.js) =====
+const OCR_FAIL = {
+  load: ['글자 읽기 프로그램을 불러오지 못했어요.', '인터넷 연결을 확인하고 다시 시도하거나, 붙여넣기로 입력해 주세요.'],
+  timeout: ['글자를 읽는 데 시간이 너무 오래 걸려요.', '다시 시도하거나 붙여넣기로 입력해 주세요.'],
+  empty: ['이미지에서 글자를 찾지 못했어요.', '리뷰 글이 잘 보이게 다시 캡쳐하거나 붙여넣기로 입력해 주세요.'],
+  image: ['이미지를 열지 못했어요.', '다른 이미지를 고르거나 붙여넣기로 입력해 주세요.'],
+};
 let previewUrl = null;
+let ocrRun = 0; // 초기화·새 이미지 뒤에 끝난 이전 작업 결과는 버린다
+let ocrText = '';
+
+function prepareCapture() {
+  if (isOcrBusy()) return;
+  $('capPrep').textContent = '글자 읽기 프로그램을 준비하고 있어요…';
+  prepareOcr()
+    .then(() => { if (currentRoute() === 'capture') $('capPrep').textContent = '글자 읽기 준비가 됐어요.'; })
+    .catch(() => { $('capPrep').textContent = '글자 읽기 프로그램을 불러오지 못했어요. 붙여넣기로 입력할 수 있어요.'; });
+}
+
 function clearCapture() {
+  ocrRun++;
+  terminateOcr();
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = null;
+  ocrText = '';
   $('capPreview').removeAttribute('src');
   show('capPreview', false);
   show('capEmpty', true);
   show('capSheet', false);
   $('capFile').value = '';
   $('capCamera').value = '';
+  $('deskFile').value = '';
+  $('deskDropStatus').textContent = '';
+  show('deskDropToPaste', false);
 }
-function handleImage(file) {
+
+function setSheet(title, sub, done) {
+  $('capSheetTitle').textContent = title;
+  $('capSheetSub').textContent = sub;
+  show('capConfirm', done === 'ok');
+  show('capToPaste', done === 'fail');
+}
+
+function progressText(m) {
+  if (m && m.status === 'recognizing text') return `잠시만 기다려 주세요. (${Math.round((m.progress || 0) * 100)}%)`;
+  return '글자 읽기 프로그램을 내려받고 있어요. 잠시만 기다려 주세요.';
+}
+
+async function handleImage(file) {
   if (!file || !file.type || !file.type.startsWith('image/')) return;
   markStart();
-  if (previewUrl) URL.revokeObjectURL(previewUrl);
-  previewUrl = URL.createObjectURL(file); // 브라우저 안에서만 쓰는 주소(업로드 없음)
-  $('capPreview').src = previewUrl;
-  show('capPreview', true);
-  show('capEmpty', false);
-  show('capSheet', true);
-  if (!OCR_ENABLED) {
-    $('capSheetTitle').textContent = '글자 읽기 기능을 준비하고 있어요.';
-    $('capSheetSub').textContent = '지금은 붙여넣기로 입력해 주세요.';
-    show('capConfirm', false);
-    show('capToPaste', true);
+  const desktop = isDesktop();
+  if (desktop && !desktopStartSent) {
+    desktopStartSent = true;
+    ev('review_helper_start', { method: 'capture' });
+  }
+  const run = ++ocrRun;
+  if (desktop) {
+    $('deskDropStatus').textContent = '이미지에서 텍스트를 인식하고 있어요...';
+    show('deskDropToPaste', false);
+  } else {
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(file); // 브라우저 안에서만 쓰는 주소(업로드 없음)
+    $('capPreview').src = previewUrl;
+    show('capPreview', true);
+    show('capEmpty', false);
+    show('capSheet', true);
+    setSheet('이미지에서 텍스트를 인식하고 있어요...', '잠시만 기다려 주세요.', null);
+  }
+  const r = await recognizeImage(file, (m) => {
+    if (run !== ocrRun) return;
+    if (desktop) $('deskDropStatus').textContent = `이미지에서 텍스트를 인식하고 있어요... ${progressText(m)}`;
+    else $('capSheetSub').textContent = progressText(m);
+  });
+  if (run !== ocrRun) return;
+  if (r.ok) {
+    if (desktop) {
+      state.text = r.text;
+      syncTextFields();
+      $('deskDropStatus').textContent = '글자를 읽었어요. 위 칸에서 확인하고 고쳐 주세요.';
+    } else {
+      ocrText = r.text;
+      setSheet('글자를 읽었어요.', '다음 화면에서 내용을 확인하고 고쳐 주세요.', 'ok');
+    }
+    return;
+  }
+  const [title, sub] = OCR_FAIL[r.reason] || OCR_FAIL.load;
+  $('capPrep').textContent = ''; // 아래 안내 상자가 대신 설명한다
+  if (desktop) {
+    $('deskDropStatus').textContent = `${title} ${sub}`;
+    show('deskDropToPaste', true);
+  } else {
+    setSheet(title, sub, 'fail');
   }
 }
 
@@ -572,21 +644,39 @@ function bindEvents() {
   });
   $('replyCopy').addEventListener('click', copyReply);
 
-  // 캡쳐: 갤러리·카메라·끌어다 놓기·붙여넣기(Ctrl+V)
+  // 캡쳐: 갤러리·카메라·끌어다 놓기·붙여넣기(Ctrl+V). PC 는 확인 칸 아래 끌어다 놓기 칸.
+  if (!OCR_ENABLED) {
+    for (const id of ['goCapture', 'deskDrop']) show(id, false);
+    document.querySelector('#pasteToCapture').hidden = true;
+    return;
+  }
   $('capFile').addEventListener('change', () => handleImage($('capFile').files[0]));
   $('capCamera').addEventListener('change', () => handleImage($('capCamera').files[0]));
-  const frame = $('capFrame');
-  frame.addEventListener('dragover', (e) => { e.preventDefault(); frame.classList.add('is-drag'); });
-  frame.addEventListener('dragleave', () => frame.classList.remove('is-drag'));
-  frame.addEventListener('drop', (e) => {
-    e.preventDefault();
-    frame.classList.remove('is-drag');
-    handleImage(e.dataTransfer.files[0]);
-  });
+  $('deskFile').addEventListener('change', () => handleImage($('deskFile').files[0]));
+  for (const zone of [$('capFrame'), $('deskDrop')]) {
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('is-drag'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('is-drag'));
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.classList.remove('is-drag');
+      handleImage(e.dataTransfer.files[0]);
+    });
+  }
   document.addEventListener('paste', (e) => {
-    if (currentRoute() !== 'capture' || isDesktop()) return;
+    if (!isDesktop() && currentRoute() !== 'capture') return;
     const item = [...(e.clipboardData ? e.clipboardData.items : [])].find((i) => i.type.startsWith('image/'));
-    if (item) handleImage(item.getAsFile());
+    if (item) {
+      e.preventDefault();
+      handleImage(item.getAsFile());
+    }
+  });
+  $('capConfirm').addEventListener('click', () => {
+    state.text = ocrText;
+    navigate('confirm');
+  });
+  $('deskDropToPaste').addEventListener('click', (e) => {
+    e.preventDefault();
+    $('confirmText').focus();
   });
 }
 

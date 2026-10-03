@@ -28,7 +28,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   두 파일은 Python 참고 구현과 결과가 항상 같아야 한다(규칙을 바꾸면 Python·JS·시험 문장 함께).
   욕설 단어 자체는 반환하지 않는다(화면에 다시 출력 금지).
 - **`js/fill.js`** — 템플릿 `[빈칸]` 찾기·채우기·남은 수. **`js/policy.js`** — 확인 중/확인일 경과 판단.
-- **`js/config.js`** — `HUB_URL`·데이터 경로·플랫폼 칩·`OCR_ENABLED` 등 설정값.
+- **`js/config.js`** — `HUB_URL`·데이터 경로·플랫폼 칩·`OCR_ENABLED`·`TESSERACT` 등 설정값.
+- **`js/ocr.js`** — Tesseract 지연 로드·이미지 축소(긴 변 `OCR_MAX_SIDE`)·시간 제한(`OCR_TIMEOUT_MS`)·정리.
 - **`js/data.js`** — JSON 5개를 한 번에 읽음. 실패 시 안내만 띄우고 입력은 막지 않는다.
 - **`app.js`** — 상태(메모리 객체 하나) · 해시 라우팅(`#home #paste #capture #confirm #result #reply #report`)
   · DOM 그리기 · GA 이벤트. 960px 이상은 같은 DOM 을 3열 그리드로 보여 준다(왼쪽 확인 / 가운데 결과·체크리스트 /
@@ -47,8 +48,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   ("신고대상은 아닙니다"가 욕설 상태에서 나오면 안 됨).
 - h1 은 상단 바의 "리뷰 대응도우미" 하나뿐(화면 전환으로 숨겨지지 않음). 화면 제목은 모두 h2.
 - 도구 화면(입력·결과·답변) 안에 수동 광고 슬롯을 만들지 않는다.
-- 외부 JS 라이브러리 금지. 예외는 캡쳐 글자 읽기용 Tesseract.js 하나(버전 고정·캡쳐 화면 진입 시 지연 로드).
-  로드 방식 승인 전까지 `OCR_ENABLED = false` — 캡쳐 화면은 이미지 미리보기 후 붙여넣기로 안내한다.
+- 외부 JS 라이브러리 금지. 예외는 캡쳐 글자 읽기용 Tesseract.js 하나 — `js/ocr.js`.
+  jsDelivr CDN·버전 고정(tesseract.js 7.0.0 / core 7.0.0 / kor 4.0.0_best_int), 주소와 SRI 는 `js/config.js` 의
+  `TESSERACT`. 모바일은 캡쳐 화면(`#capture`) 진입 시, PC 는 이미지를 처음 넣을 때만 불러온다(처음·붙여넣기 화면에서는
+  요청 0). 처리가 끝나면 worker 를 terminate. 버전을 올리면 integrity 를 다시 계산(`config.js` 주석의 명령).
+  언어 데이터는 Tesseract 기본 동작대로 IndexedDB(`keyval-store`)에 보관된다 — 사용자 입력은 저장하지 않는다.
 - **AdSense auto ads 가 로드 직후 빈/숨김 요소를 잠깐 떼어냈다 되돌린다.** `init()` 은 `EL_IDS` 가 모두
   보일 때까지 재시도한 뒤 참조를 `el` 에 캐시한다 — DOM 조회는 `$()` 를 쓸 것. 새 id 를 쓰면 `EL_IDS` 에 추가.
 
@@ -56,8 +60,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 개발 문서: `docs/tools/review-helper/` (PRD·TASKS·OPEN-ITEMS·DESIGN-TOKENS·02_Rule_Engine·03_QA_Test_Cases·
   CHANGELOG·design-reference). 모든 코드 변경은 `CHANGELOG.md` 에 기록.
-- 캐시 버스터: `index.html` 의 `style.css?v=`·`app.js?v=`, `app.js` 의 `js/*.js?v=` import 6건,
-  `js/data.js` 의 `config.js?v=` import 는 **항상 같은 값(YYYYMMDD)**. 한 파일만 고쳐도 전부 올린다.
+- 캐시 버스터: `index.html` 의 `style.css?v=`·`app.js?v=`, `app.js` 의 `js/*.js?v=` import 7건,
+  `js/data.js`·`js/ocr.js` 의 `config.js?v=` import 는 **항상 같은 값(YYYYMMDD)**. 한 파일만 고쳐도 전부 올린다.
 - 배포: 저장소 `main` push → GitHub Pages / Cloudflare Pages. `data/**/*.json` 변경은
   `.github/workflows/build-pages.yml` 도 트리거하지만 `build-pages.js` 는 이 폴더를 읽지 않아 변경이 없다.
   커밋 메시지에 `[skip ci]` 금지.

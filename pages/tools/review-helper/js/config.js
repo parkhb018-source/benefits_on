@@ -28,5 +28,17 @@ export const DEFAULT_TONE = 'polite';
 // PC 3열 레이아웃 시작 폭(PRD 2절)
 export const DESKTOP_MIN_WIDTH = 960;
 
-// 캡쳐 글자 읽기(Tesseract.js). 로드 방식이 승인되기 전까지 꺼 둔다(OPEN-ITEMS 12번).
-export const OCR_ENABLED = false;
+// 캡쳐 글자 읽기(Tesseract.js) — jsDelivr CDN, 버전 고정(OPEN-ITEMS 12번, 2026-10-04 승인).
+// 캡쳐 화면에 들어갈 때만 불러온다. 버전을 올리면 integrity 를 새 파일로 다시 계산한다:
+//   curl -sL <script URL> | openssl dgst -sha384 -binary | openssl base64 -A
+export const OCR_ENABLED = true;
+export const TESSERACT = {
+  script: 'https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js',
+  integrity: 'sha384-2BQ3U3OdKOb0Uczxqr41I9UvZkzr4V9Hv8uSzMMZAlmhsFClvdZX5wi5fDCzG+tM',
+  workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/worker.min.js',
+  corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@7.0.0', // 브라우저 기능에 맞는 wasm 파일을 라이브러리가 고른다
+  langPath: 'https://cdn.jsdelivr.net/npm/@tesseract.js-data/kor/4.0.0_best_int',
+  lang: 'kor',
+};
+export const OCR_MAX_SIDE = 2000; // 긴 변이 이보다 크면 줄여서 처리(px)
+export const OCR_TIMEOUT_MS = 90000; // 프로그램 내려받기 + 글자 읽기 전체 제한 시간
