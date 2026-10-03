@@ -28,7 +28,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   두 파일은 Python 참고 구현과 결과가 항상 같아야 한다(규칙을 바꾸면 Python·JS·시험 문장 함께).
   욕설 단어 자체는 반환하지 않는다(화면에 다시 출력 금지).
 - **`js/fill.js`** — 템플릿 `[빈칸]` 찾기·채우기·남은 수. 미리보기·복사 모두 `js/josa.js` 의 `resolveJosa` 를 거친다(화면 = 복사 결과).
-- **`js/josa.js`** — 채운 빈칸 뒤 조사 보정(으로/로·을/를·은/는·이/가만, 다음 글자가 한글이면 미적용, 한글 아닌 값은 "(으)로" 같은 중립 표기). `templates.json` 원문은 고치지 않는다. **`js/policy.js`** — 확인 중/확인일 경과 판단.
+- **`js/josa.js`** — 채운 빈칸 뒤 조사 보정(으로/로·을/를·은/는·이/가, 서술격 "였"→"이었", 다음 글자가 한글이면 미적용, 한글 아닌 값은 "(으)로" 같은 중립 표기). `templates.json` 원문은 고치지 않는다. **`js/policy.js`** — 확인 중/확인일 경과 판단.
 - **`js/config.js`** — `HUB_URL`·데이터 경로·플랫폼 칩·`OCR_ENABLED`·`TESSERACT` 등 설정값.
 - **`js/ocr.js`** — Tesseract 지연 로드·이미지 축소(긴 변 `OCR_MAX_SIDE`)·시간 제한(`OCR_TIMEOUT_MS`)·정리.
 - **`js/ocr-clean.js`** — 읽은 글자에서 깨진 줄만 보수적으로 제거(의미 문자 2개 미만이면서 한글 음절 없음, 또는 의미 문자 비율 40% 미만). 지운 줄이 있으면 확인 화면에 안내.

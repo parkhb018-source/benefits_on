@@ -62,6 +62,27 @@ test('미리보기 조각과 복사 결과가 같고, 빈칸 남은 곳은 노�
   assert.deepEqual(splitTemplate(tpl, v).filter((s) => s.blank).map((s) => s.text), ['[메뉴명]']);
 });
 
+test('서술격 "였" — 받침 있으면 이었, 없으면 였, 한글 아니면 (이)었', () => {
+  assert.equal(fix('[확인 결과]였고, ', { '[확인 결과]': '포장 단계 누락' }), '[확인 결과]이었고, ');
+  assert.equal(fix('[확인 결과]였습니다.', { '[확인 결과]': '주문서 기준 정상 출고' }), '[확인 결과]였습니다.');
+  assert.equal(fix('[확인 결과]였습니다.', { '[확인 결과]': '배달 지연' }), '[확인 결과]이었습니다.', '연 = ㄴ받침');
+  assert.equal(fix('[확인 결과]였고, ', { '[확인 결과]': '주문 누락 확인됨' }), '[확인 결과]이었고, ');
+  assert.equal(fix('[확인 결과]였고, ', { '[확인 결과]': '오후 7시 30분 출고 (No.12)' }), '[확인 결과](이)었고, ');
+  assert.equal(fix('[확인 결과]였고, ', {}), '[확인 결과]였고, ', '비어 있으면 원문 그대로');
+  assert.equal(fix('[확인 결과]이고, ', { '[확인 결과]': '포장 누락' }), '[확인 결과]이고, ', '이고 는 변경 없음');
+});
+
+test('템플릿의 "였" 4곳 — 값에 맞게 바뀜', () => {
+  const tpl = JSON.parse(readFileSync(new URL('../../data/review-helper/templates.json', import.meta.url), 'utf8'));
+  const spots = [];
+  for (const t of tpl.templates) for (const tone of ['polite', 'short', 'sincere']) if (/\[확인 결과\]였/.test(t[tone])) spots.push(t[tone]);
+  assert.equal(spots.length, 4);
+  for (const s of spots) {
+    assert.match(fillTemplate(s, { '[확인 결과]': '포장 단계 누락' }), /포장 단계 누락이었/);
+    assert.match(fillTemplate(s, { '[확인 결과]': '정상 출고 처리' }), /정상 출고 처리였/);
+  }
+});
+
 test('45개 템플릿 × 대표 값 2종 — 예외 없음, 빈칸 수 그대로', () => {
   const tpl = JSON.parse(readFileSync(new URL('../../data/review-helper/templates.json', import.meta.url), 'utf8'));
   const sets = {
