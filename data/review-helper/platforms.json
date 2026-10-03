@@ -268,11 +268,11 @@
         "title": "리뷰운영정책",
         "versionLabel": "2023-10-04 시행본",
         "effectiveDate": "2023-10-04",
-        "verifiedDate": "2026-10-02",
+        "verifiedDate": "2026-10-03",
         "verification": "official_web",
         "confidence": "high",
         "officialUrl": "https://www.yogiyo.co.kr/media/static/terms/r/20231004.html",
-        "officialUrlNote": "사용자 제공 정책 텍스트와 조문 구성·내용이 같음. 이후 개정본 여부는 확인하지 못함"
+        "officialUrlNote": "사용자 제공 정책 텍스트와 조문 구성·내용이 같음. 2026-10-03 운영자가 직접 확인: 2023-10-04판 이후 개정본 없음"
       },
       "generalReport": {
         "text": "이용자는 제7조 위반 리뷰를 신고할 수 있고, 회사는 검토 후 삭제 또는 제한할 수 있다.",
@@ -523,6 +523,10 @@
     {
       "date": "2026-10-02",
       "note": "최초 작성. 배민·쿠팡이츠·요기요 공식 정책 기준, 네이버는 2차 자료 기준"
+    },
+    {
+      "date": "2026-10-03",
+      "note": "요기요 리뷰운영정책 개정 여부 운영자 확인(2023-10-04판 이후 개정 없음), verifiedDate 갱신"
     }
   ]
 }
