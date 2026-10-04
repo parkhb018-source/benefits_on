@@ -1,11 +1,12 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "2026-10-04",
+  "dataVersion": "2026-10-05",
   "disclaimer": "참고용 안내이며, 최종 판단은 각 플랫폼 정책에 따라요.",
   "displayRules": [
     "reportStatus가 not_target인 유형은 욕설·비방·개인정보 키워드가 감지되지 않을 때만 쓴다",
     "분류 순서는 classification.steps를 따른다 (priority 숫자는 같은 단계 안에서 우선순위를 가릴 때만 사용)",
     "자동 분류가 틀릴 수 있으므로 사장님이 유형을 바꾸면 문구도 함께 바뀌어야 한다",
+    "신고 전 체크리스트는 현재 선택된 유형의 reportStatus가 reportCandidateStatuses에 있거나 욕설·비방·개인정보 표현이 감지됐을 때만 보여 준다 (result.step2는 지우지 않고 노출만 막는다)",
     "키워드는 초안이며 실제 리뷰 20~30건으로 시험해야 한다"
   ],
   "reportStatuses": {
@@ -34,6 +35,11 @@
       "tone": "neutral"
     }
   },
+  "reportCandidateStatuses": [
+    "may_review",
+    "check_first",
+    "verify_records"
+  ],
   "types": [
     {
       "id": "T11",

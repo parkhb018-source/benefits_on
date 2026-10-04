@@ -11,6 +11,7 @@ import { createAbuseChecker } from './js/abuse.js?v=20261004d';
 import { createClassifier } from './js/classify.js?v=20261004d';
 import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261004d';
 import { policyFlags } from './js/policy.js?v=20261004d';
+import { shouldShowChecklist } from './js/report-gate.js?v=20261004d';
 import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261004d';
 
 const SAMPLE_REVIEW = '배달이 너무 늦게 와서 음식이 다 식었어요. 다시는 안 시킬 것 같아요.';
@@ -94,6 +95,9 @@ function statusFor(type) {
   return DATA.types.reportStatuses[key];
 }
 
+// 신고 전 체크리스트는 현재 선택된 유형(사장님이 바꾼 유형 포함) 기준으로만 보여 준다(types.json reportCandidateStatuses).
+const checklistOn = () => !!state.result && shouldShowChecklist(state.type, state.result.abusive, DATA.types);
+
 function policyLine(p, withVerified) {
   const pol = p.policy;
   if (!pol.effectiveDate) return `${pol.title} · ${pol.versionLabel}`;
@@ -129,7 +133,8 @@ function applyRoute(userNav) {
   if (isDesktop()) {
     for (const r of ['home', 'paste', 'capture']) show(SCREENS[r], false);
     show('scrConfirm', true);
-    for (const r of ['result', 'report', 'reply']) show(SCREENS[r], state.analyzed);
+    for (const r of ['result', 'reply']) show(SCREENS[r], state.analyzed);
+    show('scrReport', state.analyzed && checklistOn());
     show('midEmpty', !state.analyzed);
     show('rightEmpty', !state.analyzed);
     show('deskOfficialCard', state.analyzed);
@@ -271,10 +276,12 @@ function renderResult() {
   $('resPolicyFlag').textContent = flag;
   show('resPolicyFlag', !!flag);
 
+  const checklist = checklistOn();
+  if (isDesktop()) show('scrReport', checklist);
   show('resNextCard', typed);
   if (typed) {
     const s2 = type.result.step2;
-    show('resStep2', !!s2);
+    show('resStep2', !!s2 && checklist);
     if (s2) {
       $('resStep2Title').textContent = s2.title;
       $('resStep2Desc').textContent = s2.desc;
