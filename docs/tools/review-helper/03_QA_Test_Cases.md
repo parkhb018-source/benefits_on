@@ -6,9 +6,12 @@
 |---|---|
 | `python data/review-helper/validate.py` | 데이터 연결·확인일·단정 표현·사전/분류 시험 |
 | `python data/review-helper/abuse_check.py` | 욕설 사전 36개 |
-| `python data/review-helper/classify_check.py` | 유형 분류 97개 · 표기 정규화 41개 |
-| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 36·분류 97·정규화 41·칭찬 보호 규칙·JS↔Python 결과 일치·PRD §10-2 문장 4개·빈칸·정책 판단 |
+| `python data/review-helper/classify_check.py` | 유형 분류 114개 · 표기 정규화 41개 |
+| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 36·분류 114·정규화 41·칭찬 보호 규칙·JS↔Python 결과 일치·PRD §10-2 문장 4개·빈칸·정책 판단 |
 | `node --test tests/review-helper/report-gate.test.mjs` | 체크리스트 노출 규칙(1.6.0): T06·T12·T13 보임, 그 밖·미분류 숨김, 욕설이면 항상 보임, 목록 비었거나 키 없으면 숨김 |
+| `node --test tests/review-helper/static-copy.test.mjs` | 정적 문구(1.6.1): meta·og description 일치, meta·og·JSON-LD 에 새 설명 구절, 본문에 "'신고 전 체크리스트' 화면" 구절 없음 |
+
+> 1.6.1: classify-fixtures.json c98~c114 추가(구어체 별루·별롭·노맛·쏘쏘·짱·짱나요·그닥·그다지, 기존 기대값 변경 없음).
 
 `validate.py` 는 `reportCandidateStatuses` 값이 `reportStatuses` 키에 있는지도 확인한다(1.6.0).
 

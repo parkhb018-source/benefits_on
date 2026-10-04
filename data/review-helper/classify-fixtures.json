@@ -627,6 +627,107 @@
       "text": "양도 많고 맛있어요 실패할 일 없음",
       "rating": 5,
       "expectMain": "T14"
+    },
+    {
+      "id": "c98",
+      "text": "별루",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c99",
+      "text": "별루",
+      "expectMain": "T03"
+    },
+    {
+      "id": "c100",
+      "text": "별루예요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c101",
+      "text": "별루임",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c102",
+      "text": "별롭니다",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c103",
+      "text": "노맛",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c104",
+      "text": "노맛임",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c105",
+      "text": "쏘쏘",
+      "rating": 3,
+      "expectMain": null
+    },
+    {
+      "id": "c106",
+      "text": "짱",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c107",
+      "text": "짱이에요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c108",
+      "text": "짱나요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c109",
+      "text": "짱나네",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c110",
+      "text": "그닥",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c111",
+      "text": "그다지",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c112",
+      "text": "그닥 별로네요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c113",
+      "text": "그닥 맛있진 않네요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c114",
+      "text": "별로임",
+      "rating": 2,
+      "expectMain": "T03"
     }
   ]
 }
