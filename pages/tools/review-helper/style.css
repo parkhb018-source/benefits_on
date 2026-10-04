@@ -300,8 +300,27 @@ legend.rh-card-title + * { clear: both; }
 .rh-type-list dd { margin: 2px 0 0; color: var(--text); }
 .rh-faq { border-top: 1px solid var(--border); }
 .rh-faq:first-of-type { border-top: none; }
-.rh-faq summary { min-height: 48px; display: flex; align-items: center; font-weight: 700; cursor: pointer; }
+.rh-faq-q { margin: 14px 0 4px; font-size: 16px; }
 .rh-faq p { margin: 0 0 14px; color: var(--text); }
+
+/* 정적 섹션 접기 — 기본 접힘, 제목(h2)을 누르면 펼침. 네이티브 details/summary(키보드 Enter·Space) */
+.rh-static section { padding: 0; }
+.rh-static section + section { margin-top: 12px; }
+.rh-acc-summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  min-height: 56px; padding: 12px 20px; border-radius: 16px; list-style: none; cursor: pointer;
+}
+.rh-acc-summary::-webkit-details-marker { display: none; }
+.rh-acc-summary h2 { margin: 0; font-size: 19px; line-height: 1.4; }
+.rh-acc-summary::after {
+  content: "+"; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%; background: var(--primary-light); color: var(--rh-accent-text);
+  font-size: 20px; font-weight: 700; line-height: 1;
+}
+.rh-acc[open] > .rh-acc-summary::after { content: "−"; }
+.rh-acc-summary:hover h2 { color: var(--rh-accent-text); }
+.rh-acc-summary:focus-visible { outline: 3px solid var(--rh-accent-text); outline-offset: 2px; }
+.rh-acc-body { padding: 0 20px 22px; }
 
 .app-footer { text-align: center; font-size: 0.82rem; color: var(--muted); padding: 24px 16px 8px; max-width: 880px; margin: 0 auto; }
 .app-footer p { margin: 4px 0; }
