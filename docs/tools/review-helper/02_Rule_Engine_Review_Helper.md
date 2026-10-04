@@ -48,7 +48,7 @@
 - "친절"은 칭찬 키워드로 넣지 않는다 — "불친절"(T09)에 "친절"이 들어 있어 혼합(T15)으로 잘못 분류된다.
 - **규칙을 더 늘리기 전에 사용자 확인을 받는다.**
 
-- 시험: `classify-fixtures.json` 114개, `normalize-fixtures.json` 41개. JS 와 Python 의 출력(대표·보조·욕설·거친 표현, 정규화 결과)이
+- 시험: `classify-fixtures.json` 124개, `normalize-fixtures.json` 41개. JS 와 Python 의 출력(대표·보조·욕설·거친 표현, 정규화 결과)이
   전 문장 동일해야 한다(`engine.test.mjs` 가 `classify_check.py --dump` 를 불러 비교).
 
 ## 2. 욕설·모욕 사전

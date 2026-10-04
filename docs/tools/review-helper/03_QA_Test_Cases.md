@@ -5,11 +5,13 @@
 | 명령 | 내용 |
 |---|---|
 | `python data/review-helper/validate.py` | 데이터 연결·확인일·단정 표현·사전/분류 시험 |
-| `python data/review-helper/abuse_check.py` | 욕설 사전 36개 |
-| `python data/review-helper/classify_check.py` | 유형 분류 114개 · 표기 정규화 41개 |
-| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 36·분류 114·정규화 41·칭찬 보호 규칙·JS↔Python 결과 일치·PRD §10-2 문장 4개·빈칸·정책 판단 |
+| `python data/review-helper/abuse_check.py` | 욕설 사전 40개 |
+| `python data/review-helper/classify_check.py` | 유형 분류 124개 · 표기 정규화 41개 |
+| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 40·분류 124·정규화 41·칭찬 보호 규칙·JS↔Python 결과 일치·PRD §10-2 문장 4개·빈칸·정책 판단 |
 | `node --test tests/review-helper/report-gate.test.mjs` | 체크리스트 노출 규칙(1.6.0): T06·T12·T13 보임, 그 밖·미분류 숨김, 욕설이면 항상 보임, 목록 비었거나 키 없으면 숨김 |
-| `node --test tests/review-helper/static-copy.test.mjs` | 정적 문구(1.6.1): meta·og description 일치, meta·og·JSON-LD 에 새 설명 구절, 본문에 "'신고 전 체크리스트' 화면" 구절 없음 |
+| `node --test tests/review-helper/static-copy.test.mjs` | 정적 문구(1.6.1): meta·og description 일치, meta·og·JSON-LD 에 새 설명 구절, 본문에 "'신고 전 체크리스트' 화면" 구절 없음, 유형별 대응 요령에 반복 신고 안내 0개·서로 다른 신고 안내 4개 유지·첫 문단 새 문장(1.6.2) |
+
+> 1.6.2: classify-fixtures.json c115~c124 추가(짱남·짱나·개짱나·짱개·짱깨 문장, 짱·짱이에요·짱나요 기존 동작 유지 확인, 기존 기대값 변경 없음). abuse-tests.json t17·t18·f21·f22 추가(짱깨·짱개, 36→40).
 
 > 1.6.1: classify-fixtures.json c98~c114 추가(구어체 별루·별롭·노맛·쏘쏘·짱·짱나요·그닥·그다지, 기존 기대값 변경 없음).
 

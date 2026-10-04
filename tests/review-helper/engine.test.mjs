@@ -1,5 +1,5 @@
 // 리뷰 대응도우미 JS 엔진 시험 — 실행: node --test tests/review-helper/
-// abuse-tests.json(40개)·classify-fixtures.json(114개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
+// abuse-tests.json(40개)·classify-fixtures.json(124개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -27,9 +27,9 @@ test('욕설 사전 — abuse-tests.json 40개', () => {
   assert.deepEqual(fails, []);
 });
 
-test('유형 분류 — classify-fixtures.json 114개', () => {
+test('유형 분류 — classify-fixtures.json 124개', () => {
   const { cases } = load('classify-fixtures.json');
-  assert.equal(cases.length, 114);
+  assert.equal(cases.length, 124);
   const fails = [];
   for (const c of cases) {
     const r = classify(c.text, c.rating ?? null);
@@ -91,14 +91,19 @@ test('칭찬 보호(positiveGuards) — 막히는 것과 막히지 않는 것', 
   for (const t of ['짱나요', '짱나네', '짱나서 안 시켜요', '짱났어요', '짱난다', '짱 나요']) assert.equal(classify(t, null).main, null, t);
   for (const t of ['짱', '짱이에요', '짱맛', '짱짱하네요']) assert.equal(classify(t, null).main, 'T14', t);
   assert.equal(classify('짱 맛있어요 나요', null).main, 'T14', '짱 바로 뒤가 아니면 안 막힘');
+  // 1.6.2 짱 — 나·남·개·깨 추가(짜증난다는 뜻 / 비하어) — 각 1건
+  const zzangCases = { 나: '진짜 짱나', 남: '짱남', 개: '짱개', 깨: '짱깨' };
+  for (const [pat, t] of Object.entries(zzangCases)) assert.equal(classify(t, null).main, null, `${pat}: ${t}`);
+  assert.equal(classify('개짱나', null).main, null, '짱 앞의 개는 상관없이 뒤 나로 막힘');
 });
 
-test('JS·Python 결과 일치 — 정규화 41개 + 분류 fixture 114개 + 보호 규칙 문장', (t) => {
+test('JS·Python 결과 일치 — 정규화 41개 + 분류 fixture 124개 + 보호 규칙 문장', (t) => {
   const py = fileURLToPath(new URL('../../data/review-helper/classify_check.py', import.meta.url));
   const normalize = load('normalize-fixtures.json').cases.map((c) => c.input);
   const classifyIn = load('classify-fixtures.json').cases.map((c) => [c.text, c.rating ?? null])
     .concat(['불맛있어요', '추천 안할게요', '맛있어요ㅎㅎㅎㅎ 지않', '맛있어요ㅎㅎㅎㅎㅎㅎㅎ지않', '맛은 있는데 안 시킬 것 같아요',
-      '짱나서 안 시켜요', '짱났어요', '짱난다', '짱 맛있어요 나요']
+      '짱나서 안 시켜요', '짱났어요', '짱난다', '짱 맛있어요 나요',
+      '진짜 짱나', '짱남', '짱개', '짱깨', '개짱나', '배달 늦어서 짱남', '짱개집인데 늦었어요', '사장이 짱깨라서 그런지 불친절하네요']
       .flatMap((s) => [[s, null], [s, 1], [s, 5]]));
   const input = JSON.stringify({ normalize, classify: classifyIn });
   let out = null;

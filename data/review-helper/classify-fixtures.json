@@ -728,6 +728,66 @@
       "text": "별로임",
       "rating": 2,
       "expectMain": "T03"
+    },
+    {
+      "id": "c115",
+      "text": "짱남",
+      "rating": null,
+      "expectMain": null
+    },
+    {
+      "id": "c116",
+      "text": "짱나",
+      "rating": null,
+      "expectMain": null
+    },
+    {
+      "id": "c117",
+      "text": "개짱나",
+      "rating": null,
+      "expectMain": null
+    },
+    {
+      "id": "c118",
+      "text": "짱개",
+      "rating": null,
+      "expectMain": null
+    },
+    {
+      "id": "c119",
+      "text": "배달 늦어서 짱남",
+      "rating": null,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c120",
+      "text": "짱개집인데 늦었어요",
+      "rating": null,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c121",
+      "text": "사장이 짱깨라서 그런지 불친절하네요",
+      "rating": 1,
+      "expectMain": "T12"
+    },
+    {
+      "id": "c122",
+      "text": "짱",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c123",
+      "text": "짱이에요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c124",
+      "text": "짱나요",
+      "rating": 1,
+      "expectMain": null
     }
   ]
 }
