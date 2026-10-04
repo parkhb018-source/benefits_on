@@ -24,9 +24,9 @@ test('욕설 사전 — abuse-tests.json 36개', () => {
   assert.deepEqual(fails, []);
 });
 
-test('유형 분류 — classify-fixtures.json 31개', () => {
+test('유형 분류 — classify-fixtures.json 41개', () => {
   const { cases } = load('classify-fixtures.json');
-  assert.equal(cases.length, 31);
+  assert.equal(cases.length, 41);
   const fails = [];
   for (const c of cases) {
     const r = classify(c.text, c.rating ?? null);

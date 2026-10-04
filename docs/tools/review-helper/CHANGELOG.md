@@ -2,6 +2,7 @@
 
 | Version | Date | Type | Description |
 |---|---|---|---|
+| 1.4.0 | 2026-10-04 | Minor | 분류 1단계 변경: 공백 제외 5자 미만이어도 키워드(위험·핵심·일반 불만·칭찬)가 걸리면 2~5단계를 적용하고, 아무것도 없을 때만 T11("맛없어요"→T03, "맛있어요"(5)→T14). classify_check.py·js/classify.js·types.json steps 1 설명·classify-fixtures.json(c31 T11→T03, c32~c41 추가) 함께 수정. ?v=20261004c. |
 | 1.3.6 | 2026-10-04 | Patch | 정적 섹션 4개(사용 방법·유형별 대응 요령·공식 신고 경로·FAQ)를 기본 접힘 details/summary 로 변경(문구 변경 없음). FAQ 안쪽의 질문별 접기는 중첩을 피하려고 질문(h3)·답변(p)으로 펼침. style.css?v=20261004b. |
 | 1.3.5 | 2026-10-04 | Patch | 배민 versionLabel 과 정적 안내에서 "[현행] " 라벨 제거. 공식 신고 경로 안내 첫 문단의 확인일 문장을 "정책별 확인일은 신고 전 체크리스트 화면에서" 로 변경. |
 | 1.3.4 | 2026-10-04 | Patch | 데이터: 요기요 verifiedDate 2026-10-03(운영자 확인, 2023-10-04판 이후 개정 없음), officialUrlNote·changelog 갱신. |

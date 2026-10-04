@@ -221,7 +221,68 @@
       "id": "c31",
       "text": "별로",
       "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c32",
+      "text": "맛없어요",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c33",
+      "text": "맛있어요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c34",
+      "text": "맛있어요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c35",
+      "text": "식었어요",
+      "rating": 2,
+      "expectMain": "T02"
+    },
+    {
+      "id": "c36",
+      "text": "늦어요",
+      "rating": 1,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c37",
+      "text": "굿",
+      "rating": 5,
       "expectMain": "T11"
+    },
+    {
+      "id": "c38",
+      "text": "최악",
+      "rating": 1,
+      "expectMain": "T11"
+    },
+    {
+      "id": "c39",
+      "text": "",
+      "rating": null,
+      "expectMain": "T11"
+    },
+    {
+      "id": "c40",
+      "text": "ㅅㅂ",
+      "rating": 1,
+      "expectMain": "T12",
+      "expectAbusive": true
+    },
+    {
+      "id": "c41",
+      "text": "별로",
+      "rating": null,
+      "expectMain": "T03"
     }
   ]
 }

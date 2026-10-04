@@ -55,7 +55,7 @@
 
 ### types.json
 
-- `classification.steps`: **유형을 고르는 순서**(글이 짧으면 별점만 → 위험·핵심 유형 우선 → 칭찬+불만 혼합 → 일반 불만). `priority` 숫자는 같은 단계 안에서만 쓴다.
+- `classification.steps`: **유형을 고르는 순서**(짧은 글은 욕설·키워드가 하나도 없을 때만 별점만 → 위험·핵심 유형 우선 → 칭찬+불만 혼합 → 일반 불만). `priority` 숫자는 같은 단계 안에서만 쓴다.
 - `match`: 분류 방법. `keywords`(키워드 포함) · `short_text`(글자 수 짧음) · `dictionary`(`abuse-words.json` 사전, 욕설·비방 유형) · `mixed`(칭찬+아쉬움).
 - `priority`: 여러 유형이 걸릴 때 숫자가 작은 유형을 대표로 사용.
 - `reportStatus`: 신고 대상 표시. `reportStatuses`에서 문구를 찾습니다.

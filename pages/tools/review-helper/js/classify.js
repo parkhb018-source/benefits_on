@@ -20,15 +20,18 @@ export function createClassifier(typesData, abuseCheck) {
     const t = (text || '').trim();
     const low = t.toLowerCase();
     const ab = abuseCheck(t);
-    // 1단계: 공백을 뺀 글자 수가 maxChars 이하이면 '별점만'. 짧아도 욕설이 있으면 T12
-    if (Array.from(t.replace(/\s/gu, '')).length < TYPES.T11.match.maxChars + 1) {
-      if (ab.abusive) return { main: 'T12', secondary: [], abusive: true, vulgar: ab.vulgar };
-      return { main: 'T11', secondary: [], abusive: false, vulgar: false };
-    }
     const hit = (ids) => ids.filter((id) => KW[id].some((k) => low.includes(k)));
     const risk = hit(RISK_KEYWORD_TYPES).concat(ab.abusive ? ['T12'] : []);
     const neg = hit(NEGATIVE_TYPES);
     const positive = POSITIVE.some((k) => low.includes(k));
+    // 1단계: 공백을 뺀 글자 수가 5자 미만이면
+    //   (a) 욕설·모욕이 있으면 T12
+    //   (b) 키워드(위험·핵심 / 일반 불만 / 칭찬)가 하나라도 걸리면 아래 2~5단계를 그대로 적용
+    //   (c) 아무것도 걸리지 않을 때만 '별점만'(T11). 빈 글도 T11
+    if (Array.from(t.replace(/\s/gu, '')).length < TYPES.T11.match.maxChars + 1) {
+      if (ab.abusive) return { main: 'T12', secondary: [], abusive: true, vulgar: ab.vulgar };
+      if (!risk.length && !neg.length && !positive) return { main: 'T11', secondary: [], abusive: false, vulgar: false };
+    }
     let main = null;
     if (risk.length) {
       main = minByPrio(risk); // 2단계: 위험·핵심 유형은 항상 우선

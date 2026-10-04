@@ -21,15 +21,19 @@ def classify(text, rating=None):
     t = (text or "").strip()
     low = t.lower()
     ab = abuse_check(t)
-    # 1단계: 글이 없거나 매우 짧으면 '별점만'. 단, 짧아도 욕설이 있으면 욕설·비방(T12)
-    if len(re.sub(r"\s", "", t)) < TYPES["T11"]["match"]["maxChars"] + 1:
-        if ab["abusive"]:
-            return {"main": "T12", "secondary": [], "abusive": True, "vulgar": ab["vulgar"]}
-        return {"main": "T11", "secondary": [], "abusive": False, "vulgar": False}
     hit = lambda ids: [i for i in ids if any(k in low for k in KW[i])]
     risk = hit(RISK_KEYWORD_TYPES) + (["T12"] if ab["abusive"] else [])
     neg = hit(NEGATIVE_TYPES)
     positive = any(k in low for k in POSITIVE)
+    # 1단계: 공백을 뺀 글자 수가 5자 미만이면
+    #   (a) 욕설·모욕이 있으면 욕설·비방(T12)
+    #   (b) 키워드(위험·핵심 / 일반 불만 / 칭찬)가 하나라도 걸리면 아래 2~5단계를 그대로 적용
+    #   (c) 아무것도 걸리지 않을 때만 '별점만'(T11). 빈 글도 T11
+    if len(re.sub(r"\s", "", t)) < TYPES["T11"]["match"]["maxChars"] + 1:
+        if ab["abusive"]:
+            return {"main": "T12", "secondary": [], "abusive": True, "vulgar": ab["vulgar"]}
+        if not (risk or neg or positive):
+            return {"main": "T11", "secondary": [], "abusive": False, "vulgar": False}
     main = None
     if risk:                                               # 2단계: 위험·핵심 유형은 항상 우선
         main = min(risk, key=prio)

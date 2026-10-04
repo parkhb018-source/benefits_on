@@ -7,7 +7,10 @@
 - 원본: `data/review-helper/types.json` 의 `classification.steps`(7단계)와 `types[].match`·`priority`.
 - 참고 구현: `data/review-helper/classify_check.py` → JS 이식: `pages/tools/review-helper/js/classify.js`.
 - 입력: 리뷰 글, 별점(선택, 1~5 또는 없음). 출력: `{ main, secondary, abusive, vulgar }`.
-- 시험: `classify-fixtures.json` 31개. JS 와 Python 의 출력(대표·보조·욕설·거친 표현)이 전 문장 동일해야 한다.
+- 1단계(짧은 글, 공백 제외 5자 미만): 욕설·모욕이 감지되면 T12. 아니면 키워드(위험·핵심 T06·T05·T13, 일반 불만 T01~T04·T07~T10,
+  칭찬 T14)를 먼저 확인해 하나라도 걸리면 2~5단계를 그대로 적용(별점 조건 포함)하고, 아무것도 걸리지 않을 때만 T11. 빈 글도 T11.
+  (2026-10-04 변경: 이전에는 짧으면 키워드와 상관없이 T11 — "맛없어요"가 별점만으로 분류되던 문제)
+- 시험: `classify-fixtures.json` 41개. JS 와 Python 의 출력(대표·보조·욕설·거친 표현)이 전 문장 동일해야 한다.
 
 ## 2. 욕설·모욕 사전
 
