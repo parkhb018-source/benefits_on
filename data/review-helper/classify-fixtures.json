@@ -591,6 +591,42 @@
       "text": "만족스럽지는 않네요",
       "rating": 2,
       "expectMain": null
+    },
+    {
+      "id": "c92",
+      "text": "재주문 안해요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c93",
+      "text": "추천 안 해요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c94",
+      "text": "맛있어서 후회 안해요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c95",
+      "text": "추천합니다 후회 안함",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c96",
+      "text": "맛있어요 걱정 안하셔도 돼요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c97",
+      "text": "양도 많고 맛있어요 실패할 일 없음",
+      "rating": 5,
+      "expectMain": "T14"
     }
   ]
 }

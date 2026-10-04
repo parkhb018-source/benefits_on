@@ -1,5 +1,5 @@
 // 리뷰 대응도우미 JS 엔진 시험 — 실행: node --test tests/review-helper/
-// abuse-tests.json(36개)·classify-fixtures.json(91개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
+// abuse-tests.json(36개)·classify-fixtures.json(97개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -27,9 +27,9 @@ test('욕설 사전 — abuse-tests.json 36개', () => {
   assert.deepEqual(fails, []);
 });
 
-test('유형 분류 — classify-fixtures.json 91개', () => {
+test('유형 분류 — classify-fixtures.json 97개', () => {
   const { cases } = load('classify-fixtures.json');
-  assert.equal(cases.length, 91);
+  assert.equal(cases.length, 97);
   const fails = [];
   for (const c of cases) {
     const r = classify(c.text, c.rating ?? null);
@@ -74,6 +74,13 @@ test('칭찬 보호(positiveGuards) — 막히는 것과 막히지 않는 것', 
     못하겠: '만족 못하겠어요', 못할: '추천 못할 것 같아요',
   };
   for (const [pat, t] of Object.entries(afterCases)) assert.equal(classify(t, null).main, null, `${pat}: ${t}`);
+  // 안해·안하·안함(재주문·또 시킬·추천)·일없·일은없(또 시킬·재주문)은 적용 대상 키워드 뒤 3자 이내에서만 막는다
+  for (const [t, r] of [['재주문 안 해요', null], ['재주문 안해요', 1], ['또 시킬 일 없을 듯', 2], ['추천 안 해요', 1],
+    ['추천은 못 하겠어요', 2], ['만족스럽지는 않네요', 2]]) assert.equal(classify(t, r).main, null, t);
+  for (const t of ['맛있어서 후회 안해요', '추천합니다 후회 안함', '맛있어요 걱정 안하셔도 돼요', '양도 많고 맛있어요 실패할 일 없음']) {
+    assert.equal(classify(t, 5).main, 'T14', t);
+  }
+  assert.equal(classify('추천해요 정말 안해본 맛', null).main, 'T14', '추천 뒤 4자 이상 떨어진 안해 → 안 막힘');
   // 앞 글자 보호가 없는 키워드·다른 앞 글자는 막지 않는다
   const kept = ['불맛있어요', '추천해요', '만족해요', '정말 좋아요', '좋은 재료', '또 시킬게요', '굿', '👍'];
   for (const t of kept) assert.equal(classify(t, null).main, 'T14', t);
@@ -82,7 +89,7 @@ test('칭찬 보호(positiveGuards) — 막히는 것과 막히지 않는 것', 
   assert.equal(classify('맛있어요ㅎㅎㅎㅎㅎ지않', null).main, 'T14', '7자 뒤 → 안 막힘');
 });
 
-test('JS·Python 결과 일치 — 정규화 41개 + 분류 fixture 91개 + 보호 규칙 문장', (t) => {
+test('JS·Python 결과 일치 — 정규화 41개 + 분류 fixture 97개 + 보호 규칙 문장', (t) => {
   const py = fileURLToPath(new URL('../../data/review-helper/classify_check.py', import.meta.url));
   const normalize = load('normalize-fixtures.json').cases.map((c) => c.input);
   const classifyIn = load('classify-fixtures.json').cases.map((c) => [c.text, c.rating ?? null])
