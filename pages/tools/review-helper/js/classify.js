@@ -1,6 +1,7 @@
 // 리뷰 유형 분류 — data/review-helper/classify_check.py 를 그대로 옮긴 것.
 // 규칙 원본은 types.json 의 classification.steps. 판정 문구는 여기 두지 않는다(화면이 types.json 에서 읽음).
 // 규칙을 바꾸면 classify_check.py 와 이 파일을 함께 고치고 classify-fixtures.json 31개를 다시 돌린다.
+import { normalizeForMatch } from './normalize.js?v=20261004c';
 
 const RISK_KEYWORD_TYPES = ['T06', 'T05', 'T13']; // 키워드로 잡는 위험·핵심 유형
 const NEGATIVE_TYPES = ['T01', 'T02', 'T03', 'T04', 'T07', 'T08', 'T09', 'T10'];
@@ -10,7 +11,7 @@ export function createClassifier(typesData, abuseCheck) {
   const TYPES = Object.fromEntries(typesData.types.map((t) => [t.id, t]));
   const KW = {};
   for (const t of typesData.types) {
-    if (t.match.type === 'keywords') KW[t.id] = t.match.keywords.map((k) => k.toLowerCase());
+    if (t.match.type === 'keywords') KW[t.id] = t.match.keywords.map(normalizeForMatch);
   }
   const POSITIVE = KW.T14;
   const prio = (id) => TYPES[id].priority;
@@ -18,7 +19,7 @@ export function createClassifier(typesData, abuseCheck) {
 
   return function classify(text, rating = null) {
     const t = (text || '').trim();
-    const low = t.toLowerCase();
+    const low = normalizeForMatch(t); // 키워드 비교용. 욕설 판정은 원문으로
     const ab = abuseCheck(t);
     const hit = (ids) => ids.filter((id) => KW[id].some((k) => low.includes(k)));
     const risk = hit(RISK_KEYWORD_TYPES).concat(ab.abusive ? ['T12'] : []);

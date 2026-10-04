@@ -4,13 +4,30 @@
 
 사용법:  python classify_check.py            (시험 문장 전체 실행)
          python classify_check.py "리뷰 문장" 2   (한 문장과 별점으로 검사)"""
-import json, re, sys, pathlib
+import json, re, sys, pathlib, unicodedata
 here = pathlib.Path(__file__).parent
 sys.path.insert(0, str(here))
 from abuse_check import check as abuse_check
 
+# 분류 키워드 매칭 전용 표기 정규화 (js/normalize.js 와 결과가 항상 같아야 함)
+# 1) NFC + 소문자  2) 모든 공백 제거  3) 받침만 접기: ㄲ·ㄳ→ㄱ, ㄶ→ㄴ, ㅀ→ㄹ, ㅄ→ㅂ, ㅆ→ㅅ
+# 욕설 판정·화면 표시·답변 초안에는 쓰지 않는다.
+SPACES = re.compile("[\t\n\v\f\r \u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]")
+JONG_FOLD = {2: 1, 3: 1, 6: 4, 15: 8, 18: 17, 20: 19}
+
+
+def normalize_for_match(s):
+    s = SPACES.sub("", unicodedata.normalize("NFC", s or "").lower())
+    out = []
+    for ch in s:
+        code = ord(ch) - 0xAC00
+        jong = code % 28
+        out.append(chr(0xAC00 + code - jong + JONG_FOLD[jong]) if 0 <= code < 11172 and jong in JONG_FOLD else ch)
+    return "".join(out)
+
+
 TYPES = {t["id"]: t for t in json.loads((here / "types.json").read_text(encoding="utf-8"))["types"]}
-KW = {tid: [k.lower() for k in t["match"]["keywords"]] for tid, t in TYPES.items() if t["match"]["type"] == "keywords"}
+KW = {tid: [normalize_for_match(k) for k in t["match"]["keywords"]] for tid, t in TYPES.items() if t["match"]["type"] == "keywords"}
 POSITIVE = KW["T14"]
 RISK_KEYWORD_TYPES = ["T06", "T05", "T13"]                    # 키워드로 잡는 위험·핵심 유형
 NEGATIVE_TYPES = ["T01", "T02", "T03", "T04", "T07", "T08", "T09", "T10"]
@@ -19,7 +36,7 @@ prio = lambda tid: TYPES[tid]["priority"]
 
 def classify(text, rating=None):
     t = (text or "").strip()
-    low = t.lower()
+    low = normalize_for_match(t)                           # 키워드 비교용. 욕설 판정은 원문으로
     ab = abuse_check(t)
     hit = lambda ids: [i for i in ids if any(k in low for k in KW[i])]
     risk = hit(RISK_KEYWORD_TYPES) + (["T12"] if ab["abusive"] else [])
