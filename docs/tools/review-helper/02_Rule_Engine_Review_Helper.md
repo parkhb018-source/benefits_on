@@ -56,7 +56,9 @@
 - 원본: `data/review-helper/abuse-words.json` 의 `matchingRules` 9개.
 - 참고 구현: `abuse_check.py` → JS 이식: `js/abuse.js`.
 - 이식 시 차이 보정: Python `\d`(유니코드 숫자)는 JS `\p{Nd}`(u 플래그), 글자 수는 코드포인트 기준.
-- 시험: `abuse-tests.json` 36개.
+- 시험: `abuse-tests.json` 40개(1.6.2: t17·t18·f21·f22 추가).
+- 범위: 혐오·차별 표현은 원칙적으로 제외. 예외로 비하어 1개(짱깨·짱개)만 `insult`·severity 2·`requiresPerson` 으로 포함(1.6.2) —
+  사람을 가리키는 말이 `personWindowChars` 이내에 있을 때만 모욕. "짱개집인데 배달이 늦었어요"처럼 업종만 가리키면 감지하지 않음.
 
 ## 3. 화면 쪽 보정 규칙 (app.js)
 

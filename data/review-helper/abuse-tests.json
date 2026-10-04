@@ -100,6 +100,18 @@
       "expectVulgar": true
     },
     {
+      "id": "t17",
+      "text": "사장이 짱깨라서 그런지 불친절하네요",
+      "expectAbusive": true,
+      "why": "비하어 + 사람을 가리키는 말 근처"
+    },
+    {
+      "id": "t18",
+      "text": "짱개 사장님 음식이 별로예요",
+      "expectAbusive": true,
+      "why": "변형 표기 + 사람을 가리키는 말"
+    },
+    {
       "id": "f01",
       "text": "존맛 개맛있어요 또 시킬게요",
       "expectAbusive": false,
@@ -220,6 +232,18 @@
       "text": "죽어라 일하는 사장님 모습이 보기 좋아요",
       "expectAbusive": false,
       "why": "'열심히'라는 뜻(제외)"
+    },
+    {
+      "id": "f21",
+      "text": "짱개집인데 배달이 늦었어요",
+      "expectAbusive": false,
+      "why": "사람을 가리키는 말 없음(업종만 가리킴)"
+    },
+    {
+      "id": "f22",
+      "text": "짱깨",
+      "expectAbusive": false,
+      "why": "짧은 단독 표기 — 사람을 가리키는 말이 없음"
     }
   ]
 }

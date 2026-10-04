@@ -1,5 +1,5 @@
 // 리뷰 대응도우미 JS 엔진 시험 — 실행: node --test tests/review-helper/
-// abuse-tests.json(36개)·classify-fixtures.json(114개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
+// abuse-tests.json(40개)·classify-fixtures.json(114개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -15,9 +15,9 @@ const load = (n) => JSON.parse(readFileSync(new URL(`../../data/review-helper/${
 const abuseCheck = createAbuseChecker(load('abuse-words.json'));
 const classify = createClassifier(load('types.json'), abuseCheck);
 
-test('욕설 사전 — abuse-tests.json 36개', () => {
+test('욕설 사전 — abuse-tests.json 40개', () => {
   const { cases } = load('abuse-tests.json');
-  assert.equal(cases.length, 36);
+  assert.equal(cases.length, 40);
   const fails = [];
   for (const c of cases) {
     const r = abuseCheck(c.text);
