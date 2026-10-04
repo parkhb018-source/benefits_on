@@ -35,6 +35,7 @@ test('유형 분류 — classify-fixtures.json 91개', () => {
     const r = classify(c.text, c.rating ?? null);
     if (r.main !== c.expectMain) fails.push(`[${c.id}] main 기대 ${c.expectMain} / 결과 ${r.main}`);
     for (const s of c.expectSecondaryContains || []) if (!r.secondary.includes(s)) fails.push(`[${c.id}] 보조 ${s} 없음`);
+    if (c.expectSecondaryEmpty && r.secondary.length) fails.push(`[${c.id}] 보조 유형이 비어 있어야 함`);
     for (const s of c.expectSecondaryExcludes || []) if (r.secondary.includes(s)) fails.push(`[${c.id}] 보조 ${s} 잘못 붙음`);
     if ('expectAbusive' in c && r.abusive !== c.expectAbusive) fails.push(`[${c.id}] abusive 기대 ${c.expectAbusive}`);
   }

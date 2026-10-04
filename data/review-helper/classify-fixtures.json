@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "리뷰 유형 분류 시험 문장. expectMain=null은 '미분류(사장님이 유형을 직접 고름)'. 칭찬 문장이 불만 유형으로 잘못 분류되지 않는지도 함께 시험한다",
+  "note": "리뷰 유형 분류 시험 문장. expectMain=null은 '미분류(사장님이 유형을 직접 고름)'. 칭찬 문장이 불만 유형으로 잘못 분류되지 않는지도 함께 시험한다. expectSecondaryEmpty=true 는 보조 유형이 하나도 없어야 함",
   "cases": [
     {
       "id": "c01",
@@ -300,7 +300,7 @@
       "id": "c44",
       "text": "굳",
       "rating": null,
-      "expectMain": "T14"
+      "expectMain": "T11"
     },
     {
       "id": "c45",
@@ -534,10 +534,11 @@
       "id": "c83",
       "text": "너무 매력적인 맛이에요",
       "rating": 5,
-      "expectMain": "T14",
+      "expectMain": null,
       "expectSecondaryExcludes": [
         "T03"
-      ]
+      ],
+      "expectSecondaryEmpty": true
     },
     {
       "id": "c84",
@@ -549,10 +550,11 @@
       "id": "c85",
       "text": "항상 맛이 변함없네요",
       "rating": 5,
-      "expectMain": "T14",
+      "expectMain": null,
       "expectSecondaryExcludes": [
         "T03"
-      ]
+      ],
+      "expectSecondaryEmpty": true
     },
     {
       "id": "c86",

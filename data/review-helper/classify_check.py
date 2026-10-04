@@ -105,6 +105,8 @@ def run_tests():
             fails.append(f'[{c["id"]}] 대표 유형 기대 {c["expectMain"]} / 결과 {r["main"]} :: {c["text"]}')
         for s in c.get("expectSecondaryContains", []):
             if s not in r["secondary"]: fails.append(f'[{c["id"]}] 보조 유형 {s} 없음 :: {c["text"]}')
+        if c.get("expectSecondaryEmpty") and r["secondary"]:
+            fails.append(f'[{c["id"]}] 보조 유형이 비어 있어야 함 / 결과 {r["secondary"]} :: {c["text"]}')
         for s in c.get("expectSecondaryExcludes", []):
             if s in r["secondary"]: fails.append(f'[{c["id"]}] 보조 유형 {s}가 잘못 붙음 :: {c["text"]}')
         if "expectAbusive" in c and r["abusive"] != c["expectAbusive"]:
