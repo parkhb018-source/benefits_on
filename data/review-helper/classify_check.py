@@ -36,8 +36,8 @@ GUARD_BEFORE = {}                                                               
 for g in GUARDS["before"]:
     for k in g["keywords"]:
         GUARD_BEFORE.setdefault(normalize_for_match(k), []).extend(normalize_for_match(c) for c in g["chars"])
-GUARD_AFTER = [normalize_for_match(p) for p in GUARDS["after"]["patterns"]]
-GUARD_WITHIN = GUARDS["after"]["withinChars"]
+GUARD_AFTER = [(set(map(normalize_for_match, g["appliesTo"])) if "appliesTo" in g else None,   # 적용 키워드(None=전부)
+                [normalize_for_match(p) for p in g["patterns"]], g["withinChars"]) for g in GUARDS["after"]]
 RISK_KEYWORD_TYPES = ["T06", "T05", "T13"]                    # 키워드로 잡는 위험·핵심 유형
 NEGATIVE_TYPES = ["T01", "T02", "T03", "T04", "T07", "T08", "T09", "T10"]
 prio = lambda tid: TYPES[tid]["priority"]
@@ -51,7 +51,8 @@ def positive_hits(low):
         while s != -1:
             e = s + len(k)
             before = s > 0 and low[s - 1] in GUARD_BEFORE.get(k, ())                    # 앞 글자로 막기
-            after = any(0 <= low.find(p, e) - e <= GUARD_WITHIN for p in GUARD_AFTER)   # 뒤 표현으로 막기
+            after = any((ks is None or k in ks) and any(0 <= low.find(p, e) - e <= w for p in ps)
+                        for ks, ps, w in GUARD_AFTER)                                     # 뒤 표현으로 막기
             blocked = before or after
             guarded, ok = guarded or blocked, ok or not blocked
             s = low.find(k, s + 1)

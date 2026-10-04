@@ -23,8 +23,11 @@ export function createClassifier(typesData, abuseCheck) {
       GUARD_BEFORE[key] = (GUARD_BEFORE[key] || []).concat(g.chars.map(normalizeForMatch));
     }
   }
-  const GUARD_AFTER = positiveGuards.after.patterns.map(normalizeForMatch);
-  const GUARD_WITHIN = positiveGuards.after.withinChars;
+  const GUARD_AFTER = positiveGuards.after.map((g) => ({
+    keys: g.appliesTo ? g.appliesTo.map(normalizeForMatch) : null, // 적용 키워드(null=전부)
+    patterns: g.patterns.map(normalizeForMatch),
+    within: g.withinChars,
+  }));
   const prio = (id) => TYPES[id].priority;
   const minByPrio = (ids) => ids.reduce((a, b) => (prio(b) < prio(a) ? b : a));
   // 글자 수는 Python 과 같게 코드 포인트로 센다(이모지 등)
@@ -39,10 +42,10 @@ export function createClassifier(typesData, abuseCheck) {
         const e = s + k.length;
         const prev = s > 0 ? Array.from(low.slice(0, s)).pop() : '';
         const before = s > 0 && (GUARD_BEFORE[k] || []).includes(prev); // 앞 글자로 막기
-        const after = GUARD_AFTER.some((p) => { // 뒤 표현으로 막기
+        const after = GUARD_AFTER.some((g) => (!g.keys || g.keys.includes(k)) && g.patterns.some((p) => { // 뒤 표현으로 막기
           const i = low.indexOf(p, e);
-          return i !== -1 && cpLen(low.slice(e, i)) <= GUARD_WITHIN;
-        });
+          return i !== -1 && cpLen(low.slice(e, i)) <= g.within;
+        }));
         if (before || after) guarded = true;
         else ok = true;
       }

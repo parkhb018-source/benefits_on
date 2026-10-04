@@ -49,6 +49,9 @@ t14 = next(t for t in typ["types"] if t["id"] == "T14")["match"]["keywords"]
 for g in typ["classification"]["positiveGuards"]["before"]:
     for k in g["keywords"]:
         if k not in t14: errors.append(f'positiveGuards: "{k}"가 T14 키워드에 없음')
+for g in typ["classification"]["positiveGuards"]["after"]:
+    for k in g.get("appliesTo", []):
+        if k not in t14: errors.append(f'positiveGuards.after: "{k}"가 T14 키워드에 없음')
 pr = [t["priority"] for t in typ["types"]]
 if len(pr) != len(set(pr)): errors.append("types: priority 중복")
 
