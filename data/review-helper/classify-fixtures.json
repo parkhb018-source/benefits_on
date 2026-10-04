@@ -257,13 +257,13 @@
       "id": "c37",
       "text": "굿",
       "rating": 5,
-      "expectMain": "T11"
+      "expectMain": "T14"
     },
     {
       "id": "c38",
       "text": "최악",
       "rating": 1,
-      "expectMain": "T11"
+      "expectMain": null
     },
     {
       "id": "c39",
