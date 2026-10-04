@@ -5,13 +5,14 @@
 
 import {
   TOOL_ID, HUB_URL, PLATFORM_CHIPS, DEFAULT_PLATFORM, DEFAULT_TONE, DESKTOP_MIN_WIDTH, OCR_ENABLED,
-} from './js/config.js?v=20261004d';
-import { loadData } from './js/data.js?v=20261004d';
-import { createAbuseChecker } from './js/abuse.js?v=20261004d';
-import { createClassifier } from './js/classify.js?v=20261004d';
-import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261004d';
-import { policyFlags } from './js/policy.js?v=20261004d';
-import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261004d';
+} from './js/config.js?v=20261005';
+import { loadData } from './js/data.js?v=20261005';
+import { createAbuseChecker } from './js/abuse.js?v=20261005';
+import { createClassifier } from './js/classify.js?v=20261005';
+import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261005';
+import { policyFlags } from './js/policy.js?v=20261005';
+import { shouldShowChecklist } from './js/report-gate.js?v=20261005';
+import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261005';
 
 const SAMPLE_REVIEW = '배달이 너무 늦게 와서 음식이 다 식었어요. 다시는 안 시킬 것 같아요.';
 const MSG_CHECKING = '아직 확인 중인 정보예요. 공식 안내를 꼭 확인하세요.';
@@ -58,8 +59,8 @@ const EL_IDS = [
   'midEmpty', 'rightEmpty', 'deskOfficialCard', 'deskOfficial',
   'resTitle', 'resPills', 'resAdvice', 'resAdviceText', 'resStatus', 'resReason', 'resAbuseExtra', 'resSecondary',
   'resToggle', 'resTypeChips', 'resChecksCard', 'resChecks', 'resPolicyName', 'resPolicyLine', 'resPolicyFlag',
-  'resNextCard', 'resStep2', 'resStep2Title', 'resStep2Desc', 'resToReply', 'resReset',
-  'repList', 'repOfficial',
+  'resNextCard', 'resStep2', 'resStep2Title', 'resStep2Desc', 'resRouteGuide', 'resToReply', 'resReset',
+  'repList', 'repOfficial', 'repRouteGuide',
   'replyTypeChips', 'replyBanner', 'replyToneChips', 'replyBlankCount', 'replyPreview', 'replyBlanks', 'replyBlankWarn', 'replyCopy', 'replyReset',
 ];
 const el = {};
@@ -93,6 +94,9 @@ function statusFor(type) {
   if (state.result && state.result.abusive && (key === 'not_target' || key === 'principle_not_target')) key = 'may_review';
   return DATA.types.reportStatuses[key];
 }
+
+// 신고 전 체크리스트는 현재 선택된 유형(사장님이 바꾼 유형 포함) 기준으로만 보여 준다(types.json reportCandidateStatuses).
+const checklistOn = () => !!state.result && shouldShowChecklist(state.type, state.result.abusive, DATA.types);
 
 function policyLine(p, withVerified) {
   const pol = p.policy;
@@ -129,7 +133,8 @@ function applyRoute(userNav) {
   if (isDesktop()) {
     for (const r of ['home', 'paste', 'capture']) show(SCREENS[r], false);
     show('scrConfirm', true);
-    for (const r of ['result', 'report', 'reply']) show(SCREENS[r], state.analyzed);
+    for (const r of ['result', 'reply']) show(SCREENS[r], state.analyzed);
+    show('scrReport', state.analyzed && checklistOn());
     show('midEmpty', !state.analyzed);
     show('rightEmpty', !state.analyzed);
     show('deskOfficialCard', state.analyzed);
@@ -271,10 +276,14 @@ function renderResult() {
   $('resPolicyFlag').textContent = flag;
   show('resPolicyFlag', !!flag);
 
+  const checklist = checklistOn();
+  if (isDesktop()) show('scrReport', checklist);
+  show('resRouteGuide', checklist);
+  show('repRouteGuide', checklist);
   show('resNextCard', typed);
   if (typed) {
     const s2 = type.result.step2;
-    show('resStep2', !!s2);
+    show('resStep2', !!s2 && checklist);
     if (s2) {
       $('resStep2Title').textContent = s2.title;
       $('resStep2Desc').textContent = s2.desc;
@@ -317,6 +326,16 @@ function renderReport() {
       return h('li', {}, [text, link]);
     }));
   }
+}
+
+// 정적 섹션 '공식 신고 경로 안내'(접힘)를 열고 그쪽으로 옮긴다.
+// 해시 라우팅을 쓰므로 앵커(href="#…")로 이동하면 라우터가 화면을 바꾼다 — 해시는 건드리지 않는다.
+function openRouteGuide() {
+  const details = $('routeH').closest('details');
+  details.open = true;
+  details.querySelector('summary').focus({ preventScroll: true });
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  details.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
 }
 
 // ===== 4. 답변 초안 =====
@@ -555,6 +574,7 @@ function bindEvents() {
       renderRatingChips();
       return;
     }
+    if (e.target.closest('[data-route-guide]')) { openRouteGuide(); return; }
     const ty = e.target.closest('[data-type]');
     if (ty) { setType(ty.dataset.type); return; }
     const tn = e.target.closest('[data-tone]');

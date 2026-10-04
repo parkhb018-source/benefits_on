@@ -61,6 +61,7 @@
 - `priority`: 여러 유형이 걸릴 때 숫자가 작은 유형을 대표로 사용.
 - `reportStatus`: 신고 대상 표시. `reportStatuses`에서 문구를 찾습니다.
   - `not_target` 신고대상은 아닙니다. · `principle_not_target` 원칙적으로 신고대상은 아닙니다. · `check_first` 상황부터 확인하세요. · `verify_records` 주문 기록을 확인한 뒤에 판단하세요. · `may_review` 신고 검토가 가능할 수 있어요. · `not_applicable` 해당 없음
+- `reportCandidateStatuses`(최상위): 신고 전 체크리스트를 보여 줄 `reportStatus` 목록. 지금은 `may_review`·`check_first`·`verify_records`(욕설·비방·이물질·위생·사실 확인). 현재 유형의 `reportStatus`가 이 목록에 있거나 욕설·비방·개인정보 표현이 감지되면 체크리스트와 "공식 신고 경로 안내" 안내 줄을 보여 주고, 아니면 숨깁니다. 목록만 고치면 노출 유형이 바뀝니다(값은 `reportStatuses` 키여야 하며 `validate.py`가 확인). 숨겨도 `result.step2`는 지우지 않습니다.
 - `caution`: `true`이면 안내 상자를 주황색으로 표시(이물질·위생, 욕설·비방, 사실 확인).
 - `result`: 분석 결과 화면에 쓰는 제목, 태그, 조언, 이유, 확인해 볼 점, 다음 단계.
 - `replyBanner`: 답변 초안 화면의 한 줄 안내.
@@ -122,7 +123,7 @@
 | 분석 결과 | `types.json`에서 유형을 찾아 제목·신고 문구·이유·확인할 점 표시 |
 | 관련 플랫폼 정책 | 선택한 플랫폼의 `policy.versionLabel`, `verifiedDate`, 공식 링크 |
 | 답변 초안 | `templates.json`에서 유형·말투에 맞는 템플릿, `types.json`의 `replyBanner` |
-| 신고 전 체크리스트 | `checklist.json` 문항 + 선택한 플랫폼의 `basis` |
+| 신고 전 체크리스트 | `checklist.json` 문항 + 선택한 플랫폼의 `basis` (노출 여부는 `types.json`의 `reportCandidateStatuses`) |
 
 **표시 규칙**
 1. 플랫폼 정책 카드에는 시행일과 확인일을 항상 함께 보여 줍니다.

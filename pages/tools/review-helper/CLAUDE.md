@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 로컬: `python -m http.server 8000` → `http://localhost:8000/pages/tools/review-helper/`.
   ESM + 절대경로 fetch(`/data/review-helper/…`)라 `file://` 로는 안 열리고, 반드시 저장소 루트에서 띄운다.
-- JS 엔진 시험: `node --test tests/review-helper/engine.test.mjs tests/review-helper/josa.test.mjs tests/review-helper/ocr-clean.test.mjs`
+- JS 엔진 시험: `node --test tests/review-helper/engine.test.mjs tests/review-helper/josa.test.mjs tests/review-helper/ocr-clean.test.mjs tests/review-helper/report-gate.test.mjs`
   (욕설 36개·분류 97개·정규화 41개·칭찬 보호 규칙·JS↔Python 결과 일치·수용 기준 문장·빈칸·정책 판단.
   일치 시험은 `python`/`py` 로 `classify_check.py --dump` 를 불러 비교하며, 실행 파일이 없으면 건너뜀)
 - 데이터·참고 구현 시험: `python data/review-helper/validate.py`, `abuse_check.py`, `classify_check.py`
@@ -34,6 +34,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   보호 규칙을 늘리기 전에 사용자 확인을 받는다.
 - **`js/fill.js`** — 템플릿 `[빈칸]` 찾기·채우기·남은 수. 미리보기·복사 모두 `js/josa.js` 의 `resolveJosa` 를 거친다(화면 = 복사 결과).
 - **`js/josa.js`** — 채운 빈칸 뒤 조사 보정(으로/로·을/를·은/는·이/가, 서술격 "였"→"이었", 다음 글자가 한글이면 미적용, 한글 아닌 값은 "(으)로" 같은 중립 표기). `templates.json` 원문은 고치지 않는다. **`js/policy.js`** — 확인 중/확인일 경과 판단.
+- **`js/report-gate.js`** — 신고 전 체크리스트 노출 판단 `shouldShowChecklist(typeId, abusive, typesData)`(순수 함수).
+  현재 선택된 유형의 `reportStatus` 가 `types.json` `reportCandidateStatuses` 에 있거나 욕설이 감지되면 보임. 유형 ID 를 코드에 적지 않는다.
+  보일 때만 "공식 신고 경로 안내 보기" 버튼이 나오며, 이 버튼은 해시를 바꾸지 않고 정적 `details` 를 열어 스크롤한다(앵커 이동 금지).
 - **`js/config.js`** — `HUB_URL`·데이터 경로·플랫폼 칩·`OCR_ENABLED`·`TESSERACT` 등 설정값.
 - **`js/ocr.js`** — Tesseract 지연 로드·이미지 축소(긴 변 `OCR_MAX_SIDE`)·시간 제한(`OCR_TIMEOUT_MS`)·정리.
 - **`js/ocr-clean.js`** — 읽은 글자에서 깨진 줄만 보수적으로 제거(의미 문자 2개 미만이면서 한글 음절 없음, 또는 의미 문자 비율 40% 미만). 지운 줄이 있으면 확인 화면에 안내.
@@ -67,7 +70,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 개발 문서: `docs/tools/review-helper/` (PRD·TASKS·OPEN-ITEMS·DESIGN-TOKENS·02_Rule_Engine·03_QA_Test_Cases·
   CHANGELOG·design-reference). 모든 코드 변경은 `CHANGELOG.md` 에 기록.
-- 캐시 버스터: `index.html` 의 `style.css?v=`·`app.js?v=`, `app.js` 의 `js/*.js?v=` import 7건,
+- 캐시 버스터: `index.html` 의 `style.css?v=`·`app.js?v=`, `app.js` 의 `js/*.js?v=` import 8건,
   `js/data.js`·`js/ocr.js` 의 `config.js?v=`, `js/fill.js` 의 `josa.js?v=`, `js/ocr.js` 의 `ocr-clean.js?v=`,
   `js/classify.js` 의 `normalize.js?v=` import 는 **항상 같은 값(YYYYMMDD)**. 한 파일만 고쳐도 전부 올린다.
 - 배포: 저장소 `main` push → GitHub Pages / Cloudflare Pages. `data/**/*.json` 변경은
