@@ -59,8 +59,8 @@ const EL_IDS = [
   'midEmpty', 'rightEmpty', 'deskOfficialCard', 'deskOfficial',
   'resTitle', 'resPills', 'resAdvice', 'resAdviceText', 'resStatus', 'resReason', 'resAbuseExtra', 'resSecondary',
   'resToggle', 'resTypeChips', 'resChecksCard', 'resChecks', 'resPolicyName', 'resPolicyLine', 'resPolicyFlag',
-  'resNextCard', 'resStep2', 'resStep2Title', 'resStep2Desc', 'resToReply', 'resReset',
-  'repList', 'repOfficial',
+  'resNextCard', 'resStep2', 'resStep2Title', 'resStep2Desc', 'resRouteGuide', 'resToReply', 'resReset',
+  'repList', 'repOfficial', 'repRouteGuide',
   'replyTypeChips', 'replyBanner', 'replyToneChips', 'replyBlankCount', 'replyPreview', 'replyBlanks', 'replyBlankWarn', 'replyCopy', 'replyReset',
 ];
 const el = {};
@@ -278,6 +278,8 @@ function renderResult() {
 
   const checklist = checklistOn();
   if (isDesktop()) show('scrReport', checklist);
+  show('resRouteGuide', checklist);
+  show('repRouteGuide', checklist);
   show('resNextCard', typed);
   if (typed) {
     const s2 = type.result.step2;
@@ -324,6 +326,16 @@ function renderReport() {
       return h('li', {}, [text, link]);
     }));
   }
+}
+
+// 정적 섹션 '공식 신고 경로 안내'(접힘)를 열고 그쪽으로 옮긴다.
+// 해시 라우팅을 쓰므로 앵커(href="#…")로 이동하면 라우터가 화면을 바꾼다 — 해시는 건드리지 않는다.
+function openRouteGuide() {
+  const details = $('routeH').closest('details');
+  details.open = true;
+  details.querySelector('summary').focus({ preventScroll: true });
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  details.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
 }
 
 // ===== 4. 답변 초안 =====
@@ -562,6 +574,7 @@ function bindEvents() {
       renderRatingChips();
       return;
     }
+    if (e.target.closest('[data-route-guide]')) { openRouteGuide(); return; }
     const ty = e.target.closest('[data-type]');
     if (ty) { setType(ty.dataset.type); return; }
     const tn = e.target.closest('[data-tone]');

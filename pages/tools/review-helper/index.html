@@ -309,6 +309,11 @@ data-ad-height = "100"></ins>
               <li><a href="#reply" class="rh-step"><span class="rh-step-no" aria-hidden="true">1</span><span><strong>답변 초안 만들기</strong><span class="rh-muted">말투를 고르고 빈칸을 채워 복사해요.</span></span></a></li>
               <li id="resStep2"><a href="#report" class="rh-step"><span class="rh-step-no" aria-hidden="true">2</span><span><strong id="resStep2Title"></strong><span class="rh-muted" id="resStep2Desc"></span></span></a></li>
             </ol>
+            <!-- 초안 문구(사장님 검수 대상). 해시를 바꾸지 않는 버튼이어야 한다(app.js openRouteGuide) -->
+            <div class="rh-route-guide" id="resRouteGuide" hidden>
+              <p class="rh-help">신고를 검토 중이라면 아래 '공식 신고 경로 안내'에서 플랫폼별 접수 경로를 확인해 보세요.</p>
+              <button type="button" class="rh-text-btn" data-route-guide>공식 신고 경로 안내 보기</button>
+            </div>
           </div>
 
           <div class="rh-actions rh-only-mobile">
@@ -332,6 +337,11 @@ data-ad-height = "100"></ins>
           <div class="rh-card rh-only-mobile">
             <h3 class="rh-card-title">공식 안내 바로가기</h3>
             <ul class="rh-official" id="repOfficial"></ul>
+          </div>
+          <!-- 초안 문구(사장님 검수 대상). 해시를 바꾸지 않는 버튼이어야 한다(app.js openRouteGuide) -->
+          <div class="rh-route-guide" id="repRouteGuide" hidden>
+            <p class="rh-help">신고를 검토 중이라면 아래 '공식 신고 경로 안내'에서 플랫폼별 접수 경로를 확인해 보세요.</p>
+            <button type="button" class="rh-text-btn" data-route-guide>공식 신고 경로 안내 보기</button>
           </div>
         </div>
       </section>
