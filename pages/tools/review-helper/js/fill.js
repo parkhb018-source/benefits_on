@@ -1,7 +1,7 @@
 // 답변 템플릿의 [빈칸] 처리 — 찾기, 채우기, 남은 빈칸 세기. DOM 의존 없음.
 // values 는 { '[가게 이름]': '○○분식', ... } 처럼 빈칸 토큰을 키로 쓴다. 빈 문자열은 '안 채움'.
 
-import { resolveJosa } from './josa.js?v=20261005';
+import { resolveJosa } from './josa.js?v=20261005b';
 
 const TOKEN_RE = /\[[^\]]+\]/g;
 
