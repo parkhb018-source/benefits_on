@@ -112,12 +112,26 @@ def run_tests():
     return len(cases), fails
 
 
+def run_normalize_tests():
+    cases = json.loads((here / "normalize-fixtures.json").read_text(encoding="utf-8"))["cases"]
+    fails = [f'[{c["id"]}] 정규화 기대 {c["expect"]!r} / 결과 {normalize_for_match(c["input"])!r}'
+             for c in cases if normalize_for_match(c["input"]) != c["expect"]]
+    return len(cases), fails
+
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1 and sys.argv[1] == "--dump":
+        # JS 시험(engine.test.mjs)이 두 구현의 결과를 비교할 때 쓴다.
+        # 표준 입력 {"normalize": [글...], "classify": [[글, 별점]...]} -> 표준 출력 같은 순서의 결과(JSON)
+        req = json.loads(sys.stdin.buffer.read().decode("utf-8"))
+        print(json.dumps({"normalize": [normalize_for_match(s) for s in req["normalize"]],
+                          "classify": [classify(t, r) for t, r in req["classify"]]}))
+    elif len(sys.argv) > 1:
         rating = int(sys.argv[2]) if len(sys.argv) > 2 else None
         print(json.dumps(classify(sys.argv[1], rating), ensure_ascii=False, indent=2))
     else:
         n, f = run_tests()
-        print(f"분류 시험 문장 {n}개 중 {n - len(f)}개 통과")
-        for x in f: print("실패:", x)
-        sys.exit(1 if f else 0)
+        nn, nf = run_normalize_tests()
+        print(f"분류 시험 문장 {n}개 중 {n - len(f)}개 통과 · 정규화 시험 {nn}개 중 {nn - len(nf)}개 통과")
+        for x in f + nf: print("실패:", x)
+        sys.exit(1 if f or nf else 0)

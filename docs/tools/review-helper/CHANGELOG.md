@@ -2,6 +2,7 @@
 
 | Version | Date | Type | Description |
 |---|---|---|---|
+| 1.5.0 | 2026-10-04 | Minor | 분류 키워드 보강·표기 변형 처리. ① 표기 정규화(js/normalize.js · classify_check.py normalize_for_match): NFC+소문자 → 공백 제거 → 받침 ㅆ→ㅅ·ㄲ/ㄳ→ㄱ·ㅄ→ㅂ·ㄶ→ㄴ·ㅀ→ㄹ, 리뷰 글과 키워드 모두에 적용(욕설 판정·화면·답변에는 미적용, ㅐ/ㅔ 접기 미적용). ② classification.generalNegative 신설: 일반 불만 표현만 걸리면 짧은 글도 T11 대신 미분류, 칭찬+일반 불만 표현만이면 별점 ≤2 미분류·5 T14·그 외 T15. ③ classification.positiveGuards: 불만족·비추천·안 좋아요·맛있지 않아요·재주문 의사 없음 등에서 칭찬 키워드를 세지 않음. ④ 키워드 추가 T14 22개(명시 변형 6개 포함)·T03 15개·T01 5개·T02 6개("안 와/안 오"는 T05 누락 문장과 겹쳐 보류, "친절"은 불친절과 겹쳐 미추가). ⑤ classify-fixtures.json 40개 추가(c42~c81), normalize-fixtures.json 41개 신설, engine.test.mjs 에 정규화·보호 규칙·JS↔Python 일치 시험. 기존 c37(굿 5점→T11)·c38(최악 1점→T11)은 새 규칙과 충돌해 미통과(기대값 미변경). ?v=20261004d. |
 | 1.4.0 | 2026-10-04 | Minor | 분류 1단계 변경: 공백 제외 5자 미만이어도 키워드(위험·핵심·일반 불만·칭찬)가 걸리면 2~5단계를 적용하고, 아무것도 없을 때만 T11("맛없어요"→T03, "맛있어요"(5)→T14). classify_check.py·js/classify.js·types.json steps 1 설명·classify-fixtures.json(c31 T11→T03, c32~c41 추가) 함께 수정. ?v=20261004c. |
 | 1.3.6 | 2026-10-04 | Patch | 정적 섹션 4개(사용 방법·유형별 대응 요령·공식 신고 경로·FAQ)를 기본 접힘 details/summary 로 변경(문구 변경 없음). FAQ 안쪽의 질문별 접기는 중첩을 피하려고 질문(h3)·답변(p)으로 펼침. style.css?v=20261004b. |
 | 1.3.5 | 2026-10-04 | Patch | 배민 versionLabel 과 정적 안내에서 "[현행] " 라벨 제거. 공식 신고 경로 안내 첫 문단의 확인일 문장을 "정책별 확인일은 신고 전 체크리스트 화면에서" 로 변경. |

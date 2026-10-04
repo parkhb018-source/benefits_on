@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "dataVersion": "2026-10-02",
+  "dataVersion": "2026-10-04",
   "disclaimer": "참고용 안내이며, 최종 판단은 각 플랫폼 정책에 따라요.",
   "displayRules": [
     "reportStatus가 not_target인 유형은 욕설·비방·개인정보 키워드가 감지되지 않을 때만 쓴다",

@@ -6,8 +6,8 @@
 |---|---|
 | `python data/review-helper/validate.py` | 데이터 연결·확인일·단정 표현·사전/분류 시험 |
 | `python data/review-helper/abuse_check.py` | 욕설 사전 36개 |
-| `python data/review-helper/classify_check.py` | 유형 분류 41개 |
-| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 36·분류 41·PRD §10-2 문장 4개·빈칸·정책 판단 |
+| `python data/review-helper/classify_check.py` | 유형 분류 81개 · 표기 정규화 41개 |
+| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 36·분류 81·정규화 41·칭찬 보호 규칙·JS↔Python 결과 일치·PRD §10-2 문장 4개·빈칸·정책 판단 |
 
 ## 수동 점검 (PRD §10, TASKS 7단계)
 
