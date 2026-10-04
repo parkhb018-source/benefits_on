@@ -5,14 +5,14 @@
 
 import {
   TOOL_ID, HUB_URL, PLATFORM_CHIPS, DEFAULT_PLATFORM, DEFAULT_TONE, DESKTOP_MIN_WIDTH, OCR_ENABLED,
-} from './js/config.js?v=20261004d';
-import { loadData } from './js/data.js?v=20261004d';
-import { createAbuseChecker } from './js/abuse.js?v=20261004d';
-import { createClassifier } from './js/classify.js?v=20261004d';
-import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261004d';
-import { policyFlags } from './js/policy.js?v=20261004d';
-import { shouldShowChecklist } from './js/report-gate.js?v=20261004d';
-import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261004d';
+} from './js/config.js?v=20261005';
+import { loadData } from './js/data.js?v=20261005';
+import { createAbuseChecker } from './js/abuse.js?v=20261005';
+import { createClassifier } from './js/classify.js?v=20261005';
+import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261005';
+import { policyFlags } from './js/policy.js?v=20261005';
+import { shouldShowChecklist } from './js/report-gate.js?v=20261005';
+import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261005';
 
 const SAMPLE_REVIEW = '배달이 너무 늦게 와서 음식이 다 식었어요. 다시는 안 시킬 것 같아요.';
 const MSG_CHECKING = '아직 확인 중인 정보예요. 공식 안내를 꼭 확인하세요.';

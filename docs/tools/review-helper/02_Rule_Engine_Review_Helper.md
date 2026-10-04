@@ -65,6 +65,9 @@
 | 대표 유형이 T12 가 아니고 `abusive` 이면 "욕설·비방 표현도 감지됐어요…" 한 줄 추가 | PRD §3-3 |
 | `vulgar` 이면 태그에 "거친 표현" 추가 | PRD §4 |
 | 미분류(`main = null`)면 유형 칩을 펼친 채 "유형을 골라 주세요" | classification.steps 1·3·6 |
+| 신고 전 체크리스트 노출(1.6.0): 현재 선택된 유형의 `reportStatus` 가 `types.json` `reportCandidateStatuses`(may_review·check_first·verify_records → T12·T06·T13)에 있거나 `abusive` 이면 보여 주고, 그 밖(미분류 포함)은 숨긴다. 사장님이 유형을 바꾸면 즉시 다시 판단. 판단은 `js/report-gate.js` `shouldShowChecklist(typeId, abusive, typesData)` | `types.json` displayRules 4 |
+| 체크리스트를 숨기면 모바일 결과의 다음 단계 ②(`step2`)·경로 안내 줄, PC 가운데 열의 체크리스트 화면을 `hidden` 으로 숨긴다(`step2` 데이터는 유지). 모바일 `#report` 로 직접 들어오면 화면은 그대로 동작하고(문항·공식 안내 표시) 경로 안내 줄만 숨김. "관련 플랫폼 정책 → 자세히 보기"(→ `#report`)는 그대로 둔다 | 1.6.0 |
+| 체크리스트가 보일 때 "공식 신고 경로 안내 보기" 버튼: 정적 섹션(`#routeH` 의 `details`)을 열고 `scrollIntoView` + `summary` 포커스. 해시는 바꾸지 않는다(앵커 이동 금지 — 해시 라우터가 화면을 바꿈) | 1.6.0 |
 
 ## 4. 정책 표시 (js/policy.js)
 
