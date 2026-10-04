@@ -5,13 +5,13 @@
 
 import {
   TOOL_ID, HUB_URL, PLATFORM_CHIPS, DEFAULT_PLATFORM, DEFAULT_TONE, DESKTOP_MIN_WIDTH, OCR_ENABLED,
-} from './js/config.js?v=20261004c';
-import { loadData } from './js/data.js?v=20261004c';
-import { createAbuseChecker } from './js/abuse.js?v=20261004c';
-import { createClassifier } from './js/classify.js?v=20261004c';
-import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261004c';
-import { policyFlags } from './js/policy.js?v=20261004c';
-import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261004c';
+} from './js/config.js?v=20261004d';
+import { loadData } from './js/data.js?v=20261004d';
+import { createAbuseChecker } from './js/abuse.js?v=20261004d';
+import { createClassifier } from './js/classify.js?v=20261004d';
+import { listBlanks, splitTemplate, fillTemplate, countBlanksLeft } from './js/fill.js?v=20261004d';
+import { policyFlags } from './js/policy.js?v=20261004d';
+import { prepareOcr, recognizeImage, terminateOcr, isOcrBusy } from './js/ocr.js?v=20261004d';
 
 const SAMPLE_REVIEW = '배달이 너무 늦게 와서 음식이 다 식었어요. 다시는 안 시킬 것 같아요.';
 const MSG_CHECKING = '아직 확인 중인 정보예요. 공식 안내를 꼭 확인하세요.';

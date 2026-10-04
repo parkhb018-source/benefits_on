@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "note": "분류 매칭용 표기 정규화(classify_check.py normalize_for_match / js/normalize.js normalizeForMatch) 시험. 두 구현이 모두 expect 와 같아야 한다.",
+  "cases": [
+    {
+      "id": "n01",
+      "desc": "받침 ㅆ→ㅅ",
+      "input": "있",
+      "expect": "잇"
+    },
+    {
+      "id": "n02",
+      "desc": "받침 ㄲ→ㄱ",
+      "input": "밖",
+      "expect": "박"
+    },
+    {
+      "id": "n03",
+      "desc": "받침 ㄳ→ㄱ",
+      "input": "넋",
+      "expect": "넉"
+    },
+    {
+      "id": "n04",
+      "desc": "받침 ㅄ→ㅂ",
+      "input": "값",
+      "expect": "갑"
+    },
+    {
+      "id": "n05",
+      "desc": "받침 ㄶ→ㄴ",
+      "input": "않",
+      "expect": "안"
+    },
+    {
+      "id": "n06",
+      "desc": "받침 ㅀ→ㄹ",
+      "input": "앓",
+      "expect": "알"
+    },
+    {
+      "id": "n07",
+      "desc": "받침 접기",
+      "input": "맛있다",
+      "expect": "맛잇다"
+    },
+    {
+      "id": "n08",
+      "desc": "받침 접기",
+      "input": "맛없다",
+      "expect": "맛업다"
+    },
+    {
+      "id": "n09",
+      "desc": "받침 접기",
+      "input": "늦었어요",
+      "expect": "늦엇어요"
+    },
+    {
+      "id": "n10",
+      "desc": "받침 접기",
+      "input": "했어요",
+      "expect": "햇어요"
+    },
+    {
+      "id": "n11",
+      "desc": "받침 접기",
+      "input": "샜어요",
+      "expect": "샛어요"
+    },
+    {
+      "id": "n12",
+      "desc": "받침 접기",
+      "input": "빠졌어요",
+      "expect": "빠졋어요"
+    },
+    {
+      "id": "n13",
+      "desc": "초성 ㄲ은 유지",
+      "input": "깎았어요",
+      "expect": "깍앗어요"
+    },
+    {
+      "id": "n14",
+      "desc": "받침 접기",
+      "input": "싫어요",
+      "expect": "실어요"
+    },
+    {
+      "id": "n15",
+      "desc": "받침 접기",
+      "input": "많이",
+      "expect": "만이"
+    },
+    {
+      "id": "n16",
+      "desc": "받침 접기",
+      "input": "몫",
+      "expect": "목"
+    },
+    {
+      "id": "n17",
+      "desc": "다른 겹받침 유지(ㄺ)",
+      "input": "닭",
+      "expect": "닭"
+    },
+    {
+      "id": "n18",
+      "desc": "ㅎ 받침 유지",
+      "input": "좋아요",
+      "expect": "좋아요"
+    },
+    {
+      "id": "n19",
+      "desc": "ㅐ/ㅔ 접기 미적용",
+      "input": "베달",
+      "expect": "베달"
+    },
+    {
+      "id": "n20",
+      "desc": "ㅐ/ㅔ 접기 미적용",
+      "input": "배달",
+      "expect": "배달"
+    },
+    {
+      "id": "n21",
+      "desc": "공백 제거",
+      "input": "맛 없어요",
+      "expect": "맛업어요"
+    },
+    {
+      "id": "n22",
+      "desc": "탭·줄바꿈 제거",
+      "input": "맛\t없\n어요",
+      "expect": "맛업어요"
+    },
+    {
+      "id": "n23",
+      "desc": "앞뒤 공백 제거",
+      "input": "  굿  ",
+      "expect": "굿"
+    },
+    {
+      "id": "n24",
+      "desc": "NBSP 제거",
+      "input": "맛\u00a0있다",
+      "expect": "맛잇다"
+    },
+    {
+      "id": "n25",
+      "desc": "전각 공백 제거",
+      "input": "맛\u3000있다",
+      "expect": "맛잇다"
+    },
+    {
+      "id": "n26",
+      "desc": "소문자",
+      "input": "JMT",
+      "expect": "jmt"
+    },
+    {
+      "id": "n27",
+      "desc": "영문+한글",
+      "input": "Good 굿",
+      "expect": "good굿"
+    },
+    {
+      "id": "n28",
+      "desc": "숫자 유지",
+      "input": "1시간 걸렸",
+      "expect": "1시간걸렷"
+    },
+    {
+      "id": "n29",
+      "desc": "기호 유지",
+      "input": "맛있어요!!",
+      "expect": "맛잇어요!!"
+    },
+    {
+      "id": "n30",
+      "desc": "이모지 유지",
+      "input": "👍👍",
+      "expect": "👍👍"
+    },
+    {
+      "id": "n31",
+      "desc": "이모지+한글",
+      "input": "😊 굿",
+      "expect": "😊굿"
+    },
+    {
+      "id": "n32",
+      "desc": "호환 자모 유지",
+      "input": "ㅅㅂ",
+      "expect": "ㅅㅂ"
+    },
+    {
+      "id": "n33",
+      "desc": "호환 자모 ㅆ 유지",
+      "input": "ㅆㅂ",
+      "expect": "ㅆㅂ"
+    },
+    {
+      "id": "n34",
+      "desc": "자모만",
+      "input": "ㅎㅎ",
+      "expect": "ㅎㅎ"
+    },
+    {
+      "id": "n35",
+      "desc": "NFD → NFC 후 접기",
+      "input": "\u1106\u1161\u11bb어요",
+      "expect": "맛어요"
+    },
+    {
+      "id": "n36",
+      "desc": "빈 글",
+      "input": "",
+      "expect": ""
+    },
+    {
+      "id": "n37",
+      "desc": "반복 줄이기 안 함",
+      "input": "굿굿굿",
+      "expect": "굿굿굿"
+    },
+    {
+      "id": "n38",
+      "desc": "반복 줄이기 안 함",
+      "input": "맛있어요ㅋㅋㅋㅋ",
+      "expect": "맛잇어요ㅋㅋㅋㅋ"
+    },
+    {
+      "id": "n39",
+      "desc": "받침 없는 글자",
+      "input": "조아요",
+      "expect": "조아요"
+    },
+    {
+      "id": "n40",
+      "desc": "문장",
+      "input": "재주문 의사 없음",
+      "expect": "재주문의사업음"
+    },
+    {
+      "id": "n41",
+      "desc": "문장",
+      "input": "맛있지 않아요",
+      "expect": "맛잇지안아요"
+    }
+  ]
+}

@@ -45,6 +45,13 @@ for t in typ["types"]:
     if t["reportStatus"] not in typ["reportStatuses"]: errors.append(f'types {t["id"]}: reportStatus 오류')
     if t["reportStatus"] == "not_target" and t["match"]["type"] == "dictionary":
         errors.append(f'types {t["id"]}: 욕설 유형에 not_target을 쓸 수 없음')
+t14 = next(t for t in typ["types"] if t["id"] == "T14")["match"]["keywords"]
+for g in typ["classification"]["positiveGuards"]["before"]:
+    for k in g["keywords"]:
+        if k not in t14: errors.append(f'positiveGuards: "{k}"가 T14 키워드에 없음')
+for g in typ["classification"]["positiveGuards"]["after"]:
+    for k in g.get("appliesTo", []):
+        if k not in t14: errors.append(f'positiveGuards.after: "{k}"가 T14 키워드에 없음')
 pr = [t["priority"] for t in typ["types"]]
 if len(pr) != len(set(pr)): errors.append("types: priority 중복")
 
@@ -81,15 +88,17 @@ try:
 except Exception as ex:
     errors.append(f"abuse 사전을 읽는 중 오류: {ex} (abuse-words.json의 pattern 항목을 확인하세요)")
 
-n_classify = 0
+n_classify = n_normalize = 0
 try:
     import classify_check
     n_classify, cfails = classify_check.run_tests()
     for f in cfails: errors.append("분류 시험 실패: " + f)
+    n_normalize, nfails = classify_check.run_normalize_tests()
+    for f in nfails: errors.append("정규화 시험 실패: " + f)
 except Exception as ex:
     errors.append(f"분류 시험을 실행하는 중 오류: {ex}")
 
-print(f"기준일 {today} | 플랫폼 {len(pids)}개 · 체크리스트 {len(ids)}개 · 유형 {len(tids)}개 · 템플릿 {len(tpl['templates'])*3}개 · 욕설 사전 {len(abuse['entries'])}개 항목 · 시험 문장 {n_cases}개 · 분류 시험 {n_classify}개")
+print(f"기준일 {today} | 플랫폼 {len(pids)}개 · 체크리스트 {len(ids)}개 · 유형 {len(tids)}개 · 템플릿 {len(tpl['templates'])*3}개 · 욕설 사전 {len(abuse['entries'])}개 항목 · 시험 문장 {n_cases}개 · 분류 시험 {n_classify}개 · 정규화 시험 {n_normalize}개")
 for w in warnings: print("주의:", w)
 for e in errors: print("오류:", e)
 print("결과:", "통과" if not errors else f"오류 {len(errors)}건")

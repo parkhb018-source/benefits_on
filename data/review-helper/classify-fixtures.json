@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "리뷰 유형 분류 시험 문장. expectMain=null은 '미분류(사장님이 유형을 직접 고름)'. 칭찬 문장이 불만 유형으로 잘못 분류되지 않는지도 함께 시험한다",
+  "note": "리뷰 유형 분류 시험 문장. expectMain=null은 '미분류(사장님이 유형을 직접 고름)'. 칭찬 문장이 불만 유형으로 잘못 분류되지 않는지도 함께 시험한다. expectSecondaryEmpty=true 는 보조 유형이 하나도 없어야 함",
   "cases": [
     {
       "id": "c01",
@@ -257,13 +257,13 @@
       "id": "c37",
       "text": "굿",
       "rating": 5,
-      "expectMain": "T11"
+      "expectMain": "T14"
     },
     {
       "id": "c38",
       "text": "최악",
       "rating": 1,
-      "expectMain": "T11"
+      "expectMain": null
     },
     {
       "id": "c39",
@@ -283,6 +283,350 @@
       "text": "별로",
       "rating": null,
       "expectMain": "T03"
+    },
+    {
+      "id": "c42",
+      "text": "굿",
+      "rating": null,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c43",
+      "text": "굿",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c44",
+      "text": "굳",
+      "rating": null,
+      "expectMain": "T11"
+    },
+    {
+      "id": "c45",
+      "text": "맛있다",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c46",
+      "text": "맛잇다",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c47",
+      "text": "맛잇어요",
+      "rating": null,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c48",
+      "text": "조아요",
+      "rating": null,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c49",
+      "text": "좋아용",
+      "rating": null,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c50",
+      "text": "맛없다",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c51",
+      "text": "맛업다",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c52",
+      "text": "맛읎어요",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c53",
+      "text": "맛 없어요",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c54",
+      "text": "맛이없어요",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c55",
+      "text": "늦었어요",
+      "rating": 2,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c56",
+      "text": "늦엇어요",
+      "rating": 2,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c57",
+      "text": "느려요",
+      "rating": 2,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c58",
+      "text": "식었어요",
+      "rating": 2,
+      "expectMain": "T02"
+    },
+    {
+      "id": "c59",
+      "text": "식엇어요",
+      "rating": 2,
+      "expectMain": "T02"
+    },
+    {
+      "id": "c60",
+      "text": "차가워요",
+      "rating": 2,
+      "expectMain": "T02"
+    },
+    {
+      "id": "c61",
+      "text": "빠졌어요",
+      "rating": 2,
+      "expectMain": "T05"
+    },
+    {
+      "id": "c62",
+      "text": "빠졋어요",
+      "rating": 2,
+      "expectMain": "T05"
+    },
+    {
+      "id": "c63",
+      "text": "샜어요",
+      "rating": 2,
+      "expectMain": "T07"
+    },
+    {
+      "id": "c64",
+      "text": "샛어요",
+      "rating": 2,
+      "expectMain": "T07"
+    },
+    {
+      "id": "c65",
+      "text": "최악",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c66",
+      "text": "실망",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c67",
+      "text": "불만",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c68",
+      "text": "짜증나요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c69",
+      "text": "안좋아요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c70",
+      "text": "안 좋았어요",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c71",
+      "text": "비추천",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c72",
+      "text": "불만족",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c73",
+      "text": "재주문 의사 없음",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c74",
+      "text": "맛있지 않아요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c75",
+      "text": "맛있진 않네요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c76",
+      "text": "불친절",
+      "rating": 1,
+      "expectMain": "T09"
+    },
+    {
+      "id": "c77",
+      "text": "맛있어요 근데 늦어요",
+      "rating": null,
+      "expectMain": "T15"
+    },
+    {
+      "id": "c78",
+      "text": "맛있어요 근데 늦어요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c79",
+      "text": "맛있어요 근데 늦어요",
+      "rating": 1,
+      "expectMain": "T01"
+    },
+    {
+      "id": "c80",
+      "text": "ㅎㅎ",
+      "rating": null,
+      "expectMain": "T11"
+    },
+    {
+      "id": "c81",
+      "text": "네",
+      "rating": null,
+      "expectMain": "T11"
+    },
+    {
+      "id": "c82",
+      "text": "치즈가 굳었어요",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c83",
+      "text": "너무 매력적인 맛이에요",
+      "rating": 5,
+      "expectMain": null,
+      "expectSecondaryExcludes": [
+        "T03"
+      ],
+      "expectSecondaryEmpty": true
+    },
+    {
+      "id": "c84",
+      "text": "너무 매워요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c85",
+      "text": "항상 맛이 변함없네요",
+      "rating": 5,
+      "expectMain": null,
+      "expectSecondaryExcludes": [
+        "T03"
+      ],
+      "expectSecondaryEmpty": true
+    },
+    {
+      "id": "c86",
+      "text": "맛이 변했어요",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c87",
+      "text": "재주문 안 해요",
+      "rating": null,
+      "expectMain": null
+    },
+    {
+      "id": "c88",
+      "text": "재주문 안 해요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c89",
+      "text": "또 시킬 일 없을 듯",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c90",
+      "text": "추천은 못 하겠어요",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c91",
+      "text": "만족스럽지는 않네요",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c92",
+      "text": "재주문 안해요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c93",
+      "text": "추천 안 해요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c94",
+      "text": "맛있어서 후회 안해요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c95",
+      "text": "추천합니다 후회 안함",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c96",
+      "text": "맛있어요 걱정 안하셔도 돼요",
+      "rating": 5,
+      "expectMain": "T14"
+    },
+    {
+      "id": "c97",
+      "text": "양도 많고 맛있어요 실패할 일 없음",
+      "rating": 5,
+      "expectMain": "T14"
     }
   ]
 }
