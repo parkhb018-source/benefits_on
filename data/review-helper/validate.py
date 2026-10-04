@@ -45,6 +45,10 @@ for t in typ["types"]:
     if t["reportStatus"] not in typ["reportStatuses"]: errors.append(f'types {t["id"]}: reportStatus 오류')
     if t["reportStatus"] == "not_target" and t["match"]["type"] == "dictionary":
         errors.append(f'types {t["id"]}: 욕설 유형에 not_target을 쓸 수 없음')
+t14 = next(t for t in typ["types"] if t["id"] == "T14")["match"]["keywords"]
+for g in typ["classification"]["positiveGuards"]["before"]:
+    for k in g["keywords"]:
+        if k not in t14: errors.append(f'positiveGuards: "{k}"가 T14 키워드에 없음')
 pr = [t["priority"] for t in typ["types"]]
 if len(pr) != len(set(pr)): errors.append("types: priority 중복")
 
