@@ -1,6 +1,6 @@
 // 리뷰 유형 분류 — data/review-helper/classify_check.py 를 그대로 옮긴 것.
 // 규칙 원본은 types.json 의 classification.steps. 판정 문구는 여기 두지 않는다(화면이 types.json 에서 읽음).
-// 규칙을 바꾸면 classify_check.py 와 이 파일을 함께 고치고 classify-fixtures.json 81개·normalize-fixtures.json 41개를 다시 돌린다.
+// 규칙을 바꾸면 classify_check.py 와 이 파일을 함께 고치고 classify-fixtures.json 91개·normalize-fixtures.json 41개를 다시 돌린다.
 import { normalizeForMatch } from './normalize.js?v=20261004d';
 
 const RISK_KEYWORD_TYPES = ['T06', 'T05', 'T13']; // 키워드로 잡는 위험·핵심 유형

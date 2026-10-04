@@ -523,6 +523,72 @@
       "text": "네",
       "rating": null,
       "expectMain": "T11"
+    },
+    {
+      "id": "c82",
+      "text": "치즈가 굳었어요",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c83",
+      "text": "너무 매력적인 맛이에요",
+      "rating": 5,
+      "expectMain": "T14",
+      "expectSecondaryExcludes": [
+        "T03"
+      ]
+    },
+    {
+      "id": "c84",
+      "text": "너무 매워요",
+      "rating": 2,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c85",
+      "text": "항상 맛이 변함없네요",
+      "rating": 5,
+      "expectMain": "T14",
+      "expectSecondaryExcludes": [
+        "T03"
+      ]
+    },
+    {
+      "id": "c86",
+      "text": "맛이 변했어요",
+      "rating": 1,
+      "expectMain": "T03"
+    },
+    {
+      "id": "c87",
+      "text": "재주문 안 해요",
+      "rating": null,
+      "expectMain": null
+    },
+    {
+      "id": "c88",
+      "text": "재주문 안 해요",
+      "rating": 1,
+      "expectMain": null
+    },
+    {
+      "id": "c89",
+      "text": "또 시킬 일 없을 듯",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c90",
+      "text": "추천은 못 하겠어요",
+      "rating": 2,
+      "expectMain": null
+    },
+    {
+      "id": "c91",
+      "text": "만족스럽지는 않네요",
+      "rating": 2,
+      "expectMain": null
     }
   ]
 }

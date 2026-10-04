@@ -6,8 +6,8 @@
 |---|---|
 | `python data/review-helper/validate.py` | 데이터 연결·확인일·단정 표현·사전/분류 시험 |
 | `python data/review-helper/abuse_check.py` | 욕설 사전 36개 |
-| `python data/review-helper/classify_check.py` | 유형 분류 81개 · 표기 정규화 41개 |
-| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 36·분류 81·정규화 41·칭찬 보호 규칙·JS↔Python 결과 일치·PRD §10-2 문장 4개·빈칸·정책 판단 |
+| `python data/review-helper/classify_check.py` | 유형 분류 91개 · 표기 정규화 41개 |
+| `node --test tests/review-helper/engine.test.mjs` | JS 이식본: 욕설 36·분류 91·정규화 41·칭찬 보호 규칙·JS↔Python 결과 일치·PRD §10-2 문장 4개·빈칸·정책 판단 |
 
 > 1.5.0: c37·c38 기대값 변경(규칙 변경에 따름) — c37 "굿"(5점) T11→T14, c38 "최악"(1점) T11→null.
 

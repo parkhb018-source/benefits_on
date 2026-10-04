@@ -1,5 +1,5 @@
 // 리뷰 대응도우미 JS 엔진 시험 — 실행: node --test tests/review-helper/
-// abuse-tests.json(36개)·classify-fixtures.json(81개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
+// abuse-tests.json(36개)·classify-fixtures.json(91개)·normalize-fixtures.json(41개)은 Python 참고 구현과 같은 기대값을 쓴다. 시험 문장은 고치지 않는다.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -27,9 +27,9 @@ test('욕설 사전 — abuse-tests.json 36개', () => {
   assert.deepEqual(fails, []);
 });
 
-test('유형 분류 — classify-fixtures.json 81개', () => {
+test('유형 분류 — classify-fixtures.json 91개', () => {
   const { cases } = load('classify-fixtures.json');
-  assert.equal(cases.length, 81);
+  assert.equal(cases.length, 91);
   const fails = [];
   for (const c of cases) {
     const r = classify(c.text, c.rating ?? null);
@@ -66,6 +66,13 @@ test('칭찬 보호(positiveGuards) — 막히는 것과 막히지 않는 것', 
   for (const t of blocked) assert.notEqual(classify(t, null).main, 'T14', t);
   for (const t of ['불만족', '비추천', '안좋아요', '재주문 의사 없음']) assert.equal(classify(t, null).main, null, t);
   for (const t of ['맛있지 않아요', '맛있진 않네요', '안 맛있어요']) assert.equal(classify(t, 2).main, 'T03', t);
+  // 1.5.0 추가 뒤쪽 패턴 — 각 1건(칭찬만 있던 글이 미분류가 되는지)
+  const afterCases = {
+    안해: '재주문 안 해요', 안하: '추천 안하고 싶어요', 안함: '재주문 안함', 일없: '또 시킬 일 없을 듯',
+    일은없: '또 시킬 일은 없어요', 지는않: '만족스럽지는 않네요', 은못: '맛있는 편은 못 돼요',
+    못하겠: '만족 못하겠어요', 못할: '추천 못할 것 같아요',
+  };
+  for (const [pat, t] of Object.entries(afterCases)) assert.equal(classify(t, null).main, null, `${pat}: ${t}`);
   // 앞 글자 보호가 없는 키워드·다른 앞 글자는 막지 않는다
   const kept = ['불맛있어요', '추천해요', '만족해요', '정말 좋아요', '좋은 재료', '또 시킬게요', '굿', '👍'];
   for (const t of kept) assert.equal(classify(t, null).main, 'T14', t);
@@ -74,7 +81,7 @@ test('칭찬 보호(positiveGuards) — 막히는 것과 막히지 않는 것', 
   assert.equal(classify('맛있어요ㅎㅎㅎㅎㅎ지않', null).main, 'T14', '7자 뒤 → 안 막힘');
 });
 
-test('JS·Python 결과 일치 — 정규화 41개 + 분류 fixture 81개 + 보호 규칙 문장', (t) => {
+test('JS·Python 결과 일치 — 정규화 41개 + 분류 fixture 91개 + 보호 규칙 문장', (t) => {
   const py = fileURLToPath(new URL('../../data/review-helper/classify_check.py', import.meta.url));
   const normalize = load('normalize-fixtures.json').cases.map((c) => c.input);
   const classifyIn = load('classify-fixtures.json').cases.map((c) => [c.text, c.rating ?? null])
