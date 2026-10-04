@@ -1,5 +1,5 @@
 // 데이터 JSON 5개를 한 번에 읽어 메모리에 둔다 (PRD §5). 실패하면 null 을 돌려주고 화면은 막지 않는다.
-import { DATA_BASE, DATA_FILES } from './config.js?v=20261005b';
+import { DATA_BASE, DATA_FILES } from './config.js?v=20261005c';
 
 export async function loadData() {
   try {

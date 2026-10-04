@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 로컬: `python -m http.server 8000` → `http://localhost:8000/pages/tools/review-helper/`.
   ESM + 절대경로 fetch(`/data/review-helper/…`)라 `file://` 로는 안 열리고, 반드시 저장소 루트에서 띄운다.
 - JS 엔진 시험: `node --test tests/review-helper/engine.test.mjs tests/review-helper/josa.test.mjs tests/review-helper/ocr-clean.test.mjs tests/review-helper/report-gate.test.mjs tests/review-helper/static-copy.test.mjs`
-  (욕설 36개·분류 114개·정규화 41개·칭찬 보호 규칙·JS↔Python 결과 일치·수용 기준 문장·빈칸·정책 판단.
+  (욕설 40개·분류 124개·정규화 41개·칭찬 보호 규칙·JS↔Python 결과 일치·수용 기준 문장·빈칸·정책 판단.
   일치 시험은 `python`/`py` 로 `classify_check.py --dump` 를 불러 비교하며, 실행 파일이 없으면 건너뜀)
 - 데이터·참고 구현 시험: `python data/review-helper/validate.py`, `abuse_check.py`, `classify_check.py`
   (`python` 이 안 되면 `py`)
