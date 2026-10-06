@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-05",
-  "count": 1425,
+  "updatedAt": "2026-10-06",
+  "count": 1421,
   "items": [
     {
       "id": "PBLN_000000000126975",
@@ -5054,47 +5054,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000126861",
-      "title": "[경북] 2026년 레전드50+ 기업맞춤 지능형 첨단소재 인력양성사업 지역 청년 대상 기업탐방 참여기업 추가모집 공고",
-      "summary": "경상북도가 추진하는 「레전드 50+ 기업맞춤 지능형 첨단소재 인력양성사업」에서 지역기업 대상 기업탐방에 참여할 기업을 다음과 같이 추가모집하오니, 참여를 희망하는 기업의 많은 신청 바랍니다.☞ 소재부품 관련 기업,…",
-      "summaryLength": 617,
-      "agency": "경상북도",
-      "fields": [
-        "내수"
-      ],
-      "fieldMid": "홍보지원",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-29 ~ 2026-10-05",
-        "start": "2026-09-29",
-        "end": "2026-10-05",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126861",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000126859",
       "title": "[전북] 장수군 2026년 트레일 신산업 육성사업 기업활성화 지원 참여기업 모집 공고",
       "summary": "장수군 인구 감소(관심)지역 내 생활인구 유입 및 지역경제 활성화에 기여하기 위해 전라북도와 장수군청, 주식회사 크립톤에서 추진하는 「2026년 트레일 신산업 육성사업 기업활성화 지원」에 참여할 기업을 아래와 같이…",
@@ -8060,47 +8019,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126783",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126779",
-      "title": "2026년 대전 웰컴 스테이 지원사업 참가기업 모집 공고",
-      "summary": "대전창조경제혁신센터는 창업도시 대전으로 유입되는 스타트업의 조기 안착을 지원하고자 다음과 같이「2026년 월컴 스테이 지원사업」을 운영하오니 대전 이전(예정)인 창업기업의 많은 참여를 바랍니다.☞ 2026년 내(1…",
-      "summaryLength": 288,
-      "agency": "대전광역시",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "시설/입지지원",
-      "sigungu": null,
-      "regionFixed": true,
-      "regionCount": 1,
-      "regionLabel": "대전",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "대전"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "창업벤처"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-23 ~ 2026-10-05",
-        "start": "2026-09-23",
-        "end": "2026-10-05",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126779",
       "source": "bizinfo"
     },
     {
@@ -13337,47 +13255,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126573",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126572",
-      "title": "[대구] 2026년 4차 BIT융합캠퍼스(의료ㆍ헬스ㆍ바이오) 지원사업 기업 모집 공고",
-      "summary": "경북대학교 첨단정보통신융합산업기술원에서는 대구 앵커 사업 ‘③-2) 기업집적지 현장캠퍼스 운영’ 단위과제 수행과 관련하여 의료ㆍ바이오ㆍ헬스케어 분야 융합 기술ㆍ제품 개발을 지원하고자 지원대상 기업을 모집합니다. ☞…",
-      "summaryLength": 236,
-      "agency": "대구광역시",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "시험/인증",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "대구",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "대구"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-16 ~ 2026-10-05",
-        "start": "2026-09-16",
-        "end": "2026-10-05",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126572",
       "source": "bizinfo"
     },
     {
@@ -25350,47 +25227,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000124779",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000124762",
-      "title": "[대구] 2026년 4차 대경 이음 미래모빌리티 일자리고도화 수혜기업 모집 공고(지역산업맞춤형 일자리지원사업 대경권 광역이음프로젝트)",
-      "summary": "대구-경북지역 자동차부품기업간 협력을 통해 동반성장과 미래모빌리티 산업 경쟁력 강화에 도모하고자「2026년 지역산업맞춤형 일자리지원사업」“대경 이음 미래모빌리티 일자리 고도화” 프로그램을 안내하오니, 참여를 희망하…",
-      "summaryLength": 307,
-      "agency": "고용노동부",
-      "fields": [
-        "인력"
-      ],
-      "fieldMid": "작업환경개선",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "대구",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "대구"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "예산 소진시까지",
-        "start": null,
-        "end": null,
-        "always": true
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000124762",
       "source": "bizinfo"
     },
     {
