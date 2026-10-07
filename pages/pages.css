@@ -182,3 +182,10 @@
 .guide-more[open] .guide-more-label-closed,
 .guide-more:not([open]) .guide-more-label-open { display: none; }
 .guide-more > .articles-grid { margin-top: 14px; }
+
+/* ── 메뉴 페이지: 정책 대상 필터 버튼 (빌드가 hidden 으로 생성, main.js 목록 표시부가 켬) ── */
+.target-filter:not([hidden]) { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+.target-filter-btn { background: #fff; color: var(--text-secondary); border: 1.5px solid var(--border); border-radius: 999px; padding: 7px 14px; font-size: 0.86rem; font-weight: 600; cursor: pointer; transition: all .15s; }
+.target-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+.target-filter-btn[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
+.target-filter-btn:focus-visible { outline: 2px solid var(--primary-dark); outline-offset: 2px; }

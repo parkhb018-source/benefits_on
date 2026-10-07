@@ -1127,18 +1127,21 @@ if (bannerClose && banner) {
 }());
 
 /* ── 카테고리 페이지 정책 카드 페이지네이션 ──
-   카드는 SEO를 위해 정적 HTML로 전부 존재하고, 화면에는 9개씩(3×3) 페이지 번호로 나눠 보여준다. */
+   카드는 SEO를 위해 정적 HTML로 전부 존재하고, 화면에는 9개씩(3×3) 페이지 번호로 나눠 보여준다.
+   대상 필터(#pl-filter, 빌드가 생성·기본 hidden)가 있으면 카드의 data-target 으로 걸러서 같은 방식으로 나눈다. */
 (function () {
   var PAGE_SIZE = 9;
   var grid = document.getElementById('pl-grid');
   if (!grid) return;
 
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('.pl-card'));
+  var allCards = Array.prototype.slice.call(grid.querySelectorAll('.pl-card'));
+  var cards = allCards;
   var countEl = document.getElementById('pl-count');
   if (countEl) countEl.textContent = '총 ' + cards.length + '건';
 
+  var filterBox = document.getElementById('pl-filter');
   var totalPages = Math.ceil(cards.length / PAGE_SIZE);
-  if (totalPages <= 1) return;
+  if (totalPages <= 1 && !filterBox) return;
 
   var pager = document.createElement('div');
   pager.id = 'pl-pager';
@@ -1148,9 +1151,13 @@ if (bannerClose && banner) {
   var page = 1;
 
   function render() {
+    allCards.forEach(function (card) {
+      if (cards.indexOf(card) === -1) card.style.display = 'none';
+    });
     cards.forEach(function (card, i) {
       card.style.display = (i >= (page - 1) * PAGE_SIZE && i < page * PAGE_SIZE) ? '' : 'none';
     });
+    pager.style.display = totalPages <= 1 ? 'none' : '';
     var html = '<button class="pl-pbtn" data-page="' + (page - 1) + '"' + (page === 1 ? ' disabled' : '') + '>이전</button>';
     for (var i = 1; i <= totalPages; i++) {
       html += '<button class="pl-pbtn' + (i === page ? ' active' : '') + '" data-page="' + i + '">' + i + '</button>';
@@ -1168,6 +1175,24 @@ if (bannerClose && banner) {
     render();
     grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  if (filterBox) {
+    var filterBtns = Array.prototype.slice.call(filterBox.querySelectorAll('.target-filter-btn'));
+    filterBox.addEventListener('click', function (e) {
+      var btn = e.target.closest('.target-filter-btn');
+      if (!btn) return;
+      var key = btn.dataset.filter;
+      filterBtns.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      cards = key === 'all' ? allCards : allCards.filter(function (card) {
+        return (' ' + (card.dataset.target || '') + ' ').indexOf(' ' + key + ' ') !== -1;
+      });
+      if (countEl) countEl.textContent = '총 ' + cards.length + '건';
+      totalPages = Math.ceil(cards.length / PAGE_SIZE);
+      page = 1;
+      render();
+    });
+    filterBox.hidden = false;
+  }
 
   render();
 }());

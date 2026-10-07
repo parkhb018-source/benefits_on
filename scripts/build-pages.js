@@ -37,6 +37,29 @@ const MENU_ASSIGNMENT_FILE = 'menu-assignment.json';
 /* 메뉴 페이지 가이드(글) 카드 중 항상 보이는 개수. 나머지는 <details> "더 보기" 로 접힌다. */
 const GUIDE_VISIBLE_COUNT = 3;
 
+/* 정책 목록 대상 필터 — data/benefit-conditions.json 의 공식 나이 조건(type:"age", value:[시작, 끝])으로 분류한다.
+   규칙 숫자는 여기 한 곳에서만 바꾼다. 한 정책이 여러 대상에 걸릴 수 있고, 나이 조건이 없으면 어느 대상에도 안 걸린다.
+   (옛 category 는 정책 선정 할당량 라벨이라 대상 분류에 쓰지 않는다.) */
+const TARGET_FILTERS = [
+  { key: 'youth', label: '청년', match: (s, e) => s >= 13 && s <= 25 && e <= 45 },
+  { key: 'kids', label: '영유아·아동', match: (s, e) => e <= 12 },
+  { key: 'senior', label: '노년', match: (s, e) => s >= 55 },
+];
+
+/* 정책 id → 대상 key 배열 (benefit-conditions.json 은 읽기만) */
+function loadPolicyTargets() {
+  const data = readJson('benefit-conditions.json');
+  const conds = data.conditions || {};
+  const out = {};
+  Object.keys(conds).forEach((id) => {
+    const age = (conds[id].conditions || []).find((c) => c.type === 'age' && Array.isArray(c.value));
+    if (!age) return;
+    const [s, e] = age.value;
+    out[id] = TARGET_FILTERS.filter((f) => f.match(s, e)).map((f) => f.key);
+  });
+  return out;
+}
+
 /* 참고용 기대 카드 수 (2026-10 메뉴 개편 기준). 실제 검증은 "렌더된 수 === 배정 항목 수" 로 하고,
    이 값과 어긋나면 에러가 아니라 경고만 낸다 — 정책 추가 시 빌드가 막히면 안 되기 때문. */
 const EXPECTED_COUNTS = {
@@ -163,7 +186,7 @@ function orderMenuPolicies(entries) {
 /* detailUrl(pages/policy-XXX, pages/article-XXX)이 있으면 내부 링크, 없으면 sourceUrl 외부 링크.
    카테고리 페이지는 pages/ 안에 있으므로 앞의 "pages/"는 떼고 상대 경로로 쓴다. .html은 붙이지 않는다.
    카드 라벨(pl-cat)은 메뉴 이름. 신규 항목에는 data-added 를 단다. */
-function renderPolicyCard(p, menu, addedAt) {
+function renderPolicyCard(p, menu, addedAt, targets) {
   const cat = esc(menu);
   const title = esc(p.title);
   const summary = esc(p.summary);
@@ -179,9 +202,10 @@ function renderPolicyCard(p, menu, addedAt) {
   const linkText = isInternal ? '자세히 보기 →' : '공식 사이트에서 확인 →';
 
   const addedAttr = addedAt ? ' data-added="' + esc(addedAt) + '"' : '';
+  const targetAttr = targets && targets.length ? ' data-target="' + esc(targets.join(' ')) + '"' : '';
 
   return (
-    '        <div class="pl-card"' + addedAttr + '>' +
+    '        <div class="pl-card"' + addedAttr + targetAttr + '>' +
     '<span class="pl-cat">' + cat + '</span>' +
     '<div class="pl-title">' + title + '</div>' +
     '<p class="pl-summary">' + summary + '</p>' +
@@ -192,12 +216,26 @@ function renderPolicyCard(p, menu, addedAt) {
   );
 }
 
-function renderCategoryInner(menu, entries) {
-  const cards = orderMenuPolicies(entries).map((e) => renderPolicyCard(e.item, menu, e.addedAt));
+function renderCategoryInner(menu, entries, policyTargets) {
+  const ordered = orderMenuPolicies(entries);
+  const cards = ordered.map((e) => renderPolicyCard(e.item, menu, e.addedAt, policyTargets[e.item.id]));
+  // 대상 필터 버튼 — 이 메뉴 안에서 0건인 대상은 버튼을 만들지 않고, 하나도 없으면 묶음 자체를 만들지 않는다.
+  // 기본 hidden: JS(main.js 목록 표시부)가 켜야 보이므로 JS 가 꺼져 있으면 모든 카드가 그대로 보인다.
+  const filterBtns = TARGET_FILTERS
+    .map((f) => ({ f, n: ordered.filter((e) => (policyTargets[e.item.id] || []).indexOf(f.key) !== -1).length }))
+    .filter((x) => x.n > 0)
+    .map((x) => '<button type="button" class="target-filter-btn" data-filter="' + x.f.key + '" aria-pressed="false">' +
+      esc(x.f.label) + ' (' + x.n + ')</button>');
+  const filterHtml = filterBtns.length
+    ? '      <div class="target-filter" id="pl-filter" role="group" aria-label="대상별로 보기" hidden>' +
+      '<button type="button" class="target-filter-btn" data-filter="all" aria-pressed="true">전체 (' + cards.length + ')</button>' +
+      filterBtns.join('') + '</div>\n'
+    : '';
   // 가이드 영역과의 구분선 + 정책 소제목(전체 정책 수, 9개씩 보기와 무관)
   return (
     '      <hr class="list-divider">\n' +
     '      <h2 class="section-title list-section-title">지원 정책 모음 (' + cards.length + ')</h2>\n' +
+    filterHtml +
     '      <div class="pl-count" id="pl-count">총 ' + cards.length + '건</div>\n' +
     '      <div class="pl-grid" id="pl-grid" data-category="' + esc(menu) + '">\n' +
     cards.join('\n') + '\n' +
@@ -1189,6 +1227,7 @@ function main() {
 
   // 메뉴별 분류 — data/menu-assignment.json 기준 (배정표에 없는 정책 id 는 여기서 빌드 실패)
   const { policyMenus, byMenu, articlesByMenu } = loadMenuAssignment(policies);
+  const policyTargets = loadPolicyTargets(); // 대상 필터 분류 (benefit-conditions.json 나이 조건, 읽기만)
 
   // expired 경고 (지시 B)
   const expired = policies.filter((p) => p.status === 'expired');
@@ -1219,7 +1258,7 @@ function main() {
         ' 을(를) 비우지 않고 종료합니다. (JSON 손상 방지)');
     }
 
-    const inner = renderCategoryInner(menu, list);
+    const inner = renderCategoryInner(menu, list, policyTargets);
     let replaced = replaceBetweenMarkers(html.split('\r\n').join('\n'), 'POLICY_CARDS', inner);
     if (replaced === null) fail('AUTOGEN:POLICY_CARDS 마커 없음 — ' + path.relative(ROOT, file));
     replaced = replaceBetweenMarkers(replaced, 'GUIDE_CARDS', renderGuideInner(articles));
