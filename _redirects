@@ -1,3 +1,20 @@
+# 메뉴 개편(2026-10-07): 옛 카테고리·자료실 주소 → 새 메뉴 (301, 한 번에 최종 주소로)
+# Cloudflare 가 이 파일의 앞쪽 약 111개 규칙만 적용하므로(2026-10-07 실측) 맨 위에 둔다
+/pages/youth   /pages/housing-finance   301
+/pages/newlywed   /pages/parenting-education   301
+/pages/single   /pages/living-medical   301
+/pages/income   /pages/jobs-income   301
+/pages/senior   /pages/senior-pension   301
+/pages/tax   /pages/jobs-income   301
+/pages/resources   /pages/small-business   301
+/pages/income.html   /pages/jobs-income   301
+/pages/newlywed.html   /pages/parenting-education   301
+/pages/resources.html   /pages/small-business   301
+/pages/senior.html   /pages/senior-pension   301
+/pages/single.html   /pages/living-medical   301
+/pages/tax.html   /pages/jobs-income   301
+/pages/youth.html   /pages/housing-finance   301
+
 https://benefitson.pages.dev/* https://benefitson.org/:splat 301
 
 # 구버전·오타 경로 → 정식 경로 (301)
@@ -52,8 +69,6 @@ https://benefitson.pages.dev/* https://benefitson.org/:splat 301
 /pages/calc-youth-deposit.html   /pages/calc-youth-deposit   301
 /pages/calculators.html   /pages/calculators   301
 /pages/contact.html   /pages/contact   301
-/pages/income.html   /pages/jobs-income   301
-/pages/newlywed.html   /pages/parenting-education   301
 /pages/policy-129000000008.html   /pages/policy-129000000008   301
 /pages/policy-129000000014.html   /pages/policy-129000000014   301
 /pages/policy-131200000004.html   /pages/policy-131200000004   301
@@ -219,24 +234,3 @@ https://benefitson.pages.dev/* https://benefitson.org/:splat 301
 /pages/policy-WII000001620.html   /pages/policy-WII000001620   301
 /pages/policy-WLU000000020.html   /pages/policy-WLU000000020   301
 /pages/privacy.html   /pages/privacy   301
-/pages/resources.html   /pages/small-business   301
-/pages/senior.html   /pages/senior-pension   301
-/pages/single.html   /pages/living-medical   301
-/pages/tax.html   /pages/jobs-income   301
-/pages/youth.html   /pages/housing-finance   301
-
-# 메뉴 개편(2026-10-07): 옛 카테고리·자료실 주소 → 새 메뉴 (301, 한 번에 최종 주소로)
-/pages/youth   /pages/housing-finance   301
-/pages/newlywed   /pages/parenting-education   301
-/pages/single   /pages/living-medical   301
-/pages/income   /pages/jobs-income   301
-/pages/senior   /pages/senior-pension   301
-/pages/tax   /pages/jobs-income   301
-/pages/resources   /pages/small-business   301
-/pages/housing-finance.html   /pages/housing-finance   301
-/pages/jobs-income.html   /pages/jobs-income   301
-/pages/parenting-education.html   /pages/parenting-education   301
-/pages/living-medical.html   /pages/living-medical   301
-/pages/senior-pension.html   /pages/senior-pension   301
-/pages/special-support.html   /pages/special-support   301
-/pages/small-business.html   /pages/small-business   301
