@@ -3,7 +3,7 @@
 export const TOOL_ID = 'review-helper';
 
 // 하단 탭 "무료도구 돌아가기" 이동 주소 (기존 도구 back-bar·BreadcrumbList 와 같은 허브)
-export const HUB_URL = '/pages/resources';
+export const HUB_URL = '/pages/small-business';
 
 // 데이터 JSON 위치(절대경로). 파일 이름 → 기대 schemaVersion
 export const DATA_BASE = '/data/review-helper/';
