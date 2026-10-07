@@ -2,8 +2,8 @@
 /*
  * scripts/build-pages.js
  *
- * data/policies.json / data/home-cards.json 을 읽어
- * 카테고리 페이지(pages/*.html)와 홈(index.html)의
+ * data/policies.json / data/menu-assignment.json / data/home-cards.json 을 읽어
+ * 메뉴 페이지(pages/*.html — 메뉴 목록은 menu-assignment.json meta.menus)와 홈(index.html)의
  * AUTOGEN 마커 사이를 정적 카드 HTML 로 다시 생성한다.
  *
  * GitHub Actions(.github/workflows/build-pages.yml)가 data/*.json push 시 자동 실행하고,
@@ -15,6 +15,7 @@
  *
  * 마커:
  *   pages/*.html : <!-- AUTOGEN:POLICY_CARDS:START --> ... <!-- AUTOGEN:POLICY_CARDS:END -->
+ *                  <!-- AUTOGEN:GUIDE_CARDS:START --> ... <!-- AUTOGEN:GUIDE_CARDS:END -->
  *   index.html   : <!-- AUTOGEN:HOME_CARDS:START --> ... <!-- AUTOGEN:HOME_CARDS:END -->
  *                  <!-- AUTOGEN:SEASONAL:START --> ... <!-- AUTOGEN:SEASONAL:END -->
  */
@@ -28,25 +29,33 @@ const ROOT = path.join(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
 const PAGES_DIR = path.join(ROOT, 'pages');
 
-/* category 값 → 카테고리 페이지 파일명 */
-const CATEGORY_PAGES = {
-  '청년정책': 'youth.html',
-  '신혼·육아': 'newlywed.html',
-  '중장년·노년': 'senior.html',
-  '1인가구': 'single.html',
-  '근로/소득': 'income.html',
-  '세금/환급': 'tax.html',
-};
+/* 정책·글 → 메뉴 배정은 data/menu-assignment.json 이 유일한 기준이다(policies.json 의 category 는 쓰지 않음).
+   메뉴 페이지 파일명은 그 파일 meta.menus 의 slug + '.html'. kind="policy" 메뉴만 카드를 생성하고,
+   kind="tool"(계산기·소상공인)은 도구 전용 탭이라 아래 TOOL_TAB_ALLOW 가드만 적용한다. */
+const MENU_ASSIGNMENT_FILE = 'menu-assignment.json';
 
-/* 참고용 기대 카드 수 (2026-09 기준). 실제 검증은 "렌더된 수 === JSON 항목 수" 로 하고,
+/* 참고용 기대 카드 수 (2026-10 메뉴 개편 기준). 실제 검증은 "렌더된 수 === 배정 항목 수" 로 하고,
    이 값과 어긋나면 에러가 아니라 경고만 낸다 — 정책 추가 시 빌드가 막히면 안 되기 때문. */
 const EXPECTED_COUNTS = {
-  '청년정책': 38,
-  '신혼·육아': 65,
-  '중장년·노년': 29,
-  '1인가구': 22,
-  '근로/소득': 71,
-  '세금/환급': 20,
+  '주거·금융': 24,
+  '일자리·소득': 46,
+  '육아·교육': 51,
+  '생활·의료': 43,
+  '노후·연금': 20,
+  '장애·보훈·다문화': 61,
+};
+
+/* 도구 전용 탭 가드 — 이 페이지들의 본문(모바일 메뉴 끝 ~ footer 앞)에 허용 목록 밖 링크가 있으면 빌드 실패.
+   소상공인은 data/resources.json 의 url/fileUrl(자료실 카드, 브라우저에서 렌더)도 같은 목록으로 검사한다.
+   도구를 추가할 때 링크 형태가 다르면 여기 한 곳만 고친다. */
+const TOOL_TAB_ALLOW = {
+  'calculators.html': [/^calc-[a-z0-9-]+$/],
+  'small-business.html': [
+    /^tools\/[a-z0-9-]+\/$/,          // pages/tools/* 도구
+    /^\.\.\/#diagnosis$/,             // 사장님 자가진단 진입(홈 자가진단)
+    /^\.\.\/downloads\/[^/]+$/,       // 자료실 내려받기 파일
+    /^https:\/\/disqus\.com\//,       // 자료실 댓글(Disqus) noscript 안내
+  ],
 };
 
 /* A등급(index,follow) → C등급(noindex) 강등 허용 목록(서비스ID).
@@ -130,12 +139,29 @@ function sortByLastUpdatedDesc(items, getKey) {
     .map((x) => x.item);
 }
 
+/* 신규 항목 최상단 규칙: addedAt(YYYY-MM-DD)이 있는 항목은 기준선(addedAt=null)보다 항상 위,
+   그들끼리는 최신 날짜가 위, 같은 날짜면 배정 파일에 나중에 적은 것이 위(만료 없음).
+   기준선 항목의 순서는 baselineOrder 에 맡긴다 — 정책은 기존 sortByLastUpdatedDesc, 글은 배정 파일 순서.
+   entries: [{ item, addedAt, fileIndex }] */
+function orderNewOnTop(entries, baselineOrder) {
+  const fresh = entries.filter((e) => e.addedAt)
+    .sort((a, b) => (a.addedAt !== b.addedAt ? (a.addedAt < b.addedAt ? 1 : -1) : b.fileIndex - a.fileIndex));
+  const baseline = baselineOrder(entries.filter((e) => !e.addedAt));
+  return fresh.concat(baseline);
+}
+
+/* 메뉴 하나의 정책 카드 순서. 기준선은 policies.json 순서대로 넘겨 sortByLastUpdatedDesc 를 그대로 쓴다. */
+function orderMenuPolicies(entries) {
+  return orderNewOnTop(entries, (base) => sortByLastUpdatedDesc(base, (e) => e.item.lastUpdated));
+}
+
 /* ── 카테고리 카드 렌더 ──────────────────────────────────── */
 
 /* detailUrl(pages/policy-XXX, pages/article-XXX)이 있으면 내부 링크, 없으면 sourceUrl 외부 링크.
-   카테고리 페이지는 pages/ 안에 있으므로 앞의 "pages/"는 떼고 상대 경로로 쓴다. .html은 붙이지 않는다. */
-function renderPolicyCard(p) {
-  const cat = esc(p.category);
+   카테고리 페이지는 pages/ 안에 있으므로 앞의 "pages/"는 떼고 상대 경로로 쓴다. .html은 붙이지 않는다.
+   카드 라벨(pl-cat)은 메뉴 이름. 신규 항목에는 data-added 를 단다. */
+function renderPolicyCard(p, menu, addedAt) {
+  const cat = esc(menu);
   const title = esc(p.title);
   const summary = esc(p.summary);
   const tags = Array.isArray(p.tags) ? p.tags : [];
@@ -149,8 +175,10 @@ function renderPolicyCard(p) {
   const linkAttrs = isInternal ? '' : ' target="_blank" rel="noopener nofollow"';
   const linkText = isInternal ? '자세히 보기 →' : '공식 사이트에서 확인 →';
 
+  const addedAttr = addedAt ? ' data-added="' + esc(addedAt) + '"' : '';
+
   return (
-    '        <div class="pl-card">' +
+    '        <div class="pl-card"' + addedAttr + '>' +
     '<span class="pl-cat">' + cat + '</span>' +
     '<div class="pl-title">' + title + '</div>' +
     '<p class="pl-summary">' + summary + '</p>' +
@@ -161,15 +189,145 @@ function renderPolicyCard(p) {
   );
 }
 
-function renderCategoryInner(category, policies) {
-  const sorted = sortByLastUpdatedDesc(policies, (p) => p.lastUpdated);
-  const cards = sorted.map(renderPolicyCard);
+function renderCategoryInner(menu, entries) {
+  const cards = orderMenuPolicies(entries).map((e) => renderPolicyCard(e.item, menu, e.addedAt));
   return (
     '      <div class="pl-count" id="pl-count">총 ' + cards.length + '건</div>\n' +
-    '      <div class="pl-grid" id="pl-grid" data-category="' + esc(category) + '">\n' +
+    '      <div class="pl-grid" id="pl-grid" data-category="' + esc(menu) + '">\n' +
     cards.join('\n') + '\n' +
     '      </div>'
   );
+}
+
+/* ── 메뉴 페이지 글(가이드) 카드 ───────────────────────────── */
+
+/* pages/article-*.html 에서 카드에 쓸 제목(h1)·업데이트 날짜를 읽는다. */
+function readArticleMeta(slug) {
+  const html = fs.readFileSync(path.join(PAGES_DIR, slug + '.html'), 'utf8');
+  const h1 = html.match(/<h1 class="article-h1">([\s\S]*?)<\/h1>/);
+  const title = h1
+    ? h1[1].replace(/<br\s*\/?>/g, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
+    : '';
+  const upd = html.match(/업데이트 <strong>(\d{4}\.\d{2}\.\d{2})<\/strong>/);
+  return { title, date: upd ? upd[1] : '' };
+}
+
+/* 글 카드 순서: 신규(addedAt) 최상단, 기준선은 배정 파일에 적은 순서 그대로. */
+function orderMenuArticles(entries) {
+  return orderNewOnTop(entries, (base) => base.slice().sort((a, b) => a.fileIndex - b.fileIndex));
+}
+
+function renderGuideInner(entries) {
+  if (!entries.length) return '';
+  const cards = orderMenuArticles(entries).map((e) => {
+    const meta = readArticleMeta(e.item.slug);
+    if (!meta.title) fail(e.item.slug + '.html 에서 <h1 class="article-h1"> 제목을 찾지 못했습니다.');
+    const addedAttr = e.addedAt ? ' data-added="' + esc(e.addedAt) + '"' : '';
+    return '          <a href="' + esc(e.item.slug) + '" class="article-card"' + addedAttr + '>' +
+      '<span class="art-tag tag-guide">가이드</span>' +
+      '<h3 class="art-title">' + esc(meta.title) + '</h3>' +
+      (meta.date ? '<p class="art-date">' + esc(meta.date) + ' 업데이트</p>' : '') +
+      '</a>';
+  });
+  return (
+    '    <div class="inner-wrap guide-cards">\n' +
+    '      <h2 class="section-title">이 분야 가이드</h2>\n' +
+    '      <div class="articles-grid">\n' +
+    cards.join('\n') + '\n' +
+    '      </div>\n' +
+    '    </div>'
+  );
+}
+
+/* ── 메뉴 배정 로드·검증 ─────────────────────────────────── */
+
+/* 오늘 날짜(KST, YYYY-MM-DD). addedAt 미래 날짜 가드에 쓴다. */
+function todayKst() {
+  return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+}
+
+function isValidDate(s) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
+  const d = new Date(s + 'T00:00:00Z');
+  return !isNaN(d) && d.toISOString().slice(0, 10) === s;
+}
+
+/* data/menu-assignment.json 을 읽어 검증하고 { menus, policyMenus, byMenu, articlesByMenu } 를 돌려준다.
+   ① policies.json 의 정책 id 가 배정표에 없으면 실패(엉뚱한 메뉴 자동 배정 방지)
+   ② addedAt=null 은 meta.baselineIds 에 있는 초기 항목만 허용(신규 항목 날짜 누락 방지)
+   ③ addedAt 형식 오류·미래 날짜는 실패
+   ④ pages/article-*.html 은 모두 배정돼 있어야 하고, 배정된 글 파일은 실제로 있어야 한다 */
+function loadMenuAssignment(policies) {
+  const data = readJson(MENU_ASSIGNMENT_FILE);
+  const meta = data.meta || {};
+  const menus = Array.isArray(meta.menus) ? meta.menus : [];
+  const policyMenus = menus.filter((m) => m.kind === 'policy');
+  if (!policyMenus.length) fail(MENU_ASSIGNMENT_FILE + ' meta.menus 에 kind="policy" 메뉴가 없습니다.');
+  const menuNames = new Set(policyMenus.map((m) => m.name));
+  const base = meta.baselineIds || {};
+  const basePolicies = new Set(Array.isArray(base.policies) ? base.policies : []);
+  const baseArticles = new Set(Array.isArray(base.articles) ? base.articles : []);
+  const today = todayKst();
+  const errors = [];
+
+  function checkAddedAt(kind, key, addedAt, baselineSet) {
+    if (addedAt === null || addedAt === undefined) {
+      if (!baselineSet.has(key)) {
+        errors.push(kind + ' ' + key + ': addedAt 이 비어 있는데 meta.baselineIds 에 없는 신규 항목입니다 — 추가한 날짜(YYYY-MM-DD)를 넣으세요.');
+      }
+      return;
+    }
+    if (typeof addedAt !== 'string' || !isValidDate(addedAt)) {
+      errors.push(kind + ' ' + key + ': addedAt 형식 오류 "' + addedAt + '" (YYYY-MM-DD 이어야 함)');
+    } else if (addedAt > today) {
+      errors.push(kind + ' ' + key + ': addedAt 이 미래 날짜입니다 "' + addedAt + '" (오늘 ' + today + ')');
+    }
+  }
+
+  const assigned = new Map();
+  (Array.isArray(data.policies) ? data.policies : []).forEach((a, i) => {
+    if (assigned.has(a.id)) errors.push('정책 ' + a.id + ': 배정표에 중복');
+    if (!menuNames.has(a.menu)) errors.push('정책 ' + a.id + ': 알 수 없는 메뉴 "' + a.menu + '"');
+    checkAddedAt('정책', a.id, a.addedAt, basePolicies);
+    assigned.set(a.id, { menu: a.menu, addedAt: a.addedAt || null, fileIndex: i });
+  });
+
+  const missing = policies.filter((p) => !assigned.has(p.id)).map((p) => p.id + ' ' + p.title);
+  if (missing.length) {
+    errors.push('배정표(' + MENU_ASSIGNMENT_FILE + ')에 없는 정책 ' + missing.length + '건 — 한 줄씩 추가하세요:\n    · ' + missing.join('\n    · '));
+  }
+  const policyIds = new Set(policies.map((p) => p.id));
+  const stale = Array.from(assigned.keys()).filter((id) => !policyIds.has(id));
+  if (stale.length) {
+    console.warn('[build-pages] 경고: policies.json 에 없는 배정 항목 ' + stale.length + '건 (무시됨): ' + stale.join(', '));
+  }
+
+  const articleFiles = fs.readdirSync(PAGES_DIR).filter((f) => /^article-.+\.html$/.test(f)).map((f) => f.slice(0, -5));
+  const assignedArticles = new Map();
+  (Array.isArray(data.articles) ? data.articles : []).forEach((a, i) => {
+    if (assignedArticles.has(a.slug)) errors.push('글 ' + a.slug + ': 배정표에 중복');
+    if (!menuNames.has(a.menu)) errors.push('글 ' + a.slug + ': 알 수 없는 메뉴 "' + a.menu + '"');
+    if (!fs.existsSync(path.join(PAGES_DIR, a.slug + '.html'))) errors.push('글 ' + a.slug + ': pages/' + a.slug + '.html 파일이 없음');
+    checkAddedAt('글', a.slug, a.addedAt, baseArticles);
+    assignedArticles.set(a.slug, { item: a, menu: a.menu, addedAt: a.addedAt || null, fileIndex: i });
+  });
+  const unassignedArticles = articleFiles.filter((s) => !assignedArticles.has(s));
+  if (unassignedArticles.length) {
+    errors.push('배정표에 없는 글 ' + unassignedArticles.length + '건 — articles 에 한 줄씩 추가하세요: ' + unassignedArticles.join(', '));
+  }
+
+  if (errors.length) fail('메뉴 배정 검증 실패 (' + errors.length + '건):\n  - ' + errors.join('\n  - '));
+
+  const byMenu = {};
+  const articlesByMenu = {};
+  policyMenus.forEach((m) => { byMenu[m.name] = []; articlesByMenu[m.name] = []; });
+  policies.forEach((p) => {
+    const a = assigned.get(p.id);
+    byMenu[a.menu].push({ item: p, addedAt: a.addedAt, fileIndex: a.fileIndex });
+  });
+  assignedArticles.forEach((e) => { articlesByMenu[e.menu].push(e); });
+
+  return { menus, policyMenus, byMenu, articlesByMenu };
 }
 
 /* ── 홈 카드 렌더 ────────────────────────────────────────── */
@@ -505,7 +663,7 @@ function validateSitemapGrades() {
 /* detailUrl 이 있는 정책의 pl-card 가 실제로 내부 링크를 걸었는지 검증.
    카테고리 페이지 파일을 디스크에서 다시 읽어(re-read) 확인한다 — 코드 경로 재사용이 아니라
    최종 산출물을 독립적으로 다시 검사한다. */
-function validateCategoryCardLinks(byCategory) {
+function validateCategoryCardLinks(policyMenus, byMenu) {
   let totalInternal = 0;
   let totalExternal = 0;
   const badExternalForDetail = [];
@@ -513,15 +671,16 @@ function validateCategoryCardLinks(byCategory) {
   const badExternalNofollow = [];
   const missingInternalFiles = [];
 
-  Object.keys(CATEGORY_PAGES).forEach((category) => {
-    const file = path.join(PAGES_DIR, CATEGORY_PAGES[category]);
+  policyMenus.forEach((m) => {
+    const pageFile = m.slug + '.html';
+    const file = path.join(PAGES_DIR, pageFile);
     if (!fs.existsSync(file)) return;
     const html = fs.readFileSync(file, 'utf8');
-    const sorted = sortByLastUpdatedDesc(byCategory[category], (p) => p.lastUpdated);
-    const tags = Array.from(html.matchAll(/<a class="pl-link"([^>]*)>/g)).map((m) => m[1]);
+    const sorted = orderMenuPolicies(byMenu[m.name]).map((e) => e.item);
+    const tags = Array.from(html.matchAll(/<a class="pl-link"([^>]*)>/g)).map((x) => x[1]);
 
     if (tags.length !== sorted.length) {
-      fail(CATEGORY_PAGES[category] + ' 의 pl-link 개수(' + tags.length + ')가 정책 수(' +
+      fail(pageFile + ' 의 pl-link 개수(' + tags.length + ')가 정책 수(' +
         sorted.length + ')와 다릅니다.');
     }
 
@@ -564,13 +723,46 @@ function validateCategoryCardLinks(byCategory) {
       badExternalNofollow.join('\n  - '));
   }
   if (totalInternal !== 186) {
-    fail('카테고리 페이지 6개 합계 내부 링크 수가 186이 아닙니다: ' + totalInternal);
+    fail('메뉴 페이지 6개 합계 내부 링크 수가 186이 아닙니다: ' + totalInternal);
   }
   if (totalExternal !== 59) {
-    fail('카테고리 페이지 6개 합계 외부 링크 수가 59가 아닙니다: ' + totalExternal);
+    fail('메뉴 페이지 6개 합계 외부 링크 수가 59가 아닙니다: ' + totalExternal);
   }
 
   console.log('[build-pages] 카드 링크 검증 통과: 내부 ' + totalInternal + ' · 외부 ' + totalExternal);
+}
+
+/* 도구 전용 탭 가드 — TOOL_TAB_ALLOW 의 페이지 본문(모바일 메뉴 </nav> 이후 ~ <footer 앞)의 모든 href 와
+   (소상공인) data/resources.json 의 url/fileUrl 이 허용 목록에 맞는지 본다. 위반이 있으면 빌드 실패. */
+function validateToolTabs() {
+  const violations = [];
+  Object.keys(TOOL_TAB_ALLOW).forEach((pageFile) => {
+    const allow = TOOL_TAB_ALLOW[pageFile];
+    const ok = (href) => allow.some((re) => re.test(href));
+    const file = path.join(PAGES_DIR, pageFile);
+    if (!fs.existsSync(file)) { violations.push(pageFile + ': 파일 없음'); return; }
+    const html = fs.readFileSync(file, 'utf8');
+    const navEnd = html.indexOf('</nav>', html.indexOf('<nav class="mobile-menu"'));
+    const footerStart = html.indexOf('<footer');
+    if (navEnd === -1 || footerStart === -1) { violations.push(pageFile + ': 본문 범위(mobile-menu ~ footer)를 찾지 못함'); return; }
+    const body = html.slice(navEnd, footerStart);
+    Array.from(body.matchAll(/href="([^"]*)"/g)).forEach((x) => {
+      if (!ok(x[1])) violations.push(pageFile + ' 본문 링크: ' + x[1]);
+    });
+    if (pageFile === 'small-business.html') {
+      const res = readJson('resources.json');
+      (Array.isArray(res.resources) ? res.resources : []).forEach((r) => {
+        ['url', 'fileUrl'].forEach((k) => {
+          if (r[k] && !ok(r[k])) violations.push('data/resources.json (' + (r.id || r.title) + ') ' + k + ': ' + r[k]);
+        });
+      });
+    }
+  });
+  if (violations.length) {
+    fail('도구 전용 탭(계산기·소상공인)에 허용되지 않은 링크가 있습니다 (' + violations.length + '건) — ' +
+      '정책·일반 글은 넣지 않습니다. 새 도구라면 TOOL_TAB_ALLOW 를 고치세요:\n  - ' + violations.join('\n  - '));
+  }
+  console.log('[build-pages] 도구 전용 탭 가드 통과 (' + Object.keys(TOOL_TAB_ALLOW).join(', ') + ')');
 }
 
 /* pages/tools/delivery-fee-calc/script.js 의 PLATFORM_RATES 와
@@ -976,17 +1168,8 @@ function main() {
   // sitemap 에는 A등급 정책 상세 페이지만 등록되어야 한다.
   validateSitemapGrades();
 
-  // 카테고리별 분류
-  const byCategory = {};
-  Object.keys(CATEGORY_PAGES).forEach((c) => { byCategory[c] = []; });
-  const unknownCategories = new Set();
-  policies.forEach((p) => {
-    if (Object.prototype.hasOwnProperty.call(byCategory, p.category)) {
-      byCategory[p.category].push(p);
-    } else {
-      unknownCategories.add(p.category);
-    }
-  });
+  // 메뉴별 분류 — data/menu-assignment.json 기준 (배정표에 없는 정책 id 는 여기서 빌드 실패)
+  const { policyMenus, byMenu, articlesByMenu } = loadMenuAssignment(policies);
 
   // expired 경고 (지시 B)
   const expired = policies.filter((p) => p.status === 'expired');
@@ -995,67 +1178,69 @@ function main() {
     expired.forEach((p) => console.warn('  - [' + p.category + '] ' + (p.benefit || p.title)));
   }
 
-  if (unknownCategories.size) {
-    console.warn('\n[build-pages] 경고: 매핑되지 않은 category 값 (어느 페이지에도 안 실림): ' +
-      Array.from(unknownCategories).join(', '));
-  }
-
-  // ── 카테고리 페이지 ──
-  Object.keys(CATEGORY_PAGES).forEach((category) => {
-    const file = path.join(PAGES_DIR, CATEGORY_PAGES[category]);
+  // ── 메뉴 페이지 (정책 카드 + 글 카드) ──
+  report.articleCounts = {};
+  policyMenus.forEach((m) => {
+    const menu = m.name;
+    const pageFile = m.slug + '.html';
+    const file = path.join(PAGES_DIR, pageFile);
     let html;
     try {
       html = fs.readFileSync(file, 'utf8');
     } catch (e) {
-      console.warn('[build-pages] 경고: 파일 없음, 건너뜀 — ' + path.relative(ROOT, file));
-      report.skipped.push(path.relative(ROOT, file));
-      return;
+      fail('메뉴 페이지 파일이 없습니다: ' + path.relative(ROOT, file));
     }
 
     const eol = detectEol(html);
-    const list = byCategory[category];
+    const list = byMenu[menu];
+    const articles = articlesByMenu[menu];
 
     if (list.length === 0) {
-      fail(category + ' 카테고리 정책이 0건입니다 — ' + CATEGORY_PAGES[category] +
+      fail(menu + ' 메뉴 정책이 0건입니다 — ' + pageFile +
         ' 을(를) 비우지 않고 종료합니다. (JSON 손상 방지)');
     }
 
-    const inner = renderCategoryInner(category, list).split('\n').join(eol);
-    const replaced = replaceBetweenMarkers(html.split('\r\n').join('\n'), 'POLICY_CARDS', inner.split('\r\n').join('\n'));
-
-    if (replaced === null) {
-      console.warn('[build-pages] 경고: AUTOGEN:POLICY_CARDS 마커 없음, 건너뜀 — ' + path.relative(ROOT, file));
-      report.skipped.push(path.relative(ROOT, file));
-      return;
-    }
+    const inner = renderCategoryInner(menu, list);
+    let replaced = replaceBetweenMarkers(html.split('\r\n').join('\n'), 'POLICY_CARDS', inner);
+    if (replaced === null) fail('AUTOGEN:POLICY_CARDS 마커 없음 — ' + path.relative(ROOT, file));
+    replaced = replaceBetweenMarkers(replaced, 'GUIDE_CARDS', renderGuideInner(articles));
+    if (replaced === null) fail('AUTOGEN:GUIDE_CARDS 마커 없음 — ' + path.relative(ROOT, file));
 
     const nextText = replaced.split('\n').join(eol);
 
     // 안전장치: canonical 태그 잔존 확인
     if (!/<link[^>]+rel=["']canonical["']/.test(nextText)) {
-      fail('교체 후 ' + CATEGORY_PAGES[category] + ' 에 canonical 태그가 없습니다. 중단합니다.');
+      fail('교체 후 ' + pageFile + ' 에 canonical 태그가 없습니다. 중단합니다.');
     }
 
-    // 안전장치: 렌더된 카드 수 === JSON 항목 수 (지시 C)
-    const renderedCards = (nextText.match(/<div class="pl-card">/g) || []).length;
+    // 안전장치: 렌더된 카드 수 === 배정 항목 수 (지시 C)
+    const renderedCards = (nextText.match(/<div class="pl-card"[\s>]/g) || []).length;
     if (renderedCards !== list.length) {
-      fail(CATEGORY_PAGES[category] + ' 카드 수 불일치: 렌더 ' + renderedCards +
-        ' vs JSON ' + list.length + '. 중단합니다.');
+      fail(pageFile + ' 카드 수 불일치: 렌더 ' + renderedCards +
+        ' vs 배정 ' + list.length + '. 중단합니다.');
     }
-    report.counts[category] = renderedCards;
+    const renderedGuides = (nextText.match(/class="article-card"/g) || []).length;
+    if (renderedGuides !== articles.length) {
+      fail(pageFile + ' 글 카드 수 불일치: 렌더 ' + renderedGuides + ' vs 배정 ' + articles.length + '. 중단합니다.');
+    }
+    report.counts[menu] = renderedCards;
+    report.articleCounts[menu] = renderedGuides;
 
     // 참고: 문서상 기대값과 다르면 경고 (에러 아님)
-    if (EXPECTED_COUNTS[category] !== list.length) {
-      console.warn('[build-pages] 참고: ' + category + ' 항목 수가 ' + EXPECTED_COUNTS[category] +
+    if (EXPECTED_COUNTS[menu] !== list.length) {
+      console.warn('[build-pages] 참고: ' + menu + ' 항목 수가 ' + EXPECTED_COUNTS[menu] +
         ' → ' + list.length + ' 로 바뀌었습니다. (정상적인 정책 추가/삭제일 수 있음)');
     }
 
     writeIfChanged(file, nextText, report);
   });
 
-  // 카테고리 카드가 detailUrl 을 실제로 링크로 걸었는지 검증 (지시 2).
+  // 메뉴 카드가 detailUrl 을 실제로 링크로 걸었는지 검증 (지시 2).
   // 디스크에 쓰여진 최종 파일을 다시 읽어서 확인한다.
-  validateCategoryCardLinks(byCategory);
+  validateCategoryCardLinks(policyMenus, byMenu);
+
+  // 계산기·소상공인(도구 전용 탭)에 정책·일반 글 링크가 섞이지 않았는지 검증.
+  validateToolTabs();
 
   // ── index.html (HOME_CARDS + SEASONAL) ──
   const indexFile = path.join(ROOT, 'index.html');
@@ -1095,12 +1280,13 @@ function main() {
 
   // ── 결과 출력 ──
   console.log('\n[build-pages] 완료');
-  console.log('  카드 수:');
+  console.log('  카드 수 (정책 / 글):');
   Object.keys(report.counts).forEach((k) => {
-    console.log('    ' + k + ': ' + report.counts[k]);
+    console.log('    ' + k + ': ' + report.counts[k] + ' / ' + report.articleCounts[k]);
   });
-  const total = Object.keys(byCategory).reduce((n, c) => n + byCategory[c].length, 0);
-  console.log('    (카테고리 합계: ' + total + ')');
+  const total = Object.keys(byMenu).reduce((n, c) => n + byMenu[c].length, 0);
+  const totalArticles = Object.keys(articlesByMenu).reduce((n, c) => n + articlesByMenu[c].length, 0);
+  console.log('    (메뉴 합계: 정책 ' + total + ' / 글 ' + totalArticles + ')');
 
   console.log('  변경된 파일: ' + (report.written.length ? report.written.join(', ') : '없음'));
   if (report.unchanged.length) console.log('  변경 없음: ' + report.unchanged.join(', '));

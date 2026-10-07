@@ -1,0 +1,22 @@
+# 메뉴 운영 규칙 (2026-10 메뉴 개편 이후)
+
+상단 메뉴는 정부 공공서비스의 공식 서비스분야를 기준으로 한 8개다:
+주거·금융 / 일자리·소득 / 육아·교육 / 생활·의료 / 노후·연금 / 장애·보훈·다문화 (정책·글 메뉴 6개)와
+계산기 / 소상공인 (도구 전용 탭 2개). 정책·글이 어느 메뉴에 나오는지는 `data/menu-assignment.json`
+하나로만 정한다. `data/policies.json`의 `category`는 메뉴 배정에 쓰지 않는다.
+
+## 신규 정책·글 추가 절차
+
+새 정책을 `policies.json`에 넣거나 새 글(`pages/article-*.html`)을 만들면, `data/menu-assignment.json`의
+`policies`(정책: `{ "id", "menu", "serviceField", "basis", "addedAt" }`) 또는 `articles`(글: `{ "slug", "menu", "addedAt" }`)
+배열 **맨 끝에 한 줄**을 추가하고 `addedAt`에 추가한 날짜(오늘, `YYYY-MM-DD`)를 적은 뒤 `node scripts/build-pages.js`를 실행한다.
+`addedAt`이 있는 항목은 해당 메뉴 페이지의 정책 카드·글 카드 목록 **맨 위에 고정**되고(날짜가 최신인 것이 위,
+같은 날짜면 나중에 적은 것이 위, 기간이 지나도 내려가지 않음), `addedAt: null`인 초기 항목(`meta.baselineIds`)은
+기존 순서(정책은 `lastUpdated` 최신순, 글은 배정 파일 순서)를 그대로 따른다. 배정표에 없는 정책·글, 날짜를 빠뜨린
+신규 항목, 형식이 틀리거나 미래인 `addedAt`은 빌드가 실패하며 해당 항목을 출력한다.
+정책 카드를 추가하면 `build-pages.js`의 카드 링크 가드(내부·외부 링크 합계) 기대값도 함께 바뀌어야 빌드가 통과한다.
+
+## 도구 전용 탭
+
+계산기 탭에는 `calc-*` 계산기만, 소상공인 탭에는 `pages/tools/*` 도구·사장님 자가진단 진입·자료실(내려받기·댓글)만 둔다.
+정책·일반 글 링크가 섞이면 빌드가 실패한다. 새 도구의 링크 형태가 다르면 `build-pages.js`의 `TOOL_TAB_ALLOW` 한 곳만 고친다.
