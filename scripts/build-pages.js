@@ -34,6 +34,9 @@ const PAGES_DIR = path.join(ROOT, 'pages');
    kind="tool"(계산기·소상공인)은 도구 전용 탭이라 아래 TOOL_TAB_ALLOW 가드만 적용한다. */
 const MENU_ASSIGNMENT_FILE = 'menu-assignment.json';
 
+/* 메뉴 페이지 가이드(글) 카드 중 항상 보이는 개수. 나머지는 <details> "더 보기" 로 접힌다. */
+const GUIDE_VISIBLE_COUNT = 3;
+
 /* 참고용 기대 카드 수 (2026-10 메뉴 개편 기준). 실제 검증은 "렌더된 수 === 배정 항목 수" 로 하고,
    이 값과 어긋나면 에러가 아니라 경고만 낸다 — 정책 추가 시 빌드가 막히면 안 되기 때문. */
 const EXPECTED_COUNTS = {
@@ -191,7 +194,10 @@ function renderPolicyCard(p, menu, addedAt) {
 
 function renderCategoryInner(menu, entries) {
   const cards = orderMenuPolicies(entries).map((e) => renderPolicyCard(e.item, menu, e.addedAt));
+  // 가이드 영역과의 구분선 + 정책 소제목(전체 정책 수, 9개씩 보기와 무관)
   return (
+    '      <hr class="list-divider">\n' +
+    '      <h2 class="section-title list-section-title">지원 정책 모음 (' + cards.length + ')</h2>\n' +
     '      <div class="pl-count" id="pl-count">총 ' + cards.length + '건</div>\n' +
     '      <div class="pl-grid" id="pl-grid" data-category="' + esc(menu) + '">\n' +
     cards.join('\n') + '\n' +
@@ -229,12 +235,25 @@ function renderGuideInner(entries) {
       (meta.date ? '<p class="art-date">' + esc(meta.date) + ' 업데이트</p>' : '') +
       '</a>';
   });
+  // 처음 GUIDE_VISIBLE_COUNT 개(= 맨 위 = 최신)는 항상 보이고, 나머지는 <details> 로 접는다(JS 없음).
+  const visible = cards.slice(0, GUIDE_VISIBLE_COUNT);
+  const folded = cards.slice(GUIDE_VISIBLE_COUNT);
+  const more = folded.length
+    ? '      <details class="guide-more">\n' +
+      '        <summary><span class="guide-more-label-closed">가이드 ' + folded.length + '개 더 보기</span>' +
+      '<span class="guide-more-label-open">접기</span></summary>\n' +
+      '        <div class="articles-grid">\n' +
+      folded.map((c) => '  ' + c).join('\n') + '\n' +
+      '        </div>\n' +
+      '      </details>\n'
+    : '';
   return (
     '    <div class="inner-wrap guide-cards">\n' +
-    '      <h2 class="section-title">이 분야 가이드</h2>\n' +
+    '      <h2 class="section-title">이 분야 가이드 (' + cards.length + ')</h2>\n' +
     '      <div class="articles-grid">\n' +
-    cards.join('\n') + '\n' +
+    visible.join('\n') + '\n' +
     '      </div>\n' +
+    more +
     '    </div>'
   );
 }

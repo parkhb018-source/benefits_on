@@ -168,3 +168,17 @@
 .policy-tool-card { display: inline-block; padding: 10px 16px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; color: var(--primary-dark); font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: all .15s; }
 .policy-tool-card:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
 .pl-pbtn[disabled] { opacity: .4; cursor: not-allowed; }
+
+/* ── 메뉴 페이지: 가이드/정책 영역 구분 · 가이드 더 보기 (<details>, JS 없음) ── */
+.list-divider { border: 0; border-top: 1px solid var(--border); margin: 32px 0 28px; }
+.list-section-title { margin-bottom: 0; }
+.list-section-title + .pl-count { margin-top: 6px; }
+.guide-more { margin-top: 14px; }
+.guide-more > summary { display: inline-flex; align-items: center; gap: 6px; list-style: none; cursor: pointer; background: #fff; color: var(--primary); border: 1.5px solid var(--primary); border-radius: 8px; padding: 9px 18px; font-size: 0.9rem; font-weight: 700; }
+.guide-more > summary::-webkit-details-marker { display: none; }
+.guide-more > summary:hover { background: rgba(46,117,182,0.06); }
+.guide-more > summary::after { content: '▾'; font-size: 0.8rem; }
+.guide-more[open] > summary::after { content: '▴'; }
+.guide-more[open] .guide-more-label-closed,
+.guide-more:not([open]) .guide-more-label-open { display: none; }
+.guide-more > .articles-grid { margin-top: 14px; }
