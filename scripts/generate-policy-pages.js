@@ -84,6 +84,33 @@ function isBlankLike(v) {
   return t === '' || t === '해당없음' || t === '-';
 }
 
+/* ── 신청 버튼 문구: 도착 사이트(호스트)에 맞춘다 ─────────────────
+   호스트는 목록과 정확히 같을 때만 그 이름을 쓰고(부분 문자열 일치 안 함),
+   목록에 없는 호스트는 "공식 신청 사이트에서 확인하기 →" 로 쓴다. */
+const CTA_LABEL_BY_HOST = [
+  { hosts: ['gov.kr', 'www.gov.kr'], label: '정부24에서 신청하기 →' },
+  { hosts: ['enhuf.molit.go.kr'], label: '기금e든든에서 신청하기 →' },
+  { hosts: ['bokjiro.go.kr', 'www.bokjiro.go.kr'], label: '복지로에서 신청하기 →' },
+  { hosts: ['work24.go.kr', 'www.work24.go.kr'], label: '고용24에서 신청하기 →' },
+  { hosts: ['kosaf.go.kr', 'www.kosaf.go.kr'], label: '한국장학재단에서 신청하기 →' },
+  { hosts: ['nhuf.molit.go.kr'], label: '주택도시기금 사이트에서 확인하기 →' },
+];
+const CTA_LABEL_OTHER = '공식 신청 사이트에서 확인하기 →';
+
+function urlHost(url) {
+  try { return new URL(String(url)).hostname.toLowerCase(); } catch (e) { return ''; }
+}
+
+function ctaLabelForUrl(url) {
+  const host = urlHost(url);
+  const hit = CTA_LABEL_BY_HOST.find((x) => x.hosts.indexOf(host) !== -1);
+  return hit ? hit.label : CTA_LABEL_OTHER;
+}
+
+function isGov24Url(url) {
+  return CTA_LABEL_BY_HOST[0].hosts.indexOf(urlHost(url)) !== -1;
+}
+
 /* ── 소스 로드 ──────────────────────────────────────────────── */
 
 function loadCsvRows() {
@@ -322,7 +349,9 @@ function renderPage(row, detail, cond) {
   }
 
   const onlineAnswer = !isBlankLike(onlineUrl)
-    ? '온라인 신청이 가능합니다. 아래 "정부24에서 신청하기" 버튼을 이용하세요.'
+    ? (isGov24Url(finalUrl)
+      ? '온라인 신청이 가능합니다. 아래 "정부24에서 신청하기" 버튼을 이용하세요.'
+      : '온라인 신청이 가능합니다. 아래 신청 버튼을 이용하세요.')
     : '온라인 신청 사이트가 별도로 없습니다. 신청 방법을 참고해 접수기관에 직접 신청하세요.';
 
   const whereAnswerParts = [];
@@ -463,7 +492,7 @@ ${toolCardsHtml}
             <!-- AUTOGEN:POLICY_AD:START -->
             <!-- AUTOGEN:POLICY_AD:END -->
             ${freshnessNote}
-            <p style="margin-top:8px;"><a href="${esc(finalUrl)}" class="cta-link" rel="nofollow noopener" target="_blank" style="font-size:0.85rem;">정부24에서 신청하기 →</a></p>
+            <p style="margin-top:8px;"><a href="${esc(finalUrl)}" class="cta-link" rel="nofollow noopener" target="_blank" style="font-size:0.85rem;">${esc(ctaLabelForUrl(finalUrl))}</a></p>
           </div>
         </article>
       </div>
