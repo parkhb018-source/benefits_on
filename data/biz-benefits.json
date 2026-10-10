@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-09",
-  "count": 1445,
+  "updatedAt": "2026-10-10",
+  "count": 1437,
   "items": [
     {
       "id": "PBLN_000000000127088",
@@ -7783,48 +7783,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000126903",
-      "title": "[서울ㆍ경기] 2026년 한국건강증진개발원 ESG 컨설팅 지원 사업 공고",
-      "summary": "중소기업 대상 ESG 전문 컨설팅 무상 지원을 통해 중소기업의 내부 ESG 실행력의 제고 및 외부 ESG 평가에 대한 실질적 대응 역량 강화를 도모해드리는 사업입니다.☞ 서울, 경기 소재 ESG 컨설팅 참여를 희망…",
-      "summaryLength": 187,
-      "agency": "보건복지부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "컨설팅",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 2,
-      "regionLabel": "2개 지역",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "경기"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-28 ~ 2026-10-09",
-        "start": "2026-09-28",
-        "end": "2026-10-09",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126903",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000126902",
       "title": "[경남] 2026년 특산물박람회 해외바이어 초청 수출상담회 참가업체 모집 공고",
       "summary": "도내 수산식품 및 농업 관련 수출업체의 수출 확대와 해외시장 다변화를 위해 개최하는 「2026년 해외바이어 초청 수출상담회」의 참가업체 모집 계획을 다음과 같이 공고합니다. ☞ 도내 수출업체☞ 참가기업과의 1:1 …",
@@ -9452,47 +9410,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126853",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126852",
-      "title": "[전북] 임실군 2026년 관내 기업체 맞춤형 안전ㆍ위생키트 지원사업 참여기업 모집 공고",
-      "summary": "임실군에서는 관내 식품ㆍ제조업 현장 생산직 근로자의 산업재해를 예방하고 작업 환경을 개선하여 근로 복지를 향상시키고자「2026년 임실군 관내 기업체 맞춤형 안전ㆍ위생키트 지원사업」의 참여 기업을 다음과 같이 모집하…",
-      "summaryLength": 232,
-      "agency": "전북특별자치도",
-      "fields": [
-        "인력"
-      ],
-      "fieldMid": "작업환경개선",
-      "sigungu": "임실군",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "전북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "전북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-28 ~ 2026-10-09",
-        "start": "2026-09-28",
-        "end": "2026-10-09",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126852",
       "source": "bizinfo"
     },
     {
@@ -11722,47 +11639,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000126775",
-      "title": "[울산] 울주군 2026년 4차 청년 스마트팜 보급 육성 지원사업 지원기업 모집 공고",
-      "summary": "울산광역시 울주군이 지원하고, (재)울산테크노파크에서 시행하는 2026년도「울주군 청년 스마트팜 보급 육성 지원사업」에서 스마트팜 설비보급 지원사업을 통한 산업생태계 조성을 위해 다음과 같이 모집계획을 공고하오니,…",
-      "summaryLength": 279,
-      "agency": "울산광역시",
-      "fields": [
-        "창업"
-      ],
-      "fieldMid": "사업화지원",
-      "sigungu": "울주군",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "울산",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "울산"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "창업벤처"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-23 ~ 2026-10-09",
-        "start": "2026-09-23",
-        "end": "2026-10-09",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126775",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000126774",
       "title": "[경기] 파주시 2026년 파주청년창업지원센터 청년창업 멘토링 지원 참여기업ㆍ팀 모집 공고",
       "summary": "파주시와 (재)경기테크노파크에서는 파주청년창업지원센터 입주기업 및 파주시 관내 예비ㆍ초기창업자의 성공 창업을 지원하기 위하여 각 분야 전문가와의 멘토링을 지원하고자 하오니 많은 관심과 참여 바랍니다.☞ 공고일 기준…",
@@ -12203,62 +12079,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000126759",
-      "title": "2026년 한국농수산식품유통공사 혁신 파트너십 지원사업 참여 창업ㆍ벤처기업 모집 공고",
-      "summary": "중소 창업ㆍ벤처기업의 원활한 시장 진입과 지속 가능한 성장을 지원하기 위해 「2025년 한국농수산식품유통공사 혁신 파트너십 지원사업」을 아래와 같이 추진하오니, 본 사업에 참여를 희망하는 중소 창업ㆍ벤처기업의 많은…",
-      "summaryLength": 311,
-      "agency": "농림축산식품부",
-      "fields": [
-        "창업"
-      ],
-      "fieldMid": "사업화지원",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "창업벤처"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-23 ~ 2026-10-09",
-        "start": "2026-09-23",
-        "end": "2026-10-09",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126759",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000126756",
       "title": "2026년 4차 소재부품기술개발사업 신규지원 대상과제 공고",
       "summary": "2026년도 소재부품기술개발사업(4차) 신규 지원대상 연구개발과제를 다음과 같이 공고하오니 수행하고자 하는 자는 신청하여 주시기 바랍니다.☞ 기업, 대학, 연구기관, 연구조합, 사업자단체, 의료기관 등- 주관연구개…",
@@ -12640,47 +12460,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126734",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126733",
-      "title": "[경남] 진주시 2026년 2차 우리동네 맑은공기 패키지 지원사업 참여 사업장 모집 추가 공고",
-      "summary": "상평일반산업단지 및 상평동, 상대동 공업지역의 집중관리지역 내 소규모 사업장의 방지시설 교체ㆍ설치 지원을 통한 대기환경 개선을 위한 「2026년 우리동네 맑은공기 패키지 지원사업」을 아래와 같이 공고하오니 지원을 …",
-      "summaryLength": 258,
-      "agency": "경상남도",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "시설/입지지원",
-      "sigungu": "진주시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경남",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경남"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-21 ~ 2026-10-09",
-        "start": "2026-09-21",
-        "end": "2026-10-09",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126733",
       "source": "bizinfo"
     },
     {
@@ -16659,47 +16438,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000126505",
-      "title": "2026년 제2회 반려동물 창업 아이디어 경진대회 참가자 모집 공고",
-      "summary": "전국의 창의적인 반려동물 창업 아이디어를 발굴ㆍ육성하고, 우수 아이디어의 사업화 및 지역 산업 연계를 통해 부울경(부산ㆍ울산ㆍ경남) 반려동물 산업의 경쟁력 강화와 창업 생태계 활성화를 도모하고자「2026 제2회 반…",
-      "summaryLength": 253,
-      "agency": "부산광역시",
-      "fields": [
-        "창업"
-      ],
-      "fieldMid": "사업화지원",
-      "sigungu": null,
-      "regionFixed": true,
-      "regionCount": 1,
-      "regionLabel": "부산",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "부산"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "창업벤처"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-14 ~ 2026-10-09",
-        "start": "2026-09-14",
-        "end": "2026-10-09",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126505",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000126504",
       "title": "2026년 3차 메카노바이오활성소재 혁신의료기기 실증 기반구축 생물학적 시험평가인증 지원사업 공고(산업혁신기반구축사업)",
       "summary": "「국가독성과학연구소 전북첨단바이오연구본부 중개독성연구센터」에서는 산업통상자원부와 전북특별자치도 및 전주시가 함께 지원하는 2026년도 산업혁신 기반 구축 사업의 일환으로, 생물학적 시험평가인증 지원사업을 다음과 같…",
@@ -18185,47 +17923,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126339",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126336",
-      "title": "[경남] 김해시 2026년 2차 우리동네 맑은공기 패키지 지원사업 참여 사업자 모집 공고",
-      "summary": "「2026년 우리동네 맑은공기 패키지 지원사업」 참여 사업자를 모집하고자 다음과 같이 공고(2차)합니다.☞ 공고일 기준 다음 조건을 모두 충족하는 사업장① 김해시 진영읍 진영ㆍ본산리 준공업지역(악취관리지역), 부곡…",
-      "summaryLength": 269,
-      "agency": "경상남도",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "시설/입지지원",
-      "sigungu": "김해시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경남",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경남"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "예산 소진시까지",
-        "start": null,
-        "end": null,
-        "always": true
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126336",
       "source": "bizinfo"
     },
     {
@@ -24220,47 +23917,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000125356",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000125354",
-      "title": "[대전] 2026년 하반기 기업 직접물류비 지원사업 참여기업 모집 공고",
-      "summary": "대전일자리경제진흥원에서는「2026 기업 직접물류비 지원사업」을 통해 관내 중소수출기업의 수출경쟁력 강화와 물류비 절감을 위해 아래와 같이 참여기업을 모집하오니 많은 관심과 참여 바랍니다.☞ 중소벤처기업부에서 발급하…",
-      "summaryLength": 274,
-      "agency": "대전광역시",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "해외진출준비",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "대전",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "대전"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-01 ~ 2026-10-09",
-        "start": "2026-10-01",
-        "end": "2026-10-09",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000125354",
       "source": "bizinfo"
     },
     {
