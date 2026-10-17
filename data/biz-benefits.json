@@ -1,6 +1,6 @@
 {
   "updatedAt": "2026-10-17",
-  "count": 1437,
+  "count": 1436,
   "items": [
     {
       "id": "PBLN_000000000127291",
@@ -38088,61 +38088,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121631",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000121617",
-      "title": "2026년 조달청 우수제품 지정계획 변경 공고",
-      "summary": "2026년도 조달청 우수제품 지정 계획을 아래와 같이 공고합니다.☞ 「조달사업에 관한 법률 제26조」(우수조달물품등의 지정) 제1항 제1호에서 정한 기업이 생산하는 물품 및 소프트웨어로서「우수조달물품 지정관리 규정…",
-      "summaryLength": 166,
-      "agency": "조달청",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "시험/인증",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 15,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "차수별 상이",
-        "start": null,
-        "end": null,
-        "always": true
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000121617",
       "source": "bizinfo"
     },
     {
