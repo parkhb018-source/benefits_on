@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-17",
-  "count": 1436,
+  "updatedAt": "2026-10-18",
+  "count": 1434,
   "items": [
     {
       "id": "PBLN_000000000127291",
@@ -8676,47 +8676,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127058",
-      "title": "[인천] 2026년 IFEZ 스마트시티 시민참여 리빙랩 실증 프로그램 참가기업 모집 공고",
-      "summary": "인천경제자유구역청, (재)인천테크노파크에서는 시민참여 리빙랩 운영을 통해 기업의 혁신 제품ㆍ서비스를 활용한 통합관제개선(장애, 데이터 등) 및 스마트시티 활성화를 지원하기 위해 아래와 같이 참여기업을 모집하오니 사…",
-      "summaryLength": 363,
-      "agency": "인천광역시",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "기술사업화/이전/지도",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "인천",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "인천"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-06 ~ 2026-10-18",
-        "start": "2026-10-06",
-        "end": "2026-10-18",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127058",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127057",
       "title": "[울산] 2026년 국가연구지원시설 고도화사업 장비이용료 바우처지원 참여기업 모집 공고",
       "summary": "2026년도 과학기술정보통신부가 지원하는 「국가연구지원시설 고도화사업」 장비이용료 바우처지원 참여기업 모집을 다음과 같이 공고하오니, 해당 프로그램 참여를 희망하는 울산지역 중소기업, 신진연구자의 많은 신청 바랍니…",
@@ -12994,47 +12953,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126884",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126882",
-      "title": "[경북] 2026년 YUnicorn 시제품 제작 및 사업화 지원 모집 공고",
-      "summary": "앵커사업단 YUnicorn창업지원단에서는 창업에 관심 있는 영남대학(원)교 재학생 및 교원과 경북지역 소재 대학(원)교 재학생 등을 대상으로 시제품 제작 및 사업화 지원을 하고자 합니다. 새로운 아이디어로 신규제품…",
-      "summaryLength": 331,
-      "agency": "교육부",
-      "fields": [
-        "창업"
-      ],
-      "fieldMid": "사업화지원",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "창업벤처"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-14 ~ 2026-10-18",
-        "start": "2026-09-14",
-        "end": "2026-10-18",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126882",
       "source": "bizinfo"
     },
     {
