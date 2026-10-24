@@ -1,6 +1,6 @@
 {
   "updatedAt": "2026-10-24",
-  "count": 1419,
+  "count": 1418,
   "items": [
     {
       "id": "PBLN_000000000127435",
@@ -3191,47 +3191,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127364",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127363",
-      "title": "[경북] 포항시 2026년 2차 이차전지 업종전환 지원사업(컨설팅) 수혜기업 모집 공고",
-      "summary": "포항시가 지원하는「지역 이차전지산업 업종전환 지원사업」의 기업 지원 프로그램을 아래와 같이 안내하오니 참여를 희망하는 포항지역 중소ㆍ중견기업의 많은 신청 바랍니다.☞ 포항지역 중견ㆍ중소기업☞ 이차전지 산업관련 업종…",
-      "summaryLength": 175,
-      "agency": "경상북도",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "기술사업화/이전/지도",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "모집 완료까지 상시 접수",
-        "start": null,
-        "end": null,
-        "always": true
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127363",
       "source": "bizinfo"
     },
     {
