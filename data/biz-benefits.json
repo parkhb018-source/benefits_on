@@ -1,7 +1,1465 @@
 {
-  "updatedAt": "2026-10-25",
-  "count": 1414,
+  "updatedAt": "2026-10-27",
+  "count": 1420,
   "items": [
+    {
+      "id": "PBLN_000000000127470",
+      "title": "[경기] 화성시 2026년 2차 스마트 물류비 지원사업 참가기업 모집 연장 공고",
+      "summary": "화성특례시는 관내 수출 중소기업을 대상으로 수출물류비 부담 경감 및 수출경쟁력 강화에 기여하고자「2026년 화성특례시 스마트 물류비 지원사업(2차)」참가기업을 다음과 같이 모집하오니, 많은 신청 바랍니다.☞ 관내 …",
+      "summaryLength": 361,
+      "agency": "경기도",
+      "fields": [
+        "수출"
+      ],
+      "fieldMid": "해외진출",
+      "sigungu": "화성시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경기",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경기"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-01 ~ 2026-10-30",
+        "start": "2026-10-01",
+        "end": "2026-10-30",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127470",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127469",
+      "title": "2026년 철강ㆍ금속 인공지능전환AX 실증센터 구축 기업지원 사업 기초단계 모집 공고",
+      "summary": "철강ㆍ금속 제조기업의 도입 효과를 현장 데이터로 검증할 수 있도록「철강ㆍ금속 인공지능전환(AX) 기술지원 사업(기초단계)」을 다음과 같이 공고하오니 관련 기업들의 많은 참여 바랍니다.☞ 공정데이터 생산ㆍ수집 설비를…",
+      "summaryLength": 210,
+      "agency": "산업통상부",
+      "fields": [
+        "기술"
+      ],
+      "fieldMid": "기술사업화/이전/지도",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 16,
+      "regionLabel": "전국",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울",
+            "부산",
+            "대구",
+            "인천",
+            "전남광주",
+            "대전",
+            "울산",
+            "세종",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "전북",
+            "경북",
+            "경남",
+            "제주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-22 ~ 2026-10-30",
+        "start": "2026-10-22",
+        "end": "2026-10-30",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127469",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127468",
+      "title": "[충북] 옥천군 2026년 우수기업(인) 및 유망 중소기업 선정 공고",
+      "summary": "기업하기 좋은 환경조성 및 기업 활동 촉진을 위하여 옥천군 지역경제 활성화에 기여한 기업이나 기업인을 예우하고 지원하기 위한 우수기업(인) 및 유망 중소기업을 선정하고자 아래와 같이 공고합니다.☞ 관내 중소기업- …",
+      "summaryLength": 321,
+      "agency": "충청북도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": "옥천군",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "충북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "충북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-21 ~ 2026-11-04",
+        "start": "2026-10-21",
+        "end": "2026-11-04",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127468",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127467",
+      "title": "[충남] 청양군 청년창업공간 누구나가게 본점 창업도전자 모집 공고",
+      "summary": "청양군에서는 지역 청년의 창업 활성화를 위해 청년창업공간 누구나가게 운영지원을 하고 있습니다. 이와 관련하여 「누구나가게 본점」을 성실하게 운영할 청년 창업도전자를 다음과 같이 모집하오니 많은 관심과 참여 바랍니다…",
+      "summaryLength": 288,
+      "agency": "충청남도",
+      "fields": [
+        "창업"
+      ],
+      "fieldMid": "창업공간지원",
+      "sigungu": "청양군",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "충남",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "충남"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "창업벤처"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-21 ~ 2026-11-06",
+        "start": "2026-10-21",
+        "end": "2026-11-06",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127467",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127466",
+      "title": "2026년 서천 해양 블루바이오 신소재 기반 예비창업자 지원 프로그램 상시 모집 공고",
+      "summary": "건양대학교 KY 앵커 사업단에서는 서천군의 우수한 해양자원과 블루바이오 성장 잠재력을 바탕으로 혁신적인 창업 아이디어를 보유한 예비창업자의 성공적인 창업 및 시장 안착을 지원하고자 「2026년도 서천 해양 블루바이…",
+      "summaryLength": 464,
+      "agency": "교육부",
+      "fields": [
+        "창업"
+      ],
+      "fieldMid": "예비창업자지원",
+      "sigungu": "서천군",
+      "regionFixed": false,
+      "regionCount": 16,
+      "regionLabel": "전국",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울",
+            "부산",
+            "대구",
+            "인천",
+            "전남광주",
+            "대전",
+            "울산",
+            "세종",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "전북",
+            "경북",
+            "경남",
+            "제주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "창업벤처"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "상시 접수",
+        "start": null,
+        "end": null,
+        "always": true
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127466",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127465",
+      "title": "[경기] 상생 노무컨설팅 참여 사업장 모집 공고",
+      "summary": "경기도에서는 도내 영세사업장의 노동관계법령 준수와 자율적인 노무관리 개선을 지원하기 위해 「2026년 경기상생 노무컨설팅」 참여사업장을 모집합니다. 경기도 마을노무사가 사업장을 직접 방문하여 근로계약, 임금, 근로…",
+      "summaryLength": 249,
+      "agency": "경기도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "컨설팅",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경기",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경기"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-22 ~ 2026-11-20",
+        "start": "2026-10-22",
+        "end": "2026-11-20",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127465",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127464",
+      "title": "[충남] 서천군 2026년 사회적기업 시설장비 지원사업 공고",
+      "summary": "「지방보조금법」제7조제2항 및 「서천군 지방보조금 관리 조례」제19조에 따라 2026년 사회적경제기업 시설장비 지원사업을 다음과 같이 공고합니다.☞ 서천군 관내 사회적경제기업(예비ㆍ인증사회적기업, 사회적협동조합, …",
+      "summaryLength": 195,
+      "agency": "충청남도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "시설/입지지원",
+      "sigungu": "서천군",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "충남",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "충남"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "사회적기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-10-28",
+        "start": "2026-10-23",
+        "end": "2026-10-28",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127464",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127463",
+      "title": "[전북] 고창군 2026년 수산물 물류환경 개선사업 모집 공고",
+      "summary": "「수산물 물류환경 개선사업」사업자 모집을 아래와 같이 공고하오니, 사업 희망자께서는 사업신청서 및 구비서류를 제출하여 주시기 바랍니다.☞ 고창군수산업협동조합, 어업회사법인, 영어조합법인 등 어업인 생산자단체※ 수산…",
+      "summaryLength": 158,
+      "agency": "전북특별자치도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": "고창군",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "전북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "전북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-06",
+        "start": "2026-10-23",
+        "end": "2026-11-06",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127463",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127462",
+      "title": "제6차 해양수산 투자기관 협의회(정기IR) 참여기업 모집 공고",
+      "summary": "해투자자 대상 북극항로 연관 유망기술ㆍ기업 소개로 해양수산분야 투자유치 활성화와 기업 자금조달 기회 확대 등을 위한 제6차 해양수산 투자기관협의회(정기IR) 참여기업을 다음과 같이 모집하오니, 투자유치를 희망하는 …",
+      "summaryLength": 283,
+      "agency": "해양수산부",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 16,
+      "regionLabel": "전국",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울",
+            "부산",
+            "대구",
+            "인천",
+            "전남광주",
+            "대전",
+            "울산",
+            "세종",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "전북",
+            "경북",
+            "경남",
+            "제주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-26 ~ 2026-11-13",
+        "start": "2026-10-26",
+        "end": "2026-11-13",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127462",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127461",
+      "title": "[전북] 고창군 2026년 4차 수산식품 가공설비 지원사업 모집 공고",
+      "summary": "수산식품산업의 부가가치 향상을 위한 기반 마련 및 지속적인 발전을 도모하고자 다음과 같이 사업을 공고하오니 많은 참여 바랍니다.☞ 「수산식품산업법」시행령 제11조(수산가공품 생산 등의 지원범위) 각호에 따른 수산가…",
+      "summaryLength": 326,
+      "agency": "전북특별자치도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "시설/입지지원",
+      "sigungu": "고창군",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "전북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "전북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-10-30",
+        "start": "2026-10-23",
+        "end": "2026-10-30",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127461",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127460",
+      "title": "[전북] 군산시 2026년 일자리창출 우수중소기업 선정계획 공고",
+      "summary": "군산시에서는 일자리 창출에 기여한 우수중소기업 선정계획을 다음과 같이 공고합니다.☞ 2024. 11. 1 이전부터 군산시에서 운영중인 종사자 10인이상 중소기업- 2026년 신규채용 인원이 5명 이상 (단, 공고일…",
+      "summaryLength": 168,
+      "agency": "전북특별자치도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": "군산시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "전북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "전북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-11-09 ~ 2026-11-20",
+        "start": "2026-11-09",
+        "end": "2026-11-20",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127460",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127459",
+      "title": "[세종] 2026년 하반기 착한가격업소 지정신청 공고",
+      "summary": "지역물가 안정에 기여하는 업소를 착한가격업소로 지정ㆍ지원하고자 행정안전부「착한가격업소 지정 및 관리지침」및「세종특별자치시 착한가격업소 지원 및 관리에 관한 조례」 제3조에 따라 다음과 같이 공고합니다.☞ 세종시에 …",
+      "summaryLength": 326,
+      "agency": "세종특별자치시",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "세종",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "세종"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-20 ~ 2026-11-03",
+        "start": "2026-10-20",
+        "end": "2026-11-03",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127459",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127458",
+      "title": "[서울] 2026년 서울역 사회적경제 자판기 운영사업 참여기업 모집 공고",
+      "summary": "서울특별시 소재 사회적경제기업 및 소셜벤처의 친환경ㆍ가치소비 제품 판로 확대를 위해 코레일유통과 협력하여 서울역 지하통로 자판기를 활용한 「2026년 서울역 사회적경제 자판기 운영사업」 참여기업을 다음과 같이 모집…",
+      "summaryLength": 520,
+      "agency": "서울특별시",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "서울",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "사회적기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-14 ~ 2026-10-30",
+        "start": "2026-10-14",
+        "end": "2026-10-30",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127458",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127456",
+      "title": "[충북] 청주시 2026년 시제품 고도화 바우처 지원 프로그램 참여 기업 모집 공고",
+      "summary": "초기 창업 기업의 시제품 제작 비용 부담 완화 및 전문 제조 업체 연계 애로 해소를 위해 \"2026년 시제품 고도화 바우처 지원 프로그램\"을 운영하니 학생 창업, 교원 창업 기업의 많은 신청 바랍니다.☞ 청주시에 …",
+      "summaryLength": 252,
+      "agency": "충청북도",
+      "fields": [
+        "창업"
+      ],
+      "fieldMid": "사업화지원",
+      "sigungu": "청주시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "충북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "충북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "창업벤처"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-22 ~ 2026-11-03",
+        "start": "2026-10-22",
+        "end": "2026-11-03",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127456",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127455",
+      "title": "[전남광주] 지역문화자원 연구 및 상품개발 컨소시엄(공방ㆍ디자인기업) 모집 공고",
+      "summary": "지역문화자원을 활용한 문화콘텐츠의 확산을 위한 ‘지역문화자원 연구 및 상품개발 컨소시엄(공방&디자인기업) 모집 공고’를 추진하오니, 공방 및 디자인기업의 많은 관심과 참여 바랍니다.☞ 공고일 기준, 구 광주광역시 …",
+      "summaryLength": 330,
+      "agency": "전남광주통합특별시",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "전남광주",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "전남광주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-11-09 ~ 2026-11-10",
+        "start": "2026-11-09",
+        "end": "2026-11-10",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127455",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127454",
+      "title": "[충남] 2026년 충남창업마루나비 인플루언서 마케팅 지원사업 모집 공고",
+      "summary": "충남창업마루나비는 인플루언서 매칭 및 마케팅을 지원하는 사업에 도내 창업자를 아래와 같이 모집하오니 많은 관심과 참여 바랍니다. ☞ 충남창업마루나비 입주기업 및 도내기업(7년 미만 기업)☞ 유튜브, 블로그, 인스타…",
+      "summaryLength": 162,
+      "agency": "충청남도",
+      "fields": [
+        "창업"
+      ],
+      "fieldMid": "사업화지원",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "충남",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "충남"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "창업벤처"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-26 ~ 2026-11-01",
+        "start": "2026-10-26",
+        "end": "2026-11-01",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127454",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127453",
+      "title": "[경남] 2026년 KERI-STARS 특화기업 집중지원 사업 (Tech-UpㆍScale-Up) 참여기업 모집 공고(경남 창원 강소연구개발특구 이노테크 기업육성사업)",
+      "summary": "창원 강소연구개발특구 내 유망 기술기업의 사업화를 집중 지원하기 위한「KERI-STARS 특화기업 집중지원 사업 (Tech-up & Scale-up)」 참여기업을 다음과 같이 모집하오니, 관심 있는 기업의 많은 신…",
+      "summaryLength": 334,
+      "agency": "경상남도",
+      "fields": [
+        "기술"
+      ],
+      "fieldMid": "기술사업화/이전/지도",
+      "sigungu": "창원시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경남",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경남"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-08",
+        "start": "2026-10-23",
+        "end": "2026-11-08",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127453",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127452",
+      "title": "2027년 이탈리아 밀라노 광학 전시회(MIDO) 한국관 참가기업 모집 공고",
+      "summary": "KOTRA와 한국광학공업협동조합은 2027년 2월 6일~2월 8일, 3일간 이탈리아 밀라노에서 개최되는 “2027 이탈리아 밀라노 광학 전시회(MIDO)”의 한국관 참가기업을 아래와 같이 모집하오니 관심 기업들의 …",
+      "summaryLength": 290,
+      "agency": "산업통상부",
+      "fields": [
+        "수출"
+      ],
+      "fieldMid": "해외진출",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 16,
+      "regionLabel": "전국",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울",
+            "부산",
+            "대구",
+            "인천",
+            "전남광주",
+            "대전",
+            "울산",
+            "세종",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "전북",
+            "경북",
+            "경남",
+            "제주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-06",
+        "start": "2026-10-23",
+        "end": "2026-11-06",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127452",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127451",
+      "title": "2027년 튀르키예 이스탄불 의료기기 전시회(Expomed Eurasia) 한국관 참가기업 모집 공고",
+      "summary": "KOTRA와 한국의료기기산업협회는 2027년 4월 15일 ~ 4월 18일 (4일간) 튀르키예 이스탄불에서 개최되는 ‘2027 튀르키예 이스탄불 의료기기 전시회(Expomed Eurasia)’의 한국관 참가기업을 아…",
+      "summaryLength": 323,
+      "agency": "산업통상부",
+      "fields": [
+        "수출"
+      ],
+      "fieldMid": "해외진출",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 16,
+      "regionLabel": "전국",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울",
+            "부산",
+            "대구",
+            "인천",
+            "전남광주",
+            "대전",
+            "울산",
+            "세종",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "전북",
+            "경북",
+            "경남",
+            "제주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-26 ~ 2026-11-16",
+        "start": "2026-10-26",
+        "end": "2026-11-16",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127451",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127450",
+      "title": "[경남] 거창군 2026년 임산물 상품화 지원 재공고",
+      "summary": "임산물 포장재 지원을 통한 상품성 향상과 임업인 소득증대를 위하여「2026년 임산물 상품화 지원사업」의 신청의 신청을 아래와 같이 재공고 하오니 지원조건에 적합한 자는 많은 참여를 바랍니다.☞ 임업인 등 생산자 단…",
+      "summaryLength": 241,
+      "agency": "경상남도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경남",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경남"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-11-02 ~ 2026-11-10",
+        "start": "2026-11-02",
+        "end": "2026-11-10",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127450",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127449",
+      "title": "2026년 2차 1인 중증장애인기업 업무지원인 서비스 지원사업 의사소통형ㆍ경영지도형 지원대상자 모집 공고",
+      "summary": "장애인기업종합지원센터는 중증장애인기업의 안정적인 경영활동 지원을 위한 「2026년 1인 중증장애인기업 업무지원인 서비스 지원사업」의 의사소통형ㆍ경영지도형 지원대상자를 다음과 같이 모집합니다. ☞ 아래 조건을 모두 …",
+      "summaryLength": 445,
+      "agency": "중소벤처기업부",
+      "fields": [
+        "인력"
+      ],
+      "fieldMid": "작업환경개선",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 16,
+      "regionLabel": "전국",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울",
+            "부산",
+            "대구",
+            "인천",
+            "전남광주",
+            "대전",
+            "울산",
+            "세종",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "전북",
+            "경북",
+            "경남",
+            "제주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "장애인기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-04",
+        "start": "2026-10-23",
+        "end": "2026-11-04",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127449",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127448",
+      "title": "[전남광주] 2026년 아태 AI 특화지구(AHAP) 조성 올인원 AI 허브 AX 실증 (제조 AX) 사업 수행기업 모집 공고",
+      "summary": "광주정보문화산업진흥원은 과학기술정보통신부와 정보통신산업진흥원(NIPA)이 주관하는「2026년 아태 AI 특화지구(AHAP) 조성사업」추진과 관련하여, 지정 기획과제 실증을 위한 올인원 AI 허브 AX 실증 (제조 …",
+      "summaryLength": 319,
+      "agency": "과학기술정보통신부",
+      "fields": [
+        "기술"
+      ],
+      "fieldMid": "기술사업화/이전/지도",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "전남광주",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "전남광주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-22 ~ 2026-10-29",
+        "start": "2026-10-22",
+        "end": "2026-10-29",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127448",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127447",
+      "title": "2026년 하반기 절충교역 수출상담회 참여 희망업체 모집 공고",
+      "summary": "방위사업청, 국방기술진흥연구소는 국내 방산중소기업의 수출경쟁력 강화를 위해 아래와 같이 글로벌 방산 기업과 국내 중소 기업간 1:1 수출상담회 행사를 추진하오니, 국내 방산 중소기업의 많은 참여바랍니다.☞ 방위산업…",
+      "summaryLength": 198,
+      "agency": "방위사업청",
+      "fields": [
+        "수출"
+      ],
+      "fieldMid": "시장개척",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 16,
+      "regionLabel": "전국",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "서울",
+            "부산",
+            "대구",
+            "인천",
+            "전남광주",
+            "대전",
+            "울산",
+            "세종",
+            "경기",
+            "강원",
+            "충북",
+            "충남",
+            "전북",
+            "경북",
+            "경남",
+            "제주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-06",
+        "start": "2026-10-23",
+        "end": "2026-11-06",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127447",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127446",
+      "title": "[경남] 창원시 2026년 3차 AI 빅데이터 기반 의료바이오 첨단기기 연구제조센터 구축사업 의료기기 부품ㆍ모듈 국산화 및 기술개발 지원사업 공고",
+      "summary": "산업통상자원부 ⸢AI 빅데이터 기반 의료바이오 첨단기기 연구제조센터 구축사업⸥을 통해 창원시가 지원하는 2026년 의료기기 부품ㆍ모듈 국산화 및 기술개발 지원사업을 안내하오니 관심있는 기업들의 많은 참여 바랍니다.…",
+      "summaryLength": 334,
+      "agency": "산업통상부",
+      "fields": [
+        "기술"
+      ],
+      "fieldMid": "기술사업화/이전/지도",
+      "sigungu": "창원시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경남",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경남"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-20",
+        "start": "2026-10-23",
+        "end": "2026-11-20",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127446",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127445",
+      "title": "[충북] 2026년 콘텐츠기업 글로벌 스케일업(Scale-up) 지원사업 재공고",
+      "summary": "충북 지역 우수 콘텐츠 IP를 보유한 기업의 글로벌 시장 경쟁력을 강화하고, 유럽(EU) 시장 진출 및 글로벌 네트워크 확대를 지원하고자 「2026 충북 콘텐츠기업 글로벌 스케일업(Scale-up) 지원사업」을 다…",
+      "summaryLength": 360,
+      "agency": "충청북도",
+      "fields": [
+        "수출"
+      ],
+      "fieldMid": "해외진출",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "충북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "충북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-06",
+        "start": "2026-10-23",
+        "end": "2026-11-06",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127445",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127444",
+      "title": "[경북] 2026년 K-통합 마케팅 생태계 조성사업 온ㆍ오프라인 특판전(오아시스 마켓) 참가기업 모집 공고",
+      "summary": "경상북도와 (재)경상북도경제진흥원은 14개 시군과 협력하여 중소기업 및 소상공인의 판로 확대 및 매출 증대를 위해 오아시스 마켓과 협력하여 온ㆍ오프라인 특판전을 추진하오니 도내 기업의 많은 관심과 참여 바랍니다.☞…",
+      "summaryLength": 423,
+      "agency": "경상북도",
+      "fields": [
+        "내수"
+      ],
+      "fieldMid": "홍보지원",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-06",
+        "start": "2026-10-23",
+        "end": "2026-11-06",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127444",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127443",
+      "title": "[부산] 1만원 임대료 빈 점포 다시채움 프로젝트 임차인 모집 공고",
+      "summary": "부산시와 (재)부산경제진흥원에서는「민생 100일 비상조치」의 일환으로 침체된 상권 내 빈 점포를 새로운 활력 거점으로 전환하기 위한 「1만원 임대료 빈 점포 다시채움 프로젝트」에 참여할 임차인을 아래와 같이 모집합…",
+      "summaryLength": 361,
+      "agency": "부산광역시",
+      "fields": [
+        "창업"
+      ],
+      "fieldMid": "창업공간지원",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "부산",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "부산"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "창업벤처"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-05",
+        "start": "2026-10-23",
+        "end": "2026-11-05",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127443",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127442",
+      "title": "[인천] 2026년 직구 온라인 상설관(중소기업 온라인 판매 지원사업) 참가기업 모집 공고",
+      "summary": "인천광역시와 인천테크노파크에서는 관내 중소제조기업의 온라인 판매 진출 도모 및 e-커머스 경쟁력 강화를 위하여 인천직구 온라인 상설관 참가기업 모집을 추진하오니 관심있는 기업의 많은 신청 바랍니다.☞ 인천에 본사 …",
+      "summaryLength": 232,
+      "agency": "인천광역시",
+      "fields": [
+        "내수"
+      ],
+      "fieldMid": "온라인",
+      "sigungu": "직구",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "인천",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "인천"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "상시 접수",
+        "start": null,
+        "end": null,
+        "always": true
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127442",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127441",
+      "title": "[경북] 고령군 2026년 스타기업 및 우수기업인 선정계획 공고",
+      "summary": "지역경제 발전에 이바지한 우수기업 및 기업인을 발굴ㆍ시상하여 기업(인)의 자긍심을 살리고 지역경제 활성화를 도모하기 위하여 「2026년 고령군 스타기업 및 우수기업인 선정계획」을 다음과 같이 공고합니다.☞ 관내 제…",
+      "summaryLength": 229,
+      "agency": "경상북도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": "고령군",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-19 ~ 2026-10-30",
+        "start": "2026-10-19",
+        "end": "2026-10-30",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127441",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127440",
+      "title": "[전북] 2026년 3차 중소기업 정보보호 지원 사업 수요기업 모집 공고",
+      "summary": "(재)전북테크노파크는 전북특별자치도 내 중소기업 대상으로 정보보호 역량 강화를 위해 정보보호 관련 보안인증 취득 지원사업을 시행합니다. 2026년 중소기업 정보보호 지원 사업의 수요기업을 아래와 같이 3차 모집하오…",
+      "summaryLength": 294,
+      "agency": "전북특별자치도",
+      "fields": [
+        "기술"
+      ],
+      "fieldMid": "기술사업화/이전/지도",
+      "sigungu": null,
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "전북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "전북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-11-06",
+        "start": "2026-10-23",
+        "end": "2026-11-06",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127440",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127439",
+      "title": "[경북] 의성군 2026년 모범음식점 지정 신청 공고",
+      "summary": "위생관리 및 고객서비스 수준이 우수하고 좋은 식단을 실천하는 일반음식점을 모범음식점으로 지정하여 음식문화 서비스수준 향상을 도모하고 청결하고 안전한 먹거리 제공에 기여하고자 아래와 같이 모범음식점 지정 신청을 공고…",
+      "summaryLength": 168,
+      "agency": "경상북도",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": "의성군",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-21 ~ 2026-10-30",
+        "start": "2026-10-21",
+        "end": "2026-10-30",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127439",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127438",
+      "title": "[경남] 경산시 2026년 여성친화기업 환경개선 지원사업 참여기업 모집 공고",
+      "summary": "경산여성새로일하기센터는 여성이 일하기 좋은 기업 환경조성을 위해 여성전용시설 설치 등 기업 환경 개선 지원금을 지원함으로써 여성의 고용 안정 및 취업을 촉진시키고자 다음과 같이 「여성친화기업 환경개선 지원사업」의 …",
+      "summaryLength": 412,
+      "agency": "경상북도",
+      "fields": [
+        "인력"
+      ],
+      "fieldMid": "작업환경개선",
+      "sigungu": "경산시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경북",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경북"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "여성기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-28 ~ 2026-11-04",
+        "start": "2026-10-28",
+        "end": "2026-11-04",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127438",
+      "source": "bizinfo"
+    },
+    {
+      "id": "PBLN_000000000127437",
+      "title": "[전남광주] 광양시 2026년 5차 지역산업 위기대응 맞춤형 지원사업 통합 공고",
+      "summary": "글로벌 공급과잉, 중동사태 등으로 인한 광양 철강산업 위기 및 지역경제 악화에 실효적 대응을 위한 광양 지역산업 위기대응 맞춤형 지원사업(산업 맞춤형 특화지원, 물류인프라개선) 수혜기업 모집을 다음과 같이 공고하오…",
+      "summaryLength": 309,
+      "agency": "전남광주통합특별시",
+      "fields": [
+        "경영"
+      ],
+      "fieldMid": "디자인/상품화/사업화",
+      "sigungu": "광양시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "전남광주",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "전남광주"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-10-23 ~ 2026-10-30",
+        "start": "2026-10-23",
+        "end": "2026-10-30",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127437",
+      "source": "bizinfo"
+    },
     {
       "id": "PBLN_000000000127435",
       "title": "2026년 창업도시 조성 프로젝트 창업도시 모집 공고",
@@ -2094,47 +3552,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127389",
-      "title": "[울산] 2026년 신중년 경력형 일자리사업 참여기관 추가 모집 공고",
-      "summary": "근로능력이 있는 신중년층에게 적합한 일자리 활동 및 연계ㆍ체험을 제공하기 위한 2026년 「신중년 경력형 일자리사업」에 참여할 참여기관 모집을 다음과 같이 공고하오니 많은 참여 바랍니다.☞ 사회적기업, 사회적협동조…",
-      "summaryLength": 214,
-      "agency": "울산광역시",
-      "fields": [
-        "인력"
-      ],
-      "fieldMid": "국내일반인력",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "울산",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "울산"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-21 ~ 2026-10-26",
-        "start": "2026-10-21",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127389",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127388",
       "title": "[전남광주] 여수시 2026년 2차 맞춤형 단계별 기업지원프로그램 모집 공고",
       "summary": "여수시와 (재)전남테크노파크는 여수시 소재 중소기업을 대상으로 2026년도 맞춤형 단계별 기업지원프로그램에 참여할 기업을 다음과 같이 모집 하오니 기업의 많은 신청 바랍니다. ☞ 공고일 현재 본사와 사업장이 여수시…",
@@ -2918,103 +4335,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127370",
-      "title": "2026년 제4회 중견기업 혁신대상 장관표창 계획 연장 공고",
-      "summary": "중견기업 발전 및 경쟁력 강화에 기여한 중견기업(인)을 발굴하여 포상함으로써 관련 종사자의 사기진작과 중견기업(인)으로서 자긍심을 고취하고자 아래와 같이 2026년도 제4회 중견기업 혁신대상(공로자표창 포함)장관표…",
-      "summaryLength": 310,
-      "agency": "산업통상부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-20 ~ 2026-10-26",
-        "start": "2026-10-20",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127370",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127369",
-      "title": "[전남광주] 2026년 2차 전남창조경제혁신센터 국내판로 오픈이노베이션(GS SHOP) 밋업데이 참가기업 모집 공고",
-      "summary": "전남창조경제혁신센터에서는 국내 대표 유통사와 협업하여 전남광주통합특별시 내 유망 스타트업의 유통 판로 확대 및 사업 협력 기회 제공을 위한 「2026년도 전남창조경제혁신센터 국내판로 오픈이노베이션 2차 밋업데이」를…",
-      "summaryLength": 421,
-      "agency": "전남광주통합특별시",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "전남광주",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "전남광주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-20 ~ 2026-10-26",
-        "start": "2026-10-20",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127369",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127367",
       "title": "[전남광주] 2026년 전남창조경제혁신센터 국내판로 오픈이노베이션 밋업데이(GS THE FRESH) 참가기업 모집 공고",
       "summary": "전남창조경제혁신센터에서는 국내 대표 유통사와 협업하여 전남광주통합특별시 내 유망 스타트업의 유통 판로 확대 및 사업 협력 기회 제공을 위한 「2026년도 전남창조경제혁신센터 국내판로 오픈이노베이션 밋업데이(수산전)…",
@@ -3053,103 +4373,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127367",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127366",
-      "title": "[강원] 춘천시 2026년 친환경 인증농산물 포장재 지원사업 추가 공고",
-      "summary": "「춘천시 보조금 관리조례」 제15조의 규정에 따라 「2026년 친환경 인증농산물 포장재 지원사업」 추가 공개모집을 다음과 같이 공고합니다.☞ 관내 친환경인증 농업인 및 생산자단체☞ 친환경 인증농산물 포장재 제작비용…",
-      "summaryLength": 122,
-      "agency": "강원특별자치도",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": "춘천시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "강원",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "강원"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-20 ~ 2026-10-26",
-        "start": "2026-10-20",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127366",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127365",
-      "title": "2026년 K-푸드 콜드풀링 시범사업 이용업체 모집 공고",
-      "summary": "한국농수산식품유통공사에서는 중동 수출 경험이 있는 국내 농식품 수출업체 대상으로 「2026년 K-푸드 콜드풀링 시범사업 이용업체 모집」을 실시합니다. 많은 관심과 신청 바랍니다.☞ 중동 수출 경험이 있는 국내 농식…",
-      "summaryLength": 198,
-      "agency": "농림축산식품부",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "해외진출",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-20 ~ 2026-10-26",
-        "start": "2026-10-20",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127365",
       "source": "bizinfo"
     },
     {
@@ -3332,61 +4555,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127359",
-      "title": "2026년 사회연대경제기업 AX 현장 컨설팅 참여기업 모집 공고",
-      "summary": "한국사회적기업진흥원은 AI 전문가가 사회연대경제기업의 현장에 직접 참여하여 실제 업무 문제를 진단하고 AI 기반 맞춤형 해결 방안을 구축함으로써, 현장에서 즉시 활용 가능한 AI 업무체계를 마련하기 위해 「2026…",
-      "summaryLength": 252,
-      "agency": "고용노동부",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "기술사업화/이전/지도",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 15,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "사회적기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-15 ~ 2026-10-26",
-        "start": "2026-10-15",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127359",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127358",
       "title": "2027년 상반기 IBK창공(創工) 혁신 창업기업 모집 공고",
       "summary": "IBK기업은행은 축적된 중소기업금융 노하우, 컨설팅 역량, 글로벌 네트워크 등을 적극 활용하여 창업기업들의 성공적인 사업모델 및 양질의 일자리를 창출하기 위해 2027년 상반기 「IBK창공(創工)」 혁신창업기업을 …",
@@ -3514,47 +4682,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127355",
-      "title": "[경북] 2026년 우수상품 전시 및 수출상담회 참가기업 모집 공고",
-      "summary": "경상북도와 (재)경상북도경제진흥원은「2026 경북도 우수상품 전시 및 수출상담회」를 통해 국내외 판로 개척을 희망하는 도내 수출 중소기업을 다음과 같이 모집하오니, 많은 참여 바랍니다.☞ 경상북도 제조 또는 수출 …",
-      "summaryLength": 334,
-      "agency": "경상북도",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "시장개척",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-20 ~ 2026-10-26",
-        "start": "2026-10-20",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127355",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127354",
       "title": "[충남] 2026년 2차 해양바이오산업 클러스터 플랫폼 구축 사업 수혜기업 모집 공고",
       "summary": "2026년도 충청남도 및 서천군이 지원하고 충남테크노파크가 수행하는「충남 해양바이오산업 클러스터 플랫폼 구축사업」의 수혜기업을 모집하오니, 참여를 희망하는 기업의 많은 관심과 신청 바랍니다.☞ 충청남도에 본사ㆍ공장…",
@@ -3649,47 +4776,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127353",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127352",
-      "title": "[충남] 홍성군 2026년 (예비)사회적기업 시설장비 지원사업 공고",
-      "summary": "사회적경제기업 작업환경 개선 및 생산성 향상을 통한 경쟁력 강화를 위하여 「2026년 (예비)사회적기업 시설장비 지원사업」에 참여할 사회적기업을 아래와 같이 모집하오니 많은 참여 바랍니다.☞ 주사무소가 홍성군에 소…",
-      "summaryLength": 347,
-      "agency": "충청남도",
-      "fields": [
-        "인력"
-      ],
-      "fieldMid": "작업환경개선",
-      "sigungu": "홍성군",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "충남",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "충남"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "사회적기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-16 ~ 2026-10-26",
-        "start": "2026-10-16",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127352",
       "source": "bizinfo"
     },
     {
@@ -4588,62 +5674,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127325",
-      "title": "2026년 희망나눔 자립지원 프로그램 취약계층 고용 우수기업 선정 모집 공고",
-      "summary": "한국도로공사는 취약계층에게 양질의 일자리를 제공한 중소기업을 대상으로「취약계층 고용 우수기업 지원」사업(근로환경ㆍ관리시스템 개선)을 통한 효율적 업무 환경을 제공하고자 하오니 많은 관심과 참여 부탁드립니다.☞ 26…",
-      "summaryLength": 184,
-      "agency": "국토교통부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "시설/입지지원",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-19 ~ 2026-10-26",
-        "start": "2026-10-19",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127325",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127323",
       "title": "[전북] 2026년 7차 글로벌 IP스타기업 육성 해외출원비용지원사업 모집 공고",
       "summary": "2026년도 글로벌 IP스타기업 육성 해외출원비용 지원사업을 다음과 같이 공고하오니, 동 사업에 참여를 원하는 기업은 신청하여 주시기 바랍니다.☞ 전북 글로벌 IP스타기업☞ 해외 특허, 상표, 디자인 출원에 소요되…",
@@ -4888,47 +5918,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127318",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127317",
-      "title": "[제주] 2026년 4극3특 제주특별자치도 과학기술혁신지원사업 연구단 모집 공고",
-      "summary": "수도권 일극체제 극복 및 지역 주도의 과학기술 혁신 생태계 조성을 위한 「2026년도 4극3특 과학기술혁신지원사업」의 연구단을 다음과 같이 모집하오니, 권역 내 역량 있는 기관들의 많은 참여 바랍니다.☞ (주관) …",
-      "summaryLength": 280,
-      "agency": "과학기술정보통신부",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "혼합(단독+공동)",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "제주",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-11 ~ 2026-10-26",
-        "start": "2026-09-11",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127317",
       "source": "bizinfo"
     },
     {
@@ -5231,49 +6220,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127308",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127307",
-      "title": "2026년 동남권 멀티도메인 모빌리티 비즈니스 해커톤 참가자 모집 수정 공고(지역혁신클러스터육성(비R&D)사업)",
-      "summary": "부산ㆍ울산ㆍ경남의 지역별 특화산업과 혁신역량을 연계하고, 육상(Ground)ㆍ해상(Naval)ㆍ항공(Air) 모빌리티 기술과 AIㆍ데이터를 융합한 문제해결형 비즈니스모델을 발굴하기 위하여 「2026 동남권 멀티도메…",
-      "summaryLength": 312,
-      "agency": "산업통상부",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "기술사업화/이전/지도",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 3,
-      "regionLabel": "3개 지역",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "부산",
-            "울산",
-            "경남"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-16 ~ 2026-10-26",
-        "start": "2026-10-16",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127307",
       "source": "bizinfo"
     },
     {
@@ -5967,6 +6913,47 @@
       "source": "bizinfo"
     },
     {
+      "id": "PBLN_000000000127278",
+      "title": "[경기] 성남시 전남광주-성남cnd 연계 바이오 인프라 프로모션 참여기업 모집 연장 공고",
+      "summary": "성남산업진흥원와 전남바이오진흥원은 전남광주의 바이오 인프라를 견학하고 현지 기업들과의 네트워크를 통해 협력을 모색하는 전남광주-성남C&D 연계 바이오 인프라 프로모션을 추진합니다. C&D 플랫폼 협력을 통한 새로운…",
+      "summaryLength": 240,
+      "agency": "경기도",
+      "fields": [
+        "기술"
+      ],
+      "fieldMid": "기술사업화/이전/지도",
+      "sigungu": "성남시",
+      "regionFixed": false,
+      "regionCount": 1,
+      "regionLabel": "경기",
+      "conditions": [
+        {
+          "type": "region",
+          "op": "in",
+          "value": [
+            "경기"
+          ],
+          "required": true
+        },
+        {
+          "type": "businessType",
+          "op": "in",
+          "value": [
+            "중소기업"
+          ],
+          "required": true
+        }
+      ],
+      "period": {
+        "raw": "2026-09-30 ~ 2026-11-02",
+        "start": "2026-09-30",
+        "end": "2026-11-02",
+        "always": false
+      },
+      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127278",
+      "source": "bizinfo"
+    },
+    {
       "id": "PBLN_000000000127277",
       "title": "일본진출 K-스타트업 AI 역직구 온라인 한국관 특별전 모집 공고",
       "summary": "대한무역투자진흥공사에서는 일본진출 K-스타트업 AI 역직구 온라인 한국관 특별전 참가를 희망하는 기업을 모집 합니다. 많은 관심과 신청 바랍니다.☞ 유망 소비재기업※ 네이버 스마트스토어, 쿠팡 마켓플레이스 등 한국…",
@@ -6061,47 +7048,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127276",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127274",
-      "title": "[세종] 2026년 LH 임대주택 중소기업 기숙사 기관공급 대상 기업 모집 공고",
-      "summary": "세종특별자치시는 관내 중소기업 근로자의 주거 안정을 도모하고 직주근접형 정주 여건을 조성하기 위하여, LH 행복주택 장기 공가를 중소기업체 기숙사로 공급하는 「LH 임대주택 중소기업 기숙사 기관공급 지원사업」 대상…",
-      "summaryLength": 253,
-      "agency": "세종특별자치시",
-      "fields": [
-        "인력"
-      ],
-      "fieldMid": "고용환경개선",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "세종",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "세종"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-13 ~ 2026-10-26",
-        "start": "2026-10-13",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127274",
       "source": "bizinfo"
     },
     {
@@ -6878,47 +7824,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127253",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127251",
-      "title": "[전북] 전주시 2026년 착한가격업소 추가 모집 공고",
-      "summary": "소비자물가가 급등함에 따라 서민생활에 영향을 주는 개인서비스 요금의 가격안정 유도를 위해 착한가격업소를 선정하여 물가인상 억제 분위기를 조성하고자 아래와 같이 2026년 전주시 착한가격업소 추가 모집공고를 진행 하…",
-      "summaryLength": 292,
-      "agency": "전북특별자치도",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": "전주시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "전북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "전북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-14 ~ 2026-10-26",
-        "start": "2026-10-14",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127251",
       "source": "bizinfo"
     },
     {
@@ -8160,144 +9065,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127196",
-      "title": "[충북] 충주시 2026년 제조 AI 현장 적용 지원 사업 수혜기업 모집 연장 공고",
-      "summary": "2026년도 중소벤처기업부, 중소기업기술정보진흥원, 충청북도 충주시, 충북테크노파크가 지원하는 제조 AI 현장 적용 지원 사업을 안내하오니, 해당 프로그램 참여를 희망하는 중견ㆍ중소기업은 아래 내용을 참고하여 신청…",
-      "summaryLength": 443,
-      "agency": "중소벤처기업부",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "기술사업화/이전/지도",
-      "sigungu": "충주시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "충북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "충북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-13 ~ 2026-10-26",
-        "start": "2026-10-13",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127196",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127195",
-      "title": "2026년 4차 K-브랜드 정부인증제도 참여기업 모집 공고",
-      "summary": "해외 K-브랜드 위조상품 유통에 따른 우리기업의 피해를 예방하고 피해 발생 시, 정부가 기업과 함께 대응하기 위한「2026년 K-브랜드 정부인증제도」의 참여기업 모집을 다음과 같이 공고합니다.☞ 「중소기업기본법」제…",
-      "summaryLength": 461,
-      "agency": "지식재산처",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "해외진출",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-13 ~ 2026-10-26",
-        "start": "2026-10-13",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127195",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127193",
-      "title": "[부산] K-콘텐츠 관광마케팅 아카데미 2기 심화아카데미 참가자 모집 공고",
-      "summary": "글로벌 K-콘텐츠 확산 및 부산 지역 관광기업과 인재 육성을 위한「K-콘텐츠 관광마케팅 아카데미 2기」심화아카데미 참가자 모집을 다음과 같이 공고합니다.☞ 부산시 소재의 본사가 있으며, 콘텐츠ㆍ관광ㆍ문화 관련 콘텐…",
-      "summaryLength": 325,
-      "agency": "문화체육관광부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "부산",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "부산"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-13 ~ 2026-10-26",
-        "start": "2026-10-13",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127193",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127192",
       "title": "[제주] 서귀포시 2026년 하반기 청년농업인 농지임대료 지원사업 공고",
       "summary": "청년농업인의 성공적 농업분야 진출 및 정착유도를 위한 2026년 청년농업인 농지임대료 지원사업 추진계획을 아래와 같이 알려드리니, 신청 대상 청년농업인께서는 기한내 신청하시기 바랍니다.☞ 서귀포시 주소를 두고 거주…",
@@ -8575,47 +9342,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127181",
-      "title": "[충북] 진천군 2026년 반려동물 동반 출입 음식점 위생용품 지원사업 공고",
-      "summary": "반려동물 친화업소에 맞춤형 위생용품을 지원하여 위생 수준 향상과 영업자의 경제적 부담 완화를 도모하고, 펫티켓 및 위생 수칙 홍보를 통해 반려인과 비반려인 모두가 안심하는 외식 환경과 지역 상권 활성화 기반을 조성…",
-      "summaryLength": 326,
-      "agency": "충청북도",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "시설/입지지원",
-      "sigungu": "진천군",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "충북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "충북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-12 ~ 2026-10-26",
-        "start": "2026-10-12",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127181",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127178",
       "title": "[대구] 2026년 2차 컨설팅 지원 사업 참여기업 모집 공고(지역특화 제조데이터 활성화 사업)",
       "summary": "중소벤처기업부와 대구광역시가 지원하는 ‘2026년 지역특화 제조데이터 활성화사업’ 의 일환으로「컨설팅 지원 사업」의 지원기업을 다음과 같이 모집 공고하오니，지역의 기계요소ㆍ소재부품 관련 중소ㆍ중견 제조기업 및 AI…",
@@ -8821,47 +9547,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127164",
-      "title": "[전북] 익산시 청년공유주방(배달형 외식창업 인큐베이팅) 예비창업자 모집 재공고(익산시 음식ㆍ식품교육문화원)",
-      "summary": "「익산시 음식ㆍ식품교육문화원 운영 조례」 제10조에 의거하여 청년의 가능성과 창업이 연결될 수 있도록 음식ㆍ식품교육문화원 청년공유주방 외식창업 참여자를 다음과 같이 모집하오니, 우수하고 창의적인 외식 아이템을 가진…",
-      "summaryLength": 342,
-      "agency": "전북특별자치도",
-      "fields": [
-        "창업"
-      ],
-      "fieldMid": "창업공간지원",
-      "sigungu": "익산시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "전북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "전북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "창업벤처"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-12 ~ 2026-10-26",
-        "start": "2026-10-12",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127164",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127162",
       "title": "[전북] 군산시 2026년 창업플랫폼 예비창업자 모집 공고",
       "summary": "외식창업을 희망하는 예비 창업자들의 창업을 지원하기 위한 창업플랫폼 운영자를 모집하오니 많은 관심과 참여 바랍니다.☞ 공고일 현재 주민등록상 주소지가 군산시로 되어 있는 자로, 외식 창업을 희망하는 만 19세 이상…",
@@ -8900,47 +9585,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127162",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127160",
-      "title": "[경북] 2026년 경산형 여성ㆍ가족친화기업 지원사업 참여기업 모집 공고",
-      "summary": "여성근로자의 일ㆍ가정 양립과 근무환경 개선에 노력하는 기업을 여성가족친화기업으로 선정ㆍ지원하여 여성의 경제활동 참여율을 높이고 여성고용을 촉진하고자「2026 경산형 여성ㆍ가족친화기업 지원사업」에 참여할 기업을 다음…",
-      "summaryLength": 311,
-      "agency": "경상북도",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "시설/입지지원",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "여성기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-22 ~ 2026-10-26",
-        "start": "2026-10-22",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127160",
       "source": "bizinfo"
     },
     {
@@ -9414,88 +10058,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127138",
-      "title": "[경기] 용인시 2026년 해외플랫폼 입점 지원사업 기업 추가 모집 공고",
-      "summary": "용인시산업진흥원에서는 관내 중소기업의 해외진출 활성화를 위해 아래와 같이 지원사업 추가 모집을 시행하오니 많은 관심과 참여 바랍니다.☞ 용인 소재 본사 또는 공장이 있는 중소기업☞ 해외플랫폼 입점 관련 지원(기업당…",
-      "summaryLength": 165,
-      "agency": "경기도",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "해외진출",
-      "sigungu": "용인시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경기",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경기"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-12 ~ 2026-10-26",
-        "start": "2026-10-12",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127138",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127135",
-      "title": "[경기] 용인시 2026년 KOTRA 수출 대행 서비스 지원사업 추가 모집 공고",
-      "summary": "용인시산업진흥원에서 관내 중소기업의 해외시장 진출 및 수출 지원을 위해 ‘KOTRA 수출24 대행 서비스 지원’ 사업 추가 모집을 아래와 같이 시행하오니 많은 관심과 참여 바랍니다.☞ 용인 소재 본사 또는 공장이 …",
-      "summaryLength": 313,
-      "agency": "경기도",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "해외진출",
-      "sigungu": "용인시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경기",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경기"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-19 ~ 2026-10-26",
-        "start": "2026-10-19",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127135",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127132",
       "title": "[서울] MWC2027-4YFN 서울기업관 서울소재 참가기업 모집 공고",
       "summary": "세계 3대 IT 전시회 MWC Barcelona에서 스타트업과 투자자를 위해 열리는 행사, 4YFN. 서울경제진흥원이 부스 제공부터 투자자 매칭, 현지 네트워킹까지 지원하는「MWC 2027 - 4YFN 서울기업관」…",
@@ -9825,47 +10387,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127120",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127119",
-      "title": "[경남] 양산시 2026년 노동자 휴게시설 지원사업 2차 추가 공고",
-      "summary": "노동자의 휴식권 보장을 통한 노동권익 증대로 노사 상생의 토대를 마련하기 위한 “2026년 양산시 노동자 휴게시설 지원사업”을 추가(2차) 공고합니다.☞ 상시 근로자 수 50명 미만인 사업장※ 신청일 이전 달의 고…",
-      "summaryLength": 161,
-      "agency": "경상남도",
-      "fields": [
-        "인력"
-      ],
-      "fieldMid": "작업환경개선",
-      "sigungu": "양산시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경남",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경남"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-06 ~ 2026-10-26",
-        "start": "2026-10-06",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127119",
       "source": "bizinfo"
     },
     {
@@ -10463,174 +10984,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127077",
-      "title": "2026년 산업기술 정책금융 지원 유공자 포상 신청 공고",
-      "summary": "공공 및 민간 부문 연구개발(R&D) 결과물이 기업에 이전ㆍ사업화 되어 산업 전반의 기술경쟁력을 강화하고 新산업을 창출하도록 기여하는 기술사업화 분야의 산업기술 정책금융 지원 공로자에게 포상을 실시하고자 하오니 많…",
-      "summaryLength": 250,
-      "agency": "산업통상부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-07 ~ 2026-10-26",
-        "start": "2026-10-07",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127077",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127076",
-      "title": "2026년 농림축산식품부 혁신제품 지정기간 연장(2차 연장) 공고",
-      "summary": "「조달사업에 관한 법률 시행령」 제33조 제3항 및 기획재정부 훈령 「혁신제품 지정 및 구매촉진 등에 관한 규정」제13조에 따라 아래와 같이 ‘2026년도 혁신제품 지정기간 연장(2차연장)’을 안내하오니, 지정기간…",
-      "summaryLength": 277,
-      "agency": "농림축산식품부",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "시험/인증",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-06 ~ 2026-10-26",
-        "start": "2026-10-06",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127076",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127074",
-      "title": "2026년 농림축산식품부 혁신제품 지정기간 연장(1차 연장) 공고",
-      "summary": "2026년도 혁신제품 지정기간 「1차연장」을 위해 아래와 같이 공고하오니, 1차연장 자격요건에 해당하는 기업은 신청하여 주시기 바랍니다.☞ 기본 지정기간(3년)의 만료가 도래한 혁신제품을 보유한 기업※ 금회 지정기…",
-      "summaryLength": 179,
-      "agency": "농림축산식품부",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "시험/인증",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-06 ~ 2026-10-26",
-        "start": "2026-10-06",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127074",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127073",
       "title": "[대전] 2026년 독일 뒤셀도르프 의료기기 전시회(MEDICA) 단체참가 참여기업 모집 공고(간접출전)",
       "summary": "대전광역시와 대전일자리경제진흥원에서는 대전 관내 본사 또는 공 장 소재기업을 대상으로 「2026년도 독일 뒤셀도르프 의료기기 전시회」 간접출전 참여기업을 다음과 같이 모집하오니 많은 참여 바랍니다.☞ 대전지역 본사…",
@@ -10669,62 +11022,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127073",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127070",
-      "title": "2026년 해외 물시장 기술 테스트 및 검증 지원사업 모집 공고",
-      "summary": "한국물산업협의회가 기후에너지환경부의 지원으로 추진하는 2026년도 「해외 물시장 기술 테스트 및 검증 지원사업」을 다음과 같이 공고하오니 참여를 희망하는 기업 또는 기관은 2026. 10. 26(월) 18:00까지…",
-      "summaryLength": 336,
-      "agency": "기후에너지환경부",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "시험/인증",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-07 ~ 2026-10-26",
-        "start": "2026-10-07",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127070",
       "source": "bizinfo"
     },
     {
@@ -12284,62 +12581,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126970",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126969",
-      "title": "2026년 청년기업인상 포상 신청 공고",
-      "summary": "과학기술정보통신부와 한국청년기업가정신재단은 국내 ICT 창업 활성화에 기여한 공적이 있는 청년창업가의 성과와 노고를 격려하기 위한 「2026년 청년기업인상」포상 신청ㆍ접수를 아래와 같이 공고하오니 많은 참여 바랍니…",
-      "summaryLength": 255,
-      "agency": "과학기술정보통신부",
-      "fields": [
-        "창업"
-      ],
-      "fieldMid": "사업화지원",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "창업벤처"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-01 ~ 2026-10-26",
-        "start": "2026-10-01",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126969",
       "source": "bizinfo"
     },
     {
@@ -20169,61 +20410,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126098",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126088",
-      "title": "2026년 임실N치즈축제 관광객 모객여행사 인센티브 지원 계획 공고",
-      "summary": "임실군에서 관광활성화 및 임실N치즈축제 홍보를 위하여 “임실N치즈축제 관광객 모객여행사 인센티브 지원 계획”을 다음과 같이 공고하오니 많은 관심과 참여 부탁드립니다.☞ 「관광진흥법」제3조, 제4조에 의한 여행업등록…",
-      "summaryLength": 202,
-      "agency": "전북특별자치도",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": "임실군",
-      "regionFixed": false,
-      "regionCount": 15,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-09-01 ~ 2026-10-26",
-        "start": "2026-09-01",
-        "end": "2026-10-26",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126088",
       "source": "bizinfo"
     },
     {
