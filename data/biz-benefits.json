@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-07",
-  "count": 1328,
+  "updatedAt": "2026-11-08",
+  "count": 1326,
   "items": [
     {
       "id": "PBLN_000000000127757",
@@ -11954,47 +11954,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127315",
-      "title": "[강원] 2026년 관광사업체 경영안정자금 지원계획 추가 공고",
-      "summary": "「강원특별자치도 관광사업경영안정자금 지원 조례」 및 같은 조례 시행규칙에 따라 2026년 강원특별자치도 관광사업체 경영안정자금 지원계획을 다음과 같이 공고합니다.☞ 강원특별자치도 내에서 「관광진흥법」에 따라 등록 …",
-      "summaryLength": 292,
-      "agency": "강원특별자치도",
-      "fields": [
-        "금융"
-      ],
-      "fieldMid": "융자",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "강원",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "강원"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "예산 소진시까지",
-        "start": null,
-        "end": null,
-        "always": true
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127315",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127314",
       "title": "[경남] 진주시 2026년 우수바이오제품 품질인증 맞춤형 바우처 지원사업 운영계획 변경 공고",
       "summary": "경상남도내 바이오기업의 소비자 신뢰확보 및 제품 판매촉진을 위해 추진하는 「2026년 우수바이오제품 품질인증 맞춤형 바우처 지원사업 」을 다음과 같이 공고하오니 많은 관심과 참여 바랍니다.☞ 한국산업표준 바이오산업…",
@@ -16812,47 +16771,6 @@
         "always": true
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126662",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000126649",
-      "title": "[강원] 2026년 소상공인ㆍ자영업자 재기 지원사업 참여자 모집 공고(새출발기금 협업)",
-      "summary": "새출발기금 채무조정 약정을 체결하고 성실납부 중인 도내 소상공인 및 자영업자의 경영 위기 극복 및 재창업 준비를 돕기 위해 「새출발기금 협업 2026 강원 소상공인ㆍ자영업자 재기 지원사업」의 참여자를 아래와 같이 …",
-      "summaryLength": 214,
-      "agency": "강원특별자치도",
-      "fields": [
-        "창업"
-      ],
-      "fieldMid": "재기지원",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "강원",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "강원"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "소상공인"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "예산 소진시까지",
-        "start": null,
-        "end": null,
-        "always": true
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126649",
       "source": "bizinfo"
     },
     {
