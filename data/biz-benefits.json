@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-08",
-  "count": 1326,
+  "updatedAt": "2026-11-09",
+  "count": 1323,
   "items": [
     {
       "id": "PBLN_000000000127757",
@@ -10069,47 +10069,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127453",
-      "title": "[경남] 2026년 KERI-STARS 특화기업 집중지원 사업 (Tech-UpㆍScale-Up) 참여기업 모집 공고(경남 창원 강소연구개발특구 이노테크 기업육성사업)",
-      "summary": "창원 강소연구개발특구 내 유망 기술기업의 사업화를 집중 지원하기 위한「KERI-STARS 특화기업 집중지원 사업 (Tech-up & Scale-up)」 참여기업을 다음과 같이 모집하오니, 관심 있는 기업의 많은 신…",
-      "summaryLength": 334,
-      "agency": "경상남도",
-      "fields": [
-        "기술"
-      ],
-      "fieldMid": "기술사업화/이전/지도",
-      "sigungu": "창원시",
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "경남",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "경남"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-23 ~ 2026-11-08",
-        "start": "2026-10-23",
-        "end": "2026-11-08",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127453",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127451",
       "title": "2027년 튀르키예 이스탄불 의료기기 전시회(Expomed Eurasia) 한국관 참가기업 모집 공고",
       "summary": "KOTRA와 한국의료기기산업협회는 2027년 4월 15일 ~ 4월 18일 (4일간) 튀르키예 이스탄불에서 개최되는 ‘2027 튀르키예 이스탄불 의료기기 전시회(Expomed Eurasia)’의 한국관 참가기업을 아…",
@@ -12174,62 +12133,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127284",
-      "title": "6G 서비스 시나리오 공모전 - 6G 시연 기획 Track 공고",
-      "summary": "정보통신기획평가원에서는 6G Vision Fest 2028 행사 현장에서 실제 통신망 환경을 구축하여 시연 가능한 서비스 아이디어 및 구현 계획을 제안하기 위한 기업 대상 공모전을 실시합니다. 많은 관심과 신청 바…",
-      "summaryLength": 217,
-      "agency": "과학기술정보통신부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-08 ~ 2026-11-08",
-        "start": "2026-10-08",
-        "end": "2026-11-08",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127284",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127282",
       "title": "[경남] 의령군 2026년 청년 일경험(인턴) 지원사업 참여기업 모집 재공고",
       "summary": "미취업 청년들의 실무경험을 통한 취업역량 강화를 위해 「2026년 의령군 청년 일경험(인턴) 지원사업」참여기업을 다음과 같이 모집 재공고합니다.☞ 관내 청년을 신규 채용할 의사가 있는 의령군 소재 기업☞ 청년 일경…",
@@ -12268,62 +12171,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127282",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127281",
-      "title": "6G 서비스 시나리오 공모전 - 6G 예상 시나리오 Track 공고",
-      "summary": "국민 여러분이 평소 생활하며 느꼈던 '필요'와 '바람'을 모아, 우리가 진짜로 원하는 미래 통신의 밑그림을 그리기 위해 「6G 대표 서비스 시나리오 발굴 공모전 - 6G 예상 시나리오 Track」을 개최합니다. \"…",
-      "summaryLength": 531,
-      "agency": "과학기술정보통신부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-10-08 ~ 2026-11-08",
-        "start": "2026-10-08",
-        "end": "2026-11-08",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127281",
       "source": "bizinfo"
     },
     {
