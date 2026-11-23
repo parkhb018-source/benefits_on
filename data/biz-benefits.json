@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-22",
-  "count": 1295,
+  "updatedAt": "2026-11-23",
+  "count": 1292,
   "items": [
     {
       "id": "PBLN_000000000128062",
@@ -2818,47 +2818,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127993",
-      "title": "[전북] 2026년 마이오피스(지사화) 지원사업(추가모집) 참여기업 모집 공고",
-      "summary": "전북특별자치도와 (재)전북특별자치도경제통상진흥원은 전북특별자치도중소기업수출진흥조례 제11조에 따라 중소기업 수출 확대를 위하여 마이오피스(지사화) 지원사업(추가모집) 참여업체를 모집하고자 합니다.☞ 도내 중소기업(…",
-      "summaryLength": 272,
-      "agency": "전북특별자치도",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "해외진출",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 1,
-      "regionLabel": "전북",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "전북"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-11-18 ~ 2026-11-22",
-        "start": "2026-11-18",
-        "end": "2026-11-22",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127993",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127992",
       "title": "2027년 정보통신 및 정보문화 유공 정부포상 계획 공고",
       "summary": "「제72회 정보통신의 날」및「제40회 정보문화의 달」을 맞이하여 대한민국 정보통신 및 정보문화 발전에 기여한 유공자 및 단체에 대한 포상계획을 다음과 같이 공고하오니 많은 참여와 추천 바랍니다.☞ (정보통신 분야)…",
@@ -4939,62 +4898,6 @@
       "source": "bizinfo"
     },
     {
-      "id": "PBLN_000000000127930",
-      "title": "2026년 3차 울산 남구 지역산업위기대응 맞춤형 지원사업 수혜기업 모집 공고",
-      "summary": "2026년도 산업통상부와 울산광역시가 지원하는 지역산업위기대응 맞춤형 지원사업 「(울산 남구) 지역산업위기대응 맞춤형 지원사업」를 다음과 같이 추진하오니, 해당 프로그램 참여를 희망하는 중소ㆍ중견기업의 많은 신청 …",
-      "summaryLength": 485,
-      "agency": "산업통상부",
-      "fields": [
-        "경영"
-      ],
-      "fieldMid": "디자인/상품화/사업화",
-      "sigungu": "남구",
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-11-13 ~ 2026-11-22",
-        "start": "2026-11-13",
-        "end": "2026-11-22",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127930",
-      "source": "bizinfo"
-    },
-    {
       "id": "PBLN_000000000127928",
       "title": "[전남광주] 보성군 2027년 청년어촌정착 지원사업 신청 공고",
       "summary": "2027년도 청년어촌정착 지원사업 신청을 다음과 같이 공고하니, 동 사업의 지원을 받고자 하는 자는 2026년 12월 4일까지 신청하시기 바랍니다.☞ 보성군에 실제 거주하는(주민등록 포함) 수산업경력 3년 이하, …",
@@ -6297,62 +6200,6 @@
         "always": false
       },
       "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127884",
-      "source": "bizinfo"
-    },
-    {
-      "id": "PBLN_000000000127883",
-      "title": "2027년 쇼피 베트남 온라인 판촉전 참가기업 모집 공고",
-      "summary": "KOTRA 호치민무역관은 우리 소비재 기업의 베트남 온라인 시장 진출 확대를 위해 Shopee Vietnam과 함께 「2027 쇼피 베트남 온라인 판촉전」을 개최합니다. 베트남 이커머스 시장 진출 및 판매 확대를 …",
-      "summaryLength": 486,
-      "agency": "산업통상부",
-      "fields": [
-        "수출"
-      ],
-      "fieldMid": "해외진출",
-      "sigungu": null,
-      "regionFixed": false,
-      "regionCount": 16,
-      "regionLabel": "전국",
-      "conditions": [
-        {
-          "type": "region",
-          "op": "in",
-          "value": [
-            "서울",
-            "부산",
-            "대구",
-            "인천",
-            "전남광주",
-            "대전",
-            "울산",
-            "세종",
-            "경기",
-            "강원",
-            "충북",
-            "충남",
-            "전북",
-            "경북",
-            "경남",
-            "제주"
-          ],
-          "required": true
-        },
-        {
-          "type": "businessType",
-          "op": "in",
-          "value": [
-            "중소기업"
-          ],
-          "required": true
-        }
-      ],
-      "period": {
-        "raw": "2026-11-12 ~ 2026-11-22",
-        "start": "2026-11-12",
-        "end": "2026-11-22",
-        "always": false
-      },
-      "applyUrl": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000127883",
       "source": "bizinfo"
     },
     {
